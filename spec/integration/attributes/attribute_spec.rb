@@ -6,7 +6,6 @@ end
 
 describe User do
   it { described_class.should respond_to(:attribute)  }
-  it { described_class.should respond_to(:attributes) }
 
   describe ".attribute" do
     before do
