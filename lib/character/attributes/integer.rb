@@ -1,5 +1,5 @@
 module Character
-  module Attribute
+  module Attributes
     class Integer < Numeric
       primitive ::Fixnum
     end # Integer

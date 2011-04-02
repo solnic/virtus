@@ -1,5 +1,5 @@
 module Character
-  module Attribute
+  module Attributes
     class Object
       attr_reader :name, :model, :options, :instance_variable_name,
         :reader_visibility, :writer_visibility

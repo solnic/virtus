@@ -1,5 +1,5 @@
 module Character
-  module Attribute
+  module Attributes
     class Float < Numeric
       primitive ::Float
     end # String

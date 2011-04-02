@@ -1,5 +1,5 @@
 module Character
-  module Attribute
+  module Attributes
     class Boolean < Object
       primitive TrueClass
     end # Boolean

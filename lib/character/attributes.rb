@@ -1,5 +1,5 @@
 module Character
-  module Attribute
+  module Attributes
     class << self
       # @api semipublic
       # TODO: document
@@ -11,7 +11,7 @@ module Character
     # @api public
     # TODO: document
     def attribute(name, type, options = {})
-      attributes[name] = Attribute.determine_type(type).new(name, self, options)
+      attributes[name] = Attributes.determine_type(type).new(name, self, options)
     end
 
     # @api public

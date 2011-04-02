@@ -1,5 +1,5 @@
 module Character
-  module Attribute
+  module Attributes
     class String < Object
       primitive ::String
 

@@ -5,20 +5,30 @@ module Character
   module Undefined; end
 
   def self.included(base)
-    base.extend(Attribute)
+    base.extend(Attributes)
+  end
+
+  def attributes
+    attributes = {}
+
+    self.class.attributes.each do |name, attribute|
+      attributes[name] = send(attribute.name)
+    end
+
+    attributes
   end
 end
 
 dir = Pathname(__FILE__).dirname.expand_path
 
-require dir + 'character/attribute'
-require dir + 'character/attribute/object'
-require dir + 'character/attribute/boolean'
-require dir + 'character/attribute/date'
-require dir + 'character/attribute/date_time'
-require dir + 'character/attribute/numeric'
-require dir + 'character/attribute/decimal'
-require dir + 'character/attribute/float'
-require dir + 'character/attribute/integer'
-require dir + 'character/attribute/string'
-require dir + 'character/attribute/time'
+require dir + 'character/attributes'
+require dir + 'character/attributes/object'
+require dir + 'character/attributes/boolean'
+require dir + 'character/attributes/date'
+require dir + 'character/attributes/date_time'
+require dir + 'character/attributes/numeric'
+require dir + 'character/attributes/decimal'
+require dir + 'character/attributes/float'
+require dir + 'character/attributes/integer'
+require dir + 'character/attributes/string'
+require dir + 'character/attributes/time'

@@ -22,7 +22,7 @@ describe User do
     end
 
     it "should create an attribute of a correct type" do
-      described_class.attributes[:name].should be_instance_of(Character::Attribute::String)
+      described_class.attributes[:name].should be_instance_of(Character::Attributes::String)
     end
 
     it "creates attribute writer" do
