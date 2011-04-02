@@ -1,7 +1,7 @@
 module Character
   module Attribute
-    class String < Object
-
-    end # String
+    class DateTime < Object
+      primitive ::DateTime
+    end # DateTime
   end # Attribute
 end # Character

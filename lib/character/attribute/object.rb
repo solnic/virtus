@@ -1,6 +1,11 @@
 module Character
   module Attribute
     class Object
+      attr_reader :name, :model, :options, :instance_variable_name,
+        :reader_visibility, :writer_visibility
+
+      OPTIONS = [ :accessor, :reader, :writer ].freeze
+
       class << self
         # @api public
         def accepted_options
@@ -20,15 +25,34 @@ module Character
             end                                                      # end
             RUBY
           end
+
+          descendants.each { |descendant| descendant.accepted_options.concat(args) }
+        end
+
+        # @api public
+        def descendants
+          @descendants ||= []
+        end
+
+        # @api private
+        def inherited(descendant)
+          descendants << descendant
+          descendant.accepted_options.concat(accepted_options)
+          options.each { |key, value| descendant.send(key, value) }
+        end
+
+        # @api public
+        def options
+          options = {}
+          accepted_options.each do |method|
+            value = send(method)
+            options[method] = value unless value.nil?
+          end
+          options
         end
       end
 
-      attr_reader :name, :model, :options, :instance_variable_name,
-        :reader_visibility, :writer_visibility
-
-      OPTIONS = [ :accessor, :reader, :writer ].freeze
-
-      accept_options :load_as, :dump_as, *OPTIONS
+      accept_options :primitive, *OPTIONS
 
       def initialize(name, model, options)
         @name    = name
@@ -46,6 +70,31 @@ module Character
         _create_reader(name)
       end
 
+      # @apit private
+      def typecast(value, model)
+        value
+      end
+
+      # @api private
+      def get(model)
+        get!(model)
+      end
+
+      # @api private
+      def get!(model)
+        model.instance_variable_get(instance_variable_name)
+      end
+
+      # @api private
+      def set(model, value)
+        set!(model, primitive?(value) || value.nil? ? value : typecast(value, model))
+      end
+
+      # @api private
+      def set!(model, value)
+        model.instance_variable_set(instance_variable_name, value)
+      end
+
       private
 
       def _create_reader(name)
@@ -53,7 +102,7 @@ module Character
           #{reader_visibility}
           def #{name}
             return #{instance_variable_name} if defined?(#{instance_variable_name})
-            attribute = attribute[#{name.inspect}]
+            attribute = model.attributes[#{name.inspect}]
             #{instance_variable_name} = attribute ? attribute.get(self) : nil
           end
         RUBY
@@ -63,7 +112,7 @@ module Character
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
           #{writer_visibility}
           def #{name}=(value)
-            attribute = attributes[#{name.inspect}]
+            attribute = model.attributes[#{name.inspect}]
             attribute.set(value, self)
           end
         RUBY

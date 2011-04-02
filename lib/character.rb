@@ -1,4 +1,13 @@
 require 'pathname'
+require 'bigdecimal'
+
+module Character
+  module Undefined; end
+
+  def self.included(base)
+    base.extend(Attribute)
+  end
+end
 
 dir = Pathname(__FILE__).dirname.expand_path
 
@@ -13,11 +22,3 @@ require dir + 'character/attribute/float'
 require dir + 'character/attribute/integer'
 require dir + 'character/attribute/string'
 require dir + 'character/attribute/time'
-
-module Character
-  module Undefined; end
-
-  def self.included(base)
-    base.extend(Attribute)
-  end
-end
