@@ -31,9 +31,11 @@ require typecasting and/or validations.
 
 == TODO
 
-  * specs
-  * typecasting
-  * validations
+* specs
+* typecasting
+* validations
+* ActiveModel compliance
+* I18n
 
 == Note on Patches/Pull Requests
 
