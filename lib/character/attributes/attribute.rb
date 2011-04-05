@@ -4,7 +4,9 @@ module Character
       attr_reader :name, :model, :options, :instance_variable_name,
         :reader_visibility, :writer_visibility
 
-      OPTIONS = [ :accessor, :reader, :writer ].freeze
+      OPTIONS = [ :primitive, :accessor, :reader, :writer ].freeze
+
+      DEFAULT_ACCESSOR = :public.freeze
 
       class << self
         # @api public
@@ -34,13 +36,6 @@ module Character
           @descendants ||= []
         end
 
-        # @api private
-        def inherited(descendant)
-          descendants << descendant
-          descendant.accepted_options.concat(accepted_options)
-          options.each { |key, value| descendant.send(key, value) }
-        end
-
         # @api public
         def options
           options = {}
@@ -50,19 +45,25 @@ module Character
           end
           options
         end
+
+        # @api private
+        def inherited(descendant)
+          descendants << descendant
+          descendant.accepted_options.concat(accepted_options)
+          options.each { |key, value| descendant.send(key, value) }
+        end
       end
 
-      accept_options :primitive, *OPTIONS
+      accept_options *OPTIONS
 
-      def initialize(name, model, options)
+      def initialize(name, model, options = {})
         @name    = name
         @model   = model
-        @options = options.freeze
+        @options = self.class.options.merge(options).freeze
 
         @instance_variable_name = "@#{@name}".freeze
 
-        default_accessor = @options.fetch(:accessor, :public)
-
+        default_accessor   = @options.fetch(:accessor, DEFAULT_ACCESSOR)
         @reader_visibility = @options.fetch(:reader, default_accessor)
         @writer_visibility = @options.fetch(:writer, default_accessor)
 
