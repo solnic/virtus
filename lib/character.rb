@@ -22,6 +22,7 @@ end
 dir = Pathname(__FILE__).dirname.expand_path
 
 require dir + 'character/attributes'
+require dir + 'character/attributes/attribute'
 require dir + 'character/attributes/object'
 require dir + 'character/attributes/boolean'
 require dir + 'character/attributes/date'
