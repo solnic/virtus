@@ -7,5 +7,5 @@ module Character
         value.to_s
       end
     end # String
-  end # Attribute
+  end # Attributes
 end # Character

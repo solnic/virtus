@@ -3,5 +3,5 @@ module Character
     class Integer < Numeric
       primitive ::Fixnum
     end # Integer
-  end # Attribute
+  end # Attributes
 end # Character

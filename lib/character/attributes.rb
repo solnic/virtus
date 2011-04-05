@@ -19,6 +19,5 @@ module Character
     def attributes
       @attributes ||= {}
     end
-
-  end # Attribute
+  end # Attributes
 end # Character

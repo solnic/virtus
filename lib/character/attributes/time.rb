@@ -3,5 +3,5 @@ module Character
     class Time < Object
       primitive ::Time
     end # Time
-  end # Attribute
+  end # Attributes
 end # Character

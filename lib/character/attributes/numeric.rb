@@ -3,5 +3,5 @@ module Character
     class Numeric < Object
       accept_options :min, :max
     end # Numeric
-  end # Attribute
+  end # Attributes
 end # Character

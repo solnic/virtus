@@ -3,5 +3,5 @@ module Character
     class Decimal < Numeric
       primitive ::BigDecimal
     end # Decimal
-  end # Attribute
+  end # Attributes
 end # Character

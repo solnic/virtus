@@ -3,5 +3,5 @@ module Character
     class Date < Object
       primitive ::Date
     end # Date
-  end # Attribute
+  end # Attributes
 end # Character

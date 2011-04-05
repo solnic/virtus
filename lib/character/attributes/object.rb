@@ -3,5 +3,5 @@ module Character
     class Object < Attribute
       primitive ::Object
     end # Object
-  end # Attribute
+  end # Attributes
 end # Character

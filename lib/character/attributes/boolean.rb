@@ -3,5 +3,5 @@ module Character
     class Boolean < Object
       primitive TrueClass
     end # Boolean
-  end # Attribute
+  end # Attributes
 end # Character
