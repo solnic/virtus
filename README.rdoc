@@ -45,7 +45,7 @@ require typecasting and/or validations.
   require 'json'
 
   module MyApp
-    module Attr'butes
+    module Attributes
       class JSON < Character::Attributes::Object
         primitive Hash
 
