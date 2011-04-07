@@ -42,14 +42,15 @@ require typecasting and/or validations.
   user.birthday # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 
   # define your own attribute classes
+  require 'json'
 
   module MyApp
-    module Attributes
+    module Attr'butes
       class JSON < Character::Attributes::Object
         primitive Hash
 
         def typecast(value, model = nil)
-          JSON.parse(value)
+          ::JSON.parse(value)
         end
       end
     end
@@ -69,8 +70,6 @@ require typecasting and/or validations.
   # validations coming soon...
 == TODO
 
-* specs
-* typecasting
 * validations
 * ActiveModel compliance
 * I18n
