@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Character::Attributes::Time do
   it_should_behave_like 'Attribute' do
-    let(:attribute_name) { :birthday }
+    let(:attribute_name)        { :birthday }
+    let(:attribute_value)       { Time.now }
+    let(:attribute_value_other) { Time.now.to_s }
   end
 
   describe '#typecast' do

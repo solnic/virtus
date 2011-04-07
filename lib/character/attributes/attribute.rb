@@ -71,7 +71,12 @@ module Character
         _create_reader(name)
       end
 
-      # @apit private
+      # @api private
+      def primitive?(value)
+        value.kind_of?(self.class.primitive)
+      end
+
+      # @api private
       def typecast(value, model)
         value
       end
@@ -88,7 +93,8 @@ module Character
 
       # @api private
       def set(model, value)
-        set!(model, primitive?(value) || value.nil? ? value : typecast(value, model))
+        return if value.nil?
+        set!(model, primitive?(value) ? value : typecast(value, model))
       end
 
       # @api private

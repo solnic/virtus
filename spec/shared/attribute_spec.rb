@@ -13,8 +13,7 @@ shared_examples_for "Attribute" do
   let(:sub_attribute) { class SubAttribute < described_class; end; SubAttribute }
 
   let(:model) do
-    class User; end
-    User
+    Class.new { include Character }
   end
 
   describe ".options" do
@@ -82,6 +81,61 @@ shared_examples_for "Attribute" do
           subject.options[option].should == new_value
         end
       end
+    end
+  end
+
+  describe "#set" do
+    let(:attribute) { model.attribute(attribute_name, described_class) }
+    let(:object)    { model.new }
+
+    context "with nil" do
+      subject { attribute.set(object, nil) }
+
+      it "doesn't set the ivar" do
+        subject
+        object.instance_variable_defined?(attribute.instance_variable_name).should be(false)
+      end
+
+      it "returns nil" do
+        subject.should be(nil)
+      end
+    end
+
+    context "with a primitive value" do
+      before { attribute.set(object, attribute_value) }
+
+      it "sets the value in an ivar" do
+        object.instance_variable_get(attribute.instance_variable_name).should == attribute_value
+      end
+    end
+
+    context "with a non-primitive value" do
+      before { attribute.set(object, attribute_value_other) }
+
+      it "sets the value in an ivar converted to the primitive type" do
+        object.instance_variable_get(attribute.instance_variable_name).should be_kind_of(described_class.primitive)
+      end
+    end
+  end
+
+  describe "#get" do
+    let(:attribute) { model.attribute(attribute_name, described_class) }
+    let(:object)    { model.new }
+
+    context "when a non-nil value is set" do
+      before { attribute.set(object, attribute_value) }
+
+      subject { attribute.get(object) }
+
+      it { should == attribute_value }
+    end
+
+    context "when nil is set" do
+      before { attribute.set(object, nil) }
+
+      subject { attribute.get(object) }
+
+      it { should be(nil) }
     end
   end
 end

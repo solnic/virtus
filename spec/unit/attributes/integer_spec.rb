@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Character::Attributes::Integer do
   it_should_behave_like 'Attribute' do
-    let(:attribute_name) { :age }
+    let(:attribute_name)        { :age }
+    let(:attribute_value)       { 28 }
+    let(:attribute_value_other) { "28" }
   end
 
   describe '#typecast' do

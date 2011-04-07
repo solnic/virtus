@@ -2,12 +2,14 @@ require 'spec_helper'
 
 describe Character::Attributes::Float do
   it_should_behave_like 'Attribute' do
-    let(:attribute_name) { :uncontext }
+    let(:attribute_name)        { :score }
+    let(:attribute_value)       { 12.34 }
+    let(:attribute_value_other) { "12.34" }
   end
 
   describe '#typecast' do
     let(:model)     { Class.new { include Character } }
-    let(:attribute) { model.attribute(:price, Character::Attributes::Float) }
+    let(:attribute) { model.attribute(:score, Character::Attributes::Float) }
 
     subject { attribute.typecast(value) }
 

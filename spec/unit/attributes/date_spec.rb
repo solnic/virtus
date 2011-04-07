@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe Character::Attributes::Date do
   it_should_behave_like 'Attribute' do
-    let(:attribute_name) { :created_on }
+    let(:attribute_name)        { :created_on }
+    let(:attribute_value)       { Date.today }
+    let(:attribute_value_other) { Date.today.to_s }
   end
 
   describe '#typecast' do
