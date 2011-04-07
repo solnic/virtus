@@ -103,8 +103,8 @@ module Character
         #{reader_visibility}
           def #{name}
             return #{instance_variable_name} if defined?(#{instance_variable_name})
-            attribute = model.attributes[#{name.inspect}]
-          #{instance_variable_name} = attribute ? attribute.get(self) : nil
+            attribute = attributes[#{name.inspect}]
+            #{instance_variable_name} = attribute ? attribute.get(self) : nil
           end
           RUBY
       end
@@ -113,8 +113,7 @@ module Character
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
         #{writer_visibility}
           def #{name}=(value)
-            attribute = model.attributes[#{name.inspect}]
-            attribute.set(value, self)
+            attributes[#{name.inspect}].set(self, value)
           end
         RUBY
       end

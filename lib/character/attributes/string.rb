@@ -3,7 +3,7 @@ module Character
     class String < Object
       primitive ::String
 
-      def typecast(value, model)
+      def typecast(value, model = nil)
         value.to_s
       end
     end # String
