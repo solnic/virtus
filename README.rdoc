@@ -18,17 +18,55 @@ require typecasting and/or validations.
   class User
     include Character
 
-    attribute :name, String
-    attribute :age,  Integer
-    attribute :bday, DateTime
+    attribute :name,     String
+    attribute :age,      Integer
+    attribute :birthday, DateTime
   end
 
   user = User.new
+
+  # attribute writer
   user.name = "Piotr"
+
+  # attribute reader
   user.name # => "Piotr"
 
-  # that's it for a good start :)
+  # hash of attribute values
+  user.attributes # => { :name => "Piotr" }
 
+  # automatic typecasting
+  user.age = '28'
+  user.age # => 28
+
+  user.birthday = 'November 18th, 1983'
+  user.birthday # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+
+  # define your own attribute classes
+
+  module MyApp
+    module Attributes
+      class JSON < Character::Attributes::Object
+        primitive Hash
+
+        def typecast(value, model = nil)
+          JSON.parse(value)
+        end
+      end
+    end
+
+    class User
+      include Character
+
+      attribute :info, Attributes::JSON
+    end
+  end
+
+  user = MyApp::User.new
+
+  user.info = '{"email" : "john@domain.com" }'
+  user.info # => {"email"=>"john@domain.com"}
+
+  # validations coming soon...
 == TODO
 
 * specs
