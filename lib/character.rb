@@ -16,7 +16,7 @@ module Character
     attributes = {}
 
     self.class.attributes.each do |name, attribute|
-      attributes[name] = send(attribute.name)
+      attributes[name] = __send__(attribute.name)
     end
 
     attributes
