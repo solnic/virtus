@@ -12,3 +12,5 @@ if ENV['SPEC_COV'] && RUBY_VERSION >= '1.9.2'
 end
 
 require 'virtus'
+
+ENV['TZ'] = 'UTC'

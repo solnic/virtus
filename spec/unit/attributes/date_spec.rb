@@ -24,6 +24,12 @@ describe Virtus::Attributes::Date do
       its(:day)   { should == day   }
     end
 
+    context 'with a time' do
+      it_should_behave_like "a correct date" do
+        let(:value) { Time.new(year, month, day) }
+      end
+    end
+
     context 'with a hash' do
       it_should_behave_like "a correct date" do
         let(:value) do
