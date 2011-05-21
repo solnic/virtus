@@ -1,4 +1,4 @@
-= Character
+= Virtus
 
 This is a partial extraction of the DataMapper Property API with various
 modifications. My goal is to provide a common API to define attributes on a
@@ -9,14 +9,14 @@ require typecasting and/or validations.
 
 == Installation
 
-  gem i character
+  gem i virtus
 
 == Usage
 
-  require 'character'
+  require 'virtus'
 
   class User
-    include Character
+    include Virtus
 
     attribute :name,     String
     attribute :age,      Integer
@@ -46,7 +46,7 @@ require typecasting and/or validations.
 
   module MyApp
     module Attributes
-      class JSON < Character::Attributes::Object
+      class JSON < Virtus::Attributes::Object
         primitive Hash
 
         def typecast(value, model = nil)
@@ -56,7 +56,7 @@ require typecasting and/or validations.
     end
 
     class User
-      include Character
+      include Virtus
 
       attribute :info, Attributes::JSON
     end
