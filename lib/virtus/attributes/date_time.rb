@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class DateTime < Object
       primitive ::DateTime
@@ -40,4 +40,4 @@ module Character
       end
     end # DateTime
   end # Attributes
-end # Character
+end # Virtus

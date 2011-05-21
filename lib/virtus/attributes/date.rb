@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class Date < Object
       include Typecast::Time
@@ -41,4 +41,4 @@ module Character
       end
     end # Date
   end # Attributes
-end # Character
+end # Virtus

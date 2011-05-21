@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Character::Attributes::Boolean do
+describe Virtus::Attributes::Boolean do
   it_should_behave_like 'Attribute' do
     let(:attribute_name)        { :is_admin }
     let(:attribute_value)       { true }
@@ -8,8 +8,8 @@ describe Character::Attributes::Boolean do
   end
 
   describe '#typecast' do
-    let(:model)     { Class.new { include Character } }
-    let(:attribute) { model.attribute(:is_admin, Character::Attributes::Boolean) }
+    let(:model)     { Class.new { include Virtus } }
+    let(:attribute) { model.attribute(:is_admin, Virtus::Attributes::Boolean) }
 
     subject { attribute.typecast(value) }
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Character::Attributes::String do
+describe Virtus::Attributes::String do
   it_should_behave_like 'Attribute' do
     let(:attribute_name)        { :email }
     let(:attribute_value)       { 'red john' }
@@ -8,7 +8,7 @@ describe Character::Attributes::String do
   end
 
   describe '#typecast' do
-    let(:model)          { Class.new { include Character } }
+    let(:model)          { Class.new { include Virtus } }
     let(:attribute)      { model.attribute(:name, String) }
     let(:value)          { 1 }
     let(:typecast_value) { '1' }

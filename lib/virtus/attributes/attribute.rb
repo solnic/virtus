@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class Attribute
       attr_reader :name, :model, :options, :instance_variable_name,
@@ -126,4 +126,4 @@ module Character
 
     end # Attribute
   end # Attributes
-end # Character
+end # Virtus

@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class Numeric < Object
       include Typecast::Numeric
@@ -6,4 +6,4 @@ module Character
       accept_options :min, :max
     end # Numeric
   end # Attributes
-end # Character
+end # Virtus

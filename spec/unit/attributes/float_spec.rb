@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Character::Attributes::Float do
+describe Virtus::Attributes::Float do
   it_should_behave_like 'Attribute' do
     let(:attribute_name)        { :score }
     let(:attribute_value)       { 12.34 }
@@ -8,8 +8,8 @@ describe Character::Attributes::Float do
   end
 
   describe '#typecast' do
-    let(:model)     { Class.new { include Character } }
-    let(:attribute) { model.attribute(:score, Character::Attributes::Float) }
+    let(:model)     { Class.new { include Virtus } }
+    let(:attribute) { model.attribute(:score, Virtus::Attributes::Float) }
 
     subject { attribute.typecast(value) }
 

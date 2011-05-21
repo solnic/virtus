@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     module Typecast
       module Numeric
@@ -29,4 +29,4 @@ module Character
       end # Numeric
     end # Typecast
   end # Attributes
-end # Character
+end # Virtus

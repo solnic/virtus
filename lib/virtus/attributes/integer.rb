@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class Integer < Numeric
       primitive ::Integer
@@ -17,4 +17,4 @@ module Character
       end
     end # Integer
   end # Attributes
-end # Character
+end # Virtus

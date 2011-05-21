@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Character::Attributes::Decimal do
+describe Virtus::Attributes::Decimal do
   it_should_behave_like 'Attribute' do
     let(:attribute_name)        { :price }
     let(:attribute_value)       { BigDecimal("12.3456789") }
@@ -8,8 +8,8 @@ describe Character::Attributes::Decimal do
   end
 
   describe '#typecast' do
-    let(:model)     { Class.new { include Character } }
-    let(:attribute) { model.attribute(:price, Character::Attributes::Decimal) }
+    let(:model)     { Class.new { include Virtus } }
+    let(:attribute) { model.attribute(:price, Virtus::Attributes::Decimal) }
 
     subject { attribute.typecast(value) }
 

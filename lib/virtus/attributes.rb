@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class << self
       # @api semipublic
@@ -33,4 +33,4 @@ module Character
       Attributes.determine_type(name) || super
     end
   end # Attributes
-end # Character
+end # Virtus

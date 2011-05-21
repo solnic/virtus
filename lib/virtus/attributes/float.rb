@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class Float < Numeric
       primitive ::Float
@@ -17,4 +17,4 @@ module Character
       end
     end # Float
   end # Attributes
-end # Character
+end # Virtus

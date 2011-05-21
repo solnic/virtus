@@ -13,7 +13,7 @@ shared_examples_for "Attribute" do
   let(:sub_attribute) { class SubAttribute < described_class; end; SubAttribute }
 
   let(:model) do
-    Class.new { include Character }
+    Class.new { include Virtus }
   end
 
   describe ".options" do
@@ -27,7 +27,7 @@ shared_examples_for "Attribute" do
     end
 
     it "accepts base options" do
-      described_class.accepted_options.should include(*Character::Attributes::Attribute::OPTIONS)
+      described_class.accepted_options.should include(*Virtus::Attributes::Attribute::OPTIONS)
     end
   end
 

@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class String < Object
       primitive ::String
@@ -8,4 +8,4 @@ module Character
       end
     end # String
   end # Attributes
-end # Character
+end # Virtus

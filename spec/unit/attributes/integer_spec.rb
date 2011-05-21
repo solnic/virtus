@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Character::Attributes::Integer do
+describe Virtus::Attributes::Integer do
   it_should_behave_like 'Attribute' do
     let(:attribute_name)        { :age }
     let(:attribute_value)       { 28 }
@@ -8,8 +8,8 @@ describe Character::Attributes::Integer do
   end
 
   describe '#typecast' do
-    let(:model)     { Class.new { include Character } }
-    let(:attribute) { model.attribute(:age, Character::Attributes::Integer) }
+    let(:model)     { Class.new { include Virtus } }
+    let(:attribute) { model.attribute(:age, Virtus::Attributes::Integer) }
 
     subject { attribute.typecast(value) }
 

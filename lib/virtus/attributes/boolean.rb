@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class Boolean < Object
       primitive TrueClass
@@ -21,4 +21,4 @@ module Character
       end
     end # Boolean
   end # Attributes
-end # Character
+end # Virtus

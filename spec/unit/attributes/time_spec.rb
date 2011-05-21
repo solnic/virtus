@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Character::Attributes::Time do
+describe Virtus::Attributes::Time do
   it_should_behave_like 'Attribute' do
     let(:attribute_name)        { :birthday }
     let(:attribute_value)       { Time.now }
@@ -8,8 +8,8 @@ describe Character::Attributes::Time do
   end
 
   describe '#typecast' do
-    let(:model)     { Class.new { include Character } }
-    let(:attribute) { model.attribute(:birthday, Character::Attributes::Time) }
+    let(:model)     { Class.new { include Virtus } }
+    let(:attribute) { model.attribute(:birthday, Virtus::Attributes::Time) }
 
     let(:year)  { 1983 }
     let(:month) { 11 }

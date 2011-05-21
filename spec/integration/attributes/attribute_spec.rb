@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class User
-  include Character
+  include Virtus
 end
 
 describe User do
@@ -21,7 +21,7 @@ describe User do
     end
 
     it "should create an attribute of a correct type" do
-      described_class.attributes[:name].should be_instance_of(Character::Attributes::String)
+      described_class.attributes[:name].should be_instance_of(Virtus::Attributes::String)
     end
 
     it "creates attribute writer" do
@@ -60,7 +60,7 @@ describe User do
   describe "#name=" do
     let(:model) do
       Class.new do
-        include Character
+        include Virtus
         attribute :name, String
       end
     end
@@ -77,7 +77,7 @@ describe User do
   describe "#attributes" do
     let(:model) do
       Class.new do
-        include Character
+        include Virtus
         attribute :email,      String
         attribute :created_at, DateTime
       end

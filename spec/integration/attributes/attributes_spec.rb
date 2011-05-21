@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 class User
-  include Character
+  include Virtus
 
   attribute :name, String
   attribute :age,  Integer

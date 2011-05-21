@@ -6,13 +6,13 @@ describe User, '.const_missing' do
   context "with an existing attribute constant which doesn't exist in the global ns" do
     before do
       class User
-        include Character
+        include Virtus
         attribute :name, String
       end
     end
 
     it "should create attribute of the correct type" do
-      User.attributes[:name].should be_instance_of(Character::Attributes::String)
+      User.attributes[:name].should be_instance_of(Virtus::Attributes::String)
     end
   end
 
@@ -20,14 +20,14 @@ describe User, '.const_missing' do
     before do
       lambda {
         class User
-          include Character
+          include Virtus
           attribute :admin, Boolean
         end
       }.should_not raise_error(NameError)
     end
 
     it "should create attribute of the correct type" do
-      User.attributes[:admin].should be_instance_of(Character::Attributes::Boolean)
+      User.attributes[:admin].should be_instance_of(Virtus::Attributes::Boolean)
     end
   end
 
@@ -35,7 +35,7 @@ describe User, '.const_missing' do
     it "should raise NameError" do
       expect {
         class User
-          include Character
+          include Virtus
           attribute :not_gonna_work, NoSuchThing
         end
       }.to raise_error(NameError)

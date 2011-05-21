@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     module Typecast
       module Time
@@ -24,4 +24,4 @@ module Character
       end # Time
     end # Typecast
   end # Attributes
-end # Character
+end # Virtus

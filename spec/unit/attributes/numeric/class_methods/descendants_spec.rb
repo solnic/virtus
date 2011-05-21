@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Character::Attributes::Numeric, '.descendants' do
+describe Virtus::Attributes::Numeric, '.descendants' do
   subject { described_class.descendants }
 
   let(:known_descendants) do
-    [ Character::Attributes::Decimal,
-      Character::Attributes::Float,
-      Character::Attributes::Integer ]
+    [ Virtus::Attributes::Decimal,
+      Virtus::Attributes::Float,
+      Virtus::Attributes::Integer ]
   end
 
   it "should return all known attribute classes" do

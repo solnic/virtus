@@ -1,4 +1,4 @@
-module Character
+module Virtus
   module Attributes
     class Decimal < Numeric
       primitive ::BigDecimal
@@ -21,4 +21,4 @@ module Character
       end
     end # Decimal
   end # Attributes
-end # Character
+end # Virtus
