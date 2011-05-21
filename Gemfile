@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-# Specify your gem's dependencies in character.gemspec
+# Specify your gem's dependencies in virtus.gemspec
 gemspec
 
 group :development do

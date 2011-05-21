@@ -4,12 +4,12 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{character}
+  s.name = %q{virtus}
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Piotr Solnica"]
-  s.date = %q{2011-04-07}
+  s.date = %q{2011-05-21}
   s.description = %q{Add validatable attributes to your ruby objects}
   s.email = ["piotr@rubyverse.com"]
   s.extra_rdoc_files = [
@@ -18,27 +18,27 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+    ".rvmrc",
     "Gemfile",
     "LICENSE",
     "README.rdoc",
     "Rakefile",
     "VERSION",
-    "character.gemspec",
-    "lib/character.rb",
-    "lib/character/attributes.rb",
-    "lib/character/attributes/attribute.rb",
-    "lib/character/attributes/boolean.rb",
-    "lib/character/attributes/date.rb",
-    "lib/character/attributes/date_time.rb",
-    "lib/character/attributes/decimal.rb",
-    "lib/character/attributes/float.rb",
-    "lib/character/attributes/integer.rb",
-    "lib/character/attributes/numeric.rb",
-    "lib/character/attributes/object.rb",
-    "lib/character/attributes/string.rb",
-    "lib/character/attributes/time.rb",
-    "lib/character/attributes/typecast/numeric.rb",
-    "lib/character/attributes/typecast/time.rb",
+    "lib/virtus.rb",
+    "lib/virtus/attributes.rb",
+    "lib/virtus/attributes/attribute.rb",
+    "lib/virtus/attributes/boolean.rb",
+    "lib/virtus/attributes/date.rb",
+    "lib/virtus/attributes/date_time.rb",
+    "lib/virtus/attributes/decimal.rb",
+    "lib/virtus/attributes/float.rb",
+    "lib/virtus/attributes/integer.rb",
+    "lib/virtus/attributes/numeric.rb",
+    "lib/virtus/attributes/object.rb",
+    "lib/virtus/attributes/string.rb",
+    "lib/virtus/attributes/time.rb",
+    "lib/virtus/attributes/typecast/numeric.rb",
+    "lib/virtus/attributes/typecast/time.rb",
     "spec/integration/attributes/attribute_spec.rb",
     "spec/integration/attributes/attributes_spec.rb",
     "spec/integration/attributes/const_missing_spec.rb",
@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/unit/attributes/boolean_spec.rb",
     "spec/unit/attributes/class_methods/determine_type_spec.rb",
+    "spec/unit/attributes/class_methods/new_spec.rb",
     "spec/unit/attributes/date_spec.rb",
     "spec/unit/attributes/date_time_spec.rb",
     "spec/unit/attributes/decimal_spec.rb",
@@ -54,9 +55,11 @@ Gem::Specification.new do |s|
     "spec/unit/attributes/numeric/class_methods/descendants_spec.rb",
     "spec/unit/attributes/object/class_methods/descendants_spec.rb",
     "spec/unit/attributes/string_spec.rb",
-    "spec/unit/attributes/time_spec.rb"
+    "spec/unit/attributes/time_spec.rb",
+    "spec/unit/virtus/instance_methods/attributes_spec.rb",
+    "virtus.gemspec"
   ]
-  s.homepage = %q{https://github.com/solnic/character}
+  s.homepage = %q{https://github.com/solnic/virtus}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Add validatable attributes to your ruby objects}
@@ -65,7 +68,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<character>, [">= 0"])
+      s.add_runtime_dependency(%q<virtus>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
@@ -75,7 +82,11 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
     else
-      s.add_dependency(%q<character>, [">= 0"])
+      s.add_dependency(%q<virtus>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_dependency(%q<rspec>, ["~> 2.4.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_dependency(%q<rspec>, ["~> 2.4.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rspec>, ["~> 2.4.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
@@ -86,7 +97,11 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, ["~> 2.4.0"])
     end
   else
-    s.add_dependency(%q<character>, [">= 0"])
+    s.add_dependency(%q<virtus>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+    s.add_dependency(%q<rspec>, ["~> 2.4.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+    s.add_dependency(%q<rspec>, ["~> 2.4.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rspec>, ["~> 2.4.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
