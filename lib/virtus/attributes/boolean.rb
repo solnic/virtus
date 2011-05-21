@@ -3,21 +3,17 @@ module Virtus
     class Boolean < Object
       primitive TrueClass
 
-      TRUE_VALUES  = [ 1, '1', 't', 'T', 'true',  'TRUE'  ].to_set.freeze
-      FALSE_VALUES = [ 0, '0', 'f', 'F', 'false', 'FALSE' ].to_set.freeze
+      TRUE_VALUES  = [ 1, '1', 't', 'T', 'true',  'TRUE'  ].freeze
+      FALSE_VALUES = [ 0, '0', 'f', 'F', 'false', 'FALSE' ].freeze
+      BOOLEAN_MAP  = Hash[
+        TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
 
       def primitive?(value)
         value == true || value == false
       end
 
       def typecast(value, model = nil)
-        if TRUE_VALUES.include?(value)
-          true
-        elsif FALSE_VALUES.include?(value)
-          false
-        else
-          value
-        end
+        BOOLEAN_MAP.fetch(value, value)
       end
     end # Boolean
   end # Attributes
