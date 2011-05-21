@@ -15,7 +15,7 @@ module Virtus
       #   Time constructed from value
       #
       # @api private
-      def typecast(value, model = nil)
+      def typecast_to_primitive(value, model = nil)
         if value.respond_to?(:to_time)
           value.to_time
         elsif value.is_a?(::Hash)

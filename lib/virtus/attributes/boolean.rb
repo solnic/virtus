@@ -12,7 +12,7 @@ module Virtus
         value == true || value == false
       end
 
-      def typecast(value, model = nil)
+      def typecast_to_primitive(value, model = nil)
         BOOLEAN_MAP.fetch(value, value)
       end
     end # Boolean

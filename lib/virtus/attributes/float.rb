@@ -12,7 +12,7 @@ module Virtus
       #   Float constructed from value
       #
       # @api private
-      def typecast(value, model = nil)
+      def typecast_to_primitive(value, model = nil)
         typecast_to_numeric(value, :to_f)
       end
     end # Float

@@ -15,7 +15,7 @@ module Virtus
       #   Date constructed from value
       #
       # @api private
-      def typecast(value, model = nil)
+      def typecast_to_primitive(value)
         if value.respond_to?(:to_date)
           value.to_date
         elsif value.is_a?(::Hash)

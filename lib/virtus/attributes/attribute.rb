@@ -77,7 +77,16 @@ module Virtus
       end
 
       # @api private
-      def typecast(value, model)
+      def typecast(value, model = nil)
+        if value.nil? || primitive?(value)
+          value
+        else
+          typecast_to_primitive(value)
+        end
+      end
+
+      # @api private
+      def typecast_to_primitive(value, model)
         value
       end
 
