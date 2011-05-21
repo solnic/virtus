@@ -23,7 +23,8 @@ require typecasting and/or validations.
     attribute :birthday, DateTime
   end
 
-  user = User.new
+  # adds attributes setting in the constructor
+  user = User.new(:age => 28)
 
   # attribute writer
   user.name = "Piotr"
