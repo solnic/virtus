@@ -8,15 +8,31 @@ require 'bigdecimal/util'
 module Virtus
   module Undefined; end
 
+  # @api private
+  # TODO: document
   def self.included(base)
     base.extend(Attributes)
   end
 
+  # @api private
+  # TODO: document
+  def attributes=(attributes)
+    attributes.each do |name, value|
+      if self.class.public_method_defined?(writer_name = "#{name}=")
+        __send__(writer_name, value)
+      end
+    end
+  end
+
+  # @api private
+  # TODO: document
   def attributes
     attributes = {}
 
     self.class.attributes.each do |name, attribute|
-      attributes[name] = __send__(attribute.name)
+      if self.class.public_method_defined?(name)
+        attributes[name] = __send__(attribute.name)
+      end
     end
 
     attributes

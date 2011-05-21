@@ -12,6 +12,14 @@ module Virtus
       end
     end
 
+    # @api private
+    # TODO: document
+    def new(attributes = {})
+      model = super
+      model.attributes = attributes
+      model
+    end
+
     # @api public
     # TODO: document
     def attribute(name, type, options = {})
