@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Piotr Solnica"]
-  s.date = %q{2011-05-21}
+  s.date = %q{2011-05-22}
   s.description = %q{Add validatable attributes to your ruby objects}
   s.email = ["piotr@rubyverse.com"]
   s.extra_rdoc_files = [
@@ -39,10 +39,20 @@ Gem::Specification.new do |s|
     "lib/virtus/attributes/time.rb",
     "lib/virtus/attributes/typecast/numeric.rb",
     "lib/virtus/attributes/typecast/time.rb",
+    "lib/virtus/dirty_tracking.rb",
+    "lib/virtus/support/chainable.rb",
     "spec/integration/attributes/attribute_spec.rb",
     "spec/integration/attributes/attributes_spec.rb",
+    "spec/integration/attributes/boolean_spec.rb",
     "spec/integration/attributes/const_missing_spec.rb",
-    "spec/shared/attribute_spec.rb",
+    "spec/integration/attributes/date_spec.rb",
+    "spec/integration/attributes/date_time_spec.rb",
+    "spec/integration/attributes/decimal_spec.rb",
+    "spec/integration/attributes/float_spec.rb",
+    "spec/integration/attributes/integer_spec.rb",
+    "spec/integration/attributes/string_spec.rb",
+    "spec/integration/attributes/time_spec.rb",
+    "spec/integration/shared/dirty_trackable_attribute_spec.rb",
     "spec/spec_helper.rb",
     "spec/unit/attributes/boolean_spec.rb",
     "spec/unit/attributes/class_methods/determine_type_spec.rb",
@@ -56,6 +66,7 @@ Gem::Specification.new do |s|
     "spec/unit/attributes/object/class_methods/descendants_spec.rb",
     "spec/unit/attributes/string_spec.rb",
     "spec/unit/attributes/time_spec.rb",
+    "spec/unit/shared/attribute_spec.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
     "virtus.gemspec"
   ]
@@ -81,6 +92,9 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.4.0"])
+      s.add_development_dependency(%q<simplecov>, ["~> 0.4.2"])
     else
       s.add_dependency(%q<virtus>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
@@ -95,6 +109,9 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, ["~> 2.4.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
       s.add_dependency(%q<rspec>, ["~> 2.4.0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+      s.add_dependency(%q<rspec>, ["~> 2.4.0"])
+      s.add_dependency(%q<simplecov>, ["~> 0.4.2"])
     end
   else
     s.add_dependency(%q<virtus>, [">= 0"])
@@ -110,6 +127,9 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rspec>, ["~> 2.4.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
     s.add_dependency(%q<rspec>, ["~> 2.4.0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.5.2"])
+    s.add_dependency(%q<rspec>, ["~> 2.4.0"])
+    s.add_dependency(%q<simplecov>, ["~> 0.4.2"])
   end
 end
 
