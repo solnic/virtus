@@ -8,6 +8,16 @@ shared_examples_for "Dirty Trackable Attribute" do
     model
   end
 
+  context "when object is clean" do
+    let(:object) do
+      model.new
+    end
+
+    it "doesn't mark it as dirty" do
+      object.dirty?.should be(false)
+    end
+  end
+
   context "when value is set on a new object" do
     let(:object) do
       model.new
@@ -17,8 +27,12 @@ shared_examples_for "Dirty Trackable Attribute" do
       object.attribute_set(attribute_name, attribute_value)
     end
 
+    it "marks the object as dirty" do
+      object.dirty?.should be(true)
+    end
+
     it "marks the attribute as dirty" do
-      object.dirty_attributes.should have_key(attribute_name)
+      object.attribute_dirty?(attribute_name).should be(true)
     end
 
     it "sets new value in dirty_attributes hash" do
@@ -39,8 +53,12 @@ shared_examples_for "Dirty Trackable Attribute" do
       object.attribute_set(attribute_name, new_value)
     end
 
+    it "marks the object as dirty" do
+      object.dirty?.should be(true)
+    end
+
     it "marks the attribute as dirty" do
-      object.dirty_attributes.should have_key(attribute_name)
+      object.attribute_dirty?(attribute_name).should be(true)
     end
 
     it "sets new value in dirty_attributes hash" do

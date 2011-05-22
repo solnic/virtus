@@ -7,17 +7,29 @@ module Virtus
     end
 
     # @api public
+    def dirty?
+      dirty_attributes.any?
+    end
+
+    # @api public
+    def attribute_dirty?(name)
+      dirty_attributes.key?(name)
+    end
+
+    # @api public
     # TODO: document
     def attribute_dirty!(name, value)
       dirty_attributes[name] = value
     end
 
     # @api public
+    # TODO: document
     def dirty_attributes
       @_dirty_attributes ||= {}
     end
 
     # @api public
+    # TODO: document
     def original_attributes
       @_original_attributes ||= attributes.dup.freeze
     end
