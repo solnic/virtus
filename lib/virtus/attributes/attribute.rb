@@ -66,9 +66,6 @@ module Virtus
         default_accessor   = @options.fetch(:accessor, DEFAULT_ACCESSOR)
         @reader_visibility = @options.fetch(:reader, default_accessor)
         @writer_visibility = @options.fetch(:writer, default_accessor)
-
-        _create_writer(name)
-        _create_reader(name)
       end
 
       # @api private
@@ -110,29 +107,6 @@ module Virtus
       def set!(model, value)
         model.instance_variable_set(instance_variable_name, value)
       end
-
-      private
-
-      def _create_reader(name)
-        model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        #{reader_visibility}
-          def #{name}
-            return #{instance_variable_name} if defined?(#{instance_variable_name})
-            attribute = self.class.attributes[#{name.inspect}]
-            #{instance_variable_name} = attribute ? attribute.get(self) : nil
-          end
-          RUBY
-      end
-
-      def _create_writer(name)
-        model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        #{writer_visibility}
-          def #{name}=(value)
-            self.class.attributes[#{name.inspect}].set(self, value)
-          end
-        RUBY
-      end
-
     end # Attribute
   end # Attributes
 end # Virtus

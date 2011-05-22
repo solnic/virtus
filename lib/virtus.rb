@@ -12,9 +12,22 @@ module Virtus
   # TODO: document
   def self.included(base)
     base.extend(Attributes)
+    base.extend(Support::Chainable)
   end
 
-  # @api private
+  # @api public
+  # TODO: document
+  def attribute_get(name)
+    __send__(name)
+  end
+
+  # @api public
+  # TODO: document
+  def attribute_set(name, value)
+    __send__("#{name}=", value)
+  end
+
+  # @api public
   # TODO: document
   def attributes=(attributes)
     attributes.each do |name, value|
@@ -24,7 +37,7 @@ module Virtus
     end
   end
 
-  # @api private
+  # @api public
   # TODO: document
   def attributes
     attributes = {}
@@ -40,7 +53,7 @@ module Virtus
 end
 
 dir = Pathname(__FILE__).dirname.expand_path
-
+require dir + 'virtus/support/chainable'
 require dir + 'virtus/attributes'
 require dir + 'virtus/attributes/typecast/numeric'
 require dir + 'virtus/attributes/typecast/time'
@@ -55,3 +68,4 @@ require dir + 'virtus/attributes/float'
 require dir + 'virtus/attributes/integer'
 require dir + 'virtus/attributes/string'
 require dir + 'virtus/attributes/time'
+require dir + 'virtus/dirty_tracking'
