@@ -1,64 +1,103 @@
 module Virtus
+  # == Dirty Tracking
+  #
+  # Dirty Tracking is an optional module that you include only if you need it.
   module DirtyTracking
+    # Extends a class with DirtyTracking::Attributes module
+    #
+    # @param [Class] base
+    #
     # @api private
-    # TODO: document
     def self.included(base)
       base.extend(DirtyTracking::Attributes)
     end
 
+    # Returns if an object is dirty
+    #
+    # @return [TrueClass, FalseClass]
+    #
     # @api public
-    # TODO: document
     def dirty?
       dirty_session.dirty?
     end
 
+    # Returns if an attribute with the given name is dirty.
+    #
+    # @param [Symbol] name
+    #
+    # @return [TrueClass, FalseClass]
+    #
     # @api public
-    # TODO: document
     def attribute_dirty?(name)
       dirty_session.dirty?(name)
     end
 
+    # Explicitly sets an attribute as dirty.
+    #
+    # @param [Symbol] name
+    #   the name of an attribute
+    #
+    # @param [Object] value
+    #   a value of an attribute
+    #
     # @api public
-    # TODO: document
     def attribute_dirty!(name, value)
       dirty_session.dirty!(name, value)
     end
 
+    # Returns all dirty attributes
+    #
+    # @return [Hash]
+    #   a hash indexed with attribute names
+    #
     # @api public
-    # TODO: document
     def dirty_attributes
       dirty_session.dirty_attributes
     end
 
+    # Returns original attributes
+    #
+    # @return [Hash]
+    #   a hash indexed with attribute names
+    #
     # @api public
-    # TODO: document
     def original_attributes
       dirty_session.original_attributes
     end
 
+    # Returns the current dirty tracking session
+    #
+    # @return [Virtus::DirtyTracking::Session]
+    #
     # @api private
-    # TODO: document
     def dirty_session
       @_dirty_session ||= Session.new(self)
     end
 
     module Attributes
+      # Creates an attribute writer with dirty tracking
+      #
+      # @see Virtus::Attributes.attribute
+      #
+      # @return [Virtus::Attributes::Object]
+      #
       # @api public
-      # TODO: document
       def attribute(name, type, options = {})
-        _create_writer_with_dirty_tracking(name, super)
-      end
-
-      # @api private
-      def new(attributes = {})
-        model = super
-        model
+        _create_writer_with_dirty_tracking(name, attribute = super)
+        attribute
       end
 
       private
 
+      # Creates an attribute writer method with dirty tracking
+      #
+      # @param [Symbol] name
+      #   the name of an attribute
+      #
+      # @param [Virtus::Attributes::Object] attribute
+      #   an attribute instance
+      #
       # @api private
-      # TODO: document
       def _create_writer_with_dirty_tracking(name, attribute)
         class_eval <<-RUBY, __FILE__, __LINE__ + 1
           chainable(:dirty_tracking) do

@@ -1,8 +1,15 @@
 module Virtus
   module Attributes
     class << self
+      # Returns a Virtus::Attributes::Object sub-class based on a name or class.
+      #
+      # @param [Class,String] class_or_name
+      #   name of a class or a class itself
+      #
+      # @return [Class]
+      #   one of the Virtus::Attributes::Object sub-class
+      #
       # @api semipublic
-      # TODO: document
       def determine_type(class_or_name)
         if class_or_name.is_a?(Class) && class_or_name < Attributes::Object
           class_or_name
@@ -12,16 +19,46 @@ module Virtus
       end
     end
 
+    # Chains Class.new to be able to set attributes during initialization of
+    # an object.
+    #
+    # @param [Hash] attributes
+    #   the attributes hash to be set
+    #
+    # @return [Object]
+    #
     # @api private
-    # TODO: document
     def new(attributes = {})
       model = super
       model.attributes = attributes
       model
     end
 
+    # Defines an attribute on an object's class.
+    #
+    # Usage:
+    #
+    #    class Book
+    #      include Virtus
+    #
+    #      attribute :title,        String
+    #      attribute :author,       String
+    #      attribute :published_at, DateTime
+    #      attribute :page_count,   Integer
+    #    end
+    #
+    # @param [Symbol] name
+    #   the name of an attribute
+    #
+    # @param [Class] type
+    #   the type class of an attribute
+    #
+    # @param [Hash] options
+    #   the extra options hash
+    #
+    # @return [Virtus::Attributes::Object]
+    #
     # @api public
-    # TODO: document
     def attribute(name, type, options = {})
       attribute_klass  = Attributes.determine_type(type)
       attributes[name] = attribute = attribute_klass.new(name, self, options)
@@ -32,14 +69,27 @@ module Virtus
       attribute
     end
 
+    # Returns all the attributes defined on a Class.
+    #
+    # @return [Hash]
+    #   an attributes hash indexed by attribute names
+    #
     # @api public
-    # TODO: document
     def attributes
       @attributes ||= {}
     end
 
     private
 
+    # Creates an attribute reader method
+    #
+    # @param [Symbol] name
+    #   the name of an attribute
+    #
+    # @param [Virtus::Attributes::Object] attribute
+    #   an attribute instance
+    #
+    # @api private
     def _create_reader(name, attribute)
       instance_variable_name = attribute.instance_variable_name
 
@@ -56,6 +106,15 @@ module Virtus
       RUBY
     end
 
+    # Creates an attribute writer method
+    #
+    # @param [Symbol] name
+    #   the name of an attribute
+    #
+    # @param [Virtus::Attributes::Object] attribute
+    #   an attribute instance
+    #
+    # @api private
     def _create_writer(name, attribute)
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
         chainable(:attributes) do
@@ -68,8 +127,17 @@ module Virtus
       RUBY
     end
 
+    # Hooks into const missing process to determine types of attributes.
+    #
+    # It is used when an attribute is defined and a global class like String
+    # or Integer is provided as the type which needs to be mapped to
+    # Virtus::Attributes::String and Virtus::Attributes::Integer.
+    #
+    # @param [String] name
+    #
+    # @return [Class]
+    #
     # @api private
-    # TODO: document
     def const_missing(name)
       Attributes.determine_type(name) || super
     end
