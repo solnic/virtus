@@ -53,6 +53,7 @@ module Virtus
 end
 
 dir = Pathname(__FILE__).dirname.expand_path
+
 require dir + 'virtus/support/chainable'
 require dir + 'virtus/attributes'
 require dir + 'virtus/attributes/typecast/numeric'
@@ -71,3 +72,4 @@ require dir + 'virtus/attributes/integer'
 require dir + 'virtus/attributes/string'
 require dir + 'virtus/attributes/time'
 require dir + 'virtus/dirty_tracking'
+require dir + 'virtus/dirty_tracking/session'
