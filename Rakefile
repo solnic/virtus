@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'rake'
 require 'jeweler'
+require 'rspec/core/rake_task'
 
 Jeweler::Tasks.new do |gem|
   gem.name        = "virtus"
@@ -18,3 +19,9 @@ Jeweler::Tasks.new do |gem|
 end
 
 Jeweler::GemcutterTasks.new
+
+desc "Run specs"
+RSpec::Core::RakeTask.new
+
+desc 'Default: run specs.'
+task :default => :spec
