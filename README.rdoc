@@ -1,4 +1,4 @@
-= Virtus
+= Virtus http://travis-ci.org/solnic/virtus.png
 
 This is a partial extraction of the DataMapper Property API with various
 modifications. My goal is to provide a common API to define attributes on a
