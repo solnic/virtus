@@ -1,10 +1,6 @@
 require 'spec_helper'
 
-class User
-  include Virtus
-end
-
-describe User do
+describe Class.new { include Virtus } do
   it { described_class.should respond_to(:attribute)  }
 
   describe ".attribute" do
