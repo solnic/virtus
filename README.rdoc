@@ -11,7 +11,7 @@ require typecasting and/or validations.
 
   gem i virtus
 
-== Usage
+== Basic Usage
 
   require 'virtus'
 
@@ -68,7 +68,39 @@ require typecasting and/or validations.
   user.info = '{"email" : "john@domain.com" }'
   user.info # => {"email"=>"john@domain.com"}
 
-  # validations coming soon...
+== Dirty Tracking
+
+Dirty tracking is optional. If you need it, just include Virtus::DirtyTracking
+in you class.
+
+  class Post
+    include Virtus
+    include Virtus::DirtyTracking
+
+    attribute  :title,   String
+    attribute, :content, String
+    attribute, :meta,    Hash
+  end
+
+  post = Post.new(:title => 'Foo', :meta => { :tags => ['red', 'green'] })
+
+  post.title = 'Bar'
+
+  post.dirty? # => true
+
+  post.attribute_dirty?(:title) # => true
+
+  post.meta[:tags] << 'blue'
+
+  post.attribute_dirty?(:meta) # => true
+
+  post.dirty_attributes # => {:title => 'Bar', :meta=>{:tags=>["red", "green", "blue"]}}
+
+
+== Validations
+
+Coming soon...:)
+
 == TODO
 
 * validations
