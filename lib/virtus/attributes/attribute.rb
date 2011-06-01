@@ -4,7 +4,7 @@ module Virtus
       attr_reader :name, :model, :options, :instance_variable_name,
         :reader_visibility, :writer_visibility
 
-      OPTIONS = [ :primitive, :accessor, :reader, :writer ].freeze
+      OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
 
       DEFAULT_ACCESSOR = :public.freeze
 
@@ -55,6 +55,12 @@ module Virtus
       end
 
       accept_options *OPTIONS
+
+      # @api semipublic
+      # TODO: document
+      def complex?
+        options[:complex]
+      end
 
       def initialize(name, model, options = {})
         @name    = name
