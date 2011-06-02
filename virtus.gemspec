@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-06-01}
+  s.authors = ["Piotr Solnica"]
+  s.date = %q{2011-06-02}
   s.description = %q{Add validatable attributes to your ruby objects}
-  s.email = [%q{piotr@rubyverse.com}]
+  s.email = ["piotr@rubyverse.com"]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.rdoc"
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
     ".rvmrc",
+    ".travis.yml",
     "Gemfile",
     "LICENSE",
     "README.rdoc",
@@ -57,7 +58,7 @@ Gem::Specification.new do |s|
     "spec/integration/attributes/integer_spec.rb",
     "spec/integration/attributes/string_spec.rb",
     "spec/integration/attributes/time_spec.rb",
-    "spec/integration/shared/dirty_trackable_attribute_spec.rb",
+    "spec/integration/shared/dirty_trackable_attribute.rb",
     "spec/spec_helper.rb",
     "spec/unit/attributes/array_spec.rb",
     "spec/unit/attributes/boolean_spec.rb",
@@ -73,13 +74,13 @@ Gem::Specification.new do |s|
     "spec/unit/attributes/object/class_methods/descendants_spec.rb",
     "spec/unit/attributes/string_spec.rb",
     "spec/unit/attributes/time_spec.rb",
-    "spec/unit/shared/attribute_spec.rb",
+    "spec/unit/shared/attribute.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
     "virtus.gemspec"
   ]
   s.homepage = %q{https://github.com/solnic/virtus}
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.5}
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{Add validatable attributes to your ruby objects}
 
   if s.respond_to? :specification_version then
