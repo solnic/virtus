@@ -7,6 +7,22 @@ describe Virtus::Attributes::Boolean do
     let(:attribute_value_other) { '1' }
   end
 
+  describe "accessor names" do
+    let(:model) do
+      Class.new do
+        include Virtus
+        
+        attribute :is_admin, Virtus::Attributes::Boolean
+      end
+    end
+    
+    let(:object) { model.new(:is_admin => true) }
+    
+    it "uses standard boolean reader naming conventions" do
+      object.is_admin?.should be_true
+    end
+  end
+
   describe '#typecast' do
     let(:model)     { Class.new { include Virtus } }
     let(:attribute) { model.attribute(:is_admin, Virtus::Attributes::Boolean) }
