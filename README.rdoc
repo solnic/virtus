@@ -1,3 +1,6 @@
+IF YOU'RE LOOKING AT THIS PAGE, YOU SHOULD GO TO solnic/virtus INSTEAD.
+THIS IS JUST A PERSONAL CLONE OF THE ORIGINAL.
+
 = Virtus http://travis-ci.org/solnic/virtus.png
 
 This is a partial extraction of the DataMapper Property API with various
