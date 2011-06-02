@@ -85,6 +85,20 @@ module Virtus
           end
         end
       RUBY
+
+      boolean_reader_name = "#{name}?"
+
+      if attribute.kind_of?(Virtus::Attributes::Boolean)
+        class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          chainable(:attributes) do
+            #{attribute.reader_visibility}
+
+            def #{boolean_reader_name}
+              #{name}
+            end
+          end
+        RUBY
+      end
     end
 
     # Creates an attribute writer method
