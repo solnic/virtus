@@ -138,4 +138,20 @@ shared_examples_for "Attribute" do
       it { should be(nil) }
     end
   end
+
+  describe "#complex" do
+    let(:attribute) { model.attribute(attribute_name, described_class, :complex => complex) }
+
+    subject { attribute.complex? }
+
+    context "when set to true" do
+      let(:complex) { true }
+      it { should be(true) }
+    end
+
+    context "when set to false" do
+      let(:complex) { false }
+      it { should be(false) }
+    end
+  end
 end
