@@ -16,6 +16,10 @@ describe Virtus::ClassMethods, '.attribute' do
       described_class.attribute(:bday,    Date,    :writer   => :protected)
     end
 
+    let(:public_instance_methods)    { described_class.public_instance_methods.map    { |method| method.to_s } }
+    let(:protected_instance_methods) { described_class.protected_instance_methods.map { |method| method.to_s } }
+    let(:private_instance_methods)   { described_class.private_instance_methods.map   { |method| method.to_s } }
+
     it "should create an attribute" do
       described_class.attributes.should have_key(:name)
     end
@@ -25,35 +29,35 @@ describe Virtus::ClassMethods, '.attribute' do
     end
 
     it "creates attribute writer" do
-      described_class.public_instance_methods.should include('name=')
+      public_instance_methods.should include('name=')
     end
 
     it "creates attribute reader" do
-      described_class.public_instance_methods.should include('name')
+      public_instance_methods.should include('name')
     end
 
     it "creates attribute private reader when :accessor => :private" do
-      described_class.private_instance_methods.should include('email')
+      private_instance_methods.should include('email')
     end
 
     it "creates attribute private writer when :accessor => :private" do
-      described_class.private_instance_methods.should include('email=')
+      private_instance_methods.should include('email=')
     end
 
     it "creates attribute protected reader when :accessor => :protected" do
-      described_class.protected_instance_methods.should include('address')
+      protected_instance_methods.should include('address')
     end
 
     it "creates attribute protected writer when :accessor => :protected" do
-      described_class.protected_instance_methods.should include('address=')
+      protected_instance_methods.should include('address=')
     end
 
     it "creates attribute private reader when :reader => :private" do
-      described_class.private_instance_methods.should include('age')
+      private_instance_methods.should include('age')
     end
 
     it "creates attribute protected writer when :writer => :protected" do
-      described_class.protected_instance_methods.should include('bday=')
+      protected_instance_methods.should include('bday=')
     end
   end
 end
