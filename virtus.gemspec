@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/virtus.rb",
-    "lib/virtus/attributes.rb",
     "lib/virtus/attributes/array.rb",
     "lib/virtus/attributes/attribute.rb",
     "lib/virtus/attributes/boolean.rb",
