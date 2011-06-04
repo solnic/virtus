@@ -9,7 +9,7 @@ Jeweler::Tasks.new do |gem|
   gem.authors     = ["Piotr Solnica"]
   gem.email       = ["piotr@rubyverse.com"]
   gem.homepage    = "https://github.com/solnic/virtus"
-  gem.summary     = %q{Add validatable attributes to your ruby objects}
+  gem.summary     = %q{Attributes for your plain ruby objects}
   gem.description = gem.summary
 
   gem.files         = `git ls-files`.split("\n")
