@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-06-01}
+  s.date = %q{2011-06-04}
   s.description = %q{Add validatable attributes to your ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".gitignore",
     ".rvmrc",
+    ".travis.yml",
     "Gemfile",
     "LICENSE",
     "README.rdoc",
@@ -41,23 +42,10 @@ Gem::Specification.new do |s|
     "lib/virtus/attributes/time.rb",
     "lib/virtus/attributes/typecast/numeric.rb",
     "lib/virtus/attributes/typecast/time.rb",
-    "lib/virtus/dirty_tracking.rb",
-    "lib/virtus/dirty_tracking/session.rb",
     "lib/virtus/support/chainable.rb",
-    "spec/integration/attributes/array_spec.rb",
     "spec/integration/attributes/attribute_spec.rb",
     "spec/integration/attributes/attributes_spec.rb",
-    "spec/integration/attributes/boolean_spec.rb",
     "spec/integration/attributes/const_missing_spec.rb",
-    "spec/integration/attributes/date_spec.rb",
-    "spec/integration/attributes/date_time_spec.rb",
-    "spec/integration/attributes/decimal_spec.rb",
-    "spec/integration/attributes/float_spec.rb",
-    "spec/integration/attributes/hash_spec.rb",
-    "spec/integration/attributes/integer_spec.rb",
-    "spec/integration/attributes/string_spec.rb",
-    "spec/integration/attributes/time_spec.rb",
-    "spec/integration/shared/dirty_trackable_attribute_spec.rb",
     "spec/spec_helper.rb",
     "spec/unit/attributes/array_spec.rb",
     "spec/unit/attributes/boolean_spec.rb",
@@ -73,7 +61,7 @@ Gem::Specification.new do |s|
     "spec/unit/attributes/object/class_methods/descendants_spec.rb",
     "spec/unit/attributes/string_spec.rb",
     "spec/unit/attributes/time_spec.rb",
-    "spec/unit/shared/attribute_spec.rb",
+    "spec/unit/shared/attribute.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
     "virtus.gemspec"
   ]
