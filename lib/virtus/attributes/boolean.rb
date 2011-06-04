@@ -15,6 +15,25 @@ module Virtus
       def typecast_to_primitive(value, model = nil)
         BOOLEAN_MAP.fetch(value, value)
       end
+
+      private
+
+      # Creates standard and boolean attribute reader methods.
+      #
+      # @api private
+      def _create_reader
+        super
+
+        model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          chainable(:attribute) do
+            #{reader_visibility}
+
+            def #{name}?
+              #{name}
+            end
+          end
+        RUBY
+      end
     end # Boolean
   end # Attributes
 end # Virtus

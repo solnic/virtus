@@ -42,12 +42,7 @@ module Virtus
     # @api public
     def attribute(name, type, options = {})
       attribute_klass  = Virtus.determine_type(type)
-      attributes[name] = attribute = attribute_klass.new(name, self, options)
-
-      _create_reader(name, attribute)
-      _create_writer(name, attribute)
-
-      attribute
+      attributes[name] = attribute_klass.new(name, self, options)
     end
 
     # Returns all the attributes defined on a Class.
@@ -61,66 +56,6 @@ module Virtus
     end
 
     private
-
-    # Creates an attribute reader method
-    #
-    # @param [Symbol] name
-    #   the name of an attribute
-    #
-    # @param [Virtus::Attributes::Object] attribute
-    #   an attribute instance
-    #
-    # @api private
-    def _create_reader(name, attribute)
-      instance_variable_name = attribute.instance_variable_name
-
-      class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        chainable(:attributes) do
-          #{attribute.reader_visibility}
-
-          def #{name}
-            return #{instance_variable_name} if defined?(#{instance_variable_name})
-            attribute = self.class.attributes[#{name.inspect}]
-          #{instance_variable_name} = attribute ? attribute.get(self) : nil
-          end
-        end
-      RUBY
-
-      boolean_reader_name = "#{name}?"
-
-      if attribute.kind_of?(Virtus::Attributes::Boolean)
-        class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          chainable(:attributes) do
-            #{attribute.reader_visibility}
-
-            def #{boolean_reader_name}
-              #{name}
-            end
-          end
-        RUBY
-      end
-    end
-
-    # Creates an attribute writer method
-    #
-    # @param [Symbol] name
-    #   the name of an attribute
-    #
-    # @param [Virtus::Attributes::Object] attribute
-    #   an attribute instance
-    #
-    # @api private
-    def _create_writer(name, attribute)
-      class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        chainable(:attributes) do
-          #{attribute.writer_visibility}
-
-          def #{name}=(value)
-            self.class.attributes[#{name.inspect}].set(self, value)
-          end
-        end
-      RUBY
-    end
 
     # Hooks into const missing process to determine types of attributes.
     #

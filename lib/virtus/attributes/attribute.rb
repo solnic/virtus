@@ -112,6 +112,9 @@ module Virtus
         default_accessor   = @options.fetch(:accessor, DEFAULT_ACCESSOR)
         @reader_visibility = @options.fetch(:reader, default_accessor)
         @writer_visibility = @options.fetch(:writer, default_accessor)
+
+        _create_reader
+        _create_writer
       end
 
       # Returns if the given value's class is an attribute's primitive
@@ -172,6 +175,39 @@ module Virtus
       # @api private
       def set!(model, value)
         model.instance_variable_set(instance_variable_name, value)
+      end
+
+      # Creates an attribute reader method
+      #
+      # @api private
+      def _create_reader
+        model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          chainable(:attribute) do
+            #{reader_visibility}
+
+            def #{name}
+              return #{instance_variable_name} if defined?(#{instance_variable_name})
+              attribute = self.class.attributes[#{name.inspect}]
+            #{instance_variable_name} = attribute ? attribute.get(self) : nil
+            end
+          end
+        RUBY
+
+      end
+
+      # Creates an attribute writer method
+      #
+      # @api private
+      def _create_writer
+        model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          chainable(:attribute) do
+            #{writer_visibility}
+
+            def #{name}=(value)
+              self.class.attributes[#{name.inspect}].set(self, value)
+            end
+          end
+        RUBY
       end
     end # Attribute
   end # Attributes
