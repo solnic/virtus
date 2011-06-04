@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Attributes, '.determine_type' do
+describe Virtus, '.determine_type' do
 
   (Virtus::Attributes::Object.descendants - [
    Virtus::Attributes::Boolean,

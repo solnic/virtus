@@ -8,86 +8,42 @@ require 'bigdecimal/util'
 module Virtus
   module Undefined; end
 
-  # Extends base class with Attributes and Chainable modules
-  #
-  # @param [Object] base
-  #
-  # @api private
-  def self.included(base)
-    base.extend(Attributes)
-    base.extend(Support::Chainable)
-  end
-
-  # Returns a value of the attribute with the given name
-  #
-  # @param [Symbol] name
-  #   a name of an attribute
-  #
-  # @return [Object]
-  #   a value of an attribute
-  #
-  # @api public
-  def attribute_get(name)
-    __send__(name)
-  end
-
-
-  # Sets a value of the attribute with the given name
-  #
-  # @param [Symbol] name
-  #   a name of an attribute
-  #
-  # @param [Object] value
-  #   a value to be set
-  #
-  # @return [Object]
-  #   the value set on an object
-  #
-  # @api public
-  def attribute_set(name, value)
-    __send__("#{name}=", value)
-  end
-
-  # Mass-assign of attribute values
-  #
-  # @param [Hash] attributes
-  #   a hash of attribute values to be set on an object
-  #
-  # @return [Hash]
-  #   the attributes
-  #
-  # @api public
-  def attributes=(attributes)
-    attributes.each do |name, value|
-      if self.class.public_method_defined?(writer_name = "#{name}=")
-        __send__(writer_name, value)
-      end
-    end
-  end
-
-  # Returns a hash of all publicly accessible attributes
-  #
-  # @return [Hash]
-  #   the attributes
-  #
-  # @api public
-  def attributes
-    attributes = {}
-
-    self.class.attributes.each do |name, attribute|
-      if self.class.public_method_defined?(name)
-        attributes[name] = __send__(attribute.name)
-      end
+  class << self
+    # Extends base class with Attributes and Chainable modules
+    #
+    # @param [Object] base
+    #
+    # @api private
+    def included(base)
+      base.extend(ClassMethods)
+      base.send(:include, InstanceMethods)
+      base.extend(Support::Chainable)
     end
 
-    attributes
+    # Returns a Virtus::Attributes::Object sub-class based on a name or class.
+    #
+    # @param [Class,String] class_or_name
+    #   name of a class or a class itself
+    #
+    # @return [Class]
+    #   one of the Virtus::Attributes::Object sub-class
+    #
+    # @api semipublic
+    def determine_type(class_or_name)
+      if class_or_name.is_a?(Class) && class_or_name < Attributes::Object
+        class_or_name
+      elsif Attributes.const_defined?(name = class_or_name.to_s)
+        Attributes.const_get(name)
+      end
+    end
   end
 end
 
 dir = Pathname(__FILE__).dirname.expand_path
 
 require dir + 'virtus/support/chainable'
-require dir + 'virtus/attributes'
+require dir + 'virtus/class_methods'
+require dir + 'virtus/instance_methods'
 require dir + 'virtus/attributes/typecast/numeric'
 require dir + 'virtus/attributes/typecast/time'
 require dir + 'virtus/attributes/attribute'
