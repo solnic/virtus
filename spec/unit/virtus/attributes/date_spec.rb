@@ -26,7 +26,7 @@ describe Virtus::Attributes::Date do
 
     context 'with a time' do
       it_should_behave_like "a correct date" do
-        let(:value) { Time.new(year, month, day) }
+        let(:value) { Time.local(year, month, day) }
       end
     end
 

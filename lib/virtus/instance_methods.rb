@@ -1,5 +1,18 @@
 module Virtus
   module InstanceMethods
+    # Chains Class.new to be able to set attributes during initialization of
+    # an object.
+    #
+    # @param [Hash] attributes
+    #   the attributes hash to be set
+    #
+    # @return [Object]
+    #
+    # @api private
+    def initialize(attributes = {})
+      self.attributes = attributes
+    end
+
     # Returns a value of the attribute with the given name
     #
     # @param [Symbol] name
@@ -12,7 +25,6 @@ module Virtus
     def attribute_get(name)
       __send__(name)
     end
-
 
     # Sets a value of the attribute with the given name
     #

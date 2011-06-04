@@ -1,20 +1,5 @@
 module Virtus
   module ClassMethods
-    # Chains Class.new to be able to set attributes during initialization of
-    # an object.
-    #
-    # @param [Hash] attributes
-    #   the attributes hash to be set
-    #
-    # @return [Object]
-    #
-    # @api private
-    def new(attributes = {})
-      model = super
-      model.attributes = attributes
-      model
-    end
-
     # Defines an attribute on an object's class.
     #
     # Usage:

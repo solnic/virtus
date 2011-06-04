@@ -25,35 +25,35 @@ describe Virtus::ClassMethods, '.attribute' do
     end
 
     it "creates attribute writer" do
-      described_class.public_instance_methods.should include(:"name=")
+      described_class.public_instance_methods.should include('name=')
     end
 
     it "creates attribute reader" do
-      described_class.public_instance_methods.should include(:name)
+      described_class.public_instance_methods.should include('name')
     end
 
     it "creates attribute private reader when :accessor => :private" do
-      described_class.private_instance_methods.should include(:email)
+      described_class.private_instance_methods.should include('email')
     end
 
     it "creates attribute private writer when :accessor => :private" do
-      described_class.private_instance_methods.should include(:"email=")
+      described_class.private_instance_methods.should include('email=')
     end
 
     it "creates attribute protected reader when :accessor => :protected" do
-      described_class.protected_instance_methods.should include(:address)
+      described_class.protected_instance_methods.should include('address')
     end
 
     it "creates attribute protected writer when :accessor => :protected" do
-      described_class.protected_instance_methods.should include(:"address=")
+      described_class.protected_instance_methods.should include('address=')
     end
 
     it "creates attribute private reader when :reader => :private" do
-      described_class.private_instance_methods.should include(:age)
+      described_class.private_instance_methods.should include('age')
     end
 
     it "creates attribute protected writer when :writer => :protected" do
-      described_class.protected_instance_methods.should include(:"bday=")
+      described_class.protected_instance_methods.should include('bday=')
     end
   end
 end

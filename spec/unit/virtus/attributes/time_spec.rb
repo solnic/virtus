@@ -64,7 +64,7 @@ describe Virtus::Attributes::Time do
     end
 
     context 'with a non-date value' do
-      let(:value) { 'non-date' }
+      let(:value) { '2999' }
       it { should == value }
     end
   end

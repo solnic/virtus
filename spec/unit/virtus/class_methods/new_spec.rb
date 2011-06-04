@@ -16,7 +16,8 @@ describe Virtus::Attributes, '.new' do
         model
       end
 
-      def initialize(a=nil)
+      def initialize(attributes = {})
+        super
         @email = "john@domain.com"
       end
     end
