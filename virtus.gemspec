@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Piotr Solnica"]
+  s.authors = [%q{Piotr Solnica}]
   s.date = %q{2011-06-04}
   s.description = %q{Attributes for your plain ruby objects}
-  s.email = ["piotr@rubyverse.com"]
+  s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.markdown"
@@ -70,8 +70,8 @@ Gem::Specification.new do |s|
     "virtus.gemspec"
   ]
   s.homepage = %q{https://github.com/solnic/virtus}
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.5}
   s.summary = %q{Attributes for your plain ruby objects}
 
   if s.respond_to? :specification_version then
