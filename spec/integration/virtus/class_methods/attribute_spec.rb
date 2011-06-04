@@ -1,6 +1,10 @@
 require 'spec_helper'
 
-describe Class.new { include Virtus } do
+describe Virtus::ClassMethods, '.attribute' do
+  let(:described_class) do
+    Class.new { include Virtus }
+  end
+
   it { described_class.should respond_to(:attribute)  }
 
   describe ".attribute" do
@@ -50,48 +54,6 @@ describe Class.new { include Virtus } do
 
     it "creates attribute protected writer when :writer => :protected" do
       described_class.protected_instance_methods.should include(:"bday=")
-    end
-  end
-
-  describe "#name=" do
-    let(:model) do
-      Class.new do
-        include Virtus
-        attribute :name, String
-      end
-    end
-
-    let(:object) { model.new }
-
-    before { object.name = 'jane' }
-
-    it "sets the value" do
-      object.name.should == 'jane'
-    end
-  end
-
-  describe "#attributes" do
-    let(:model) do
-      Class.new do
-        include Virtus
-        attribute :email,      String
-        attribute :created_at, DateTime
-      end
-    end
-
-    let(:object) { model.new }
-
-    let(:attributes) do
-      { :email => "john@domain.com", :created_at => DateTime.now }
-    end
-
-    before do
-      object.email      = attributes[:email]
-      object.created_at = attributes[:created_at]
-    end
-
-    it "returns hash with attribute values" do
-      object.attributes.should == attributes
     end
   end
 end

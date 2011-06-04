@@ -1,21 +1,24 @@
 require 'spec_helper'
 
+describe Virtus::ClassMethods, '.attributes' do
+  let(:described_class) do
+    Class.new { include Virtus }
+  end
 
-model = Class.new do
-  include Virtus
-
-  attribute :name, String
-  attribute :age,  Integer
-end
-
-describe model do
   it { described_class.should respond_to(:attributes)  }
 
   describe ".attributes" do
-    subject { model.attributes }
+    before do
+      described_class.attribute(:name, String)
+      described_class.attribute(:age,  Integer)
+    end
+
+    subject { described_class.attributes }
 
     it "returns an attributes hash" do
-      subject.should == { :name => model.attributes[:name], :age => model.attributes[:age] }
+      subject.should == {
+        :name => described_class.attributes[:name],
+        :age  => described_class.attributes[:age] }
     end
   end
 end
