@@ -67,8 +67,8 @@ module Virtus
     def attributes
       attributes = {}
 
-      self.class.attributes.each do |name, attribute|
-        attributes[name] = __send__(attribute.name) if respond_to?(name)
+      self.class.attributes.each_key do |name|
+        attributes[name] = __send__(name) if respond_to?(name)
       end
 
       attributes
