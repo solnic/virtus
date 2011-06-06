@@ -4,11 +4,9 @@ module Virtus
       MODULES = {}
 
       def chainable(key, &block)
-        begin
-          mod = (MODULES[key] ||= Module.new)
-          include mod
-          mod
-        end.module_eval(&block)
+        mod = MODULES[key] ||= Module.new
+        include mod
+        mod.module_eval(&block)
       end
     end
   end
