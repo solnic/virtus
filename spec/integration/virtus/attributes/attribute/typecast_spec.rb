@@ -30,7 +30,7 @@ describe Virtus::Attributes::Attribute, '#typecast' do
     end
 
     it "peforms custom typecasting" do
-      object.count.should == output_value
+      object.count.should eql(output_value)
     end
   end
 end

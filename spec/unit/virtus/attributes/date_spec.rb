@@ -19,9 +19,9 @@ describe Virtus::Attributes::Date do
 
     shared_examples_for "a correct date" do
       it          { should be_kind_of(Date) }
-      its(:year)  { should == year  }
-      its(:month) { should == month }
-      its(:day)   { should == day   }
+      its(:year)  { should eql(year)  }
+      its(:month) { should eql(month) }
+      its(:day)   { should eql(day)   }
     end
 
     context 'with a time' do
@@ -46,7 +46,7 @@ describe Virtus::Attributes::Date do
 
     context 'with a on-date value' do
       let(:value) { 'non-date' }
-      it { should == value }
+      it { should equal(value) }
     end
   end
 end

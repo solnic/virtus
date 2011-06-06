@@ -9,7 +9,7 @@ module Virtus
         TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
 
       def primitive?(value)
-        value == true || value == false
+        value.equal?(true) || value.equal?(false)
       end
 
       def typecast_to_primitive(value, model = nil)

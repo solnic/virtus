@@ -21,10 +21,10 @@ describe Virtus::InstanceMethods, '#attribute_set' do
   end
 
   it "returns the value" do
-    object.attribute_set(:name, value).should == value
+    object.attribute_set(:name, value).should eql(value)
   end
 
   it "sets value of an attribute" do
-    object.name.should == value
+    object.name.should eql(value)
   end
 end

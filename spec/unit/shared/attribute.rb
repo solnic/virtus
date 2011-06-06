@@ -68,7 +68,7 @@ shared_examples_for "Attribute" do
         subject { sub_attribute.new(attribute_name, model) }
 
         it "sets the default value" do
-          subject.options[option].should == value
+          subject.options[option].should eql(value)
         end
       end
 
@@ -78,7 +78,7 @@ shared_examples_for "Attribute" do
         subject { sub_attribute.new(attribute_name, model, option => new_value) }
 
         it "sets the new value" do
-          subject.options[option].should == new_value
+          subject.options[option].should eql(new_value)
         end
       end
     end
@@ -105,7 +105,7 @@ shared_examples_for "Attribute" do
       before { attribute.set(object, attribute_value) }
 
       it "sets the value in an ivar" do
-        object.instance_variable_get(attribute.instance_variable_name).should == attribute_value
+        object.instance_variable_get(attribute.instance_variable_name).should eql(attribute_value)
       end
     end
 
@@ -127,7 +127,7 @@ shared_examples_for "Attribute" do
 
       subject { attribute.get(object) }
 
-      it { should == attribute_value }
+      it { should eql(attribute_value) }
     end
 
     context "when nil is set" do
