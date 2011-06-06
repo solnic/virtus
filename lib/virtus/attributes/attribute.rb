@@ -188,7 +188,7 @@ module Virtus
             def #{name}
               return #{instance_variable_name} if defined?(#{instance_variable_name})
               attribute = self.class.attributes[#{name.inspect}]
-            #{instance_variable_name} = attribute ? attribute.get(self) : nil
+              #{instance_variable_name} = attribute ? attribute.get(self) : nil
             end
           end
         RUBY
