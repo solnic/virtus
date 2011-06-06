@@ -166,8 +166,7 @@ module Virtus
       #
       # @api private
       def set(model, value)
-        return if value.nil?
-        set!(model, typecast(value, model))
+        set!(model, typecast(value, model)) unless value.nil?
       end
 
       # Sets instance variable of the attribute
