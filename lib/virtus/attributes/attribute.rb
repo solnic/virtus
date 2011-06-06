@@ -192,7 +192,6 @@ module Virtus
             end
           end
         RUBY
-
       end
 
       # Creates an attribute writer method
