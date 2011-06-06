@@ -6,7 +6,7 @@ module Virtus
 
       OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
 
-      DEFAULT_ACCESSOR = :public.freeze
+      DEFAULT_ACCESSOR = :public
 
       class << self
         # Returns an array of valid options
