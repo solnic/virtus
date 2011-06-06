@@ -37,7 +37,7 @@ module Virtus
       #
       # @api private
       def typecast_hash_to_date(value)
-        ::Date.new(*extract_time(value)[0, 3])
+        ::Date.new(*extract_time(value).first(3))
       end
     end # Date
   end # Attributes

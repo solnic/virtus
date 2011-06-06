@@ -7,7 +7,7 @@ describe Virtus::Attributes::Attribute do
     let(:value)     { 'value' }
 
     it "returns original value" do
-      attribute.typecast_to_primitive(value, model).should == value
+      attribute.typecast_to_primitive(value, model).should eql(value)
     end
   end
 end

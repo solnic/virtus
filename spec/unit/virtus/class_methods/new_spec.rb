@@ -28,14 +28,14 @@ describe Virtus::Attributes, '.new' do
   end
 
   it "sets the attributes" do
-    object.name.should == "john"
+    object.name.should eql("john")
   end
 
   it "calls custom #initialize" do
-    object.email.should == "john@domain.com"
+    object.email.should eql("john@domain.com")
   end
 
   it "calls custom .new" do
-    object.age.should == 28
+    object.age.should eql(28)
   end
 end

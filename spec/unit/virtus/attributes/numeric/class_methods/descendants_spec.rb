@@ -10,6 +10,6 @@ describe Virtus::Attributes::Numeric, '.descendants' do
   end
 
   it "should return all known attribute classes" do
-    subject.should == known_descendants
+    subject.should eql(known_descendants)
   end
 end

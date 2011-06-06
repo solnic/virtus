@@ -91,7 +91,7 @@ describe Virtus::Attributes::Boolean do
 
     context "with 'Foo'" do
       let(:value) { 'Foo' }
-      it { should == value }
+      it { should equal(value) }
     end
   end
 end

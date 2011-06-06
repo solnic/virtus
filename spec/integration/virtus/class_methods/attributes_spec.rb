@@ -16,9 +16,10 @@ describe Virtus::ClassMethods, '.attributes' do
     subject { described_class.attributes }
 
     it "returns an attributes hash" do
-      subject.should == {
+      subject.should eql(
         :name => described_class.attributes[:name],
-        :age  => described_class.attributes[:age] }
+        :age  => described_class.attributes[:age]
+      )
     end
   end
 end

@@ -22,12 +22,12 @@ describe Virtus::Attributes::Time do
 
     shared_examples_for "a correct time" do
       it          { should be_kind_of(Time) }
-      its(:year)  { should == year  }
-      its(:month) { should == month }
-      its(:day)   { should == day   }
-      its(:hour)  { should == hour   }
-      its(:min)   { should == min   }
-      its(:sec)   { should == sec   }
+      its(:year)  { should eql(year)  }
+      its(:month) { should eql(month) }
+      its(:day)   { should eql(day)   }
+      its(:hour)  { should eql(hour)  }
+      its(:min)   { should eql(min)   }
+      its(:sec)   { should eql(sec)   }
     end
 
     context 'with a date time' do
@@ -65,7 +65,7 @@ describe Virtus::Attributes::Time do
 
     context 'with a non-date value' do
       let(:value) { '2999' }
-      it { should == value }
+      it { should equal(value) }
     end
   end
 end

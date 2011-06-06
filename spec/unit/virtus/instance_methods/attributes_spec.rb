@@ -21,7 +21,7 @@ describe Virtus do
 
   describe '#attributes' do
     it "returns a hash of attributes" do
-      object.attributes.should == attributes
+      object.attributes.should eql(attributes)
     end
   end
 
@@ -31,7 +31,7 @@ describe Virtus do
     end
 
     it "sets attribute values for publicly accessible attributes" do
-      object.attributes.should == attributes
+      object.attributes.should eql(attributes)
     end
   end
 end

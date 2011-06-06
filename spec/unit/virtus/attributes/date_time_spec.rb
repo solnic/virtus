@@ -22,12 +22,12 @@ describe Virtus::Attributes::DateTime do
 
     shared_examples_for "a correct date time" do
       it          { should be_kind_of(DateTime) }
-      its(:year)  { should == year  }
-      its(:month) { should == month }
-      its(:day)   { should == day   }
-      its(:hour)  { should == hour  }
-      its(:min)   { should == min   }
-      its(:sec)   { should == sec   }
+      its(:year)  { should eql(year)  }
+      its(:month) { should eql(month) }
+      its(:day)   { should eql(day)   }
+      its(:hour)  { should eql(hour)  }
+      its(:min)   { should eql(min)   }
+      its(:sec)   { should eql(sec)   }
     end
 
     context 'with a hash' do
@@ -59,7 +59,7 @@ describe Virtus::Attributes::DateTime do
 
     context 'with a on-date value' do
       let(:value) { 'non-date' }
-      it { should == value }
+      it { should equal(value) }
     end
   end
 end

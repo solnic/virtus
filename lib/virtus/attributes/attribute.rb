@@ -6,7 +6,7 @@ module Virtus
 
       OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
 
-      DEFAULT_ACCESSOR = :public.freeze
+      DEFAULT_ACCESSOR = :public
 
       class << self
         # Returns an array of valid options
@@ -91,7 +91,7 @@ module Virtus
       end
 
       # Initializes an attribute instance
-      # 
+      #
       # @param [Symbol] name
       #   the name of an attribute
       #
@@ -166,8 +166,7 @@ module Virtus
       #
       # @api private
       def set(model, value)
-        return if value.nil?
-        set!(model, typecast(value, model))
+        set!(model, typecast(value, model)) unless value.nil?
       end
 
       # Sets instance variable of the attribute
@@ -188,11 +187,10 @@ module Virtus
             def #{name}
               return #{instance_variable_name} if defined?(#{instance_variable_name})
               attribute = self.class.attributes[#{name.inspect}]
-            #{instance_variable_name} = attribute ? attribute.get(self) : nil
+              #{instance_variable_name} = attribute ? attribute.get(self) : nil
             end
           end
         RUBY
-
       end
 
       # Creates an attribute writer method

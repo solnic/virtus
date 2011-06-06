@@ -15,6 +15,6 @@ describe Virtus::Attributes::String do
 
     subject { attribute.typecast(value) }
 
-    it { should == typecast_value }
+    it { should eql(typecast_value) }
   end
 end

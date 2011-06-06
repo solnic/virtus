@@ -17,6 +17,6 @@ describe Virtus::InstanceMethods, '#attribute_get' do
   end
 
   it "returns the value of an attribute" do
-    object.attribute_get(:name).should == value
+    object.attribute_get(:name).should eql(value)
   end
 end
