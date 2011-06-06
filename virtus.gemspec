@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{virtus}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-06-04}
+  s.date = %q{2011-06-06}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
     "lib/virtus/class_methods.rb",
     "lib/virtus/instance_methods.rb",
     "lib/virtus/support/chainable.rb",
+    "spec/integration/virtus/attributes/attribute/typecast_spec.rb",
     "spec/integration/virtus/class_methods/attribute_spec.rb",
     "spec/integration/virtus/class_methods/attributes_spec.rb",
     "spec/integration/virtus/class_methods/const_missing_spec.rb",
