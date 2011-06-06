@@ -11,9 +11,9 @@ describe Virtus::Attributes, '.new' do
       attr_accessor :age
 
       def self.new(attributes)
-        model = super
-        model.age = 28
-        model
+        instance = super
+        instance.age = 28
+        instance
       end
 
       def initialize(attributes = {})

@@ -148,32 +148,32 @@ module Virtus
         value
       end
 
-      # Returns value of an attribute for the given model
+      # Returns value of an attribute for the given instance
       #
       # @api private
-      def get(model)
-        get!(model)
+      def get(instance)
+        get!(instance)
       end
 
       # Returns the instance variable of the attribute
       #
       # @api private
-      def get!(model)
-        model.instance_variable_get(instance_variable_name)
+      def get!(instance)
+        instance.instance_variable_get(instance_variable_name)
       end
 
-      # Sets the value on the model
+      # Sets the value on the instance
       #
       # @api private
-      def set(model, value)
-        set!(model, typecast(value)) unless value.nil?
+      def set(instance, value)
+        set!(instance, typecast(value)) unless value.nil?
       end
 
       # Sets instance variable of the attribute
       #
       # @api private
-      def set!(model, value)
-        model.instance_variable_set(instance_variable_name, value)
+      def set!(instance, value)
+        instance.instance_variable_set(instance_variable_name, value)
       end
 
       # Creates an attribute reader method
