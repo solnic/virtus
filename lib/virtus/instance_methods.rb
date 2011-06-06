@@ -53,8 +53,7 @@ module Virtus
     # @api public
     def attributes=(attributes)
       attributes.each do |name, value|
-        writer_name = "#{name}="
-        __send__(writer_name, value) if respond_to?(writer_name)
+        attribute_set(name, value) if respond_to?("#{name}=")
       end
     end
 
@@ -68,7 +67,7 @@ module Virtus
       attributes = {}
 
       self.class.attributes.each_key do |name|
-        attributes[name] = __send__(name) if respond_to?(name)
+        attributes[name] = attribute_get(name) if respond_to?(name)
       end
 
       attributes
