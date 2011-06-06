@@ -1,1 +1,1 @@
-rvm --create use 1.9.2@virtus
+rvm use @$(basename `pwd`) --create
