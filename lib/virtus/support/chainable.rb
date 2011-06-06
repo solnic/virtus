@@ -3,10 +3,10 @@ module Virtus
     module Chainable
       MODULES = {}
 
-      def chainable(key, &block)
+      def chainable(key)
         mod = MODULES[key] ||= Module.new
         include mod
-        mod.module_eval(&block)
+        mod.module_eval { yield }
       end
     end
   end
