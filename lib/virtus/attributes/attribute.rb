@@ -133,7 +133,7 @@ module Virtus
       #   the value
       #
       # @api private
-      def typecast(value, model = nil)
+      def typecast(value)
         if value.nil? || primitive?(value)
           value
         else
@@ -144,7 +144,7 @@ module Virtus
       # Converts the given value to the primitive type
       #
       # @api private
-      def typecast_to_primitive(value, model)
+      def typecast_to_primitive(value)
         value
       end
 
@@ -166,7 +166,7 @@ module Virtus
       #
       # @api private
       def set(model, value)
-        set!(model, typecast(value, model)) unless value.nil?
+        set!(model, typecast(value)) unless value.nil?
       end
 
       # Sets instance variable of the attribute

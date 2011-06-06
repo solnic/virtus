@@ -12,7 +12,7 @@ module Virtus
       #   Integer constructed from value
       #
       # @api private
-      def typecast_to_primitive(value, model = nil)
+      def typecast_to_primitive(value)
         typecast_to_numeric(value, :to_i)
       end
     end # Integer

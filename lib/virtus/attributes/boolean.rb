@@ -12,7 +12,7 @@ module Virtus
         value.equal?(true) || value.equal?(false)
       end
 
-      def typecast_to_primitive(value, model = nil)
+      def typecast_to_primitive(value)
         BOOLEAN_MAP.fetch(value, value)
       end
 
