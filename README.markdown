@@ -50,7 +50,7 @@ attributes that require typecasting and/or validations.
         class JSON < Virtus::Attributes::Object
           primitive Hash
 
-          def typecast(value, model = nil)
+          def typecast(value)
             ::JSON.parse(value)
           end
         end

@@ -12,7 +12,7 @@ module Virtus
       #   BigDecimal constructed from value
       #
       # @api private
-      def typecast_to_primitive(value, model = nil)
+      def typecast_to_primitive(value)
         if value.kind_of?(::Integer)
           value.to_s.to_d
         else

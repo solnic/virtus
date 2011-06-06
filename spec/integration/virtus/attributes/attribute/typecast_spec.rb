@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attributes::Attribute, '#typecast' do
   let(:attribute_class) do
     Class.new(Virtus::Attributes::Integer) do
-      def typecast(value, object)
+      def typecast(value)
         super + 1
       end
     end
