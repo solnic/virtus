@@ -91,7 +91,7 @@ module Virtus
       end
 
       # Initializes an attribute instance
-      # 
+      #
       # @param [Symbol] name
       #   the name of an attribute
       #
