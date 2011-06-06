@@ -53,7 +53,7 @@ module Virtus
     # @api public
     def attributes=(attributes)
       attributes.each do |name, value|
-        if self.class.public_method_defined?(writer_name = "#{name}=")
+        if respond_to?(writer_name = "#{name}=")
           __send__(writer_name, value)
         end
       end
@@ -69,7 +69,7 @@ module Virtus
       attributes = {}
 
       self.class.attributes.each do |name, attribute|
-        if self.class.public_method_defined?(name)
+        if respond_to?(name)
           attributes[name] = __send__(attribute.name)
         end
       end
