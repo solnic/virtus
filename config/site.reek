@@ -78,12 +78,7 @@ SimulatedPolymorphism:
   enabled: true
   max_ifs: 1
 DataClump:
-  exclude: [
-    # all of these classes have utility class methods that are
-    # incorrectly identified as instance methods
-    Veritas::Relation::Operation::Binary::ClassMethods,
-    Veritas::Relation::Operation::Set::ClassMethods
-  ]
+  exclude: []
   enabled: true
   max_copies: 1
   min_clump_size: 2
