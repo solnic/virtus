@@ -1,0 +1,6 @@
+--exclude-only "spec/,^/"
+--sort coverage
+--callsites
+--xrefs
+--profile
+--text-summary

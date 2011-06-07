@@ -1,0 +1,96 @@
+---
+UncommunicativeParameterName:
+  accept: []
+  exclude: []
+  enabled: true
+  reject:
+  - !ruby/regexp /^.$/
+  - !ruby/regexp /[0-9]$/
+  - !ruby/regexp /[A-Z]/
+LargeClass:
+  max_methods: 15  # TODO: decrease max_methods to 10-15 or less
+  exclude: []
+  enabled: true
+  max_instance_variables: 5
+UncommunicativeMethodName:
+  accept: []
+  exclude: []
+  enabled: true
+  reject:
+  - !ruby/regexp /^[a-z]$/
+  - !ruby/regexp /[0-9]$/
+  - !ruby/regexp /[A-Z]/
+LongParameterList:
+  max_params: 3  # TODO: decrease max_params to 2
+  exclude: []
+  enabled: true
+  overrides: {}
+FeatureEnvy:
+  exclude: []
+  enabled: true
+ClassVariable:
+  exclude: []
+  enabled: true
+BooleanParameter:
+  exclude: []
+  enabled: true
+IrresponsibleModule:
+  exclude: []
+  enabled: true
+UncommunicativeModuleName:
+  accept: []
+  exclude: []
+  enabled: true
+  reject:
+  - !ruby/regexp /^.$/
+  - !ruby/regexp /[0-9]$/
+NestedIterators:
+  ignore_iterators: []
+  exclude: []
+  enabled: true
+  max_allowed_nesting: 1
+LongMethod:
+  max_statements: 7  # TODO: decrease max_statements to 5 or less
+  exclude: []
+  enabled: true
+Duplication:
+  allow_calls: []
+  exclude: []
+  enabled: true
+  max_calls: 1
+UtilityFunction:
+  max_helper_calls: 1
+  exclude: []
+  enabled: true
+Attribute:
+  exclude: []
+  enabled: false
+UncommunicativeVariableName:
+  accept: []
+  exclude: []
+  enabled: true
+  reject:
+  - !ruby/regexp /^.$/
+  - !ruby/regexp /[0-9]$/
+  - !ruby/regexp /[A-Z]/
+SimulatedPolymorphism:
+  exclude: []
+  enabled: true
+  max_ifs: 1
+DataClump:
+  exclude: [
+    # all of these classes have utility class methods that are
+    # incorrectly identified as instance methods
+    Veritas::Relation::Operation::Binary::ClassMethods,
+    Veritas::Relation::Operation::Set::ClassMethods
+  ]
+  enabled: true
+  max_copies: 1
+  min_clump_size: 2
+ControlCouple:
+  exclude: []
+  enabled: true
+LongYieldList:
+  max_params: 2
+  exclude: []
+  enabled: true

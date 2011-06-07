@@ -20,8 +20,7 @@ end
 
 Jeweler::GemcutterTasks.new
 
-desc "Run specs"
-RSpec::Core::RakeTask.new
+FileList['tasks/**/*.rake'].each { |task| import task }
 
 desc 'Default: run specs.'
 task :default => :spec
