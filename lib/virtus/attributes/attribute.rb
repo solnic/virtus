@@ -105,9 +105,6 @@ module Virtus
         default_accessor   = @options.fetch(:accessor, DEFAULT_ACCESSOR)
         @reader_visibility = @options.fetch(:reader, default_accessor)
         @writer_visibility = @options.fetch(:writer, default_accessor)
-
-        _create_reader
-        _create_writer
       end
 
       # Returns if an attribute is a complex one.
@@ -181,7 +178,7 @@ module Virtus
       # Creates an attribute reader method
       #
       # @api private
-      def _create_reader
+      def add_reader_method(model)
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
           chainable(:attribute) do
             #{reader_visibility}
@@ -198,7 +195,7 @@ module Virtus
       # Creates an attribute writer method
       #
       # @api private
-      def _create_writer
+      def add_writer_method(model)
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
           chainable(:attribute) do
             #{writer_visibility}

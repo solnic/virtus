@@ -16,12 +16,10 @@ module Virtus
         BOOLEAN_MAP.fetch(value, value)
       end
 
-      private
-
       # Creates standard and boolean attribute reader methods.
       #
       # @api private
-      def _create_reader
+      def add_reader_method(model)
         super
 
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
