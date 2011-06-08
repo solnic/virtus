@@ -1,7 +1,7 @@
 module Virtus
   module Attributes
     class Attribute
-      attr_reader :name, :model, :options, :instance_variable_name,
+      attr_reader :name, :model, :primitive, :options, :instance_variable_name,
         :reader_visibility, :writer_visibility
 
       OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
@@ -81,15 +81,6 @@ module Virtus
 
       accept_options *OPTIONS
 
-      # Returns if an attribute is a complex one.
-      #
-      # @return [TrueClass, FalseClass]
-      #
-      # @api semipublic
-      def complex?
-        options[:complex]
-      end
-
       # Initializes an attribute instance
       #
       # @param [Symbol] name
@@ -107,6 +98,8 @@ module Virtus
         @model   = model
         @options = self.class.options.merge(options).freeze
 
+        @primitive = @options[:primitive].freeze
+
         @instance_variable_name = "@#{@name}".freeze
 
         default_accessor   = @options.fetch(:accessor, DEFAULT_ACCESSOR)
@@ -117,13 +110,22 @@ module Virtus
         _create_writer
       end
 
+      # Returns if an attribute is a complex one.
+      #
+      # @return [TrueClass, FalseClass]
+      #
+      # @api semipublic
+      def complex?
+        options[:complex]
+      end
+
       # Returns if the given value's class is an attribute's primitive
       #
       # @return [TrueClass, FalseClass]
       #
       # @api private
       def primitive?(value)
-        value.kind_of?(self.class.primitive)
+        value.kind_of?(primitive)
       end
 
       # Converts the given value to the primitive type unless it's already
