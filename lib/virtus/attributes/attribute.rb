@@ -1,7 +1,7 @@
 module Virtus
   module Attributes
     class Attribute
-      attr_reader :name, :model, :primitive, :options, :instance_variable_name,
+      attr_reader :name, :primitive, :options, :instance_variable_name,
         :reader_visibility, :writer_visibility
 
       OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
@@ -86,16 +86,12 @@ module Virtus
       # @param [Symbol] name
       #   the name of an attribute
       #
-      # @param [Class] model
-      #   the object's class
-      #
       # @param [Hash] options
       #   hash of extra options which overrides defaults set on an attribute class
       #
       # @api private
-      def initialize(name, model, options = {})
+      def initialize(name, options = {})
         @name    = name
-        @model   = model
         @options = self.class.options.merge(options).freeze
 
         @primitive = @options[:primitive].freeze

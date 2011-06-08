@@ -65,7 +65,7 @@ shared_examples_for "Attribute" do
       end
 
       context "when new attribute is created" do
-        subject { sub_attribute.new(attribute_name, model) }
+        subject { sub_attribute.new(attribute_name) }
 
         it "sets the default value" do
           subject.options[option].should eql(value)
@@ -75,7 +75,7 @@ shared_examples_for "Attribute" do
       context "when new attribute is created and overrides option's default value" do
         let(:new_value) { 11 }
 
-        subject { sub_attribute.new(attribute_name, model, option => new_value) }
+        subject { sub_attribute.new(attribute_name, option => new_value) }
 
         it "sets the new value" do
           subject.options[option].should eql(new_value)

@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Virtus::Attributes::Attribute do
   describe '#typecast_to_primitive' do
-    let(:model)     { Class.new { include Virtus } }
-    let(:attribute) { Virtus::Attributes::Attribute.new(:name, model) }
+    let(:attribute) { Virtus::Attributes::Attribute.new(:name) }
     let(:value)     { 'value' }
 
     it "returns original value" do
