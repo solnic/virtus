@@ -14,7 +14,7 @@ module Virtus
       #
       # @api private
       def typecast_to_primitive(value)
-        Typecast::Time.to_date_time(value)
+        Typecast::Time.to_datetime(value)
       end
     end # DateTime
   end # Attributes

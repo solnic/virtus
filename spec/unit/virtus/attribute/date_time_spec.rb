@@ -21,13 +21,34 @@ describe Virtus::Attribute::DateTime do
     subject { attribute.typecast(value) }
 
     shared_examples_for "a correct date time" do
-      it          { should be_kind_of(DateTime) }
+      it { should be_kind_of(DateTime) }
+
       its(:year)  { should eql(year)  }
       its(:month) { should eql(month) }
       its(:day)   { should eql(day)   }
       its(:hour)  { should eql(hour)  }
       its(:min)   { should eql(min)   }
       its(:sec)   { should eql(sec)   }
+    end
+
+    context 'with a date' do
+      it_should_behave_like "a correct date time" do
+        let(:hour) { 0 }
+        let(:min)  { 0 }
+        let(:sec)  { 0 }
+
+        let(:value) do
+          Date.new(year, month, day)
+        end
+      end
+    end
+
+    context 'with a time' do
+      it_should_behave_like "a correct date time" do
+        let(:value) do
+          Time.local(year, month, day, hour, min, sec)
+        end
+      end
     end
 
     context 'with a hash' do

@@ -3,6 +3,12 @@ module Virtus
     class Time
       SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
 
+      METHOD_TO_CLASS = {
+        :to_time     => ::Time,
+        :to_date     => ::Date,
+        :to_datetime => ::DateTime
+      }.freeze
+
       class << self
         # Typecasts an arbitrary value to a Time
         # Handles both Hashes and Time instances.
@@ -15,15 +21,7 @@ module Virtus
         #
         # @api public
         def to_time(value)
-          if value.respond_to?(:to_time)
-            value.to_time
-          elsif value.is_a?(::Hash)
-            hash_to_time(value)
-          else
-            ::Time.parse(value.to_s)
-          end
-        rescue ArgumentError
-          value
+          call(value, :to_time)
         end
 
         # Typecasts an arbitrary value to a Date
@@ -37,15 +35,7 @@ module Virtus
         #
         # @api public
         def to_date(value)
-          if value.respond_to?(:to_date)
-            value.to_date
-          elsif value.is_a?(::Hash)
-            hash_to_date(value)
-          else
-            ::Date.parse(value.to_s)
-          end
-        rescue ArgumentError
-          value
+          call(value, :to_date)
         end
 
         # Typecasts an arbitrary value to a DateTime.
@@ -58,17 +48,36 @@ module Virtus
         #   DateTime constructed from value
         #
         # @api public
-        def to_date_time(value)
-          if value.is_a?(::Hash)
-            hash_to_datetime(value)
-          else
-            ::DateTime.parse(value.to_s)
-          end
-        rescue ArgumentError
-          value
+        def to_datetime(value)
+          call(value, :to_datetime)
         end
 
         private
+
+        # @api private
+        def call(value, method)
+          return value.send(method) if value.respond_to?(method)
+
+          begin
+            if value.is_a?(::Hash)
+              from_hash(value, method)
+            else
+              from_string(value.to_s, method)
+            end
+          rescue ArgumentError
+            return value
+          end
+        end
+
+        # @api private
+        def from_string(value, method)
+          METHOD_TO_CLASS[method].parse(value.to_s)
+        end
+
+        # @api private
+        def from_hash(value, method)
+          send("hash_#{method}", value)
+        end
 
         # Creates a Time instance from a Hash with keys :year, :month, :day,
         # :hour, :min, :sec

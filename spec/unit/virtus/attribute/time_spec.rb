@@ -30,6 +30,16 @@ describe Virtus::Attribute::Time do
       its(:sec)   { should eql(sec)   }
     end
 
+    context 'with a date' do
+      let(:hour) { 0 }
+      let(:min)  { 0 }
+      let(:sec)  { 0 }
+
+      it_should_behave_like "a correct time" do
+        let(:value) { DateTime.new(year, month, day, hour, min, sec) }
+      end
+    end
+
     context 'with a date time' do
       it_should_behave_like "a correct time" do
         let(:value) { DateTime.new(year, month, day, hour, min, sec) }

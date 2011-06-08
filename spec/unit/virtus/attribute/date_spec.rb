@@ -30,6 +30,12 @@ describe Virtus::Attribute::Date do
       end
     end
 
+    context 'with a date time' do
+      it_should_behave_like "a correct date" do
+        let(:value) { DateTime.new(year, month, day) }
+      end
+    end
+
     context 'with a hash' do
       it_should_behave_like "a correct date" do
         let(:value) do
@@ -44,7 +50,7 @@ describe Virtus::Attribute::Date do
       end
     end
 
-    context 'with a on-date value' do
+    context 'with a non-date value' do
       let(:value) { 'non-date' }
       it { should equal(value) }
     end
