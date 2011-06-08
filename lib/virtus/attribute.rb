@@ -31,16 +31,20 @@ module Virtus
         accepted_options.concat(args)
 
         # create methods for each new option
-        args.each do |attribute_option|
-          class_eval <<-RUBY, __FILE__, __LINE__ + 1
-            def self.#{attribute_option}(value = Undefined)          # def self.unique(value = Undefined)
-              return @#{attribute_option} if value.equal?(Undefined) #   return @unique if value.equal?(Undefined)
-              @#{attribute_option} = value                           #   @unique = value
-            end                                                      # end
-          RUBY
-        end
+        args.each { |option| add_option_method(option) }
 
+        # add new options to all descendants
         descendants.each { |descendant| descendant.accepted_options.concat(args) }
+      end
+
+      # @api private
+      def add_option_method(option)
+        class_eval <<-RUBY, __FILE__, __LINE__ + 1
+          def self.#{option}(value = Undefined)          # def self.unique(value = Undefined)
+            return @#{option} if value.equal?(Undefined) #   return @unique if value.equal?(Undefined)
+            @#{option} = value                           #   @unique = value
+          end                                            # end
+        RUBY
       end
 
       # Returns all the descendant classes
