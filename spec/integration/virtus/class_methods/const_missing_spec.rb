@@ -14,7 +14,7 @@ describe Virtus::ClassMethods, '.const_missing' do
     end
 
     it "should create attribute of the correct type" do
-      User.attributes[:name].should be_instance_of(Virtus::Attributes::String)
+      User.attributes[:name].should be_instance_of(Virtus::Attribute::String)
     end
   end
 
@@ -27,7 +27,7 @@ describe Virtus::ClassMethods, '.const_missing' do
     end
 
     it "should create attribute of the correct type" do
-      User.attributes[:admin].should be_instance_of(Virtus::Attributes::Boolean)
+      User.attributes[:admin].should be_instance_of(Virtus::Attribute::Boolean)
     end
   end
 

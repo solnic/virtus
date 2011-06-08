@@ -30,10 +30,10 @@ module Virtus
     #
     # @api semipublic
     def determine_type(class_or_name)
-      if class_or_name.is_a?(Class) && class_or_name < Attributes::Object
+      if class_or_name.is_a?(Class) && class_or_name < Attribute::Object
         class_or_name
-      elsif Attributes.const_defined?(name = class_or_name.to_s)
-        Attributes.const_get(name)
+      elsif Attribute.const_defined?(name = class_or_name.to_s)
+        Attribute.const_get(name)
       end
     end
   end
@@ -44,18 +44,18 @@ dir = Pathname(__FILE__).dirname.expand_path
 require dir + 'virtus/support/chainable'
 require dir + 'virtus/class_methods'
 require dir + 'virtus/instance_methods'
-require dir + 'virtus/attributes/typecast/numeric'
-require dir + 'virtus/attributes/typecast/time'
-require dir + 'virtus/attributes/attribute'
-require dir + 'virtus/attributes/object'
-require dir + 'virtus/attributes/array'
-require dir + 'virtus/attributes/boolean'
-require dir + 'virtus/attributes/date'
-require dir + 'virtus/attributes/date_time'
-require dir + 'virtus/attributes/numeric'
-require dir + 'virtus/attributes/decimal'
-require dir + 'virtus/attributes/float'
-require dir + 'virtus/attributes/hash'
-require dir + 'virtus/attributes/integer'
-require dir + 'virtus/attributes/string'
-require dir + 'virtus/attributes/time'
+require dir + 'virtus/attribute'
+require dir + 'virtus/attribute/typecast/numeric'
+require dir + 'virtus/attribute/typecast/time'
+require dir + 'virtus/attribute/object'
+require dir + 'virtus/attribute/array'
+require dir + 'virtus/attribute/boolean'
+require dir + 'virtus/attribute/date'
+require dir + 'virtus/attribute/date_time'
+require dir + 'virtus/attribute/numeric'
+require dir + 'virtus/attribute/decimal'
+require dir + 'virtus/attribute/float'
+require dir + 'virtus/attribute/hash'
+require dir + 'virtus/attribute/integer'
+require dir + 'virtus/attribute/string'
+require dir + 'virtus/attribute/time'

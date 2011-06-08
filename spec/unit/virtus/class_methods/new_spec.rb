@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Attributes, '.new' do
+describe Virtus::Attribute, '.new' do
   let(:model) do
     Class.new do
       include Virtus

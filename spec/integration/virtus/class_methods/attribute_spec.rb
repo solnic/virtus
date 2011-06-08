@@ -25,7 +25,7 @@ describe Virtus::ClassMethods, '.attribute' do
     end
 
     it "should create an attribute of a correct type" do
-      described_class.attributes[:name].should be_instance_of(Virtus::Attributes::String)
+      described_class.attributes[:name].should be_instance_of(Virtus::Attribute::String)
     end
 
     it "creates attribute writer" do

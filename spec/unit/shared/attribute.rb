@@ -27,7 +27,7 @@ shared_examples_for "Attribute" do
     end
 
     it "accepts base options" do
-      described_class.accepted_options.should include(*Virtus::Attributes::Attribute::OPTIONS)
+      described_class.accepted_options.should include(*Virtus::Attribute::OPTIONS)
     end
   end
 
