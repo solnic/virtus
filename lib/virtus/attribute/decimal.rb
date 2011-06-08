@@ -13,11 +13,7 @@ module Virtus
       #
       # @api private
       def typecast_to_primitive(value)
-        if value.kind_of?(::Integer)
-          value.to_s.to_d
-        else
-          typecast_to_numeric(value, :to_d)
-        end
+        Typecast::Numeric.to_d(value)
       end
     end # Decimal
   end # Attributes

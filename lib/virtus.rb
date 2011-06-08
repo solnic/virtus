@@ -44,9 +44,12 @@ dir = Pathname(__FILE__).dirname.expand_path
 require dir + 'virtus/support/chainable'
 require dir + 'virtus/class_methods'
 require dir + 'virtus/instance_methods'
+
+require dir + 'virtus/typecast/boolean'
+require dir + 'virtus/typecast/numeric'
+require dir + 'virtus/typecast/time'
+
 require dir + 'virtus/attribute'
-require dir + 'virtus/attribute/typecast/numeric'
-require dir + 'virtus/attribute/typecast/time'
 require dir + 'virtus/attribute/object'
 require dir + 'virtus/attribute/array'
 require dir + 'virtus/attribute/boolean'

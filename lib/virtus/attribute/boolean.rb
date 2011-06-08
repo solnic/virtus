@@ -3,20 +3,17 @@ module Virtus
     class Boolean < Object
       primitive TrueClass
 
-      TRUE_VALUES  = [ 1, '1', 't', 'T', 'true',  'TRUE'  ].freeze
-      FALSE_VALUES = [ 0, '0', 'f', 'F', 'false', 'FALSE' ].freeze
-      BOOLEAN_MAP  = Hash[
-        TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
-
+      # @api private
       def primitive?(value)
         value.equal?(true) || value.equal?(false)
       end
 
+      # @api private
       def typecast_to_primitive(value)
-        BOOLEAN_MAP.fetch(value, value)
+        Typecast::Boolean.call(value)
       end
 
-      # Creates standard and boolean attribute reader methods.
+      # Creates standard and boolean attribute reader methods
       #
       # @api private
       def add_reader_method(model)

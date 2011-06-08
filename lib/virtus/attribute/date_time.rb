@@ -3,8 +3,6 @@ module Virtus
     class DateTime < Object
       primitive ::DateTime
 
-      include Typecast::Time
-
       # Typecasts an arbitrary value to a DateTime.
       # Handles both Hashes and DateTime instances.
       #
@@ -16,27 +14,7 @@ module Virtus
       #
       # @api private
       def typecast_to_primitive(value)
-        if value.is_a?(::Hash)
-          typecast_hash_to_datetime(value)
-        else
-          ::DateTime.parse(value.to_s)
-        end
-      rescue ArgumentError
-        value
-      end
-
-      # Creates a DateTime instance from a Hash with keys :year, :month, :day,
-      # :hour, :min, :sec
-      #
-      # @param [Hash, #to_mash] value
-      #   value to be typecast
-      #
-      # @return [DateTime]
-      #   DateTime constructed from hash
-      #
-      # @api private
-      def typecast_hash_to_datetime(value)
-        ::DateTime.new(*extract_time(value))
+        Typecast::Time.to_date_time(value)
       end
     end # DateTime
   end # Attributes

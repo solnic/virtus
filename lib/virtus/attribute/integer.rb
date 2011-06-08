@@ -13,7 +13,7 @@ module Virtus
       #
       # @api private
       def typecast_to_primitive(value)
-        typecast_to_numeric(value, :to_i)
+        Typecast::Numeric.to_i(value)
       end
     end # Integer
   end # Attributes
