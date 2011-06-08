@@ -139,7 +139,7 @@ shared_examples_for "Attribute" do
     end
   end
 
-  describe "#complex" do
+  describe "#complex?" do
     let(:attribute) { model.attribute(attribute_name, described_class, :complex => complex) }
 
     subject { attribute.complex? }
