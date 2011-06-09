@@ -1,8 +1,7 @@
 module Virtus
   # Instance methods that are added when you include Virtus
   module InstanceMethods
-    # Chains Class.new to be able to set attributes during initialization of
-    # an object.
+    # Set attributes during initialization of an object
     #
     # @param [Hash] attributes
     #   the attributes hash to be set
@@ -16,6 +15,16 @@ module Virtus
 
     # Returns a value of the attribute with the given name
     #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #   end
+    #
+    #   user = User.new(:name => 'John')
+    #   user.attribute_get(:name) # => "john"
+    #
     # @param [Symbol] name
     #   a name of an attribute
     #
@@ -28,6 +37,17 @@ module Virtus
     end
 
     # Sets a value of the attribute with the given name
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #   end
+    #
+    #   user = User.new
+    #   user.attribute_set(:name) # => "john"
+    #   user.name # => "john"
     #
     # @param [Symbol] name
     #   a name of an attribute
@@ -45,6 +65,17 @@ module Virtus
 
     # Mass-assign of attribute values
     #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new
+    #   user.attributes = { :name => 'John', :age => 28 }
+    #
     # @param [Hash] attributes
     #   a hash of attribute values to be set on an object
     #
@@ -59,6 +90,17 @@ module Virtus
     end
 
     # Returns a hash of all publicly accessible attributes
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new(:name => 'John', :age => 28)
+    #   user.attributes # => { :name => 'John', :age => 28 }
     #
     # @return [Hash]
     #   the attributes

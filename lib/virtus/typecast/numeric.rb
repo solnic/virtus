@@ -4,6 +4,10 @@ module Virtus
     class Numeric
       # Typecast value to integer
       #
+      # @example
+      #   Virtus::Typecast::Numeric.to_i('1') # => 1
+      #   Virtus::Typecast::Numeric.to_i(1.2) # => 1
+      #
       # @param [Object]
       #
       # @return [Integer]
@@ -15,6 +19,10 @@ module Virtus
 
       # Typecast value to float
       #
+      # @example
+      #   Virtus::Typecast::Numeric.to_f('1.2') # => 1.2
+      #   Virtus::Typecast::Numeric.to_f(1)     # => 1.0
+      #
       # @param [Object]
       #
       # @return [Float]
@@ -25,6 +33,10 @@ module Virtus
       end
 
       # Typecast value to decimal
+      #
+      # @example
+      #   Virtus::Typecast::Numeric.to_d('1.2') # => #<BigDecimal:b72157d4,'0.12E1',8(8)>
+      #   Virtus::Typecast::Numeric.to_d(1)     # => #<BigDecimal:b7212e08,'0.1E1',4(8)>
       #
       # @param [Object]
       #

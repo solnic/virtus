@@ -11,7 +11,12 @@ module Virtus
       }.freeze
 
       # Typecasts an arbitrary value to a Time
-      # Handles both Hashes and Time instances.
+      #
+      # Handles both Hashes and Time instances
+      #
+      # @example
+      #   Virtus::Typecast::Time.to_time('2011/06/09 12:01')
+      #   # => Thu Jun 09 12:01:00 +0200 2011
       #
       # @param [Hash, #to_mash, #to_s] value
       #   value to be typecast
@@ -25,7 +30,12 @@ module Virtus
       end
 
       # Typecasts an arbitrary value to a Date
-      # Handles both Hashes and Date instances.
+      #
+      # Handles both Hashes and Date instances
+      #
+      # @example
+      #   Virtus::Typecast::Time.to_date('2011/06/09')
+      #   # => #<Date: 4911443/2,0,2299161>
       #
       # @param [Hash, #to_mash, #to_s] value
       #   value to be typecast
@@ -38,8 +48,13 @@ module Virtus
         call(value, :to_date)
       end
 
-      # Typecasts an arbitrary value to a DateTime.
-      # Handles both Hashes and DateTime instances.
+      # Typecasts an arbitrary value to a DateTime
+      #
+      # Handles both Hashes and DateTime instances
+      #
+      # @example
+      #   Virtus::Typecast::Time.to_datetime('2011/06/09 12:01')
+      #   # => #<DateTime: 3536239681/1440,0,2299161>
       #
       # @param [Hash, #to_mash, #to_s] value
       #   value to be typecast
@@ -79,8 +94,9 @@ module Virtus
         send("hash_#{method}", value)
       end
 
-      # Creates a Time instance from a Hash with keys :year, :month, :day,
-      # :hour, :min, :sec
+      # Creates a Time instance from a Hash
+      #
+      # Valid keys are: :year, :month, :day, :hour, :min, :sec
       #
       # @param [Hash, #to_mash] value
       #   value to be typecast
@@ -93,7 +109,9 @@ module Virtus
         ::Time.local(*extract(value))
       end
 
-      # Creates a Date instance from a Hash with keys :year, :month, :day
+      # Creates a Date instance from a Hash
+      #
+      # Valid keys are: :year, :month, :day, :hour
       #
       # @param [Hash, #to_mash] value
       #   value to be typecast
@@ -106,8 +124,9 @@ module Virtus
         ::Date.new(*extract(value).first(3))
       end
 
-      # Creates a DateTime instance from a Hash with keys :year, :month, :day,
-      # :hour, :min, :sec
+      # Creates a DateTime instance from a Hash
+      #
+      # Valid keys are: :year, :month, :day, :hour, :min, :sec
       #
       # @param [Hash, #to_mash] value
       #   value to be typecast
@@ -120,8 +139,9 @@ module Virtus
         ::DateTime.new(*extract(value))
       end
 
-      # Extracts the given args from the hash. If a value does not exist, it
-      # uses the value of Time.now.
+      # Extracts the given args from the hash
+      #
+      # If a value does not exist, it uses the value of Time.now
       #
       # @param [Hash, #to_mash] value
       #   value to extract time args from
@@ -129,7 +149,7 @@ module Virtus
       # @return [Array]
       #   Extracted values
       #
-      # @api public
+      # @api private
       def self.extract(value)
         now = ::Time.now
 

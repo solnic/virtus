@@ -12,7 +12,9 @@ module Virtus
 
   # Extends base class with Attributes and Chainable modules
   #
-  # @param [Object] base
+  # @param [Class] base
+  #
+  # @return [Class]
   #
   # @api private
   def self.included(base)
@@ -22,6 +24,9 @@ module Virtus
   end
 
   # Returns a Virtus::Attributes::Object sub-class based on a name or class
+  #
+  # @example
+  #   Virtus.determine_type('String') # => Virtus::Attribute::String
   #
   # @param [Class,String] class_or_name
   #   name of a class or a class itself

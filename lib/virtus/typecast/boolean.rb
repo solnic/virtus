@@ -10,6 +10,10 @@ module Virtus
 
       # Typecast value to TrueClass or FalseClass
       #
+      # @example
+      #   Virtus::Typecast::Boolean.call('T') # => true
+      #   Virtus::Typecast::Boolean.call('F') # => false
+      #
       # @param [Integer, String]
       #
       # @return [TrueClass, FalseClass]

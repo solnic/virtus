@@ -30,12 +30,16 @@ module Virtus
       #
       # @see Virtus::Typecast::Boolean.call
       #
+      # @return [TrueClass,FalseClass]
+      #
       # @api private
       def typecast_to_primitive(value)
         Typecast::Boolean.call(value)
       end
 
       # Creates standard and boolean attribute reader methods
+      #
+      # @return [NilClass]
       #
       # @api private
       def add_reader_method(model)

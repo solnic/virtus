@@ -5,6 +5,10 @@ module Virtus
   class Attribute
     # Returns default options hash for a given attribute class
     #
+    # @example
+    #   Virtus::Attribute::String.options
+    #   # => {:primitive => String, :complex => false}
+    #
     # @return [Hash]
     #   a hash of default option values
     #
@@ -20,6 +24,10 @@ module Virtus
 
     # Returns an array of valid options
     #
+    # @example
+    #   Virtus::Attribute::String.accepted_options
+    #   # => [:primitive, :complex, :accessor, :reader, :writer]
+    #
     # @return [Array]
     #   the array of valid option names
     #
@@ -30,11 +38,13 @@ module Virtus
 
     # Defines which options are valid for a given attribute class
     #
-    # Example:
-    #
+    # @example
     #   class MyAttribute < Virtus::Attribute::Object
     #     accept_options :foo, :bar
     #   end
+    #
+    # @return [Array]
+    #   All accepted options
     #
     # @api public
     def self.accept_options(*args)
@@ -45,8 +55,14 @@ module Virtus
 
       # add new options to all descendants
       descendants.each { |descendant| descendant.accepted_options.concat(args) }
+
+      accepted_options
     end
 
+    # Adds a reader/writer method for the give option name
+    #
+    # @return [NilClass]
+    #
     # @api private
     def self.add_option_method(option)
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
@@ -60,6 +76,10 @@ module Virtus
 
     # Returns all the descendant classes
     #
+    # @example
+    #   Virtus::Attribute::Numeric.descendants
+    #   # => [Virtus::Attribute::Decimal, Virtus::Attribute::Float, Virtus::Attribute::Integer]
+    #
     # @return [Array]
     #   the array of descendants
     #
@@ -70,15 +90,63 @@ module Virtus
 
     # Adds descendant to descendants array and inherits default options
     #
+    # @param [Class]
+    #
+    # @return [Class]
+    #
     # @api private
     def self.inherited(descendant)
       descendants << descendant
       descendant.accepted_options.concat(accepted_options)
       options.each { |key, value| descendant.send(key, value) }
+      descendant
     end
 
-    attr_reader :name, :primitive, :options, :instance_variable_name,
-      :reader_visibility, :writer_visibility
+    # Returns name of the attribute
+    #
+    # @example
+    #   User.attributes[:age].name # => :age
+    #
+    # @return [Symbol]
+    #
+    # @api public
+    attr_reader :name
+
+    # Returns primitive class of the attribute
+    #
+    # @return [Class]
+    #
+    # @api private
+    attr_reader :primitive
+
+    # Returns options hash for the attribute
+    #
+    # @return [Hash]
+    #
+    # @api private
+    attr_reader :options
+
+    # Returns instance variable name of the attribute
+    #
+    # @return [String]
+    #
+    # @api private
+    attr_reader :instance_variable_name
+
+    # Returns reader visibility
+    #
+    # @return [Symbol]
+    #
+    # @api private
+    attr_reader :reader_visibility
+
+
+    # Returns write visibility
+    #
+    # @return [Symbol]
+    #
+    # @api private
+    attr_reader :writer_visibility
 
     DEFAULT_ACCESSOR = :public.freeze
 
@@ -110,6 +178,10 @@ module Virtus
 
     # Returns if an attribute is a complex one
     #
+    # @example
+    #   Virtus::Attribute::String.complex? # => false
+    #   Virtus::Attribute::Array.complex? # => true
+    #
     # @return [TrueClass, FalseClass]
     #
     # @api semipublic
@@ -126,11 +198,13 @@ module Virtus
       value.kind_of?(primitive)
     end
 
-    # Converts the given value to the primitive type unless it's already
-    # the primitive or nil
+    # Converts the given value to the primitive type
     #
     # @param [Object] value
     #   the value
+    #
+    # @return [Object]
+    #   nil, original value or value converted to the primitive type
     #
     # @api private
     def typecast(value)
@@ -150,12 +224,18 @@ module Virtus
 
     # Returns value of an attribute for the given instance
     #
+    # @return [Object]
+    #   value of an attribute
+    #
     # @api private
     def get(instance)
       get!(instance)
     end
 
     # Returns the instance variable of the attribute
+    #
+    # @return [Object]
+    #   value of an attribute
     #
     # @api private
     def get!(instance)
@@ -164,6 +244,9 @@ module Virtus
 
     # Sets the value on the instance
     #
+    # @return [Object]
+    #   value of an attribute
+    #
     # @api private
     def set(instance, value)
       set!(instance, typecast(value)) unless value.nil?
@@ -171,12 +254,17 @@ module Virtus
 
     # Sets instance variable of the attribute
     #
+    # @return [Object]
+    #   value of an attribute
+    #
     # @api private
     def set!(instance, value)
       instance.instance_variable_set(instance_variable_name, value)
     end
 
     # Creates an attribute reader method
+    #
+    # @return [NilClass]
     #
     # @api private
     def add_reader_method(model)
@@ -194,6 +282,8 @@ module Virtus
     end
 
     # Creates an attribute writer method
+    #
+    # @return [NilClass]
     #
     # @api private
     def add_writer_method(model)

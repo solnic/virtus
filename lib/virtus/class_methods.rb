@@ -1,10 +1,9 @@
 module Virtus
   # Class methods that are added when you include Virtus
   module ClassMethods
-    # Defines an attribute on an object's class.
+    # Defines an attribute on an object's class
     #
-    # Usage:
-    #
+    # @example
     #    class Book
     #      include Virtus
     #
@@ -36,7 +35,19 @@ module Virtus
       attributes[name] = attribute
     end
 
-    # Returns all the attributes defined on a Class.
+    # Returns all the attributes defined on a Class
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   User.attributes # =>
+    #
+    #   TODO: implement inspect so the output is not cluttered - solnic
     #
     # @return [Hash]
     #   an attributes hash indexed by attribute names
@@ -48,11 +59,11 @@ module Virtus
 
     private
 
-    # Hooks into const missing process to determine types of attributes.
+    # Hooks into const missing process to determine types of attributes
     #
     # It is used when an attribute is defined and a global class like String
     # or Integer is provided as the type which needs to be mapped to
-    # Virtus::Attributes::String and Virtus::Attributes::Integer.
+    # Virtus::Attributes::String and Virtus::Attributes::Integer
     #
     # @param [String] name
     #
