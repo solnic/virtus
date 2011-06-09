@@ -1,4 +1,7 @@
 module Virtus
+  # Abstract class implementing base API for attribute types
+  #
+  # @abstract
   class Attribute
     # Returns default options hash for a given attribute class
     #

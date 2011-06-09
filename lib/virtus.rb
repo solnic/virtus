@@ -5,7 +5,9 @@ require 'time'
 require 'bigdecimal'
 require 'bigdecimal/util'
 
+# Base module which adds Attribute API to your classes
 module Virtus
+  # Represents an undefined parameter used by auto-generated option methods
   module Undefined; end
 
   # Extends base class with Attributes and Chainable modules

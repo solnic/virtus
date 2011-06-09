@@ -1,5 +1,6 @@
 module Virtus
   module Typecast
+    # Typecast various values into Date, DateTime or Time
     class Time
       SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
 

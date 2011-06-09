@@ -1,15 +1,28 @@
 module Virtus
   class Attribute
+    # Example usage:
+    #
+    #   class ExchangeRate
+    #     include Virtus
+    #
+    #     attribute :dollar, Float
+    #   end
+    #
+    #   ExchangeRate.new(:dollar => 2.69)
+    #
+    #   # typecasting from a string
+    #   ExchangeRate.new(:dollar => '2.69')
+    #
+    #   # typecasting from an integer
+    #   ExchangeRate.new(:dollar => 2)
+    #
+    #   # typecasting from an object which implements #to_f
+    #   ExchangeRate.new(:dollar => BigDecimal.new('2.69')
+    #
     class Float < Numeric
       primitive ::Float
 
-      # Typecast a value to a Float
-      #
-      # @param [#to_str, #to_f] value
-      #   value to typecast
-      #
-      # @return [Float]
-      #   Float constructed from value
+      # @see Virtus::Typecast::Numeric.to_f
       #
       # @api private
       def typecast_to_primitive(value)

@@ -1,4 +1,5 @@
 module Virtus
+  # Instance methods that are added when you include Virtus
   module InstanceMethods
     # Chains Class.new to be able to set attributes during initialization of
     # an object.

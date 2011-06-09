@@ -1,5 +1,7 @@
 module Virtus
   module Typecast
+    # Typecast defined values into true or false.
+    # See TRUE_VALUES and FALSE_VALUES constants for a reference.
     class Boolean
       TRUE_VALUES  = [ 1, '1', 't', 'T', 'true',  'TRUE'  ].freeze
       FALSE_VALUES = [ 0, '0', 'f', 'F', 'false', 'FALSE' ].freeze

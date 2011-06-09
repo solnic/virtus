@@ -1,15 +1,19 @@
 module Virtus
   class Attribute
+    # Example usage:
+    #
+    #   class ExchangeRate
+    #     include Virtus
+    #
+    #     attribute :dollar, Decimal
+    #   end
+    #
+    #   ExchangeRate.new(:dollar => '2.6948')
+    #
     class Decimal < Numeric
       primitive ::BigDecimal
 
-      # Typecast a value to a BigDecimal
-      #
-      # @param [#to_str, #to_d, Integer] value
-      #   value to typecast
-      #
-      # @return [BigDecimal]
-      #   BigDecimal constructed from value
+      # @see Virtus::Typecast::Numeric.to_d
       #
       # @api private
       def typecast_to_primitive(value)

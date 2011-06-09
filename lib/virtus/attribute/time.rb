@@ -1,16 +1,29 @@
 module Virtus
   class Attribute
+    # Example usage:
+    #
+    #   class Post
+    #     include Virtus
+    #
+    #     attribute :published_at, Time
+    #   end
+    #
+    #   Post.new(:published_at => Time.now)
+    #
+    #   # typecasting from a string
+    #   Post.new(:published_at => '2011/06/09 11:08')
+    #
+    #   # typecasting from a hash
+    #   Post.new(:published_at => {
+    #     :year => 2011, :month => 6, :day => 9, :hour => 11, :minutes => 8 })
+    #
+    #   # typecasting from an object which implements #to_time
+    #   Post.new(:published_at => DateTime.now)
+    #
     class Time < Object
       primitive ::Time
 
-      # Typecasts an arbitrary value to a Time
-      # Handles both Hashes and Time instances.
-      #
-      # @param [Hash, #to_mash, #to_s] value
-      #   value to be typecast
-      #
-      # @return [Time]
-      #   Time constructed from value
+      # @see Virtus::Typecast::Time.to_time
       #
       # @api private
       def typecast_to_primitive(value)

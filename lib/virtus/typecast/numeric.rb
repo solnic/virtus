@@ -1,5 +1,6 @@
 module Virtus
   module Typecast
+    # Typecast numeric values. Supports Integer, Float and BigDecimal
     class Numeric
       class << self
         # Typecast value to integer

@@ -1,4 +1,5 @@
 module Virtus
+  # Class methods that are added when you include Virtus
   module ClassMethods
     # Defines an attribute on an object's class.
     #

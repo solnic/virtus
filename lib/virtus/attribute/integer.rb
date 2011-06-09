@@ -1,15 +1,25 @@
 module Virtus
   class Attribute
+    # Example usage:
+    #
+    #   class Post
+    #     include Virtus
+    #
+    #     attribute :read_count, Integer
+    #   end
+    #
+    #   Post.new(:read_count => 100)
+    #
+    #   # typecasting from a string
+    #   Post.new(:read_count => '100')
+    #
+    #   # typecasting from an object that implements #to_i
+    #   Post.new(:read_count => 100.0)
+    #
     class Integer < Numeric
       primitive ::Integer
 
-      # Typecast a value to an Integer
-      #
-      # @param [#to_str, #to_i] value
-      #   value to typecast
-      #
-      # @return [Integer]
-      #   Integer constructed from value
+      # @see Virtus::Typecast::Numeric.to_i
       #
       # @api private
       def typecast_to_primitive(value)
