@@ -167,7 +167,7 @@ module Virtus
       @name    = name
       @options = self.class.options.merge(options).freeze
 
-      @primitive = @options[:primitive].freeze
+      @primitive = @options[:primitive]
 
       @instance_variable_name = "@#{@name}".freeze
 
