@@ -1,5 +1,7 @@
 source "http://rubygems.org"
 
+gem 'virtus', File.read('VERSION'), :path => File.dirname(__FILE__)
+
 group :development do
   gem "jeweler",   "~> 1.5.2"
   gem "rspec",     "~> 2.6.0"
