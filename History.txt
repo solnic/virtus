@@ -1,0 +1,21 @@
+=== v0.0.3 2011-06-09
+
+* [BREAKING CHANGE] Attribute classes were moved to Virtus::Attribute namespace
+* [BREAKING CHANGE] Attribute instance no longer holds the reference to a model
+* [BREAKING CHANGE] #typecast no longer receives an instance of a model (override #set which calls #typecast if you need that)
+* [changed] Adding reader/writer methods was moved from the attribute constructor to Virtus::ClassMethods.attribute
+* [changed] Typecast logic has been moved into separate classes (see Virtus::Typecast)
+* [added] Virtus::Attribute::DateTime#typecast supports objects which implement #to_datetime
+* [general] Internals have been cleaned up, simplified and properly documented
+
+Details: https://github.com/solnic/virtus/compare/v0.0.2...v0.0.3
+
+=== v0.0.2 2011-06-06
+
+* [bugfix] Fixed #typecast in custom attribute classes
+
+Details: https://github.com/solnic/virtus/compare/v0.0.1...v0.0.2
+
+=== v0.0.1 2011-06-04
+
+First public release :)
