@@ -1,86 +1,85 @@
 module Virtus
   class Attribute
+    # Returns default options hash for a given attribute class
+    #
+    # @return [Hash]
+    #   a hash of default option values
+    #
+    # @api public
+    def self.options
+      options = {}
+      accepted_options.each do |method|
+        value = send(method)
+        options[method] = value unless value.nil?
+      end
+      options
+    end
+
+    # Returns an array of valid options
+    #
+    # @return [Array]
+    #   the array of valid option names
+    #
+    # @api public
+    def self.accepted_options
+      @accepted_options ||= []
+    end
+
+    # Defines which options are valid for a given attribute class
+    #
+    # Example:
+    #
+    #   class MyAttribute < Virtus::Attribute::Object
+    #     accept_options :foo, :bar
+    #   end
+    #
+    # @api public
+    def self.accept_options(*args)
+      accepted_options.concat(args)
+
+      # create methods for each new option
+      args.each { |option| add_option_method(option) }
+
+      # add new options to all descendants
+      descendants.each { |descendant| descendant.accepted_options.concat(args) }
+    end
+
+    # @api private
+    def self.add_option_method(option)
+      class_eval <<-RUBY, __FILE__, __LINE__ + 1
+        def self.#{option}(value = Undefined)          # def self.unique(value = Undefined)
+          return @#{option} if value.equal?(Undefined) #   return @unique if value.equal?(Undefined)
+          @#{option} = value                           #   @unique = value
+        end                                            # end
+      RUBY
+    end
+    private_class_method :add_option_method
+
+    # Returns all the descendant classes
+    #
+    # @return [Array]
+    #   the array of descendants
+    #
+    # @api public
+    def self.descendants
+      @descendants ||= []
+    end
+
+    # Adds descendant to descendants array and inherits default options
+    #
+    # @api private
+    def self.inherited(descendant)
+      descendants << descendant
+      descendant.accepted_options.concat(accepted_options)
+      options.each { |key, value| descendant.send(key, value) }
+    end
+
     attr_reader :name, :primitive, :options, :instance_variable_name,
       :reader_visibility, :writer_visibility
 
+    DEFAULT_ACCESSOR = :public.freeze
+
     OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
-
-    DEFAULT_ACCESSOR = :public
-
-    class << self
-      # Returns an array of valid options
-      #
-      # @return [Array]
-      #   the array of valid option names
-      #
-      # @api public
-      def accepted_options
-        @accepted_options ||= []
-      end
-
-      # Defines which options are valid for a given attribute class.
-      #
-      # Example:
-      #
-      #   class MyAttribute < Virtus::Attributes::Object
-      #     accept_options :foo, :bar
-      #   end
-      #
-      # @api public
-      def accept_options(*args)
-        accepted_options.concat(args)
-
-        # create methods for each new option
-        args.each { |option| add_option_method(option) }
-
-        # add new options to all descendants
-        descendants.each { |descendant| descendant.accepted_options.concat(args) }
-      end
-
-      # @api private
-      def add_option_method(option)
-        class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def self.#{option}(value = Undefined)          # def self.unique(value = Undefined)
-            return @#{option} if value.equal?(Undefined) #   return @unique if value.equal?(Undefined)
-            @#{option} = value                           #   @unique = value
-          end                                            # end
-        RUBY
-      end
-
-      # Returns all the descendant classes
-      #
-      # @return [Array]
-      #   the array of descendants
-      #
-      # @api public
-      def descendants
-        @descendants ||= []
-      end
-
-      # Returns default options hash for a give attribute class.
-      #
-      # @return [Hash]
-      #   a hash of default option values
-      #
-      # @api public
-      def options
-        options = {}
-        accepted_options.each do |method|
-          value = send(method)
-          options[method] = value unless value.nil?
-        end
-        options
-      end
-
-      # Adds descendant to descendants array and inherits default options
-      #
-      # @api private
-      def inherited(descendant)
-        descendants << descendant
-        descendant.accepted_options.concat(accepted_options)
-        options.each { |key, value| descendant.send(key, value) }
-      end
-    end
 
     accept_options *OPTIONS
 
@@ -106,7 +105,7 @@ module Virtus
       @writer_visibility = @options.fetch(:writer, default_accessor)
     end
 
-    # Returns if an attribute is a complex one.
+    # Returns if an attribute is a complex one
     #
     # @return [TrueClass, FalseClass]
     #
