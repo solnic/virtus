@@ -8,33 +8,31 @@ require 'bigdecimal/util'
 module Virtus
   module Undefined; end
 
-  class << self
-    # Extends base class with Attributes and Chainable modules
-    #
-    # @param [Object] base
-    #
-    # @api private
-    def included(base)
-      base.extend(ClassMethods)
-      base.send(:include, InstanceMethods)
-      base.extend(Support::Chainable)
-    end
+  # Extends base class with Attributes and Chainable modules
+  #
+  # @param [Object] base
+  #
+  # @api private
+  def self.included(base)
+    base.extend(ClassMethods)
+    base.send(:include, InstanceMethods)
+    base.extend(Support::Chainable)
+  end
 
-    # Returns a Virtus::Attributes::Object sub-class based on a name or class.
-    #
-    # @param [Class,String] class_or_name
-    #   name of a class or a class itself
-    #
-    # @return [Class]
-    #   one of the Virtus::Attributes::Object sub-class
-    #
-    # @api semipublic
-    def determine_type(class_or_name)
-      if class_or_name.is_a?(Class) && class_or_name < Attribute::Object
-        class_or_name
-      elsif Attribute.const_defined?(name = class_or_name.to_s)
-        Attribute.const_get(name)
-      end
+  # Returns a Virtus::Attributes::Object sub-class based on a name or class
+  #
+  # @param [Class,String] class_or_name
+  #   name of a class or a class itself
+  #
+  # @return [Class]
+  #   one of the Virtus::Attributes::Object sub-class
+  #
+  # @api semipublic
+  def self.determine_type(class_or_name)
+    if class_or_name.is_a?(Class) && class_or_name < Attribute::Object
+      class_or_name
+    elsif Attribute.const_defined?(name = class_or_name.to_s)
+      Attribute.const_get(name)
     end
   end
 end
