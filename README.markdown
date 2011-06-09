@@ -47,7 +47,7 @@ attributes that require typecasting and/or validations.
 
     module MyApp
       module Attributes
-        class JSON < Virtus::Attributes::Object
+        class JSON < Virtus::Attribute::Object
           primitive Hash
 
           def typecast(value)
