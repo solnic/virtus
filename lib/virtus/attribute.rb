@@ -15,9 +15,9 @@ module Virtus
     # @api public
     def self.options
       options = {}
-      accepted_options.each do |method|
-        value = send(method)
-        options[method] = value unless value.nil?
+      accepted_options.each do |option_name|
+        option_value         = send(option_name)
+        options[option_name] = option_value unless option_value.nil?
       end
       options
     end
@@ -47,14 +47,15 @@ module Virtus
     #   All accepted options
     #
     # @api public
-    def self.accept_options(*args)
-      accepted_options.concat(args)
+    def self.accept_options(*new_options)
+      # add new options to the array
+      concat_options(new_options)
 
       # create methods for each new option
-      args.each { |option| add_option_method(option) }
+      new_options.each { |option| add_option_method(option) }
 
       # add new options to all descendants
-      descendants.each { |descendant| descendant.accepted_options.concat(args) }
+      descendants.each { |descendant| descendant.concat_options(new_options) }
 
       accepted_options
     end
@@ -73,6 +74,34 @@ module Virtus
       RUBY
     end
     private_class_method :add_option_method
+
+    # Sets default options
+    #
+    # @param [Hash]
+    #   options to be set
+    #
+    # @return [Hash]
+    #   default options set on the attribute class
+    #
+    # @api private
+    def self.set_options(new_options)
+      new_options.each do |option_name, option_value|
+        send(option_name, option_value)
+      end
+    end
+
+    # Adds new options that an attribute class can accept
+    #
+    # @param [Array]
+    #   new options to be added
+    #
+    # @return [Array]
+    #   all accepted options
+    #
+    # @api private
+    def self.concat_options(new_options)
+      accepted_options.concat(new_options).uniq
+    end
 
     # Returns all the descendant classes
     #
@@ -97,8 +126,8 @@ module Virtus
     # @api private
     def self.inherited(descendant)
       descendants << descendant
-      descendant.accepted_options.concat(accepted_options)
-      options.each { |key, value| descendant.send(key, value) }
+      descendant.concat_options(accepted_options)
+      descendant.set_options(options)
       descendant
     end
 
