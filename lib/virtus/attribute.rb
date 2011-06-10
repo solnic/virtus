@@ -153,13 +153,6 @@ module Virtus
     # @api public
     attr_reader :name
 
-    # Returns primitive class of the attribute
-    #
-    # @return [Class]
-    #
-    # @api private
-    attr_reader :primitive
-
     # Returns options hash for the attribute
     #
     # @return [Hash]
@@ -207,8 +200,6 @@ module Virtus
     def initialize(name, options = {})
       @name    = name
       @options = self.class.options.merge(options).freeze
-
-      @primitive = @options[:primitive]
 
       @instance_variable_name = "@#{@name}".freeze
 
