@@ -1,3 +1,10 @@
+=== v0.0.4 to-be-released
+
+* [changed] Instance #primitive? method has been replaced by class utility method Virtus::Attribute.primitive?
+* [changed] Virtus::Attribute::String#typecast_to_primitive delegates to Virtus::Typecast::String.call
+
+Details: https://github.com/solnic/virtus/compare/v0.0.3...master
+
 === v0.0.3 2011-06-09
 
 * [BREAKING CHANGE] Attribute classes were moved to Virtus::Attribute namespace
