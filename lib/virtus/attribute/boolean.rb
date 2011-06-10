@@ -51,12 +51,14 @@ module Virtus
       def add_reader_method(model)
         super
 
+        attr_name = name
+
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
           chainable(:attribute) do
             #{reader_visibility}
 
-            def #{name}?
-              #{name}
+            def #{attr_name}?
+              #{attr_name}
             end
           end
         RUBY
