@@ -1,0 +1,4 @@
+* Add Virtus::Typecast::Array
+* Add Virtus::Typecast::Hash
+* Add support for default values
+* Add better inspection of attribute instances
