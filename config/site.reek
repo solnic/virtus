@@ -11,7 +11,7 @@ LargeClass:
   max_methods: 15  # TODO: decrease max_methods to 10-15 or less
   exclude: []
   enabled: true
-  max_instance_variables: 5
+  max_instance_variables: 7
 UncommunicativeMethodName:
   accept: []
   exclude: []
@@ -80,7 +80,7 @@ SimulatedPolymorphism:
 DataClump:
   exclude: []
   enabled: true
-  max_copies: 1
+  max_copies: 2
   min_clump_size: 2
 ControlCouple:
   exclude: []
