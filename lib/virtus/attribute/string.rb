@@ -16,15 +16,11 @@ module Virtus
     class String < Object
       primitive ::String
 
-      # Typecast the given value to a string
-      #
-      # @param [Object]
-      #
-      # @return [String]
+      # @see Virtus::Typecast::String.call
       #
       # @api private
       def typecast_to_primitive(value)
-        value.to_s
+        Virtus::Typecast::String.call(value)
       end
     end # String
   end # Attributes

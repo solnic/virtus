@@ -50,6 +50,7 @@ require 'virtus/instance_methods'
 
 require 'virtus/typecast/boolean'
 require 'virtus/typecast/numeric'
+require 'virtus/typecast/string'
 require 'virtus/typecast/time'
 
 require 'virtus/attribute'
