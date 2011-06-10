@@ -19,10 +19,16 @@ module Virtus
 
       # Returns if the given value is either true or false
       #
+      # @example
+      #   Virtus::Attribute::Boolean.primitive?(true)   # => true
+      #   Virtus::Attribute::Boolean.primitive?(false)  # => true
+      #   Virtus::Attribute::Boolean.primitive?(1)      # => false
+      #   Virtus::Attribute::Boolean.primitive?('true') # => false
+      #
       # @return [TrueClass,FalseClass]
       #
-      # @api private
-      def primitive?(value)
+      # @api semipublic
+      def self.primitive?(value)
         value.equal?(true) || value.equal?(false)
       end
 

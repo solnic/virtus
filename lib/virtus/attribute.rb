@@ -131,6 +131,18 @@ module Virtus
       descendant
     end
 
+    # Returns if the given value's class is an attribute's primitive
+    #
+    # @example
+    #   Virtus::Attribute::String.primitive?('String') # => true
+    #
+    # @return [TrueClass, FalseClass]
+    #
+    # @api semipublic
+    def self.primitive?(value)
+      value.kind_of?(primitive)
+    end
+
     # Returns name of the attribute
     #
     # @example
@@ -218,15 +230,6 @@ module Virtus
       options[:complex]
     end
 
-    # Returns if the given value's class is an attribute's primitive
-    #
-    # @return [TrueClass, FalseClass]
-    #
-    # @api private
-    def primitive?(value)
-      value.kind_of?(primitive)
-    end
-
     # Converts the given value to the primitive type
     #
     # @param [Object] value
@@ -237,7 +240,7 @@ module Virtus
     #
     # @api private
     def typecast(value)
-      if value.nil? || primitive?(value)
+      if value.nil? || self.class.primitive?(value)
         value
       else
         typecast_to_primitive(value)
