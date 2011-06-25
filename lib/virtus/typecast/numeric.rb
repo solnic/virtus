@@ -4,6 +4,8 @@ module Virtus
     # Typecast numeric values. Supports Integer, Float and BigDecimal
     class Numeric
 
+      REGEXP = /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/.freeze
+
       # Typecast value to integer
       #
       # @example
@@ -68,7 +70,7 @@ module Virtus
       # @api private
       def self.call(value, method)
         if value.respond_to?(:to_str)
-          if value.to_str =~ /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/
+          if value.to_str =~ REGEXP
             $1.send(method)
           else
             value
