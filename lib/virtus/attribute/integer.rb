@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Example usage:
     #
     #   class Post
@@ -25,6 +26,7 @@ module Virtus
       def typecast_to_primitive(value)
         Typecast::Numeric.to_i(value)
       end
-    end # Integer
-  end # Attributes
-end # Virtus
+
+    end # class Integer
+  end # class Attributes
+end # module Virtus

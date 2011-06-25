@@ -1,8 +1,10 @@
 module Virtus
+
   # Abstract class implementing base API for attribute types
   #
   # @abstract
   class Attribute
+
     # Returns default options hash for a given attribute class
     #
     # @example
@@ -73,11 +75,12 @@ module Virtus
         end                                            # end
       RUBY
     end
+
     private_class_method :add_option_method
 
     # Sets default options
     #
-    # @param [Hash]
+    # @param [#to_hash] new_options
     #   options to be set
     #
     # @return [Hash]
@@ -85,14 +88,14 @@ module Virtus
     #
     # @api private
     def self.set_options(new_options)
-      new_options.each do |option_name, option_value|
+      new_options.to_hash.each do |option_name, option_value|
         send(option_name, option_value)
       end
     end
 
     # Adds new options that an attribute class can accept
     #
-    # @param [Array]
+    # @param [#to_ary] new_options
     #   new options to be added
     #
     # @return [Array]
@@ -100,7 +103,7 @@ module Virtus
     #
     # @api private
     def self.concat_options(new_options)
-      accepted_options.concat(new_options).uniq
+      accepted_options.concat(new_options.to_ary).uniq
     end
 
     # Returns all the descendant classes
@@ -119,7 +122,7 @@ module Virtus
 
     # Adds descendant to descendants array and inherits default options
     #
-    # @param [Class]
+    # @param [Class] descendant
     #
     # @return [Class]
     #
@@ -174,7 +177,6 @@ module Virtus
     # @api private
     attr_reader :reader_visibility
 
-
     # Returns write visibility
     #
     # @return [Symbol]
@@ -182,7 +184,7 @@ module Virtus
     # @api private
     attr_reader :writer_visibility
 
-    DEFAULT_ACCESSOR = :public.freeze
+    DEFAULT_ACCESSOR = :public
 
     OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
 
@@ -193,17 +195,18 @@ module Virtus
     # @param [Symbol] name
     #   the name of an attribute
     #
-    # @param [Hash] options
+    # @param [#to_hash] options
     #   hash of extra options which overrides defaults set on an attribute class
     #
     # @api private
     def initialize(name, options = {})
       @name    = name
-      @options = self.class.options.merge(options).freeze
+      @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
+      @complex                = @options.fetch(:complex, false)
 
-      default_accessor   = @options.fetch(:accessor, DEFAULT_ACCESSOR)
+      default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
       @reader_visibility = @options.fetch(:reader, default_accessor)
       @writer_visibility = @options.fetch(:writer, default_accessor)
     end
@@ -218,7 +221,7 @@ module Virtus
     #
     # @api semipublic
     def complex?
-      options[:complex]
+      @complex
     end
 
     # Converts the given value to the primitive type
@@ -291,20 +294,21 @@ module Virtus
     #
     # @api private
     def add_reader_method(model)
-      ivar_name = instance_variable_name
-      attr_name = name
+      instance_variable_name = self.instance_variable_name
+      method_name            = name
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        chainable(:attribute) do
-          #{reader_visibility}
-
-          def #{attr_name}
-            return #{ivar_name} if defined?(#{ivar_name})
-            attribute = self.class.attributes[#{attr_name.inspect}]
-            #{ivar_name} = attribute ? attribute.get(self) : nil
+        module AttributeMethods
+          def #{method_name}
+            return #{instance_variable_name} if defined?(#{instance_variable_name})
+            attribute = self.class.attributes[#{method_name.inspect}]
+            #{instance_variable_name} = attribute ? attribute.get(self) : nil
           end
         end
+        include AttributeMethods
       RUBY
+
+      model.send(reader_visibility, method_name)
     end
 
     # Creates an attribute writer method
@@ -313,17 +317,20 @@ module Virtus
     #
     # @api private
     def add_writer_method(model)
-      attr_name = name
+      name        = self.name
+      method_name = "#{name}="
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        chainable(:attribute) do
-          #{writer_visibility}
-
-          def #{attr_name}=(value)
-            self.class.attributes[#{attr_name.inspect}].set(self, value)
+        module AttributeMethods
+          def #{method_name}(value)
+            self.class.attributes[#{name.inspect}].set(self, value)
           end
         end
+        include AttributeMethods
       RUBY
+
+      model.send(writer_visibility, method_name)
     end
-  end # Attribute
-end # Virtus
+
+  end # class Attribute
+end # module Virtus

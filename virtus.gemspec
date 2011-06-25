@@ -9,12 +9,13 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-06-09}
+  s.date = %q{2011-06-25}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
     "LICENSE",
-    "README.markdown"
+    "README.markdown",
+    "TODO"
   ]
   s.files = [
     ".gitignore",
@@ -25,6 +26,7 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README.markdown",
     "Rakefile",
+    "TODO",
     "VERSION",
     "config/flay.yml",
     "config/flog.yml",
@@ -47,9 +49,9 @@ Gem::Specification.new do |s|
     "lib/virtus/attribute/time.rb",
     "lib/virtus/class_methods.rb",
     "lib/virtus/instance_methods.rb",
-    "lib/virtus/support/chainable.rb",
     "lib/virtus/typecast/boolean.rb",
     "lib/virtus/typecast/numeric.rb",
+    "lib/virtus/typecast/string.rb",
     "lib/virtus/typecast/time.rb",
     "spec/integration/virtus/attributes/attribute/typecast_spec.rb",
     "spec/integration/virtus/class_methods/attribute_spec.rb",
@@ -73,9 +75,9 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/attribute/time_spec.rb",
     "spec/unit/virtus/class_methods/new_spec.rb",
     "spec/unit/virtus/determine_type_spec.rb",
-    "spec/unit/virtus/instance_methods/attribute_get_spec.rb",
-    "spec/unit/virtus/instance_methods/attribute_set_spec.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
+    "spec/unit/virtus/instance_methods/element_reference_spec.rb",
+    "spec/unit/virtus/instance_methods/element_set_spec.rb",
     "tasks/metrics/ci.rake",
     "tasks/metrics/flay.rake",
     "tasks/metrics/flog.rake",
@@ -92,6 +94,33 @@ Gem::Specification.new do |s|
   s.require_paths = [%q{lib}]
   s.rubygems_version = %q{1.8.5}
   s.summary = %q{Attributes for your plain ruby objects}
+  s.test_files = [
+    "spec/integration/virtus/attributes/attribute/typecast_spec.rb",
+    "spec/integration/virtus/class_methods/attribute_spec.rb",
+    "spec/integration/virtus/class_methods/attributes_spec.rb",
+    "spec/integration/virtus/class_methods/const_missing_spec.rb",
+    "spec/rcov.opts",
+    "spec/spec_helper.rb",
+    "spec/unit/shared/attribute.rb",
+    "spec/unit/virtus/attribute/array_spec.rb",
+    "spec/unit/virtus/attribute/attribute_spec.rb",
+    "spec/unit/virtus/attribute/boolean_spec.rb",
+    "spec/unit/virtus/attribute/date_spec.rb",
+    "spec/unit/virtus/attribute/date_time_spec.rb",
+    "spec/unit/virtus/attribute/decimal_spec.rb",
+    "spec/unit/virtus/attribute/float_spec.rb",
+    "spec/unit/virtus/attribute/hash_spec.rb",
+    "spec/unit/virtus/attribute/integer_spec.rb",
+    "spec/unit/virtus/attribute/numeric/class_methods/descendants_spec.rb",
+    "spec/unit/virtus/attribute/object/class_methods/descendants_spec.rb",
+    "spec/unit/virtus/attribute/string_spec.rb",
+    "spec/unit/virtus/attribute/time_spec.rb",
+    "spec/unit/virtus/class_methods/new_spec.rb",
+    "spec/unit/virtus/determine_type_spec.rb",
+    "spec/unit/virtus/instance_methods/attributes_spec.rb",
+    "spec/unit/virtus/instance_methods/element_reference_spec.rb",
+    "spec/unit/virtus/instance_methods/element_set_spec.rb"
+  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Example usage:
     #
     #   class Post
@@ -12,6 +13,6 @@ module Virtus
     class Array < Object
       primitive ::Array
       complex   true
-    end # Integer
-  end # Attributes
-end # Virtus
+    end # class Array
+  end # class Attributes
+end # module Virtus

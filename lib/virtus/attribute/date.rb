@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Example usage:
     #
     #   class Post
@@ -30,6 +31,7 @@ module Virtus
       def typecast_to_primitive(value)
         Typecast::Time.to_date(value)
       end
-    end # Date
-  end # Attributes
-end # Virtus
+
+    end # class Date
+  end # class Attributes
+end # module Virtus
