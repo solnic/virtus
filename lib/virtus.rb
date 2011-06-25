@@ -9,7 +9,7 @@ require 'bigdecimal/util'
 module Virtus
 
   # Represents an undefined parameter used by auto-generated option methods
-  module Undefined; end
+  Undefined = Object.new.freeze
 
   # Extends base class with Attributes and Chainable modules
   #
