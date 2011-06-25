@@ -12,7 +12,7 @@ module Virtus
       #   Virtus::Typecast::Numeric.to_i('1') # => 1
       #   Virtus::Typecast::Numeric.to_i(1.2) # => 1
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [Integer]
       #
@@ -27,7 +27,7 @@ module Virtus
       #   Virtus::Typecast::Numeric.to_f('1.2') # => 1.2
       #   Virtus::Typecast::Numeric.to_f(1)     # => 1.0
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [Float]
       #
@@ -42,7 +42,7 @@ module Virtus
       #   Virtus::Typecast::Numeric.to_d('1.2') # => #<BigDecimal:b72157d4,'0.12E1',8(8)>
       #   Virtus::Typecast::Numeric.to_d(1)     # => #<BigDecimal:b7212e08,'0.1E1',4(8)>
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [BigDecimal]
       #

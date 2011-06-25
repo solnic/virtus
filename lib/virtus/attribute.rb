@@ -80,7 +80,7 @@ module Virtus
 
     # Sets default options
     #
-    # @param [#to_hash]
+    # @param [#to_hash] new_options
     #   options to be set
     #
     # @return [Hash]
@@ -95,7 +95,7 @@ module Virtus
 
     # Adds new options that an attribute class can accept
     #
-    # @param [#to_ary]
+    # @param [#to_ary] new_options
     #   new options to be added
     #
     # @return [Array]
@@ -122,7 +122,7 @@ module Virtus
 
     # Adds descendant to descendants array and inherits default options
     #
-    # @param [Class]
+    # @param [Class] descendant
     #
     # @return [Class]
     #

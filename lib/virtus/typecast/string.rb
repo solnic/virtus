@@ -10,7 +10,7 @@ module Virtus
       #   Virtus::Typecast::String.call(1)  # => '1'
       #   Virtus::Typecast::String.call([]) # => '[]'
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [String]
       #
