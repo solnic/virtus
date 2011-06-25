@@ -204,6 +204,7 @@ module Virtus
       @options = self.class.options.merge(options).freeze
 
       @instance_variable_name = "@#{@name}".freeze
+      @complex                = @options.fetch(:complex, false)
 
       default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
       @reader_visibility = @options.fetch(:reader, default_accessor)
@@ -220,7 +221,7 @@ module Virtus
     #
     # @api semipublic
     def complex?
-      options[:complex]
+      @complex
     end
 
     # Converts the given value to the primitive type
