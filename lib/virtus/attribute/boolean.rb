@@ -52,17 +52,18 @@ module Virtus
       def add_reader_method(model)
         super
 
-        name = self.name
+        name        = self.name
+        method_name = "#{name}?"
 
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
           chainable(:attribute) do
-            #{reader_visibility}
-
-            def #{name}?
+            def #{method_name}
               #{name}
             end
           end
         RUBY
+
+        model.send(reader_visibility, method_name)
       end
 
     end # class Boolean
