@@ -293,17 +293,17 @@ module Virtus
     #
     # @api private
     def add_reader_method(model)
-      ivar_name = instance_variable_name
-      attr_name = name
+      instance_variable_name = self.instance_variable_name
+      name                   = self.name
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
         chainable(:attribute) do
           #{reader_visibility}
 
-          def #{attr_name}
-            return #{ivar_name} if defined?(#{ivar_name})
-            attribute = self.class.attributes[#{attr_name.inspect}]
-            #{ivar_name} = attribute ? attribute.get(self) : nil
+          def #{name}
+            return #{instance_variable_name} if defined?(#{instance_variable_name})
+            attribute = self.class.attributes[#{name.inspect}]
+            #{instance_variable_name} = attribute ? attribute.get(self) : nil
           end
         end
       RUBY
@@ -315,14 +315,14 @@ module Virtus
     #
     # @api private
     def add_writer_method(model)
-      attr_name = name
+      name = self.name
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
         chainable(:attribute) do
           #{writer_visibility}
 
-          def #{attr_name}=(value)
-            self.class.attributes[#{attr_name.inspect}].set(self, value)
+          def #{name}=(value)
+            self.class.attributes[#{name.inspect}].set(self, value)
           end
         end
       RUBY
