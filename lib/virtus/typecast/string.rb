@@ -19,6 +19,6 @@ module Virtus
         value.to_s
       end
 
-    end # String
-  end # Typecast
-end # Virtus
+    end # class String
+  end # module Typecast
+end # module Virtus

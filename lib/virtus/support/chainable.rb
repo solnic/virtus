@@ -9,6 +9,6 @@ module Virtus
         mod.module_eval { yield }
       end
 
-    end
-  end
-end
+    end # module Chainable
+  end # module Support
+end # module Virtus

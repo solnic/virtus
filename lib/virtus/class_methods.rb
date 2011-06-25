@@ -76,5 +76,5 @@ module Virtus
       Virtus.determine_type(name) || super
     end
 
-  end # ClassMethods
-end # Virtus
+  end # module ClassMethods
+end # module Virtus

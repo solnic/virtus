@@ -328,5 +328,5 @@ module Virtus
       RUBY
     end
 
-  end # Attribute
-end # Virtus
+  end # class Attribute
+end # module Virtus

@@ -44,7 +44,7 @@ module Virtus
     end
   end
 
-end
+end # module Virtus
 
 require 'virtus/support/chainable'
 require 'virtus/class_methods'

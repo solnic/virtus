@@ -31,6 +31,6 @@ module Virtus
         Typecast::Time.to_time(value)
       end
 
-    end # Time
-  end # Attributes
-end # Virtus
+    end # class Time
+  end # class Attributes
+end # module Virtus

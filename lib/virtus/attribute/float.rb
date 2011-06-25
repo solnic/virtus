@@ -30,6 +30,6 @@ module Virtus
         Typecast::Numeric.to_f(value)
       end
 
-    end # Float
-  end # Attributes
-end # Virtus
+    end # class Float
+  end # class Attributes
+end # module Virtus

@@ -80,6 +80,6 @@ module Virtus
         end
       end
 
-    end # Numeric
-  end # Typecast
-end # Virtus
+    end # class Numeric
+  end # module Typecast
+end # module Virtus

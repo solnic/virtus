@@ -65,6 +65,6 @@ module Virtus
         RUBY
       end
 
-    end # Boolean
-  end # Attributes
-end # Virtus
+    end # class Boolean
+  end # class Attributes
+end # module Virtus

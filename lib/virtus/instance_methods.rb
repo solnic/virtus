@@ -118,5 +118,5 @@ module Virtus
       attributes
     end
 
-  end # InstanceMethods
-end # Virtus
+  end # module InstanceMethods
+end # module Virtus

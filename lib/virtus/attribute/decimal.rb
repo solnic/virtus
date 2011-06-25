@@ -21,6 +21,6 @@ module Virtus
         Typecast::Numeric.to_d(value)
       end
 
-    end # Decimal
-  end # Attributes
-end # Virtus
+    end # class Decimal
+  end # class Attributes
+end # module Virtus

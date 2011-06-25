@@ -24,6 +24,6 @@ module Virtus
         BOOLEAN_MAP.fetch(value, value)
       end
 
-    end # Boolean
-  end # Typecast
-end # Virtus
+    end # class Boolean
+  end # module Typecast
+end # module Virtus

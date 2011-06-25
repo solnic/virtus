@@ -159,6 +159,6 @@ module Virtus
         end
       end
 
-    end # Time
-  end # Typecast
-end # Virtus
+    end # class Time
+  end # module Typecast
+end # module Virtus

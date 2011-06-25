@@ -24,6 +24,6 @@ module Virtus
         Virtus::Typecast::String.call(value)
       end
 
-    end # String
-  end # Attributes
-end # Virtus
+    end # class String
+  end # class Attributes
+end # module Virtus

@@ -27,6 +27,6 @@ module Virtus
         Typecast::Numeric.to_i(value)
       end
 
-    end # Integer
-  end # Attributes
-end # Virtus
+    end # class Integer
+  end # class Attributes
+end # module Virtus
