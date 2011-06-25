@@ -25,7 +25,7 @@ module Virtus
     #   end
     #
     #   user = User.new(:name => 'John')
-    #   user.attribute_get(:name) # => "john"
+    #   user[:name] # => "john"
     #
     # @param [Symbol] name
     #   a name of an attribute
@@ -34,8 +34,8 @@ module Virtus
     #   a value of an attribute
     #
     # @api public
-    def attribute_get(name)
-      __send__(name)
+    def [](name)
+      attribute_get(name)
     end
 
     # Sets a value of the attribute with the given name
@@ -48,7 +48,7 @@ module Virtus
     #   end
     #
     #   user = User.new
-    #   user.attribute_set(:name) # => "john"
+    #   user[:name] = "john" # => "john"
     #   user.name # => "john"
     #
     # @param [Symbol] name
@@ -61,8 +61,8 @@ module Virtus
     #   the value set on an object
     #
     # @api public
-    def attribute_set(name, value)
-      __send__("#{name}=", value)
+    def []=(name, value)
+      attribute_set(name, value)
     end
 
     # Mass-assign of attribute values
@@ -116,6 +116,26 @@ module Virtus
       end
 
       attributes
+    end
+
+  private
+
+    # Returns a value of the attribute with the given name
+    #
+    # @see Virtus::InstanceMethods#[]
+    #
+    # @api private
+    def attribute_get(name)
+      __send__(name)
+    end
+
+    # Sets a value of the attribute with the given name
+    #
+    # @see Virtus::InstanceMethods#[]=
+    #
+    # @api private
+    def attribute_set(name, value)
+      __send__("#{name}=", value)
     end
 
   end # module InstanceMethods

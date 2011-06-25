@@ -75,9 +75,9 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/attribute/time_spec.rb",
     "spec/unit/virtus/class_methods/new_spec.rb",
     "spec/unit/virtus/determine_type_spec.rb",
-    "spec/unit/virtus/instance_methods/attribute_get_spec.rb",
-    "spec/unit/virtus/instance_methods/attribute_set_spec.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
+    "spec/unit/virtus/instance_methods/element_reference_spec.rb",
+    "spec/unit/virtus/instance_methods/element_set_spec.rb",
     "tasks/metrics/ci.rake",
     "tasks/metrics/flay.rake",
     "tasks/metrics/flog.rake",
@@ -117,9 +117,9 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/attribute/time_spec.rb",
     "spec/unit/virtus/class_methods/new_spec.rb",
     "spec/unit/virtus/determine_type_spec.rb",
-    "spec/unit/virtus/instance_methods/attribute_get_spec.rb",
-    "spec/unit/virtus/instance_methods/attribute_set_spec.rb",
-    "spec/unit/virtus/instance_methods/attributes_spec.rb"
+    "spec/unit/virtus/instance_methods/attributes_spec.rb",
+    "spec/unit/virtus/instance_methods/element_reference_spec.rb",
+    "spec/unit/virtus/instance_methods/element_set_spec.rb"
   ]
 
   if s.respond_to? :specification_version then

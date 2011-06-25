@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe Virtus::InstanceMethods, '#attribute_set' do
+describe Virtus::InstanceMethods, '#[]=' do
+  subject { object[:name] = value }
+
   let(:described_class) do
     Class.new do
       include Virtus
@@ -16,15 +18,11 @@ describe Virtus::InstanceMethods, '#attribute_set' do
     'john'
   end
 
-  before do
-    object.attribute_set(:name, value)
-  end
-
   it "returns the value" do
-    object.attribute_set(:name, value).should eql(value)
+    should eql(value)
   end
 
   it "sets value of an attribute" do
-    object.name.should eql(value)
+    expect { subject }.to change { object.name }.from(nil).to(value)
   end
 end
