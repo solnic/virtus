@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Example usage
     #
     #   class User
@@ -22,6 +23,7 @@ module Virtus
       def typecast_to_primitive(value)
         Virtus::Typecast::String.call(value)
       end
-    end # String
-  end # Attributes
-end # Virtus
+
+    end # class String
+  end # class Attributes
+end # module Virtus

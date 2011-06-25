@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Example usage:
     #
     #   class ExchangeRate
@@ -28,6 +29,7 @@ module Virtus
       def typecast_to_primitive(value)
         Typecast::Numeric.to_f(value)
       end
-    end # Float
-  end # Attributes
-end # Virtus
+
+    end # class Float
+  end # class Attributes
+end # module Virtus

@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Bolean attribute allows true or false values to be set
     # Additionally it adds boolean reader method, like "admin?"
     #
@@ -51,18 +52,21 @@ module Virtus
       def add_reader_method(model)
         super
 
-        attr_name = name
+        name        = self.name
+        method_name = "#{name}?"
 
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          chainable(:attribute) do
-            #{reader_visibility}
-
-            def #{attr_name}?
-              #{attr_name}
+          module AttributeMethods
+            def #{method_name}
+              #{name}
             end
           end
+          include AttributeMethods
         RUBY
+
+        model.send(reader_visibility, method_name)
       end
-    end # Boolean
-  end # Attributes
-end # Virtus
+
+    end # class Boolean
+  end # class Attributes
+end # module Virtus

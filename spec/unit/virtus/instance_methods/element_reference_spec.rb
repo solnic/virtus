@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe Virtus::InstanceMethods, '#attribute_get' do
+describe Virtus::InstanceMethods, '#[]' do
+  subject { object[:name] }
+
   let(:described_class) do
     Class.new do
       include Virtus
@@ -17,6 +19,6 @@ describe Virtus::InstanceMethods, '#attribute_get' do
   end
 
   it "returns the value of an attribute" do
-    object.attribute_get(:name).should eql(value)
+    should eql(value)
   end
 end

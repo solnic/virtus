@@ -1,5 +1,3 @@
-require 'pathname'
-require 'set'
 require 'date'
 require 'time'
 require 'bigdecimal'
@@ -7,10 +5,11 @@ require 'bigdecimal/util'
 
 # Base module which adds Attribute API to your classes
 module Virtus
-  # Represents an undefined parameter used by auto-generated option methods
-  module Undefined; end
 
-  # Extends base class with Attributes and Chainable modules
+  # Represents an undefined parameter used by auto-generated option methods
+  Undefined = Object.new.freeze
+
+  # Extends base class with class and instance methods
   #
   # @param [Class] base
   #
@@ -20,7 +19,6 @@ module Virtus
   def self.included(base)
     base.extend(ClassMethods)
     base.send(:include, InstanceMethods)
-    base.extend(Support::Chainable)
   end
 
   # Returns a Virtus::Attributes::Object sub-class based on a name or class
@@ -36,15 +34,15 @@ module Virtus
   #
   # @api semipublic
   def self.determine_type(class_or_name)
-    if class_or_name.is_a?(Class) && class_or_name < Attribute::Object
+    if class_or_name.kind_of?(Class) && class_or_name < Attribute::Object
       class_or_name
     elsif Attribute.const_defined?(name = class_or_name.to_s)
       Attribute.const_get(name)
     end
   end
-end
 
-require 'virtus/support/chainable'
+end # module Virtus
+
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
 

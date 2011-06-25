@@ -1,14 +1,18 @@
 module Virtus
   module Typecast
+
     # Typecast numeric values. Supports Integer, Float and BigDecimal
     class Numeric
+
+      REGEXP = /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/.freeze
+
       # Typecast value to integer
       #
       # @example
       #   Virtus::Typecast::Numeric.to_i('1') # => 1
       #   Virtus::Typecast::Numeric.to_i(1.2) # => 1
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [Integer]
       #
@@ -23,7 +27,7 @@ module Virtus
       #   Virtus::Typecast::Numeric.to_f('1.2') # => 1.2
       #   Virtus::Typecast::Numeric.to_f(1)     # => 1.0
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [Float]
       #
@@ -38,7 +42,7 @@ module Virtus
       #   Virtus::Typecast::Numeric.to_d('1.2') # => #<BigDecimal:b72157d4,'0.12E1',8(8)>
       #   Virtus::Typecast::Numeric.to_d(1)     # => #<BigDecimal:b7212e08,'0.1E1',4(8)>
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [BigDecimal]
       #
@@ -51,7 +55,7 @@ module Virtus
         end
       end
 
-      private
+    private
 
       # Match numeric string
       #
@@ -66,7 +70,7 @@ module Virtus
       # @api private
       def self.call(value, method)
         if value.respond_to?(:to_str)
-          if value.to_str =~ /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/
+          if value.to_str =~ REGEXP
             $1.send(method)
           else
             value
@@ -77,6 +81,7 @@ module Virtus
           value
         end
       end
-    end # Numeric
-  end # Typecast
-end # Virtus
+
+    end # class Numeric
+  end # module Typecast
+end # module Virtus

@@ -1,5 +1,6 @@
 module Virtus
   module Typecast
+
     # Typecast any object to a string
     class String
 
@@ -9,7 +10,7 @@ module Virtus
       #   Virtus::Typecast::String.call(1)  # => '1'
       #   Virtus::Typecast::String.call([]) # => '[]'
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [String]
       #
@@ -17,6 +18,7 @@ module Virtus
       def self.call(value)
         value.to_s
       end
-    end # String
-  end # Typecast
-end # Virtus
+
+    end # class String
+  end # module Typecast
+end # module Virtus
