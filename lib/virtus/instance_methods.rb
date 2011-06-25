@@ -65,32 +65,6 @@ module Virtus
       attribute_set(name, value)
     end
 
-    # Mass-assign of attribute values
-    #
-    # @example
-    #   class User
-    #     include Virtus
-    #
-    #     attribute :name, String
-    #     attribute :age,  Integer
-    #   end
-    #
-    #   user = User.new
-    #   user.attributes = { :name => 'John', :age => 28 }
-    #
-    # @param [Hash] attributes
-    #   a hash of attribute values to be set on an object
-    #
-    # @return [Hash]
-    #   the attributes
-    #
-    # @api public
-    def attributes=(attributes)
-      attributes.each do |name, value|
-        attribute_set(name, value) if respond_to?("#{name}=")
-      end
-    end
-
     # Returns a hash of all publicly accessible attributes
     #
     # @example
@@ -116,6 +90,32 @@ module Virtus
       end
 
       attributes
+    end
+
+    # Mass-assign of attribute values
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new
+    #   user.attributes = { :name => 'John', :age => 28 }
+    #
+    # @param [Hash] attributes
+    #   a hash of attribute values to be set on an object
+    #
+    # @return [Hash]
+    #   the attributes
+    #
+    # @api public
+    def attributes=(attributes)
+      attributes.each do |name, value|
+        attribute_set(name, value) if respond_to?("#{name}=")
+      end
     end
 
   private
