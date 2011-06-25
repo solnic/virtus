@@ -80,7 +80,7 @@ module Virtus
 
     # Sets default options
     #
-    # @param [Hash]
+    # @param [#to_hash]
     #   options to be set
     #
     # @return [Hash]
@@ -88,14 +88,14 @@ module Virtus
     #
     # @api private
     def self.set_options(new_options)
-      new_options.each do |option_name, option_value|
+      new_options.to_hash.each do |option_name, option_value|
         send(option_name, option_value)
       end
     end
 
     # Adds new options that an attribute class can accept
     #
-    # @param [Array]
+    # @param [#to_ary]
     #   new options to be added
     #
     # @return [Array]
@@ -103,7 +103,7 @@ module Virtus
     #
     # @api private
     def self.concat_options(new_options)
-      accepted_options.concat(new_options).uniq
+      accepted_options.concat(new_options.to_ary).uniq
     end
 
     # Returns all the descendant classes
@@ -195,13 +195,13 @@ module Virtus
     # @param [Symbol] name
     #   the name of an attribute
     #
-    # @param [Hash] options
+    # @param [#to_hash] options
     #   hash of extra options which overrides defaults set on an attribute class
     #
     # @api private
     def initialize(name, options = {})
       @name    = name
-      @options = self.class.options.merge(options).freeze
+      @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
       @complex                = @options.fetch(:complex, false)

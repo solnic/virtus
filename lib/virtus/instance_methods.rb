@@ -5,7 +5,7 @@ module Virtus
 
     # Set attributes during initialization of an object
     #
-    # @param [Hash] attributes
+    # @param [#to_hash] attributes
     #   the attributes hash to be set
     #
     # @return [Object]
@@ -105,7 +105,7 @@ module Virtus
     #   user = User.new
     #   user.attributes = { :name => 'John', :age => 28 }
     #
-    # @param [Hash] attributes
+    # @param [#to_hash] attributes
     #   a hash of attribute values to be set on an object
     #
     # @return [Hash]
@@ -113,7 +113,7 @@ module Virtus
     #
     # @api public
     def attributes=(attributes)
-      attributes.each do |name, value|
+      attributes.to_hash.each do |name, value|
         attribute_set(name, value) if respond_to?("#{name}=")
       end
     end

@@ -21,7 +21,7 @@ module Virtus
     # @param [Class] type
     #   the type class of an attribute
     #
-    # @param [Hash] options
+    # @param [#to_hash] options
     #   the extra options hash
     #
     # @return [Virtus::Attributes::Object]
