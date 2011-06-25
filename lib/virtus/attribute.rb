@@ -184,7 +184,7 @@ module Virtus
     # @api private
     attr_reader :writer_visibility
 
-    DEFAULT_ACCESSOR = :public.freeze
+    DEFAULT_ACCESSOR = :public
 
     OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
 
