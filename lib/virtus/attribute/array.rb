@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Example usage:
     #
     #   class Post

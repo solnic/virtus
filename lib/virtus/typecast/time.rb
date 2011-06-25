@@ -1,5 +1,6 @@
 module Virtus
   module Typecast
+
     # Typecast various values into Date, DateTime or Time
     class Time
       SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
@@ -67,7 +68,7 @@ module Virtus
         call(value, :to_datetime)
       end
 
-      private
+    private
 
       # @api private
       def self.call(value, method)
@@ -157,6 +158,7 @@ module Virtus
           Numeric.to_i(value.fetch(segment, now.send(segment)))
         end
       end
+
     end # Time
   end # Typecast
 end # Virtus

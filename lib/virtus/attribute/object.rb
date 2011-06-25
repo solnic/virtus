@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Base class for every attribute
     class Object < Attribute
       primitive ::Object

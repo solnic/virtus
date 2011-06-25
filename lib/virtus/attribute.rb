@@ -1,8 +1,10 @@
 module Virtus
+
   # Abstract class implementing base API for attribute types
   #
   # @abstract
   class Attribute
+
     # Returns default options hash for a given attribute class
     #
     # @example
@@ -73,6 +75,7 @@ module Virtus
         end                                            # end
       RUBY
     end
+
     private_class_method :add_option_method
 
     # Sets default options
@@ -173,7 +176,6 @@ module Virtus
     #
     # @api private
     attr_reader :reader_visibility
-
 
     # Returns write visibility
     #
@@ -325,5 +327,6 @@ module Virtus
         end
       RUBY
     end
+
   end # Attribute
 end # Virtus

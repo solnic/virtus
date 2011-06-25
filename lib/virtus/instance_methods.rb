@@ -1,6 +1,8 @@
 module Virtus
+
   # Instance methods that are added when you include Virtus
   module InstanceMethods
+
     # Set attributes during initialization of an object
     #
     # @param [Hash] attributes
@@ -115,5 +117,6 @@ module Virtus
 
       attributes
     end
+
   end # InstanceMethods
 end # Virtus

@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Bolean attribute allows true or false values to be set
     # Additionally it adds boolean reader method, like "admin?"
     #
@@ -63,6 +64,7 @@ module Virtus
           end
         RUBY
       end
+
     end # Boolean
   end # Attributes
 end # Virtus

@@ -8,6 +8,7 @@ module Virtus
         include mod
         mod.module_eval { yield }
       end
+
     end
   end
 end

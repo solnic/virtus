@@ -1,5 +1,6 @@
 module Virtus
   class Attribute
+
     # Example usage:
     #
     #   class Post
@@ -29,6 +30,7 @@ module Virtus
       def typecast_to_primitive(value)
         Typecast::Time.to_time(value)
       end
+
     end # Time
   end # Attributes
 end # Virtus

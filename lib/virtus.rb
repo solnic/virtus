@@ -7,6 +7,7 @@ require 'bigdecimal/util'
 
 # Base module which adds Attribute API to your classes
 module Virtus
+
   # Represents an undefined parameter used by auto-generated option methods
   module Undefined; end
 
@@ -42,6 +43,7 @@ module Virtus
       Attribute.const_get(name)
     end
   end
+
 end
 
 require 'virtus/support/chainable'

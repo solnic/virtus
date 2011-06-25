@@ -1,6 +1,8 @@
 module Virtus
+
   # Class methods that are added when you include Virtus
   module ClassMethods
+
     # Defines an attribute on an object's class
     #
     # @example
@@ -57,7 +59,7 @@ module Virtus
       @attributes ||= {}
     end
 
-    private
+  private
 
     # Hooks into const missing process to determine types of attributes
     #
@@ -73,5 +75,6 @@ module Virtus
     def const_missing(name)
       Virtus.determine_type(name) || super
     end
+
   end # ClassMethods
 end # Virtus

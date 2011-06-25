@@ -1,5 +1,6 @@
 module Virtus
   module Typecast
+
     # Typecast any object to a string
     class String
 
@@ -17,6 +18,7 @@ module Virtus
       def self.call(value)
         value.to_s
       end
+
     end # String
   end # Typecast
 end # Virtus

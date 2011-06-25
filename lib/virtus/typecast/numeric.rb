@@ -1,7 +1,9 @@
 module Virtus
   module Typecast
+
     # Typecast numeric values. Supports Integer, Float and BigDecimal
     class Numeric
+
       # Typecast value to integer
       #
       # @example
@@ -51,7 +53,7 @@ module Virtus
         end
       end
 
-      private
+    private
 
       # Match numeric string
       #
@@ -77,6 +79,7 @@ module Virtus
           value
         end
       end
+
     end # Numeric
   end # Typecast
 end # Virtus
