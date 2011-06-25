@@ -297,13 +297,14 @@ module Virtus
       method_name            = name
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        chainable(:attribute) do
+        module AttributeMethods
           def #{method_name}
             return #{instance_variable_name} if defined?(#{instance_variable_name})
             attribute = self.class.attributes[#{method_name.inspect}]
             #{instance_variable_name} = attribute ? attribute.get(self) : nil
           end
         end
+        include AttributeMethods
       RUBY
 
       model.send(reader_visibility, method_name)
@@ -319,11 +320,12 @@ module Virtus
       method_name = "#{name}="
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        chainable(:attribute) do
+        module AttributeMethods
           def #{method_name}(value)
             self.class.attributes[#{name.inspect}].set(self, value)
           end
         end
+        include AttributeMethods
       RUBY
 
       model.send(writer_visibility, method_name)

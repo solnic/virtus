@@ -9,7 +9,7 @@ module Virtus
   # Represents an undefined parameter used by auto-generated option methods
   Undefined = Object.new.freeze
 
-  # Extends base class with Attributes and Chainable modules
+  # Extends base class with class and instance methods
   #
   # @param [Class] base
   #
@@ -19,7 +19,6 @@ module Virtus
   def self.included(base)
     base.extend(ClassMethods)
     base.send(:include, InstanceMethods)
-    base.extend(Support::Chainable)
   end
 
   # Returns a Virtus::Attributes::Object sub-class based on a name or class
@@ -44,7 +43,6 @@ module Virtus
 
 end # module Virtus
 
-require 'virtus/support/chainable'
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
 

@@ -49,7 +49,6 @@ Gem::Specification.new do |s|
     "lib/virtus/attribute/time.rb",
     "lib/virtus/class_methods.rb",
     "lib/virtus/instance_methods.rb",
-    "lib/virtus/support/chainable.rb",
     "lib/virtus/typecast/boolean.rb",
     "lib/virtus/typecast/numeric.rb",
     "lib/virtus/typecast/string.rb",
