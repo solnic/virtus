@@ -205,7 +205,7 @@ module Virtus
 
       @instance_variable_name = "@#{@name}".freeze
 
-      default_accessor   = @options.fetch(:accessor, DEFAULT_ACCESSOR)
+      default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
       @reader_visibility = @options.fetch(:reader, default_accessor)
       @writer_visibility = @options.fetch(:writer, default_accessor)
     end
