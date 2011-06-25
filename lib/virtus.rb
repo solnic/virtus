@@ -37,7 +37,7 @@ module Virtus
   #
   # @api semipublic
   def self.determine_type(class_or_name)
-    if class_or_name.is_a?(Class) && class_or_name < Attribute::Object
+    if class_or_name.kind_of?(Class) && class_or_name < Attribute::Object
       class_or_name
     elsif Attribute.const_defined?(name = class_or_name.to_s)
       Attribute.const_get(name)

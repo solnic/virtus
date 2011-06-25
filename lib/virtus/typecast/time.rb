@@ -75,7 +75,7 @@ module Virtus
         return value.send(method) if value.respond_to?(method)
 
         begin
-          if value.is_a?(::Hash)
+          if value.kind_of?(::Hash)
             from_hash(value, method)
           else
             from_string(value.to_s, method)
