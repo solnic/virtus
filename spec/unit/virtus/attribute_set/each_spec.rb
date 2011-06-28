@@ -37,7 +37,7 @@ describe Virtus::AttributeSet, '#each' do
 
       it { should equal(object) }
 
-      it 'yields the attributes' do
+      it 'yields the expected attributes' do
         expect { subject }.to change { yields.dup }.
           from(Set[]).
           to(Set[ attribute, parent_attribute ])
@@ -50,7 +50,7 @@ describe Virtus::AttributeSet, '#each' do
 
       it { should equal(object) }
 
-      it 'yields the attributes' do
+      it 'yields the expected attributes' do
         expect { subject }.to change { yields.dup }.
           from(Set[]).
           to(Set[ attribute ])
