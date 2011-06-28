@@ -334,6 +334,8 @@ module Virtus
 
     # Sets visibility of reader/write methods based on the options hash
     #
+    # @return [undefined]
+    #
     # @api private
     def set_visibility
       default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
