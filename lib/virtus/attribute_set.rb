@@ -117,9 +117,9 @@ module Virtus
     #
     # @api private
     def reset
-      block = lambda { |attribute| @index[attribute.name] = attribute }
-      parent.each(&block) if parent
-      @attributes.each(&block)
+      parent = self.parent
+      merge_index(parent) if parent
+      merge_index(@attributes)
       self
     end
 
@@ -134,6 +134,17 @@ module Virtus
     # @api private
     def delete(name)
       @attributes.delete(@index.delete(name))
+    end
+
+    # Add the attributes to the index
+    #
+    # @param [Array<Attribute>] attributes
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def merge_index(attributes)
+      attributes.each { |attribute| @index[attribute.name] = attribute }
     end
 
   end # class AttributeSet
