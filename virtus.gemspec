@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-06-25}
+  s.date = %q{2011-06-28}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
     "lib/virtus/attribute/object.rb",
     "lib/virtus/attribute/string.rb",
     "lib/virtus/attribute/time.rb",
+    "lib/virtus/attribute_set.rb",
     "lib/virtus/class_methods.rb",
     "lib/virtus/instance_methods.rb",
     "lib/virtus/typecast/boolean.rb",
@@ -73,6 +74,13 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/attribute/object/class_methods/descendants_spec.rb",
     "spec/unit/virtus/attribute/string_spec.rb",
     "spec/unit/virtus/attribute/time_spec.rb",
+    "spec/unit/virtus/attribute_set/append_spec.rb",
+    "spec/unit/virtus/attribute_set/each_spec.rb",
+    "spec/unit/virtus/attribute_set/element_reference_spec.rb",
+    "spec/unit/virtus/attribute_set/element_set_spec.rb",
+    "spec/unit/virtus/attribute_set/merge_spec.rb",
+    "spec/unit/virtus/attribute_set/parent_spec.rb",
+    "spec/unit/virtus/attribute_set/reset_spec.rb",
     "spec/unit/virtus/class_methods/new_spec.rb",
     "spec/unit/virtus/determine_type_spec.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
@@ -115,6 +123,13 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/attribute/object/class_methods/descendants_spec.rb",
     "spec/unit/virtus/attribute/string_spec.rb",
     "spec/unit/virtus/attribute/time_spec.rb",
+    "spec/unit/virtus/attribute_set/append_spec.rb",
+    "spec/unit/virtus/attribute_set/each_spec.rb",
+    "spec/unit/virtus/attribute_set/element_reference_spec.rb",
+    "spec/unit/virtus/attribute_set/element_set_spec.rb",
+    "spec/unit/virtus/attribute_set/merge_spec.rb",
+    "spec/unit/virtus/attribute_set/parent_spec.rb",
+    "spec/unit/virtus/attribute_set/reset_spec.rb",
     "spec/unit/virtus/class_methods/new_spec.rb",
     "spec/unit/virtus/determine_type_spec.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",

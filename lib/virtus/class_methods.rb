@@ -56,7 +56,11 @@ module Virtus
     #
     # @api public
     def attributes
-      @attributes ||= {}
+      @attributes ||= begin
+        superclass = self.superclass
+        parent     = superclass.attributes if superclass.respond_to?(:attributes)
+        AttributeSet.new([], parent)
+      end
     end
 
   private
