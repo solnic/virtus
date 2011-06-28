@@ -330,6 +330,8 @@ module Virtus
       model.send(writer_visibility, method_name)
     end
 
+  private
+
     # Sets visibility of reader/write methods based on the options hash
     #
     # @api private
