@@ -85,7 +85,8 @@ module Virtus
     def attributes
       attributes = {}
 
-      self.class.attributes.each_key do |name|
+      self.class.attributes.each do |attribute|
+        name = attribute.name
         attributes[name] = attribute_get(name) if respond_to?(name)
       end
 
