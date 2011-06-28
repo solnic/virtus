@@ -15,7 +15,7 @@ describe Virtus::ClassMethods, '.attributes' do
 
     subject { described_class.attributes }
 
-    it "returns an attributes hash" do
+    it "returns a set of attributes" do
       subject.should be_kind_of(Virtus::AttributeSet)
     end
   end
