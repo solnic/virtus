@@ -46,6 +46,8 @@ end # module Virtus
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
 
+require 'virtus/attribute_set'
+
 require 'virtus/typecast/boolean'
 require 'virtus/typecast/numeric'
 require 'virtus/typecast/string'
