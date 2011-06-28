@@ -7,7 +7,7 @@ describe Virtus::AttributeSet, '#[]' do
   let(:attribute)  { mock('Attribute', :name => name)        }
   let(:attributes) { [ attribute ]                           }
   let(:parent)     { described_class.new                     }
-  let(:object)     { described_class.new(attributes, parent) }
+  let(:object)     { described_class.new(parent, attributes) }
 
   it { should equal(attribute) }
 end

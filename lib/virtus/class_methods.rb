@@ -59,7 +59,7 @@ module Virtus
       @attributes ||= begin
         superclass = self.superclass
         parent     = superclass.attributes if superclass.respond_to?(:attributes)
-        AttributeSet.new([], parent)
+        AttributeSet.new(parent)
       end
     end
 

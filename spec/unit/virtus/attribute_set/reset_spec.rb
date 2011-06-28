@@ -6,7 +6,7 @@ describe Virtus::AttributeSet, '#reset' do
   let(:name)       { :name                                   }
   let(:attribute)  { mock('Attribute', :name => name)        }
   let(:attributes) { [ attribute ]                           }
-  let(:object)     { described_class.new(attributes, parent) }
+  let(:object)     { described_class.new(parent, attributes) }
 
   context 'when the parent has no attributes' do
     let(:parent) { described_class.new }

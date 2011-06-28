@@ -5,7 +5,7 @@ describe Virtus::AttributeSet, '#merge' do
 
   let(:attributes) { []                                      }
   let(:parent)     { described_class.new                     }
-  let(:object)     { described_class.new(attributes, parent) }
+  let(:object)     { described_class.new(parent, attributes) }
   let(:name)       { :name                                   }
   let(:other)      { [ attribute ]                           }
 

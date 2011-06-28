@@ -5,7 +5,7 @@ describe Virtus::AttributeSet, '#each' do
   let(:attribute)  { mock('Attribute', :name => name)        }
   let(:attributes) { [ attribute ]                           }
   let(:parent)     { described_class.new                     }
-  let(:object)     { described_class.new(attributes, parent) }
+  let(:object)     { described_class.new(parent, attributes) }
   let(:yields)     { Set[]                                   }
 
   context 'with no block' do

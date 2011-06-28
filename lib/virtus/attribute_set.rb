@@ -17,15 +17,15 @@ module Virtus
 
     # Initialize an AttributeSet
     #
-    # @param [Array] attributes
     # @param [AttributeSet] parent
+    # @param [Array] attributes
     #
     # @return [undefined]
     #
     # @api private
-    def initialize(attributes = [], parent = nil)
-      @attributes = attributes.dup
+    def initialize(parent = nil, attributes = [])
       @parent     = parent
+      @attributes = attributes.dup
       @index      = {}
       reset
     end
