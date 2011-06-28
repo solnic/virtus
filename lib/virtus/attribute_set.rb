@@ -118,7 +118,7 @@ module Virtus
     # @api private
     def reset
       block = lambda { |attribute| @index[attribute.name] = attribute }
-      @parent.each(&block) if @parent
+      parent.each(&block) if parent
       @attributes.each(&block)
       self
     end
