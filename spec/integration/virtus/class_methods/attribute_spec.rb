@@ -20,10 +20,6 @@ describe Virtus::ClassMethods, '.attribute' do
     let(:protected_instance_methods) { described_class.protected_instance_methods.map { |method| method.to_s } }
     let(:private_instance_methods)   { described_class.private_instance_methods.map   { |method| method.to_s } }
 
-    it "should create an attribute" do
-      described_class.attributes.should have_key(:name)
-    end
-
     it "should create an attribute of a correct type" do
       described_class.attributes[:name].should be_instance_of(Virtus::Attribute::String)
     end
