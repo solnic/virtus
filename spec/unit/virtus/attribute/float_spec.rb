@@ -8,8 +8,7 @@ describe Virtus::Attribute::Float do
   end
 
   describe '#typecast' do
-    let(:model)     { Class.new { include Virtus } }
-    let(:attribute) { model.attribute(:score, Virtus::Attribute::Float) }
+    let(:attribute) { Virtus::Attribute::Float.new(:score) }
 
     subject { attribute.typecast(value) }
 

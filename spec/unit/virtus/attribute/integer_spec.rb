@@ -8,8 +8,7 @@ describe Virtus::Attribute::Integer do
   end
 
   describe '#typecast' do
-    let(:model)     { Class.new { include Virtus } }
-    let(:attribute) { model.attribute(:age, Virtus::Attribute::Integer) }
+    let(:attribute) { Virtus::Attribute::Integer.new(:age) }
 
     subject { attribute.typecast(value) }
 
