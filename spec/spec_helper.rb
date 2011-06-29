@@ -16,7 +16,9 @@ RSpec.configure do |config|
   config.after :all do
     stack = [ Virtus::Attribute ]
     while klass = stack.pop
-      klass.descendants.delete_if { |descendant| descendant.name.empty? }
+      klass.descendants.delete_if do |descendant|
+        descendant.name.nil? || descendant.name.empty?
+      end
       stack.concat(klass.descendants)
     end
   end
