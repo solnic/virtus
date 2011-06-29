@@ -57,5 +57,17 @@ describe Virtus::ClassMethods, '.attribute' do
         protected_instance_methods.should include('bday=')
       end
     end
+
+    context "in the descendants" do
+      subject { described_class.attribute(:name, String) }
+
+      let(:descendant) { Class.new(described_class) }
+
+      it 'updates the descendant attributes' do
+        descendant.attributes.to_a.should be_empty
+        @attribute = subject
+        descendant.attributes.to_a.should eql([ @attribute ])
+      end
+    end
   end
 end

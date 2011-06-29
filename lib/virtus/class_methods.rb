@@ -35,6 +35,7 @@ module Virtus
       attribute.add_writer_method(self)
 
       attributes << attribute
+      descendants.each { |descendant| descendant.attributes.reset }
 
       attribute
     end

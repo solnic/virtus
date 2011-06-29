@@ -17,6 +17,7 @@ module Virtus
   #
   # @api private
   def self.included(base)
+    base.extend(DescendantsTracker)
     base.extend(ClassMethods)
     base.send(:include, InstanceMethods)
   end
