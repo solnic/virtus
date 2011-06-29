@@ -43,6 +43,8 @@ module Virtus
 
 end # module Virtus
 
+require 'virtus/support/descendants_tracker'
+
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
 
