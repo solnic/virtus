@@ -34,7 +34,9 @@ module Virtus
       attribute.add_reader_method(self)
       attribute.add_writer_method(self)
 
-      attributes[name] = attribute
+      attributes << attribute
+
+      attribute
     end
 
     # Returns all the attributes defined on a Class
