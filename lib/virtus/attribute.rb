@@ -4,6 +4,7 @@ module Virtus
   #
   # @abstract
   class Attribute
+    extend DescendantsTracker
 
     # Returns default options hash for a given attribute class
     #
@@ -106,32 +107,18 @@ module Virtus
       accepted_options.concat(new_options.to_ary).uniq
     end
 
-    # Returns all the descendant classes
-    #
-    # @example
-    #   Virtus::Attribute::Numeric.descendants
-    #   # => [Virtus::Attribute::Decimal, Virtus::Attribute::Float, Virtus::Attribute::Integer]
-    #
-    # @return [Array]
-    #   the array of descendants
-    #
-    # @api public
-    def self.descendants
-      @descendants ||= []
-    end
-
     # Adds descendant to descendants array and inherits default options
     #
     # @param [Class] descendant
     #
-    # @return [Class]
+    # @return [self]
     #
     # @api private
     def self.inherited(descendant)
-      descendants << descendant
+      super
       descendant.concat_options(accepted_options)
       descendant.set_options(options)
-      descendant
+      self
     end
 
     # Returns if the given value's class is an attribute's primitive

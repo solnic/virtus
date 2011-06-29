@@ -4,10 +4,12 @@ describe Virtus::Attribute::Object, '.descendants' do
   subject { described_class.descendants }
 
   let(:known_descendants) do
-    [ Virtus::Attribute::Array,   Virtus::Attribute::Boolean,
-      Virtus::Attribute::Date,    Virtus::Attribute::DateTime,
-      Virtus::Attribute::Numeric, Virtus::Attribute::Hash,
-      Virtus::Attribute::String,  Virtus::Attribute::Time ]
+    [ Virtus::Attribute::Time,    Virtus::Attribute::String,
+      Virtus::Attribute::Integer, Virtus::Attribute::Hash,
+      Virtus::Attribute::Float,   Virtus::Attribute::Decimal,
+      Virtus::Attribute::Numeric, Virtus::Attribute::DateTime,
+      Virtus::Attribute::Date,    Virtus::Attribute::Boolean,
+      Virtus::Attribute::Array ]
   end
 
   it "should return all known attribute classes" do

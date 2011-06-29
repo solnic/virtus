@@ -34,8 +34,14 @@ module Virtus
   #
   # @api semipublic
   def self.determine_type(class_or_name)
-    if class_or_name.kind_of?(Class) && class_or_name < Attribute::Object
-      class_or_name
+    if class_or_name.kind_of?(Class)
+      if class_or_name < Attribute::Object
+        class_or_name
+      else
+        Attribute.descendants.detect do |descendant|
+          class_or_name <= descendant.primitive
+        end
+      end
     elsif Attribute.const_defined?(name = class_or_name.to_s)
       Attribute.const_get(name)
     end

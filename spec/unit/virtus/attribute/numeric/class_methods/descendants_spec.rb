@@ -4,9 +4,9 @@ describe Virtus::Attribute::Numeric, '.descendants' do
   subject { described_class.descendants }
 
   let(:known_descendants) do
-    [ Virtus::Attribute::Decimal,
+    [ Virtus::Attribute::Integer,
       Virtus::Attribute::Float,
-      Virtus::Attribute::Integer ]
+      Virtus::Attribute::Decimal ]
   end
 
   it "should return all known attribute classes" do
