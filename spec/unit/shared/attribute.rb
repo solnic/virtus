@@ -5,12 +5,7 @@ shared_examples_for "Attribute" do
     raise "+attribute_name+ should be defined"
   end
 
-  before :all do
-    Object.send(:remove_const, :SubAttribute) if Object.const_defined?(:SubAttribute)
-    Object.send(:remove_const, :User)         if Object.const_defined?(:User)
-  end
-
-  let(:sub_attribute) { class SubAttribute < described_class; end; SubAttribute }
+  let(:sub_attribute) { Class.new(described_class) }
 
   let(:model) do
     Class.new { include Virtus }

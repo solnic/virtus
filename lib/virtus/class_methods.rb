@@ -28,13 +28,15 @@ module Virtus
     #
     # @api public
     def attribute(name, type, options = {})
-      attribute_klass = Virtus.determine_type(type)
-      attribute       = attribute_klass.new(name, options)
+      attribute = Virtus.determine_type(type).new(name, options)
 
       attribute.add_reader_method(self)
       attribute.add_writer_method(self)
 
-      attributes[name] = attribute
+      attributes << attribute
+      descendants.each { |descendant| descendant.attributes.reset }
+
+      attribute
     end
 
     # Returns all the attributes defined on a Class
