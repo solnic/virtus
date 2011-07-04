@@ -24,7 +24,7 @@ module Virtus
     # @param [#to_hash] options
     #   the extra options hash
     #
-    # @return [Virtus::Attributes::Object]
+    # @return [self]
     #
     # @api public
     def attribute(name, type, options = {})
@@ -36,7 +36,7 @@ module Virtus
       attributes << attribute
       descendants.each { |descendant| descendant.attributes.reset }
 
-      attribute
+      self
     end
 
     # Returns all the attributes defined on a Class

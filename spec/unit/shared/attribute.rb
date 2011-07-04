@@ -11,6 +11,14 @@ shared_examples_for "Attribute" do
     Class.new { include Virtus }
   end
 
+  let(:attribute) do
+    model.attribute(attribute_name, described_class).attributes[attribute_name]
+  end
+
+  let(:object) do
+    model.new
+  end
+
   describe ".options" do
     subject { described_class.options }
     it { should be_instance_of(Hash) }
@@ -80,9 +88,6 @@ shared_examples_for "Attribute" do
   end
 
   describe "#set" do
-    let(:attribute) { model.attribute(attribute_name, described_class) }
-    let(:object)    { model.new }
-
     context "with nil" do
       subject { attribute.set(object, nil) }
 
@@ -114,9 +119,6 @@ shared_examples_for "Attribute" do
   end
 
   describe "#get" do
-    let(:attribute) { model.attribute(attribute_name, described_class) }
-    let(:object)    { model.new }
-
     context "when a non-nil value is set" do
       before { attribute.set(object, attribute_value) }
 
@@ -135,7 +137,7 @@ shared_examples_for "Attribute" do
   end
 
   describe "#complex?" do
-    let(:attribute) { model.attribute(attribute_name, described_class, :complex => complex) }
+    let(:attribute) { described_class.new(attribute_name, :complex => complex) }
 
     subject { attribute.complex? }
 
