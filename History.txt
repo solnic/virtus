@@ -1,6 +1,7 @@
 === v0.0.4 to-be-released
 
 * [BREAKING CHANGE] attributes hash has been replaced by a specialized class AttributeSet (dkubb)
+* [BREAKING CHANGE] Virtus::ClassMethods.attribute returns self instead of a created attribute
 * [changed] descendants tracking has been extracted into DescendantsTracker module (dkubb)
 * [changed] Instance #primitive? method has been replaced by class utility method Virtus::Attribute.primitive?
 * [changed] Virtus::Attribute::String#typecast_to_primitive delegates to Virtus::Typecast::String.call
