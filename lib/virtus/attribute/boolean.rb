@@ -68,5 +68,5 @@ module Virtus
       end
 
     end # class Boolean
-  end # class Attributes
+  end # class Attribute
 end # module Virtus

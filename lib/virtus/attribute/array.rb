@@ -14,5 +14,5 @@ module Virtus
       primitive ::Array
       complex   true
     end # class Array
-  end # class Attributes
+  end # class Attribute
 end # module Virtus

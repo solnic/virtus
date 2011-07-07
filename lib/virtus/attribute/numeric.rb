@@ -6,5 +6,5 @@ module Virtus
       primitive      ::Numeric
       accept_options :min, :max
     end # class Numeric
-  end # class Attributes
+  end # class Attribute
 end # module Virtus

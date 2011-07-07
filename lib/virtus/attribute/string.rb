@@ -25,5 +25,5 @@ module Virtus
       end
 
     end # class String
-  end # class Attributes
+  end # class Attribute
 end # module Virtus
