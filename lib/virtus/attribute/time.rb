@@ -32,5 +32,5 @@ module Virtus
       end
 
     end # class Time
-  end # class Attributes
+  end # class Attribute
 end # module Virtus

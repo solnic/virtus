@@ -28,5 +28,5 @@ module Virtus
       end
 
     end # class Integer
-  end # class Attributes
+  end # class Attribute
 end # module Virtus

@@ -22,7 +22,7 @@ module Virtus
     base.send(:include, InstanceMethods)
   end
 
-  # Returns a Virtus::Attributes::Object sub-class based on a name or class
+  # Returns a Virtus::Attribute::Object sub-class based on a name or class
   #
   # @example
   #   Virtus.determine_type('String') # => Virtus::Attribute::String
@@ -31,7 +31,7 @@ module Virtus
   #   name of a class or a class itself
   #
   # @return [Class]
-  #   one of the Virtus::Attributes::Object sub-class
+  #   one of the Virtus::Attribute::Object sub-class
   #
   # @api semipublic
   def self.determine_type(class_or_name)
