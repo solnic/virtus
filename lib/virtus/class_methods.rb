@@ -71,7 +71,7 @@ module Virtus
     #
     # It is used when an attribute is defined and a global class like String
     # or Integer is provided as the type which needs to be mapped to
-    # Virtus::Attributes::String and Virtus::Attributes::Integer
+    # Virtus::Attribute::String and Virtus::Attribute::Integer
     #
     # @param [String] name
     #

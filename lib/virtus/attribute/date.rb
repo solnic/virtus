@@ -33,5 +33,5 @@ module Virtus
       end
 
     end # class Date
-  end # class Attributes
+  end # class Attribute
 end # module Virtus

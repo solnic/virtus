@@ -15,5 +15,5 @@ module Virtus
       primitive ::Hash
       complex   true
     end # class Hash
-  end # class Attributes
+  end # class Attribute
 end # module Virtus

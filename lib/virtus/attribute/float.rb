@@ -31,5 +31,5 @@ module Virtus
       end
 
     end # class Float
-  end # class Attributes
+  end # class Attribute
 end # module Virtus
