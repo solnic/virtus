@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{virtus}
-  s.version = "0.0.3"
+  s.version = "0.0.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Piotr Solnica}]
+  s.authors = ["Piotr Solnica"]
   s.date = %q{2011-07-08}
   s.description = %q{Attributes for your plain ruby objects}
-  s.email = [%q{piotr@rubyverse.com}]
+  s.email = ["piotr@rubyverse.com"]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.markdown",
@@ -63,6 +63,12 @@ Gem::Specification.new do |s|
     "spec/shared/idempotent_method_behaviour.rb",
     "spec/spec_helper.rb",
     "spec/unit/shared/attribute.rb",
+    "spec/unit/shared/attribute/accept_options.rb",
+    "spec/unit/shared/attribute/accepted_options.rb",
+    "spec/unit/shared/attribute/complex.rb",
+    "spec/unit/shared/attribute/get.rb",
+    "spec/unit/shared/attribute/options.rb",
+    "spec/unit/shared/attribute/set.rb",
     "spec/unit/virtus/attribute/array_spec.rb",
     "spec/unit/virtus/attribute/attribute_spec.rb",
     "spec/unit/virtus/attribute/boolean_spec.rb",
@@ -104,10 +110,10 @@ Gem::Specification.new do |s|
     "virtus.gemspec"
   ]
   s.homepage = %q{https://github.com/solnic/virtus}
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.5}
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{Attributes for your plain ruby objects}
-  s.test_files = [%q{spec/integration/virtus/attributes/attribute/typecast_spec.rb}, %q{spec/integration/virtus/class_methods/attribute_spec.rb}, %q{spec/integration/virtus/class_methods/attributes_spec.rb}, %q{spec/integration/virtus/class_methods/const_missing_spec.rb}, %q{spec/rcov.opts}, %q{spec/shared/idempotent_method_behaviour.rb}, %q{spec/spec_helper.rb}, %q{spec/unit/shared/attribute.rb}, %q{spec/unit/virtus/attribute/array_spec.rb}, %q{spec/unit/virtus/attribute/attribute_spec.rb}, %q{spec/unit/virtus/attribute/boolean_spec.rb}, %q{spec/unit/virtus/attribute/date_spec.rb}, %q{spec/unit/virtus/attribute/date_time_spec.rb}, %q{spec/unit/virtus/attribute/decimal_spec.rb}, %q{spec/unit/virtus/attribute/float_spec.rb}, %q{spec/unit/virtus/attribute/hash_spec.rb}, %q{spec/unit/virtus/attribute/integer_spec.rb}, %q{spec/unit/virtus/attribute/numeric/class_methods/descendants_spec.rb}, %q{spec/unit/virtus/attribute/object/class_methods/descendants_spec.rb}, %q{spec/unit/virtus/attribute/string_spec.rb}, %q{spec/unit/virtus/attribute/time_spec.rb}, %q{spec/unit/virtus/attribute_set/append_spec.rb}, %q{spec/unit/virtus/attribute_set/each_spec.rb}, %q{spec/unit/virtus/attribute_set/element_reference_spec.rb}, %q{spec/unit/virtus/attribute_set/element_set_spec.rb}, %q{spec/unit/virtus/attribute_set/merge_spec.rb}, %q{spec/unit/virtus/attribute_set/parent_spec.rb}, %q{spec/unit/virtus/attribute_set/reset_spec.rb}, %q{spec/unit/virtus/class_methods/attribute_spec.rb}, %q{spec/unit/virtus/class_methods/new_spec.rb}, %q{spec/unit/virtus/descendants_tracker/descendants_spec.rb}, %q{spec/unit/virtus/descendants_tracker/inherited_spec.rb}, %q{spec/unit/virtus/determine_type_spec.rb}, %q{spec/unit/virtus/instance_methods/attributes_spec.rb}, %q{spec/unit/virtus/instance_methods/element_reference_spec.rb}, %q{spec/unit/virtus/instance_methods/element_set_spec.rb}]
+  s.test_files = ["spec/integration/virtus/attributes/attribute/typecast_spec.rb", "spec/integration/virtus/class_methods/attribute_spec.rb", "spec/integration/virtus/class_methods/attributes_spec.rb", "spec/integration/virtus/class_methods/const_missing_spec.rb", "spec/rcov.opts", "spec/shared/idempotent_method_behaviour.rb", "spec/spec_helper.rb", "spec/unit/shared/attribute.rb", "spec/unit/shared/attribute/accept_options.rb", "spec/unit/shared/attribute/accepted_options.rb", "spec/unit/shared/attribute/complex.rb", "spec/unit/shared/attribute/get.rb", "spec/unit/shared/attribute/options.rb", "spec/unit/shared/attribute/set.rb", "spec/unit/virtus/attribute/array_spec.rb", "spec/unit/virtus/attribute/attribute_spec.rb", "spec/unit/virtus/attribute/boolean_spec.rb", "spec/unit/virtus/attribute/date_spec.rb", "spec/unit/virtus/attribute/date_time_spec.rb", "spec/unit/virtus/attribute/decimal_spec.rb", "spec/unit/virtus/attribute/float_spec.rb", "spec/unit/virtus/attribute/hash_spec.rb", "spec/unit/virtus/attribute/integer_spec.rb", "spec/unit/virtus/attribute/numeric/class_methods/descendants_spec.rb", "spec/unit/virtus/attribute/object/class_methods/descendants_spec.rb", "spec/unit/virtus/attribute/string_spec.rb", "spec/unit/virtus/attribute/time_spec.rb", "spec/unit/virtus/attribute_set/append_spec.rb", "spec/unit/virtus/attribute_set/each_spec.rb", "spec/unit/virtus/attribute_set/element_reference_spec.rb", "spec/unit/virtus/attribute_set/element_set_spec.rb", "spec/unit/virtus/attribute_set/merge_spec.rb", "spec/unit/virtus/attribute_set/parent_spec.rb", "spec/unit/virtus/attribute_set/reset_spec.rb", "spec/unit/virtus/class_methods/attribute_spec.rb", "spec/unit/virtus/class_methods/new_spec.rb", "spec/unit/virtus/descendants_tracker/descendants_spec.rb", "spec/unit/virtus/descendants_tracker/inherited_spec.rb", "spec/unit/virtus/determine_type_spec.rb", "spec/unit/virtus/instance_methods/attributes_spec.rb", "spec/unit/virtus/instance_methods/element_reference_spec.rb", "spec/unit/virtus/instance_methods/element_set_spec.rb"]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
