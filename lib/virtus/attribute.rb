@@ -6,6 +6,34 @@ module Virtus
   class Attribute
     extend DescendantsTracker
 
+    # Return the Attribute class given a primitive
+    #
+    # @param [Class] primitive
+    #
+    # @return [Class<Attribute>]
+    #
+    # @return [nil]
+    #   nil if the type cannot be determined by the primitive
+    #
+    # @api private
+    def self.from_primitive(primitive)
+      descendants.detect { |descendant| primitive <= descendant.primitive }
+    end
+
+    # Return the Attribute class given a string
+    #
+    # @param [String] string
+    #
+    # @return [Class<Attribute>]
+    #
+    # @return [nil]
+    #   nil if the type cannot be determined by the string
+    #
+    # @api private
+    def self.from_string(string)
+      const_get(string) if const_defined?(string)
+    end
+
     # Returns default options hash for a given attribute class
     #
     # @example

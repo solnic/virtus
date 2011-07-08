@@ -71,9 +71,7 @@ module Virtus
   #
   # @api private
   def self.determine_type_from_primitive(primitive)
-    Attribute.descendants.detect do |descendant|
-      primitive <= descendant.primitive
-    end
+    Attribute.from_primitive(primitive)
   end
 
   # Return the Attribute class given a string
@@ -87,7 +85,7 @@ module Virtus
   #
   # @api private
   def self.determine_type_from_string(string)
-    Attribute.const_get(string) if Attribute.const_defined?(string)
+    Attribute.from_string(string)
   end
 
   private_class_method :determine_type_from_attribute, :determine_type_from_primitive, :determine_type_from_string
