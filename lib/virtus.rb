@@ -22,16 +22,19 @@ module Virtus
     base.send(:include, InstanceMethods)
   end
 
-  # Returns a Virtus::Attribute::Object sub-class based on a name or class
+  # Returns a Virtus::Attribute::Object descendant based on a name or class
   #
   # @example
   #   Virtus.determine_type('String') # => Virtus::Attribute::String
   #
-  # @param [Class,String] class_or_name
+  # @param [Class, #to_s] class_or_name
   #   name of a class or a class itself
   #
   # @return [Class]
-  #   one of the Virtus::Attribute::Object sub-class
+  #   one of the Virtus::Attribute::Object descendants
+  #
+  # @return [nil]
+  #   nil if the type cannot be determined by the class_or_name
   #
   # @api semipublic
   def self.determine_type(class_or_name)
@@ -64,7 +67,7 @@ module Virtus
   # @return [Class<Attribute>]
   #
   # @return [nil]
-  #   nil if the primitive does not map to an Attribute
+  #   nil if the type cannot be determined by the primitive
   #
   # @api private
   def self.determine_type_from_primitive(primitive)
@@ -75,12 +78,12 @@ module Virtus
 
   # Return the Attribute class given a string
   #
-  # @param [String]
+  # @param [String] string
   #
   # @return [Class<Attribute>]
   #
   # @return [nil]
-  #   nil if the string is not a constant in the Attribute namespace
+  #   nil if the type cannot be determined by the string
   #
   # @api private
   def self.determine_type_from_string(string)
