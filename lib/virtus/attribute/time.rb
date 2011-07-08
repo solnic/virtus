@@ -16,7 +16,12 @@ module Virtus
     #
     #   # typecasting from a hash
     #   Post.new(:published_at => {
-    #     :year => 2011, :month => 6, :day => 9, :hour => 11, :minutes => 8 })
+    #     :year    => 2011,
+    #     :month   => 6,
+    #     :day     => 9,
+    #     :hour    => 11,
+    #     :minutes => 8
+    #   })
     #
     #   # typecasting from an object which implements #to_time
     #   Post.new(:published_at => DateTime.now)
@@ -25,6 +30,8 @@ module Virtus
       primitive ::Time
 
       # @see Virtus::Typecast::Time.to_time
+      #
+      # @return [Time]
       #
       # @api private
       def typecast_to_primitive(value)

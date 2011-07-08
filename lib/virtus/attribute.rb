@@ -249,6 +249,8 @@ module Virtus
     # @param [#to_hash] options
     #   hash of extra options which overrides defaults set on an attribute class
     #
+    # @return [undefined]
+    #
     # @api private
     def initialize(name, options = {})
       @name    = name
@@ -291,6 +293,8 @@ module Virtus
     end
 
     # Converts the given value to the primitive type
+    #
+    # @return [Object]
     #
     # @api private
     def typecast_to_primitive(value)

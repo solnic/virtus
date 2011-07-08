@@ -19,6 +19,8 @@ module Virtus
 
       # @see Virtus::Typecast::String.call
       #
+      # @return [String]
+      #
       # @api private
       def typecast_to_primitive(value)
         Virtus::Typecast::String.call(value)

@@ -16,6 +16,8 @@ module Virtus
 
       # @see Virtus::Typecast::Numeric.to_d
       #
+      # @return [BigDecimal]
+      #
       # @api private
       def typecast_to_primitive(value)
         Typecast::Numeric.to_d(value)

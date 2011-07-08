@@ -19,7 +19,7 @@ module Virtus
       #   Virtus::Typecast::Time.to_time('2011/06/09 12:01')
       #   # => Thu Jun 09 12:01:00 +0200 2011
       #
-      # @param [Hash, #to_mash, #to_s] value
+      # @param [#to_hash, #to_s] value
       #   value to be typecast
       #
       # @return [Time]
@@ -38,7 +38,7 @@ module Virtus
       #   Virtus::Typecast::Time.to_date('2011/06/09')
       #   # => #<Date: 4911443/2,0,2299161>
       #
-      # @param [Hash, #to_mash, #to_s] value
+      # @param [#to_hash, #to_s] value
       #   value to be typecast
       #
       # @return [Date]
@@ -57,7 +57,7 @@ module Virtus
       #   Virtus::Typecast::Time.to_datetime('2011/06/09 12:01')
       #   # => #<DateTime: 3536239681/1440,0,2299161>
       #
-      # @param [Hash, #to_mash, #to_s] value
+      # @param [#to_hash, #to_s] value
       #   value to be typecast
       #
       # @return [DateTime]

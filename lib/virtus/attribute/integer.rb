@@ -22,6 +22,8 @@ module Virtus
 
       # @see Virtus::Typecast::Numeric.to_i
       #
+      # @return [Integer]
+      #
       # @api private
       def typecast_to_primitive(value)
         Typecast::Numeric.to_i(value)

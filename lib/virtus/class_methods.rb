@@ -49,12 +49,11 @@ module Virtus
     #     attribute :age,  Integer
     #   end
     #
-    #   User.attributes  # => { name_attribute, age_attribute }
+    #   User.attributes  # =>
     #
     #   TODO: implement inspect so the output is not cluttered - solnic
     #
-    # @return [Hash]
-    #   an attributes hash indexed by attribute names
+    # @return [AttributeSet]
     #
     # @api public
     def attributes

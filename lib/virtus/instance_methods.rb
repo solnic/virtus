@@ -8,7 +8,7 @@ module Virtus
     # @param [#to_hash] attributes
     #   the attributes hash to be set
     #
-    # @return [Object]
+    # @return [undefined]
     #
     # @api private
     def initialize(attributes = {})
@@ -79,7 +79,6 @@ module Virtus
     #   user.attributes  # => { :name => 'John', :age => 28 }
     #
     # @return [Hash]
-    #   the attributes
     #
     # @api public
     def attributes
@@ -110,7 +109,6 @@ module Virtus
     #   a hash of attribute values to be set on an object
     #
     # @return [Hash]
-    #   the attributes
     #
     # @api public
     def attributes=(attributes)
@@ -125,6 +123,8 @@ module Virtus
     #
     # @see Virtus::InstanceMethods#[]
     #
+    # @return [Object]
+    #
     # @api private
     def attribute_get(name)
       __send__(name)
@@ -133,6 +133,8 @@ module Virtus
     # Sets a value of the attribute with the given name
     #
     # @see Virtus::InstanceMethods#[]=
+    #
+    # @return [Object]
     #
     # @api private
     def attribute_set(name, value)

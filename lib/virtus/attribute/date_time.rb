@@ -26,6 +26,8 @@ module Virtus
 
       # @see Virtus::Typecast::Time.to_datetime
       #
+      # @return [DateTime]
+      #
       # @api private
       def typecast_to_primitive(value)
         Typecast::Time.to_datetime(value)
