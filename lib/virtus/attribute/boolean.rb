@@ -54,19 +54,16 @@ module Virtus
       def add_reader_method(model)
         super
 
-        name        = self.name
-        method_name = "#{name}?"
+        reader_method_name = "#{name}?"
+        reader_visibility  = self.reader_visibility
+        attribute          = self
 
-        model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          module AttributeMethods   # module AttributeMethods
-            def #{method_name}      #   def active?
-              #{name}               #     @active
-            end                     #   end
-          end                       # end
-          include AttributeMethods  # include AttributeMethods
-        RUBY
+        model::AttributeMethods.class_eval do
+          define_method(reader_method_name) { attribute.get(self) }
+          send(reader_visibility, reader_method_name)
+        end
 
-        model.send(reader_visibility, method_name)
+        model.class_eval { include self::AttributeMethods }
 
         self
       end

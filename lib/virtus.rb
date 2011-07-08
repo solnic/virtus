@@ -19,6 +19,7 @@ module Virtus
   def self.included(descendant)
     descendant.extend(DescendantsTracker)
     descendant.extend(ClassMethods)
+    descendant.const_set(:AttributeMethods, Module.new)
     descendant.send(:include, InstanceMethods)
   end
 
