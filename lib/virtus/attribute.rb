@@ -130,7 +130,7 @@ module Virtus
 
     # Adds a reader/writer method for the give option name
     #
-    # @return [NilClass]
+    # @return [undefined]
     #
     # @api private
     def self.add_option_method(option)
