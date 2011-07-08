@@ -135,10 +135,10 @@ module Virtus
     # @api private
     def self.add_option_method(option)
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        def self.#{option}(value = Undefined)          # def self.unique(value = Undefined)
-          return @#{option} if value.equal?(Undefined) #   return @unique if value.equal?(Undefined)
-          @#{option} = value                           #   @unique = value
-        end                                            # end
+        def self.#{option}(value = Undefined)           # def self.primitive(value = Undefined)
+          return @#{option} if value.equal?(Undefined)  #   return @primitive if value.equal?(Undefined)
+          @#{option} = value                            #   @primitive = value
+        end                                             # end
       RUBY
     end
 
@@ -347,14 +347,14 @@ module Virtus
       method_name            = name
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        module AttributeMethods
-          def #{method_name}
-            return #{instance_variable_name} if defined?(#{instance_variable_name})
-            attribute = self.class.attributes[#{method_name.inspect}]
-            #{instance_variable_name} = attribute ? attribute.get(self) : nil
-          end
-        end
-        include AttributeMethods
+        module AttributeMethods                                                      # module AttributeMethods
+          def #{method_name}                                                         #   def name
+            return #{instance_variable_name} if defined?(#{instance_variable_name})  #     return @name if defined?(@name)
+            attribute = self.class.attributes[#{method_name.inspect}]                #     attribute = self.class.attributes[:name]
+            #{instance_variable_name} = attribute ? attribute.get(self) : nil        #     @name = attribute ? attribute.get(self) : nil
+          end                                                                        #   end
+        end                                                                          # end
+        include AttributeMethods                                                     # include AttributeMethods
       RUBY
 
       model.send(reader_visibility, method_name)
@@ -370,12 +370,12 @@ module Virtus
       method_name = "#{name}="
 
       model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-        module AttributeMethods
-          def #{method_name}(value)
-            self.class.attributes[#{name.inspect}].set(self, value)
-          end
-        end
-        include AttributeMethods
+        module AttributeMethods                                      # module AttributeMethods
+          def #{method_name}(value)                                  #   def name=(value)
+            self.class.attributes[#{name.inspect}].set(self, value)  #     self.class.attributes[:name].set(self, value)
+          end                                                        #   end
+        end                                                          # end
+        include AttributeMethods                                     # include AttributeMethods
       RUBY
 
       model.send(writer_visibility, method_name)

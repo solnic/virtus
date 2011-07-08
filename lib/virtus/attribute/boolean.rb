@@ -56,12 +56,12 @@ module Virtus
         method_name = "#{name}?"
 
         model.class_eval <<-RUBY, __FILE__, __LINE__ + 1
-          module AttributeMethods
-            def #{method_name}
-              #{name}
-            end
-          end
-          include AttributeMethods
+          module AttributeMethods   # module AttributeMethods
+            def #{method_name}      #   def active?
+              #{name}               #     @active
+            end                     #   end
+          end                       # end
+          include AttributeMethods  # include AttributeMethods
         RUBY
 
         model.send(reader_visibility, method_name)
