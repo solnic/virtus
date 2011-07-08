@@ -11,15 +11,15 @@ module Virtus
 
   # Extends base class with class and instance methods
   #
-  # @param [Class] base
+  # @param [Class] descendant
   #
   # @return [Class]
   #
   # @api private
-  def self.included(base)
-    base.extend(DescendantsTracker)
-    base.extend(ClassMethods)
-    base.send(:include, InstanceMethods)
+  def self.included(descendant)
+    descendant.extend(DescendantsTracker)
+    descendant.extend(ClassMethods)
+    descendant.send(:include, InstanceMethods)
   end
 
 end # module Virtus
