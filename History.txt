@@ -2,6 +2,9 @@
 
 Details: https://github.com/solnic/virtus/compare/v0.0.4...master
 
+* [BREAKING CHANGE] Moved Virtus.determine_type to Virtus::Attribute.determine_type (dkubb)
+* [general] Added backports as a development dependency (dkubb)
+
 === v0.0.4 2011-07-08
 
 * [BREAKING CHANGE] attributes hash has been replaced by a specialized class AttributeSet (dkubb)
