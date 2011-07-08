@@ -22,12 +22,11 @@ module Virtus
     #
     # @api semipublic
     def self.determine_type(class_or_name)
-      if class_or_name.kind_of?(Class)
-        if class_or_name < Attribute::Object
-          determine_type_from_attribute(class_or_name)
-        else
-          determine_type_from_primitive(class_or_name)
-        end
+      # first match on the Attribute singleton class first, then match
+      # any class, finally fallback to matching on the string
+      case class_or_name
+      when class << Attribute::Object; self end then determine_type_from_attribute(class_or_name)
+      when Class                                then determine_type_from_primitive(class_or_name)
       else
         determine_type_from_string(class_or_name.to_s)
       end
