@@ -168,7 +168,7 @@ module Virtus
     #
     # @api private
     def self.add_accepted_options(new_options)
-      accepted_options.concat(new_options.to_ary).uniq
+      accepted_options.concat(new_options.to_ary)
       self
     end
 
