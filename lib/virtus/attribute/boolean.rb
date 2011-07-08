@@ -46,7 +46,9 @@ module Virtus
 
       # Creates standard and boolean attribute reader methods
       #
-      # @return [NilClass]
+      # @param [Class] model
+      #
+      # @return [self]
       #
       # @api private
       def add_reader_method(model)
@@ -65,6 +67,8 @@ module Virtus
         RUBY
 
         model.send(reader_visibility, method_name)
+
+        self
       end
 
     end # class Boolean

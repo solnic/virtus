@@ -343,7 +343,7 @@ module Virtus
 
     # Creates an attribute reader method
     #
-    # @return [NilClass]
+    # @return [self]
     #
     # @api private
     def add_reader_method(model)
@@ -362,11 +362,13 @@ module Virtus
       RUBY
 
       model.send(reader_visibility, method_name)
+
+      self
     end
 
     # Creates an attribute writer method
     #
-    # @return [NilClass]
+    # @return [self]
     #
     # @api private
     def add_writer_method(model)
@@ -383,6 +385,8 @@ module Virtus
       RUBY
 
       model.send(writer_visibility, method_name)
+
+      self
     end
 
   private
