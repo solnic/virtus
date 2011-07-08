@@ -37,16 +37,57 @@ module Virtus
   def self.determine_type(class_or_name)
     if class_or_name.kind_of?(Class)
       if class_or_name < Attribute::Object
-        class_or_name
+        determine_type_from_attribute(class_or_name)
       else
-        Attribute.descendants.detect do |descendant|
-          class_or_name <= descendant.primitive
-        end
+        determine_type_from_primitive(class_or_name)
       end
-    elsif Attribute.const_defined?(name = class_or_name.to_s)
-      Attribute.const_get(name)
+    else
+      determine_type_from_string(class_or_name.to_s)
     end
   end
+
+  # Return the Attribute class given an Attribute descendant
+  #
+  # @param [Class<Attribute>] attribute
+  #
+  # @return [Class<Attribute>]
+  #
+  # @api private
+  def self.determine_type_from_attribute(attribute)
+    attribute
+  end
+
+  # Return the Attribute class given a primitive
+  #
+  # @param [Class] primitive
+  #
+  # @return [Class<Attribute>]
+  #
+  # @return [nil]
+  #   nil if the primitive does not map to an Attribute
+  #
+  # @api private
+  def self.determine_type_from_primitive(primitive)
+    Attribute.descendants.detect do |descendant|
+      primitive <= descendant.primitive
+    end
+  end
+
+  # Return the Attribute class given a string
+  #
+  # @param [String]
+  #
+  # @return [Class<Attribute>]
+  #
+  # @return [nil]
+  #   nil if the string is not a constant in the Attribute namespace
+  #
+  # @api private
+  def self.determine_type_from_string(string)
+    Attribute.const_get(string) if Attribute.const_defined?(string)
+  end
+
+  private_class_method :determine_type_from_attribute, :determine_type_from_primitive, :determine_type_from_string
 
 end # module Virtus
 
