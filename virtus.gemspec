@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
     "TODO"
   ]
   s.files = [
-    ".gitignore",
     ".rvmrc",
     ".travis.yml",
     "Gemfile",
@@ -113,7 +112,6 @@ Gem::Specification.new do |s|
   s.require_paths = [%q{lib}]
   s.rubygems_version = %q{1.8.5}
   s.summary = %q{Attributes for your plain ruby objects}
-  s.test_files = [%q{spec/integration/virtus/attributes/attribute/typecast_spec.rb}, %q{spec/integration/virtus/class_methods/attribute_spec.rb}, %q{spec/integration/virtus/class_methods/attributes_spec.rb}, %q{spec/integration/virtus/class_methods/const_missing_spec.rb}, %q{spec/rcov.opts}, %q{spec/shared/idempotent_method_behaviour.rb}, %q{spec/spec_helper.rb}, %q{spec/unit/shared/attribute.rb}, %q{spec/unit/shared/attribute/accept_options.rb}, %q{spec/unit/shared/attribute/accepted_options.rb}, %q{spec/unit/shared/attribute/complex.rb}, %q{spec/unit/shared/attribute/get.rb}, %q{spec/unit/shared/attribute/options.rb}, %q{spec/unit/shared/attribute/set.rb}, %q{spec/unit/virtus/attribute/array_spec.rb}, %q{spec/unit/virtus/attribute/attribute_spec.rb}, %q{spec/unit/virtus/attribute/boolean_spec.rb}, %q{spec/unit/virtus/attribute/class_methods/determine_type_spec.rb}, %q{spec/unit/virtus/attribute/date_spec.rb}, %q{spec/unit/virtus/attribute/date_time_spec.rb}, %q{spec/unit/virtus/attribute/decimal_spec.rb}, %q{spec/unit/virtus/attribute/float_spec.rb}, %q{spec/unit/virtus/attribute/hash_spec.rb}, %q{spec/unit/virtus/attribute/integer_spec.rb}, %q{spec/unit/virtus/attribute/numeric/class_methods/descendants_spec.rb}, %q{spec/unit/virtus/attribute/object/class_methods/descendants_spec.rb}, %q{spec/unit/virtus/attribute/string_spec.rb}, %q{spec/unit/virtus/attribute/time_spec.rb}, %q{spec/unit/virtus/attribute_set/append_spec.rb}, %q{spec/unit/virtus/attribute_set/each_spec.rb}, %q{spec/unit/virtus/attribute_set/element_reference_spec.rb}, %q{spec/unit/virtus/attribute_set/element_set_spec.rb}, %q{spec/unit/virtus/attribute_set/merge_spec.rb}, %q{spec/unit/virtus/attribute_set/parent_spec.rb}, %q{spec/unit/virtus/attribute_set/reset_spec.rb}, %q{spec/unit/virtus/class_methods/attribute_spec.rb}, %q{spec/unit/virtus/class_methods/new_spec.rb}, %q{spec/unit/virtus/descendants_tracker/descendants_spec.rb}, %q{spec/unit/virtus/descendants_tracker/inherited_spec.rb}, %q{spec/unit/virtus/instance_methods/attributes_spec.rb}, %q{spec/unit/virtus/instance_methods/element_reference_spec.rb}, %q{spec/unit/virtus/instance_methods/element_set_spec.rb}]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
