@@ -20,7 +20,7 @@ module Virtus
     # @return [nil]
     #   nil if the type cannot be determined by the class_or_name
     #
-    # @api semipublic
+    # @api public
     def self.determine_type(class_or_name)
       # first match on the Attribute singleton class first, then match
       # any class, finally fallback to matching on the string
@@ -192,7 +192,7 @@ module Virtus
     #
     # @return [TrueClass, FalseClass]
     #
-    # @api semipublic
+    # @api public
     def self.primitive?(value)
       value.kind_of?(primitive)
     end
@@ -268,7 +268,7 @@ module Virtus
     #
     # @return [TrueClass, FalseClass]
     #
-    # @api semipublic
+    # @api public
     def complex?
       @complex
     end

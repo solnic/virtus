@@ -28,7 +28,7 @@ module Virtus
       #
       # @return [TrueClass,FalseClass]
       #
-      # @api semipublic
+      # @api public
       def self.primitive?(value)
         value.equal?(true) || value.equal?(false)
       end
