@@ -43,6 +43,8 @@ module Virtus
       attribute
     end
 
+    private_class_method :determine_type_from_attribute
+
     # Return the Attribute class given a primitive
     #
     # @param [Class] primitive
@@ -56,6 +58,8 @@ module Virtus
     def self.determine_type_from_primitive(primitive)
       descendants.detect { |descendant| primitive <= descendant.primitive }
     end
+
+    private_class_method :determine_type_from_primitive
 
     # Return the Attribute class given a string
     #
@@ -71,7 +75,7 @@ module Virtus
       const_get(string) if const_defined?(string)
     end
 
-    private_class_method :determine_type_from_attribute, :determine_type_from_primitive, :determine_type_from_string
+    private_class_method :determine_type_from_string
 
     # Returns default options hash for a given attribute class
     #
