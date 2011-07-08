@@ -190,7 +190,7 @@ module Virtus
     # @example
     #   Virtus::Attribute::String.primitive?('String') # => true
     #
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     #
     # @api public
     def self.primitive?(value)
@@ -266,7 +266,7 @@ module Virtus
     #   Virtus::Attribute::String.complex? # => false
     #   Virtus::Attribute::Array.complex? # => true
     #
-    # @return [TrueClass, FalseClass]
+    # @return [Boolean]
     #
     # @api public
     def complex?

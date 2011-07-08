@@ -17,7 +17,7 @@ module Virtus
       #
       # @param [Integer, String]
       #
-      # @return [TrueClass, FalseClass]
+      # @return [Boolean]
       #
       # @api public
       def self.call(value)

@@ -26,7 +26,7 @@ module Virtus
       #   Virtus::Attribute::Boolean.primitive?(1)      # => false
       #   Virtus::Attribute::Boolean.primitive?('true') # => false
       #
-      # @return [TrueClass,FalseClass]
+      # @return [Boolean]
       #
       # @api public
       def self.primitive?(value)
@@ -37,7 +37,7 @@ module Virtus
       #
       # @see Virtus::Typecast::Boolean.call
       #
-      # @return [TrueClass,FalseClass]
+      # @return [Boolean]
       #
       # @api private
       def typecast_to_primitive(value)
