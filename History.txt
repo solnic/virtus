@@ -1,3 +1,7 @@
+=== v0.0.5 to-be-released
+
+Details: https://github.com/solnic/virtus/compare/v0.0.4...master
+
 === v0.0.4 2011-07-08
 
 * [BREAKING CHANGE] attributes hash has been replaced by a specialized class AttributeSet (dkubb)
