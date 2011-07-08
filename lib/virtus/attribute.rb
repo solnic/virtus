@@ -122,9 +122,9 @@ module Virtus
     #
     # @api public
     def self.accept_options(*new_options)
-      concat_options(new_options)
+      add_accepted_options(new_options)
       new_options.each { |option| add_option_method(option) }
-      descendants.each { |descendant| descendant.concat_options(new_options) }
+      descendants.each { |descendant| descendant.add_accepted_options(new_options) }
       self
     end
 
@@ -167,7 +167,7 @@ module Virtus
     # @return [self]
     #
     # @api private
-    def self.concat_options(new_options)
+    def self.add_accepted_options(new_options)
       accepted_options.concat(new_options.to_ary).uniq
       self
     end
@@ -181,7 +181,7 @@ module Virtus
     # @api private
     def self.inherited(descendant)
       super
-      descendant.concat_options(accepted_options).set_options(options)
+      descendant.add_accepted_options(accepted_options).set_options(options)
       self
     end
 
