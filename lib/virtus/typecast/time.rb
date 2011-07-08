@@ -68,15 +68,21 @@ module Virtus
         call(value, :to_datetime)
       end
 
-    private
-
+      # Coerce the value into a Date, Time or DateTime object
+      #
+      # @param [#to_hash, #to_s] value
+      #
+      # @param [Symbol] method
+      #
+      # @return [Object]
+      #
       # @api private
       def self.call(value, method)
         return value.send(method) if value.respond_to?(method)
 
         begin
-          if value.kind_of?(::Hash)
-            from_hash(value, method)
+          if value.respond_to?(:to_hash)
+            from_hash(value.to_hash, method)
           else
             from_string(value.to_s, method)
           end
@@ -85,70 +91,90 @@ module Virtus
         end
       end
 
+      private_class_method :call
+
+      # Coerce the string into a Date, Time or DateTime object
+      #
+      # @param [String] value
+      #
+      # @param [Symbol] method
+      #
+      # @return [Object]
+      #
       # @api private
       def self.from_string(value, method)
-        METHOD_TO_CLASS[method].parse(value.to_s)
+        METHOD_TO_CLASS[method].parse(value)
       end
 
+      private_class_method :from_string
+
+      # Coerce the Hash into a Date, Time or DateTime object
+      #
+      # @param [Hash] value
+      #
+      # @param [Symbol] method
+      #
+      # @return [Object]
+      #
       # @api private
       def self.from_hash(value, method)
         send("hash_#{method}", value)
       end
 
+      private_class_method :from_hash
+
       # Creates a Time instance from a Hash
       #
       # Valid keys are: :year, :month, :day, :hour, :min, :sec
       #
-      # @param [Hash, #to_mash] value
-      #   value to be typecast
+      # @param [Hash] value
       #
       # @return [Time]
-      #   Time constructed from hash
       #
       # @api private
       def self.hash_to_time(value)
         ::Time.local(*extract(value))
       end
 
+      private_class_method :hash_to_time
+
       # Creates a Date instance from a Hash
       #
       # Valid keys are: :year, :month, :day, :hour
       #
-      # @param [Hash, #to_mash] value
-      #   value to be typecast
+      # @param [Hash] value
       #
       # @return [Date]
-      #   Date constructed from hash
       #
       # @api private
       def self.hash_to_date(value)
         ::Date.new(*extract(value).first(3))
       end
 
+      private_class_method :hash_to_date
+
       # Creates a DateTime instance from a Hash
       #
       # Valid keys are: :year, :month, :day, :hour, :min, :sec
       #
-      # @param [Hash, #to_mash] value
-      #   value to be typecast
+      # @param [Hash] value
       #
       # @return [DateTime]
-      #   DateTime constructed from hash
       #
       # @api private
       def self.hash_to_datetime(value)
         ::DateTime.new(*extract(value))
       end
 
-      # Extracts the given args from the hash
+      private_class_method :hash_to_datetime
+
+      # Extracts the given args from a Hash
       #
       # If a value does not exist, it uses the value of Time.now
       #
-      # @param [Hash, #to_mash] value
-      #   value to extract time args from
+      # @param [Hash] value
       #
       # @return [Array]
-      #   Extracted values
       #
       # @api private
       def self.extract(value)
@@ -158,6 +184,8 @@ module Virtus
           Numeric.to_i(value.fetch(segment, now.send(segment)))
         end
       end
+
+      private_class_method :extract
 
     end # class Time
   end # module Typecast

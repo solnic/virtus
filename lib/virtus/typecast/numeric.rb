@@ -55,8 +55,6 @@ module Virtus
         end
       end
 
-    private
-
       # Match numeric string
       #
       # @param [#to_str, Numeric] value
@@ -81,6 +79,8 @@ module Virtus
           value
         end
       end
+
+      private_class_method :call
 
     end # class Numeric
   end # module Typecast
