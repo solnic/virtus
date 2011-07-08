@@ -28,7 +28,7 @@ module Virtus
     #
     # @api public
     def attribute(name, type, options = {})
-      attribute = Virtus.determine_type(type).new(name, options)
+      attribute = Attribute.determine_type(type).new(name, options)
 
       attribute.add_reader_method(self)
       attribute.add_writer_method(self)
@@ -79,7 +79,7 @@ module Virtus
     #
     # @api private
     def const_missing(name)
-      Virtus.determine_type(name) || super
+      Attribute.determine_type(name) || super
     end
 
   end # module ClassMethods

@@ -6,6 +6,44 @@ module Virtus
   class Attribute
     extend DescendantsTracker
 
+    # Returns a Virtus::Attribute::Object descendant based on a name or class
+    #
+    # @example
+    #   Attribute.determine_type('String') # => Virtus::Attribute::String
+    #
+    # @param [Class, #to_s] class_or_name
+    #   name of a class or a class itself
+    #
+    # @return [Class]
+    #   one of the Virtus::Attribute::Object descendants
+    #
+    # @return [nil]
+    #   nil if the type cannot be determined by the class_or_name
+    #
+    # @api semipublic
+    def self.determine_type(class_or_name)
+      if class_or_name.kind_of?(Class)
+        if class_or_name < Attribute::Object
+          determine_type_from_attribute(class_or_name)
+        else
+          determine_type_from_primitive(class_or_name)
+        end
+      else
+        determine_type_from_string(class_or_name.to_s)
+      end
+    end
+
+    # Return the Attribute class given an Attribute descendant
+    #
+    # @param [Class<Attribute>] attribute
+    #
+    # @return [Class<Attribute>]
+    #
+    # @api private
+    def self.determine_type_from_attribute(attribute)
+      attribute
+    end
+
     # Return the Attribute class given a primitive
     #
     # @param [Class] primitive
@@ -16,7 +54,7 @@ module Virtus
     #   nil if the type cannot be determined by the primitive
     #
     # @api private
-    def self.from_primitive(primitive)
+    def self.determine_type_from_primitive(primitive)
       descendants.detect { |descendant| primitive <= descendant.primitive }
     end
 
@@ -30,9 +68,11 @@ module Virtus
     #   nil if the type cannot be determined by the string
     #
     # @api private
-    def self.from_string(string)
+    def self.determine_type_from_string(string)
       const_get(string) if const_defined?(string)
     end
+
+    private_class_method :determine_type_from_attribute, :determine_type_from_primitive, :determine_type_from_string
 
     # Returns default options hash for a given attribute class
     #
