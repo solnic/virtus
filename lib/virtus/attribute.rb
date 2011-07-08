@@ -125,7 +125,7 @@ module Virtus
       concat_options(new_options)
       new_options.each { |option| add_option_method(option) }
       descendants.each { |descendant| descendant.concat_options(new_options) }
-      accepted_options
+      self
     end
 
     # Adds a reader/writer method for the give option name
@@ -149,14 +149,14 @@ module Virtus
     # @param [#to_hash] new_options
     #   options to be set
     #
-    # @return [Hash]
-    #   default options set on the attribute class
+    # @return [self]
     #
     # @api private
     def self.set_options(new_options)
       new_options.to_hash.each do |option_name, option_value|
         send(option_name, option_value)
       end
+      self
     end
 
     # Adds new options that an attribute class can accept
@@ -164,12 +164,12 @@ module Virtus
     # @param [#to_ary] new_options
     #   new options to be added
     #
-    # @return [Array]
-    #   all accepted options
+    # @return [self]
     #
     # @api private
     def self.concat_options(new_options)
       accepted_options.concat(new_options.to_ary).uniq
+      self
     end
 
     # Adds descendant to descendants array and inherits default options
@@ -181,8 +181,7 @@ module Virtus
     # @api private
     def self.inherited(descendant)
       super
-      descendant.concat_options(accepted_options)
-      descendant.set_options(options)
+      descendant.concat_options(accepted_options).set_options(options)
       self
     end
 
