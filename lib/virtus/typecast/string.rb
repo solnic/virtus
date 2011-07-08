@@ -7,8 +7,8 @@ module Virtus
       # Typecast value to a string
       #
       # @example
-      #   Virtus::Typecast::String.call(1)  # => '1'
-      #   Virtus::Typecast::String.call([]) # => '[]'
+      #   Virtus::Typecast::String.call(1)   # => "1"
+      #   Virtus::Typecast::String.call([])  # => "[]"
       #
       # @param [Object] value
       #

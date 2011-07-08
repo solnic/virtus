@@ -9,7 +9,7 @@ module Virtus
     # Returns a Virtus::Attribute::Object descendant based on a name or class
     #
     # @example
-    #   Attribute.determine_type('String') # => Virtus::Attribute::String
+    #   Attribute.determine_type('String')  # => Virtus::Attribute::String
     #
     # @param [Class, #to_s] class_or_name
     #   name of a class or a class itself
@@ -188,7 +188,7 @@ module Virtus
     # Returns if the given value's class is an attribute's primitive
     #
     # @example
-    #   Virtus::Attribute::String.primitive?('String') # => true
+    #   Virtus::Attribute::String.primitive?('String')  # => true
     #
     # @return [Boolean]
     #
@@ -200,7 +200,7 @@ module Virtus
     # Returns name of the attribute
     #
     # @example
-    #   User.attributes[:age].name # => :age
+    #   User.attributes[:age].name  # => :age
     #
     # @return [Symbol]
     #
@@ -263,8 +263,8 @@ module Virtus
     # Returns if an attribute is a complex one
     #
     # @example
-    #   Virtus::Attribute::String.complex? # => false
-    #   Virtus::Attribute::Array.complex? # => true
+    #   Virtus::Attribute::String.complex?  # => false
+    #   Virtus::Attribute::Array.complex?   # => true
     #
     # @return [Boolean]
     #

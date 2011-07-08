@@ -13,7 +13,7 @@ module Virtus
     #   end
     #
     #   post = Post.new(:published => false)
-    #   post.published? # => false
+    #   post.published?  # => false
     #
     class Boolean < Object
       primitive TrueClass
@@ -21,10 +21,10 @@ module Virtus
       # Returns if the given value is either true or false
       #
       # @example
-      #   Virtus::Attribute::Boolean.primitive?(true)   # => true
-      #   Virtus::Attribute::Boolean.primitive?(false)  # => true
-      #   Virtus::Attribute::Boolean.primitive?(1)      # => false
-      #   Virtus::Attribute::Boolean.primitive?('true') # => false
+      #   Virtus::Attribute::Boolean.primitive?(true)    # => true
+      #   Virtus::Attribute::Boolean.primitive?(false)   # => true
+      #   Virtus::Attribute::Boolean.primitive?(1)       # => false
+      #   Virtus::Attribute::Boolean.primitive?('true')  # => false
       #
       # @return [Boolean]
       #

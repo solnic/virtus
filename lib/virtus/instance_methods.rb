@@ -25,7 +25,7 @@ module Virtus
     #   end
     #
     #   user = User.new(:name => 'John')
-    #   user[:name] # => "john"
+    #   user[:name]  # => "John"
     #
     # @param [Symbol] name
     #   a name of an attribute
@@ -48,8 +48,8 @@ module Virtus
     #   end
     #
     #   user = User.new
-    #   user[:name] = "john" # => "john"
-    #   user.name # => "john"
+    #   user[:name] = "John"  # => "John"
+    #   user.name             # => "John"
     #
     # @param [Symbol] name
     #   a name of an attribute
@@ -76,7 +76,7 @@ module Virtus
     #   end
     #
     #   user = User.new(:name => 'John', :age => 28)
-    #   user.attributes # => { :name => 'John', :age => 28 }
+    #   user.attributes  # => { :name => 'John', :age => 28 }
     #
     # @return [Hash]
     #   the attributes

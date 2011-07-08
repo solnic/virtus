@@ -25,20 +25,20 @@ attributes that require typecasting and/or validations.
     end
 
     # setting attributes in the constructor
-    user = User.new(:age => 28)
+    user = User.new(:name => 'Piotr', :age => 28)
 
     # attribute readers
-    user.name # => "Piotr"
+    user.name  # => "Piotr"
 
     # hash of attributes
-    user.attributes # => { :name => "Piotr" }
+    user.attributes  # => { :name => "Piotr" }
 
     # automatic typecasting
     user.age = '28'
-    user.age # => 28
+    user.age  # => 28
 
     user.birthday = 'November 18th, 1983'
-    user.birthday # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+    user.birthday  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 
 ## Custom Attributes
 
@@ -65,8 +65,8 @@ attributes that require typecasting and/or validations.
 
     user = MyApp::User.new
 
-    user.info = '{"email" : "john@domain.com" }'
-    user.info # => {"email"=>"john@domain.com"}
+    user.info = '{"email":"john@domain.com"}'
+    user.info  # => {"email"=>"john@domain.com"}
 
 ## Note on Patches/Pull Requests
 
