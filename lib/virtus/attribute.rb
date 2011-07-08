@@ -118,15 +118,9 @@ module Virtus
     #
     # @api public
     def self.accept_options(*new_options)
-      # add new options to the array
       concat_options(new_options)
-
-      # create methods for each new option
       new_options.each { |option| add_option_method(option) }
-
-      # add new options to all descendants
       descendants.each { |descendant| descendant.concat_options(new_options) }
-
       accepted_options
     end
 
