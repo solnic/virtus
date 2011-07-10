@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-07-08}
+  s.date = %q{2011-07-10}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -91,8 +91,8 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/attribute_set/reset_spec.rb",
     "spec/unit/virtus/class_methods/attribute_spec.rb",
     "spec/unit/virtus/class_methods/new_spec.rb",
+    "spec/unit/virtus/descendants_tracker/add_descendant_spec.rb",
     "spec/unit/virtus/descendants_tracker/descendants_spec.rb",
-    "spec/unit/virtus/descendants_tracker/inherited_spec.rb",
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
     "spec/unit/virtus/instance_methods/element_reference_spec.rb",
     "spec/unit/virtus/instance_methods/element_set_spec.rb",

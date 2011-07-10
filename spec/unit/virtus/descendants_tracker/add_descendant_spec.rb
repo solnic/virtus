@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus::DescendantsTracker, '#inherited' do
-  subject { object.inherited(descendant) }
+describe Virtus::DescendantsTracker, '#add_descendant' do
+  subject { object.add_descendant(descendant) }
 
   let(:described_class) { Class.new { extend Virtus::DescendantsTracker } }
   let(:object)          { Class.new(described_class)                      }
