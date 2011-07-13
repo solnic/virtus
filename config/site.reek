@@ -21,7 +21,7 @@ UncommunicativeMethodName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 LongParameterList:
-  max_params: 3  # TODO: decrease max_params to 2
+  max_params: 3
   exclude: []
   enabled: true
   overrides: {}
