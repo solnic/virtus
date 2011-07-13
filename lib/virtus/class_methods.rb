@@ -3,6 +3,20 @@ module Virtus
   # Class methods that are added when you include Virtus
   module ClassMethods
 
+    # Hook called when class is inherited
+    #
+    # @param [Class] descendant
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def self.extended(descendant)
+      super
+      descendant.extend(DescendantsTracker)
+    end
+
+    private_class_method :extended
+
     # Defines an attribute on an object's class
     #
     # @example
