@@ -123,7 +123,7 @@ module Virtus
     # @api public
     def self.accept_options(*new_options)
       add_accepted_options(new_options)
-      new_options.each { |option| add_option_method(option) }
+      new_options.each { |option| define_option_method(option) }
       descendants.each { |descendant| descendant.add_accepted_options(new_options) }
       self
     end
@@ -133,7 +133,7 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def self.add_option_method(option)
+    def self.define_option_method(option)
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def self.#{option}(value = Undefined)           # def self.primitive(value = Undefined)
           return @#{option} if value.equal?(Undefined)  #   return @primitive if value.equal?(Undefined)
@@ -142,7 +142,7 @@ module Virtus
       RUBY
     end
 
-    private_class_method :add_option_method
+    private_class_method :define_option_method
 
     # Sets default options
     #
