@@ -13,6 +13,7 @@ module Virtus
     def self.extended(descendant)
       super
       descendant.extend(DescendantsTracker)
+      descendant.const_set(:AttributeMethods, Module.new)
     end
 
     private_class_method :extended
@@ -46,6 +47,8 @@ module Virtus
 
       attribute.define_reader_method(self)
       attribute.define_writer_method(self)
+
+      include self::AttributeMethods
 
       attributes << attribute
       descendants.each { |descendant| descendant.attributes.reset }
