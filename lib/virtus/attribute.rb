@@ -346,7 +346,7 @@ module Virtus
     # @return [self]
     #
     # @api private
-    def add_reader_method(model)
+    def define_reader_method(model)
       instance_variable_name = self.instance_variable_name
       method_name            = name
 
@@ -371,7 +371,7 @@ module Virtus
     # @return [self]
     #
     # @api private
-    def add_writer_method(model)
+    def define_writer_method(model)
       name        = self.name
       method_name = "#{name}="
 

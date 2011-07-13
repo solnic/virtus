@@ -51,7 +51,7 @@ module Virtus
       # @return [self]
       #
       # @api private
-      def add_reader_method(model)
+      def define_reader_method(model)
         super
 
         name        = self.name

@@ -30,8 +30,8 @@ module Virtus
     def attribute(name, type, options = {})
       attribute = Attribute.determine_type(type).new(name, options)
 
-      attribute.add_reader_method(self)
-      attribute.add_writer_method(self)
+      attribute.define_reader_method(self)
+      attribute.define_writer_method(self)
 
       attributes << attribute
       descendants.each { |descendant| descendant.attributes.reset }
