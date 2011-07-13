@@ -378,8 +378,8 @@ module Virtus
     # @api private
     def set_visibility
       default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
-      @reader_visibility = @options.fetch(:reader, default_accessor)
-      @writer_visibility = @options.fetch(:writer, default_accessor)
+      @reader_visibility = @options.fetch(:reader,   default_accessor)
+      @writer_visibility = @options.fetch(:writer,   default_accessor)
     end
 
   end # class Attribute
