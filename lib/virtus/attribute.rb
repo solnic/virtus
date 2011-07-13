@@ -344,6 +344,8 @@ module Virtus
 
     # Creates an attribute reader method
     #
+    # @param [Class] model
+    #
     # @return [self]
     #
     # @api private
@@ -368,6 +370,8 @@ module Virtus
     end
 
     # Creates an attribute writer method
+    #
+    # @param [Class] model
     #
     # @return [self]
     #
