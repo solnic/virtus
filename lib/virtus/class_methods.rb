@@ -3,7 +3,7 @@ module Virtus
   # Class methods that are added when you include Virtus
   module ClassMethods
 
-    # Hook called when class is inherited
+    # Hook called when module is extended
     #
     # @param [Class] descendant
     #
