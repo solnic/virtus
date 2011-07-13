@@ -11,7 +11,7 @@ LargeClass:
   max_methods: 11
   exclude: []
   enabled: true
-  max_instance_variables: 8
+  max_instance_variables: 7
 UncommunicativeMethodName:
   accept: []
   exclude: []
@@ -50,7 +50,7 @@ NestedIterators:
   enabled: true
   max_allowed_nesting: 1
 LongMethod:
-  max_statements: 6
+  max_statements: 7
   exclude: []
   enabled: true
 Duplication:
