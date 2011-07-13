@@ -13,7 +13,7 @@ module Virtus
   #
   # @param [Class] descendant
   #
-  # @return [Class]
+  # @return [undefined]
   #
   # @api private
   def self.included(descendant)
