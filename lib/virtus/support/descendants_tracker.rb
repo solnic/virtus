@@ -32,7 +32,7 @@ module Virtus
     #
     # @param [Class] descendant
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def inherited(descendant)

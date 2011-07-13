@@ -11,6 +11,7 @@ module Virtus
     #
     # @api private
     def self.extended(descendant)
+      super
       descendant.extend(DescendantsTracker)
       descendant.const_set(:AttributeMethods, Module.new)
     end

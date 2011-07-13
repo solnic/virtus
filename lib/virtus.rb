@@ -13,13 +13,16 @@ module Virtus
   #
   # @param [Class] descendant
   #
-  # @return [Class]
+  # @return [undefined]
   #
   # @api private
   def self.included(descendant)
+    super
     descendant.extend(ClassMethods)
     descendant.send(:include, InstanceMethods)
   end
+
+  private_class_method :included
 
 end # module Virtus
 
