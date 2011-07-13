@@ -153,9 +153,7 @@ module Virtus
     #
     # @api private
     def self.set_options(new_options)
-      new_options.to_hash.each do |option_name, option_value|
-        send(option_name, option_value)
-      end
+      new_options.to_hash.each { |pair| send(*pair) }
       self
     end
 
