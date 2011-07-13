@@ -11,7 +11,7 @@ LargeClass:
   max_methods: 11
   exclude: []
   enabled: true
-  max_instance_variables: 8
+  max_instance_variables: 7
 UncommunicativeMethodName:
   accept: []
   exclude: []
