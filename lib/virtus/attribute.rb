@@ -176,14 +176,15 @@ module Virtus
     #
     # @param [Class] descendant
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def self.inherited(descendant)
       super
       descendant.add_accepted_options(accepted_options).set_options(options)
-      self
     end
+
+    private_class_method :inherited
 
     # Returns if the given value's class is an attribute's primitive
     #

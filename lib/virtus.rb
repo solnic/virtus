@@ -22,6 +22,8 @@ module Virtus
     descendant.send(:include, InstanceMethods)
   end
 
+  private_class_method :included
+
 end # module Virtus
 
 require 'virtus/support/descendants_tracker'
