@@ -343,40 +343,34 @@ module Virtus
 
     # Creates an attribute reader method
     #
+    # @param [Module] mod
+    #
     # @return [self]
     #
     # @api private
-    def add_reader_method(model)
+    def add_reader_method(mod)
       reader_method_name = name
-      reader_visibility  = self.reader_visibility
       attribute          = self
 
-      model::AttributeMethods.class_eval do
-        define_method(reader_method_name) { attribute.get(self) }
-        send(reader_visibility, reader_method_name)
-      end
-
-      model.class_eval { include self::AttributeMethods }
+      mod.send(:define_method,    reader_method_name) { attribute.get(self) }
+      mod.send(reader_visibility, reader_method_name)
 
       self
     end
 
     # Creates an attribute writer method
     #
+    # @param [Module] mod
+    #
     # @return [self]
     #
     # @api private
-    def add_writer_method(model)
+    def add_writer_method(mod)
       writer_method_name = "#{name}="
-      writer_visibility  = self.writer_visibility
       attribute          = self
 
-      model::AttributeMethods.class_eval do
-        define_method(writer_method_name) { |value| attribute.set(self, value) }
-        send(writer_visibility, writer_method_name)
-      end
-
-      model.class_eval { include self::AttributeMethods }
+      mod.send(:define_method, writer_method_name) { |value| attribute.set(self, value) }
+      mod.send(writer_visibility, writer_method_name)
 
       self
     end

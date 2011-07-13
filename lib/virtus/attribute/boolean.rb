@@ -46,24 +46,19 @@ module Virtus
 
       # Creates standard and boolean attribute reader methods
       #
-      # @param [Class] model
+      # @param [Module] mod
       #
       # @return [self]
       #
       # @api private
-      def add_reader_method(model)
+      def add_reader_method(mod)
         super
 
         reader_method_name = "#{name}?"
-        reader_visibility  = self.reader_visibility
         attribute          = self
 
-        model::AttributeMethods.class_eval do
-          define_method(reader_method_name) { attribute.get(self) }
-          send(reader_visibility, reader_method_name)
-        end
-
-        model.class_eval { include self::AttributeMethods }
+        mod.send(:define_method,    reader_method_name) { attribute.get(self) }
+        mod.send(reader_visibility, reader_method_name)
 
         self
       end

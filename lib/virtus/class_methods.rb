@@ -3,6 +3,20 @@ module Virtus
   # Class methods that are added when you include Virtus
   module ClassMethods
 
+    # Hook called when module is extended
+    #
+    # @param [Class] descendant
+    #
+    # @return [self]
+    #
+    # @api private
+    def self.extended(descendant)
+      descendant.extend(DescendantsTracker)
+      descendant.const_set(:AttributeMethods, Module.new)
+    end
+
+    private_class_method :extended
+
     # Defines an attribute on an object's class
     #
     # @example
@@ -32,6 +46,8 @@ module Virtus
 
       attribute.add_reader_method(self)
       attribute.add_writer_method(self)
+
+      include self::AttributeMethods
 
       attributes << attribute
       descendants.each { |descendant| descendant.attributes.reset }
