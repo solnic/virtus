@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Virtus::Attribute, '#typecast' do
+describe Virtus::Attribute, '#set' do
   let(:attribute_class) do
     Class.new(Virtus::Attribute::Integer) do
-      def typecast(value)
-        super + 1
+      def set(instance, value)
+        super(instance, typecast(value) + 1) unless value.nil?
       end
     end
   end
@@ -23,14 +23,14 @@ describe Virtus::Attribute, '#typecast' do
 
   context 'when overridden' do
     let(:input_value)  { 1 }
-    let(:output_value) { 2   }
+    let(:output_value) { 2 }
 
     before do
       object.count = input_value
     end
 
-    it "peforms custom typecasting" do
-      object.count.should eql(output_value)
-    end
+    subject { object }
+
+    its(:count) { should eql(output_value) }
   end
 end

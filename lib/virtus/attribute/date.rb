@@ -29,7 +29,7 @@ module Virtus
       # @return [Date]
       #
       # @api private
-      def typecast_to_primitive(value)
+      def typecast(value)
         Typecast::Time.to_date(value)
       end
 

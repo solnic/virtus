@@ -29,7 +29,7 @@ module Virtus
       # @return [Float]
       #
       # @api private
-      def typecast_to_primitive(value)
+      def typecast(value)
         Typecast::Numeric.to_f(value)
       end
 

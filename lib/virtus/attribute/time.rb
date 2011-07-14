@@ -35,7 +35,7 @@ module Virtus
       # @return [Time]
       #
       # @api private
-      def typecast_to_primitive(value)
+      def typecast(value)
         Typecast::Time.to_time(value)
       end
 

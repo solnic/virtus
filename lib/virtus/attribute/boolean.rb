@@ -39,7 +39,7 @@ module Virtus
       # @return [Boolean]
       #
       # @api private
-      def typecast_to_primitive(value)
+      def typecast(value)
         Typecast::Boolean.to_boolean(value)
       end
 
