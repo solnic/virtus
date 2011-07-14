@@ -20,6 +20,6 @@ module Virtus
         value == 1
       end
 
-    end # class Integer
+    end # class Fixnum
   end # module Typecast
 end # module Virtus

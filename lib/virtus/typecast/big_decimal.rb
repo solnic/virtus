@@ -15,6 +15,6 @@ module Virtus
         value.to_f
       end
 
-    end # class Integer
+    end # class BigDecimal
   end # module Typecast
 end # module Virtus

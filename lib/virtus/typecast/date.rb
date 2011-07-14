@@ -19,6 +19,6 @@ module Virtus
         value.to_time
       end
 
-    end # class Integer
+    end # class Date
   end # module Typecast
 end # module Virtus

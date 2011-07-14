@@ -15,6 +15,6 @@ module Virtus
         value.to_s.to_d
       end
 
-    end # class Integer
+    end # class Float
   end # module Typecast
 end # module Virtus

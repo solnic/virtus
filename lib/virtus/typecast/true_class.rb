@@ -5,6 +5,6 @@ module Virtus
     #
     class TrueClass < Base
 
-    end # class Base
+    end # class TrueClass
   end # module Typecast
 end # module Virtus

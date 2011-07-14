@@ -10,6 +10,6 @@ module Virtus
         value.to_s
       end
 
-    end # class Integer
+    end # class Symbol
   end # module Typecast
 end # module Virtus

@@ -65,6 +65,6 @@ module Virtus
         end
       end
 
-    end # class Integer
+    end # class Hash
   end # module Typecast
 end # module Virtus

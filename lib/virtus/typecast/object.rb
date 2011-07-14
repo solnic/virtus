@@ -5,6 +5,6 @@ module Virtus
     #
     class Object < Base
 
-    end # class Integer
+    end # class Object
   end # module Typecast
 end # module Virtus
