@@ -24,15 +24,7 @@ module Virtus
     #
     class DateTime < Object
       primitive ::DateTime
-
-      # @see Virtus::Typecast::Time.to_datetime
-      #
-      # @return [DateTime]
-      #
-      # @api private
-      def typecast(value)
-        Typecast::Time.to_datetime(value)
-      end
+      typecast_method :to_datetime
 
     end # class DateTim
   end # class Attribute

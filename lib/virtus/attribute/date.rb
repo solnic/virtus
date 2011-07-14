@@ -23,15 +23,7 @@ module Virtus
     #
     class Date < Object
       primitive ::Date
-
-      # @see Virtus::Typecast::Time.to_date
-      #
-      # @return [Date]
-      #
-      # @api private
-      def typecast(value)
-        Typecast::Time.to_date(value)
-      end
+      typecast_method :to_date
 
     end # class Date
   end # class Attribute

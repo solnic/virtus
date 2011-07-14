@@ -1,9 +1,9 @@
 module Virtus
   module Typecast
 
-    # Time
+    # Date
     #
-    class Time < Base
+    class Date
 
       # @api public
       def self.to_datetime(value)
@@ -15,14 +15,10 @@ module Virtus
       end
 
       # @api public
-      def self.to_date(value)
-        if value.respond_to?(:to_date)
-          value.to_date
-        else
-          String.to_date(value.to_s)
-        end
+      def self.to_time(value)
+        value.to_time
       end
 
-    end # class Time
+    end # class Integer
   end # module Typecast
 end # module Virtus

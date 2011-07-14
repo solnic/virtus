@@ -1,22 +1,110 @@
 module Virtus
   module Typecast
 
-    # Typecast any object to a string
+    # String
+    #
     class String
+      TRUE_VALUES  = %w[ 1 t true  ].freeze
+      FALSE_VALUES = %w[ 0 f false ].freeze
+      BOOLEAN_MAP  = Hash[ TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
 
-      # Typecast value to a string
+      NUMERIC_REGEXP = /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/.freeze
+
+      # @api public
+      def self.to_time(value)
+        ::Time.parse(value)
+      rescue ArgumentError
+        value
+      end
+
+      # @api public
+      def self.to_date(value)
+        ::Date.parse(value)
+      rescue ArgumentError
+        value
+      end
+
+      # @api public
+      def self.to_datetime(value)
+        ::DateTime.parse(value)
+      rescue ArgumentError
+        value
+      end
+
+      # Typecast value to TrueClass or FalseClass
       #
       # @example
-      #   Virtus::Typecast::String.call(1)   # => "1"
-      #   Virtus::Typecast::String.call([])  # => "[]"
+      #   Virtus::Typecast::Boolean.call('T')  # => true
+      #   Virtus::Typecast::Boolean.call('F')  # => false
+      #
+      # @param [#to_s]
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def self.to_boolean(value)
+        BOOLEAN_MAP.fetch(value.to_s.downcase, value)
+      end
+
+      # Typecast value to integer
+      #
+      # @example
+      #   Virtus::Typecast::String.to_i('1')  # => 1
       #
       # @param [Object] value
       #
-      # @return [String]
+      # @return [Integer]
       #
       # @api public
-      def self.to_s(value)
-        value.to_s
+      def self.to_i(value)
+        self.to_numeric(value, :to_i)
+      end
+
+      # Typecast value to float
+      #
+      # @example
+      #   Virtus::Typecast::Numeric.to_f('1.2')  # => 1.2
+      #
+      # @param [Object] value
+      #
+      # @return [Float]
+      #
+      # @api public
+      def self.to_f(value)
+        self.to_numeric(value, :to_f)
+      end
+
+      # Typecast value to decimal
+      #
+      # @example
+      #   Virtus::Typecast::Numeric.to_d('1.2')  # => #<BigDecimal:b72157d4,'0.12E1',8(8)>
+      #
+      # @param [Object] value
+      #
+      # @return [BigDecimal]
+      #
+      # @api public
+      def self.to_d(value)
+        self.to_numeric(value, :to_d)
+      end
+
+      # Match numeric string
+      #
+      # @param [String] value
+      #   value to typecast
+      # @param [Symbol] method
+      #   method to typecast with
+      #
+      # @return [Numeric]
+      #   number if matched, value if no match
+      #
+      # @api private
+      def self.to_numeric(value, method)
+        if value =~ NUMERIC_REGEXP
+          $1.send(method)
+        else
+          value
+        end
       end
 
     end # class String

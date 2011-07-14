@@ -14,6 +14,7 @@ module Virtus
     #
     class Array < Object
       primitive ::Array
+      typecast_method :to_array
       complex   true
     end # class Array
   end # class Attribute

@@ -16,6 +16,7 @@ module Virtus
     #
     class Boolean < Object
       primitive TrueClass
+      typecast_method :to_boolean
 
       # Returns if the given value is either true or false
       #
@@ -30,17 +31,6 @@ module Virtus
       # @api public
       def self.primitive?(value)
         value.equal?(true) || value.equal?(false)
-      end
-
-      # Coerce value into true or false
-      #
-      # @see Virtus::Typecast::Boolean.call
-      #
-      # @return [Boolean]
-      #
-      # @api private
-      def typecast(value)
-        Typecast::Boolean.to_boolean(value)
       end
 
       # Creates standard and boolean attribute reader methods

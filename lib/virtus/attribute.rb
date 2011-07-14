@@ -236,9 +236,16 @@ module Virtus
     # @api private
     attr_reader :writer_visibility
 
+    # Returns method name that should be used for typecasting
+    #
+    # @return [Symbol]
+    #
+    # @api private
+    attr_reader :typecast_method
+
     DEFAULT_ACCESSOR = :public
 
-    OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer ].freeze
+    OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer, :typecast_method ].freeze
 
     accept_options *OPTIONS
 
@@ -258,6 +265,7 @@ module Virtus
       @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
+      @typecast_method        = @options.fetch(:typecast_method)
       @complex                = @options.fetch(:complex, false)
 
       set_visibility
@@ -286,7 +294,7 @@ module Virtus
     #
     # @api private
     def typecast(value)
-      value
+      Typecast.const_get(value.class.name).send(typecast_method, value)
     end
 
     # Returns value of an attribute for the given instance

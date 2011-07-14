@@ -23,15 +23,7 @@ module Virtus
     #
     class Float < Numeric
       primitive ::Float
-
-      # @see Virtus::Typecast::Numeric.to_f
-      #
-      # @return [Float]
-      #
-      # @api private
-      def typecast(value)
-        Typecast::Numeric.to_f(value)
-      end
+      typecast_method :to_f
 
     end # class Float
   end # class Attribute

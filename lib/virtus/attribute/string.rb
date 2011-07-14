@@ -17,15 +17,7 @@ module Virtus
     #
     class String < Object
       primitive ::String
-
-      # @see Virtus::Typecast::String.call
-      #
-      # @return [String]
-      #
-      # @api private
-      def typecast(value)
-        Virtus::Typecast::String.to_s(value)
-      end
+      typecast_method :to_string
 
     end # class String
   end # class Attribute

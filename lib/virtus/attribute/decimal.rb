@@ -14,15 +14,7 @@ module Virtus
     #
     class Decimal < Numeric
       primitive ::BigDecimal
-
-      # @see Virtus::Typecast::Numeric.to_d
-      #
-      # @return [BigDecimal]
-      #
-      # @api private
-      def typecast(value)
-        Typecast::Numeric.to_d(value)
-      end
+      typecast_method :to_d
 
     end # class Decimal
   end # class Attribute

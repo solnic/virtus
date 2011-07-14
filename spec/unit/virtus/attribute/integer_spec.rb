@@ -87,7 +87,7 @@ describe Virtus::Attribute::Integer do
       it { should eql(-24) }
     end
 
-    [ Object.new, true, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
+    [ Object.new, true, false, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
       context "does not typecast non-numeric value #{non_num_value.inspect}" do
         let(:value) { non_num_value }
         it { should equal(non_num_value) }

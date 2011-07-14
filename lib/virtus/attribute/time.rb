@@ -29,15 +29,7 @@ module Virtus
     #
     class Time < Object
       primitive ::Time
-
-      # @see Virtus::Typecast::Time.to_time
-      #
-      # @return [Time]
-      #
-      # @api private
-      def typecast(value)
-        Typecast::Time.to_time(value)
-      end
+      typecast_method :to_time
 
     end # class Time
   end # class Attribute

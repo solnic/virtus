@@ -20,15 +20,7 @@ module Virtus
     #
     class Integer < Numeric
       primitive ::Integer
-
-      # @see Virtus::Typecast::Numeric.to_i
-      #
-      # @return [Integer]
-      #
-      # @api private
-      def typecast(value)
-        Typecast::Numeric.to_i(value)
-      end
+      typecast_method :to_i
 
     end # class Integer
   end # class Attribute
