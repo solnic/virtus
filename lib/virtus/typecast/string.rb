@@ -3,10 +3,10 @@ module Virtus
 
     # String
     #
-    class String
+    class String < Object
       TRUE_VALUES  = %w[ 1 t true  ].freeze
       FALSE_VALUES = %w[ 0 f false ].freeze
-      BOOLEAN_MAP  = Hash[ TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
+      BOOLEAN_MAP  = ::Hash[ TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
 
       NUMERIC_REGEXP = /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/.freeze
 

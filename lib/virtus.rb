@@ -33,12 +33,10 @@ require 'virtus/instance_methods'
 
 require 'virtus/attribute_set'
 
-require 'virtus/typecast/base'
 require 'virtus/typecast/object'
 require 'virtus/typecast/fixnum'
 require 'virtus/typecast/float'
 require 'virtus/typecast/big_decimal'
-require 'virtus/typecast/string'
 require 'virtus/typecast/false_class'
 require 'virtus/typecast/true_class'
 require 'virtus/typecast/hash'

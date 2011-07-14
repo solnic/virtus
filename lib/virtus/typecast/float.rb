@@ -3,7 +3,7 @@ module Virtus
 
     # Float
     #
-    class Float < Base
+    class Float < Object
 
       # @api public
       def self.to_i(value)

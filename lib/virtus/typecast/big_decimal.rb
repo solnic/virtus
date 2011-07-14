@@ -3,7 +3,7 @@ module Virtus
 
     # BigDecimal
     #
-    class BigDecimal < Base
+    class BigDecimal < Object
 
       # @api public
       def self.to_i(value)

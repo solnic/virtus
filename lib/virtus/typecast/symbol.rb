@@ -3,7 +3,7 @@ module Virtus
 
     # Symbol
     #
-    class Symbol < Base
+    class Symbol < Object
 
       # @api public
       def self.to_string(value)

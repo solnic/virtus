@@ -3,7 +3,7 @@ module Virtus
 
     # FalseClass
     #
-    class FalseClass < Base
+    class FalseClass < Object
 
     end # class FalseClass
   end # module Typecast

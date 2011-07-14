@@ -3,7 +3,7 @@ module Virtus
 
     # Hash
     #
-    class Hash
+    class Hash < Object
       TIME_SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
 
       # Creates a Time instance from a Hash

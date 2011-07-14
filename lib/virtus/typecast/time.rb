@@ -3,7 +3,7 @@ module Virtus
 
     # Time
     #
-    class Time < Base
+    class Time < Object
 
       # @api public
       def self.to_datetime(value)

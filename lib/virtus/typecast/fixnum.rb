@@ -3,7 +3,7 @@ module Virtus
 
     # Fixnum
     #
-    class Fixnum < Base
+    class Fixnum < Object
 
       # @api public
       def self.to_f(value)

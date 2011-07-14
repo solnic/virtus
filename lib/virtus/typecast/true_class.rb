@@ -3,7 +3,7 @@ module Virtus
 
     # TrueClass
     #
-    class TrueClass < Base
+    class TrueClass < Object
 
     end # class TrueClass
   end # module Typecast
