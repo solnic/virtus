@@ -20,7 +20,7 @@ module Virtus
       # @return [Boolean]
       #
       # @api public
-      def self.call(value)
+      def self.to_boolean(value)
         BOOLEAN_MAP.fetch(value.to_s.downcase, value)
       end
 

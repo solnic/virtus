@@ -15,7 +15,7 @@ module Virtus
       # @return [String]
       #
       # @api public
-      def self.call(value)
+      def self.to_s(value)
         value.to_s
       end
 

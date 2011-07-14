@@ -41,7 +41,7 @@ module Virtus
       #
       # @api private
       def typecast_to_primitive(value)
-        Typecast::Boolean.call(value)
+        Typecast::Boolean.to_boolean(value)
       end
 
       # Creates standard and boolean attribute reader methods

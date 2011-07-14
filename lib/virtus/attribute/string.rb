@@ -23,7 +23,7 @@ module Virtus
       #
       # @api private
       def typecast_to_primitive(value)
-        Virtus::Typecast::String.call(value)
+        Virtus::Typecast::String.to_s(value)
       end
 
     end # class String
