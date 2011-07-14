@@ -1,8 +1,9 @@
 module Virtus
   class Attribute
 
-    # Example usage:
+    # Decimal
     #
+    # @example
     #   class ExchangeRate
     #     include Virtus
     #

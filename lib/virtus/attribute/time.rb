@@ -1,8 +1,9 @@
 module Virtus
   class Attribute
 
-    # Example usage:
+    # Time
     #
+    # @example
     #   class Post
     #     include Virtus
     #

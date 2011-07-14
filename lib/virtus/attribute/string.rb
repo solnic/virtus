@@ -1,8 +1,9 @@
 module Virtus
   class Attribute
 
-    # Example usage
+    # String
     #
+    # @example
     #   class User
     #     include Virtus
     #

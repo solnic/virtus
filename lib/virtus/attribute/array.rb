@@ -1,8 +1,9 @@
 module Virtus
   class Attribute
 
-    # Example usage:
+    # Array
     #
+    # @example
     #   class Post
     #     include Virtus
     #
@@ -10,6 +11,7 @@ module Virtus
     #   end
     #
     #   post = Post.new(:tags => %w(red green blue))
+    #
     class Array < Object
       primitive ::Array
       complex   true
