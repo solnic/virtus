@@ -8,7 +8,7 @@ module Virtus
     # Defaults to Virtus::Typecast::Object
     #
     # @example
-    #   Virtus::Typecast['String'] # => Virtus::Typecat::String
+    #   Virtus::Typecast['String'] # => Virtus::Typecast::String
     #
     # @param [String]
     #

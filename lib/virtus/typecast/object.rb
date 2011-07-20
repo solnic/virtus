@@ -94,6 +94,7 @@ module Virtus
       def self.to_d(value)
         value
       end
+
     end # class Object
   end # module Typecast
 end # module Virtus

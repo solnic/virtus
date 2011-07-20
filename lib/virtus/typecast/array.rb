@@ -5,7 +5,6 @@ module Virtus
     #
     class Array < Object
 
-    end # class Hash
-
+    end # class Array
   end # module Typecast
 end # module Virtus
