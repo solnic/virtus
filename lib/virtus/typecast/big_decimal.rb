@@ -5,6 +5,20 @@ module Virtus
     #
     class BigDecimal < Object
 
+      # Typecast given value to String
+      #
+      # @example
+      #   Virtus::Typecast::BigDecimal.to_string(BigDecimal('1.0')) # => "1.0"
+      #
+      # @param [BigDecimal] value
+      #
+      # @return [String]
+      #
+      # @api public
+      def self.to_string(value)
+        value.to_s('F')
+      end
+
       # Creates a Fixnum instance from a BigDecimal
       #
       # @example

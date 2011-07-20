@@ -5,12 +5,26 @@ module Virtus
     #
     class Date < Object
 
+      # Typecast given value to String
+      #
+      # @example
+      #   Virtus::Typecast::Date.to_string(date) # => "2011-07-20"
+      #
+      # @param [Date] value
+      #
+      # @return [String]
+      #
+      # @api public
+      def self.to_string(value)
+        value.to_s
+      end
+
       # @api public
       def self.to_datetime(value)
         if value.respond_to?(:to_datetime)
           value.to_datetime
         else
-          String.to_datetime(value.to_s)
+          String.to_datetime(to_string(value))
         end
       end
 

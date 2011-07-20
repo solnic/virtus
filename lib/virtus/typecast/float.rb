@@ -5,6 +5,20 @@ module Virtus
     #
     class Float < Object
 
+      # Typecast given value to String
+      #
+      # @example
+      #   Virtus::Typecast::Fixnum.to_string(0.10) # => "0.10"
+      #
+      # @param [Fixnum] value
+      #
+      # @return [String]
+      #
+      # @api public
+      def self.to_string(value)
+        value.to_s
+      end
+
       # @api public
       def self.to_i(value)
         value.to_i
@@ -12,7 +26,7 @@ module Virtus
 
       # @api public
       def self.to_d(value)
-        value.to_s.to_d
+        to_string(value).to_d
       end
 
     end # class Float
