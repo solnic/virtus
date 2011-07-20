@@ -4,21 +4,6 @@ module Virtus
   #
   module Typecast
 
-    CLASS_MAP = {
-      'Array'      => Array,
-      'BigDecimal' => BigDecimal,
-      'Date'       => Date,
-      'DateTime'   => DateTime,
-      'FalseClass' => FalseClass,
-      'Fixnum'     => Fixnum,
-      'Float'      => Float,
-      'Hash'       => Hash,
-      'String'     => String,
-      'Symbol'     => Symbol,
-      'Time'       => Time,
-      'TrueClass'  => TrueClass
-    }.freeze
-
     # Return a class that matches given name.
     # Defaults to Virtus::Typecast::Object
     #
@@ -31,7 +16,7 @@ module Virtus
     #
     # @api private
     def self.[](name)
-      CLASS_MAP.fetch(name, Object)
+      const_defined?(name) ? const_get(name) : Object
     end
 
   end # Typecast
