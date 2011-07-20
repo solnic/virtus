@@ -57,7 +57,7 @@ module Virtus
       #
       # @api public
       def self.to_i(value)
-        self.to_numeric(value, :to_i)
+        to_numeric(value, :to_i)
       end
 
       # Typecast value to float
@@ -71,7 +71,7 @@ module Virtus
       #
       # @api public
       def self.to_f(value)
-        self.to_numeric(value, :to_f)
+        to_numeric(value, :to_f)
       end
 
       # Typecast value to decimal
@@ -85,7 +85,7 @@ module Virtus
       #
       # @api public
       def self.to_d(value)
-        self.to_numeric(value, :to_d)
+        to_numeric(value, :to_d)
       end
 
       # Match numeric string
