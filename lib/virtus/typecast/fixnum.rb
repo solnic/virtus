@@ -26,7 +26,7 @@ module Virtus
 
       # @api public
       def self.to_d(value)
-        value.to_s.to_d
+        to_string(value).to_d
       end
 
       # @api public
