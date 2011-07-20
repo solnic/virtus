@@ -114,6 +114,7 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/typecast/date_time/class_methods/to_date_spec.rb",
     "spec/unit/virtus/typecast/date_time/class_methods/to_string_spec.rb",
     "spec/unit/virtus/typecast/date_time/class_methods/to_time_spec.rb",
+    "spec/unit/virtus/typecast/false_class/class_methods/to_string_spec.rb",
     "spec/unit/virtus/typecast/fixnum/class_methods/to_boolean_spec.rb",
     "tasks/metrics/ci.rake",
     "tasks/metrics/flay.rake",
