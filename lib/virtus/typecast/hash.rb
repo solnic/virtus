@@ -75,6 +75,8 @@ module Virtus
         end
       end
 
+      private_class_method :extract
+
     end # class Hash
   end # module Typecast
 end # module Virtus
