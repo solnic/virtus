@@ -1,4 +1,6 @@
-* Add Virtus::Typecast::Array
-* Add Virtus::Typecast::Hash
+* Implement #typecast specs as unit specs for Typecast classes
+* Add missing specs for Typecast::Object
+* Use #to_time #to_date and #to_datetime from backports gem (1.8.7 only)
 * Add support for default values
+* Add support for defining attributes on Modules
 * Add better inspection of attribute instances
