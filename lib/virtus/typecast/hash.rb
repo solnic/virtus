@@ -58,7 +58,6 @@ module Virtus
         ::DateTime.new(*extract(value))
       end
 
-
       # Extracts the given args from a Hash
       #
       # If a value does not exist, it uses the value of Time.now
