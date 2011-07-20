@@ -7,92 +7,17 @@ module Virtus
 
       # Passthrough given value
       #
-      # @return [object]
-      #
-      # @api private
-      def self.to_string(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [object]
-      #
-      # @api private
-      def self.to_date(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [object]
-      #
-      # @api private
-      def self.to_datetime(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [object]
-      #
-      # @api private
-      def self.to_time(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [object]
-      #
-      # @api private
-      def self.to_array(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [object]
-      #
-      # @api private
-      def self.to_hash(value)
-        value
-      end
-
-      # Passthrough given value
+      # @param [Object] value
       #
       # @return [Object]
       #
       # @api private
-      def self.to_boolean(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [Object]
-      #
-      # @api private
-      def self.to_i(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [Object]
-      #
-      # @api private
-      def self.to_f(value)
-        value
-      end
-
-      # Passthrough given value
-      #
-      # @return [Object]
-      #
-      # @api private
-      def self.to_d(value)
-        value
+      def self.method_missing(method, *args)
+        if method.to_s[0, 3] == 'to_' && args.size == 1
+          args.first
+        else
+          super
+        end
       end
 
     end # class Object
