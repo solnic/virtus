@@ -16,7 +16,13 @@ module Virtus
     #
     # @api private
     def self.[](name)
-      const_defined?(name) ? const_get(name) : Object
+      const_defined?(name, false) ? const_get(name, false) : Object
+    end
+
+    if RUBY_VERSION < '1.9'
+      def self.[](name)
+        const_defined?(name) ? const_get(name) : Object
+      end
     end
 
   end # Typecast
