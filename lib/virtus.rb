@@ -34,7 +34,6 @@ require 'virtus/instance_methods'
 require 'virtus/attribute_set'
 
 require 'virtus/typecast/object'
-require 'virtus/typecast/array'
 require 'virtus/typecast/fixnum'
 require 'virtus/typecast/float'
 require 'virtus/typecast/big_decimal'
