@@ -43,7 +43,7 @@ module Virtus
       #
       # @api public
       def self.to_boolean(value)
-        BOOLEAN_MAP.fetch(value.to_s.downcase, value)
+        BOOLEAN_MAP.fetch(value.downcase, value)
       end
 
       # Typecast value to integer
