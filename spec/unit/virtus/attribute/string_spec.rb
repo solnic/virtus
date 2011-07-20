@@ -8,7 +8,7 @@ describe Virtus::Attribute::String do
   end
 
   describe '#typecast' do
-    let(:attribute)      { Virtus::Attribute::String.new(:name) }
+    let(:attribute)      { described_class.new(:name) }
     let(:value)          { 1 }
     let(:typecast_value) { '1' }
 

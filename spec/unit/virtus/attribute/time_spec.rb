@@ -8,7 +8,7 @@ describe Virtus::Attribute::Time do
   end
 
   describe '#typecast' do
-    let(:attribute) { Virtus::Attribute::Time.new(:bday) }
+    let(:attribute) { described_class.new(:bday) }
 
     let(:year)  { 1983 }
     let(:month) { 11 }

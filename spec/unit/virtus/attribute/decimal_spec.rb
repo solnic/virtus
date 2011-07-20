@@ -8,7 +8,7 @@ describe Virtus::Attribute::Decimal do
   end
 
   describe '#typecast' do
-    let(:attribute) { Virtus::Attribute::Decimal.new(:price) }
+    let(:attribute) { described_class.new(:price) }
 
     subject { attribute.typecast(value) }
 

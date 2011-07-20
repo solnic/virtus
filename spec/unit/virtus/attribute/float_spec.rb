@@ -8,7 +8,7 @@ describe Virtus::Attribute::Float do
   end
 
   describe '#typecast' do
-    let(:attribute) { Virtus::Attribute::Float.new(:score) }
+    let(:attribute) { described_class.new(:score) }
 
     subject { attribute.typecast(value) }
 

@@ -24,7 +24,7 @@ describe Virtus::Attribute::Boolean do
   end
 
   describe '#typecast' do
-    let(:attribute) { Virtus::Attribute::Boolean.new(:is_admin) }
+    let(:attribute) { described_class.new(:is_admin) }
 
     subject { attribute.typecast(value) }
 

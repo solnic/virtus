@@ -8,7 +8,7 @@ describe Virtus::Attribute::Integer do
   end
 
   describe '#typecast' do
-    let(:attribute) { Virtus::Attribute::Integer.new(:age) }
+    let(:attribute) { described_class.new(:age) }
 
     subject { attribute.typecast(value) }
 
