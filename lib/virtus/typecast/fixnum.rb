@@ -5,6 +5,20 @@ module Virtus
     #
     class Fixnum < Object
 
+      # Typecast given value to String
+      #
+      # @example
+      #   Virtus::Typecast::Float.to_string(0.10) # => "0.10"
+      #
+      # @param [Object] value
+      #
+      # @return [#to_s]
+      #
+      # @api public
+      def self.to_string(value)
+        value.to_s
+      end
+
       # @api public
       def self.to_f(value)
         value.to_f

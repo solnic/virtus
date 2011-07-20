@@ -5,18 +5,13 @@ module Virtus
     #
     class Object
 
-      # Typecast given value to String
+      # Passthrough given value
       #
-      # @example
-      #   Virtus::Typecast::Float.to_string(0.10) # => "0.10"
+      # @return [object]
       #
-      # @param [Object] value
-      #
-      # @return [#to_s]
-      #
-      # @api public
+      # @api private
       def self.to_string(value)
-        value.to_s
+        value
       end
 
       # Passthrough given value

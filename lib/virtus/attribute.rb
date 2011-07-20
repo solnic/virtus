@@ -311,9 +311,7 @@ module Virtus
     #
     # @api public
     def set(instance, value)
-      unless value.nil?
-        set!(instance, self.class.primitive?(value) ? value : typecast(value))
-      end
+      set!(instance, typecast(value))
     end
 
     # Sets instance variable of the attribute

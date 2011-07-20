@@ -14,9 +14,9 @@ shared_examples_for 'Attribute#set' do
   context "with nil" do
     subject { attribute.set(object, nil) }
 
-    it "doesn't set the ivar" do
+    it "set the ivar" do
       subject
-      object.instance_variable_defined?(attribute.instance_variable_name).should be(false)
+      object.instance_variable_get(attribute.instance_variable_name).should be(nil)
     end
 
     it "returns nil" do
