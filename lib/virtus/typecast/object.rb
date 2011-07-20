@@ -19,7 +19,7 @@ module Virtus
         value.to_s
       end
 
-      # Passthrough give value
+      # Passthrough given value
       #
       # @return [Object]
       #
@@ -28,7 +28,7 @@ module Virtus
         value
       end
 
-      # Passthrough give value
+      # Passthrough given value
       #
       # @return [Object]
       #
@@ -37,7 +37,7 @@ module Virtus
         value
       end
 
-      # Passthrough give value
+      # Passthrough given value
       #
       # @return [Object]
       #
@@ -46,7 +46,7 @@ module Virtus
         value
       end
 
-      # Passthrough give value
+      # Passthrough given value
       #
       # @return [Object]
       #
