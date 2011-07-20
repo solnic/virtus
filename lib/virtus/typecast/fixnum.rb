@@ -8,7 +8,7 @@ module Virtus
       # Typecast given value to String
       #
       # @example
-      #   Virtus::Typecast::Fixnum.to_string(0.10) # => "1"
+      #   Virtus::Typecast::Fixnum.to_string(1) # => "1"
       #
       # @param [Fixnum] value
       #
