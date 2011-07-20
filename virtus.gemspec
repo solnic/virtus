@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-07-13}
+  s.authors = ["Piotr Solnica"]
+  s.date = %q{2011-07-20}
   s.description = %q{Attributes for your plain ruby objects}
-  s.email = [%q{piotr@rubyverse.com}]
+  s.email = ["piotr@rubyverse.com"]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.markdown",
@@ -50,11 +50,21 @@ Gem::Specification.new do |s|
     "lib/virtus/class_methods.rb",
     "lib/virtus/instance_methods.rb",
     "lib/virtus/support/descendants_tracker.rb",
-    "lib/virtus/typecast/boolean.rb",
-    "lib/virtus/typecast/numeric.rb",
+    "lib/virtus/typecast.rb",
+    "lib/virtus/typecast/array.rb",
+    "lib/virtus/typecast/big_decimal.rb",
+    "lib/virtus/typecast/date.rb",
+    "lib/virtus/typecast/date_time.rb",
+    "lib/virtus/typecast/false_class.rb",
+    "lib/virtus/typecast/fixnum.rb",
+    "lib/virtus/typecast/float.rb",
+    "lib/virtus/typecast/hash.rb",
+    "lib/virtus/typecast/object.rb",
     "lib/virtus/typecast/string.rb",
+    "lib/virtus/typecast/symbol.rb",
     "lib/virtus/typecast/time.rb",
-    "spec/integration/virtus/attributes/attribute/typecast_spec.rb",
+    "lib/virtus/typecast/true_class.rb",
+    "spec/integration/virtus/attributes/attribute/set_spec.rb",
     "spec/integration/virtus/class_methods/attribute_spec.rb",
     "spec/integration/virtus/class_methods/attributes_spec.rb",
     "spec/integration/virtus/class_methods/const_missing_spec.rb",
@@ -69,7 +79,6 @@ Gem::Specification.new do |s|
     "spec/unit/shared/attribute/options.rb",
     "spec/unit/shared/attribute/set.rb",
     "spec/unit/virtus/attribute/array_spec.rb",
-    "spec/unit/virtus/attribute/attribute_spec.rb",
     "spec/unit/virtus/attribute/boolean_spec.rb",
     "spec/unit/virtus/attribute/class_methods/determine_type_spec.rb",
     "spec/unit/virtus/attribute/date_spec.rb",
@@ -96,6 +105,7 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
     "spec/unit/virtus/instance_methods/element_reference_spec.rb",
     "spec/unit/virtus/instance_methods/element_set_spec.rb",
+    "spec/unit/virtus/typecast/class_name_reference_spec.rb",
     "tasks/metrics/ci.rake",
     "tasks/metrics/flay.rake",
     "tasks/metrics/flog.rake",
@@ -109,8 +119,8 @@ Gem::Specification.new do |s|
     "virtus.gemspec"
   ]
   s.homepage = %q{https://github.com/solnic/virtus}
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.5}
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.6.2}
   s.summary = %q{Attributes for your plain ruby objects}
 
   if s.respond_to? :specification_version then
