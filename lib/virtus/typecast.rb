@@ -5,6 +5,7 @@ module Virtus
   module Typecast
 
     CLASS_MAP = {
+      'Array'      => Array,
       'BigDecimal' => BigDecimal,
       'Date'       => Date,
       'DateTime'   => DateTime,

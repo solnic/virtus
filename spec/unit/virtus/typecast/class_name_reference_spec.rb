@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Typecast, '#[]' do
-  %w(BigDecimal Date DateTime FalseClass Fixnum
+  %w(Array BigDecimal Date DateTime FalseClass Fixnum
      Float Hash String Symbol Time TrueClass).each do |class_name|
 
     context "with #{class_name.inspect}" do
