@@ -284,25 +284,12 @@ module Virtus
       @complex
     end
 
-    # Converts the given value to the primitive type
-    #
-    # @param [Object] value
-    #   the value
-    #
-    # @return [Object]
-    #   nil, original value or value converted to the primitive type
-    #
-    # @api private
-    def typecast(value)
-      Typecast[value.class.name].send(typecast_method, value)
-    end
-
     # Returns value of an attribute for the given instance
     #
     # @return [Object]
     #   value of an attribute
     #
-    # @api private
+    # @api public
     def get(instance)
       get!(instance)
     end
@@ -312,7 +299,7 @@ module Virtus
     # @return [Object]
     #   value of an attribute
     #
-    # @api private
+    # @api public
     def get!(instance)
       instance.instance_variable_get(instance_variable_name)
     end
@@ -322,7 +309,7 @@ module Virtus
     # @return [Object]
     #   value of an attribute
     #
-    # @api private
+    # @api public
     def set(instance, value)
       unless value.nil?
         set!(instance, self.class.primitive?(value) ? value : typecast(value))
@@ -334,9 +321,22 @@ module Virtus
     # @return [Object]
     #   value of an attribute
     #
-    # @api private
+    # @api public
     def set!(instance, value)
       instance.instance_variable_set(instance_variable_name, value)
+    end
+
+    # Converts the given value to the primitive type
+    #
+    # @param [Object] value
+    #   the value
+    #
+    # @return [Object]
+    #   nil, original value or value converted to the primitive type
+    #
+    # @api public
+    def typecast(value)
+      Typecast[value.class.name].send(typecast_method, value)
     end
 
     # Creates an attribute reader method
