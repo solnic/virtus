@@ -8,10 +8,10 @@ Gem::Specification.new do |s|
   s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Piotr Solnica"]
+  s.authors = [%q{Piotr Solnica}]
   s.date = %q{2011-07-20}
   s.description = %q{Attributes for your plain ruby objects}
-  s.email = ["piotr@rubyverse.com"]
+  s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.markdown",
@@ -51,7 +51,6 @@ Gem::Specification.new do |s|
     "lib/virtus/instance_methods.rb",
     "lib/virtus/support/descendants_tracker.rb",
     "lib/virtus/typecast.rb",
-    "lib/virtus/typecast/array.rb",
     "lib/virtus/typecast/big_decimal.rb",
     "lib/virtus/typecast/date.rb",
     "lib/virtus/typecast/date_time.rb",
@@ -106,6 +105,7 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/instance_methods/element_reference_spec.rb",
     "spec/unit/virtus/instance_methods/element_set_spec.rb",
     "spec/unit/virtus/typecast/class_name_reference_spec.rb",
+    "spec/unit/virtus/typecast/fixnum/class_methods/to_boolean_spec.rb",
     "tasks/metrics/ci.rake",
     "tasks/metrics/flay.rake",
     "tasks/metrics/flog.rake",
@@ -119,8 +119,8 @@ Gem::Specification.new do |s|
     "virtus.gemspec"
   ]
   s.homepage = %q{https://github.com/solnic/virtus}
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.5}
   s.summary = %q{Attributes for your plain ruby objects}
 
   if s.respond_to? :specification_version then

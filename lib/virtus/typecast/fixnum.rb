@@ -31,7 +31,12 @@ module Virtus
 
       # @api public
       def self.to_boolean(value)
-        value == 1
+        case value
+        when 1 then true
+        when 0 then false
+        else
+          value
+        end
       end
 
     end # class Fixnum
