@@ -2,11 +2,11 @@
 
 This is a partial extraction of the DataMapper [Property
 API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
-with various modifications. My goal is to provide a common API to define
-attributes on a model along with (auto-)validations so all ORMs/ODMs could use
-it instead of reinventing the wheel all over again. It would be also suitable
-for any other usecase where you need to extend your ruby objects with various
-attributes that require typecasting and/or validations.
+with various modifications and improvements. The goal is to provide a common API
+for defining attributes on a model so all ORMs/ODMs could use it instead of
+reinventing the wheel all over again. It is also suitable for any other
+usecase where you need to extend your ruby objects with attributes that require
+typecasting.
 
 ## Installation
 
