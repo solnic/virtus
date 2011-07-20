@@ -1,6 +1,10 @@
-script: "bundle exec rspec spec/"
+bundler_args: --without guard metrics
+script: "bundle exec rake spec"
 rvm:
   - 1.8.7
   - 1.9.2
-  - jruby
   - rbx
+  - rbx-2.0
+  - ree
+  - jruby
+  - ruby-head
