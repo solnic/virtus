@@ -8,11 +8,11 @@ module Virtus
       # Typecast given value to String
       #
       # @example
-      #   Virtus::Typecast::Float.to_string(0.10) # => "0.10"
+      #   Virtus::Typecast::Fixnum.to_string(0.10) # => "1"
       #
-      # @param [Object] value
+      # @param [Fixnum] value
       #
-      # @return [#to_s]
+      # @return [String]
       #
       # @api public
       def self.to_string(value)
