@@ -7,8 +7,10 @@ describe Virtus::Typecast::Date, '.to_datetime' do
   let(:date)   { Date.new(2011, 1, 1) }
 
   context 'when Date does not support #to_datetime' do
-    before do
-      date.should_not respond_to(:to_datetime)
+    if RUBY_VERSION < '1.9'
+      before do
+        date.should_not respond_to(:to_datetime)
+      end
     end
 
     it { should be_instance_of(DateTime) }
