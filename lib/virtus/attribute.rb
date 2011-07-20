@@ -294,7 +294,7 @@ module Virtus
     #
     # @api private
     def typecast(value)
-      Typecast.const_get(value.class.name).send(typecast_method, value)
+      Typecast[value.class.name].send(typecast_method, value)
     end
 
     # Returns value of an attribute for the given instance

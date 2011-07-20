@@ -45,6 +45,7 @@ require 'virtus/typecast/date_time'
 require 'virtus/typecast/time'
 require 'virtus/typecast/string'
 require 'virtus/typecast/symbol'
+require 'virtus/typecast'
 
 require 'virtus/attribute'
 require 'virtus/attribute/object'
