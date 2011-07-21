@@ -30,7 +30,6 @@ module Virtus
         ::Time.local(*extract(value))
       end
 
-
       # Creates a Date instance from a Hash
       #
       # Valid keys are: :year, :month, :day, :hour
