@@ -9,7 +9,7 @@ describe Virtus::Typecast::Object, '.method_missing' do
     specify do
       expect { subject }.to raise_error(
         NoMethodError,
-        "undefined method `#{method_name}' for Virtus::Typecast::Object:Class")
+        /undefined method `#{method_name}' for Virtus::Typecast::Object/)
     end
   end
 
