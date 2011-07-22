@@ -71,7 +71,7 @@ typecasting.
 ## Contributors
 
 * Dan Kubb ([dkubb](https://github.com/dkubb))
-* Chris Corbyn ([emmanuel](https://github.com/d11wtq))
+* Chris Corbyn ([d11wtq](https://github.com/d11wtq))
 * Emmanuel Gomez ([emmanuel](https://github.com/emmanuel))
 
 ## Note on Patches/Pull Requests
