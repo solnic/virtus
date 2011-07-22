@@ -7,9 +7,7 @@ describe Virtus::Typecast::Object, '.method_missing' do
 
   shared_examples_for 'no method error' do
     specify do
-      expect { subject }.to raise_error(
-        NoMethodError,
-        /undefined method `#{method_name}' for Virtus::Typecast::Object/)
+      expect { subject }.to raise_error(NoMethodError)
     end
   end
 
