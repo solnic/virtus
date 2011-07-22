@@ -70,7 +70,7 @@ module Virtus
       # @return [Float]
       #
       # @api public
-      def self.to_f(value)
+      def self.to_float(value)
         to_numeric(value, :to_f)
       end
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus::Typecast::Fixnum, '.to_f' do
-  subject { object.to_f(fixnum) }
+describe Virtus::Typecast::Fixnum, '.to_float' do
+  subject { object.to_float(fixnum) }
 
   let(:object) { described_class }
   let(:fixnum) { 1               }

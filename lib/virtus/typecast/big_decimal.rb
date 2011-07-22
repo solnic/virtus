@@ -36,14 +36,14 @@ module Virtus
       # Creates a Float instance from a BigDecimal
       #
       # @example
-      #   Virtus::Typecast::BigDecimal.to_f(BigDecimal('1.0')) # => 1.0
+      #   Virtus::Typecast::BigDecimal.to_float(BigDecimal('1.0')) # => 1.0
       #
       # @param [BigDecimal] value
       #
       # @return [Fixnum]
       #
       # @api public
-      def self.to_f(value)
+      def self.to_float(value)
         value.to_f
       end
 
