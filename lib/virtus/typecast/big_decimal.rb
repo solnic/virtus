@@ -22,14 +22,14 @@ module Virtus
       # Creates a Fixnum instance from a BigDecimal
       #
       # @example
-      #   Virtus::Typecast::BigDecimal.to_i(BigDecimal('1.0')) # => 1
+      #   Virtus::Typecast::BigDecimal.to_integer(BigDecimal('1.0')) # => 1
       #
       # @param [BigDecimal] value
       #
       # @return [Fixnum]
       #
       # @api public
-      def self.to_i(value)
+      def self.to_integer(value)
         value.to_i
       end
 

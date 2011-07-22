@@ -20,7 +20,7 @@ module Virtus
       end
 
       # @api public
-      def self.to_i(value)
+      def self.to_integer(value)
         value.to_i
       end
 

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus::Typecast::BigDecimal, '.to_i' do
-  subject { object.to_i(big_decimal) }
+describe Virtus::Typecast::BigDecimal, '.to_integer' do
+  subject { object.to_integer(big_decimal) }
 
   let(:object)      { described_class   }
   let(:big_decimal) { BigDecimal('1.0') }

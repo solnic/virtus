@@ -49,14 +49,14 @@ module Virtus
       # Typecast value to integer
       #
       # @example
-      #   Virtus::Typecast::String.to_i('1')  # => 1
+      #   Virtus::Typecast::String.to_integer('1')  # => 1
       #
       # @param [Object] value
       #
       # @return [Integer]
       #
       # @api public
-      def self.to_i(value)
+      def self.to_integer(value)
         to_numeric(value, :to_i)
       end
 

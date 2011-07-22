@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus::Typecast::Float, '.to_i' do
-  subject { object.to_i(float) }
+describe Virtus::Typecast::Float, '.to_integer' do
+  subject { object.to_integer(float) }
 
   let(:object) { described_class }
   let(:float)  { 1.0             }
