@@ -30,7 +30,11 @@ module Virtus
 
       # @api public
       def self.to_time(value)
-        value.to_time
+        if value.respond_to?(:to_time)
+          value.to_time
+        else
+          String.to_time(to_string(value))
+        end
       end
 
     end # class Date
