@@ -68,6 +68,12 @@ typecasting.
     user.info = '{"email":"john@domain.com"}'
     user.info  # => {"email"=>"john@domain.com"}
 
+## Contributors
+
+* Dan Kubb ([dkubb](https://github.com/dkubb))
+* Chris Corbyn ([emmanuel](https://github.com/d11wtq))
+* Emmanuel Gomez ([emmanuel](https://github.com/emmanuel))
+
 ## Note on Patches/Pull Requests
 
 * Fork the project.
