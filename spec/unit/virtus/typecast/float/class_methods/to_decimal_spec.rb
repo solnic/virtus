@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe Virtus::Typecast::Fixnum, '.to_d' do
-  subject { object.to_d(fixnum) }
+describe Virtus::Typecast::Float, '.to_decimal' do
+  subject { object.to_decimal(float) }
 
   let(:object) { described_class }
-  let(:fixnum) { 1               }
+  let(:float)  { 1.0             }
 
   it { should be_instance_of(BigDecimal) }
 

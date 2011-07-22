@@ -84,7 +84,7 @@ module Virtus
       # @return [BigDecimal]
       #
       # @api public
-      def self.to_d(value)
+      def self.to_decimal(value)
         to_numeric(value, :to_d)
       end
 

@@ -25,7 +25,7 @@ module Virtus
       end
 
       # @api public
-      def self.to_d(value)
+      def self.to_decimal(value)
         to_string(value).to_d
       end
 
