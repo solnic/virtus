@@ -15,7 +15,6 @@ module Virtus
     class Hash < Object
       primitive       ::Hash
       typecast_method :to_hash
-      complex         true
 
     end # class Hash
   end # class Attribute

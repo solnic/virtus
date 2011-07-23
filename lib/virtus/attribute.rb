@@ -79,7 +79,7 @@ module Virtus
     #
     # @example
     #   Virtus::Attribute::String.options
-    #   # => {:primitive => String, :complex => false}
+    #   # => {:primitive => String}
     #
     # @return [Hash]
     #   a hash of default option values
@@ -98,7 +98,7 @@ module Virtus
     #
     # @example
     #   Virtus::Attribute::String.accepted_options
-    #   # => [:primitive, :complex, :accessor, :reader, :writer]
+    #   # => [:primitive, :accessor, :reader, :writer]
     #
     # @return [Array]
     #   the array of valid option names
@@ -241,7 +241,7 @@ module Virtus
 
     DEFAULT_ACCESSOR = :public
 
-    OPTIONS = [ :primitive, :complex, :accessor, :reader, :writer, :typecast_method ].freeze
+    OPTIONS = [ :primitive, :accessor, :reader, :writer, :typecast_method ].freeze
 
     accept_options *OPTIONS
 
@@ -262,22 +262,8 @@ module Virtus
 
       @instance_variable_name = "@#{@name}".freeze
       @typecast_method        = @options.fetch(:typecast_method)
-      @complex                = @options.fetch(:complex, false)
 
       set_visibility
-    end
-
-    # Returns if an attribute is a complex one
-    #
-    # @example
-    #   Virtus::Attribute::String.complex?  # => false
-    #   Virtus::Attribute::Array.complex?   # => true
-    #
-    # @return [Boolean]
-    #
-    # @api public
-    def complex?
-      @complex
     end
 
     # Returns value of an attribute for the given instance
