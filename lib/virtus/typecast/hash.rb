@@ -43,7 +43,6 @@ module Virtus
         ::Date.new(*extract(value).first(3))
       end
 
-
       # Creates a DateTime instance from a Hash
       #
       # Valid keys are: :year, :month, :day, :hour, :min, :sec
