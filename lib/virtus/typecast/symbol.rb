@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # Symbol
-    #
+    # Typecast Symbol values
     class Symbol < Object
 
       # Typecast given value to String

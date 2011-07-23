@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # DateTime
-    #
+    # Typecast DateTime values
     class DateTime < Object
 
       # Typecast given value to String

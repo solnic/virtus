@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # Hash
-    #
+    # Typecast Hash values
     class Hash < Object
       TIME_SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
 

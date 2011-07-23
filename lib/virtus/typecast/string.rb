@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # String
-    #
+    # Typecast String values
     class String < Object
       TRUE_VALUES  = %w[ 1 t true  ].freeze
       FALSE_VALUES = %w[ 0 f false ].freeze

@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # Object
-    #
+    # Typecast Object values
     class Object
 
       # Passthrough given value

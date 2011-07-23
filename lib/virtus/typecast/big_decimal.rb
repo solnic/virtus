@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # BigDecimal
-    #
+    # Typecast BigDecimal values
     class BigDecimal < Object
 
       # Typecast given value to String

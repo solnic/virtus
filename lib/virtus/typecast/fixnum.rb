@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # Fixnum
-    #
+    # Typecast Fixnum values
     class Fixnum < Object
 
       # Typecast given value to String

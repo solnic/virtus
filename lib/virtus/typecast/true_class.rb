@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # TrueClass
-    #
+    # Typecast true values
     class TrueClass < Object
 
       # Typecast given value to String

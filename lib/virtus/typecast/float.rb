@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # Float
-    #
+    # Typecast Float values
     class Float < Object
 
       # Typecast given value to String

@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # Time
-    #
+    # Typecast Time values
     class Time < Object
 
       # Typecast given value to String

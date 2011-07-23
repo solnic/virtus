@@ -1,8 +1,7 @@
 module Virtus
   module Typecast
 
-    # FalseClass
-    #
+    # Typecast false values
     class FalseClass < Object
 
       # Typecast given value to String
