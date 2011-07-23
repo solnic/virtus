@@ -17,7 +17,12 @@ module Virtus
     #
     #   # typecasting from a hash
     #   Post.new(:published_on => {
-    #     :year => 2011, :month => 6, :day => 9, :hour => 10, :minutes => 48 })
+    #     :year  => 2011,
+    #     :month => 6,
+    #     :day   => 9,
+    #     :hour  => 10,
+    #     :min   => 48,
+    #   })
     #
     #   # typecasting from an object which implements #to_datetime
     #   Post.new(:published_on => Time.now)

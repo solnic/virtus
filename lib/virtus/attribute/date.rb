@@ -16,7 +16,11 @@ module Virtus
     #   Post.new(:published_on => '2011/06/09')
     #
     #   # typecasting from a hash
-    #   Post.new(:published_on => { :year => 2011, :month => 6, :day => 9 })
+    #   Post.new(:published_on => {
+    #     :year  => 2011,
+    #     :month => 6,
+    #     :day   => 9,
+    #   })
     #
     #   # typecasting from an object which implements #to_date
     #   Post.new(:published_on => DateTime.now)
