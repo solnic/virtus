@@ -44,15 +44,8 @@ module Virtus
     # @api public
     def attribute(name, type, options = {})
       attribute = Attribute.determine_type(type).new(name, options)
-
-      attribute.define_reader_method(self)
-      attribute.define_writer_method(self)
-
-      include self::AttributeMethods
-
-      attributes << attribute
-      descendants.each { |descendant| descendant.attributes.reset }
-
+      define_attribute_methods(attribute)
+      add_attribute(attribute)
       self
     end
 
@@ -96,6 +89,31 @@ module Virtus
     # @api private
     def const_missing(name)
       Attribute.determine_type(name) || super
+    end
+
+    # Define the attribute reader and writer methods in the class
+    #
+    # @param [Attribute]
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def define_attribute_methods(attribute)
+      attribute.define_reader_method(self)
+      attribute.define_writer_method(self)
+      include self::AttributeMethods
+    end
+
+    # Add the attribute to the class' and descendants' attributes
+    #
+    # @param [Attribute]
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def add_attribute(attribute)
+      attributes << attribute
+      descendants.each { |descendant| descendant.attributes.reset }
     end
 
   end # module ClassMethods
