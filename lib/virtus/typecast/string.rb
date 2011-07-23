@@ -22,7 +22,7 @@ module Virtus
       def self.to_time(value)
         ::Time.parse(value)
       rescue ArgumentError
-        value
+        return value
       end
 
       # Typecast given value to Date
@@ -38,7 +38,7 @@ module Virtus
       def self.to_date(value)
         ::Date.parse(value)
       rescue ArgumentError
-        value
+        return value
       end
 
       # Typecast given value to DateTime
@@ -54,7 +54,7 @@ module Virtus
       def self.to_datetime(value)
         ::DateTime.parse(value)
       rescue ArgumentError
-        value
+        return value
       end
 
       # Typecast value to TrueClass or FalseClass
