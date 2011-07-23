@@ -22,28 +22,26 @@ module Virtus
     #
     # @api public
     def self.determine_type(class_or_name)
-      # first match on the Attribute singleton class first, then match
-      # any class, finally fallback to matching on the string
       case class_or_name
-      when Attribute::Object.singleton_class then determine_type_from_attribute(class_or_name)
-      when Class                             then determine_type_from_primitive(class_or_name)
+      when singleton_class then determine_type_from_descendant(class_or_name)
+      when Class           then determine_type_from_primitive(class_or_name)
       else
         determine_type_from_string(class_or_name.to_s)
       end
     end
 
-    # Return the Attribute class given an Attribute descendant
+    # Return the Attribute class given a descendant
     #
-    # @param [Class<Attribute>] attribute
+    # @param [Class<Attribute>] descendant
     #
     # @return [Class<Attribute>]
     #
     # @api private
-    def self.determine_type_from_attribute(attribute)
-      attribute
+    def self.determine_type_from_descendant(descendant)
+      descendant if descendant < self
     end
 
-    private_class_method :determine_type_from_attribute
+    private_class_method :determine_type_from_descendant
 
     # Return the Attribute class given a primitive
     #
