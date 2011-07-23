@@ -127,6 +127,8 @@ module Virtus
         end
       end
 
+      private_class_method :to_numeric
+
       # Parse the value or return it as-is if it is invalid
       #
       # @param [#parse] parser
