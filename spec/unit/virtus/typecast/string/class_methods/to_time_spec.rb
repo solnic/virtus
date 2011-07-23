@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Virtus::Typecast::String, '.to_time' do
-  subject { described_class.to_time(string) }
+  subject { object.to_time(string) }
+
+  let(:object) { described_class }
 
   shared_examples_for 'a correct time object' do
     it { should be_instance_of(Time) }
@@ -43,6 +45,6 @@ describe Virtus::Typecast::String, '.to_time' do
   context 'with an invalid date time string' do
     let(:string) { '2999' }
 
-    it { should == string }
+    it { should equal(string) }
   end
 end

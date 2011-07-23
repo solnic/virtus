@@ -1,24 +1,29 @@
 require 'spec_helper'
 
 describe Virtus::Typecast::String, '.to_boolean' do
-  subject { described_class.to_boolean(string) }
+  subject { object.to_boolean(string) }
 
-  described_class::TRUE_VALUES.each do |value|
+  let(:object) { described_class }
+
+  %w[ 1 t true T TRUE ].each do |value|
     context "with #{value.inspect}" do
       let(:string) { value }
+
       it { should be(true) }
     end
   end
 
-  described_class::FALSE_VALUES.each do |value|
+  %w[ 0 f false F FALSE ].each do |value|
     context "with #{value.inspect}" do
       let(:string) { value }
+
       it { should be(false) }
     end
   end
 
-  context 'with an unknown string' do
-    let(:string) { 'something' }
-    it { should == string }
+  context 'with an invalid boolean string' do
+    let(:string) { 'non-boolean' }
+
+    it { should equal(string) }
   end
 end

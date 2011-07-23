@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Virtus::Typecast::String, '.to_datetime' do
-  subject { described_class.to_datetime(string) }
+  subject { object.to_datetime(string) }
+
+  let(:object) { described_class }
 
   shared_examples_for 'a correct datetime object' do
     it { should be_instance_of(DateTime) }
@@ -43,6 +45,6 @@ describe Virtus::Typecast::String, '.to_datetime' do
   context 'with an invalid date time string' do
     let(:string) { 'non-datetime' }
 
-    it { should == string }
+    it { should equal(string) }
   end
 end

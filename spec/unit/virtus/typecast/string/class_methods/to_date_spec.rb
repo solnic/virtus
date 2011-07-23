@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Virtus::Typecast::String, '.to_date' do
-  subject { described_class.to_date(string) }
+  subject { object.to_date(string) }
+
+  let(:object) { described_class }
 
   context 'with a valid date string' do
     let(:string) { "July, 22th, 2011" }
@@ -15,6 +17,7 @@ describe Virtus::Typecast::String, '.to_date' do
 
   context 'with an invalid date string' do
     let(:string) { 'non-date' }
-    it { should == string }
+
+    it { should equal(string) }
   end
 end

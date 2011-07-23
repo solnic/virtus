@@ -3,8 +3,19 @@ require 'spec_helper'
 describe Virtus::Typecast::String, '.to_integer' do
   subject { described_class.to_integer(string) }
 
-  let(:string)  { '1.0' }
-  let(:integer) { 1 }
+  { '1' => 1, '1.0' => 1, '.1' => 0 }.each do |value, expected|
+    context "with #{value.inspect}" do
+      let(:string) { value }
 
-  it { should == integer }
+      it { should be_kind_of(Integer) }
+
+      it { should eql(expected) }
+    end
+  end
+
+  context 'with an invalid integer string' do
+    let(:string) { 'non-integer' }
+
+    it { should equal(string) }
+  end
 end
