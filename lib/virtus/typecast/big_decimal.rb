@@ -4,6 +4,8 @@ module Virtus
     # Typecast BigDecimal values
     class BigDecimal < Object
 
+      FLOAT_FORMAT = 'F'.freeze
+
       # Typecast given value to String
       #
       # @example
@@ -15,7 +17,7 @@ module Virtus
       #
       # @api public
       def self.to_string(value)
-        value.to_s('F')
+        value.to_s(FLOAT_FORMAT)
       end
 
       # Creates a Fixnum instance from a BigDecimal
