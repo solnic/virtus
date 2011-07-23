@@ -128,7 +128,6 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/typecast/hash/class_methods/to_date_spec.rb",
     "spec/unit/virtus/typecast/hash/class_methods/to_datetime_spec.rb",
     "spec/unit/virtus/typecast/hash/class_methods/to_time_spec.rb",
-    "spec/unit/virtus/typecast/object/class_methods/method_missing.rb",
     "spec/unit/virtus/typecast/object/class_methods/method_missing_spec.rb",
     "spec/unit/virtus/typecast/string/class_methods/to_boolean_spec.rb",
     "spec/unit/virtus/typecast/string/class_methods/to_date_spec.rb",

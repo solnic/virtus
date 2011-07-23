@@ -21,11 +21,12 @@ describe Virtus::Typecast::Object, '.method_missing' do
     let(:method_name) { attribute.typecast_method }
 
     context "with #{attribute.typecast_method.inspect} and an input value" do
-      it { should == value }
+      it { should equal(value) }
     end
 
     context "with #{attribute.typecast_method.inspect} and without an input value" do
       subject { described_class.send(method_name) }
+
       it_behaves_like 'no method error'
     end
   end
