@@ -69,7 +69,8 @@ module Virtus
         now = ::Time.now
 
         TIME_SEGMENTS.map do |segment|
-          Fixnum.to_i(value.fetch(segment, now.send(segment)))
+          val = value.fetch(segment, now.send(segment))
+          Typecast[val.class.name].to_integer(val)
         end
       end
 
