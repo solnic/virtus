@@ -4,7 +4,8 @@ module Virtus
   #
   module Typecast
 
-    # Return a class that matches given name.
+    # Return a class that matches given name
+    #
     # Defaults to Virtus::Typecast::Object
     #
     # @example

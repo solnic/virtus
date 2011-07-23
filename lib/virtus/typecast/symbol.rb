@@ -8,7 +8,7 @@ module Virtus
       # Typecast given value to String
       #
       # @example
-      #   Virtus::Typecast::Symbol.to_string(:name) # => "name"
+      #   Virtus::Typecast::Symbol.to_string(:name)  # => "name"
       #
       # @param [Symbol] value
       #

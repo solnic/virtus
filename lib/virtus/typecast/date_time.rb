@@ -8,7 +8,7 @@ module Virtus
       # Typecast given value to String
       #
       # @example
-      #   Virtus::Typecast::DateTime.to_string(date_time) # => "2011-07-20T10:30:41-07:00"
+      #   Virtus::Typecast::DateTime.to_string(date_time)  # => "2011-07-20T10:30:41-07:00"
       #
       # @param [DateTime] value
       #
@@ -19,6 +19,15 @@ module Virtus
         value.to_s
       end
 
+      # Typecast given value to Date
+      #
+      # @example
+      #   Virtus::Typecast::DateTime.to_date(date)  # => Date object
+      #
+      # @param [DateTime] value
+      #
+      # @return [Date]
+      #
       # @api public
       def self.to_date(value)
         if value.respond_to?(:to_date)
@@ -28,6 +37,15 @@ module Virtus
         end
       end
 
+      # Typecast given value to Time
+      #
+      # @example
+      #   Virtus::Typecast::DateTime.to_time(date)  # => Time object
+      #
+      # @param [DateTime] value
+      #
+      # @return [Time]
+      #
       # @api public
       def self.to_time(value)
         if value.respond_to?(:to_time)

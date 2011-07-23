@@ -8,7 +8,7 @@ module Virtus
       # Typecast given value to String
       #
       # @example
-      #   Virtus::Typecast::TrueClass.to_string(true) # => "true"
+      #   Virtus::Typecast::TrueClass.to_string(true)  # => "true"
       #
       # @param [TrueClass] value
       #

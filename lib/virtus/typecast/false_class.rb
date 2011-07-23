@@ -8,7 +8,7 @@ module Virtus
       # Typecast given value to String
       #
       # @example
-      #   Virtus::Typecast::FalseClass.to_string(false) # => "false"
+      #   Virtus::Typecast::FalseClass.to_string(false)  # => "false"
       #
       # @param [FalseClass] value
       #

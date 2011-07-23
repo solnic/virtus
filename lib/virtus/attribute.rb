@@ -284,6 +284,9 @@ module Virtus
 
     # Returns value of an attribute for the given instance
     #
+    # @example
+    #   attribute.get(instance)  # => value
+    #
     # @return [Object]
     #   value of an attribute
     #
@@ -293,6 +296,9 @@ module Virtus
     end
 
     # Returns the instance variable of the attribute
+    #
+    # @example
+    #   attribute.get!(instance)  # => value
     #
     # @return [Object]
     #   value of an attribute
@@ -304,8 +310,10 @@ module Virtus
 
     # Sets the value on the instance
     #
-    # @return [Object]
-    #   value of an attribute
+    # @example
+    #   attribute.set(instance, value)  # => value
+    #
+    # @return [self]
     #
     # @api public
     def set(instance, value)
@@ -314,8 +322,10 @@ module Virtus
 
     # Sets instance variable of the attribute
     #
-    # @return [Object]
-    #   value of an attribute
+    # @example
+    #   attribute.set!(instance, value)  # => value
+    #
+    # @return [self]
     #
     # @api public
     def set!(instance, value)
@@ -323,6 +333,9 @@ module Virtus
     end
 
     # Converts the given value to the primitive type
+    #
+    # @example
+    #   attribute.typecast(value)  # => primitive_value
     #
     # @param [Object] value
     #   the value

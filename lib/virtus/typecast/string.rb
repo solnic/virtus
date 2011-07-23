@@ -10,6 +10,15 @@ module Virtus
 
       NUMERIC_REGEXP = /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/.freeze
 
+      # Typecast given value to Time
+      #
+      # @example
+      #   Virtus::Typecast::String.to_time(string)  # => Time object
+      #
+      # @param [String] value
+      #
+      # @return [Time]
+      #
       # @api public
       def self.to_time(value)
         ::Time.parse(value)
@@ -17,6 +26,15 @@ module Virtus
         value
       end
 
+      # Typecast given value to Date
+      #
+      # @example
+      #   Virtus::Typecast::String.to_date(string)  # => Date object
+      #
+      # @param [String] value
+      #
+      # @return [Date]
+      #
       # @api public
       def self.to_date(value)
         ::Date.parse(value)
@@ -24,6 +42,15 @@ module Virtus
         value
       end
 
+      # Typecast given value to DateTime
+      #
+      # @example
+      #   Virtus::Typecast::String.to_datetime(string)  # => DateTime object
+      #
+      # @param [String] value
+      #
+      # @return [DateTime]
+      #
       # @api public
       def self.to_datetime(value)
         ::DateTime.parse(value)
