@@ -22,7 +22,7 @@ module Virtus
     #   ExchangeRate.new(:dollar => BigDecimal.new('2.69')
     #
     class Float < Numeric
-      primitive ::Float
+      primitive       ::Float
       typecast_method :to_float
 
     end # class Float

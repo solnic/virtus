@@ -15,7 +15,7 @@ module Virtus
     #   post.published?  # => false
     #
     class Boolean < Object
-      primitive TrueClass
+      primitive       TrueClass
       typecast_method :to_boolean
 
       # Returns if the given value is either true or false

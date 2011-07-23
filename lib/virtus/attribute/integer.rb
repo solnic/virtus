@@ -19,7 +19,7 @@ module Virtus
     #   Post.new(:read_count => 100.0)
     #
     class Integer < Numeric
-      primitive ::Integer
+      primitive       ::Integer
       typecast_method :to_integer
 
     end # class Integer

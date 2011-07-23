@@ -13,9 +13,9 @@ module Virtus
     #   post = Post.new(:tags => %w(red green blue))
     #
     class Array < Object
-      primitive ::Array
+      primitive       ::Array
       typecast_method :to_array
-      complex   true
+      complex         true
     end # class Array
   end # class Attribute
 end # module Virtus

@@ -23,7 +23,7 @@ module Virtus
     #   Post.new(:published_on => Time.now)
     #
     class DateTime < Object
-      primitive ::DateTime
+      primitive       ::DateTime
       typecast_method :to_datetime
 
     end # class DateTim

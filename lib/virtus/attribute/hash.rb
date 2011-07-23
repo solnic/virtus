@@ -13,9 +13,9 @@ module Virtus
     #   Post.new(:meta => { :tags => %w(foo bar) })
     #
     class Hash < Object
-      primitive ::Hash
+      primitive       ::Hash
       typecast_method :to_hash
-      complex   true
+      complex         true
 
     end # class Hash
   end # class Attribute

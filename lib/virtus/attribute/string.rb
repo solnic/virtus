@@ -16,7 +16,7 @@ module Virtus
     #   User.new(:name => :John)
     #
     class String < Object
-      primitive ::String
+      primitive       ::String
       typecast_method :to_string
 
     end # class String

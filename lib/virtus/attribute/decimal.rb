@@ -13,7 +13,7 @@ module Virtus
     #   ExchangeRate.new(:dollar => '2.6948')
     #
     class Decimal < Numeric
-      primitive ::BigDecimal
+      primitive       ::BigDecimal
       typecast_method :to_decimal
 
     end # class Decimal
