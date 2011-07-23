@@ -53,9 +53,11 @@ module Virtus
 
       # Typecast value to TrueClass or FalseClass
       #
-      # @example
-      #   Virtus::Typecast::Boolean.call('T')  # => true
-      #   Virtus::Typecast::Boolean.call('F')  # => false
+      # @example with "T"
+      #   Virtus::Typecast::String.to_boolean('T')  # => true
+      #
+      # @example with "F"
+      #   Virtus::Typecast::String.to_boolean('F')  # => false
       #
       # @param [#to_s]
       #
@@ -83,7 +85,7 @@ module Virtus
       # Typecast value to float
       #
       # @example
-      #   Virtus::Typecast::Numeric.to_f('1.2')  # => 1.2
+      #   Virtus::Typecast::String.to_float('1.2')  # => 1.2
       #
       # @param [Object] value
       #
@@ -97,7 +99,7 @@ module Virtus
       # Typecast value to decimal
       #
       # @example
-      #   Virtus::Typecast::Numeric.to_d('1.2')  # => #<BigDecimal:b72157d4,'0.12E1',8(8)>
+      #   Virtus::Typecast::String.to_decimal('1.2')  # => #<BigDecimal:b72157d4,'0.12E1',8(8)>
       #
       # @param [Object] value
       #
