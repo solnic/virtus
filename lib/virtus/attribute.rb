@@ -5,75 +5,7 @@ module Virtus
   # @abstract
   class Attribute
     extend DescendantsTracker
-
-    # Returns a Virtus::Attribute::Object descendant based on a name or class
-    #
-    # @example
-    #   Attribute.determine_type('String')  # => Virtus::Attribute::String
-    #
-    # @param [Class, #to_s] class_or_name
-    #   name of a class or a class itself
-    #
-    # @return [Class]
-    #   one of the Virtus::Attribute::Object descendants
-    #
-    # @return [nil]
-    #   nil if the type cannot be determined by the class_or_name
-    #
-    # @api public
-    def self.determine_type(class_or_name)
-      case class_or_name
-      when singleton_class then determine_type_from_descendant(class_or_name)
-      when Class           then determine_type_from_primitive(class_or_name)
-      else
-        determine_type_from_string(class_or_name.to_s)
-      end
-    end
-
-    # Return the Attribute class given a descendant
-    #
-    # @param [Class<Attribute>] descendant
-    #
-    # @return [Class<Attribute>]
-    #
-    # @api private
-    def self.determine_type_from_descendant(descendant)
-      descendant if descendant < self
-    end
-
-    private_class_method :determine_type_from_descendant
-
-    # Return the Attribute class given a primitive
-    #
-    # @param [Class] primitive
-    #
-    # @return [Class<Attribute>]
-    #
-    # @return [nil]
-    #   nil if the type cannot be determined by the primitive
-    #
-    # @api private
-    def self.determine_type_from_primitive(primitive)
-      descendants.detect { |descendant| primitive <= descendant.primitive }
-    end
-
-    private_class_method :determine_type_from_primitive
-
-    # Return the Attribute class given a string
-    #
-    # @param [String] string
-    #
-    # @return [Class<Attribute>]
-    #
-    # @return [nil]
-    #   nil if the type cannot be determined by the string
-    #
-    # @api private
-    def self.determine_type_from_string(string)
-      const_get(string) if const_defined?(string)
-    end
-
-    private_class_method :determine_type_from_string
+    extend TypeLookup
 
     # Returns default options hash for a given attribute class
     #

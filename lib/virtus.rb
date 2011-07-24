@@ -27,6 +27,7 @@ module Virtus
 end # module Virtus
 
 require 'virtus/support/descendants_tracker'
+require 'virtus/support/type_lookup'
 
 require 'virtus/class_methods'
 require 'virtus/instance_methods'

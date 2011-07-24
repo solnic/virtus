@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-07-23}
+  s.date = %q{2011-07-24}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -50,6 +50,7 @@ Gem::Specification.new do |s|
     "lib/virtus/class_methods.rb",
     "lib/virtus/instance_methods.rb",
     "lib/virtus/support/descendants_tracker.rb",
+    "lib/virtus/support/type_lookup.rb",
     "lib/virtus/typecast.rb",
     "lib/virtus/typecast/big_decimal.rb",
     "lib/virtus/typecast/date.rb",
@@ -106,6 +107,8 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
     "spec/unit/virtus/instance_methods/element_reference_spec.rb",
     "spec/unit/virtus/instance_methods/element_set_spec.rb",
+    "spec/unit/virtus/type_lookup/determine_type_spec.rb",
+    "spec/unit/virtus/type_lookup/primitive_spec.rb",
     "spec/unit/virtus/typecast/big_decimal/class_methods/to_float_spec.rb",
     "spec/unit/virtus/typecast/big_decimal/class_methods/to_integer_spec.rb",
     "spec/unit/virtus/typecast/big_decimal/class_methods/to_string_spec.rb",
