@@ -1,6 +1,8 @@
 module Virtus
 
-  # Coerce
+  # Coerce abstract class
+  #
+  # @abstract
   #
   class Coercion
     extend DescendantsTracker
