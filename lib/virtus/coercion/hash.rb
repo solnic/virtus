@@ -5,6 +5,11 @@ module Virtus
     class Hash < Object
       TIME_SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
 
+      # @api private
+      def self.primitive
+        ::Hash
+      end
+
       # Creates an Array instance from a Hash
       #
       # @param [Hash] value

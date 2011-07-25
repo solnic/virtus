@@ -22,8 +22,10 @@ module Virtus
     # @api public
     def determine_type(class_or_name)
       case class_or_name
-      when singleton_class then determine_type_from_descendant(class_or_name)
-      when Class           then determine_type_from_primitive(class_or_name)
+      when singleton_class
+        determine_type_from_descendant(class_or_name)
+      when Class
+        determine_type_from_primitive(class_or_name)
       else
         determine_type_from_string(class_or_name.to_s)
       end

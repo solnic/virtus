@@ -4,6 +4,11 @@ module Virtus
     # Coerce Float values
     class Float < Object
 
+      # @api private
+      def self.primitive
+        ::Float
+      end
+
       # Coerce given value to String
       #
       # @example

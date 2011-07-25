@@ -261,7 +261,7 @@ module Virtus
     #
     # @api public
     def typecast(value)
-      Coercion[value.class.name].send(typecast_method, value)
+      Coercion[value.class].send(typecast_method, value)
     end
 
     # Creates an attribute reader method

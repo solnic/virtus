@@ -4,6 +4,11 @@ module Virtus
     # Coerce false values
     class FalseClass < Object
 
+      # @api private
+      def self.primitive
+        ::FalseClass
+      end
+
       # Coerce given value to String
       #
       # @example

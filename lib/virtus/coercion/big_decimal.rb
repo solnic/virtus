@@ -6,6 +6,11 @@ module Virtus
 
       FLOAT_FORMAT = 'F'.freeze
 
+      # @api private
+      def self.primitive
+        ::BigDecimal
+      end
+
       # Coerce given value to String
       #
       # @example

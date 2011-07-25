@@ -4,6 +4,11 @@ module Virtus
     # Coerce Date values
     class Date < Object
 
+      # @api private
+      def self.primitive
+        ::Date
+      end
+
       # Coerce given value to String
       #
       # @example

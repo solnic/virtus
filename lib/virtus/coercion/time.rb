@@ -4,6 +4,11 @@ module Virtus
     # Coerce Time values
     class Time < Object
 
+      # @api private
+      def self.primitive
+        ::Time
+      end
+
       # Coerce given value to String
       #
       # @example

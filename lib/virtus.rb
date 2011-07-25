@@ -34,6 +34,7 @@ require 'virtus/instance_methods'
 
 require 'virtus/attribute_set'
 
+require 'virtus/coercion'
 require 'virtus/coercion/object'
 require 'virtus/coercion/fixnum'
 require 'virtus/coercion/float'
@@ -46,7 +47,6 @@ require 'virtus/coercion/date_time'
 require 'virtus/coercion/time'
 require 'virtus/coercion/string'
 require 'virtus/coercion/symbol'
-require 'virtus/coercion'
 
 require 'virtus/attribute'
 require 'virtus/attribute/object'
