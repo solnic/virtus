@@ -27,7 +27,7 @@ module Virtus
     #
     class Date < Object
       primitive       ::Date
-      typecast_method :to_date
+      coercion_method :to_date
 
     end # class Date
   end # class Attribute

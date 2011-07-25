@@ -7,13 +7,13 @@ describe Virtus::Attribute::String do
     let(:attribute_value_other) { :'red john' }
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute)      { described_class.new(:name) }
     let(:value)          { 1 }
-    let(:typecast_value) { '1' }
+    let(:coerce_value) { '1' }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
-    it { should eql(typecast_value) }
+    it { should eql(coerce_value) }
   end
 end

@@ -23,7 +23,7 @@ module Virtus
     #
     class Float < Numeric
       primitive       ::Float
-      typecast_method :to_float
+      coercion_method :to_float
 
     end # class Float
   end # class Attribute

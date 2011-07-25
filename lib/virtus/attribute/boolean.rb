@@ -16,7 +16,7 @@ module Virtus
     #
     class Boolean < Object
       primitive       TrueClass
-      typecast_method :to_boolean
+      coercion_method :to_boolean
 
       # Returns if the given value is either true or false
       #

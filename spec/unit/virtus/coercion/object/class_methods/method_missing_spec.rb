@@ -18,13 +18,13 @@ describe Virtus::Coercion::Object, '.method_missing' do
   end
 
   Virtus::Attribute::Object.descendants.each do |attribute|
-    let(:method_name) { attribute.typecast_method }
+    let(:method_name) { attribute.coercion_method }
 
-    context "with #{attribute.typecast_method.inspect} and an input value" do
+    context "with #{attribute.coercion_method.inspect} and an input value" do
       it { should equal(value) }
     end
 
-    context "with #{attribute.typecast_method.inspect} and without an input value" do
+    context "with #{attribute.coercion_method.inspect} and without an input value" do
       subject { described_class.send(method_name) }
 
       it_behaves_like 'no method error'

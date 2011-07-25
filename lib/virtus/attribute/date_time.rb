@@ -29,7 +29,7 @@ module Virtus
     #
     class DateTime < Object
       primitive       ::DateTime
-      typecast_method :to_datetime
+      coercion_method :to_datetime
 
     end # class DateTim
   end # class Attribute

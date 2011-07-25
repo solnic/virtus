@@ -14,7 +14,7 @@ module Virtus
     #
     class Decimal < Numeric
       primitive       ::BigDecimal
-      typecast_method :to_decimal
+      coercion_method :to_decimal
 
     end # class Decimal
   end # class Attribute

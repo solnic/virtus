@@ -164,16 +164,16 @@ module Virtus
     # @api private
     attr_reader :writer_visibility
 
-    # Returns method name that should be used for typecasting
+    # Returns method name that should be used for coerceing
     #
     # @return [Symbol]
     #
     # @api private
-    attr_reader :typecast_method
+    attr_reader :coercion_method
 
     DEFAULT_ACCESSOR = :public
 
-    OPTIONS = [ :primitive, :accessor, :reader, :writer, :typecast_method ].freeze
+    OPTIONS = [ :primitive, :accessor, :reader, :writer, :coercion_method ].freeze
 
     accept_options *OPTIONS
 
@@ -193,7 +193,7 @@ module Virtus
       @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
-      @typecast_method        = @options.fetch(:typecast_method)
+      @coercion_method        = @options.fetch(:coercion_method)
 
       set_visibility
     end
@@ -233,7 +233,7 @@ module Virtus
     #
     # @api public
     def set(instance, value)
-      set!(instance, typecast(value))
+      set!(instance, coerce(value))
     end
 
     # Sets instance variable of the attribute
@@ -251,7 +251,7 @@ module Virtus
     # Converts the given value to the primitive type
     #
     # @example
-    #   attribute.typecast(value)  # => primitive_value
+    #   attribute.coerce(value)  # => primitive_value
     #
     # @param [Object] value
     #   the value
@@ -260,8 +260,8 @@ module Virtus
     #   nil, original value or value converted to the primitive type
     #
     # @api public
-    def typecast(value)
-      Coercion[value.class].send(typecast_method, value)
+    def coerce(value)
+      Coercion[value.class].send(coercion_method, value)
     end
 
     # Creates an attribute reader method

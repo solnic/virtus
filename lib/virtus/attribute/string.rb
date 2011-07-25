@@ -17,7 +17,7 @@ module Virtus
     #
     class String < Object
       primitive       ::String
-      typecast_method :to_string
+      coercion_method :to_string
 
     end # class String
   end # class Attribute

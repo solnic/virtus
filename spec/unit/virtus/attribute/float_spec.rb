@@ -7,10 +7,10 @@ describe Virtus::Attribute::Float do
     let(:attribute_value_other) { "12.34" }
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute) { described_class.new(:score) }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
     context "with a float" do
       let(:value) { 24.0 }
@@ -88,7 +88,7 @@ describe Virtus::Attribute::Float do
     end
 
     [ Object.new, true, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
-      context "does not typecast non-numeric value #{non_num_value.inspect}" do
+      context "does not coerce non-numeric value #{non_num_value.inspect}" do
         let(:value) { non_num_value }
         it { should equal(non_num_value) }
       end

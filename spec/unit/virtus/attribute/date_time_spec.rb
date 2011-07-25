@@ -7,7 +7,7 @@ describe Virtus::Attribute::DateTime do
     let(:attribute_value_other) { DateTime.now.to_s }
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute) { described_class.new(:bday) }
 
     let(:year)  { 2011 }
@@ -17,7 +17,7 @@ describe Virtus::Attribute::DateTime do
     let(:min)   { 26 }
     let(:sec)   { 49 }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
     shared_examples_for "a correct date time" do
       it { should be_kind_of(DateTime) }

@@ -7,10 +7,10 @@ describe Virtus::Attribute::Decimal do
     let(:attribute_value_other) { "12.3456789" }
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute) { described_class.new(:price) }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
     context "with 24.0 big decimal" do
       let(:value) { BigDecimal('24.0') }

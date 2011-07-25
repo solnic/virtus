@@ -23,10 +23,10 @@ describe Virtus::Attribute::Boolean do
     end
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute) { described_class.new(:is_admin) }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
     context "with 1" do
       let(:value) { 1 }

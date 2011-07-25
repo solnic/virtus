@@ -4,7 +4,7 @@ describe Virtus::Attribute, '#set' do
   let(:attribute_class) do
     Class.new(Virtus::Attribute::Integer) do
       def set(instance, value)
-        super(instance, typecast(value) + 1) unless value.nil?
+        super(instance, coerce(value) + 1) unless value.nil?
       end
     end
   end

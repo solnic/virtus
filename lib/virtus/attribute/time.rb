@@ -29,7 +29,7 @@ module Virtus
     #
     class Time < Object
       primitive       ::Time
-      typecast_method :to_time
+      coercion_method :to_time
 
     end # class Time
   end # class Attribute

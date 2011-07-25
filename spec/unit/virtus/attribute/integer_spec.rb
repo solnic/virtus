@@ -7,10 +7,10 @@ describe Virtus::Attribute::Integer do
     let(:attribute_value_other) { "28" }
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute) { described_class.new(:age) }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
     context "with an integer" do
       let(:value) { 24 }
@@ -88,7 +88,7 @@ describe Virtus::Attribute::Integer do
     end
 
     [ Object.new, true, false, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
-      context "does not typecast non-numeric value #{non_num_value.inspect}" do
+      context "does not coerce non-numeric value #{non_num_value.inspect}" do
         let(:value) { non_num_value }
         it { should equal(non_num_value) }
       end

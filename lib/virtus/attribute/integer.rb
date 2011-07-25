@@ -20,7 +20,7 @@ module Virtus
     #
     class Integer < Numeric
       primitive       ::Integer
-      typecast_method :to_integer
+      coercion_method :to_integer
 
     end # class Integer
   end # class Attribute

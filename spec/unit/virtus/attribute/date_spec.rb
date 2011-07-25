@@ -7,14 +7,14 @@ describe Virtus::Attribute::Date do
     let(:attribute_value_other) { (Date.today+1).to_s }
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute) { described_class.new(:bday) }
 
     let(:year)  { 2011 }
     let(:month) { 4 }
     let(:day)   { 7 }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
     shared_examples_for "a correct date" do
       it          { should be_kind_of(Date) }

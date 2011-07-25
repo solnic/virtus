@@ -7,10 +7,10 @@ describe Virtus::Attribute::Array do
     let(:attribute_value_other) { [ 'orange', 'yellow', 'gray' ] }
   end
 
-  describe '#typecast' do
+  describe '#coerce' do
     let(:attribute) { described_class.new(:colors) }
 
-    subject { attribute.typecast(value) }
+    subject { attribute.coerce(value) }
 
     context 'with a Hash' do
       let(:value) { { :foo => 'bar' } }
