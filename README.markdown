@@ -73,15 +73,15 @@ data type coercions.
 Virtus comes with a builtin coercion library. It's super easy to add your own
 coercion classes. Take a look:
 
-   require 'virtus'
-   require 'digest/md5'
+    require 'virtus'
+    require 'digest/md5'
 
-   class MD5 < Virtus::Attribute::Object
+    class MD5 < Virtus::Attribute::Object
      primitive       String
      coercion_method :to_md5
-   end
+    end
 
-   module Virtus
+    module Virtus
      class Coercion
        class String < Virtus::Coercion::Object
          def self.to_md5(value)
@@ -89,11 +89,11 @@ coercion classes. Take a look:
          end
        end
      end
-   end
+    end
 
-   user = User.new(:name => 'Piotr', :password => 'foobar')
-   user.name     # => 'Piotr'
-   user.password # => '3858f62230ac3c915f300c664312c63f'
+    user = User.new(:name => 'Piotr', :password => 'foobar')
+    user.name     # => 'Piotr'
+    user.password # => '3858f62230ac3c915f300c664312c63f'
 
 ## Contributors
 
