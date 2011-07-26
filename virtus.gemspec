@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Piotr Solnica"]
-  s.date = %q{2011-07-25}
+  s.date = %q{2011-07-26}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = ["piotr@rubyverse.com"]
   s.extra_rdoc_files = [
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
     "config/roodi.yml",
     "config/site.reek",
     "config/yardstick.yml",
+    "examples/custom_coercion_spec.rb",
     "lib/virtus.rb",
     "lib/virtus/attribute.rb",
     "lib/virtus/attribute/array.rb",
