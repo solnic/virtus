@@ -1,11 +1,11 @@
 === v0.0.5 to-be-released
 
-* [BREAKING CHANGE] Moved Virtus.determine_type to Virtus::Attribute.determine_type (dkubb)
-* [BREAKING CHANGE] Attribute#typecast_to_primitive has been replaced by Attribute#typecast (solnic)
+* [BREAKING CHANGE] Moved Virtus.determine_type to a shared module Virtus::TypeLookup (dkubb)
+* [BREAKING CHANGE] Attribute#typecast_to_primitive has been replaced by Attribute#coerce (solnic)
 * [BREAKING CHANGE] Attribute#typecast logic was moved to Attribute#set which is now a public method (solnic)
 * [general] Added backports as a development dependency (dkubb)
-* [changed] Every primitive has a corresponding Typecast class now like Typecast::String, Typecast::Fixnum etc. (solnic)
-* [changed] Attribute#get, #get!, #set, #set! & #typecast are now part of the public API (solnic)
+* [changed] Every primitive has a corresponding Coercion class like Coercion::String, Coercion::Fixnum etc. (solnic)
+* [changed] Attribute#get, #get!, #set, #set! & #coerce are now part of the public API (solnic)
 
 Details: https://github.com/solnic/virtus/compare/v0.0.4...master
 
