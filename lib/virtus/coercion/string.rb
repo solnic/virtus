@@ -11,11 +11,6 @@ module Virtus
 
       NUMERIC_REGEXP = /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/.freeze
 
-      # @api private
-      def self.primitive
-        ::String
-      end
-
       # Coerce given value to Time
       #
       # @example
