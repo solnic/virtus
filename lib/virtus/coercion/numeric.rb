@@ -1,5 +1,7 @@
 module Virtus
   class Coercion
+
+    # Base class for all numeric Coercion classes
     class Numeric < Object
       primitive ::Numeric
 
