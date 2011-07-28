@@ -1,6 +1,7 @@
 module Virtus
   class Coercion
 
+    # Common time coercion methods
     module TimeCoercions
 
       # Coerce given value to String
