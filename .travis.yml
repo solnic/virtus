@@ -8,3 +8,6 @@ rvm:
   - ree
   - jruby
   - ruby-head
+notifications:
+  recipients:
+    - piotr.solnica@gmail.com
