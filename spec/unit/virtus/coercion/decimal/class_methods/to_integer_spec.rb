@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Coercion::BigDecimal, '.to_integer' do
+describe Virtus::Coercion::Decimal, '.to_integer' do
   subject { object.to_integer(big_decimal) }
 
   let(:object)      { described_class   }

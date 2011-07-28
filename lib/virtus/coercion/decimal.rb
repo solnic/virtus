@@ -2,7 +2,7 @@ module Virtus
   class Coercion
 
     # Coerce BigDecimal values
-    class BigDecimal < Object
+    class Decimal < Object
       primitive ::BigDecimal
 
       FLOAT_FORMAT = 'F'.freeze
