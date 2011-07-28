@@ -8,13 +8,13 @@ Gem::Specification.new do |s|
   s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Piotr Solnica"]
-  s.date = %q{2011-07-26}
+  s.authors = [%q{Piotr Solnica}]
+  s.date = %q{2011-07-28}
   s.description = %q{Attributes for your plain ruby objects}
-  s.email = ["piotr@rubyverse.com"]
+  s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
     "LICENSE",
-    "README.markdown",
+    "README.md",
     "TODO"
   ]
   s.files = [
@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
     "Gemfile",
     "History.txt",
     "LICENSE",
-    "README.markdown",
+    "README.md",
     "Rakefile",
     "TODO",
     "VERSION",
@@ -50,20 +50,23 @@ Gem::Specification.new do |s|
     "lib/virtus/attribute_set.rb",
     "lib/virtus/class_methods.rb",
     "lib/virtus/coercion.rb",
-    "lib/virtus/coercion/big_decimal.rb",
     "lib/virtus/coercion/date.rb",
     "lib/virtus/coercion/date_time.rb",
+    "lib/virtus/coercion/decimal.rb",
     "lib/virtus/coercion/false_class.rb",
-    "lib/virtus/coercion/fixnum.rb",
     "lib/virtus/coercion/float.rb",
     "lib/virtus/coercion/hash.rb",
+    "lib/virtus/coercion/integer.rb",
+    "lib/virtus/coercion/numeric.rb",
     "lib/virtus/coercion/object.rb",
     "lib/virtus/coercion/string.rb",
     "lib/virtus/coercion/symbol.rb",
     "lib/virtus/coercion/time.rb",
+    "lib/virtus/coercion/time_coercions.rb",
     "lib/virtus/coercion/true_class.rb",
     "lib/virtus/instance_methods.rb",
     "lib/virtus/support/descendants_tracker.rb",
+    "lib/virtus/support/options.rb",
     "lib/virtus/support/type_lookup.rb",
     "spec/integration/virtus/attributes/attribute/set_spec.rb",
     "spec/integration/virtus/class_methods/attribute_spec.rb",
@@ -102,9 +105,6 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/class_methods/attribute_spec.rb",
     "spec/unit/virtus/class_methods/attributes_spec.rb",
     "spec/unit/virtus/class_methods/new_spec.rb",
-    "spec/unit/virtus/coercion/big_decimal/class_methods/to_float_spec.rb",
-    "spec/unit/virtus/coercion/big_decimal/class_methods/to_integer_spec.rb",
-    "spec/unit/virtus/coercion/big_decimal/class_methods/to_string_spec.rb",
     "spec/unit/virtus/coercion/class_name_reference_spec.rb",
     "spec/unit/virtus/coercion/date/class_methods/to_datetime_spec.rb",
     "spec/unit/virtus/coercion/date/class_methods/to_string_spec.rb",
@@ -112,11 +112,10 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/coercion/date_time/class_methods/to_date_spec.rb",
     "spec/unit/virtus/coercion/date_time/class_methods/to_string_spec.rb",
     "spec/unit/virtus/coercion/date_time/class_methods/to_time_spec.rb",
+    "spec/unit/virtus/coercion/decimal/class_methods/to_float_spec.rb",
+    "spec/unit/virtus/coercion/decimal/class_methods/to_integer_spec.rb",
+    "spec/unit/virtus/coercion/decimal/class_methods/to_string_spec.rb",
     "spec/unit/virtus/coercion/false_class/class_methods/to_string_spec.rb",
-    "spec/unit/virtus/coercion/fixnum/class_methods/to_boolean_spec.rb",
-    "spec/unit/virtus/coercion/fixnum/class_methods/to_decimal_spec.rb",
-    "spec/unit/virtus/coercion/fixnum/class_methods/to_float_spec.rb",
-    "spec/unit/virtus/coercion/fixnum/class_methods/to_string_spec.rb",
     "spec/unit/virtus/coercion/float/class_methods/to_decimal_spec.rb",
     "spec/unit/virtus/coercion/float/class_methods/to_integer_spec.rb",
     "spec/unit/virtus/coercion/float/class_methods/to_string_spec.rb",
@@ -124,6 +123,10 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/coercion/hash/class_methods/to_date_spec.rb",
     "spec/unit/virtus/coercion/hash/class_methods/to_datetime_spec.rb",
     "spec/unit/virtus/coercion/hash/class_methods/to_time_spec.rb",
+    "spec/unit/virtus/coercion/integer/class_methods/to_boolean_spec.rb",
+    "spec/unit/virtus/coercion/integer/class_methods/to_decimal_spec.rb",
+    "spec/unit/virtus/coercion/integer/class_methods/to_float_spec.rb",
+    "spec/unit/virtus/coercion/integer/class_methods/to_string_spec.rb",
     "spec/unit/virtus/coercion/object/class_methods/method_missing_spec.rb",
     "spec/unit/virtus/coercion/string/class_methods/to_boolean_spec.rb",
     "spec/unit/virtus/coercion/string/class_methods/to_date_spec.rb",
@@ -154,8 +157,8 @@ Gem::Specification.new do |s|
     "virtus.gemspec"
   ]
   s.homepage = %q{https://github.com/solnic/virtus}
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.6}
   s.summary = %q{Attributes for your plain ruby objects}
 
   if s.respond_to? :specification_version then
