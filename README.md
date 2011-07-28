@@ -10,10 +10,13 @@ data type coercions.
 
 ## Installation
 
+```bash
     gem i virtus
+```
 
 ## Basic Usage
 
+```ruby
     require 'virtus'
 
     class User
@@ -39,9 +42,11 @@ data type coercions.
 
     user.birthday = 'November 18th, 1983'
     user.birthday  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+```
 
 ## Custom Attributes
 
+```ruby
     require 'virtus'
     require 'json'
 
@@ -67,12 +72,14 @@ data type coercions.
 
     user.info = '{"email":"john@domain.com"}'
     user.info  # => {"email"=>"john@domain.com"}
+```
 
 ## Coercions
 
 Virtus comes with a builtin coercion library. It's super easy to add your own
 coercion classes. Take a look:
 
+```ruby
     require 'virtus'
     require 'digest/md5'
 
@@ -94,6 +101,7 @@ coercion classes. Take a look:
     user = User.new(:name => 'Piotr', :password => 'foobar')
     user.name     # => 'Piotr'
     user.password # => '3858f62230ac3c915f300c664312c63f'
+```
 
 ## Contributors
 
