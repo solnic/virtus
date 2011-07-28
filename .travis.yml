@@ -9,5 +9,5 @@ rvm:
   - jruby
   - ruby-head
 notifications:
-  recipients:
+  email:
     - piotr.solnica@gmail.com
