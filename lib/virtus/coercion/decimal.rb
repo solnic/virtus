@@ -2,7 +2,7 @@ module Virtus
   class Coercion
 
     # Coerce BigDecimal values
-    class Decimal < Object
+    class Decimal < Numeric
       primitive ::BigDecimal
 
       FLOAT_FORMAT = 'F'.freeze
@@ -10,7 +10,7 @@ module Virtus
       # Coerce given value to String
       #
       # @example
-      #   Virtus::Coercion::BigDecimal.to_string(BigDecimal('1.0'))  # => "1.0"
+      #   Virtus::Coercion::BigDecimal.to_string(BigDecimal('1.0')) # => "1.0"
       #
       # @param [BigDecimal] value
       #
@@ -21,32 +21,18 @@ module Virtus
         value.to_s(FLOAT_FORMAT)
       end
 
-      # Creates a Fixnum instance from a BigDecimal
+      # Passthrough the value
       #
       # @example
-      #   Virtus::Coercion::BigDecimal.to_integer(BigDecimal('1.0'))  # => 1
+      #   Virtus::Coercion::BigDecimal.to_decimal(BigDecimal('1.0')) # => BigDecimal('1.0')
       #
       # @param [BigDecimal] value
       #
       # @return [Fixnum]
       #
       # @api public
-      def self.to_integer(value)
-        value.to_i
-      end
-
-      # Creates a Float instance from a BigDecimal
-      #
-      # @example
-      #   Virtus::Coercion::BigDecimal.to_float(BigDecimal('1.0'))  # => 1.0
-      #
-      # @param [BigDecimal] value
-      #
-      # @return [Fixnum]
-      #
-      # @api public
-      def self.to_float(value)
-        value.to_f
+      def self.to_decimal(value)
+        value
       end
 
     end # class BigDecimal

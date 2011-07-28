@@ -2,7 +2,7 @@ module Virtus
   class Coercion
 
     # Coerce Fixnum values
-    class Integer < Object
+    class Integer < Numeric
       primitive ::Fixnum
 
       # Coerce given value to String
@@ -19,32 +19,18 @@ module Virtus
         value.to_s
       end
 
-      # Coerce given value to Float
+      # Passthrough the value
       #
       # @example
-      #   Virtus::Coercion::Fixnum.to_float(1)  # => 1.0
+      #   Virtus::Coercion::Fixnum.to_integer(1)  # => 1
       #
       # @param [Fixnum] value
       #
       # @return [Float]
       #
       # @api public
-      def self.to_float(value)
-        value.to_f
-      end
-
-      # Coerce given value to BigDecimal
-      #
-      # @example
-      #   Virtus::Coercion::Fixnum.to_decimal(1)  # => BigDecimal('1.0')
-      #
-      # @param [Fixnum] value
-      #
-      # @return [BigDecimal]
-      #
-      # @api public
-      def self.to_decimal(value)
-        to_string(value).to_d
+      def self.to_integer(value)
+        value
       end
 
       # Coerce given value to a Boolean
