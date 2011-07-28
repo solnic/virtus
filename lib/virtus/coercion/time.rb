@@ -3,56 +3,22 @@ module Virtus
 
     # Coerce Time values
     class Time < Object
+      extend TimeCoercions
+
       primitive ::Time
 
-      # Coerce given value to String
+      # Passthrough the value
       #
       # @example
-      #   Virtus::Coercion::Time.to_string(time)  # => "Wed Jul 20 10:30:41 -0700 2011"
+      #   Virtus::Coercion::DateTime.to_time(time)  # => Time object
       #
-      # @param [Time] value
-      #
-      # @return [String]
-      #
-      # @api public
-      def self.to_string(value)
-        value.to_s
-      end
-
-      # Coerce given value to DateTime
-      #
-      # @example
-      #   Virtus::Coercion::Time.to_datetime(time)  # => DateTime object
-      #
-      # @param [Time] value
-      #
-      # @return [DateTime]
-      #
-      # @api public
-      def self.to_datetime(value)
-        if value.respond_to?(:to_datetime)
-          value.to_datetime
-        else
-          String.to_datetime(to_string(value))
-        end
-      end
-
-      # Coerce given value to Date
-      #
-      # @example
-      #   Virtus::Coercion::Time.to_date(date)  # => Date object
-      #
-      # @param [Time] value
+      # @param [DateTime] value
       #
       # @return [Date]
       #
       # @api public
-      def self.to_date(value)
-        if value.respond_to?(:to_date)
-          value.to_date
-        else
-          String.to_date(to_string(value))
-        end
+      def self.to_time(value)
+        value
       end
 
     end # class Time
