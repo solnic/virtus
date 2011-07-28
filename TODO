@@ -1,5 +1,4 @@
-* Extract options API to a shared module between Attribute & Coercion
-* Extract common coercion methods into shared modules
+* Add unit specs for Options module
 * Make #to_time #to_date and #to_datetime work on Ruby 1.8.7 instead of typecasting to string and parsing the value
 * Add support for default values
 * Add support for defining attributes on Modules
