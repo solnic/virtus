@@ -3,11 +3,7 @@ module Virtus
 
     # Coerce Fixnum values
     class Fixnum < Object
-
-      # @api private
-      def self.primitive
-        ::Fixnum
-      end
+      primitive ::Fixnum
 
       # Coerce given value to String
       #

@@ -3,11 +3,7 @@ module Virtus
 
     # Coerce DateTime values
     class DateTime < Object
-
-      # @api private
-      def self.primitive
-        ::DateTime
-      end
+      primitive ::DateTime
 
       # Coerce given value to String
       #

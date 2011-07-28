@@ -3,13 +3,9 @@ module Virtus
 
     # Coerce BigDecimal values
     class BigDecimal < Object
+      primitive ::BigDecimal
 
       FLOAT_FORMAT = 'F'.freeze
-
-      # @api private
-      def self.primitive
-        ::BigDecimal
-      end
 
       # Coerce given value to String
       #

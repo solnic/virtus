@@ -3,11 +3,7 @@ module Virtus
 
     # Coerce Object values
     class Object < Coercion
-
-      # @api private
-      def self.primitive
-        ::Object
-      end
+      primitive ::Object
 
       # Passthrough given value
       #

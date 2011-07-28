@@ -3,11 +3,7 @@ module Virtus
 
     # Coerce Symbol values
     class Symbol < Object
-
-      # @api private
-      def self.primitive
-        ::Symbol
-      end
+      primitive ::Symbol
 
       # Coerce given value to String
       #

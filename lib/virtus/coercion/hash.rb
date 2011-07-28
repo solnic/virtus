@@ -3,12 +3,9 @@ module Virtus
 
     # Coerce Hash values
     class Hash < Object
-      TIME_SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
+      primitive ::Hash
 
-      # @api private
-      def self.primitive
-        ::Hash
-      end
+      TIME_SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
 
       # Creates an Array instance from a Hash
       #

@@ -3,11 +3,7 @@ module Virtus
 
     # Coerce Float values
     class Float < Object
-
-      # @api private
-      def self.primitive
-        ::Float
-      end
+      primitive ::Float
 
       # Coerce given value to String
       #

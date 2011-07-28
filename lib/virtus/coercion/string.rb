@@ -3,6 +3,8 @@ module Virtus
 
     # Coerce String values
     class String < Object
+      primitive ::String
+
       TRUE_VALUES  = %w[ 1 t true  ].freeze
       FALSE_VALUES = %w[ 0 f false ].freeze
       BOOLEAN_MAP  = ::Hash[ TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze

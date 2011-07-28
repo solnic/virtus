@@ -7,6 +7,9 @@ module Virtus
   class Coercion
     extend DescendantsTracker
     extend TypeLookup
+    extend Options
+
+    accept_options :primitive
 
     # Return a class that matches given name
     #
