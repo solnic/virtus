@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Coercion::Fixnum, '.to_boolean' do
+describe Virtus::Coercion::Integer, '.to_boolean' do
   subject { object.to_boolean(fixnum) }
 
   let(:object) { described_class }

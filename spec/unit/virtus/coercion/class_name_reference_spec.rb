@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Coercion, '#[]' do
-  %w[ Decimal Date DateTime FalseClass Fixnum Float Hash String Symbol Time TrueClass ].each do |class_name|
+  %w[ Decimal Date DateTime FalseClass Integer Float Hash String Symbol Time TrueClass ].each do |class_name|
     context "with #{class_name.inspect}" do
       subject { described_class[class_name] }
 

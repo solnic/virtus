@@ -37,7 +37,7 @@ require 'virtus/attribute_set'
 
 require 'virtus/coercion'
 require 'virtus/coercion/object'
-require 'virtus/coercion/fixnum'
+require 'virtus/coercion/integer'
 require 'virtus/coercion/float'
 require 'virtus/coercion/decimal'
 require 'virtus/coercion/false_class'

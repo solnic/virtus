@@ -2,7 +2,7 @@ module Virtus
   class Coercion
 
     # Coerce Fixnum values
-    class Fixnum < Object
+    class Integer < Object
       primitive ::Fixnum
 
       # Coerce given value to String

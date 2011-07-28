@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Coercion::Fixnum, '.to_decimal' do
+describe Virtus::Coercion::Integer, '.to_decimal' do
   subject { object.to_decimal(fixnum) }
 
   let(:object) { described_class }
