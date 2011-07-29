@@ -26,7 +26,7 @@ LongParameterList:
   enabled: true
   overrides: {}
 FeatureEnvy:
-  exclude: []
+  exclude: [Virtus::Coercion::TimeCoercions#to_string, Virtus::Coercion::TimeCoercions#coerce_with_method]
   enabled: true
 ClassVariable:
   exclude: []
