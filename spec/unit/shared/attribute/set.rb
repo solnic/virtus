@@ -1,42 +1,37 @@
 shared_examples_for 'Attribute#set' do
-  let(:model) do
-    Class.new { include Virtus }
-  end
+  subject { attribute.set(instance, value) }
 
-  let(:attribute) do
-    model.attribute(attribute_name, described_class).attributes[attribute_name]
-  end
+  let(:attribute) { described_class.new(attribute_name) }
+  let(:model)     { Class.new }
+  let(:instance)  { model.new }
 
-  let(:object) do
-    Class.new
-  end
+  before { subject }
 
   context "with nil" do
-    subject { attribute.set(object, nil) }
+    let(:value) { nil }
 
-    it "set the ivar" do
-      subject
-      object.instance_variable_get(attribute.instance_variable_name).should be(nil)
-    end
+    it { should be(nil) }
 
-    it "returns nil" do
-      subject.should be(nil)
+    it "sets the value in an ivar" do
+      instance.instance_variable_get(attribute.instance_variable_name).should be(nil)
     end
   end
 
   context "with a primitive value" do
-    before { attribute.set(object, attribute_value) }
+    let(:value) { attribute_value }
+
+    it { should == attribute_value }
 
     it "sets the value in an ivar" do
-      object.instance_variable_get(attribute.instance_variable_name).should eql(attribute_value)
+      instance.instance_variable_get(attribute.instance_variable_name).should eql(attribute_value)
     end
   end
 
   context "with a non-primitive value" do
-    before { attribute.set(object, attribute_value_other) }
+    let(:value) { attribute_value_other }
 
-    it "sets the value in an ivar converted to the primitive type" do
-      object.instance_variable_get(attribute.instance_variable_name).should be_kind_of(described_class.primitive)
+    it "sets the value in an ivar coerced to the primitive type" do
+      instance.instance_variable_get(attribute.instance_variable_name).should be_kind_of(described_class.primitive)
     end
   end
 end
