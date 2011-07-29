@@ -20,8 +20,9 @@ Gem::Specification.new do |s|
   s.files = [
     ".rvmrc",
     ".travis.yml",
+    ".yardopts",
     "Gemfile",
-    "History.txt",
+    "History.md",
     "LICENSE",
     "README.md",
     "Rakefile",
@@ -78,6 +79,7 @@ Gem::Specification.new do |s|
     "spec/unit/shared/attribute.rb",
     "spec/unit/shared/attribute/accept_options.rb",
     "spec/unit/shared/attribute/accepted_options.rb",
+    "spec/unit/shared/attribute/default_defined.rb",
     "spec/unit/shared/attribute/get.rb",
     "spec/unit/shared/attribute/primitive.rb",
     "spec/unit/shared/attribute/set.rb",
