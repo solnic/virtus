@@ -72,6 +72,16 @@ describe Virtus::Attribute::Decimal do
       it { should eql(BigDecimal('-24.0')) }
     end
 
+    context 'with a positive bignum' do
+      let(:value) { 1311936052 }
+      it { should eql(BigDecimal('1311936052.0')) }
+    end
+
+    context 'with a negative bignum' do
+      let(:value) { -1311936052 }
+      it { should eql(BigDecimal('-1311936052.0')) }
+    end
+
     context 'with a zero float' do
       let(:value) { 0.0 }
       it { should eql(BigDecimal('0.0')) }

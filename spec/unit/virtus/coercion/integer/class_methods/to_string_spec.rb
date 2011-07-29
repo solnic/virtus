@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 describe Virtus::Coercion::Integer, '.to_string' do
-  subject { object.to_string(fixnum) }
+  subject { object.to_string(integer) }
 
-  let(:object) { described_class }
-  let(:fixnum) { 1               }
+  let(:object)  { described_class }
+  let(:integer) { 1               }
 
   it { should be_instance_of(String) }
 

@@ -3,7 +3,7 @@ module Virtus
 
     # Coerce Fixnum values
     class Integer < Numeric
-      primitive ::Fixnum
+      primitive ::Integer
 
       # Coerce given value to String
       #

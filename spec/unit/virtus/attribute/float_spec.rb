@@ -72,6 +72,16 @@ describe Virtus::Attribute::Float do
       it { should eql(-24.0) }
     end
 
+    context 'with a positive bignum' do
+      let(:value) { 1311935550 }
+      it { should eql(1311935550.0) }
+    end
+
+    context 'with a negative bignum' do
+      let(:value) { -1311935550 }
+      it { should eql(-1311935550.0) }
+    end
+
     context 'with a zero decimal' do
       let(:value) { BigDecimal('0.0') }
       it { should eql(0.0) }
