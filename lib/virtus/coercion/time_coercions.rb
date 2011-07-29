@@ -9,7 +9,7 @@ module Virtus
       # @example
       #   Virtus::Coercion::Time.to_string(time)  # => "Wed Jul 20 10:30:41 -0700 2011"
       #
-      # @param [Time] value
+      # @param [Date,Time,DateTime] value
       #
       # @return [String]
       #
@@ -21,9 +21,9 @@ module Virtus
       # Coerce given value to Time
       #
       # @example
-      #   Virtus::Coercion::DateTime.to_time(date)  # => Time object
+      #   Virtus::Coercion::DateTime.to_time(datetime)  # => Time object
       #
-      # @param [DateTime] value
+      # @param [Date,DateTime] value
       #
       # @return [Time]
       #
@@ -37,7 +37,7 @@ module Virtus
       # @example
       #   Virtus::Coercion::Time.to_datetime(time)  # => DateTime object
       #
-      # @param [Time] value
+      # @param [Date,Time] value
       #
       # @return [DateTime]
       #
@@ -49,9 +49,9 @@ module Virtus
       # Coerce given value to Date
       #
       # @example
-      #   Virtus::Coercion::Time.to_date(date)  # => Date object
+      #   Virtus::Coercion::Time.to_date(time)  # => Date object
       #
-      # @param [Time] value
+      # @param [Time,DateTime] value
       #
       # @return [Date]
       #
