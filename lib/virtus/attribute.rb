@@ -65,11 +65,17 @@ module Virtus
     # @api private
     attr_reader :coercion_method
 
+    # Returns default value
+    #
+    # @return [Object]
+    #
+    # @api private
     attr_reader :default
 
     DEFAULT_ACCESSOR = :public
 
-    OPTIONS = [ :primitive, :accessor, :reader, :writer, :coercion_method, :default ].freeze
+    OPTIONS = [ :primitive, :accessor, :reader,
+                :writer, :coercion_method, :default ].freeze
 
     accept_options *OPTIONS
 
