@@ -1,5 +1,4 @@
-shared_examples_for "Attribute" do
-  it_behaves_like 'Attribute.options'
+shared_examples_for 'Attribute' do
   it_behaves_like 'Attribute.accept_options'
   it_behaves_like 'Attribute.accepted_options'
   it_behaves_like 'Attribute.primitive?'
