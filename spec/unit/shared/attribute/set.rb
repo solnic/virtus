@@ -8,7 +8,7 @@ shared_examples_for 'Attribute#set' do
   end
 
   let(:object) do
-    model.new
+    Class.new
   end
 
   context "with nil" do

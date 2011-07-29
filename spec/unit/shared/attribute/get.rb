@@ -1,29 +1,19 @@
 shared_examples_for 'Attribute#get' do
-  let(:model) do
-    Class.new { include Virtus }
-  end
+  subject { attribute.get(instance) }
 
-  let(:attribute) do
-    model.attribute(attribute_name, described_class).attributes[attribute_name]
-  end
+  let(:attribute) { described_class.new(attribute_name) }
+  let(:model)     { Class.new }
+  let(:instance)  { model.new }
 
-  let(:object) do
-    model.new
-  end
+  before { attribute.set(instance, value) }
 
   context "when a non-nil value is set" do
-    before { attribute.set(object, attribute_value) }
-
-    subject { attribute.get(object) }
-
+    let(:value) { attribute_value }
     it { should eql(attribute_value) }
   end
 
   context "when nil is set" do
-    before { attribute.set(object, nil) }
-
-    subject { attribute.get(object) }
-
-    it { should be(nil) }
+    let(:value) { nil }
+    it { should be(value) }
   end
 end
