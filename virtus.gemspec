@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{virtus}
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-07-28}
+  s.date = %q{2011-07-29}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -79,7 +79,6 @@ Gem::Specification.new do |s|
     "spec/unit/shared/attribute/accept_options.rb",
     "spec/unit/shared/attribute/accepted_options.rb",
     "spec/unit/shared/attribute/get.rb",
-    "spec/unit/shared/attribute/options.rb",
     "spec/unit/shared/attribute/primitive.rb",
     "spec/unit/shared/attribute/set.rb",
     "spec/unit/virtus/attribute/array_spec.rb",
@@ -142,6 +141,9 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/instance_methods/attributes_spec.rb",
     "spec/unit/virtus/instance_methods/element_reference_spec.rb",
     "spec/unit/virtus/instance_methods/element_set_spec.rb",
+    "spec/unit/virtus/options/accept_options_spec.rb",
+    "spec/unit/virtus/options/accepted_options_spec.rb",
+    "spec/unit/virtus/options/options_spec.rb",
     "spec/unit/virtus/type_lookup/determine_type_spec.rb",
     "spec/unit/virtus/type_lookup/primitive_spec.rb",
     "tasks/metrics/ci.rake",
