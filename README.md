@@ -63,6 +63,13 @@ coercion classes. Take a look:
      end
     end
 
+    class User
+      include Virtus
+
+      attribute :name,     String
+      attribute :password, MD5
+    end
+
     user = User.new(:name => 'Piotr', :password => 'foobar')
     user.name     # => 'Piotr'
     user.password # => '3858f62230ac3c915f300c664312c63f'
