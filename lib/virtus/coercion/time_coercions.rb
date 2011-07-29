@@ -29,11 +29,7 @@ module Virtus
       #
       # @api public
       def to_time(value)
-        if value.respond_to?(:to_time)
-          value.to_time
-        else
-          String.to_time(to_string(value))
-        end
+        coerce_with_method(value, :to_time)
       end
 
       # Coerce given value to DateTime
@@ -47,11 +43,7 @@ module Virtus
       #
       # @api public
       def to_datetime(value)
-        if value.respond_to?(:to_datetime)
-          value.to_datetime
-        else
-          String.to_datetime(to_string(value))
-        end
+        coerce_with_method(value, :to_datetime)
       end
 
       # Coerce given value to Date
@@ -65,10 +57,26 @@ module Virtus
       #
       # @api public
       def to_date(value)
-        if value.respond_to?(:to_date)
-          value.to_date
+        coerce_with_method(value, :to_date)
+      end
+
+      private
+
+      # Try to use native coercion method on the given value
+      #
+      # Falls back to String-based parsing
+      #
+      # @param [Date,DateTime,Time] value
+      # @param [Symbol] method
+      #
+      # @return [Date,DateTime,Time]
+      #
+      # @api private
+      def coerce_with_method(value, method)
+        if value.respond_to?(method)
+          value.send(method)
         else
-          String.to_date(to_string(value))
+          String.send(method, to_string(value))
         end
       end
 
