@@ -10,13 +10,10 @@ data type coercions.
 
 ## Installation
 
-```bash
     gem i virtus
-```
 
 ## Basic Usage
 
-```ruby
     require 'virtus'
 
     class User
@@ -42,11 +39,36 @@ data type coercions.
 
     user.birthday = 'November 18th, 1983'
     user.birthday  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
-```
+
+## Coercions
+
+Virtus comes with a builtin coercion library. It's super easy to add your own
+coercion classes. Take a look:
+
+    require 'virtus'
+    require 'digest/md5'
+
+    class MD5 < Virtus::Attribute::Object
+     primitive       String
+     coercion_method :to_md5
+    end
+
+    module Virtus
+     class Coercion
+       class String < Virtus::Coercion::Object
+         def self.to_md5(value)
+           Digest::MD5.hexdigest(value)
+         end
+       end
+     end
+    end
+
+    user = User.new(:name => 'Piotr', :password => 'foobar')
+    user.name     # => 'Piotr'
+    user.password # => '3858f62230ac3c915f300c664312c63f'
 
 ## Custom Attributes
 
-```ruby
     require 'virtus'
     require 'json'
 
@@ -72,36 +94,6 @@ data type coercions.
 
     user.info = '{"email":"john@domain.com"}'
     user.info  # => {"email"=>"john@domain.com"}
-```
-
-## Coercions
-
-Virtus comes with a builtin coercion library. It's super easy to add your own
-coercion classes. Take a look:
-
-```ruby
-    require 'virtus'
-    require 'digest/md5'
-
-    class MD5 < Virtus::Attribute::Object
-     primitive       String
-     coercion_method :to_md5
-    end
-
-    module Virtus
-     class Coercion
-       class String < Virtus::Coercion::Object
-         def self.to_md5(value)
-           Digest::MD5.hexdigest(value)
-         end
-       end
-     end
-    end
-
-    user = User.new(:name => 'Piotr', :password => 'foobar')
-    user.name     # => 'Piotr'
-    user.password # => '3858f62230ac3c915f300c664312c63f'
-```
 
 ## Contributors
 
