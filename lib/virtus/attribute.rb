@@ -106,6 +106,13 @@ module Virtus
 
     # Returns true if a default value is set
     #
+    # @example
+    #   attribute = Virtus::Attribute::String.new(:name)
+    #   attribute.default_defined? # => false
+    #
+    #   attribute = Virtus::Attribute::String.new(:name, :default => 'john')
+    #   attribute.default_defined? # => true
+    #
     # @return [TrueClass, FalseClass]
     #
     # @api public
