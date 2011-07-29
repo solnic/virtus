@@ -5,6 +5,7 @@ describe Virtus::Attribute::Float do
     let(:attribute_name)        { :score }
     let(:attribute_value)       { 12.34 }
     let(:attribute_value_other) { "12.34" }
+    let(:attribute_default)     { 0.0 }
   end
 
   describe '#coerce' do

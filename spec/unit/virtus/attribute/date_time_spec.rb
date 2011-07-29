@@ -5,6 +5,7 @@ describe Virtus::Attribute::DateTime do
     let(:attribute_name)        { :created_at }
     let(:attribute_value)       { DateTime.now }
     let(:attribute_value_other) { DateTime.now.to_s }
+    let(:attribute_default)     { DateTime.now-1 }
   end
 
   describe '#coerce' do

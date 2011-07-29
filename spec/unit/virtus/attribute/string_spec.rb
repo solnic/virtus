@@ -5,6 +5,7 @@ describe Virtus::Attribute::String do
     let(:attribute_name)        { :email }
     let(:attribute_value)       { 'red john' }
     let(:attribute_value_other) { :'red john' }
+    let(:attribute_default)     { '' }
   end
 
   describe '#coerce' do

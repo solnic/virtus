@@ -5,6 +5,7 @@ describe Virtus::Attribute::Integer do
     let(:attribute_name)        { :age }
     let(:attribute_value)       { 28 }
     let(:attribute_value_other) { "28" }
+    let(:attribute_default)     { 0 }
   end
 
   describe '#coerce' do

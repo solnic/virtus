@@ -65,9 +65,11 @@ module Virtus
     # @api private
     attr_reader :coercion_method
 
+    attr_reader :default
+
     DEFAULT_ACCESSOR = :public
 
-    OPTIONS = [ :primitive, :accessor, :reader, :writer, :coercion_method ].freeze
+    OPTIONS = [ :primitive, :accessor, :reader, :writer, :coercion_method, :default ].freeze
 
     accept_options *OPTIONS
 
@@ -89,10 +91,26 @@ module Virtus
       @instance_variable_name = "@#{@name}".freeze
       @coercion_method        = @options.fetch(:coercion_method)
 
+      if @options.has_key?(:default)
+        @default = @options[:default]
+      end
+
       set_visibility
     end
 
+    # Returns true if a default value is set
+    #
+    # @return [TrueClass, FalseClass]
+    #
+    # @api public
+    def default_defined?
+      instance_variable_defined?(:@default)
+    end
+
     # Returns value of an attribute for the given instance
+    #
+    # Sets the default value if an ivar is not set and default
+    # value is configured
     #
     # @example
     #   attribute.get(instance)  # => value
@@ -102,7 +120,11 @@ module Virtus
     #
     # @api public
     def get(instance)
-      get!(instance)
+      if instance.instance_variable_defined?(instance_variable_name)
+        get!(instance)
+      elsif default_defined?
+        set_default(instance)
+      end
     end
 
     # Returns the instance variable of the attribute
@@ -193,6 +215,18 @@ module Virtus
     end
 
   private
+
+    # Sets a default value
+    #
+    # @param [Object]
+    #
+    # @return [Object]
+    #   default value that was set
+    #
+    # @api private
+    def set_default(instance)
+      set!(instance, default)
+    end
 
     # Sets visibility of reader/write methods based on the options hash
     #

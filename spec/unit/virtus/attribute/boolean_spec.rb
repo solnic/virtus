@@ -5,6 +5,7 @@ describe Virtus::Attribute::Boolean do
     let(:attribute_name)        { :is_admin }
     let(:attribute_value)       { true }
     let(:attribute_value_other) { '1' }
+    let(:attribute_default)     { true }
   end
 
   describe "accessor names" do

@@ -5,6 +5,7 @@ describe Virtus::Attribute::Time do
     let(:attribute_name)        { :birthday }
     let(:attribute_value)       { Time.now }
     let(:attribute_value_other) { Time.now.to_s }
+    let(:attribute_default)     { Time.now-1 }
   end
 
   describe '#coerce' do

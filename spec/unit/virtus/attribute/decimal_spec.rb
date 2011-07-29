@@ -5,6 +5,7 @@ describe Virtus::Attribute::Decimal do
     let(:attribute_name)        { :price }
     let(:attribute_value)       { BigDecimal("12.3456789") }
     let(:attribute_value_other) { "12.3456789" }
+    let(:attribute_default)     { BigDecimal('0') }
   end
 
   describe '#coerce' do

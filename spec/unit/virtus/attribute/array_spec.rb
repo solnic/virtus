@@ -5,6 +5,7 @@ describe Virtus::Attribute::Array do
     let(:attribute_name)        { :colors }
     let(:attribute_value)       { [ 'red', 'green', 'blue' ] }
     let(:attribute_value_other) { [ 'orange', 'yellow', 'gray' ] }
+    let(:attribute_default)     { [] }
   end
 
   describe '#coerce' do
