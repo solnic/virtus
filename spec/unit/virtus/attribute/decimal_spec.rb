@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe Virtus::Attribute::Decimal do
   it_should_behave_like 'Attribute' do
-    let(:attribute_name)        { :price }
-    let(:attribute_value)       { BigDecimal("12.3456789") }
-    let(:attribute_value_other) { "12.3456789" }
-    let(:attribute_default)     { BigDecimal('0') }
+    let(:attribute_name)         { :price }
+    let(:attribute_value)        { BigDecimal("12.3456789") }
+    let(:attribute_value_other)  { "12.3456789" }
+    let(:attribute_default)      { BigDecimal('0') }
+    let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :price } }
   end
 
   describe '#coerce' do

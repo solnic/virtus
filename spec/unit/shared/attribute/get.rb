@@ -20,9 +20,25 @@ shared_examples_for 'Attribute#get' do
     end
   end
 
-  context 'with default' do
-    let(:attribute) { described_class.new(attribute_name, :default => attribute_default) }
+  context 'with default value' do
+    context 'set to proc' do
+      let(:attribute) do
+        described_class.new(attribute_name, :default => attribute_default_proc)
+      end
 
-    it { should == attribute_default }
+      let(:evaluated_proc_value) do
+        attribute.default.call(instance, attribute)
+      end
+
+      it { should == evaluated_proc_value }
+    end
+
+    context 'not set to proc' do
+      let(:attribute) do
+        described_class.new(attribute_name, :default => attribute_default)
+      end
+
+      it { should == attribute_default }
+    end
   end
 end

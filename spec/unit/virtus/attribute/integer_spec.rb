@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe Virtus::Attribute::Integer do
   it_should_behave_like 'Attribute' do
-    let(:attribute_name)        { :age }
-    let(:attribute_value)       { 28 }
-    let(:attribute_value_other) { "28" }
-    let(:attribute_default)     { 0 }
+    let(:attribute_name)         { :age }
+    let(:attribute_value)        { 28 }
+    let(:attribute_value_other)  { "28" }
+    let(:attribute_default)      { 0 }
+    let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :age } }
   end
 
   describe '#coerce' do

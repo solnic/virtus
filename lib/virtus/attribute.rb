@@ -96,8 +96,8 @@ module Virtus
 
       @instance_variable_name = "@#{@name}".freeze
       @coercion_method        = @options.fetch(:coercion_method)
-      @default                = @options[:default]
 
+      set_default
       set_visibility
     end
 
@@ -117,7 +117,7 @@ module Virtus
       if instance.instance_variable_defined?(instance_variable_name)
         get!(instance)
       else
-        set_default(instance)
+        set_default_value(instance)
       end
     end
 
@@ -218,8 +218,8 @@ module Virtus
     #   default value that was set
     #
     # @api private
-    def set_default(instance)
-      set!(instance, default)
+    def set_default_value(instance)
+      set!(instance, default.kind_of?(Proc) ? default.call(instance, self) : default)
     end
 
     # Sets visibility of reader/write methods based on the options hash
@@ -231,6 +231,22 @@ module Virtus
       default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
       @reader_visibility = @options.fetch(:reader,   default_accessor)
       @writer_visibility = @options.fetch(:writer,   default_accessor)
+    end
+
+    # Sets default value option
+    #
+    # @return [Object]
+    #
+    # @api private
+    def set_default
+      default = @options[:default]
+
+      @default = case default
+                 when Proc, ::NilClass, ::TrueClass, ::FalseClass, ::Numeric, ::Symbol
+                   default
+                 else
+                   default.dup
+                 end
     end
 
   end # class Attribute
