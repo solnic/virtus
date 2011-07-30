@@ -96,28 +96,9 @@ module Virtus
 
       @instance_variable_name = "@#{@name}".freeze
       @coercion_method        = @options.fetch(:coercion_method)
-
-      if @options.has_key?(:default)
-        @default = @options[:default]
-      end
+      @default                = @options[:default]
 
       set_visibility
-    end
-
-    # Returns true if a default value is set
-    #
-    # @example
-    #   attribute = Virtus::Attribute::String.new(:name)
-    #   attribute.default_defined? # => false
-    #
-    #   attribute = Virtus::Attribute::String.new(:name, :default => 'john')
-    #   attribute.default_defined? # => true
-    #
-    # @return [TrueClass, FalseClass]
-    #
-    # @api public
-    def default_defined?
-      instance_variable_defined?(:@default)
     end
 
     # Returns value of an attribute for the given instance
@@ -135,7 +116,7 @@ module Virtus
     def get(instance)
       if instance.instance_variable_defined?(instance_variable_name)
         get!(instance)
-      elsif default_defined?
+      else
         set_default(instance)
       end
     end
