@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
     "config/site.reek",
     "config/yardstick.yml",
     "examples/custom_coercion_spec.rb",
+    "examples/default_values_spec.rb",
     "lib/virtus.rb",
     "lib/virtus/attribute.rb",
     "lib/virtus/attribute/array.rb",
