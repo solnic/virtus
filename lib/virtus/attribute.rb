@@ -103,6 +103,10 @@ module Virtus
 
     # Returns a concise string representation of the attribute instance
     #
+    # @example
+    #   attribute = Virtus::Attribute::String.new(:name)
+    #   attribute.inspect # => #<Virtus::Attribute::String @name=:name>
+    #
     # @return [String]
     #
     # @api public
