@@ -3,6 +3,8 @@
 * [BREAKING CHANGE] Moved Virtus.determine_type to a shared module Virtus::TypeLookup (dkubb)
 * [BREAKING CHANGE] Attribute#typecast_to_primitive has been replaced by Attribute#coerce (solnic)
 * [BREAKING CHANGE] Attribute#typecast logic was moved to Attribute#set which is now a public method (solnic)
+* [feature] Added support for default values (solnic)
+* [general] Added custom inspect for Attribute classes (solnic)
 * [general] Added backports as a development dependency (dkubb)
 * [changed] Options API has been extracted from Attribute to a support module Virtus::Options (solnic)
 * [changed] Typecast classes have been replace by a new hierarchy of Coercion classes like Coercion::String, Coercion::Integer etc. (solnic)
