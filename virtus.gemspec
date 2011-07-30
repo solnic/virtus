@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-07-29}
+  s.date = %q{2011-07-30}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -79,7 +79,6 @@ Gem::Specification.new do |s|
     "spec/unit/shared/attribute.rb",
     "spec/unit/shared/attribute/accept_options.rb",
     "spec/unit/shared/attribute/accepted_options.rb",
-    "spec/unit/shared/attribute/default_defined.rb",
     "spec/unit/shared/attribute/get.rb",
     "spec/unit/shared/attribute/primitive.rb",
     "spec/unit/shared/attribute/set.rb",
