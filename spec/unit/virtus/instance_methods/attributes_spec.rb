@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# TODO: split this into separate files - solnic
 describe Virtus do
   let(:model) do
     Class.new do
@@ -22,6 +23,12 @@ describe Virtus do
   describe '#attributes' do
     it "returns a hash of attributes" do
       object.attributes.should eql(attributes)
+    end
+  end
+
+  describe '#to_hash' do
+    it 'returns attributes' do
+      object.to_hash.should == object.attributes
     end
   end
 

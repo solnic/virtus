@@ -117,6 +117,13 @@ module Virtus
       end
     end
 
+    # @see Virtus::InstanceMethods#attributes
+    #
+    # @api public
+    def to_hash
+      attributes
+    end
+
   private
 
     # Returns a value of the attribute with the given name
