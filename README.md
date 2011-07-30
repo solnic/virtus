@@ -40,6 +40,22 @@ data type coercions.
     user.birthday = 'November 18th, 1983'
     user.birthday  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 
+## Default values
+
+    require 'virtus'
+
+    class Page
+      include Virtus
+
+      attribute :title,      String
+      attribute :slug,       String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }
+      attribute :view_count, Integer, :default => 0
+    end
+
+    page = Page.new(:title => 'Virtus Is Awesome')
+    page.slug # => 'virtus-is-awesome'
+    page.view_count # => 0
+
 ## Coercions
 
 Virtus comes with a builtin coercion library. It's super easy to add your own
