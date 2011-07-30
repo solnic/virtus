@@ -101,6 +101,15 @@ module Virtus
       set_visibility
     end
 
+    # Returns a concise string representation of the attribute instance
+    #
+    # @return [String]
+    #
+    # @api public
+    def inspect
+      "#<#{self.class.name} @name=#{name.inspect}>"
+    end
+
     # Returns value of an attribute for the given instance
     #
     # Sets the default value if an ivar is not set and default
