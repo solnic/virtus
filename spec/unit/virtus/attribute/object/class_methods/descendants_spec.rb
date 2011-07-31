@@ -9,7 +9,7 @@ describe Virtus::Attribute::Object, '.descendants' do
       Virtus::Attribute::Float,   Virtus::Attribute::Decimal,
       Virtus::Attribute::Numeric, Virtus::Attribute::DateTime,
       Virtus::Attribute::Date,    Virtus::Attribute::Boolean,
-      Virtus::Attribute::Array ]
+      Virtus::Attribute::Array,   Virtus::Attribute::Class ]
   end
 
   it "should return all known attribute classes" do

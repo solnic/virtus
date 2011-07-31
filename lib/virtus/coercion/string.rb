@@ -11,6 +11,17 @@ module Virtus
 
       NUMERIC_REGEXP = /\A(-?(?:0|[1-9]\d*)(?:\.\d+)?|(?:\.\d+))\z/.freeze
 
+      # Coerce give value to a constant
+      #
+      # @param [String] value
+      #
+      # @return [Object]
+      #
+      # @api public
+      def self.to_class(value)
+        ::Object.const_get(value)
+      end
+
       # Coerce given value to Time
       #
       # @example
