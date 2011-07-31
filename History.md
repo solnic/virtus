@@ -1,4 +1,8 @@
-# v0.0.6 to-be-released
+# v0.0.7 to-be-released
+
+[Compare v0.0.5..master](https://github.com/solnic/virtus/compare/v0.0.5...master)
+
+# v0.0.6 2011-07-31
 
 * [BREAKING CHANGE] Moved Virtus.determine_type to a shared module Virtus::TypeLookup (dkubb)
 * [BREAKING CHANGE] Attribute#typecast_to_primitive has been replaced by Attribute#coerce (solnic)
@@ -10,7 +14,7 @@
 * [changed] Typecast classes have been replace by a new hierarchy of Coercion classes like Coercion::String, Coercion::Integer etc. (solnic)
 * [changed] Attribute#get, #get!, #set, #set! & #coerce are now part of the public API (solnic)
 
-[Compare v0.0.5..master](https://github.com/solnic/virtus/compare/v0.0.5...master)
+[Compare v0.0.5..v0.0.6](https://github.com/solnic/virtus/compare/v0.0.5...v0.0.6)
 
 # v0.0.5 2011-07-10
 
