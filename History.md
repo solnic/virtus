@@ -1,5 +1,8 @@
 # v0.0.7 to-be-released
 
+* [BREAKING CHANGE] Attribute.primitive? has been removed (solnic)
+* [general] Default value logic has been extracted into Attribute::DefaultValue class (solnic)
+
 [Compare v0.0.5..master](https://github.com/solnic/virtus/compare/v0.0.5...master)
 
 # v0.0.6 2011-07-31
