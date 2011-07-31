@@ -83,7 +83,6 @@ Gem::Specification.new do |s|
     "spec/unit/shared/attribute/accepted_options.rb",
     "spec/unit/shared/attribute/get.rb",
     "spec/unit/shared/attribute/inspect.rb",
-    "spec/unit/shared/attribute/primitive.rb",
     "spec/unit/shared/attribute/set.rb",
     "spec/unit/virtus/attribute/array_spec.rb",
     "spec/unit/virtus/attribute/boolean_spec.rb",
