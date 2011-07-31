@@ -5,6 +5,13 @@ describe Virtus::ClassMethods, '.attribute' do
     Class.new { include Virtus }
   end
 
+  (Virtus::Attribute.descendants + [Virtus::Attribute::Object]).each do |attribute_class|
+    context "with #{attribute_class.inspect}" do
+      subject { described_class.attribute(:name, attribute_class) }
+      specify { subject.attributes[:name].should be_instance_of(attribute_class) }
+    end
+  end
+
   specify { described_class.should respond_to(:attribute)  }
 
   context "in the class" do
