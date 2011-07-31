@@ -6,9 +6,17 @@ module Virtus
       DUP_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
                       ::Numeric,  ::Symbol ].freeze
 
+      # Returns the attribute associated with this default value instance
+      #
+      # @return [Virtus::Attribute::Object]
+      #
       # @api private
       attr_reader :attribute
 
+      # Returns the value instance
+      #
+      # @return [Object]
+      #
       # @api private
       attr_reader :value
 

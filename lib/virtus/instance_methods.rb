@@ -117,7 +117,20 @@ module Virtus
       end
     end
 
-    # @see Virtus::InstanceMethods#attributes
+    # Returns a hash of all publicly accessible attributes
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new(:name => 'John', :age => 28)
+    #   user.attributes  # => { :name => 'John', :age => 28 }
+    #
+    # @return [Hash]
     #
     # @api public
     def to_hash
