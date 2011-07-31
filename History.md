@@ -1,7 +1,9 @@
 # v0.0.7 to-be-released
 
 * [BREAKING CHANGE] Attribute.primitive? has been removed (solnic)
+* [fixed] Added missing coercion_method setting to Virtus::Attribute::Object (solnic)
 * [general] Default value logic has been extracted into Attribute::DefaultValue class (solnic)
+* [added] Virtus::Attribute::Class (solnic)
 
 [Compare v0.0.5..master](https://github.com/solnic/virtus/compare/v0.0.5...master)
 
