@@ -1,3 +1,2 @@
-* Add Attribute::Class and Coercion::Class
 * Make #to_time #to_date and #to_datetime work on Ruby 1.8.7 instead of typecasting to string and parsing the value
 * Add support for defining attributes on Modules
