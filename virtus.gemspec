@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{virtus}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-07-30}
+  s.date = %q{2011-07-31}
   s.description = %q{Attributes for your plain ruby objects}
   s.email = [%q{piotr@rubyverse.com}]
   s.extra_rdoc_files = [
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
     "lib/virtus/attribute/date.rb",
     "lib/virtus/attribute/date_time.rb",
     "lib/virtus/attribute/decimal.rb",
+    "lib/virtus/attribute/default_value.rb",
     "lib/virtus/attribute/float.rb",
     "lib/virtus/attribute/hash.rb",
     "lib/virtus/attribute/integer.rb",
@@ -90,6 +91,8 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/attribute/date_spec.rb",
     "spec/unit/virtus/attribute/date_time_spec.rb",
     "spec/unit/virtus/attribute/decimal_spec.rb",
+    "spec/unit/virtus/attribute/default_value/class_methods/new_spec.rb",
+    "spec/unit/virtus/attribute/default_value/instance_methods/evaluate_spec.rb",
     "spec/unit/virtus/attribute/float_spec.rb",
     "spec/unit/virtus/attribute/hash_spec.rb",
     "spec/unit/virtus/attribute/integer_spec.rb",
