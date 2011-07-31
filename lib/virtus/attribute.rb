@@ -8,18 +8,6 @@ module Virtus
     extend TypeLookup
     extend Options
 
-    # Returns if the given value's class is an attribute's primitive
-    #
-    # @example
-    #   Virtus::Attribute::String.primitive?('String')  # => true
-    #
-    # @return [Boolean]
-    #
-    # @api public
-    def self.primitive?(value)
-      value.kind_of?(primitive)
-    end
-
     # Returns name of the attribute
     #
     # @example
