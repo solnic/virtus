@@ -13,12 +13,16 @@ module Virtus
 
       # Coerce give value to a constant
       #
+      # @example
+      #   Virtus::Coercion::String.to_class('String') # => String
+      #
       # @param [String] value
       #
       # @return [Object]
       #
       # @api public
       def self.to_class(value)
+        # TODO: add support for namespaced classes like 'Virtus::Attribute::String'
         ::Object.const_get(value)
       end
 
