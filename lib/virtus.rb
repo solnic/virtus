@@ -51,6 +51,7 @@ require 'virtus/coercion/time'
 require 'virtus/coercion/string'
 require 'virtus/coercion/symbol'
 
+require 'virtus/attribute/default_value'
 require 'virtus/attribute'
 require 'virtus/attribute/object'
 require 'virtus/attribute/array'

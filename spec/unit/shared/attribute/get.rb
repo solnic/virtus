@@ -27,7 +27,7 @@ shared_examples_for 'Attribute#get' do
       end
 
       let(:evaluated_proc_value) do
-        attribute.default.call(instance, attribute)
+        attribute.default.evaluate(attribute)
       end
 
       it { should == evaluated_proc_value }
