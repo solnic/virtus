@@ -5,6 +5,8 @@ module Virtus
     class Object < Coercion
       primitive ::Object
 
+      COERCION_METHOD_REGEXP = /\Ato_/.freeze
+
       # Passthrough given value
       #
       # @param [Object] value
@@ -13,7 +15,7 @@ module Virtus
       #
       # @api private
       def self.method_missing(method, *args)
-        if method.to_s[0, 3] == 'to_' && args.size == 1
+        if method.to_s =~ COERCION_METHOD_REGEXP && args.size == 1
           args.first
         else
           super
