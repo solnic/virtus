@@ -61,6 +61,6 @@ module Virtus
         to_string(value).to_d
       end
 
-    end
+    end # class Numeric
   end # class Coercion
 end # module Virtus
