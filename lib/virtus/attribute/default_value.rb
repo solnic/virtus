@@ -44,7 +44,7 @@ module Virtus
         callable? ? call(instance) : value
       end
 
-      private
+    private
 
       # Evaluates a proc value
       #

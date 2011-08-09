@@ -60,7 +60,7 @@ module Virtus
         coerce_with_method(value, :to_date)
       end
 
-      private
+    private
 
       # Try to use native coercion method on the given value
       #
