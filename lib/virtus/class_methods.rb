@@ -44,8 +44,8 @@ module Virtus
     # @api public
     def attribute(name, type, options = {})
       attribute = Attribute.determine_type(type).new(name, options)
-      define_attribute_methods(attribute)
-      add_attribute(attribute)
+      virtus_define_attribute_methods(attribute)
+      virtus_add_attribute(attribute)
       self
     end
 
@@ -98,7 +98,7 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def define_attribute_methods(attribute)
+    def virtus_define_attribute_methods(attribute)
       attribute.define_reader_method(self)
       attribute.define_writer_method(self)
       include self::AttributeMethods
@@ -111,7 +111,7 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def add_attribute(attribute)
+    def virtus_add_attribute(attribute)
       attributes << attribute
       descendants.each { |descendant| descendant.attributes.reset }
     end
