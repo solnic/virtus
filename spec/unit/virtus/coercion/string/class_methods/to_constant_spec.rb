@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus::Coercion::String, '.to_class' do
-  subject { object.to_class(string) }
+describe Virtus::Coercion::String, '.to_constant' do
+  subject { object.to_constant(string) }
 
   let(:object) { described_class }
 

@@ -14,7 +14,7 @@ module Virtus
     #
     class Class < Object
       primitive       ::Class
-      coercion_method :to_class
+      coercion_method :to_constant
 
     end # class Class
   end # class Attribute

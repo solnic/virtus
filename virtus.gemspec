@@ -135,7 +135,7 @@ Gem::Specification.new do |s|
     "spec/unit/virtus/coercion/integer/class_methods/to_string_spec.rb",
     "spec/unit/virtus/coercion/object/class_methods/method_missing_spec.rb",
     "spec/unit/virtus/coercion/string/class_methods/to_boolean_spec.rb",
-    "spec/unit/virtus/coercion/string/class_methods/to_class_spec.rb",
+    "spec/unit/virtus/coercion/string/class_methods/to_constant_spec.rb",
     "spec/unit/virtus/coercion/string/class_methods/to_date_spec.rb",
     "spec/unit/virtus/coercion/string/class_methods/to_datetime_spec.rb",
     "spec/unit/virtus/coercion/string/class_methods/to_decimal_spec.rb",
