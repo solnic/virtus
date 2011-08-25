@@ -1,6 +1,9 @@
 # v0.0.8 to-be-released
 
-[Compare v0.0.6..master](https://github.com/solnic/virtus/compare/v0.0.7...master)
+* [fixed] Fixed conflict with ActiveModel (RichGuk)
+* [changed] Renamed Coercion::String.to_class => Coercion::String.to_constant (emmanuel)
+
+[Compare v0.0.8..master](https://github.com/solnic/virtus/compare/v0.0.7...master)
 
 # v0.0.7 2011-07-31
 
