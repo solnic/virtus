@@ -1,13 +1,17 @@
-# v0.0.7 to-be-released
+# v0.0.8 to-be-released
+
+[Compare v0.0.6..master](https://github.com/solnic/virtus/compare/v0.0.7...master)
+
+# v0.0.7 2011-07-31
 
 * [BREAKING CHANGE] Attribute.primitive? has been removed (solnic)
 * [fixed] Added missing coercion_method setting to Virtus::Attribute::Object (solnic)
 * [general] Default value logic has been extracted into Attribute::DefaultValue class (solnic)
 * [added] Virtus::Attribute::Class (solnic)
 
-[Compare v0.0.5..master](https://github.com/solnic/virtus/compare/v0.0.5...master)
+[Compare v0.0.6..master](https://github.com/solnic/virtus/compare/v0.0.6...master)
 
-# v0.0.6 2011-07-31
+# v0.0.6 2011-07-30
 
 * [BREAKING CHANGE] Moved Virtus.determine_type to a shared module Virtus::TypeLookup (dkubb)
 * [BREAKING CHANGE] Attribute#typecast_to_primitive has been replaced by Attribute#coerce (solnic)
@@ -16,7 +20,7 @@
 * [general] Added custom inspect for Attribute classes (solnic)
 * [general] Added backports as a development dependency (dkubb)
 * [changed] Options API has been extracted from Attribute to a support module Virtus::Options (solnic)
-* [changed] Typecast classes have been replace by a new hierarchy of Coercion classes like Coercion::String, Coercion::Integer etc. (solnic)
+* [changed] Typecast classes have been replaced by a new hierarchy of Coercion classes like Coercion::String, Coercion::Integer etc. (solnic)
 * [changed] Attribute#get, #get!, #set, #set! & #coerce are now part of the public API (solnic)
 
 [Compare v0.0.5..v0.0.6](https://github.com/solnic/virtus/compare/v0.0.5...v0.0.6)
