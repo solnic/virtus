@@ -1,4 +1,4 @@
-require 'backports'
+require 'backports' if RUBY_VERSION < '1.9'
 require 'pathname'
 require 'rubygems'
 require 'rspec'
