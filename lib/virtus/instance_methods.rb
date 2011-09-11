@@ -117,6 +117,33 @@ module Virtus
       end
     end
 
+    # Returns an Array of all publicly accessible attributes
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new(:name => 'John', :age => 28)
+    #   user.to_a # => ['John', 28]
+    #
+    # @return [Array]
+    #
+    # @api public
+    def to_a
+      attributes = []
+
+      self.class.attributes.each do |attribute|
+        name = attribute.name
+        attributes << attribute_get(name) if respond_to?(name)
+      end
+
+      attributes
+    end
+
     # Returns a hash of all publicly accessible attributes
     #
     # @example
