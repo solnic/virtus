@@ -26,6 +26,12 @@ describe Virtus do
     end
   end
 
+  describe "#to_a" do
+    it 'returns ordered attributes' do
+      object.to_a.should == [attributes[:name], attributes[:age]]
+    end
+  end
+
   describe '#to_hash' do
     it 'returns attributes' do
       object.to_hash.should == object.attributes
