@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{virtus}
-  s.version = "0.0.8"
+  s.name = "virtus"
+  s.version = "0.0.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Piotr Solnica}]
-  s.date = %q{2011-08-25}
-  s.description = %q{Attributes for your plain ruby objects}
-  s.email = [%q{piotr@rubyverse.com}]
+  s.authors = ["Piotr Solnica"]
+  s.date = "2011-10-11"
+  s.description = "Attributes for your plain ruby objects"
+  s.email = ["piotr@rubyverse.com"]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md",
@@ -166,10 +166,10 @@ Gem::Specification.new do |s|
     "tasks/yard.rake",
     "virtus.gemspec"
   ]
-  s.homepage = %q{https://github.com/solnic/virtus}
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.6}
-  s.summary = %q{Attributes for your plain ruby objects}
+  s.homepage = "https://github.com/solnic/virtus"
+  s.require_paths = ["lib"]
+  s.rubygems_version = "1.8.11"
+  s.summary = "Attributes for your plain ruby objects"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
