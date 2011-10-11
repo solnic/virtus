@@ -3,19 +3,32 @@ require 'spec_helper'
 describe Virtus::TypeLookup, '#determine_type' do
   subject { object.determine_type(class_or_name) }
 
-  let(:object) do
+  let!(:object) do
     Class.new do
       extend Virtus::DescendantsTracker
       extend Virtus::TypeLookup
     end
   end
 
-  let(:descendant) do
-    object.const_set :String, Class.new(object) {
-      def self.primitive
-        ::String
-      end
+  let!(:default) do
+    object.const_set :Object, Class.new(object) {
+      def self.primitive() ::Object end
     }
+  end
+
+  let!(:descendant) do
+    object.const_set :String, Class.new(default) {
+      def self.primitive() ::String end
+    }
+  end
+
+  # add a default subclass to the top of the stack
+  let!(:extra) { Class.new(default) }
+
+  # assert the classes are subclassed in a specific order that will trigger
+  # the bug that this commit fixes. Do not remove or change the order below.
+  it 'has the descendants in the expected order' do
+    object.descendants.should == [ extra, descendant, default ]
   end
 
   context 'with a TypeLookup class' do
@@ -42,7 +55,7 @@ describe Virtus::TypeLookup, '#determine_type' do
     context 'when the argument is an unknown class' do
       let(:class_or_name) { Class.new }
 
-      it { should be_nil }
+      it { should equal(default) }
     end
   end
 
