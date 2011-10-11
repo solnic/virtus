@@ -90,7 +90,7 @@ module Virtus
       end
     end
 
-    if RUBY_VERSION < '1.9'
+    if RUBY_VERSION < '1.9' || RUBY_ENGINE == 'rbx'
       def determine_type_from_string(string)
         if string =~ TYPE_FORMAT && const_defined?(string)
           const_get(string)
