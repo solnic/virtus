@@ -1,15 +1,19 @@
-# v0.0.8 to-be-released
+# v0.10.0 to-be-released
+
+[Compare v0.0.9..master](https://github.com/solnic/virtus/compare/v0.0.9...master)
+
+# v0.0.9 2011-10-11
 
 * [fixed] Fix in type lookup for anonymous classes (dkubb)
 
-[Compare v0.0.8..master](https://github.com/solnic/virtus/compare/v0.0.8...master)
+[Compare v0.0.8..v0.0.9](https://github.com/solnic/virtus/compare/v0.0.8...v0.0.9)
 
 # v0.0.8 2011-08-25
 
 * [fixed] Fixed conflict with ActiveModel (RichGuk)
 * [changed] Renamed Coercion::String.to_class => Coercion::String.to_constant (emmanuel)
 
-[Compare v0.0.7..master](https://github.com/solnic/virtus/compare/v0.0.7...v0.0.8)
+[Compare v0.0.7..v0.0.8](https://github.com/solnic/virtus/compare/v0.0.7...v0.0.8)
 
 # v0.0.7 2011-07-31
 
