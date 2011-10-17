@@ -1,4 +1,7 @@
-# Virtus [![Build Status](http://travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
+virtus
+======
+
+[![Build Status](http://travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
 
 This is a partial extraction of the DataMapper [Property
 API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
@@ -8,123 +11,159 @@ reinventing the wheel all over again. It is also suitable for any other
 usecase where you need to extend your ruby objects with attributes that require
 data type coercions.
 
-## Installation
+Installation
+------------
 
-    gem i virtus
+``` terminal
+$ gem install virtus
+```
 
-## Basic Usage
+or
 
-    require 'virtus'
+``` ruby
+# ./Gemfile
 
-    class User
-      include Virtus
+gem 'virtus', '0.0.7'
+```
 
-      attribute :name,     String
-      attribute :age,      Integer
-      attribute :birthday, DateTime
-    end
+Examples
+--------
 
-    # setting attributes in the constructor
-    user = User.new(:name => 'Piotr', :age => 28)
 
-    # attribute readers
-    user.name  # => "Piotr"
+``` ruby
+require 'virtus'
 
-    # hash of attributes
-    user.attributes  # => { :name => "Piotr" }
+class User
+  include Virtus
 
-    # automatic coercion
-    user.age = '28'
-    user.age  # => 28
+  attribute :name, String
+  attribute :age, Integer
+  attribute :birthday, DateTime
+end
 
-    user.birthday = 'November 18th, 1983'
-    user.birthday  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+user = User.new :name => 'Piotr', :age => 28
+user.attributes
+  # => { :name => "Piotr", :age => 28 }
 
-## Default values
+user.name
+  # => "Piotr"
 
-    require 'virtus'
+user.age = '28'
+  # => 28
+user.age.class
+  # => Fixnum
 
-    class Page
-      include Virtus
+user.birthday = 'November 18th, 1983'
+  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+```
 
-      attribute :title,      String
-      attribute :slug,       String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }
-      attribute :view_count, Integer, :default => 0
-    end
 
-    page = Page.new(:title => 'Virtus Is Awesome')
-    page.slug # => 'virtus-is-awesome'
-    page.view_count # => 0
+**Default values**
 
-## Coercions
+``` ruby
+require 'virtus'
 
-Virtus comes with a builtin coercion library. It's super easy to add your own
-coercion classes. Take a look:
+class Page
+  include Virtus
 
-    require 'virtus'
-    require 'digest/md5'
+  attribute :title, String
+  attribute :views, Integer, :default => 0
+  attribute :slug, String, :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }
+end
 
-    class MD5 < Virtus::Attribute::Object
-     primitive       String
-     coercion_method :to_md5
-    end
+page = Page.new :title => 'Virtus Is Awesome'
+page.slug
+  # => 'virtus-is-awesome'
+page.views
+  # => 0
+```
 
-    module Virtus
-     class Coercion
-       class String < Virtus::Coercion::Object
-         def self.to_md5(value)
-           Digest::MD5.hexdigest(value)
-         end
-       end
-     end
-    end
+**Adding Coercions**
 
-    class User
-      include Virtus
+Virtus comes with a builtin coercion library.
+It's super easy to add your own coercion classes.
+Take a look:
 
-      attribute :name,     String
-      attribute :password, MD5
-    end
+``` ruby
+require 'virtus'
+require 'digest/md5'
 
-    user = User.new(:name => 'Piotr', :password => 'foobar')
-    user.name     # => 'Piotr'
-    user.password # => '3858f62230ac3c915f300c664312c63f'
+# Our new attribute type
+class MD5 < Virtus::Attribute::Object
+  primitive String
+  coercion_method :to_md5
+end
 
-## Custom Attributes
-
-    require 'virtus'
-    require 'json'
-
-    module MyApp
-      module Attributes
-        class JSON < Virtus::Attribute::Object
-          primitive Hash
-
-          def coerce(value)
-            ::JSON.parse(value)
-          end
-        end
-      end
-
-      class User
-        include Virtus
-
-        attribute :info, Attributes::JSON
+# Defining the Coercion method
+module Virtus
+  class Coercion
+    class String < Virtus::Coercion::Object
+      def self.to_md5(value)
+        Digest::MD5.hexdigest value
       end
     end
+  end
+end
 
-    user = MyApp::User.new
+# And now the user!
+class User
+  include Virtus
 
-    user.info = '{"email":"john@domain.com"}'
-    user.info  # => {"email"=>"john@domain.com"}
+  attribute :name, String
+  attribute :password, MD5
+end
 
-## Contributors
+user = User.new :name => 'Piotr', :password => 'foobar'
+user.name
+  # => 'Piotr'
+user.password
+  # => '3858f62230ac3c915f300c664312c63f'
+```
+
+**Custom Attributes**
+
+``` ruby
+require 'virtus'
+require 'json'
+
+module MyAppClass
+
+  # Defining the custom attribute(s)
+  module Attributes
+    class JSON < Virtus::Attribute::Object
+      primitive Hash
+
+      def coerce(value)
+        ::JSON.parse value
+      end
+    end
+  end
+
+  class User
+    include Virtus
+
+    attribute :info, Attributes::JSON
+  end
+end
+
+user = MyApp::User.new
+user.info = '{"email":"john@domain.com"}'
+  # => {"email"=>"john@domain.com"}
+user.info.class
+  # => Hash
+```
+
+
+Credits
+-------
 
 * Dan Kubb ([dkubb](https://github.com/dkubb))
 * Chris Corbyn ([d11wtq](https://github.com/d11wtq))
 * Emmanuel Gomez ([emmanuel](https://github.com/emmanuel))
 
-## Note on Patches/Pull Requests
+
+Contributing
+-------------
 
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -134,6 +173,26 @@ coercion classes. Take a look:
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-## Copyright
+License
+-------
 
-Copyright (c) 2011 Piotr Solnica. See LICENSE for details.
+Copyright (c) 2011 Piotr Solnica
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
