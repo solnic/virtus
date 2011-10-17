@@ -1,10 +1,6 @@
 source :rubygems
 
-group :development do
-  gem 'backports', '~> 2.3.0'
-  gem 'jeweler',   '~> 1.6.4'
-  gem 'rspec',     '~> 2.6.0'
-end
+gemspec
 
 group :metrics do
   gem 'flay',      '~> 1.4.2'
