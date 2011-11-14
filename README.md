@@ -68,7 +68,7 @@ class Page
 
   attribute :title, String
   attribute :views, Integer, :default => 0
-  attribute :slug, String, :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }
+  attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
 end
 
 page = Page.new :title => 'Virtus Is Awesome'
