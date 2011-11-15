@@ -99,9 +99,12 @@ module Virtus
     #
     # @api private
     def virtus_define_attribute_methods(attribute)
-      attribute.define_reader_method(self)
-      attribute.define_writer_method(self)
-      include self::AttributeMethods
+      module_with_methods = self::AttributeMethods
+
+      attribute.define_reader_method(module_with_methods)
+      attribute.define_writer_method(module_with_methods)
+
+      include module_with_methods
     end
 
     # Add the attribute to the class' and descendants' attributes
