@@ -1,7 +1,22 @@
 begin
   require 'rspec/core/rake_task'
 
-  RSpec::Core::RakeTask.new(:spec)
+  desc 'run all specs'
+  task :spec => ['spec:unit', 'spec:integration', 'spec:examples']
+
+  namespace :spec do
+    RSpec::Core::RakeTask.new(:examples) do |t|
+      t.pattern = 'examples/**/*_spec.rb'
+    end
+
+    RSpec::Core::RakeTask.new(:integration) do |t|
+      t.pattern = 'spec/integration/**/*_spec.rb'
+    end
+
+    RSpec::Core::RakeTask.new(:unit) do |t|
+      t.pattern = 'spec/unit/**/*_spec.rb'
+    end
+  end
 rescue LoadError
   task :spec do
     abort 'rspec is not available. In order to run spec, you must: gem install rspec'
@@ -22,5 +37,4 @@ rescue LoadError
   end
 end
 
-task :test    => :spec
-task :default => :spec
+task :test    => 'spec'
