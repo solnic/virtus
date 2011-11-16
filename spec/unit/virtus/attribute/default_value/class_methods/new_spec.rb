@@ -5,18 +5,15 @@ describe Virtus::Attribute::DefaultValue, '.new' do
 
   let(:attribute) { Virtus::Attribute::String.new(:attribute) }
 
-  context 'with a value that can be duped' do
+  context 'with a duplicable value' do
     let(:value) { 'something' }
-
-    its(:value) { should     eql(value)   }
-    its(:value) { should_not equal(value) }
+    its(:value) { should equal(value) }
   end
 
-  context 'with a value that cannot be duped' do
+  context 'with a non-duplicable value' do
     [ nil, true, false, 1, :symbol ].each do |value|
       context "with #{value.inspect}" do
         let(:value) { value }
-
         its(:value) { should equal(value) }
       end
     end
