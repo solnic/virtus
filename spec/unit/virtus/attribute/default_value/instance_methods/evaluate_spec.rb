@@ -8,8 +8,16 @@ describe Virtus::Attribute::DefaultValue, '#evaluate' do
   let(:instance)  { Class.new }
 
   context 'with a non-callable value' do
-    let(:value) { 'something' }
-    it { should eql(value) }
+    context 'with a non-duplicable value' do
+      let(:value) { nil }
+      it { should eql(value) }
+    end
+
+    context 'with a duplicable value' do
+      let(:value) { 'something' }
+      it { should     eql(value) }
+      it { should_not equal(value)}
+    end
   end
 
   context 'with a callable value' do
