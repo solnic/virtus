@@ -29,8 +29,7 @@ module Virtus
       #
       # @api private
       def initialize(attribute, value)
-        @attribute = attribute
-        @value     = case value when *DUP_CLASSES then value else value.dup end
+        @attribute, @value = attribute, value
       end
 
       # Evaluates the value
@@ -41,7 +40,13 @@ module Virtus
       #
       # @api private
       def evaluate(instance)
-        callable? ? call(instance) : value
+        if callable?
+          call(instance)
+        elsif duplicable?
+          value.dup
+        else
+          value
+        end
       end
 
     private
@@ -64,6 +69,15 @@ module Virtus
       # @api private
       def callable?
         value.respond_to?(:call)
+      end
+
+      # Returns whether or not the value is duplicable
+      #
+      # # return [TrueClass, FalseClass]
+      #
+      # @api private
+      def duplicable?
+        case value when *DUP_CLASSES then false else true end
       end
 
     end # class DefaultValue
