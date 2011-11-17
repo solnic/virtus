@@ -1,5 +1,8 @@
 # v0.10.0 to-be-released
 
+* [fixed] Default values are now duped on evaluate (rclosner)
+* [fixed] Allow to override attribute mutator methods (senny)
+
 [Compare v0.0.9..master](https://github.com/solnic/virtus/compare/v0.0.9...master)
 
 # v0.0.9 2011-10-11
