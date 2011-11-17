@@ -1,6 +1,6 @@
 require './spec/spec_helper'
 
-class MD5 < Virtus::Attribute::Object
+class Md5 < Virtus::Attribute::Object
   primitive       String
   coercion_method :to_md5
 end
@@ -19,7 +19,7 @@ class User
   include Virtus
 
   attribute :name,     String
-  attribute :password, MD5
+  attribute :password, Md5
 end
 
 describe User do
