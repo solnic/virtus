@@ -65,12 +65,11 @@ module Virtus
     # @api private
     def determine_type_from_primitive(primitive)
       type = nil
-
       descendants.reverse_each do |descendant|
-        next unless primitive <= descendant.primitive
-        type = descendant if type.nil? || type.primitive > descendant.primitive
+        descendant_primitive = descendant.primitive
+        next unless primitive <= descendant_primitive
+        type = descendant if type.nil? || type.primitive > descendant_primitive
       end
-
       type
     end
 

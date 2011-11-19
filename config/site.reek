@@ -26,7 +26,11 @@ LongParameterList:
   enabled: true
   overrides: {}
 FeatureEnvy:
-  exclude: [Virtus::Coercion::TimeCoercions#to_string, Virtus::Coercion::TimeCoercions#coerce_with_method]
+  exclude: [
+    Virtus::Coercion::TimeCoercions#to_string,
+    Virtus::Coercion::TimeCoercions#coerce_with_method,
+    Virtus::TypeLookup#determine_type_from_primitive
+  ]
   enabled: true
 ClassVariable:
   exclude: []
@@ -55,7 +59,9 @@ LongMethod:
   enabled: true
 Duplication:
   allow_calls: []
-  exclude: []
+  exclude: [
+    Virtus::Attribute::DefaultValue#evaluate
+  ]
   enabled: true
   max_calls: 1
 UtilityFunction:

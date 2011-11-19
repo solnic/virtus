@@ -30,11 +30,9 @@ begin
     t.rcov_opts = File.read('spec/rcov.opts').split(/\s+/)
   end
 rescue LoadError
-  %w[ rcov verify_rcov ].each do |name|
-    task name do
-      abort "rcov is not available. In order to run #{name}, you must: gem install rcov"
-    end
+  task :rcov do
+    abort 'rcov is not available. In order to run rcov, you must: gem install rcov'
   end
 end
 
-task :test    => 'spec'
+task :test => 'spec'

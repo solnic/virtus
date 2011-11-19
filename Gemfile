@@ -10,7 +10,6 @@ group :metrics do
   gem 'yardstick', '~> 0.4.0'
 
   platforms :mri_18 do
-    gem 'heckle',    '~> 1.4.3'
     gem 'json',      '~> 1.5.3'
     gem 'metric_fu', '~> 2.1.1'
     gem 'mspec',     '~> 1.5.17'
