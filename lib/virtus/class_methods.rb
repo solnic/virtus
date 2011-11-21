@@ -12,8 +12,12 @@ module Virtus
     # @api private
     def self.extended(descendant)
       super
-      descendant.extend(DescendantsTracker)
-      descendant.__send__(:attributes_module) # ensure attributes_module is included now
+
+      class << descendant
+        extend DescendantsTracker
+        @virtus_attributes_accessor_module = AttributesAccessor.new(name)
+        include @virtus_attributes_accessor_module
+      end
     end
 
     private_class_method :extended
@@ -44,7 +48,7 @@ module Virtus
     # @api public
     def attribute(name, type, options = {})
       attribute = Attribute.determine_type(type).new(name, options)
-      attributes_module.define_accessor_for(attribute)
+      virtus_attributes_accessor_module.define_accessor_for(attribute)
       virtus_add_attribute(attribute)
       self
     end
@@ -76,13 +80,7 @@ module Virtus
 
   private
 
-    def attributes_module
-      @attributes_module ||= begin
-        mod = AttributeAccessor.new(name)
-        include mod
-        mod
-      end
-    end
+    attr_reader :virtus_attributes_accessor_module
 
     # Hooks into const missing process to determine types of attributes
     #

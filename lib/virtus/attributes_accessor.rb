@@ -1,10 +1,10 @@
 module Virtus
-  class AttributeAccessor < Module
+  class AttributesAccessor < Module
     attr_reader :inspect
 
     def initialize(name)
       super
-      @inspect = "#{name}::AttributeAccessor"
+      @inspect = "#{name}::AttributesAccessor"
     end
 
     # Define attribute reader and writer methods
