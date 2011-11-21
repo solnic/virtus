@@ -1,4 +1,4 @@
-# v0.10.0 to-be-released
+# v0.0.10 to-be-released
 
 * [fixed] Default values are now duped on evaluate (rclosner)
 * [fixed] Allow to override attribute mutator methods (senny)
