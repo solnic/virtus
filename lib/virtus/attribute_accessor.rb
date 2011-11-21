@@ -7,6 +7,13 @@ module Virtus
       @inspect = "#{name}::AttributeAccessor"
     end
 
+    # Define attribute reader and writer methods
+    #
+    # @param [Attribute]
+    #
+    # @return [receiver]
+    #
+    # @api private
     def define_accessor_for(attribute)
       define_reader_method(attribute)
       define_writer_method(attribute)
