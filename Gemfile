@@ -8,6 +8,9 @@ group :metrics do
   gem 'reek',      '~> 1.2.8', :git => 'git://github.com/dkubb/reek.git'
   gem 'roodi',     '~> 2.1.0'
   gem 'yardstick', '~> 0.4.0'
+  gem 'fattr'
+  gem 'arrayfields'
+  gem 'map'
 
   platforms :mri_18 do
     gem 'json',      '~> 1.5.3'
