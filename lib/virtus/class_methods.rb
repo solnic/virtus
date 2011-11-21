@@ -13,7 +13,7 @@ module Virtus
     def self.extended(descendant)
       super
       descendant.extend(DescendantsTracker)
-      descendant.const_set(:AttributeMethods, Module.new)
+      descendant.__send__(:attributes_module) # ensure attributes_module is included now
     end
 
     private_class_method :extended
@@ -44,7 +44,7 @@ module Virtus
     # @api public
     def attribute(name, type, options = {})
       attribute = Attribute.determine_type(type).new(name, options)
-      virtus_define_attribute_methods(attribute)
+      attributes_module.define_accessor_for(attribute)
       virtus_add_attribute(attribute)
       self
     end
@@ -76,6 +76,14 @@ module Virtus
 
   private
 
+    def attributes_module
+      @attributes_module ||= begin
+        mod = AttributeAccessor.new(name)
+        include mod
+        mod
+      end
+    end
+
     # Hooks into const missing process to determine types of attributes
     #
     # It is used when an attribute is defined and a global class like String
@@ -89,22 +97,6 @@ module Virtus
     # @api private
     def const_missing(name)
       Attribute.determine_type(name) || super
-    end
-
-    # Define the attribute reader and writer methods in the class
-    #
-    # @param [Attribute]
-    #
-    # @return [undefined]
-    #
-    # @api private
-    def virtus_define_attribute_methods(attribute)
-      module_with_methods = self::AttributeMethods
-
-      attribute.define_reader_method(module_with_methods)
-      attribute.define_writer_method(module_with_methods)
-
-      include module_with_methods
     end
 
     # Add the attribute to the class' and descendants' attributes

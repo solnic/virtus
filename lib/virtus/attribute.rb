@@ -175,40 +175,6 @@ module Virtus
       Coercion[value.class].send(coercion_method, value)
     end
 
-    # Creates an attribute reader method
-    #
-    # @param [Module] mod
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_reader_method(mod)
-      reader_method_name = name
-      attribute          = self
-
-      mod.send(:define_method,    reader_method_name) { attribute.get(self) }
-      mod.send(reader_visibility, reader_method_name)
-
-      self
-    end
-
-    # Creates an attribute writer method
-    #
-    # @param [Module] mod
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_writer_method(mod)
-      writer_method_name = "#{name}="
-      attribute          = self
-
-      mod.send(:define_method,    writer_method_name) { |value| attribute.set(self, value) }
-      mod.send(writer_visibility, writer_method_name)
-
-      self
-    end
-
   private
 
     # Sets visibility of reader/write methods based on the options hash
