@@ -160,6 +160,7 @@ Credits
 * Dan Kubb ([dkubb](https://github.com/dkubb))
 * Chris Corbyn ([d11wtq](https://github.com/d11wtq))
 * Emmanuel Gomez ([emmanuel](https://github.com/emmanuel))
+* Ryan Closner ([rclosner](https://github.com/rclosner))
 
 
 Contributing
