@@ -1,9 +1,13 @@
-# v0.0.10 to-be-released
+# v0.0.11 to-be-released
+
+[Compare v0.0.10..master](https://github.com/solnic/virtus/compare/v0.0.9...master)
+
+# v0.0.10 2011-11-21
 
 * [fixed] Default values are now duped on evaluate (rclosner)
 * [fixed] Allow to override attribute mutator methods (senny)
 
-[Compare v0.0.9..master](https://github.com/solnic/virtus/compare/v0.0.9...master)
+[Compare v0.0.9..v0.0.10](https://github.com/solnic/virtus/compare/v0.0.9...v0.0.10)
 
 # v0.0.9 2011-10-11
 
