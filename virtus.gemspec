@@ -5,7 +5,7 @@ require File.expand_path('../lib/virtus/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.name        = "virtus"
   gem.version     = Virtus::VERSION
-  gem.date        = "2011-10-17"
+  gem.date        = "2011-11-21"
   gem.authors     = [ "Piotr Solnica" ]
   gem.email       = [ "piotr.solnica@gmail.com" ]
   gem.description = "Attributes on Steroids for Plain Old Ruby Objects"
