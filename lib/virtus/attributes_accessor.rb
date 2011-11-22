@@ -3,7 +3,7 @@ module Virtus
     attr_reader :inspect
 
     def initialize(name)
-      super
+      super()
       @inspect = "#{name}::AttributesAccessor"
     end
 
@@ -32,7 +32,7 @@ module Virtus
       reader_method_name = attribute.name
 
       define_method(reader_method_name) { attribute.get(self) }
-      send(reader_visibility, reader_method_name)
+      send(attribute.reader_visibility, reader_method_name)
     end
 
     # Creates an attribute writer method
@@ -46,7 +46,7 @@ module Virtus
       writer_method_name = "#{attribute.name}="
 
       define_method(writer_method_name) { |value| attribute.set(self, value) }
-      send(writer_visibility, writer_method_name)
+      send(attribute.writer_visibility, writer_method_name)
     end
 
   end

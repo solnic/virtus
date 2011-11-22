@@ -13,7 +13,7 @@ module Virtus
     def self.extended(descendant)
       super
 
-      class << descendant
+      descendant.module_eval do
         extend DescendantsTracker
         @virtus_attributes_accessor_module = AttributesAccessor.new(name)
         include @virtus_attributes_accessor_module
