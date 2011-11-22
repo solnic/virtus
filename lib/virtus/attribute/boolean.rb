@@ -33,13 +33,19 @@ module Virtus
         value.equal?(true) || value.equal?(false)
       end
 
-      # Query for the list of reader method names defined for this Attribute
+      # Creates an attribute reader method as a query
       #
-      # @return [Array(Symbol)]
+      # @param [Module] mod
+      #
+      # @return [self]
       #
       # @api private
-      def reader_method_names
-        super + ["#{name}?"]
+      def define_reader_method(mod)
+        super
+
+        mod.define_attribute_reader_method(self, "#{name}?", reader_visibility)
+
+        self
       end
 
     end # class Boolean

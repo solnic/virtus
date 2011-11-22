@@ -11,42 +11,24 @@ module Virtus
     #
     # @param [Attribute]
     #
-    # @return [receiver]
+    # @return [self]
     #
     # @api private
     def define_attribute_accessor(attribute)
-      define_reader_method(attribute)
-      define_writer_method(attribute)
+      attribute.define_reader_method(self)
+      attribute.define_writer_method(self)
 
       self
     end
 
-    # Creates an attribute reader method
-    #
-    # @param [Module] mod
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_reader_method(attribute)
-      attribute.reader_method_names.each do |name|
-        define_method(name) { attribute.get(self) }
-        send(attribute.reader_visibility, name)
-      end
+    def define_attribute_getter(attribute, method_name, visibility)
+      define_method(method_name) { attribute.get(self) }
+      send(visibility, method_name)
     end
 
-    # Creates an attribute writer method
-    #
-    # @param [Module] mod
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_writer_method(attribute)
-      attribute.writer_method_names.each do |name|
-        define_method(name) { |value| attribute.set(self, value) }
-        send(attribute.writer_visibility, name)
-      end
+    def define_attribute_setter(attribute, method_name, visibility)
+      define_method(method_name) { |value| attribute.set(self, value) }
+      send(visibility, method_name)
     end
 
   end
