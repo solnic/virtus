@@ -175,6 +175,36 @@ module Virtus
       Coercion[value.class].send(coercion_method, value)
     end
 
+    # Reports the names of the reader method(s) that will be defined to access
+    # this attribute's values
+    # 
+    # @example
+    #   attribute = Attribute.new(:foo)
+    #   attribute.reader_method_names   # => [:foo]
+    # 
+    # @return [Array(Symbol)]
+    #   list of names of reader methods defined
+    # 
+    # @api private
+    def reader_method_names
+      [name]
+    end
+
+    # Reports the names of the reader method(s) that will be defined to access
+    # this attribute's values
+    # 
+    # @example
+    #   attribute = Attribute.new(:foo)
+    #   attribute.reader_method_names   # => [:foo]
+    # 
+    # @return [Array(Symbol)]
+    #   list of names of reader methods defined
+    # 
+    # @api private
+    def writer_method_names
+      ["#{name}="]
+    end
+
   private
 
     # Sets visibility of reader/write methods based on the options hash

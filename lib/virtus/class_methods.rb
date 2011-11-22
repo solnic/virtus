@@ -48,7 +48,7 @@ module Virtus
     # @api public
     def attribute(name, type, options = {})
       attribute = Attribute.determine_type(type).new(name, options)
-      virtus_attributes_accessor_module.define_accessor_for(attribute)
+      virtus_attributes_accessor_module.define_attribute_accessor(attribute)
       virtus_add_attribute(attribute)
       self
     end
