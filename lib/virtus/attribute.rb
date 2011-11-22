@@ -183,7 +183,7 @@ module Virtus
     #
     # @api private
     def define_reader_method(mod)
-      mod.define_attribute_reader_method(self, name, reader_visibility)
+      mod.define_attribute_getter(self, name, reader_visibility)
 
       self
     end
@@ -196,7 +196,7 @@ module Virtus
     #
     # @api private
     def define_writer_method(mod)
-      mod.define_attribute_writer_method(self, "#{name}=", writer_visibility)
+      mod.define_attribute_setter(self, "#{name}=", writer_visibility)
 
       self
     end
