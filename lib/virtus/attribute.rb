@@ -175,6 +175,19 @@ module Virtus
       Coercion[value.class].send(coercion_method, value)
     end
 
+    # Define reader and writer methods for an Attribute
+    #
+    # @param [Attribute] attribute
+    #
+    # @return [self]
+    #
+    # @api private
+    def define_accessor_methods(mod)
+      define_reader_method(mod)
+      define_writer_method(mod)
+      self
+    end
+
     # Creates an attribute reader method
     #
     # @param [Module] mod

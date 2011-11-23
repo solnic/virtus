@@ -1,5 +1,13 @@
 module Virtus
   class AttributesAccessor < Module
+
+    # The inspect value of this Module.
+    #   This provides meaningful output when inspecting the ancestors
+    #   of a class/module that includes this module
+    # 
+    # @return [String]
+    # 
+    # @api public
     attr_reader :inspect
 
     # Initialize an AttributesAccessor module,
@@ -11,20 +19,6 @@ module Virtus
     def initialize(name)
       super()
       @inspect = "#{name}::AttributesAccessor"
-    end
-
-    # Define reader and writer methods for an Attribute
-    #
-    # @param [Attribute] attribute
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_attribute_accessor(attribute)
-      attribute.define_reader_method(self)
-      attribute.define_writer_method(self)
-
-      self
     end
 
     # Defines an attribute reader method
