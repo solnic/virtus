@@ -20,9 +20,9 @@ describe Virtus::ClassMethods, '.attribute' do
       descendant.attribute      :name, String, :default => 'Descendant Default'
     end
 
-   #it 'updates the default value of descendant' do
-   #  descendant.new.name.should == 'Descendant Default'
-   #end
+    it 'updates the default value of descendant' do
+      descendant.new.name.should == 'Descendant Default'
+    end
 
     it 'retains the default value of base class' do
       described_class.new.name.should == 'Base Default'
