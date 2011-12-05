@@ -81,7 +81,7 @@ module Virtus
   private
 
     def virtus_attributes_accessor_module
-      @virtus_attributes_accessor_module ||= AttributesAccessor.new(name)
+      @virtus_attributes_accessor_module ||= AttributesAccessor.new(name || inspect)
     end
 
     # Hooks into const missing process to determine types of attributes
