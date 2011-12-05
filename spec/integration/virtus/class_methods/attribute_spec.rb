@@ -109,15 +109,24 @@ describe Virtus::ClassMethods, '.attribute' do
       end
     end
 
-    it "adds an attribute accessor module to the descendant's ancestors" do
-      superclass_attributes_accessor_module = described_class.send(:virtus_attributes_accessor_module)
-      descendant_attributes_accessor_module = descendant.send(:virtus_attributes_accessor_module)
+    context 'an attribute on the superclass and on the descendant' do
+      before do
+        described_class.attribute(:name, String)
+        descendant.attribute(:descendant_name, String)
+      end
 
-      descendant.ancestors.should include(superclass_attributes_accessor_module)
-      descendant.ancestors.should_not include(descendant_attributes_accessor_module)
+      it "adds accessor methods for both attributes to the descendant" do
+        descendant.instance_methods.map(&:to_s).should include('name', 'name=')
+        descendant.instance_methods.map(&:to_s).should include('descendant_name', 'descendant_name=')
+      end
 
-      descendant.attribute(:descendant_name, String)
-      descendant.ancestors.should include(descendant_attributes_accessor_module)
+      it "adds accessor methods for the superclass attribute to the superclass" do
+        described_class.instance_methods.map(&:to_s).should include('name', 'name=')
+      end
+
+      it "does not add accessor methods for the descendant attribute to the superclass" do
+        described_class.instance_methods.map(&:to_s).should_not include('descendant_name', 'descendant_name=')
+      end
     end
   end
 end
