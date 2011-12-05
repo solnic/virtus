@@ -69,14 +69,31 @@ describe Virtus::ClassMethods, '.attribute' do
   end
 
   context "in the descendants" do
-    subject { described_class.attribute(:name, String).attributes[:name] }
-
     let(:descendant) { Class.new(described_class) }
 
-    it 'updates the descendant attributes' do
-      descendant.attributes.to_a.should be_empty
-      @attribute = subject
-      descendant.attributes.to_a.should eql([ @attribute ])
+    context 'adding an attribute to the superclass' do
+      subject { described_class.attribute(:name, String).attributes[:name] }
+
+      it 'updates the descendant attributes' do
+        descendant.attributes.to_a.should be_empty
+        @attribute = subject
+        descendant.attributes.to_a.should eql([ @attribute ])
+      end
+    end
+
+    context 'adding an attribute to a descendant' do
+      subject { descendant.attribute(:name, String).attributes[:name] }
+
+      it "adds the new attribute to the descendant's attributes" do
+        subject.name.should eql(:name)
+        descendant.attributes.to_a.should eql([ subject ])
+      end
+
+      it "does not add a new attribute to the superclass's attributes" do
+        attribute = subject
+        descendant.attributes.to_a.should eql([ attribute ])
+        described_class.attributes.to_a.should eql([ ])
+      end
     end
   end
 end

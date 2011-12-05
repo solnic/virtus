@@ -15,8 +15,7 @@ module Virtus
 
       descendant.module_eval do
         extend DescendantsTracker
-        @virtus_attributes_accessor_module = AttributesAccessor.new(name)
-        include @virtus_attributes_accessor_module
+        include virtus_attributes_accessor_module
       end
     end
 
@@ -80,7 +79,9 @@ module Virtus
 
   private
 
-    attr_reader :virtus_attributes_accessor_module
+    def virtus_attributes_accessor_module
+      @virtus_attributes_accessor_module ||= AttributesAccessor.new(name)
+    end
 
     # Hooks into const missing process to determine types of attributes
     #
