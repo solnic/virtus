@@ -79,21 +79,45 @@ describe Virtus::ClassMethods, '.attribute' do
         @attribute = subject
         descendant.attributes.to_a.should eql([ @attribute ])
       end
+
+      it "adds attribute accessor methods to the descendant" do
+        subject
+        descendant.instance_methods.map(&:to_s).should include('name', 'name=')
+      end
     end
 
     context 'adding an attribute to a descendant' do
-      subject { descendant.attribute(:name, String).attributes[:name] }
+      before { descendant.attribute(:name, String) }
+      subject { descendant.attributes[:name] }
 
-      it "adds the new attribute to the descendant's attributes" do
+      it "adds the attribute to the descendant's attributes" do
         subject.name.should eql(:name)
         descendant.attributes.to_a.should eql([ subject ])
       end
 
-      it "does not add a new attribute to the superclass's attributes" do
-        attribute = subject
-        descendant.attributes.to_a.should eql([ attribute ])
+      it "does not add the attribute to the superclass's attributes" do
+        descendant.attributes.to_a.should eql([ subject ])
         described_class.attributes.to_a.should eql([ ])
       end
+
+      it "adds attribute accessor methods to the descendant" do
+        descendant.instance_methods.map(&:to_s).should include('name', 'name=')
+      end
+
+      it "does not add attribute accessor methods to the superclass" do
+        described_class.instance_methods.map(&:to_s).should_not include('name', 'name=')
+      end
+    end
+
+    it "adds an attribute accessor module to the descendant's ancestors" do
+      superclass_attributes_accessor_module = described_class.send(:virtus_attributes_accessor_module)
+      descendant_attributes_accessor_module = descendant.send(:virtus_attributes_accessor_module)
+
+      descendant.ancestors.should include(superclass_attributes_accessor_module)
+      descendant.ancestors.should_not include(descendant_attributes_accessor_module)
+
+      descendant.attribute(:descendant_name, String)
+      descendant.ancestors.should include(descendant_attributes_accessor_module)
     end
   end
 end
