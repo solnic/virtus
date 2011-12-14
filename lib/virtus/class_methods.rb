@@ -77,22 +77,22 @@ module Virtus
       end
     end
 
-  private
-
-    def inherited(descendant)
-      super
-
-      descendant.module_eval do
-        virtus_setup_attributes_accessor_module
-      end
-    end
-
-    attr_reader :virtus_attributes_accessor_module
+  protected
 
     def virtus_setup_attributes_accessor_module
       @virtus_attributes_accessor_module = AttributesAccessor.new(name || inspect)
       include virtus_attributes_accessor_module
     end
+
+  private
+
+    def inherited(descendant)
+      super
+
+      descendant.virtus_setup_attributes_accessor_module
+    end
+
+    attr_reader :virtus_attributes_accessor_module
 
     # Hooks into const missing process to determine types of attributes
     #
