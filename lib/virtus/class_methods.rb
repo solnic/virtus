@@ -79,19 +79,45 @@ module Virtus
 
   protected
 
+    # Set up the anonymous module which will host Attribute accessor methods.
+    #
+    # @return [self]
+    #
+    # @api private
     def virtus_setup_attributes_accessor_module
       @virtus_attributes_accessor_module = AttributesAccessor.new(name || inspect)
       include virtus_attributes_accessor_module
+
+      self
     end
 
   private
 
+    # Hook inheritance to setup descendants with their own Attribute-accessor-
+    # method-hosting modules.
+    # 
+    # Descendants inherit Attribute accessor methods via Ruby's inheritance
+    # mechanism: Attribute accessor methods are defined in a module included
+    # in a superclass. Attributes defined on descendants add methods to the
+    # descendant's Attributes accessor module, leaving the superclass's method
+    # table unaffected.
+    # 
+    # @param [Class] descendant
+    # 
+    # @return [undefined]
+    # 
+    # @api private
     def inherited(descendant)
       super
 
       descendant.virtus_setup_attributes_accessor_module
     end
 
+    # Holds the anonymous module which hosts this class's Attribute accessors
+    # 
+    # @return [Module]
+    # 
+    # @api private
     attr_reader :virtus_attributes_accessor_module
 
     # Hooks into const missing process to determine types of attributes
