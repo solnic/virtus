@@ -14,12 +14,11 @@ module Virtus
     #
     # @api public
     def options
-      options = {}
-      accepted_options.each do |option_name|
+      accepted_options.inject({}) do |options, option_name|
         option_value         = send(option_name)
         options[option_name] = option_value unless option_value.nil?
+        options
       end
-      options
     end
 
     # Returns an array of valid options
