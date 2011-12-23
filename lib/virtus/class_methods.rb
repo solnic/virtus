@@ -79,7 +79,7 @@ module Virtus
 
   protected
 
-    # Set up the anonymous module which will host Attribute accessor methods.
+    # Set up the anonymous module which will host Attribute accessor methods
     #
     # @return [self]
     #
@@ -93,8 +93,7 @@ module Virtus
 
   private
 
-    # Hook inheritance to setup descendants with their own Attribute-accessor-
-    # method-hosting modules.
+    # Setup descendants' own Attribute-accessor-method-hosting modules
     # 
     # Descendants inherit Attribute accessor methods via Ruby's inheritance
     # mechanism: Attribute accessor methods are defined in a module included
