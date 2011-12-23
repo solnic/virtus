@@ -43,8 +43,7 @@ module Virtus
     #     accept_options :foo, :bar
     #   end
     #
-    # @return [Array]
-    #   All accepted options
+    # @return [self]
     #
     # @api public
     def accept_options(*new_options)
