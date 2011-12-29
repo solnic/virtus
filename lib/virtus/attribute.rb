@@ -175,6 +175,26 @@ module Virtus
       Coercion[value.class].send(coercion_method, value)
     end
 
+    # Is the given value coerced into the target type for this attribute?
+    #
+    # @example
+    #   string_attribute = Virtus::Attribute::String.new(:str)
+    #   string_attribute.value_coerced?('foo')        # => true
+    #   string_attribute.value_coerced?(:foo)         # => false
+    #   integer_attribute = Virtus::Attribute::Integer.new(:integer)
+    #   integer_attribute.value_coerced?(5)           # => true
+    #   integer_attribute.value_coerced?('5')         # => false
+    #   date_attribute = Virtus::Attribute::Date.new(:date)
+    #   date_attribute.value_coerced?('2011-12-31')   # => false
+    #   date_attribute.value_coerced?(Date.today)     # => true
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def value_coerced?(value)
+      value.kind_of?(self.class.primitive)
+    end
+
     # Creates an attribute reader method
     #
     # @param [Module] mod

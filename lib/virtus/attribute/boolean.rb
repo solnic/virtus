@@ -21,15 +21,16 @@ module Virtus
       # Returns if the given value is either true or false
       #
       # @example
-      #   Virtus::Attribute::Boolean.primitive?(true)    # => true
-      #   Virtus::Attribute::Boolean.primitive?(false)   # => true
-      #   Virtus::Attribute::Boolean.primitive?(1)       # => false
-      #   Virtus::Attribute::Boolean.primitive?('true')  # => false
+      #   boolean = Virtus::Attribute::Boolean.new(:bool)
+      #   boolean.primitive?(true)    # => true
+      #   boolean.primitive?(false)   # => true
+      #   boolean.primitive?(1)       # => false
+      #   boolean.primitive?('true')  # => false
       #
       # @return [Boolean]
       #
       # @api public
-      def self.primitive?(value)
+      def value_coerced?(value)
         value.equal?(true) || value.equal?(false)
       end
 
