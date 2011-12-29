@@ -192,7 +192,7 @@ module Virtus
     #
     # @api public
     def value_coerced?(value)
-      value.kind_of?(self.class.primitive)
+      value.is_a?(self.class.primitive)
     end
 
     # Creates an attribute reader method
