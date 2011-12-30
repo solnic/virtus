@@ -69,7 +69,7 @@ module Virtus
 
     # Initializes an attribute instance
     #
-    # @param [Symbol] name
+    # @param [#to_sym] name
     #   the name of an attribute
     #
     # @param [#to_hash] options
@@ -79,7 +79,7 @@ module Virtus
     #
     # @api private
     def initialize(name, options = {})
-      @name    = name
+      @name    = name.to_sym
       @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
