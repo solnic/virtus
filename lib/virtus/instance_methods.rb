@@ -11,8 +11,8 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(attributes = {}, include_private = false)
-      set_attributes(attributes, include_private)
+    def initialize(attribute_values = {}, include_private = false)
+      set_attributes(attribute_values, include_private)
     end
 
     # Returns a value of the attribute with the given name
@@ -86,7 +86,7 @@ module Virtus
 
       self.class.attributes.each do |attribute|
         name = attribute.name
-        attributes[name] = attribute_get(name) if respond_to?(name)
+        attributes[name] = attribute_get(name) unless attribute.private_reader?
       end
 
       attributes
@@ -111,8 +111,8 @@ module Virtus
     # @return [Hash]
     #
     # @api public
-    def attributes=(attributes)
-      set_attributes(attributes)
+    def attributes=(attribute_values)
+      set_attributes(attribute_values)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -137,9 +137,11 @@ module Virtus
 
   private
 
-    def set_attributes(attributes, include_private = false)
-      attributes.to_hash.each do |name, value|
-        attribute_set(name, value) if respond_to?("#{name}=", include_private)
+    def set_attributes(attribute_values, include_private = false)
+      attributes = self.class.attributes
+      attribute_values.each do |name, value|
+        attribute = attributes[name]
+        attribute_set(name, value) if attribute && !attribute.private_writer?
       end
     end
 
