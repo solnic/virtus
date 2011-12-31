@@ -190,18 +190,18 @@ module Virtus
     #
     # @return [Boolean]
     #
-    # @api public
+    # @api private
     def value_coerced?(value)
-      value.is_a?(self.class.primitive)
+      primitives.any? { |primitive| primitive === value }
     end
 
-    # Returns the class to which the receiver's values will be coerced
+    # Returns the Set of class(es) to which values will be coerced
     #
-    # @return [Object]
+    # @return [Set<Object>]
     #
-    # @api public
-    def primitive
-      @options.fetch(:primitive)
+    # @api private
+    def primitives
+      Set[ *@options.fetch(:primitive) ]
     end
 
     # Creates an attribute reader method
