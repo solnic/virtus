@@ -105,7 +105,7 @@ module Virtus
     #   user = User.new
     #   user.attributes = { :name => 'John', :age => 28 }
     #
-    # @param [#to_hash] attributes
+    # @param [#to_hash] attribute_values
     #   a hash of attribute values to be set on an object
     #
     # @return [Hash]
@@ -137,6 +137,30 @@ module Virtus
 
   private
 
+    # Mass-assign attribute values
+    #
+    # Only values at keys that correspond to publicly writable Attributes will
+    # be set. Keys in the +attribute_values+ param can be symbols or strings.
+    # Non-attribute setter methods on the receiver will not be called, and
+    # privately writable attribute setter methods will not be called.
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new
+    #   user.attributes = { :name => 'John', :age => 28 }
+    #
+    # @param [#to_hash] attribute_values
+    #   a hash of attribute values to be set on an object
+    #
+    # @return [Hash]
+    #
+    # @api private
     def set_attributes(attribute_values, include_private = false)
       attributes = self.class.attributes
       attribute_values.each do |name, value|
