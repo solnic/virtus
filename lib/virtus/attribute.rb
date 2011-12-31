@@ -195,6 +195,15 @@ module Virtus
       value.is_a?(self.class.primitive)
     end
 
+    # Returns the class to which the receiver's values will be coerced
+    #
+    # @return [Object]
+    #
+    # @api public
+    def primitive
+      @options.fetch(:primitive)
+    end
+
     # Creates an attribute reader method
     #
     # @param [Module] mod
