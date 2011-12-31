@@ -22,10 +22,10 @@ module Virtus
       #
       # @example
       #   boolean = Virtus::Attribute::Boolean.new(:bool)
-      #   boolean.primitive?(true)    # => true
-      #   boolean.primitive?(false)   # => true
-      #   boolean.primitive?(1)       # => false
-      #   boolean.primitive?('true')  # => false
+      #   boolean.value_coerced?(true)    # => true
+      #   boolean.value_coerced?(false)   # => true
+      #   boolean.value_coerced?(1)       # => false
+      #   boolean.value_coerced?('true')  # => false
       #
       # @return [Boolean]
       #
