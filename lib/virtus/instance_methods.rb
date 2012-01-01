@@ -92,7 +92,11 @@ module Virtus
       attributes
     end
 
-    # Mass-assign of attribute values
+    # Mass-assign attribute values
+    #
+    # Keys in the +attribute_values+ param can be symbols or strings.
+    # Only non-private referenced Attribute writer methods will be called.
+    # Non-attribute setter methods on the receiver will not be called.
     #
     # @example
     #   class User
@@ -103,10 +107,10 @@ module Virtus
     #   end
     #
     #   user = User.new
-    #   user.attributes = { :name => 'John', :age => 28 }
+    #   user.attributes = { :name => 'John', 'age' => 28 }
     #
     # @param [#to_hash] attribute_values
-    #   a hash of attribute values to be set on an object
+    #   a hash of attribute names and values to set on the receiver
     #
     # @return [Hash]
     #
@@ -143,10 +147,9 @@ module Virtus
 
     # Mass-assign attribute values
     #
-    # Only values at keys that correspond to publicly writable Attributes will
-    # be set. Keys in the +attribute_values+ param can be symbols or strings.
-    # Non-attribute setter methods on the receiver will not be called, and
-    # privately writable attribute setter methods will not be called.
+    # Keys in the +attribute_values+ param can be symbols or strings.
+    # All referenced Attribute writer methods *will* be called.
+    # Non-attribute setter methods on the receiver will not be called.
     #
     # @example
     #   class User
@@ -157,10 +160,10 @@ module Virtus
     #   end
     #
     #   user = User.new
-    #   user.attributes = { :name => 'John', :age => 28 }
+    #   user.attributes = { :name => 'John', 'age' => 28 }
     #
     # @param [#to_hash] attribute_values
-    #   a hash of attribute values to be set on an object
+    #   a hash of attribute names and values to set on the receiver
     #
     # @return [Hash]
     #
