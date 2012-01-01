@@ -35,7 +35,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      attribute_get(name)
+      get_attribute(name)
     end
 
     # Sets a value of the attribute with the given name
@@ -62,7 +62,7 @@ module Virtus
     #
     # @api public
     def []=(name, value)
-      attribute_set(name, value)
+      set_attribute(name, value)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -86,7 +86,7 @@ module Virtus
 
       self.class.attributes.each do |attribute|
         name = attribute.name
-        attributes[name] = attribute_get(name) unless attribute.private_reader?
+        attributes[name] = get_attribute(name) unless attribute.private_reader?
       end
 
       attributes
@@ -172,7 +172,7 @@ module Virtus
       attributes = self.class.attributes
       attribute_values.each do |name, value|
         attribute = attributes[name]
-        attribute_set(name, value) if attribute
+        set_attribute(name, value) if attribute
       end
     end
 
@@ -183,7 +183,7 @@ module Virtus
     # @return [Object]
     #
     # @api private
-    def attribute_get(name)
+    def get_attribute(name)
       __send__(name)
     end
 
@@ -194,7 +194,7 @@ module Virtus
     # @return [Object]
     #
     # @api private
-    def attribute_set(name, value)
+    def set_attribute(name, value)
       __send__("#{name}=", value)
     end
 
