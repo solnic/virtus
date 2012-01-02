@@ -5,7 +5,7 @@ describe Virtus::ClassMethods, '.const_missing' do
     Object.send(:remove_const, :User)
   end
 
-  context "with an existing attribute constant which doesn't exist in the global ns" do
+  context "with an existing attribute constant which exists in the global ns" do
     before do
       class User
         include Virtus

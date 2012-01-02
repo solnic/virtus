@@ -12,8 +12,11 @@ module Virtus
     # @api private
     def self.extended(descendant)
       super
-      descendant.extend(DescendantsTracker)
-      descendant.const_set(:AttributeMethods, Module.new)
+
+      descendant.module_eval do
+        extend DescendantsTracker
+        virtus_setup_attributes_accessor_module
+      end
     end
 
     private_class_method :extended
@@ -44,7 +47,7 @@ module Virtus
     # @api public
     def attribute(name, type, options = {})
       attribute = Attribute.determine_type(type).new(name, options)
-      virtus_define_attribute_methods(attribute)
+      attribute.define_accessor_methods(virtus_attributes_accessor_module)
       virtus_add_attribute(attribute)
       self
     end
@@ -74,7 +77,47 @@ module Virtus
       end
     end
 
+  protected
+
+    # Set up the anonymous module which will host Attribute accessor methods
+    #
+    # @return [self]
+    #
+    # @api private
+    def virtus_setup_attributes_accessor_module
+      @virtus_attributes_accessor_module = AttributesAccessor.new(name || inspect)
+      include virtus_attributes_accessor_module
+
+      self
+    end
+
   private
+
+    # Setup descendants' own Attribute-accessor-method-hosting modules
+    # 
+    # Descendants inherit Attribute accessor methods via Ruby's inheritance
+    # mechanism: Attribute accessor methods are defined in a module included
+    # in a superclass. Attributes defined on descendants add methods to the
+    # descendant's Attributes accessor module, leaving the superclass's method
+    # table unaffected.
+    # 
+    # @param [Class] descendant
+    # 
+    # @return [undefined]
+    # 
+    # @api private
+    def inherited(descendant)
+      super
+
+      descendant.virtus_setup_attributes_accessor_module
+    end
+
+    # Holds the anonymous module which hosts this class's Attribute accessors
+    # 
+    # @return [Module]
+    # 
+    # @api private
+    attr_reader :virtus_attributes_accessor_module
 
     # Hooks into const missing process to determine types of attributes
     #
@@ -89,22 +132,6 @@ module Virtus
     # @api private
     def const_missing(name)
       Attribute.determine_type(name) || super
-    end
-
-    # Define the attribute reader and writer methods in the class
-    #
-    # @param [Attribute]
-    #
-    # @return [undefined]
-    #
-    # @api private
-    def virtus_define_attribute_methods(attribute)
-      module_with_methods = self::AttributeMethods
-
-      attribute.define_reader_method(module_with_methods)
-      attribute.define_writer_method(module_with_methods)
-
-      include module_with_methods
     end
 
     # Add the attribute to the class' and descendants' attributes
