@@ -33,7 +33,7 @@ module Virtus
         value.equal?(true) || value.equal?(false)
       end
 
-      # Creates standard and boolean attribute reader methods
+      # Creates an attribute reader method as a query
       #
       # @param [Module] mod
       #
@@ -42,13 +42,7 @@ module Virtus
       # @api private
       def define_reader_method(mod)
         super
-
-        reader_method_name = "#{name}?"
-        attribute          = self
-
-        mod.send(:define_method,    reader_method_name) { attribute.get(self) }
-        mod.send(reader_visibility, reader_method_name)
-
+        mod.define_reader_method(self, "#{name}?", reader_visibility)
         self
       end
 
