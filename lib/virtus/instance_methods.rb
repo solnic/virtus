@@ -149,7 +149,7 @@ module Virtus
     #
     # Keys in the +attribute_values+ param can be symbols or strings.
     # All referenced Attribute writer methods *will* be called.
-    # Non-attribute setter methods on the receiver will not be called.
+    # Non-attribute setter methods on the receiver *will* be called.
     #
     # @example
     #   class User
