@@ -169,11 +169,7 @@ module Virtus
     #
     # @api private
     def set_attributes(attribute_values)
-      attributes = self.class.attributes
-      attribute_values.each do |name, value|
-        attribute = attributes[name]
-        set_attribute(name, value) if attribute
-      end
+      attribute_values.each { |name, value| set_attribute(name, value) }
     end
 
     # Returns a value of the attribute with the given name
