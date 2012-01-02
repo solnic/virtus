@@ -14,10 +14,9 @@ module Virtus
     #
     # @api public
     def options
-      accepted_options.inject({}) do |options, option_name|
+      accepted_options.each_with_object({}) do |option_name, options|
         option_value         = send(option_name)
         options[option_name] = option_value unless option_value.nil?
-        options
       end
     end
 
