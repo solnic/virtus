@@ -83,6 +83,7 @@ module Virtus
       @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
+      @primitive              = @options.fetch(:primitive)
       @coercion_method        = @options.fetch(:coercion_method)
       @default                = DefaultValue.new(self, @options[:default])
 
@@ -192,16 +193,7 @@ module Virtus
     #
     # @api private
     def value_coerced?(value)
-      primitives.any? { |primitive| primitive === value }
-    end
-
-    # Returns the Set of class(es) to which values will be coerced
-    #
-    # @return [Set<Object>]
-    #
-    # @api private
-    def primitives
-      Set[ *@options.fetch(:primitive) ]
+      @primitive === value
     end
 
     # Creates an attribute reader method
