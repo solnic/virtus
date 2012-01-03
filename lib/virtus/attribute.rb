@@ -69,7 +69,7 @@ module Virtus
 
     # Initializes an attribute instance
     #
-    # @param [Symbol] name
+    # @param [#to_sym] name
     #   the name of an attribute
     #
     # @param [#to_hash] options
@@ -79,7 +79,7 @@ module Virtus
     #
     # @api private
     def initialize(name, options = {})
-      @name    = name
+      @name    = name.to_sym
       @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
@@ -196,6 +196,19 @@ module Virtus
       @primitive === value
     end
 
+    # Define reader and writer methods for an Attribute
+    #
+    # @param [Attribute] attribute
+    #
+    # @return [self]
+    #
+    # @api private
+    def define_accessor_methods(mod)
+      define_reader_method(mod)
+      define_writer_method(mod)
+      self
+    end
+
     # Creates an attribute reader method
     #
     # @param [Module] mod
@@ -204,12 +217,7 @@ module Virtus
     #
     # @api private
     def define_reader_method(mod)
-      reader_method_name = name
-      attribute          = self
-
-      mod.send(:define_method,    reader_method_name) { attribute.get(self) }
-      mod.send(reader_visibility, reader_method_name)
-
+      mod.define_reader_method(self, name, reader_visibility)
       self
     end
 
@@ -221,12 +229,7 @@ module Virtus
     #
     # @api private
     def define_writer_method(mod)
-      writer_method_name = "#{name}="
-      attribute          = self
-
-      mod.send(:define_method,    writer_method_name) { |value| attribute.set(self, value) }
-      mod.send(writer_visibility, writer_method_name)
-
+      mod.define_writer_method(self, "#{name}=", writer_visibility)
       self
     end
 

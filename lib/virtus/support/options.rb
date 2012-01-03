@@ -14,12 +14,10 @@ module Virtus
     #
     # @api public
     def options
-      options = {}
-      accepted_options.each do |option_name|
+      accepted_options.each_with_object({}) do |option_name, options|
         option_value         = send(option_name)
         options[option_name] = option_value unless option_value.nil?
       end
-      options
     end
 
     # Returns an array of valid options
@@ -43,8 +41,7 @@ module Virtus
     #     accept_options :foo, :bar
     #   end
     #
-    # @return [Array]
-    #   All accepted options
+    # @return [self]
     #
     # @api public
     def accept_options(*new_options)

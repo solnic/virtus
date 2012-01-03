@@ -69,14 +69,64 @@ describe Virtus::ClassMethods, '.attribute' do
   end
 
   context "in the descendants" do
-    subject { described_class.attribute(:name, String).attributes[:name] }
-
     let(:descendant) { Class.new(described_class) }
 
-    it 'updates the descendant attributes' do
-      descendant.attributes.to_a.should be_empty
-      @attribute = subject
-      descendant.attributes.to_a.should eql([ @attribute ])
+    context 'adding an attribute to the superclass' do
+      subject { described_class.attribute(:name, String).attributes[:name] }
+
+      it 'updates the descendant attributes' do
+        descendant.attributes.to_a.should be_empty
+        @attribute = subject
+        descendant.attributes.to_a.should eql([ @attribute ])
+      end
+
+      it "adds attribute accessor methods to the descendant" do
+        subject
+        descendant.instance_methods.map(&:to_s).should include('name', 'name=')
+      end
+    end
+
+    context 'adding an attribute to a descendant' do
+      before { descendant.attribute(:name, String) }
+      subject { descendant.attributes[:name] }
+
+      it "adds the attribute to the descendant's attributes" do
+        subject.name.should eql(:name)
+        descendant.attributes.to_a.should eql([ subject ])
+      end
+
+      it "does not add the attribute to the superclass's attributes" do
+        descendant.attributes.to_a.should eql([ subject ])
+        described_class.attributes.to_a.should eql([ ])
+      end
+
+      it "adds attribute accessor methods to the descendant" do
+        descendant.instance_methods.map(&:to_s).should include('name', 'name=')
+      end
+
+      it "does not add attribute accessor methods to the superclass" do
+        described_class.instance_methods.map(&:to_s).should_not include('name', 'name=')
+      end
+    end
+
+    context 'an attribute on the superclass and on the descendant' do
+      before do
+        described_class.attribute(:name, String)
+        descendant.attribute(:descendant_name, String)
+      end
+
+      it "adds accessor methods for both attributes to the descendant" do
+        descendant.instance_methods.map(&:to_s).should include('name', 'name=')
+        descendant.instance_methods.map(&:to_s).should include('descendant_name', 'descendant_name=')
+      end
+
+      it "adds accessor methods for the superclass attribute to the superclass" do
+        described_class.instance_methods.map(&:to_s).should include('name', 'name=')
+      end
+
+      it "does not add accessor methods for the descendant attribute to the superclass" do
+        described_class.instance_methods.map(&:to_s).should_not include('descendant_name', 'descendant_name=')
+      end
     end
   end
 end
