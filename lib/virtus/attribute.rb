@@ -83,6 +83,7 @@ module Virtus
       @options = self.class.options.merge(options.to_hash).freeze
 
       @instance_variable_name = "@#{@name}".freeze
+      @primitive              = @options.fetch(:primitive)
       @coercion_method        = @options.fetch(:coercion_method)
       @default                = DefaultValue.new(self, @options[:default])
 
@@ -173,6 +174,26 @@ module Virtus
     # @api public
     def coerce(value)
       Coercion[value.class].send(coercion_method, value)
+    end
+
+    # Is the given value coerced into the target type for this attribute?
+    #
+    # @example
+    #   string_attribute = Virtus::Attribute::String.new(:str)
+    #   string_attribute.value_coerced?('foo')        # => true
+    #   string_attribute.value_coerced?(:foo)         # => false
+    #   integer_attribute = Virtus::Attribute::Integer.new(:integer)
+    #   integer_attribute.value_coerced?(5)           # => true
+    #   integer_attribute.value_coerced?('5')         # => false
+    #   date_attribute = Virtus::Attribute::Date.new(:date)
+    #   date_attribute.value_coerced?('2011-12-31')   # => false
+    #   date_attribute.value_coerced?(Date.today)     # => true
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def value_coerced?(value)
+      @primitive === value
     end
 
     # Define reader and writer methods for an Attribute
