@@ -27,7 +27,7 @@ module Virtus
 
     # Returns instance variable name of the attribute
     #
-    # @return [String]
+    # @return [Symbol]
     #
     # @api private
     attr_reader :instance_variable_name
@@ -82,7 +82,7 @@ module Virtus
       @name    = name.to_sym
       @options = self.class.options.merge(options.to_hash).freeze
 
-      @instance_variable_name = "@#{@name}".freeze
+      @instance_variable_name = "@#{@name}".to_sym
       @coercion_method        = @options.fetch(:coercion_method)
       @default                = DefaultValue.new(self, @options[:default])
 
