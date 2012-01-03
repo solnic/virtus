@@ -13,7 +13,7 @@ group :metrics do
   gem 'map'
 
   platforms :mri_18 do
-    gem 'json',      '~> 1.5.3'
+    gem 'json',      '~> 1.6.4'
     gem 'metric_fu', '~> 2.1.1'
     gem 'mspec',     '~> 1.5.17'
     gem 'rcov',      '~> 0.9.9'
