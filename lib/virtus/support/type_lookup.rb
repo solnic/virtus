@@ -3,7 +3,7 @@ module Virtus
   # A module that adds type lookup to a class
   module TypeLookup
 
-    TYPE_FORMAT = /\A(?:[A-Z]\w*)\z/.freeze
+    TYPE_FORMAT = /\A[A-Z]\w*\z/.freeze
 
     # Returns a descendant based on a name or class
     #
