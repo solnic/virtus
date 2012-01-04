@@ -121,10 +121,6 @@ module Virtus
 
     # Hooks into const missing process to determine types of attributes
     #
-    # It is used when an attribute is defined and a global class like String
-    # or Integer is provided as the type which needs to be mapped to
-    # Virtus::Attribute::String and Virtus::Attribute::Integer
-    #
     # @param [String] name
     #
     # @return [Class]
