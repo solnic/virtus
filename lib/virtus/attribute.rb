@@ -67,6 +67,27 @@ module Virtus
 
     accept_options *OPTIONS
 
+    # Determine attribute type based on class or name
+    #
+    # Returns Attribute::EmbeddedValue if a virtus class is passed
+    #
+    # @example
+    #   address_class = Class.new { include Virtus }
+    #   Virtus::Attribute.determine_type(address_class) # => Virtus::Attribute::EmbeddedValue
+    #
+    # @see Virtus::Support::TypeLookup.determine_type
+    #
+    # @return [Class]
+    #
+    # @api public
+    def self.determine_type(class_or_name)
+      if class_or_name.is_a?(::Class) && class_or_name < Virtus
+        Attribute::EmbeddedValue
+      else
+        super(class_or_name)
+      end
+    end
+
     # Initializes an attribute instance
     #
     # @param [#to_sym] name

@@ -13,8 +13,12 @@ describe Virtus::Attribute, '.determine_type' do
     end
 
     primitive = attribute_class.primitive
-    context "with primitive #{primitive.inspect}" do
+    context "with #{attribute_class.inspect} and primitive #{primitive.inspect}" do
       subject { object.determine_type(primitive) }
+
+      before do
+        pending if attribute_class == Virtus::Attribute::EmbeddedValue
+      end
 
       it 'returns the corresponding attribute class' do
         should be(attribute_class)
@@ -29,6 +33,14 @@ describe Virtus::Attribute, '.determine_type' do
         should be(attribute_class)
       end
     end
+  end
+
+  context 'with a virtus model' do
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Class.new { include Virtus } }
+
+    it { should equal(Virtus::Attribute::EmbeddedValue) }
   end
 
   context 'when the primitive defaults to Object' do

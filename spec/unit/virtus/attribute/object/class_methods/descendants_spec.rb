@@ -4,7 +4,8 @@ describe Virtus::Attribute::Object, '.descendants' do
   subject { described_class.descendants }
 
   let(:known_descendants) do
-    [ Virtus::Attribute::Time,    Virtus::Attribute::String,
+    [ Virtus::Attribute::EmbeddedValue,
+      Virtus::Attribute::Time,    Virtus::Attribute::String,
       Virtus::Attribute::Integer, Virtus::Attribute::Hash,
       Virtus::Attribute::Float,   Virtus::Attribute::Decimal,
       Virtus::Attribute::Numeric, Virtus::Attribute::DateTime,
