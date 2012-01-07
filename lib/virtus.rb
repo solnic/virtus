@@ -35,6 +35,8 @@ require 'virtus/attributes_accessor'
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
 
+require 'virtus/value_object'
+
 require 'virtus/attribute_set'
 
 require 'virtus/coercion'
