@@ -14,7 +14,10 @@ describe Virtus::ValueObject do
     end
   end
   let(:attribute_values) { { :latitude => 10.0, :longitude => 20.0 } }
-  let(:equivalent) { class_under_test.new(attribute_values) }
+  let(:instance_with_equal_state) { class_under_test.new(attribute_values) }
+  let(:instance_with_different_state) do
+    class_under_test.new(:latitude => attribute_values[:latitude])
+  end
   subject { class_under_test.new(attribute_values) }
 
   describe 'initialization' do
@@ -43,20 +46,44 @@ describe Virtus::ValueObject do
   end
 
   describe 'equality' do
-    it '#== returns true for different objects with the same state' do
-      subject.should == equivalent
+    describe '#==' do
+      it 'returns true for different objects with the same state' do
+        subject.should == instance_with_equal_state
+      end
+      
+      it 'returns false for different objects with different state' do
+        subject.should_not == instance_with_different_state
+      end
     end
 
-    it '#eql? returns true for different objects with the same state' do
-      subject.should eql(equivalent)
+    describe '#eql?' do
+      it 'returns true for different objects with the same state' do
+        subject.should eql(instance_with_equal_state)
+      end
+
+      it 'returns false for different objects with different state' do
+        subject.should_not eql(instance_with_different_state)
+      end      
     end
 
-    it '#equal? returns false for different objects with the same state' do
-      subject.should_not equal(equivalent)
+    describe '#equal?' do
+      it 'returns false for different objects with the same state' do
+        subject.should_not equal(instance_with_equal_state)
+      end
+
+      it 'returns false for different objects with different state' do
+        subject.should_not equal(instance_with_different_state)
+      end      
     end
 
-    it '#hash returns the same value for different objects with the same state' do
-      subject.hash.should eql(equivalent.hash)
+    describe '#hash' do
+      it 'returns the same value for different objects with the same state' do
+        subject.hash.should eql(instance_with_equal_state.hash)
+      end
+
+      it 'returns different values for different objects with different state' do
+        subject.hash.should_not eql(instance_with_different_state.hash)
+      end
     end
   end
 
