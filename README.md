@@ -11,19 +11,20 @@ reinventing the wheel all over again. It is also suitable for any other
 usecase where you need to extend your ruby objects with attributes that require
 data type coercions.
 
+
 Installation
 ------------
 
-``` terminal
+``` bash
 $ gem install virtus
 ```
 
 or
 
 ``` ruby
-# ./Gemfile
+# Gemfile
 
-gem 'virtus', '0.0.7'
+gem 'virtus', '0.0.10'
 ```
 
 Examples
@@ -41,7 +42,8 @@ class User
   attribute :birthday, DateTime
 end
 
-user = User.new :name => 'Piotr', :age => 28
+user = User.new name: 'Piotr', age: 28
+
 user.attributes
   # => { :name => "Piotr", :age => 28 }
 
@@ -67,11 +69,11 @@ class Page
   include Virtus
 
   attribute :title, String
-  attribute :views, Integer, :default => 0
-  attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
+  attribute :views, Integer, default: 0
+  attribute :slug, String, default: ->(page, attribute) { page.title.downcase.gsub ' ', '-' }
 end
 
-page = Page.new :title => 'Virtus Is Awesome'
+page = Page.new title: 'Virtus Is Awesome'
 page.slug
   # => 'virtus-is-awesome'
 page.views
@@ -95,13 +97,9 @@ class MD5 < Virtus::Attribute::Object
 end
 
 # Defining the Coercion method
-module Virtus
-  class Coercion
-    class String < Virtus::Coercion::Object
-      def self.to_md5(value)
-        Digest::MD5.hexdigest value
-      end
-    end
+class Virtus::Coercion::String < Virtus::Coercion::Object
+  def self.to_md5(value)
+    Digest::MD5.hexdigest value
   end
 end
 
@@ -113,7 +111,7 @@ class User
   attribute :password, MD5
 end
 
-user = User.new :name => 'Piotr', :password => 'foobar'
+user = User.new name: 'Piotr', password: 'foobar'
 user.name
   # => 'Piotr'
 user.password
@@ -129,13 +127,11 @@ require 'json'
 module MyAppClass
 
   # Defining the custom attribute(s)
-  module Attributes
-    class JSON < Virtus::Attribute::Object
-      primitive Hash
+  class Attributes::JSON < Virtus::Attribute::Object
+    primitive Hash
 
-      def coerce(value)
-        ::JSON.parse value
-      end
+    def coerce(value)
+      ::JSON.parse value
     end
   end
 
