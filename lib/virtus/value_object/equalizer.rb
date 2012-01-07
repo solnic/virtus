@@ -9,8 +9,6 @@ module Virtus
 
       # List of methods that will be used to define equality methods
       #
-      # Specifically: #inspect, #eql?, #== and #hash
-      # 
       # @return [Array(Symbol)]
       attr_reader :keys
 
@@ -52,10 +50,9 @@ module Virtus
       # 
       # @return [self]
       def define_inspect_method
-        name = host_name
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def inspect
-            "#<#{name} #{keys.map { |k| "#{k}=\#{#{k}.inspect}" }.join(' ')}>"
+            "#<#{host_name} #{keys.map { |k| "#{k}=\#{#{k}.inspect}" }.join(' ')}>"
           end
         RUBY
       end
