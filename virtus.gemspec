@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency('rake',      '~> 0.9.2')
   gem.add_development_dependency('backports', '~> 2.3.0')
-  gem.add_development_dependency('rspec',     '~> 2.7.0')
+  gem.add_development_dependency('rspec',     '~> 2.8.0')
 end
