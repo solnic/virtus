@@ -46,9 +46,7 @@ module Virtus
     #
     # @api public
     def attribute(name, type, options = {})
-      attribute_class   = Attribute.determine_type(type)
-      attribute_options = attribute_class == Attribute::EmbeddedValue ? options.merge(:model => type) : options
-      attribute         = attribute_class.new(name, attribute_options)
+      attribute = build_attribute(name, type, options)
       attribute.define_accessor_methods(virtus_attributes_accessor_module)
       virtus_add_attribute(attribute)
       self
@@ -142,6 +140,21 @@ module Virtus
     def virtus_add_attribute(attribute)
       attributes << attribute
       descendants.each { |descendant| descendant.attributes.reset }
+    end
+
+    # Builds an attribute instance
+    #
+    # @return [Attribute]
+    #
+    # @api private
+    def build_attribute(name, type, options)
+      attribute_class   = Attribute.determine_type(type)
+      attribute_options = if attribute_class == Attribute::EmbeddedValue
+                            options.merge(:model => type)
+                          else
+                            options
+                          end
+      attribute_class.new(name, attribute_options)
     end
 
   end # module ClassMethods
