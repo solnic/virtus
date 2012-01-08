@@ -23,7 +23,7 @@ or
 ``` ruby
 # ./Gemfile
 
-gem 'virtus', '0.0.7'
+gem 'virtus'
 ```
 
 Examples
@@ -76,6 +76,37 @@ page.slug
   # => 'virtus-is-awesome'
 page.views
   # => 0
+```
+
+**Embedded Value**
+
+``` ruby
+class City
+  include Virtus
+
+  attribute :name, String
+end
+
+class Address
+  include Virtus
+
+  attribute :street,  String
+  attribute :zipcode, String
+  attribute :city,    City
+end
+
+class User
+  include Virtus
+
+  attribute :name,    String
+  attribute :address, Address
+end
+
+user = User.new(:address => {
+  :street => 'Street 1/2', :zipcode => '12345', :city => { :name => 'NYC' } })
+
+user.address.street # => "Street 1/2"
+user.address.city.name # => "NYC"
 ```
 
 **Adding Coercions**
