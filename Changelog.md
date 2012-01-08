@@ -1,6 +1,11 @@
-# v0.0.11 to-be-released
+# v0.1.0 to-be-released
 
-[Compare v0.0.10..master](https://github.com/solnic/virtus/compare/v0.0.9...master)
+[Compare v0.0.10..master](https://github.com/solnic/virtus/compare/v0.0.10...master)
+
+* [feature] New EmbeddedValue attribute (solnic)
+* [feature] Support for scientific notation handling in string => integer coercion (dkubb)
+* [feature] Handling of string => numeric coercion with a leading + sign (dkubb)
+
 
 # v0.0.10 2011-11-21
 
