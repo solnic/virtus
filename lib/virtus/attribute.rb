@@ -67,6 +67,17 @@ module Virtus
 
     accept_options *OPTIONS
 
+    # @see Virtus::Support::TypeLookup
+    #
+    # @api private
+    def self.determine_type(class_or_name)
+      if class_or_name.is_a?(::Class) && class_or_name < Virtus
+        Attribute::EmbeddedValue
+      else
+        super(class_or_name)
+      end
+    end
+
     # Initializes an attribute instance
     #
     # @param [#to_sym] name

@@ -35,6 +35,14 @@ describe Virtus::Attribute, '.determine_type' do
     end
   end
 
+  context 'with a virtus model' do
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Class.new { include Virtus } }
+
+    it { should equal(Virtus::Attribute::EmbeddedValue) }
+  end
+
   context 'when the primitive defaults to Object' do
     subject { object.determine_type(primitive) }
 
