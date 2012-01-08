@@ -3,7 +3,13 @@ require 'spec_helper'
 describe Virtus::Coercion::String, '.to_integer' do
   subject { described_class.to_integer(string) }
 
-  { '1' => 1, '1.0' => 1, '.1' => 0 }.each do |value, expected|
+  {
+    '1'    => 1,
+    '-1'   => -1,
+    '1.0'  => 1,
+    '-1.0' => -1,
+    '.1'   => 0,
+  }.each do |value, expected|
     context "with #{value.inspect}" do
       let(:string) { value }
 

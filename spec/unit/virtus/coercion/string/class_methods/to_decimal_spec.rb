@@ -5,7 +5,13 @@ describe Virtus::Coercion::String, '.to_decimal' do
 
   let(:object) { described_class }
 
-  { '1' => BigDecimal('1.0'), '1.0' => BigDecimal('1.0'), '.1' => BigDecimal('0.1') }.each do |value, expected|
+  {
+    '1'    => BigDecimal('1.0'),
+    '-1'   => BigDecimal('-1.0'),
+    '1.0'  => BigDecimal('1.0'),
+    '-1.0' => BigDecimal('-1.0'),
+    '.1'   => BigDecimal('0.1'),
+  }.each do |value, expected|
     context "with #{value.inspect}" do
       let(:string) { value }
 
