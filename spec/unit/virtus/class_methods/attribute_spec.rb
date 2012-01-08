@@ -7,10 +7,6 @@ describe Virtus::ClassMethods, '.attribute' do
     Class.new { include Virtus }
   end
 
-  let(:virtus_class) do
-    Class.new { include Virtus }
-  end
-
   context 'with a string as type' do
     let(:type) { String }
 
@@ -18,8 +14,12 @@ describe Virtus::ClassMethods, '.attribute' do
   end
 
   context 'with a virtus class as type' do
-    let(:type) { virtus_class }
+    let(:type) { Class.new { include Virtus } }
 
     it { should be(described_class) }
+
+    it 'sets model option' do
+      subject.attributes[:name].options[:model].should be(type)
+    end
   end
 end
