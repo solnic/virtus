@@ -26,6 +26,12 @@ module Virtus
     #
     class EmbeddedValue < Object
 
+      # Sets @model ivar
+      #
+      # @see Virtus::Attribute#initialize
+      #
+      # @return [undefined]
+      #
       # @api private
       def initialize(name, options = {})
         super
@@ -34,7 +40,14 @@ module Virtus
 
       # Set an embedded instance
       #
-      # @see Virtus::Attribute#set
+      # @example
+      #   address_attributes = { :street => 'Foo 1/2' }
+      #   address            = Address.new(address_attributes)
+      #
+      #   attribute.set(instance, address)
+      #   attribute.set(instance, address_attributes)
+      #
+      # @return [Virtus]
       #
       # @api public
       def set(instance, attributes_or_object)
