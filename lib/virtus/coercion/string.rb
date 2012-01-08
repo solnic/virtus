@@ -10,7 +10,8 @@ module Virtus
       BOOLEAN_MAP  = ::Hash[ TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
 
       INTEGER_REGEXP    = /[-+]?(?:0|[1-9]\d*)/.freeze
-      FRACTIONAL_REGEXP = /(?:\.\d+)/.freeze
+      EXPONENT_REGEXP   = /(?:[eE][-+]?\d+)/.freeze
+      FRACTIONAL_REGEXP = /(?:\.\d+#{EXPONENT_REGEXP}?)/.freeze
       NUMERIC_REGEXP    = /\A(#{INTEGER_REGEXP}#{FRACTIONAL_REGEXP}?|#{FRACTIONAL_REGEXP})\z/.freeze
 
       # Coerce give value to a constant
@@ -98,7 +99,9 @@ module Virtus
       #
       # @api public
       def self.to_integer(value)
-        to_numeric(value, :to_i)
+        # coerce to a float first to evaluate scientific notation (if any)
+        # that may change the integer part, then convert to an integer
+        to_numeric(Float.to_string(to_float(value)), :to_i)
       end
 
       # Coerce value to float
