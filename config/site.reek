@@ -27,6 +27,7 @@ LongParameterList:
   overrides: {}
 FeatureEnvy:
   exclude: [
+    Virtus::ClassMethods#build_attribute,
     Virtus::Coercion::TimeCoercions#to_string,
     Virtus::Coercion::TimeCoercions#coerce_with_method,
     Virtus::TypeLookup#determine_type_from_primitive
