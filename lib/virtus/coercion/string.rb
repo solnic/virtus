@@ -99,9 +99,10 @@ module Virtus
       #
       # @api public
       def self.to_integer(value)
-        # coerce to a float first to evaluate scientific notation (if any)
+        # coerce to a Float first to evaluate scientific notation (if any)
         # that may change the integer part, then convert to an integer
-        to_numeric(Float.to_string(to_float(value)), :to_i)
+        coerced = to_float(value)
+        ::Float === coerced ? coerced.to_i : coerced
       end
 
       # Coerce value to float
