@@ -94,17 +94,17 @@ module Virtus
   private
 
     # Setup descendants' own Attribute-accessor-method-hosting modules
-    # 
+    #
     # Descendants inherit Attribute accessor methods via Ruby's inheritance
     # mechanism: Attribute accessor methods are defined in a module included
     # in a superclass. Attributes defined on descendants add methods to the
     # descendant's Attributes accessor module, leaving the superclass's method
     # table unaffected.
-    # 
+    #
     # @param [Class] descendant
-    # 
+    #
     # @return [undefined]
-    # 
+    #
     # @api private
     def inherited(descendant)
       super
@@ -113,9 +113,9 @@ module Virtus
     end
 
     # Holds the anonymous module which hosts this class's Attribute accessors
-    # 
+    #
     # @return [Module]
-    # 
+    #
     # @api private
     attr_reader :virtus_attributes_accessor_module
 

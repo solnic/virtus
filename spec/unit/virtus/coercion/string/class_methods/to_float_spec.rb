@@ -3,7 +3,31 @@ require 'spec_helper'
 describe Virtus::Coercion::String, '.to_float' do
   subject { described_class.to_float(string) }
 
-  { '1' => 1.0, '1.0' => 1.0, '.1' => 0.1 }.each do |value, expected|
+  {
+    '1'       => 1.0,
+    '+1'      => 1.0,
+    '-1'      => -1.0,
+    '1.0'     => 1.0,
+    '1.0e+1'  => 10.0,
+    '1.0e-1'  => 0.1,
+    '1.0E+1'  => 10.0,
+    '1.0E-1'  => 0.1,
+    '+1.0'    => 1.0,
+    '+1.0e+1' => 10.0,
+    '+1.0e-1' => 0.1,
+    '+1.0E+1' => 10.0,
+    '+1.0E-1' => 0.1,
+    '-1.0'    => -1.0,
+    '-1.0e+1' => -10.0,
+    '-1.0e-1' => -0.1,
+    '-1.0E+1' => -10.0,
+    '-1.0E-1' => -0.1,
+    '.1'      => 0.1,
+    '.1e+1'   => 1.0,
+    '.1e-1'   => 0.01,
+    '.1E+1'   => 1.0,
+    '.1E-1'   => 0.01,
+  }.each do |value, expected|
     context "with #{value.inspect}" do
       let(:string) { value }
 

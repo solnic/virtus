@@ -4,21 +4,21 @@ module Virtus
   class AttributesAccessor < Module
 
     # The inspect value of this Module
-    # 
+    #
     # This provides meaningful output when inspecting the ancestors
     # of a class/module that includes this module
-    # 
+    #
     # @example
-    # 
+    #
     #   class ClassWithAttributes
     #     include Virtus
     #   end
-    # 
+    #
     #   mod = ClassWithAttributes.send(:virtus_setup_attributes_accessor_module)
     #   mod.inspect
-    # 
+    #
     # @return [String]
-    # 
+    #
     # @api public
     attr_reader :inspect
 
