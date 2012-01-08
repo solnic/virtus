@@ -47,6 +47,6 @@ module Virtus
         super(instance, value)
       end
 
-    end # class Array
+    end # class EmbeddedValue
   end # class Attribute
 end # module Virtus

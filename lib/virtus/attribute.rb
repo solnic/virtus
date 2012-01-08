@@ -69,7 +69,7 @@ module Virtus
 
     # @see Virtus::Support::TypeLookup
     #
-    # @api private
+    # @api public
     def self.determine_type(class_or_name)
       if class_or_name.is_a?(::Class) && class_or_name < Virtus
         Attribute::EmbeddedValue
