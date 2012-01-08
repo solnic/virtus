@@ -7,8 +7,10 @@ describe Virtus::Coercion::String, '.to_decimal' do
 
   {
     '1'    => BigDecimal('1.0'),
+    '+1'   => BigDecimal('1.0'),
     '-1'   => BigDecimal('-1.0'),
     '1.0'  => BigDecimal('1.0'),
+    '+1.0' => BigDecimal('1.0'),
     '-1.0' => BigDecimal('-1.0'),
     '.1'   => BigDecimal('0.1'),
   }.each do |value, expected|

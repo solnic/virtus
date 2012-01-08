@@ -5,8 +5,10 @@ describe Virtus::Coercion::String, '.to_float' do
 
   {
     '1'    => 1.0,
+    '+1'   => 1.0,
     '-1'   => -1.0,
     '1.0'  => 1.0,
+    '+1.0' => 1.0,
     '-1.0' => -1.0,
     '.1'   => 0.1,
   }.each do |value, expected|
