@@ -39,4 +39,3 @@ describe User do
     its(:city)    { should be_instance_of(City) }
   end
 end
-
