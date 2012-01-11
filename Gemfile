@@ -5,8 +5,10 @@ gemspec
 group :metrics do
   gem 'flay',      '~> 1.4.2'
   gem 'flog',      '~> 2.5.1'
+  gem 'heckle',    '~> 1.4.3'
   gem 'reek',      '~> 1.2.8', :git => 'git://github.com/dkubb/reek.git'
   gem 'roodi',     '~> 2.1.0'
+  gem 'ruby2ruby', '=  1.2.2'
   gem 'yardstick', '~> 0.4.0'
   gem 'fattr'
   gem 'arrayfields'
