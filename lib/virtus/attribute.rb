@@ -104,7 +104,7 @@ module Virtus
     # @api private
     # 
     # @todo add type arg to Attribute#initialize signature and handle there?
-    def self.update_options(type, options)
+    def self.merge_options(type, options)
       options
     end
 
