@@ -67,7 +67,9 @@ Duplication:
   max_calls: 1
 UtilityFunction:
   max_helper_calls: 1
-  exclude: []
+  exclude: [
+    Virtus::ClassMethods#build_attribute
+  ]
   enabled: true
 Attribute:
   exclude: []
