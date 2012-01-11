@@ -25,9 +25,9 @@ shared_examples_for 'Attribute.accept_options' do
     end
 
     context "when new attribute is created and overrides option's default value" do
-      let(:new_value) { 11 }
-
       subject { sub_attribute.new(attribute_name, option => new_value) }
+
+      let(:new_value) { 11 }
 
       it 'sets the new value' do
         subject.options[option].should eql(new_value)
