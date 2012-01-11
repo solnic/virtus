@@ -69,10 +69,19 @@ module Virtus
 
     # Builds an attribute instance
     #
+    # @param [Symbol] name
+    #   the name of an attribute
+    #
+    # @param [Class] type
+    #   the type class of an attribute
+    #
+    # @param [#to_hash] options
+    #   the extra options hash
+    #
     # @return [Attribute]
     #
     # @api private
-    def self.build(type, name, options)
+    def self.build(name, type, options)
       attribute_class   = determine_type(type)
       attribute_options = attribute_class.merge_options(type, options)
       attribute_class.new(name, attribute_options)

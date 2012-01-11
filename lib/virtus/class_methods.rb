@@ -46,7 +46,7 @@ module Virtus
     #
     # @api public
     def attribute(name, type, options = {})
-      attribute = Attribute.build(type, name, options)
+      attribute = Attribute.build(name, type, options)
       attribute.define_accessor_methods(virtus_attributes_accessor_module)
       virtus_add_attribute(attribute)
       self
