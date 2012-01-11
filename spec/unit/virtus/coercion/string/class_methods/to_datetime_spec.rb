@@ -28,7 +28,7 @@ describe Virtus::Coercion::String, '.to_datetime' do
       let(:min)  { 0 }
       let(:sec)  { 0 }
 
-      it_behaves_like 'a correct datetime object'
+      it_should_behave_like 'a correct datetime object'
     end
 
     context 'including time part' do
@@ -38,7 +38,7 @@ describe Virtus::Coercion::String, '.to_datetime' do
       let(:min)  { 44 }
       let(:sec)  { 50 }
 
-      it_behaves_like 'a correct datetime object'
+      it_should_behave_like 'a correct datetime object'
     end
   end
 

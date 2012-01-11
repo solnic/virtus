@@ -14,7 +14,7 @@ describe Virtus::Coercion::Object, '.method_missing' do
   context 'with a non-typecast method' do
     let(:method_name) { 'not_here' }
 
-    it_behaves_like 'no method error'
+    it_should_behave_like 'no method error'
   end
 
   Virtus::Attribute::Object.descendants.each do |attribute|
@@ -27,7 +27,7 @@ describe Virtus::Coercion::Object, '.method_missing' do
     context "with #{attribute.coercion_method.inspect} and without an input value" do
       subject { described_class.send(method_name) }
 
-      it_behaves_like 'no method error'
+      it_should_behave_like 'no method error'
     end
   end
 end
