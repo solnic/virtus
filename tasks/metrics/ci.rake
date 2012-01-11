@@ -1,4 +1,5 @@
-task :ci => %w[ ci:metrics ]
+desc 'Run metrics with Heckle'
+task :ci => %w[ ci:metrics heckle ]
 
 namespace :ci do
   desc 'Run metrics'
