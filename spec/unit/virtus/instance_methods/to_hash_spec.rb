@@ -3,17 +3,16 @@ require 'spec_helper'
 describe Virtus::InstanceMethods, '#to_hash' do
   subject { object.to_hash }
 
-  let(:model) do
-    Class.new do
-      include Virtus
+  class Model
+    include Virtus
 
-      attribute :name,  String
-      attribute :age,   Integer
-      attribute :email, String, :accessor => :private
-    end
+    attribute :name,  String
+    attribute :age,   Integer
+    attribute :email, String, :accessor => :private
   end
 
-  let(:object) { model.new(attributes) }
+  let(:model)      { Model                           }
+  let(:object)     { model.new(attributes)           }
   let(:attributes) { { :name => 'john', :age => 28 } }
 
   it { should be_instance_of(Hash) }

@@ -7,6 +7,7 @@ describe Virtus::Attribute::DefaultValue, '.new' do
 
   context 'with a duplicable value' do
     let(:value) { 'something' }
+
     its(:value) { should equal(value) }
   end
 
@@ -14,6 +15,7 @@ describe Virtus::Attribute::DefaultValue, '.new' do
     [ nil, true, false, 1, :symbol ].each do |value|
       context "with #{value.inspect}" do
         let(:value) { value }
+
         its(:value) { should equal(value) }
       end
     end

@@ -1,15 +1,14 @@
 require 'spec_helper'
 
 describe Virtus::Options, '#accept_options' do
-  let(:object) do
-    Class.new do
-      extend Virtus::DescendantsTracker
-      extend Virtus::Options
-    end
+  class Model
+    extend Virtus::DescendantsTracker
+    extend Virtus::Options
   end
 
+  let(:object)     { Model             }
   let(:descendant) { Class.new(object) }
-  let(:new_option) { :width }
+  let(:new_option) { :width            }
 
   specify { object.should     respond_to(:accept_options) }
   specify { descendant.should respond_to(:accept_options) }

@@ -15,22 +15,18 @@ describe Virtus::Attribute::DateTime, '#coerce' do
   subject { attribute.coerce(value) }
 
   let(:attribute) { described_class.new(:bday) }
-
-  let(:year)  { 2011 }
-  let(:month) { 4 }
-  let(:day)   { 7 }
-  let(:hour)  { 1 }
-  let(:min)   { 26 }
-  let(:sec)   { 49 }
+  let(:year)      { 2011                       }
+  let(:month)     { 4                          }
+  let(:day)       { 7                          }
+  let(:hour)      { 1                          }
+  let(:min)       { 26                         }
+  let(:sec)       { 49                         }
 
   context 'with a date' do
-    let(:hour) { 0 }
-    let(:min)  { 0 }
-    let(:sec)  { 0 }
-
-    let(:value) do
-      Date.new(year, month, day)
-    end
+    let(:hour)  { 0                          }
+    let(:min)   { 0                          }
+    let(:sec)   { 0                          }
+    let(:value) { Date.new(year, month, day) }
 
     it_should_behave_like 'a correct date time'
   end
@@ -42,20 +38,16 @@ describe Virtus::Attribute::DateTime, '#coerce' do
   end
 
   context 'with a hash' do
-    let(:value) do
-      { :year => year, :month => month, :day => day,
-        :hour => hour, :min   => min,   :sec => sec }
-    end
+    let(:value) { { :year => year, :month => month, :day => day, :hour => hour, :min => min, :sec => sec } }
 
     it_should_behave_like 'a correct date time'
   end
 
   context 'with a string' do
     context 'without hour, min and sec' do
-      let(:hour) { 0 }
-      let(:min)  { 0 }
-      let(:sec)  { 0 }
-
+      let(:hour)  { 0                         }
+      let(:min)   { 0                         }
+      let(:sec)   { 0                         }
       let(:value) { "April #{day}th, #{year}" }
 
       it_should_behave_like 'a correct date time'
@@ -70,6 +62,7 @@ describe Virtus::Attribute::DateTime, '#coerce' do
 
   context 'with a on-date value' do
     let(:value) { 'non-date' }
+
     it { should equal(value) }
   end
 end

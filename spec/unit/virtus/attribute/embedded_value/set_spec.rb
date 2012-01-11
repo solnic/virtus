@@ -3,20 +3,18 @@ require 'spec_helper'
 describe Virtus::Attribute::EmbeddedValue, '#set' do
   subject { attribute.set(instance, value) }
 
-  let(:embedded_model)         { OpenStruct }
-  let(:attribute_name)         { :address }
-  let(:attribute_value)        { model.new }
-  let(:attribute_value_other)  { model.new }
-  let(:attribute_default)      { {} }
-  let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :address } }
-
-  let(:attribute) { described_class.new(attribute_name, :model => embedded_model) }
-
-  let(:model)    { Class.new }
-  let(:instance) { model.new }
+  let(:embedded_model)         { OpenStruct                                                    }
+  let(:attribute_name)         { :address                                                      }
+  let(:attribute_value)        { model.new                                                     }
+  let(:attribute_value_other)  { model.new                                                     }
+  let(:attribute_default)      { {}                                                            }
+  let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :address }   }
+  let(:attribute)              { described_class.new(attribute_name, :model => embedded_model) }
+  let(:model)                  { Class.new                                                     }
+  let(:instance)               { model.new                                                     }
 
   context 'with a hash' do
-    let(:value)                   { Hash.new(:foo => 'bar') }
+    let(:value)                   { Hash.new(:foo => 'bar')         }
     let(:embedded_model_instance) { mock('embedded_model_instance') }
 
     before do
