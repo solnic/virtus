@@ -26,6 +26,11 @@ module Virtus
     #
     class EmbeddedValue < Object
 
+      # @see Attribute.update_options
+      def self.update_options(type, options)
+        options.merge(:model => type)
+      end
+
       # Sets @model ivar
       #
       # @see Virtus::Attribute#initialize

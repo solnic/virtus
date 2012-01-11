@@ -91,6 +91,23 @@ module Virtus
     # Initializes an attribute instance
     #
     # @param [#to_sym] name
+    # A hook for Attributes to update options based on the type from the caller
+    # 
+    # @param [Object] type
+    #   The raw type, typically given by the caller of ClassMethods#attribute
+    # @param [Hash] options
+    #   Attribute configuration options
+    # 
+    # @return [Hash]
+    #   New Hash instance, potentially updated with information from the args
+    # 
+    # @api private
+    # 
+    # @todo add type arg to Attribute#initialize signature and handle there?
+    def self.update_options(type, options)
+      options
+    end
+
     #   the name of an attribute
     #
     # @param [#to_hash] options
