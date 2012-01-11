@@ -1,3 +1,4 @@
+require 'digest'
 require './spec/spec_helper'
 
 class Md5 < Virtus::Attribute::Object
