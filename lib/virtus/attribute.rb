@@ -101,16 +101,20 @@ module Virtus
     #
     # @api public
     def self.determine_type(class_or_name)
-      if class_or_name.is_a?(::Class) && class_or_name < Virtus
-        Attribute::EmbeddedValue
+      case class_or_name
+      when ::Class
+        if class_or_name <= Virtus
+          Attribute::EmbeddedValue
+        else
+          super
+        end
+      when ::Array# , ::Set
+        super(class_or_name.class)
       else
-        super(class_or_name)
+        super
       end
     end
 
-    # Initializes an attribute instance
-    #
-    # @param [#to_sym] name
     # A hook for Attributes to update options based on the type from the caller
     # 
     # @param [Object] type
@@ -128,6 +132,9 @@ module Virtus
       options
     end
 
+    # Initializes an attribute instance
+    #
+    # @param [#to_sym] name
     #   the name of an attribute
     #
     # @param [#to_hash] options

@@ -5,12 +5,13 @@ describe Virtus::Attribute::Object, '.descendants' do
 
   let(:known_descendants) do
     [ Virtus::Attribute::EmbeddedValue,
-      Virtus::Attribute::Time,    Virtus::Attribute::String,
-      Virtus::Attribute::Integer, Virtus::Attribute::Hash,
-      Virtus::Attribute::Float,   Virtus::Attribute::Decimal,
-      Virtus::Attribute::Numeric, Virtus::Attribute::DateTime,
-      Virtus::Attribute::Date,    Virtus::Attribute::Boolean,
-      Virtus::Attribute::Array,   Virtus::Attribute::Class ]
+      Virtus::Attribute::Time,       Virtus::Attribute::String,
+      Virtus::Attribute::Integer,    Virtus::Attribute::Hash,
+      Virtus::Attribute::Float,      Virtus::Attribute::Decimal,
+      Virtus::Attribute::Numeric,    Virtus::Attribute::DateTime,
+      Virtus::Attribute::Date,       Virtus::Attribute::Boolean,
+      Virtus::Attribute::Array,      # Virtus::Attribute::Set,
+      Virtus::Attribute::Collection, Virtus::Attribute::Class ]
   end
 
   it 'should return all known attribute classes' do

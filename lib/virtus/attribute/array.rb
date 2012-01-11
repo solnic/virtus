@@ -12,7 +12,7 @@ module Virtus
     #
     #   post = Post.new(:tags => %w(red green blue))
     #
-    class Array < Object
+    class Array < Collection
       primitive       ::Array
       coercion_method :to_array
 
