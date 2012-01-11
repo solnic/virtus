@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-# TODO: split this into separate files - solnic
-describe Virtus do
+describe Virtus::InstanceMethods do
   let(:model) do
     Class.new do
       include Virtus
@@ -12,33 +11,27 @@ describe Virtus do
     end
   end
 
-  let(:object) do
-    model.new(attributes)
-  end
-
-  let(:attributes) do
-    { :name => 'john', :age => 28 }
-  end
+  let(:attributes) { { :name => 'john', :age => 28 } }
 
   describe '#attributes' do
-    it "returns a hash of attributes" do
-      object.attributes.should eql(attributes)
-    end
-  end
+    subject { object.attributes }
 
-  describe '#to_hash' do
-    it 'returns attributes' do
-      object.to_hash.should == object.attributes
+    let(:object) { model.new(attributes) }
+
+    it { should be_instance_of(Hash) }
+
+    it "returns a hash of attributes" do
+      should eql(attributes)
     end
   end
 
   describe "#attributes=" do
-    before do
-      object.attributes = attributes
-    end
+    subject { object.attributes = attributes }
+
+    let(:object) { model.new({}) }
 
     it "sets attribute values for publicly accessible attributes" do
-      object.attributes.should eql(attributes)
+      expect { subject }.to change { object.attributes.dup }.from({ :name => nil, :age => nil }).to(attributes)
     end
   end
 end

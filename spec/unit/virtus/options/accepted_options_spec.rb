@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Options, '.accepted_options' do
+describe Virtus::Options, '#accepted_options' do
   subject { object.accepted_options }
 
   specify { object.should respond_to(:accepted_options) }

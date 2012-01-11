@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::Options, '.accept_options' do
+describe Virtus::Options, '#accept_options' do
   let(:object) do
     Class.new do
       extend Virtus::DescendantsTracker
