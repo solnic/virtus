@@ -5,7 +5,7 @@ describe Virtus::Attribute::Float, '#coerce' do
 
   let(:attribute) { described_class.new(:score) }
 
-  context "with a float" do
+  context 'with a float' do
     let(:value) { 24.0 }
     it { should eql(value) }
   end
@@ -91,7 +91,7 @@ describe Virtus::Attribute::Float, '#coerce' do
   end
 
   [ Object.new, true, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
-    context "does not coerce non-numeric value #{non_num_value.inspect}" do
+    context 'does not coerce non-numeric value #{non_num_value.inspect}' do
       let(:value) { non_num_value }
       it { should equal(non_num_value) }
     end

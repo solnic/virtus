@@ -18,11 +18,11 @@ describe Virtus::InstanceMethods, '#[]=' do
     'john'
   end
 
-  it "returns the value" do
+  it 'returns the value' do
     should eql(value)
   end
 
-  it "sets value of an attribute" do
+  it 'sets value of an attribute' do
     expect { subject }.to change { object.name }.from(nil).to(value)
   end
 end

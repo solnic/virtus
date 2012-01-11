@@ -20,17 +20,17 @@ describe Virtus::InstanceMethods do
 
     it { should be_instance_of(Hash) }
 
-    it "returns a hash of attributes" do
+    it 'returns a hash of attributes' do
       should eql(attributes)
     end
   end
 
-  describe "#attributes=" do
+  describe '#attributes=' do
     subject { object.attributes = attributes }
 
     let(:object) { model.new({}) }
 
-    it "sets attribute values for publicly accessible attributes" do
+    it 'sets attribute values for publicly accessible attributes' do
       expect { subject }.to change { object.attributes.dup }.from({ :name => nil, :age => nil }).to(attributes)
     end
   end

@@ -16,10 +16,10 @@ shared_examples_for 'Attribute.accept_options' do
       sub_attribute.height(value)
     end
 
-    context "when new attribute is created" do
+    context 'when new attribute is created' do
       subject { sub_attribute.new(attribute_name) }
 
-      it "sets the default value" do
+      it 'sets the default value' do
         subject.options[option].should eql(value)
       end
     end
@@ -29,7 +29,7 @@ shared_examples_for 'Attribute.accept_options' do
 
       subject { sub_attribute.new(attribute_name, option => new_value) }
 
-      it "sets the new value" do
+      it 'sets the new value' do
         subject.options[option].should eql(new_value)
       end
     end

@@ -5,7 +5,7 @@ describe Virtus::Attribute::Decimal, '#coerce' do
 
   let(:attribute) { described_class.new(:price) }
 
-  context "with 24.0 big decimal" do
+  context 'with 24.0 big decimal' do
     let(:value) { BigDecimal('24.0') }
     it { should eql(value) }
   end
@@ -91,7 +91,7 @@ describe Virtus::Attribute::Decimal, '#coerce' do
   end
 
   [ Object.new, true, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
-    context "with a non-numeric value = #{non_num_value.inspect}" do
+    context 'with a non-numeric value = #{non_num_value.inspect}' do
       let(:value) { non_num_value }
       it { should equal(non_num_value) }
     end

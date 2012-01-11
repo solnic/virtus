@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::Boolean do
-  describe "accessor names" do
+  describe 'accessor names' do
     let(:model) do
       Class.new do
         include Virtus
@@ -12,7 +12,7 @@ describe Virtus::Attribute::Boolean do
 
     let(:object) { model.new(:is_admin => true) }
 
-    it "uses standard boolean reader naming conventions" do
+    it 'uses standard boolean reader naming conventions' do
       object.is_admin?.should be_true
     end
   end

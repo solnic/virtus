@@ -5,7 +5,7 @@ describe Virtus::Coercion::String, '.to_constant' do
 
   let(:object) { described_class }
 
-  context "with a String" do
+  context 'with a String' do
     let(:string) { 'String' }
 
     it { should be(String) }

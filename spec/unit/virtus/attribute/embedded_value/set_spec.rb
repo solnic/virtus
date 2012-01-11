@@ -24,7 +24,7 @@ describe Virtus::Attribute::EmbeddedValue, '#set' do
       subject
     end
 
-    it "creates an embedded value instance with attributes" do
+    it 'creates an embedded value instance with attributes' do
       instance.instance_variable_get(attribute.instance_variable_name).
         should be(embedded_model_instance)
     end

@@ -9,7 +9,7 @@ describe Virtus::Attribute::Numeric, '.descendants' do
       Virtus::Attribute::Decimal ]
   end
 
-  it "should return all known attribute classes" do
+  it 'should return all known attribute classes' do
     subject.should eql(known_descendants)
   end
 end

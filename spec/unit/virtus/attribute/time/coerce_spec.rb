@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for "a correct time" do
+shared_examples_for 'a correct time' do
   it          { should be_kind_of(Time) }
   its(:year)  { should eql(year)  }
   its(:month) { should eql(month) }
@@ -29,13 +29,13 @@ describe Virtus::Attribute::Time, '#coerce' do
 
     let(:value) { DateTime.new(year, month, day, hour, min, sec) }
 
-    it_should_behave_like "a correct time"
+    it_should_behave_like 'a correct time'
   end
 
   context 'with a date time' do
     let(:value) { DateTime.new(year, month, day, hour, min, sec) }
 
-    it_should_behave_like "a correct time"
+    it_should_behave_like 'a correct time'
   end
 
   context 'with a hash' do
@@ -44,24 +44,24 @@ describe Virtus::Attribute::Time, '#coerce' do
         :hour => hour, :min   => min,   :sec => sec }
     end
 
-    it_should_behave_like "a correct time"
+    it_should_behave_like 'a correct time'
   end
 
   context 'with a string' do
-    context "without hour, min and sec" do
+    context 'without hour, min and sec' do
       let(:hour) { 0 }
       let(:min)  { 0 }
       let(:sec)  { 0 }
 
       let(:value) { "November #{day}th, #{year}" }
 
-      it_should_behave_like "a correct time"
+      it_should_behave_like 'a correct time'
     end
 
-    context "with hour, min and sec" do
+    context 'with hour, min and sec' do
       let(:value) { "November #{day}th, #{year}, #{hour}:#{min}:#{sec}" }
 
-      it_should_behave_like "a correct time"
+      it_should_behave_like 'a correct time'
     end
   end
 

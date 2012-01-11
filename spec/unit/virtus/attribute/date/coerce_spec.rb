@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for "a correct date" do
+shared_examples_for 'a correct date' do
   it          { should be_kind_of(Date) }
   its(:year)  { should eql(year)  }
   its(:month) { should eql(month) }
@@ -19,13 +19,13 @@ describe Virtus::Attribute::Date, '#coerce' do
   context 'with a time' do
     let(:value) { Time.local(year, month, day) }
 
-    it_should_behave_like "a correct date"
+    it_should_behave_like 'a correct date'
   end
 
   context 'with a date time' do
     let(:value) { DateTime.new(year, month, day) }
 
-    it_should_behave_like "a correct date"
+    it_should_behave_like 'a correct date'
   end
 
   context 'with a hash' do
@@ -33,13 +33,13 @@ describe Virtus::Attribute::Date, '#coerce' do
       { :year => year, :month => month, :day => day }
     end
 
-    it_should_behave_like "a correct date"
+    it_should_behave_like 'a correct date'
   end
 
   context 'with a string' do
     let(:value) { "April #{day}th, #{year}" }
 
-    it_should_behave_like "a correct date"
+    it_should_behave_like 'a correct date'
   end
 
   context 'with a non-date value' do

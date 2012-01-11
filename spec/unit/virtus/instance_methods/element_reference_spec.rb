@@ -18,7 +18,7 @@ describe Virtus::InstanceMethods, '#[]' do
     'john'
   end
 
-  it "returns the value of an attribute" do
+  it 'returns the value of an attribute' do
     should eql(value)
   end
 end

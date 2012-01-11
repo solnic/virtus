@@ -5,7 +5,7 @@ describe Virtus::Attribute::Integer, '#coerce' do
 
   let(:attribute) { described_class.new(:age) }
 
-  context "with an integer" do
+  context 'with an integer' do
     let(:value) { 24 }
     it { should eql(value) }
   end
@@ -81,7 +81,7 @@ describe Virtus::Attribute::Integer, '#coerce' do
   end
 
   [ Object.new, true, false, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
-    context "does not coerce non-numeric value #{non_num_value.inspect}" do
+    context 'does not coerce non-numeric value #{non_num_value.inspect}' do
       let(:value) { non_num_value }
       it { should equal(non_num_value) }
     end

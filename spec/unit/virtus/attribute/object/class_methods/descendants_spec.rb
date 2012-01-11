@@ -13,7 +13,7 @@ describe Virtus::Attribute::Object, '.descendants' do
       Virtus::Attribute::Array,   Virtus::Attribute::Class ]
   end
 
-  it "should return all known attribute classes" do
+  it 'should return all known attribute classes' do
     subject.should eql(known_descendants)
   end
 end
