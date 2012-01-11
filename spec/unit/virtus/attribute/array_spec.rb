@@ -1,14 +1,6 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::Array do
-  it_should_behave_like 'Attribute' do
-    let(:attribute_name)         { :colors }
-    let(:attribute_value)        { [ 'red', 'green', 'blue' ] }
-    let(:attribute_value_other)  { [ 'orange', 'yellow', 'gray' ] }
-    let(:attribute_default)      { [] }
-    let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :colors } }
-  end
-
   describe '#coerce' do
     let(:attribute) { described_class.new(:colors) }
 

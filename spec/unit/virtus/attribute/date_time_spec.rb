@@ -1,14 +1,6 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::DateTime do
-  it_should_behave_like 'Attribute' do
-    let(:attribute_name)         { :created_at }
-    let(:attribute_value)        { DateTime.now }
-    let(:attribute_value_other)  { DateTime.now.to_s }
-    let(:attribute_default)      { DateTime.now-1 }
-    let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :created_at } }
-  end
-
   describe '#coerce' do
     let(:attribute) { described_class.new(:bday) }
 

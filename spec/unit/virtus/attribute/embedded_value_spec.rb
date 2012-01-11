@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::EmbeddedValue do
-  shared_context 'EmbeddedValue attribute' do
-    let(:embedded_model) { OpenStruct }
+  describe '#set' do
+    subject { attribute.set(instance, value) }
 
+    let(:embedded_model) { OpenStruct }
     let(:attribute_name)         { :address }
     let(:attribute_value)        { model.new }
     let(:attribute_value_other)  { model.new }
@@ -11,16 +12,6 @@ describe Virtus::Attribute::EmbeddedValue do
     let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :address } }
 
     let(:attribute) { described_class.new(attribute_name, :model => embedded_model) }
-  end
-
-  it_should_behave_like 'Attribute' do
-    include_context 'EmbeddedValue attribute'
-  end
-
-  describe '#set' do
-    subject { attribute.set(instance, value) }
-
-    include_context 'EmbeddedValue attribute'
 
     let(:model)    { Class.new }
     let(:instance) { model.new }

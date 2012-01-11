@@ -1,14 +1,6 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::Float do
-  it_should_behave_like 'Attribute' do
-    let(:attribute_name)         { :score }
-    let(:attribute_value)        { 12.34 }
-    let(:attribute_value_other)  { "12.34" }
-    let(:attribute_default)      { 0.0 }
-    let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :score } }
-  end
-
   describe '#coerce' do
     let(:attribute) { described_class.new(:score) }
 

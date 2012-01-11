@@ -1,14 +1,6 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::Boolean do
-  it_should_behave_like 'Attribute' do
-    let(:attribute_name)         { :is_admin }
-    let(:attribute_value)        { true }
-    let(:attribute_value_other)  { '1' }
-    let(:attribute_default)      { true }
-    let(:attribute_default_proc) { lambda { |instance, attribute| attribute.name == :is_admin } }
-  end
-
   describe "accessor names" do
     let(:model) do
       Class.new do
