@@ -67,6 +67,17 @@ module Virtus
 
     accept_options *OPTIONS
 
+    # Builds an attribute instance
+    #
+    # @return [Attribute]
+    #
+    # @api private
+    def self.build(type, name, options)
+      attribute_class   = determine_type(type)
+      attribute_options = attribute_class.merge_options(type, options)
+      attribute_class.new(name, attribute_options)
+    end
+
     # Determine attribute type based on class or name
     #
     # Returns Attribute::EmbeddedValue if a virtus class is passed
