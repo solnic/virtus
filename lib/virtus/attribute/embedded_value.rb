@@ -27,6 +27,11 @@ module Virtus
     class EmbeddedValue < Object
 
       # @see Attribute.merge_options
+      #
+      # @return [Hash]
+      #   an updated options hash for configuring an EmbeddedValue instance
+      # 
+      # @api private
       def self.merge_options(type, options)
         options.merge(:model => type)
       end
