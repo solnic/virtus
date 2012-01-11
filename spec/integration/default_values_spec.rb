@@ -13,7 +13,6 @@ describe "default values" do
       end
     end
   end
-  after { Examples.send(:remove_const, 'Page') }
 
   subject { Examples::Page.new }
 

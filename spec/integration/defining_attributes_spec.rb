@@ -18,8 +18,6 @@ describe "virtus attribute definitions" do
       end
     end
   end
-  after { Examples.send(:remove_const, 'Person') }
-  after { Examples.send(:remove_const, 'Manager') }
 
   subject { Examples::Person.new }
 

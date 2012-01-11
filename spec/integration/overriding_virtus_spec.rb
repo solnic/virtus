@@ -19,7 +19,6 @@ describe 'overriding virtus behavior' do
       end
     end
   end
-  after { Examples.send(:remove_const, 'Article') }
 
   describe 'overriding an attribute getter' do
     specify 'calls the defined getter' do

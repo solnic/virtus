@@ -28,4 +28,13 @@ RSpec.configure do |config|
     end
   end
 
+  # Remove constants in the Example-Module
+  config.after :each do
+    if defined?(Examples)
+      Examples.constants.each do |constant|
+        Examples.send(:remove_const, constant)
+      end
+    end
+  end
+
 end

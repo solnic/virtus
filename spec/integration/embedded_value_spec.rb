@@ -25,9 +25,6 @@ describe 'embedded values' do
       end
     end
   end
-  after { Examples.send(:remove_const, 'City') }
-  after { Examples.send(:remove_const, 'Address') }
-  after { Examples.send(:remove_const, 'User') }
 
   subject { Examples::User.new(:name => 'the guy',
                                :address => address_attributes) }
