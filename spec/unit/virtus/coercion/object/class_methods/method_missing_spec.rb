@@ -1,15 +1,15 @@
 require 'spec_helper'
 
+shared_examples_for 'no method error' do
+  specify do
+    expect { subject }.to raise_error(NoMethodError)
+  end
+end
+
 describe Virtus::Coercion::Object, '.method_missing' do
   subject { described_class.send(method_name, value) }
 
   let(:value) { '1' }
-
-  shared_examples_for 'no method error' do
-    specify do
-      expect { subject }.to raise_error(NoMethodError)
-    end
-  end
 
   context 'with a non-typecast method' do
     let(:method_name) { 'not_here' }

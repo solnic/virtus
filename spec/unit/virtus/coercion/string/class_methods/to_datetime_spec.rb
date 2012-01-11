@@ -1,20 +1,20 @@
 require 'spec_helper'
 
+shared_examples_for 'a correct datetime object' do
+  it { should be_instance_of(DateTime) }
+
+  its(:year)  { should == year  }
+  its(:month) { should == month }
+  its(:day)   { should == day   }
+  its(:hour)  { should == hour  }
+  its(:min)   { should == min   }
+  its(:sec)   { should == sec   }
+end
+
 describe Virtus::Coercion::String, '.to_datetime' do
   subject { object.to_datetime(string) }
 
   let(:object) { described_class }
-
-  shared_examples_for 'a correct datetime object' do
-    it { should be_instance_of(DateTime) }
-
-    its(:year)  { should == year  }
-    its(:month) { should == month }
-    its(:day)   { should == day   }
-    its(:hour)  { should == hour  }
-    its(:min)   { should == min   }
-    its(:sec)   { should == sec   }
-  end
 
   context 'with a valid date string' do
     let(:year)  { 2011 }

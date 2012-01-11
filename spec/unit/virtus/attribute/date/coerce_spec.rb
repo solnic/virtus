@@ -1,5 +1,12 @@
 require 'spec_helper'
 
+shared_examples_for "a correct date" do
+  it          { should be_kind_of(Date) }
+  its(:year)  { should eql(year)  }
+  its(:month) { should eql(month) }
+  its(:day)   { should eql(day)   }
+end
+
 describe Virtus::Attribute::Date, '#coerce' do
   subject { attribute.coerce(value) }
 
@@ -9,37 +16,30 @@ describe Virtus::Attribute::Date, '#coerce' do
   let(:month) { 4 }
   let(:day)   { 7 }
 
-  shared_examples_for "a correct date" do
-    it          { should be_kind_of(Date) }
-    its(:year)  { should eql(year)  }
-    its(:month) { should eql(month) }
-    its(:day)   { should eql(day)   }
-  end
-
   context 'with a time' do
-    it_should_behave_like "a correct date" do
-      let(:value) { Time.local(year, month, day) }
-    end
+    let(:value) { Time.local(year, month, day) }
+
+    it_should_behave_like "a correct date"
   end
 
   context 'with a date time' do
-    it_should_behave_like "a correct date" do
-      let(:value) { DateTime.new(year, month, day) }
-    end
+    let(:value) { DateTime.new(year, month, day) }
+
+    it_should_behave_like "a correct date"
   end
 
   context 'with a hash' do
-    it_should_behave_like "a correct date" do
-      let(:value) do
-        { :year => year, :month => month, :day => day }
-      end
+    let(:value) do
+      { :year => year, :month => month, :day => day }
     end
+
+    it_should_behave_like "a correct date"
   end
 
   context 'with a string' do
-    it_should_behave_like "a correct date" do
-      let(:value) { "April #{day}th, #{year}" }
-    end
+    let(:value) { "April #{day}th, #{year}" }
+
+    it_should_behave_like "a correct date"
   end
 
   context 'with a non-date value' do
