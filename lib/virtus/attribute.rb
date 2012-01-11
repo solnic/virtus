@@ -67,6 +67,26 @@ module Virtus
 
     accept_options *OPTIONS
 
+    # Builds an attribute instance
+    #
+    # @param [Symbol] name
+    #   the name of an attribute
+    #
+    # @param [Class] type
+    #   the type class of an attribute
+    #
+    # @param [#to_hash] options
+    #   the extra options hash
+    #
+    # @return [Attribute]
+    #
+    # @api private
+    def self.build(name, type, options)
+      attribute_class   = determine_type(type)
+      attribute_options = attribute_class.merge_options(type, options)
+      attribute_class.new(name, attribute_options)
+    end
+
     # Determine attribute type based on class or name
     #
     # Returns Attribute::EmbeddedValue if a virtus class is passed
@@ -91,6 +111,23 @@ module Virtus
     # Initializes an attribute instance
     #
     # @param [#to_sym] name
+    # A hook for Attributes to update options based on the type from the caller
+    # 
+    # @param [Object] type
+    #   The raw type, typically given by the caller of ClassMethods#attribute
+    # @param [Hash] options
+    #   Attribute configuration options
+    # 
+    # @return [Hash]
+    #   New Hash instance, potentially updated with information from the args
+    # 
+    # @api private
+    # 
+    # @todo add type arg to Attribute#initialize signature and handle there?
+    def self.merge_options(type, options)
+      options
+    end
+
     #   the name of an attribute
     #
     # @param [#to_hash] options
