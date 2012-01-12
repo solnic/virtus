@@ -5,8 +5,8 @@ module Virtus
     class String < Object
       primitive ::String
 
-      TRUE_VALUES  = %w[ 1 t true  ].freeze
-      FALSE_VALUES = %w[ 0 f false ].freeze
+      TRUE_VALUES  = %w[ 1 on  t true  y yes ].freeze
+      FALSE_VALUES = %w[ 0 off f false n no  ].freeze
       BOOLEAN_MAP  = ::Hash[ TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
 
       INTEGER_REGEXP    = /[-+]?(?:0|[1-9]\d*)/.freeze

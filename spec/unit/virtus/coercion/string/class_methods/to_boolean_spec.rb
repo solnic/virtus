@@ -5,7 +5,7 @@ describe Virtus::Coercion::String, '.to_boolean' do
 
   let(:object) { described_class }
 
-  %w[ 1 t true T TRUE ].each do |value|
+  %w[ 1 on ON t true T TRUE y yes Y YES ].each do |value|
     context "with #{value.inspect}" do
       let(:string) { value }
 
@@ -13,7 +13,7 @@ describe Virtus::Coercion::String, '.to_boolean' do
     end
   end
 
-  %w[ 0 f false F FALSE ].each do |value|
+  %w[ 0 off OFF f false F FALSE n no N NO ].each do |value|
     context "with #{value.inspect}" do
       let(:string) { value }
 
