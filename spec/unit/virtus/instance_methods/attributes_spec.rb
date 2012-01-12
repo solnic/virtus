@@ -13,7 +13,7 @@ describe Virtus::InstanceMethods do
     end
   end
 
-  let(:object) { model.new(attributes) }
+  let(:object)     { model.new(attributes)           }
   let(:attributes) { { :name => 'john', :age => 28 } }
 
   describe '#attributes' do
