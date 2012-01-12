@@ -61,11 +61,12 @@ module Virtus
       #
       # @api public
       def set(instance, attributes_or_object)
-        value = case attributes_or_object
-          when ::Hash then @model.new(attributes_or_object)
-          else
-            attributes_or_object
-          end
+        value = if attributes_or_object.kind_of?(::Hash)
+                  @model.new(attributes_or_object)
+                else
+                  attributes_or_object
+                end
+
         super(instance, value)
       end
 
