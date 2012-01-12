@@ -81,7 +81,7 @@ module Virtus
     # @return [Attribute]
     #
     # @api private
-    def self.build(name, type, options)
+    def self.build(name, type, options = {})
       attribute_class   = determine_type(type)
       attribute_options = attribute_class.merge_options(type, options)
       attribute_class.new(name, attribute_options)
