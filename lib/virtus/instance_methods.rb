@@ -117,7 +117,7 @@ module Virtus
     # @api public
     def attributes=(attribute_values)
       attributes = self.class.attributes
-      set_attributes(attribute_values.select { |name, _value|
+      set_attributes(attribute_values.select { |name,|
         attribute = attributes[name]
         attribute && !attribute.private_writer?
       })
