@@ -109,8 +109,7 @@ module Virtus
     def []=(name, attribute)
       delete(name)
       @attributes << attribute
-      @index[name]                    = attribute
-      @string_index[name.to_s.freeze] = attribute
+      @index[name] = @string_index[name.to_s.freeze] = attribute
     end
 
     # Reset the index when the parent is updated
@@ -149,8 +148,7 @@ module Virtus
     def merge_index(attributes)
       attributes.each do |attribute|
         name = attribute.name
-        @index[name]                    = attribute
-        @string_index[name.to_s.freeze] = attribute
+        @index[name] = @string_index[name.to_s.freeze] = attribute
       end
     end
 
