@@ -18,6 +18,18 @@ describe Virtus::AttributeSet, '#<<' do
         from(attributes).
         to([ attribute ])
     end
+
+    it 'indexes the new attribute under its #name property' do
+      expect { subject }.to change { object[name] }.
+        from(nil).
+        to(attribute)
+    end
+
+    it 'indexes the new attribute under the string version of its #name property' do
+      expect { subject }.to change { object[name.to_s] }.
+        from(nil).
+        to(attribute)
+    end
   end
 
   context 'with a duplicate attribute' do
