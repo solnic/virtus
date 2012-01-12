@@ -1,25 +1,29 @@
 require 'spec_helper'
 
 describe Virtus::ClassMethods, '.attribute' do
-  subject { described_class.attribute(:name, type) }
+  subject { object.attribute(name, type) }
 
-  let(:described_class) do
-    Class.new { include Virtus }
+  let(:object)     { Class.new { include Virtus } }
+  let(:descendant) { Class.new(object)            }
+  let(:name)       { :name                        }
+  let(:type)       { Virtus::Attribute::String    }
+
+  def assert_attribute_added(klass, name, attribute_class)
+    attributes = klass.attributes
+    attributes[name].should be_nil
+    subject
+    attribute = attributes[name]
+    attribute.name.should be(name)
+    attribute.class.should be(attribute_class)
   end
 
-  context 'with a string as type' do
-    let(:type) { String }
+  it { should be(object) }
 
-    it { should be(described_class) }
+  it 'adds the attribute to the class' do
+    assert_attribute_added(object, name, type)
   end
 
-  context 'with a virtus class as type' do
-    let(:type) { Class.new { include Virtus } }
-
-    it { should be(described_class) }
-
-    it 'sets model option' do
-      subject.attributes[:name].options[:model].should be(type)
-    end
+  it 'adds the attribute to the descendant' do
+    assert_attribute_added(descendant, name, type)
   end
 end
