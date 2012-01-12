@@ -169,7 +169,7 @@ module Virtus
     #
     # @api private
     def set_attributes(attribute_values)
-      attribute_values.each { |name, value| set_attribute(name, value) }
+      attribute_values.each { |pair| set_attribute(*pair) }
     end
 
     # Returns a value of the attribute with the given name
