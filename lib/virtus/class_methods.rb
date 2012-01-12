@@ -12,7 +12,6 @@ module Virtus
     # @api private
     def self.extended(descendant)
       super
-
       descendant.module_eval do
         extend DescendantsTracker
         virtus_setup_attributes_accessor_module
@@ -90,7 +89,6 @@ module Virtus
     def virtus_setup_attributes_accessor_module
       @virtus_attributes_accessor_module = AttributesAccessor.new(name || inspect)
       include virtus_attributes_accessor_module
-
       self
     end
 
@@ -111,7 +109,6 @@ module Virtus
     # @api private
     def inherited(descendant)
       super
-
       descendant.virtus_setup_attributes_accessor_module
     end
 
