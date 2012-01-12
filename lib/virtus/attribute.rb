@@ -112,17 +112,17 @@ module Virtus
     #
     # @param [#to_sym] name
     # A hook for Attributes to update options based on the type from the caller
-    # 
+    #
     # @param [Object] type
     #   The raw type, typically given by the caller of ClassMethods#attribute
     # @param [Hash] options
     #   Attribute configuration options
-    # 
+    #
     # @return [Hash]
     #   New Hash instance, potentially updated with information from the args
-    # 
+    #
     # @api private
-    # 
+    #
     # @todo add type arg to Attribute#initialize signature and handle there?
     def self.merge_options(type, options)
       options
