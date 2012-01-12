@@ -30,7 +30,7 @@ describe Virtus::InstanceMethods do
     it { should eql(attributes) }
   end
 
-  describe "#attributes=" do
+  describe '#attributes=' do
     subject { object.attributes = attribute_values; object }
 
     let(:object) { model.new({}) }
@@ -76,11 +76,11 @@ describe Virtus::InstanceMethods do
     context "when given values that don't correspond to attributes" do
       let(:attribute_values) { attributes.merge(:quux => 'foobar') }
 
-      it "sets values for publicly accessible attributes" do
+      it 'sets values for publicly accessible attributes' do
         subject.attributes.should eql(attributes)
       end
 
-      it "silently ignores non-attribute keys" do
+      it 'silently ignores non-attribute keys' do
         expect { subject }.to_not raise_exception
       end
     end

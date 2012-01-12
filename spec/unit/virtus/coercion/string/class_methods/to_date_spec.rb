@@ -6,7 +6,7 @@ describe Virtus::Coercion::String, '.to_date' do
   let(:object) { described_class }
 
   context 'with a valid date string' do
-    let(:string) { "July, 22th, 2011" }
+    let(:string) { 'July, 22th, 2011' }
 
     it { should be_instance_of(Date) }
 
