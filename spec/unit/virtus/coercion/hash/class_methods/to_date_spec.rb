@@ -10,8 +10,7 @@ describe Virtus::Coercion::Hash, '.to_date' do
     let(:hash)     { {}                     }
 
     before do
-      now = time_now
-      Time.stub!(:now).and_return(now)  # freeze time
+      Time.stub!(:now).and_return(time_now)  # freeze time
     end
 
     it { should be_instance_of(Date) }
