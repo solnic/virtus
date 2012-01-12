@@ -60,14 +60,12 @@ module Virtus
       # @return [Virtus]
       #
       # @api public
-      def set(instance, attributes_or_object)
-        value = if attributes_or_object.kind_of?(::Hash)
-                  @model.new(attributes_or_object)
-                else
-                  attributes_or_object
-                end
-
-        super(instance, value)
+      def coerce(attributes_or_object)
+        if attributes_or_object.kind_of?(::Hash)
+          @model.new(attributes_or_object)
+        else
+          attributes_or_object
+        end
       end
 
     end # class EmbeddedValue
