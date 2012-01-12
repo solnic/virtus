@@ -176,7 +176,9 @@ module Virtus
       if instance.instance_variable_defined?(instance_variable_name)
         get!(instance)
       else
-        set!(instance, default.evaluate(instance))
+        value = default.evaluate(instance)
+        set!(instance, value)
+        value
       end
     end
 
@@ -215,6 +217,7 @@ module Virtus
     # @api public
     def set!(instance, value)
       instance.instance_variable_set(instance_variable_name, value)
+      self
     end
 
     # Converts the given value to the primitive type

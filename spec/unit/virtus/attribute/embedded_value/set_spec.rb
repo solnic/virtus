@@ -19,6 +19,8 @@ describe Virtus::Attribute::EmbeddedValue, '#set' do
       let(:object) { described_class.new(attribute_name, :model => model) }
       let(:model)  { mock('model')                                        }
 
+      it { should be(object) }
+
       it 'sets the embedded value instance' do
         object.get(instance).should be_nil
         subject
@@ -29,6 +31,8 @@ describe Virtus::Attribute::EmbeddedValue, '#set' do
     context 'when the options are an empty Hash' do
       let(:object) { described_class.new(attribute_name, {}) }
 
+      it { should be(object) }
+
       it 'sets the embedded model instance within the instance' do
         object.get(instance).should be_nil
         subject
@@ -38,6 +42,8 @@ describe Virtus::Attribute::EmbeddedValue, '#set' do
 
     context 'when the options are not provided' do
       let(:object) { described_class.new(attribute_name) }
+
+      it { should be(object) }
 
       it 'sets the embedded model instance within the instance' do
         object.get(instance).should be_nil
@@ -54,6 +60,8 @@ describe Virtus::Attribute::EmbeddedValue, '#set' do
     before do
       model.should_not_receive(:new)
     end
+
+    it { should be(object) }
 
     it 'sets the value in the instance' do
       object.get(instance).should be_nil
