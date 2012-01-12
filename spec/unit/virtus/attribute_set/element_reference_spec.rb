@@ -10,4 +10,8 @@ describe Virtus::AttributeSet, '#[]' do
   let(:object)     { described_class.new(parent, attributes) }
 
   it { should equal(attribute) }
+
+  it 'allows indexed access to attributes by the string representation of their name' do
+    object[name.to_s].should equal(attribute)
+  end
 end

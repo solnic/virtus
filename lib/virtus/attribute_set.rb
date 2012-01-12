@@ -24,9 +24,10 @@ module Virtus
     #
     # @api private
     def initialize(parent = nil, attributes = [])
-      @parent     = parent
-      @attributes = attributes.dup
-      @index      = {}
+      @parent       = parent
+      @attributes   = attributes.dup
+      @index        = {}
+      @string_index = {}
       reset
     end
 
@@ -91,7 +92,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      @index[name]
+      @index.fetch(name) { @string_index[name] }
     end
 
     # Set an attribute by name
@@ -108,7 +109,8 @@ module Virtus
     def []=(name, attribute)
       delete(name)
       @attributes << attribute
-      @index[name] = attribute
+      @index[name]                    = attribute
+      @string_index[name.to_s.freeze] = attribute
     end
 
     # Reset the index when the parent is updated
@@ -134,6 +136,7 @@ module Virtus
     # @api private
     def delete(name)
       @attributes.delete(@index.delete(name))
+      @string_index.delete(name.to_s)
     end
 
     # Add the attributes to the index
@@ -144,7 +147,10 @@ module Virtus
     #
     # @api private
     def merge_index(attributes)
-      attributes.each { |attribute| @index[attribute.name] = attribute }
+      attributes.each do |attribute|
+        @index[attribute.name]                    = attribute
+        @string_index[attribute.name.to_s.freeze] = attribute
+      end
     end
 
   end # class AttributeSet

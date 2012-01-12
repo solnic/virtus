@@ -11,8 +11,8 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(attributes = {})
-      self.attributes = attributes
+    def initialize(attribute_values = {})
+      self.attributes = attribute_values
     end
 
     # Returns a value of the attribute with the given name
@@ -35,7 +35,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      attribute_get(name)
+      get_attribute(name)
     end
 
     # Sets a value of the attribute with the given name
@@ -62,7 +62,7 @@ module Virtus
     #
     # @api public
     def []=(name, value)
-      attribute_set(name, value)
+      set_attribute(name, value)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -86,13 +86,17 @@ module Virtus
 
       self.class.attributes.each do |attribute|
         name = attribute.name
-        attributes[name] = attribute_get(name) if respond_to?(name)
+        attributes[name] = get_attribute(name) unless attribute.private_reader?
       end
 
       attributes
     end
 
-    # Mass-assign of attribute values
+    # Mass-assign attribute values
+    #
+    # Keys in the +attribute_values+ param can be symbols or strings.
+    # Only non-private referenced Attribute writer methods will be called.
+    # Non-attribute setter methods on the receiver will not be called.
     #
     # @example
     #   class User
@@ -103,18 +107,20 @@ module Virtus
     #   end
     #
     #   user = User.new
-    #   user.attributes = { :name => 'John', :age => 28 }
+    #   user.attributes = { :name => 'John', 'age' => 28 }
     #
-    # @param [#to_hash] attributes
-    #   a hash of attribute values to be set on an object
+    # @param [#to_hash] attribute_values
+    #   a hash of attribute names and values to set on the receiver
     #
     # @return [Hash]
     #
     # @api public
-    def attributes=(attributes)
-      attributes.to_hash.each do |name, value|
-        attribute_set(name, value) if respond_to?("#{name}=")
-      end
+    def attributes=(attribute_values)
+      attributes = self.class.attributes
+      set_attributes(attribute_values.select { |name, _value|
+        attribute = attributes[name]
+        attribute && !attribute.private_writer?
+      })
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -139,6 +145,33 @@ module Virtus
 
   private
 
+    # Mass-assign attribute values
+    #
+    # Keys in the +attribute_values+ param can be symbols or strings.
+    # All referenced Attribute writer methods *will* be called.
+    # Non-attribute setter methods on the receiver *will* be called.
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new
+    #   user.attributes = { :name => 'John', 'age' => 28 }
+    #
+    # @param [#to_hash] attribute_values
+    #   a hash of attribute names and values to set on the receiver
+    #
+    # @return [Hash]
+    #
+    # @api private
+    def set_attributes(attribute_values)
+      attribute_values.each { |name, value| set_attribute(name, value) }
+    end
+
     # Returns a value of the attribute with the given name
     #
     # @see Virtus::InstanceMethods#[]
@@ -146,7 +179,7 @@ module Virtus
     # @return [Object]
     #
     # @api private
-    def attribute_get(name)
+    def get_attribute(name)
       __send__(name)
     end
 
@@ -157,7 +190,7 @@ module Virtus
     # @return [Object]
     #
     # @api private
-    def attribute_set(name, value)
+    def set_attribute(name, value)
       __send__("#{name}=", value)
     end
 
