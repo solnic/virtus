@@ -21,8 +21,16 @@ describe Virtus::Coercion::Hash, '.to_datetime' do
     end
   end
 
-  context 'when time segments are populated' do
+  context 'when time segments are integers' do
     let(:hash) { { :year => 2011, :month => 1, :day => 1, :hour => 1, :min => 1, :sec => 1 } }
+
+    it { should be_instance_of(DateTime) }
+
+    it { should eql(DateTime.new(2011, 1, 1, 1, 1, 1)) }
+  end
+
+  context 'when time segments are strings' do
+    let(:hash) { { :year => '2011', :month => '1', :day => '1', :hour => '1', :min => '1', :sec => '1' } }
 
     it { should be_instance_of(DateTime) }
 
