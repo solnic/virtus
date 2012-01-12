@@ -20,13 +20,7 @@ describe Virtus::InstanceMethods do
     subject { object.attributes }
 
     it { should be_instance_of(Hash) }
-    it { should eql(attributes) }
-  end
 
-  describe '#to_hash' do
-    subject { object.to_hash }
-
-    it { should be_instance_of(Hash) }
     it { should eql(attributes) }
   end
 
