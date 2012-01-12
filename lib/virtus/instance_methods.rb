@@ -82,14 +82,10 @@ module Virtus
     #
     # @api public
     def attributes
-      attributes = {}
-
-      self.class.attributes.each do |attribute|
+      self.class.attributes.each_with_object({}) do |attribute, attributes|
         name = attribute.name
         attributes[name] = get_attribute(name) unless attribute.private_reader?
       end
-
-      attributes
     end
 
     # Mass-assign attribute values
