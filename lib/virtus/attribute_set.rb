@@ -148,8 +148,9 @@ module Virtus
     # @api private
     def merge_index(attributes)
       attributes.each do |attribute|
-        @index[attribute.name]                    = attribute
-        @string_index[attribute.name.to_s.freeze] = attribute
+        name = attribute.name
+        @index[name]                    = attribute
+        @string_index[name.to_s.freeze] = attribute
       end
     end
 
