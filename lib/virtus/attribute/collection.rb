@@ -8,6 +8,8 @@ module Virtus
     # @abstract
     class Collection < Object
 
+      # The type to which members of this collection will be coerced
+      # @return [Virtus::Attribute]
       attr_reader :member_type
 
       def self.merge_options(type, options)
@@ -20,6 +22,7 @@ module Virtus
         end
       end
 
+      # Init an instance of Virtus::Attribute::Collection
       def initialize(*)
         super
         @member_type = @options.fetch(:member_type, Virtus::Attribute::Object)

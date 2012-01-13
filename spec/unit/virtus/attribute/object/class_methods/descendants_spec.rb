@@ -10,7 +10,7 @@ describe Virtus::Attribute::Object, '.descendants' do
       Virtus::Attribute::Float,      Virtus::Attribute::Decimal,
       Virtus::Attribute::Numeric,    Virtus::Attribute::DateTime,
       Virtus::Attribute::Date,       Virtus::Attribute::Boolean,
-      Virtus::Attribute::Array,      # Virtus::Attribute::Set,
+      Virtus::Attribute::Set,        Virtus::Attribute::Array,
       Virtus::Attribute::Collection, Virtus::Attribute::Class ]
   end
 

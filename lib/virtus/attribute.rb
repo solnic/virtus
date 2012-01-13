@@ -108,7 +108,7 @@ module Virtus
         else
           super
         end
-      when ::Array# , ::Set
+      when *Attribute::Collection.descendants.map { |a| a.primitive }
         super(class_or_name.class)
       else
         super
