@@ -3,9 +3,32 @@ require 'spec_helper'
 describe Virtus::Options, '#options' do
   subject { object.options }
 
-  specify { object.should respond_to(:options) }
+  let(:object) do
+    Class.new do
+      extend Virtus::Options, Virtus::DescendantsTracker
+    end
+  end
 
-  let(:object) { Class.new { extend Virtus::Options } }
+  context 'with an option that has a default value' do
+    let(:default_value) { stub('default_value') }
 
-  it { should be_instance_of(Hash) }
+    before do
+      object.accept_options :name
+      object.name default_value
+    end
+
+    it { should be_instance_of(Hash) }
+
+    it { should eql(:name => default_value) }
+  end
+
+  context 'with an option that does not have a default value' do
+    before do
+      object.accept_options :name
+    end
+
+    it { should be_instance_of(Hash) }
+
+    it { should be_empty }
+  end
 end
