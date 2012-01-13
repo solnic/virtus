@@ -108,9 +108,6 @@ module Virtus
       end
     end
 
-    # Initializes an attribute instance
-    #
-    # @param [#to_sym] name
     # A hook for Attributes to update options based on the type from the caller
     #
     # @param [Object] type
@@ -128,6 +125,9 @@ module Virtus
       options
     end
 
+    # Initializes an attribute instance
+    #
+    # @param [#to_sym] name
     #   the name of an attribute
     #
     # @param [#to_hash] options
