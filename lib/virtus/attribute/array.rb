@@ -16,6 +16,10 @@ module Virtus
       primitive       ::Array
       coercion_method :to_array
 
+      def coerce_and_append_member(collection, entry)
+        collection << @member_type_instance.coerce(entry)
+      end
+
     end # class Array
   end # class Attribute
 end # module Virtus

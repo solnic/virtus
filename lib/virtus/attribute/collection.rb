@@ -28,12 +28,19 @@ module Virtus
 
       def coerce(value)
         coerced = super
-
-        if coerced.respond_to?(:map)
-          coerced.map { |val| @member_type_instance.coerce(val) }
-        else
-          coerced
+        return coerced unless coerced.respond_to?(:inject)
+        coerced.inject(new_collection) do |collection, entry|
+          coerce_and_append_member(collection, entry)
         end
+      end
+
+      def new_collection
+        self.class.primitive.new
+      end
+
+      def coerce_and_append_member(collection, entry)
+        raise NotImplementedError,
+          "#{self.class}#coerce_and_append_member has not been implemented"
       end
 
     end # class Array
