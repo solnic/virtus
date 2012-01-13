@@ -34,18 +34,18 @@ module Virtus
     def self.included(base)
       base.instance_eval do
         include ::Virtus
-        # TODO: remove this once Virtus::InstanceMethods#set_attributes lands
         include InstanceMethods
         extend ClassMethods
       end
     end
 
-    # TODO: replace this with Virtus::InstanceMethods#set_attributes
     module InstanceMethods
       def initialize(attributes = {})
-        attributes.to_hash.each do |name, value|
-          attribute_set(name, value)
-        end
+        set_attributes(attributes)
+      end
+
+      def with(attribute_updates)
+        self.class.new(get_attributes.merge(attribute_updates))
       end
     end
 
