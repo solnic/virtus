@@ -11,16 +11,18 @@ module Virtus
       attr_reader :member_type
 
       def self.merge_options(type, options)
-        if type.size > 1
+        if !type.respond_to?(:size)
+          options
+        elsif type.size > 1
           raise NotImplementedError, "build SumType from list of types (#{type.inspect})"
         else
-          options.merge(:member_type => type.first || Virtus::Attribute::Object)
+          options.merge(:member_type => type.first)
         end
       end
 
       def initialize(*)
         super
-        @member_type = @options.fetch(:member_type)
+        @member_type = @options.fetch(:member_type, Virtus::Attribute::Object)
         @member_type_instance = Attribute.build(@name, @member_type)
       end
 
