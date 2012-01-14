@@ -26,7 +26,7 @@ begin
   end
 
   desc 'Heckle each module and class'
-  task :heckle do
+  task :heckle => :rcov do
     unless Ruby2Ruby::VERSION == '1.2.2'
       raise "ruby2ruby version #{Ruby2Ruby::VERSION} may not work properly, 1.2.2 *only* is recommended for use with heckle"
     end
