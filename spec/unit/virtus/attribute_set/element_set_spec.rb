@@ -14,9 +14,15 @@ describe Virtus::AttributeSet, '#[]=' do
     it { should equal(attribute) }
 
     it 'adds an attribute' do
-      expect { subject }.to change { object.to_a }.
-        from(attributes).
-        to([ attribute ])
+      expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])
+    end
+
+    it 'allows #[] to access the attribute with a symbol' do
+      expect { subject }.to change { object['name'] }.from(nil).to(attribute)
+    end
+
+    it 'allows #[] to access the attribute with a string' do
+      expect { subject }.to change { object[:name] }.from(nil).to(attribute)
     end
   end
 
@@ -27,9 +33,15 @@ describe Virtus::AttributeSet, '#[]=' do
     it { should equal(attribute) }
 
     it 'replaces the original attribute' do
-      expect { subject }.to change { object.to_a }.
-        from(attributes).
-        to([ attribute ])
+      expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])
+    end
+
+    it 'allows #[] to access the attribute with a symbol' do
+      expect { subject }.to change { object['name'] }.from(nil).to(attribute)
+    end
+
+    it 'allows #[] to access the attribute with a string' do
+      expect { subject }.to change { object[:name] }.from(nil).to(attribute)
     end
   end
 end
