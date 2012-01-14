@@ -143,8 +143,7 @@ module Virtus
       @primitive              = @options.fetch(:primitive)
       @coercion_method        = @options.fetch(:coercion_method)
       @default                = DefaultValue.new(self, @options[:default])
-
-      set_visibility
+      initialize_visibility
     end
 
     # Returns a concise string representation of the attribute instance
@@ -313,12 +312,12 @@ module Virtus
 
   private
 
-    # Sets visibility of reader/write methods based on the options hash
+    # Initialize visibility of reader/write methods based on the options hash
     #
     # @return [undefined]
     #
     # @api private
-    def set_visibility
+    def initialize_visibility
       default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
       @reader_visibility = @options.fetch(:reader,   default_accessor)
       @writer_visibility = @options.fetch(:writer,   default_accessor)
