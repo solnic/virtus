@@ -71,12 +71,13 @@ module Virtus
     #
     # @api public
     def attributes
-      @attributes ||= begin
-        superclass = self.superclass
-        method     = __method__
-        parent     = superclass.send(method) if superclass.respond_to?(method)
-        AttributeSet.new(parent)
-      end
+      @attributes ||=
+        begin
+          superclass = self.superclass
+          method     = __method__
+          parent     = superclass.send(method) if superclass.respond_to?(method)
+          AttributeSet.new(parent)
+        end
     end
 
   protected
