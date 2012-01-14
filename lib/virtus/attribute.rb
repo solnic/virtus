@@ -137,9 +137,8 @@ module Virtus
     #
     # @api private
     def initialize(name, options = {})
-      @name    = name.to_sym
-      @options = self.class.options.merge(options.to_hash).freeze
-
+      @name                   = name.to_sym
+      @options                = self.class.options.merge(options.to_hash).freeze
       @instance_variable_name = "@#{@name}".to_sym
       @primitive              = @options.fetch(:primitive)
       @coercion_method        = @options.fetch(:coercion_method)
