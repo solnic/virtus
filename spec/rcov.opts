@@ -4,4 +4,4 @@
 --xrefs
 --profile
 --text-summary
---failure-threshold 98.6
+--failure-threshold 99.2
