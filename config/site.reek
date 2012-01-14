@@ -8,10 +8,10 @@ UncommunicativeParameterName:
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
 LargeClass:
-  max_methods: 13
+  max_methods: 14
   exclude: []
   enabled: true
-  max_instance_variables: 7
+  max_instance_variables: 8
 UncommunicativeMethodName:
   accept: []
   exclude: []
@@ -27,6 +27,7 @@ LongParameterList:
   overrides: {}
 FeatureEnvy:
   exclude: [
+    Virtus::Attribute::Boolean#value_coerced?,
     Virtus::ClassMethods#build_attribute,
     Virtus::Coercion::TimeCoercions#to_string,
     Virtus::Coercion::TimeCoercions#coerce_with_method,
@@ -68,6 +69,7 @@ Duplication:
 UtilityFunction:
   max_helper_calls: 1
   exclude: [
+    Virtus::Attribute::Boolean#value_coerced?,
     Virtus::ClassMethods#build_attribute
   ]
   enabled: true
