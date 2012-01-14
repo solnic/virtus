@@ -24,6 +24,10 @@ describe Virtus::AttributeSet, '#[]=' do
     it 'allows #[] to access the attribute with a string' do
       expect { subject }.to change { object[:name] }.from(nil).to(attribute)
     end
+
+    it 'allows #reset to track overridden attributes' do
+      expect { subject }.to change { object.reset.to_a }.from(attributes).to([ attribute ])
+    end
   end
 
   context 'with a duplicate attribute' do
@@ -42,6 +46,10 @@ describe Virtus::AttributeSet, '#[]=' do
 
     it 'allows #[] to access the attribute with a string' do
       expect { subject }.to change { object[:name] }.from(nil).to(attribute)
+    end
+
+    it 'allows #reset to track overridden attributes' do
+      expect { subject }.to change { object.reset.to_a }.from(attributes).to([ attribute ])
     end
   end
 end
