@@ -156,7 +156,7 @@ module Virtus
     #
     # @api public
     def inspect
-      "#<#{self.class.name} @name=#{name.inspect}>"
+      "#<#{self.class.inspect} @name=#{name.inspect}>"
     end
 
     # Returns value of an attribute for the given instance
