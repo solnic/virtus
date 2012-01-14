@@ -108,7 +108,7 @@ module Virtus
     # @api public
     def []=(name, attribute)
       @attributes << attribute
-      @index[name] = @string_index[name.to_s.freeze] = attribute
+      update_index(name, attribute)
     end
 
     # Reset the index when the parent is updated
@@ -118,25 +118,35 @@ module Virtus
     # @api private
     def reset
       parent = self.parent
-      merge_index(parent) if parent
-      merge_index(@attributes)
+      merge_attributes(parent) if parent
+      merge_attributes(@attributes)
       self
     end
 
   private
 
-    # Add the attributes to the index
+    # Merge the attributes into the index
     #
     # @param [Array<Attribute>] attributes
     #
     # @return [undefined]
     #
     # @api private
-    def merge_index(attributes)
-      attributes.each do |attribute|
-        name = attribute.name
-        @index[name] = @string_index[name.to_s.freeze] = attribute
-      end
+    def merge_attributes(attributes)
+      attributes.each { |attribute| update_index(attribute.name, attribute) }
+    end
+
+    # Update the symbol and string indexes with the attribute
+    #
+    # @param [Symbol] name
+    #
+    # @param [Attribute] attribute
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def update_index(name, attribute)
+      @index[name] = @string_index[name.to_s.freeze] = attribute
     end
 
   end # class AttributeSet
