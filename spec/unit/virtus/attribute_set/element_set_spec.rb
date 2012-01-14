@@ -9,7 +9,7 @@ describe Virtus::AttributeSet, '#[]=' do
   let(:name)       { :name                                   }
 
   context 'with a new attribute' do
-    let(:attribute) { mock('Attribute', :name => name) }
+    let(:attribute) { mock('attribute', :name => name) }
 
     it { should equal(attribute) }
 
@@ -27,8 +27,8 @@ describe Virtus::AttributeSet, '#[]=' do
   end
 
   context 'with a duplicate attribute' do
-    let(:attributes) { [ mock('Attribute', :name => name) ] }
-    let(:attribute)  { mock('Duplicate', :name => name)     }
+    let(:attributes) { [ mock('original', :name => name) ] }
+    let(:attribute)  { mock('attribute', :name => name)    }
 
     it { should equal(attribute) }
 
