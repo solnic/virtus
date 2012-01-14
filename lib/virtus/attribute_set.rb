@@ -107,7 +107,7 @@ module Virtus
     #
     # @api public
     def []=(name, attribute)
-      delete(name)
+      @attributes.delete(self[name])  # remove original same-named attribute
       @attributes << attribute
       @index[name] = @string_index[name.to_s.freeze] = attribute
     end
@@ -125,18 +125,6 @@ module Virtus
     end
 
   private
-
-    # Delete the Attribute by name
-    #
-    # @param [Symbol] name
-    #
-    # @return [undefined]
-    #
-    # @api private
-    def delete(name)
-      @attributes.delete(@index.delete(name))
-      @string_index.delete(name.to_s)
-    end
 
     # Add the attributes to the index
     #
