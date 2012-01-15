@@ -1,2 +1,54 @@
+* Add missing specs:
+  * Add spec file spec/unit/virtus/attribute/embedded_value/class_methods/merge_options_spec.rb for Virtus::Attribute::EmbeddedValue.merge_options
+  * Add spec file spec/unit/virtus/attribute/numeric/class_methods/min_spec.rb for Virtus::Attribute::Numeric.min
+  * Add spec file spec/unit/virtus/attribute/numeric/class_methods/max_spec.rb for Virtus::Attribute::Numeric.max
+  * Add spec file spec/unit/virtus/attribute/boolean/define_reader_method_spec.rb for Virtus::Attribute::Boolean#define_reader_method
+  * Add spec file spec/unit/virtus/attribute/default_value/attribute_spec.rb for Virtus::Attribute::DefaultValue#attribute
+  * Add spec file spec/unit/virtus/attribute/default_value/value_spec.rb for Virtus::Attribute::DefaultValue#value
+  * Add spec file spec/unit/virtus/attribute/default_value/evaluate_spec.rb for Virtus::Attribute::DefaultValue#evaluate
+  * Add spec file spec/unit/virtus/attribute/class_methods/accessor_spec.rb for Virtus::Attribute.accessor
+  * Add spec file spec/unit/virtus/attribute/class_methods/merge_options_spec.rb for Virtus::Attribute.merge_options
+  * Add spec file spec/unit/virtus/attribute/class_methods/build_spec.rb for Virtus::Attribute.build
+  * Add spec file spec/unit/virtus/attribute/class_methods/default_spec.rb for Virtus::Attribute.default
+  * Add spec file spec/unit/virtus/attribute/class_methods/primitive_spec.rb for Virtus::Attribute.primitive
+  * Add spec file spec/unit/virtus/attribute/class_methods/writer_spec.rb for Virtus::Attribute.writer
+  * Add spec file spec/unit/virtus/attribute/class_methods/coercion_method_spec.rb for Virtus::Attribute.coercion_method
+  * Add spec file spec/unit/virtus/attribute/class_methods/reader_spec.rb for Virtus::Attribute.reader
+  * Add spec file spec/unit/virtus/attribute/coerce_spec.rb for Virtus::Attribute#coerce
+  * Add spec file spec/unit/virtus/attribute/reader_visibility_spec.rb for Virtus::Attribute#reader_visibility
+  * Add spec file spec/unit/virtus/attribute/value_coerced_spec.rb for Virtus::Attribute#value_coerced?
+  * Add spec file spec/unit/virtus/attribute/define_accessor_methods_spec.rb for Virtus::Attribute#define_accessor_methods
+  * Add spec file spec/unit/virtus/attribute/options_spec.rb for Virtus::Attribute#options
+  * Add spec file spec/unit/virtus/attribute/private_writer_spec.rb for Virtus::Attribute#private_writer?
+  * Add spec file spec/unit/virtus/attribute/default_spec.rb for Virtus::Attribute#default
+  * Add spec file spec/unit/virtus/attribute/instance_variable_name_spec.rb for Virtus::Attribute#instance_variable_name
+  * Add spec file spec/unit/virtus/attribute/set_spec.rb for Virtus::Attribute#set!
+  * Add spec file spec/unit/virtus/attribute/private_reader_spec.rb for Virtus::Attribute#private_reader?
+  * Add spec file spec/unit/virtus/attribute/coercion_method_spec.rb for Virtus::Attribute#coercion_method
+  * Add spec file spec/unit/virtus/attribute/set_spec.rb for Virtus::Attribute#set
+  * Add spec file spec/unit/virtus/attribute/get_spec.rb for Virtus::Attribute#get!
+  * Add spec file spec/unit/virtus/attribute/define_writer_method_spec.rb for Virtus::Attribute#define_writer_method
+  * Add spec file spec/unit/virtus/attribute/name_spec.rb for Virtus::Attribute#name
+  * Add spec file spec/unit/virtus/attribute/writer_visibility_spec.rb for Virtus::Attribute#writer_visibility
+  * Add spec file spec/unit/virtus/attribute/get_spec.rb for Virtus::Attribute#get
+  * Add spec file spec/unit/virtus/attribute/define_reader_method_spec.rb for Virtus::Attribute#define_reader_method
+  * Add spec file spec/unit/virtus/coercion/time_coercions/to_date_spec.rb for Virtus::Coercion::TimeCoercions#to_date
+  * Add spec file spec/unit/virtus/coercion/time_coercions/to_time_spec.rb for Virtus::Coercion::TimeCoercions#to_time
+  * Add spec file spec/unit/virtus/coercion/time_coercions/to_string_spec.rb for Virtus::Coercion::TimeCoercions#to_string
+  * Add spec file spec/unit/virtus/coercion/time_coercions/to_datetime_spec.rb for Virtus::Coercion::TimeCoercions#to_datetime
+  * Add spec file spec/unit/virtus/coercion/decimal/class_methods/to_decimal_spec.rb for Virtus::Coercion::Decimal.to_decimal
+  * Add spec file spec/unit/virtus/coercion/float/class_methods/to_float_spec.rb for Virtus::Coercion::Float.to_float
+  * Add spec file spec/unit/virtus/coercion/integer/class_methods/to_integer_spec.rb for Virtus::Coercion::Integer.to_integer
+  * Add spec file spec/unit/virtus/coercion/numeric/class_methods/to_float_spec.rb for Virtus::Coercion::Numeric.to_float
+  * Add spec file spec/unit/virtus/coercion/numeric/class_methods/to_integer_spec.rb for Virtus::Coercion::Numeric.to_integer
+  * Add spec file spec/unit/virtus/coercion/numeric/class_methods/to_string_spec.rb for Virtus::Coercion::Numeric.to_string
+  * Add spec file spec/unit/virtus/coercion/numeric/class_methods/to_decimal_spec.rb for Virtus::Coercion::Numeric.to_decimal
+  * Add spec file spec/unit/virtus/coercion/class_methods/element_reference_spec.rb for Virtus::Coercion.[]
+  * Add spec file spec/unit/virtus/coercion/class_methods/primitive_spec.rb for Virtus::Coercion.primitive
+  * Add spec file spec/unit/virtus/attributes_accessor/define_writer_method_spec.rb for Virtus::AttributesAccessor#define_writer_method
+  * Add spec file spec/unit/virtus/attributes_accessor/inspect_spec.rb for Virtus::AttributesAccessor#inspect
+  * Add spec file spec/unit/virtus/attributes_accessor/define_reader_method_spec.rb for Virtus::AttributesAccessor#define_reader_method
+
 * Make #to_time #to_date and #to_datetime work on Ruby 1.8.7 instead of typecasting to string and parsing the value
 * Add support for defining attributes on Modules
+
