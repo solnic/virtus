@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/boolean/define_reader_method_spec.rb for Virtus::Attribute::Boolean#define_reader_method
   * Add spec file spec/unit/virtus/attribute/default_value/attribute_spec.rb for Virtus::Attribute::DefaultValue#attribute
   * Add spec file spec/unit/virtus/attribute/default_value/value_spec.rb for Virtus::Attribute::DefaultValue#value
   * Add spec file spec/unit/virtus/attribute/default_value/evaluate_spec.rb for Virtus::Attribute::DefaultValue#evaluate
