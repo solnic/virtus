@@ -63,6 +63,7 @@ module Virtus
         def self.#{option}(value = Undefined)           # def self.primitive(value = Undefined)
           return @#{option} if value.equal?(Undefined)  #   return @primitive if value.equal?(Undefined)
           @#{option} = value                            #   @primitive = value
+          self                                          #   self
         end                                             # end
       RUBY
     end
