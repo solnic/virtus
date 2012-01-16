@@ -10,7 +10,7 @@ describe Virtus::ClassMethods, '#inherited' do
 
     # return the descendant's attribute accessor modules (superclass + own)
     modules = descendant.ancestors.grep(Virtus::AttributesAccessor)
-    modules.size.should be(2) 
+    modules.size.should be(2)
 
     # remove the superclass' attribute accessor module
     modules -= object.ancestors.grep(Virtus::AttributesAccessor)
