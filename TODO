@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/default_value/value_spec.rb for Virtus::Attribute::DefaultValue#value
   * Add spec file spec/unit/virtus/attribute/default_value/evaluate_spec.rb for Virtus::Attribute::DefaultValue#evaluate
   * Add spec file spec/unit/virtus/attribute/class_methods/accessor_spec.rb for Virtus::Attribute.accessor
   * Add spec file spec/unit/virtus/attribute/class_methods/merge_options_spec.rb for Virtus::Attribute.merge_options
