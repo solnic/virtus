@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/numeric/class_methods/min_spec.rb for Virtus::Attribute::Numeric.min
   * Add spec file spec/unit/virtus/attribute/numeric/class_methods/max_spec.rb for Virtus::Attribute::Numeric.max
   * Add spec file spec/unit/virtus/attribute/boolean/define_reader_method_spec.rb for Virtus::Attribute::Boolean#define_reader_method
   * Add spec file spec/unit/virtus/attribute/default_value/attribute_spec.rb for Virtus::Attribute::DefaultValue#attribute
