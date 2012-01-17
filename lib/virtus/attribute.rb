@@ -99,10 +99,17 @@ module Virtus
     #
     # @api public
     def self.determine_type(class_or_name)
-      if class_or_name.is_a?(::Class) && class_or_name < Virtus
-        Attribute::EmbeddedValue
+      case class_or_name
+      when ::Class
+        if class_or_name <= Virtus
+          Attribute::EmbeddedValue
+        else
+          super
+        end
+      when *Attribute::Collection.descendants.map { |a| a.primitive }
+        super(class_or_name.class)
       else
-        super(class_or_name)
+        super
       end
     end
 
