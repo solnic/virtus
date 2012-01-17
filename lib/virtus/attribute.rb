@@ -102,7 +102,7 @@ module Virtus
       if class_or_name.is_a?(::Class) && class_or_name < Virtus
         Attribute::EmbeddedValue
       else
-        super(class_or_name)
+        super
       end
     end
 
