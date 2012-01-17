@@ -2,7 +2,6 @@
   * Add spec file spec/unit/virtus/attribute/class_methods/merge_options_spec.rb for Virtus::Attribute.merge_options
   * Add spec file spec/unit/virtus/attribute/class_methods/build_spec.rb for Virtus::Attribute.build
   * Add spec file spec/unit/virtus/attribute/class_methods/default_spec.rb for Virtus::Attribute.default
-  * Add spec file spec/unit/virtus/attribute/class_methods/primitive_spec.rb for Virtus::Attribute.primitive
   * Add spec file spec/unit/virtus/attribute/class_methods/writer_spec.rb for Virtus::Attribute.writer
   * Add spec file spec/unit/virtus/attribute/class_methods/coercion_method_spec.rb for Virtus::Attribute.coercion_method
   * Add spec file spec/unit/virtus/attribute/class_methods/reader_spec.rb for Virtus::Attribute.reader
