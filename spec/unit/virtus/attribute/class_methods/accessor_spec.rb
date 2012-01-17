@@ -9,7 +9,7 @@ describe Virtus::Attribute, '.accessor' do
   context 'with no argument' do
     subject { object.accessor } 
 
-    it { should be_nil }
+    it { should be(:public) }
   end
 
   context 'with the default accessor' do

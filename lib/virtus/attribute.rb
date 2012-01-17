@@ -60,12 +60,10 @@ module Virtus
     # @api private
     attr_reader :default
 
-    DEFAULT_ACCESSOR = :public
+    accept_options :primitive, :accessor, :reader,
+      :writer, :coercion_method, :default
 
-    OPTIONS = [ :primitive, :accessor, :reader,
-                :writer, :coercion_method, :default ].freeze
-
-    accept_options *OPTIONS
+    accessor :public
 
     # Builds an attribute instance
     #
@@ -318,9 +316,9 @@ module Virtus
     #
     # @api private
     def initialize_visibility
-      default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
-      @reader_visibility = @options.fetch(:reader,   default_accessor)
-      @writer_visibility = @options.fetch(:writer,   default_accessor)
+      default_accessor = @options.fetch(:accessor)
+      @reader_visibility = @options.fetch(:reader, default_accessor)
+      @writer_visibility = @options.fetch(:writer, default_accessor)
     end
 
   end # class Attribute
