@@ -35,7 +35,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      get_attribute(name)
+      __send__(name)
     end
 
     # Sets a value of the attribute with the given name
@@ -62,7 +62,7 @@ module Virtus
     #
     # @api public
     def []=(name, value)
-      set_attribute(name, value)
+      __send__("#{name}=", value)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -84,7 +84,7 @@ module Virtus
     def attributes
       self.class.attributes.each_with_object({}) do |attribute, attributes|
         name = attribute.name
-        attributes[name] = get_attribute(name) unless attribute.private_reader?
+        attributes[name] = self[name] unless attribute.private_reader?
       end
     end
 
@@ -165,29 +165,7 @@ module Virtus
     #
     # @api private
     def set_attributes(attribute_values)
-      attribute_values.each { |pair| set_attribute(*pair) }
-    end
-
-    # Returns a value of the attribute with the given name
-    #
-    # @see Virtus::InstanceMethods#[]
-    #
-    # @return [Object]
-    #
-    # @api private
-    def get_attribute(name)
-      __send__(name)
-    end
-
-    # Sets a value of the attribute with the given name
-    #
-    # @see Virtus::InstanceMethods#[]=
-    #
-    # @return [Object]
-    #
-    # @api private
-    def set_attribute(name, value)
-      __send__("#{name}=", value)
+      attribute_values.each { |name, value| self[name] = value }
     end
 
   end # module InstanceMethods
