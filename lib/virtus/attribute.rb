@@ -290,22 +290,22 @@ module Virtus
       self
     end
 
-    # Returns a Boolean indicating whether the reader method is private
+    # Returns a Boolean indicating whether the reader method is public
     #
     # @return [Boolean]
     #
     # @api private
-    def private_reader?
-      reader_visibility == :private
+    def public_reader?
+      reader_visibility == :public
     end
 
-    # Returns a Boolean indicating whether the writer method is private
+    # Returns a Boolean indicating whether the writer method is public
     #
     # @return [Boolean]
     #
     # @api private
-    def private_writer?
-      writer_visibility == :private
+    def public_writer?
+      writer_visibility == :public
     end
 
   private

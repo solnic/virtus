@@ -84,7 +84,7 @@ module Virtus
     def attributes
       self.class.attributes.each_with_object({}) do |attribute, attributes|
         name = attribute.name
-        attributes[name] = self[name] unless attribute.private_reader?
+        attributes[name] = self[name] if attribute.public_reader?
       end
     end
 
@@ -115,7 +115,7 @@ module Virtus
       attributes = self.class.attributes
       set_attributes(attribute_values.select { |name,|
         attribute = attributes[name]
-        attribute && !attribute.private_writer?
+        attribute && attribute.public_writer?
       })
     end
 
