@@ -70,14 +70,14 @@ module Virtus
 
     # Sets default options
     #
-    # @param [#to_hash] new_options
+    # @param [#each] new_options
     #   options to be set
     #
     # @return [self]
     #
     # @api private
     def set_options(new_options)
-      new_options.to_hash.each { |pair| send(*pair) }
+      new_options.each { |pair| send(*pair) }
       self
     end
 
