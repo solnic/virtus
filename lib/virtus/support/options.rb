@@ -90,7 +90,7 @@ module Virtus
     #
     # @api private
     def add_accepted_options(new_options)
-      accepted_options.concat(new_options.to_ary)
+      accepted_options.concat(new_options)
       self
     end
 
