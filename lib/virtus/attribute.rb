@@ -8,6 +8,11 @@ module Virtus
     extend TypeLookup
     extend Options
 
+    accept_options :primitive, :accessor, :reader,
+      :writer, :coercion_method, :default
+
+    accessor :public
+
     # Returns name of the attribute
     #
     # @example
@@ -59,11 +64,6 @@ module Virtus
     #
     # @api private
     attr_reader :default
-
-    accept_options :primitive, :accessor, :reader,
-      :writer, :coercion_method, :default
-
-    accessor :public
 
     # Builds an attribute instance
     #
