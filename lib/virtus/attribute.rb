@@ -99,8 +99,8 @@ module Virtus
     #
     # @api public
     def self.determine_type(class_or_name)
-      if class_or_name.is_a?(::Class) && class_or_name < Virtus
-        Attribute::EmbeddedValue
+      case class_or_name
+      when Virtus::ClassMethods then Attribute::EmbeddedValue
       else
         super
       end
