@@ -168,6 +168,18 @@ module Virtus
       attribute_values.each { |pair| set_attribute(*pair) }
     end
 
+    # Get values of all attributes defined for this class, ignoring privacy
+    #
+    # @return [Hash]
+    #
+    # @api private
+    def get_attributes
+      self.class.attributes.each_with_object({}) do |attributes, attribute|
+        attribute_name = attribute.name
+        attributes[attribute_name] = get_attribute(attribute_name)
+      end
+    end
+
     # Returns a value of the attribute with the given name
     #
     # @see Virtus::InstanceMethods#[]
