@@ -80,7 +80,8 @@ module Virtus
     #
     # @api private
     def self.build(name, type, options = {})
-      attribute_class   = determine_type(type)
+      attribute_class = determine_type(type) or
+        raise ArgumentError, "#{type.inspect} does not map to an attribute type"
       attribute_options = attribute_class.merge_options(type, options)
       attribute_class.new(name, attribute_options)
     end
