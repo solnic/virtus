@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/class_methods/merge_options_spec.rb for Virtus::Attribute.merge_options
   * Add spec file spec/unit/virtus/attribute/class_methods/build_spec.rb for Virtus::Attribute.build
   * Add spec file spec/unit/virtus/attribute/coerce_spec.rb for Virtus::Attribute#coerce
   * Add spec file spec/unit/virtus/attribute/reader_visibility_spec.rb for Virtus::Attribute#reader_visibility
