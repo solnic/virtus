@@ -77,7 +77,11 @@ module Virtus
       #
       # @api private
       def duplicable?
-        DUP_CLASSES.none? { |klass| value.kind_of?(klass) }
+        case value
+        when *DUP_CLASSES then false
+        else
+          true
+        end
       end
 
     end # class DefaultValue
