@@ -8,13 +8,13 @@ describe Virtus::Attribute::DefaultValue, '#evaluate' do
   let(:instance)  { Class.new                             }
 
   context 'with a non-callable value' do
-    context 'with a non-duplicable value' do
+    context 'with a non-cloneable value' do
       let(:value) { nil }
 
       it { should eql(value) }
     end
 
-    context 'with a duplicable value' do
+    context 'with a cloneable value' do
       let(:value) { 'something' }
 
       it { should     eql(value)   }

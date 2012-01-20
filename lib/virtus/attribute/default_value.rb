@@ -42,8 +42,8 @@ module Virtus
       def evaluate(instance)
         if callable?
           call(instance)
-        elsif duplicable?
-          value.dup
+        elsif cloneable?
+          value.clone
         else
           value
         end
@@ -71,12 +71,12 @@ module Virtus
         value.respond_to?(:call)
       end
 
-      # Returns whether or not the value is duplicable
+      # Returns whether or not the value is cloneable
       #
       # # return [TrueClass, FalseClass]
       #
       # @api private
-      def duplicable?
+      def cloneable?
         case value
         when *SINGLETON_CLASSES then false
         else

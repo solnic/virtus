@@ -23,17 +23,17 @@ describe Virtus::Attribute::DefaultValue, '#evaluate' do
     end
   end
 
-  context 'when the value is duplicable' do
+  context 'when the value is cloneable' do
     let(:clone) { stub('clone') }
 
     before do
-      value.stub(:dup => clone)
+      value.stub(:clone => clone)
     end
 
     it { should be(clone) }
 
     it 'clones the value' do
-      value.should_receive(:dup).with(no_args)
+      value.should_receive(:clone).with(no_args)
       subject
     end
   end
