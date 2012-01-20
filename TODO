@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/coerce_spec.rb for Virtus::Attribute#coerce
   * Add spec file spec/unit/virtus/attribute/reader_visibility_spec.rb for Virtus::Attribute#reader_visibility
   * Add spec file spec/unit/virtus/attribute/value_coerced_spec.rb for Virtus::Attribute#value_coerced?
   * Add spec file spec/unit/virtus/attribute/define_accessor_methods_spec.rb for Virtus::Attribute#define_accessor_methods
