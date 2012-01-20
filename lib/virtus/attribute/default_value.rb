@@ -3,8 +3,8 @@ module Virtus
 
     # Class representing the default value option
     class DefaultValue
-      DUP_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
-                      ::Numeric,  ::Symbol ].freeze
+      SINGLETON_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
+                            ::Numeric,  ::Symbol ].freeze
 
       # Returns the attribute associated with this default value instance
       #
@@ -78,7 +78,7 @@ module Virtus
       # @api private
       def duplicable?
         case value
-        when *DUP_CLASSES then false
+        when *SINGLETON_CLASSES then false
         else
           true
         end
