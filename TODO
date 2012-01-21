@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/define_accessor_methods_spec.rb for Virtus::Attribute#define_accessor_methods
   * Add spec file spec/unit/virtus/attribute/options_spec.rb for Virtus::Attribute#options
   * Add spec file spec/unit/virtus/attribute/private_writer_spec.rb for Virtus::Attribute#private_writer?
   * Add spec file spec/unit/virtus/attribute/default_spec.rb for Virtus::Attribute#default
