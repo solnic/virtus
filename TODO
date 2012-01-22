@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/instance_variable_name_spec.rb for Virtus::Attribute#instance_variable_name
   * Add spec file spec/unit/virtus/attribute/set_spec.rb for Virtus::Attribute#set!
   * Add spec file spec/unit/virtus/attribute/coercion_method_spec.rb for Virtus::Attribute#coercion_method
   * Add spec file spec/unit/virtus/attribute/set_spec.rb for Virtus::Attribute#set
