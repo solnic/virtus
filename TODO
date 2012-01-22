@@ -1,6 +1,5 @@
 * Add missing specs:
   * Add spec file spec/unit/virtus/attribute/coercion_method_spec.rb for Virtus::Attribute#coercion_method
-  * Add spec file spec/unit/virtus/attribute/set_spec.rb for Virtus::Attribute#set
   * Add spec file spec/unit/virtus/attribute/get_spec.rb for Virtus::Attribute#get!
   * Add spec file spec/unit/virtus/attribute/define_writer_method_spec.rb for Virtus::Attribute#define_writer_method
   * Add spec file spec/unit/virtus/attribute/name_spec.rb for Virtus::Attribute#name
