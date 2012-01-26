@@ -1,5 +1,4 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/attribute/get_spec.rb for Virtus::Attribute#get!
   * Add spec file spec/unit/virtus/attribute/define_writer_method_spec.rb for Virtus::Attribute#define_writer_method
   * Add spec file spec/unit/virtus/attribute/get_spec.rb for Virtus::Attribute#get
   * Add spec file spec/unit/virtus/attribute/define_reader_method_spec.rb for Virtus::Attribute#define_reader_method
