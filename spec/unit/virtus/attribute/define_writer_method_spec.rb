@@ -12,13 +12,13 @@ describe Virtus::Attribute, '#define_writer_method' do
 
   before do
     options.update(:writer => writer_visibility)
-    mod.stub(:define_writer_method).with(object, 'name=', writer_visibility)
+    mod.stub(:define_writer_method).with(object, :name=, writer_visibility)
   end
 
   it { should be(object) }
 
   it 'calls #define_writer_method on the module' do
-    mod.should_receive(:define_writer_method).with(object, 'name=', writer_visibility)
+    mod.should_receive(:define_writer_method).with(object, :name=, writer_visibility)
     subject
   end
 end

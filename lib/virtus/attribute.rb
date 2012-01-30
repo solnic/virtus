@@ -287,7 +287,7 @@ module Virtus
     #
     # @api private
     def define_writer_method(mod)
-      mod.define_writer_method(self, "#{name}=", writer_visibility)
+      mod.define_writer_method(self, "#{name}=".to_sym, writer_visibility)
       self
     end
 
