@@ -1,11 +1,9 @@
 require 'spec_helper'
 
-describe Virtus::ClassMethods, '.attributes' do
-  subject { described_class.attributes }
+describe Virtus::ClassMethods, '#attributes' do
+  subject { object.attributes }
 
-  let(:described_class) do
-    Class.new { extend Virtus::ClassMethods }
-  end
+  let(:object) { Class.new { extend Virtus::ClassMethods } }
 
   it { should be_instance_of(Virtus::AttributeSet) }
 end

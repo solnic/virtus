@@ -35,8 +35,8 @@ module Virtus
     # Defines an attribute reader method
     #
     # @param [Attribute] attribute
-    # @param [Symbol, String] method_name
-    # @param [Symbol, String] visibility
+    # @param [Symbol] method_name
+    # @param [Symbol] visibility
     #
     # @return [self]
     #
@@ -50,8 +50,8 @@ module Virtus
     # Defines an attribute writer method
     #
     # @param [Attribute] attribute
-    # @param [Symbol, String] method_name
-    # @param [Symbol, String] visibility
+    # @param [Symbol] method_name
+    # @param [Symbol] visibility
     #
     # @return [self]
     #

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::ClassMethods, '.attribute' do
+describe Virtus::ClassMethods, '#attribute' do
   subject { object.attribute(name, type) }
 
   let(:object)     { Class.new { include Virtus } }

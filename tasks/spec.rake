@@ -13,7 +13,7 @@ begin
   end
 
   desc 'run all specs'
-  task :spec => ['spec:unit', 'spec:integration', 'spec:examples']
+  task :spec => %w[ spec:unit spec:integration spec:examples ]
 
   namespace :spec do
     RSpec::Core::RakeTask.new(:examples) do |t|
@@ -37,7 +37,7 @@ end
 begin
   desc "Generate code coverage"
   RSpec::Core::RakeTask.new(:rcov) do |t|
-    t.rcov = true
+    t.rcov      = true
     t.rcov_opts = File.read('spec/rcov.opts').split(/\s+/)
   end
 rescue LoadError

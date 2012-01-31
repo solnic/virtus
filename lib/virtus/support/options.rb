@@ -63,20 +63,21 @@ module Virtus
         def self.#{option}(value = Undefined)           # def self.primitive(value = Undefined)
           return @#{option} if value.equal?(Undefined)  #   return @primitive if value.equal?(Undefined)
           @#{option} = value                            #   @primitive = value
+          self                                          #   self
         end                                             # end
       RUBY
     end
 
     # Sets default options
     #
-    # @param [#to_hash] new_options
+    # @param [#each] new_options
     #   options to be set
     #
     # @return [self]
     #
     # @api private
     def set_options(new_options)
-      new_options.to_hash.each { |pair| send(*pair) }
+      new_options.each { |pair| send(*pair) }
       self
     end
 
@@ -89,7 +90,7 @@ module Virtus
     #
     # @api private
     def add_accepted_options(new_options)
-      accepted_options.concat(new_options.to_ary)
+      accepted_options.concat(new_options)
       self
     end
 

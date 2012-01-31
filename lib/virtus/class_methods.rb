@@ -88,12 +88,11 @@ module Virtus
     #
     # @api public
     def attributes
-      @attributes ||= begin
-        superclass = self.superclass
-        method     = __method__
-        parent     = superclass.send(method) if superclass.respond_to?(method)
-        AttributeSet.new(parent)
-      end
+      return @attributes if defined?(@attributes)
+      superclass = self.superclass
+      method     = __method__
+      parent     = superclass.send(method) if superclass.respond_to?(method)
+      @attributes = AttributeSet.new(parent)
     end
 
   protected
@@ -104,7 +103,7 @@ module Virtus
     #
     # @api private
     def virtus_setup_attributes_accessor_module
-      @virtus_attributes_accessor_module = AttributesAccessor.new(name || inspect)
+      @virtus_attributes_accessor_module = AttributesAccessor.new(inspect)
       include virtus_attributes_accessor_module
       self
     end

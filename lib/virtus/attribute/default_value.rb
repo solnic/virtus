@@ -3,8 +3,8 @@ module Virtus
 
     # Class representing the default value option
     class DefaultValue
-      DUP_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
-                      ::Numeric,  ::Symbol ].freeze
+      SINGLETON_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
+                            ::Numeric,  ::Symbol ].freeze
 
       # Returns the attribute associated with this default value instance
       #
@@ -42,8 +42,8 @@ module Virtus
       def evaluate(instance)
         if callable?
           call(instance)
-        elsif duplicable?
-          value.dup
+        elsif cloneable?
+          value.clone
         else
           value
         end
@@ -71,13 +71,17 @@ module Virtus
         value.respond_to?(:call)
       end
 
-      # Returns whether or not the value is duplicable
+      # Returns whether or not the value is cloneable
       #
       # # return [TrueClass, FalseClass]
       #
       # @api private
-      def duplicable?
-        DUP_CLASSES.none? { |klass| value.kind_of?(klass) }
+      def cloneable?
+        case value
+        when *SINGLETON_CLASSES then false
+        else
+          true
+        end
       end
 
     end # class DefaultValue

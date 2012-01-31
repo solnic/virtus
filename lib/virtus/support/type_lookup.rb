@@ -3,7 +3,8 @@ module Virtus
   # A module that adds type lookup to a class
   module TypeLookup
 
-    TYPE_FORMAT = /\A[A-Z]\w*\z/.freeze
+    TYPE_FORMAT      = /\A[A-Z]\w*\z/.freeze
+    EXTRA_CONST_ARGS = RUBY_VERSION < '1.9' || RUBY_ENGINE == 'rbx' ? [] : [ false ]
 
     # Returns a descendant based on a name or class
     #
@@ -84,16 +85,8 @@ module Virtus
     #
     # @api private
     def determine_type_from_string(string)
-      if string =~ TYPE_FORMAT && const_defined?(string, false)
-        const_get(string, false)
-      end
-    end
-
-    if RUBY_VERSION < '1.9' || RUBY_ENGINE == 'rbx'
-      def determine_type_from_string(string)
-        if string =~ TYPE_FORMAT && const_defined?(string)
-          const_get(string)
-        end
+      if string =~ TYPE_FORMAT && const_defined?(string, *EXTRA_CONST_ARGS)
+        const_get(string, *EXTRA_CONST_ARGS)
       end
     end
 

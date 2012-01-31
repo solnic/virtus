@@ -9,27 +9,47 @@ describe Virtus::AttributeSet, '#[]=' do
   let(:name)       { :name                                   }
 
   context 'with a new attribute' do
-    let(:attribute) { mock('Attribute', :name => name) }
+    let(:attribute) { mock('attribute', :name => name) }
 
     it { should equal(attribute) }
 
     it 'adds an attribute' do
-      expect { subject }.to change { object.to_a }.
-        from(attributes).
-        to([ attribute ])
+      expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])
+    end
+
+    it 'allows #[] to access the attribute with a symbol' do
+      expect { subject }.to change { object['name'] }.from(nil).to(attribute)
+    end
+
+    it 'allows #[] to access the attribute with a string' do
+      expect { subject }.to change { object[:name] }.from(nil).to(attribute)
+    end
+
+    it 'allows #reset to track overridden attributes' do
+      expect { subject }.to change { object.reset.to_a }.from(attributes).to([ attribute ])
     end
   end
 
   context 'with a duplicate attribute' do
-    let(:attributes) { [ mock('Attribute', :name => name) ] }
-    let(:attribute)  { mock('Duplicate', :name => name)     }
+    let(:attributes) { [ mock('original', :name => name) ] }
+    let(:attribute)  { mock('attribute', :name => name)    }
 
     it { should equal(attribute) }
 
     it 'replaces the original attribute' do
-      expect { subject }.to change { object.to_a }.
-        from(attributes).
-        to([ attribute ])
+      expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])
+    end
+
+    it 'allows #[] to access the attribute with a symbol' do
+      expect { subject }.to change { object['name'] }.from(nil).to(attribute)
+    end
+
+    it 'allows #[] to access the attribute with a string' do
+      expect { subject }.to change { object[:name] }.from(nil).to(attribute)
+    end
+
+    it 'allows #reset to track overridden attributes' do
+      expect { subject }.to change { object.reset.to_a }.from(attributes).to([ attribute ])
     end
   end
 end

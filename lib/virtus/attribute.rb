@@ -8,6 +8,11 @@ module Virtus
     extend TypeLookup
     extend Options
 
+    accept_options :primitive, :accessor, :reader,
+      :writer, :coercion_method, :default
+
+    accessor :public
+
     # Returns name of the attribute
     #
     # @example
@@ -60,13 +65,6 @@ module Virtus
     # @api private
     attr_reader :default
 
-    DEFAULT_ACCESSOR = :public
-
-    OPTIONS = [ :primitive, :accessor, :reader,
-                :writer, :coercion_method, :default ].freeze
-
-    accept_options *OPTIONS
-
     # Builds an attribute instance
     #
     # @param [Symbol] name
@@ -82,7 +80,8 @@ module Virtus
     #
     # @api private
     def self.build(name, type, options = {})
-      attribute_class   = determine_type(type)
+      attribute_class = determine_type(type) or
+        raise ArgumentError, "#{type.inspect} does not map to an attribute type"
       attribute_options = attribute_class.merge_options(type, options)
       attribute_class.new(name, attribute_options)
     end
@@ -101,16 +100,13 @@ module Virtus
     #
     # @api public
     def self.determine_type(class_or_name)
-      if class_or_name.is_a?(::Class) && class_or_name < Virtus
-        Attribute::EmbeddedValue
+      case class_or_name
+      when Virtus::ClassMethods then Attribute::EmbeddedValue
       else
-        super(class_or_name)
+        super
       end
     end
 
-    # Initializes an attribute instance
-    #
-    # @param [#to_sym] name
     # A hook for Attributes to update options based on the type from the caller
     #
     # @param [Object] type
@@ -128,6 +124,9 @@ module Virtus
       options
     end
 
+    # Initializes an attribute instance
+    #
+    # @param [#to_sym] name
     #   the name of an attribute
     #
     # @param [#to_hash] options
@@ -137,14 +136,13 @@ module Virtus
     #
     # @api private
     def initialize(name, options = {})
-      @name    = name.to_sym
-      @options = self.class.options.merge(options.to_hash).freeze
-
+      @name                   = name.to_sym
+      @options                = self.class.options.merge(options).freeze
       @instance_variable_name = "@#{@name}".to_sym
+      @primitive              = @options.fetch(:primitive)
       @coercion_method        = @options.fetch(:coercion_method)
       @default                = DefaultValue.new(self, @options[:default])
-
-      set_visibility
+      initialize_visibility
     end
 
     # Returns a concise string representation of the attribute instance
@@ -157,7 +155,7 @@ module Virtus
     #
     # @api public
     def inspect
-      "#<#{self.class.name} @name=#{name.inspect}>"
+      "#<#{self.class.inspect} @name=#{name.inspect}>"
     end
 
     # Returns value of an attribute for the given instance
@@ -236,6 +234,26 @@ module Virtus
       Coercion[value.class].send(coercion_method, value)
     end
 
+    # Is the given value coerced into the target type for this attribute?
+    #
+    # @example
+    #   string_attribute = Virtus::Attribute::String.new(:str)
+    #   string_attribute.value_coerced?('foo')        # => true
+    #   string_attribute.value_coerced?(:foo)         # => false
+    #   integer_attribute = Virtus::Attribute::Integer.new(:integer)
+    #   integer_attribute.value_coerced?(5)           # => true
+    #   integer_attribute.value_coerced?('5')         # => false
+    #   date_attribute = Virtus::Attribute::Date.new(:date)
+    #   date_attribute.value_coerced?('2011-12-31')   # => false
+    #   date_attribute.value_coerced?(Date.today)     # => true
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def value_coerced?(value)
+      @primitive === value
+    end
+
     # Define reader and writer methods for an Attribute
     #
     # @param [Attribute] attribute
@@ -269,39 +287,39 @@ module Virtus
     #
     # @api private
     def define_writer_method(mod)
-      mod.define_writer_method(self, "#{name}=", writer_visibility)
+      mod.define_writer_method(self, "#{name}=".to_sym, writer_visibility)
       self
     end
 
-    # Returns a Boolean indicating whether the reader method is private
+    # Returns a Boolean indicating whether the reader method is public
     #
     # @return [Boolean]
     #
     # @api private
-    def private_reader?
-      reader_visibility == :private
+    def public_reader?
+      reader_visibility == :public
     end
 
-    # Returns a Boolean indicating whether the writer method is private
+    # Returns a Boolean indicating whether the writer method is public
     #
     # @return [Boolean]
     #
     # @api private
-    def private_writer?
-      writer_visibility == :private
+    def public_writer?
+      writer_visibility == :public
     end
 
   private
 
-    # Sets visibility of reader/write methods based on the options hash
+    # Initialize visibility of reader/write methods based on the options hash
     #
     # @return [undefined]
     #
     # @api private
-    def set_visibility
-      default_accessor   = @options.fetch(:accessor, self.class::DEFAULT_ACCESSOR)
-      @reader_visibility = @options.fetch(:reader,   default_accessor)
-      @writer_visibility = @options.fetch(:writer,   default_accessor)
+    def initialize_visibility
+      default_accessor = @options.fetch(:accessor)
+      @reader_visibility = @options.fetch(:reader, default_accessor)
+      @writer_visibility = @options.fetch(:writer, default_accessor)
     end
 
   end # class Attribute
