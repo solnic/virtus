@@ -20,6 +20,23 @@ module Virtus
 
     private_class_method :extended
 
+    # Hook called when virtus is subclassed
+    #
+    # @param [Class] descendant
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def inherited(descendant)
+      super
+      # Create a descendant specific AttributeMethods module to make 
+      # sure getters and setters are overriden and not redefined.
+      descendant_mod_with_methods.send(:include,self::AttributeMethods)
+      descendant.const_set(:AttributeMethods,descendant_mod_with_methods)
+    end
+   
+    private_class_method :inherited
+
     # Defines an attribute on an object's class
     #
     # @example
