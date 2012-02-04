@@ -9,6 +9,10 @@ describe Virtus, 'instance level attributes' do
 
   let(:attribute) { subject.singleton_class.attribute(:name, String) }
 
+  before do
+    pending if RUBY_VERSION < '1.9'
+  end
+
   context 'adding an attribute' do
     it 'allows setting the attribute value on the instance' do
       attribute
