@@ -60,4 +60,12 @@ describe Virtus::Attribute, '.determine_type' do
 
     it { should be_nil }
   end
+
+  context 'with an instance of an array' do
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Array[String] }
+
+    it { should equal(Virtus::Attribute::Array) }
+  end
 end

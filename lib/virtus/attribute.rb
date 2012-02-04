@@ -107,7 +107,7 @@ module Virtus
         else
           super
         end
-      when ::Array# , ::Set
+      when ::Array
         super(class_or_name.class)
       else
         super
