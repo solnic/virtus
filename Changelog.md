@@ -6,7 +6,7 @@
 * [feature] Handling of string => numeric coercion with a leading + sign (dkubb)
 * [changed] Update Boolean coercion to handle "on", "off", "y", "n", "yes", "no" (dkubb)
 
-[Compare v0.0.10..master](https://github.com/solnic/virtus/compare/v0.0.10...master)
+[Compare v0.0.10..v0.1.0](https://github.com/solnic/virtus/compare/v0.0.10...v0.1.0)
 
 # v0.0.10 2011-11-21
 
