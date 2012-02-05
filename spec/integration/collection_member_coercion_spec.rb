@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-# TODO: make it pass
+# TODO: refactor to make it inline with the new style of integration specs
 
 class Address
   include Virtus
@@ -21,14 +21,14 @@ class User
   include Virtus
 
   attribute :phone_numbers, Array[PhoneNumber]
-  # attribute :addresses,     Set[Address]
+  attribute :addresses,     Set[Address]
 end
 
 describe User do
   it { should respond_to(:phone_numbers)  }
   it { should respond_to(:phone_numbers=) }
-  # it { should respond_to(:addresses)  }
-  # it { should respond_to(:addresses=) }
+  it { should respond_to(:addresses)  }
+  it { should respond_to(:addresses=) }
 
   let(:instance) do
     described_class.new(:phone_numbers => phone_numbers_attributes,
@@ -45,8 +45,6 @@ describe User do
   ] }
 
   describe '#phone_numbers' do
-    before { pending }
-
     describe 'first entry' do
       subject { instance.phone_numbers.first }
 
@@ -66,8 +64,6 @@ describe User do
 
   describe '#addresses' do
     subject { instance.addresses.first }
-
-    before { pending }
 
     it { should be_instance_of(Address) }
 
