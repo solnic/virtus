@@ -1,4 +1,4 @@
-# v0.1.0 to-be-released
+# v0.1.0 2012-02-05
 
 * [feature] New EmbeddedValue attribute (solnic)
 * [feature] Array and Set attributes support member coercions (emmanuel)
