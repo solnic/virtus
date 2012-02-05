@@ -68,4 +68,12 @@ describe Virtus::Attribute, '.determine_type' do
 
     it { should equal(Virtus::Attribute::Array) }
   end
+
+  context 'with an instance of a set' do
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Set[String] }
+
+    it { should equal(Virtus::Attribute::Set) }
+  end
 end
