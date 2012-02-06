@@ -29,6 +29,20 @@ module Virtus
         ::Object.const_get(value)
       end
 
+      # Coerce give value to a symbol
+      #
+      # @example
+      #   Virtus::Coercion::String.to_symbol('string') # => :string
+      #
+      # @param [String] value
+      #
+      # @return [Symbol]
+      #
+      # @api public
+      def self.to_symbol(value)
+        value.to_sym
+      end
+
       # Coerce given value to Time
       #
       # @example
