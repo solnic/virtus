@@ -89,9 +89,9 @@ module Virtus
     # @api public
     def attributes
       return @attributes if defined?(@attributes)
-      superclass = self.superclass
-      method     = __method__
-      parent     = superclass.send(method) if superclass.respond_to?(method)
+      superclass  = self.superclass
+      method      = __method__
+      parent      = superclass.send(method) if superclass.respond_to?(method)
       @attributes = AttributeSet.new(parent)
     end
 

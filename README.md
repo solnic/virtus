@@ -111,6 +111,55 @@ user.address.street # => "Street 1/2"
 user.address.city.name # => "NYC"
 ```
 
+**Collection Member Coercions**
+
+``` ruby
+# Support "primitive" classes
+
+class Book
+  include Virtus
+
+  attribute :page_numbers, Array[Integer]
+end
+
+book = Book.new(:page_numbers => %w[1 2 3])
+book.page_numbers # => [1, 2, 3]
+
+# Support EmbeddedValues, too!
+class Address
+  include Virtus
+
+  attribute :address,     String
+  attribute :locality,    String
+  attribute :region,      String
+  attribute :postal_code, String
+end
+
+class PhoneNumber
+  include Virtus
+
+  attribute :number, String
+end
+
+class User
+  include Virtus
+
+  attribute :phone_numbers, Array[PhoneNumber]
+  attribute :addresses,     Set[Address]
+end
+
+user = User.new(
+  :phone_numbers => [
+    { :number => '212-555-1212' },
+    { :number => '919-444-3265' } ],
+  :addresses => [
+    { :address => '1234 Any St.', :locality => 'Anytown', :region => "DC", :postal_code => "21234" } ])
+
+user.phone_numbers # => [#<PhoneNumber:0x007fdb2d3bef88 @number="212-555-1212">, #<PhoneNumber:0x007fdb2d3beb00 @number="919-444-3265">]
+
+user.addresses # => #<Set: {#<Address:0x007fdb2d3be448 @address="1234 Any St.", @locality="Anytown", @region="DC", @postal_code="21234">}>
+```
+
 **Adding Coercions**
 
 Virtus comes with a builtin coercion library.
@@ -194,6 +243,7 @@ Credits
 * Chris Corbyn ([d11wtq](https://github.com/d11wtq))
 * Emmanuel Gomez ([emmanuel](https://github.com/emmanuel))
 * Ryan Closner ([rclosner](https://github.com/rclosner))
+* Yves Senn ([senny](https://github.com/senny))
 
 
 Contributing

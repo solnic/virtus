@@ -48,25 +48,21 @@ module Virtus
         @model = options.fetch(:model, OpenStruct)
       end
 
-      # Set an embedded instance
+      # Coerce attributes into a virtus object
       #
-      # @example
-      #   address_attributes = { :street => 'Foo 1/2' }
-      #   address            = Address.new(address_attributes)
-      #
-      #   attribute.set(instance, address)
-      #   attribute.set(instance, address_attributes)
+      # @param [Hash,Virtus]
       #
       # @return [Virtus]
       #
-      # @api public
-      def set(instance, attributes_or_object)
-        value = case attributes_or_object
-          when ::Hash then @model.new(attributes_or_object)
-          else
-            attributes_or_object
-          end
-        super(instance, value)
+      # @api private
+      def coerce(attributes_or_object)
+        value = if attributes_or_object.kind_of?(::Hash)
+                  @model.new(attributes_or_object)
+                else
+                  attributes_or_object
+                end
+
+        super(value)
       end
 
     end # class EmbeddedValue

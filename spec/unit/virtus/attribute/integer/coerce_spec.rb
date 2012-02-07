@@ -95,6 +95,12 @@ describe Virtus::Attribute::Integer, '#coerce' do
     it { should eql(-24) }
   end
 
+  context 'with a time object' do
+    let(:value) { Time.now }
+
+    it { should eql(value.to_i) }
+  end
+
   [ Object.new, true, false, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
     context 'does not coerce non-numeric value #{non_num_value.inspect}' do
       let(:value) { non_num_value }

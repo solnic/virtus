@@ -13,13 +13,9 @@ begin
   end
 
   desc 'run all specs'
-  task :spec => %w[ spec:unit spec:integration spec:examples ]
+  task :spec => %w[ spec:unit spec:integration ]
 
   namespace :spec do
-    RSpec::Core::RakeTask.new(:examples) do |t|
-      t.pattern = 'examples/**/*_spec.rb'
-    end
-
     RSpec::Core::RakeTask.new(:integration) do |t|
       t.pattern = 'spec/integration/**/*_spec.rb'
     end

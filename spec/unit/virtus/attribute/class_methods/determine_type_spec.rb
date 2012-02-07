@@ -17,7 +17,9 @@ describe Virtus::Attribute, '.determine_type' do
       subject { object.determine_type(primitive) }
 
       before do
-        pending if attribute_class == Virtus::Attribute::EmbeddedValue
+        if [Virtus::Attribute::EmbeddedValue, Virtus::Attribute::Collection].include? attribute_class
+          pending 
+        end
       end
 
       it 'returns the corresponding attribute class' do
@@ -57,5 +59,21 @@ describe Virtus::Attribute, '.determine_type' do
     let(:string) { 'Unknown' }
 
     it { should be_nil }
+  end
+
+  context 'with an instance of an array' do
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Array[String] }
+
+    it { should equal(Virtus::Attribute::Array) }
+  end
+
+  context 'with an instance of a set' do
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Set[String] }
+
+    it { should equal(Virtus::Attribute::Set) }
   end
 end

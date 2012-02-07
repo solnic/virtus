@@ -1,11 +1,12 @@
-# v0.1.0 to-be-released
-
-[Compare v0.0.10..master](https://github.com/solnic/virtus/compare/v0.0.10...master)
+# v0.1.0 2012-02-05
 
 * [feature] New EmbeddedValue attribute (solnic)
+* [feature] Array and Set attributes support member coercions (emmanuel)
 * [feature] Support for scientific notation handling in string => integer coercion (dkubb)
 * [feature] Handling of string => numeric coercion with a leading + sign (dkubb)
+* [changed] Update Boolean coercion to handle "on", "off", "y", "n", "yes", "no" (dkubb)
 
+[Compare v0.0.10..v0.1.0](https://github.com/solnic/virtus/compare/v0.0.10...v0.1.0)
 
 # v0.0.10 2011-11-21
 
