@@ -1,8 +1,15 @@
 * Add missing specs:
-  * Add spec file spec/unit/virtus/coercion/time_coercions/to_date_spec.rb for Virtus::Coercion::TimeCoercions#to_date
+  * Add spec file spec/unit/virtus/attribute/collection/member_coercion/coerce_and_append_member_spec.rb for Virtus::Attribute::Collection::MemberCoercion#coerce_and_append_member
+  * Add spec file spec/unit/virtus/attribute/collection/coerce_and_append_member_spec.rb for Virtus::Attribute::Collection#coerce_and_append_member
+  * Add spec file spec/unit/virtus/attribute/collection/member_type_spec.rb for Virtus::Attribute::Collection#member_type
+  * Add spec file spec/unit/virtus/attribute/collection/new_collection_spec.rb for Virtus::Attribute::Collection#new_collection
+  * Add spec file spec/unit/virtus/coercion/string/class_methods/to_symbol_spec.rb for Virtus::Coercion::String.to_symbol
+  * Add spec file spec/unit/virtus/coercion/time/class_methods/to_integer_spec.rb for Virtus::Coercion::Time.to_integer
   * Add spec file spec/unit/virtus/coercion/time_coercions/to_time_spec.rb for Virtus::Coercion::TimeCoercions#to_time
-  * Add spec file spec/unit/virtus/coercion/time_coercions/to_string_spec.rb for Virtus::Coercion::TimeCoercions#to_string
   * Add spec file spec/unit/virtus/coercion/time_coercions/to_datetime_spec.rb for Virtus::Coercion::TimeCoercions#to_datetime
+  * Add spec file spec/unit/virtus/coercion/time_coercions/to_date_spec.rb for Virtus::Coercion::TimeCoercions#to_date
+  * Add spec file spec/unit/virtus/coercion/time_coercions/to_string_spec.rb for Virtus::Coercion::TimeCoercions#to_string
+  * Add spec file spec/unit/virtus/coercion/array/class_methods/to_set_spec.rb for Virtus::Coercion::Array.to_set
   * Add spec file spec/unit/virtus/coercion/decimal/class_methods/to_decimal_spec.rb for Virtus::Coercion::Decimal.to_decimal
   * Add spec file spec/unit/virtus/coercion/float/class_methods/to_float_spec.rb for Virtus::Coercion::Float.to_float
   * Add spec file spec/unit/virtus/coercion/integer/class_methods/to_integer_spec.rb for Virtus::Coercion::Integer.to_integer
@@ -12,9 +19,13 @@
   * Add spec file spec/unit/virtus/coercion/numeric/class_methods/to_decimal_spec.rb for Virtus::Coercion::Numeric.to_decimal
   * Add spec file spec/unit/virtus/coercion/class_methods/element_reference_spec.rb for Virtus::Coercion.[]
   * Add spec file spec/unit/virtus/coercion/class_methods/primitive_spec.rb for Virtus::Coercion.primitive
+  * Add spec file spec/unit/virtus/value_object/class_methods/attribute_spec.rb for Virtus::ValueObject::ClassMethods#attribute
+  * Add spec file spec/unit/virtus/value_object/instance_methods/with_spec.rb for Virtus::ValueObject::InstanceMethods#with
+  * Add spec file spec/unit/virtus/value_object/equalizer/compile_spec.rb for Virtus::ValueObject::Equalizer#compile
+  * Add spec file spec/unit/virtus/value_object/equalizer/append_spec.rb for Virtus::ValueObject::Equalizer#<<
+  * Add spec file spec/unit/virtus/value_object/equalizer/host_name_spec.rb for Virtus::ValueObject::Equalizer#host_name
+  * Add spec file spec/unit/virtus/value_object/equalizer/keys_spec.rb for Virtus::ValueObject::Equalizer#keys
   * Add spec file spec/unit/virtus/attributes_accessor/define_writer_method_spec.rb for Virtus::AttributesAccessor#define_writer_method
-  * Add spec file spec/unit/virtus/attributes_accessor/inspect_spec.rb for Virtus::AttributesAccessor#inspect
   * Add spec file spec/unit/virtus/attributes_accessor/define_reader_method_spec.rb for Virtus::AttributesAccessor#define_reader_method
 
 * Make #to_time #to_date and #to_datetime work on Ruby 1.8.7 instead of typecasting to string and parsing the value
-* Add support for defining attributes on Modules
