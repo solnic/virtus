@@ -1,7 +1,9 @@
 module Virtus
   module ValueObject
+
     # A type of Module for dynamically defining and hosting equality methods
     class Equalizer < Module
+
       # Name of hosting Class or Module that will be used for #inspect
       #
       # @return [String]
@@ -35,7 +37,6 @@ module Virtus
       def <<(key)
         @keys << key
         compile
-
         self
       end
 
@@ -49,7 +50,6 @@ module Virtus
         define_eql_method
         define_equivalent_method
         define_hash_method
-
         self
       end
 
@@ -124,6 +124,7 @@ module Virtus
 
         [ respond_to, equivalent ]
       end
+
     end # class Equalizer
   end # module ValueObject
 end # module Virtus

@@ -4,6 +4,7 @@ require 'virtus'
 require 'virtus/value_object/equalizer'
 
 module Virtus
+
   # Include this Module for Value Object semantics
   #
   # The idea is that instances should be immutable and compared based on state
@@ -22,6 +23,7 @@ module Virtus
   #   hash = { location => :foo }
   #   hash[same_location]             #=> :foo
   module ValueObject
+
     # Callback to configure including Class as a Value Object
     #
     # Including Class will include Virtus and have additional
@@ -52,6 +54,7 @@ module Virtus
     end
 
     module ClassMethods
+
       # Define an attribute on the receiver
       #
       # The Attribute will have private writer methods (eg., immutable instances)
@@ -73,7 +76,6 @@ module Virtus
       def attribute(name, type, options = {})
         equalizer << name
         options[:writer] = :private
-
         super
       end
 
@@ -99,6 +101,7 @@ module Virtus
           equalizer
         end
       end
+
     end # module ClassMethods
   end # module ValueObject
 end # module Virtus
