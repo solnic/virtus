@@ -89,20 +89,12 @@ module Virtus
       #
       # @api private
       def define_equivalent_method
-        respond_to = []
-        equivalent = []
-
-        keys.each do |key|
-          respond_to << "other.respond_to?(#{key.inspect})"
-          equivalent << "#{key} == other.#{key}"
-        end
-
+        respond_to, equivalent = compile_strings_for_equivalent_method
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def ==(other)
             return true if equal?(other)
             return false unless kind_of?(other.class) || other.kind_of?(self.class)
-            #{respond_to.join(' && ')} &&
-            #{equivalent.join(' && ')}
+            #{respond_to.join(' && ')} && #{equivalent.join(' && ')}
           end
         RUBY
       end
@@ -118,6 +110,19 @@ module Virtus
             self.class.hash ^ #{keys.map { |key| "#{key}.hash" }.join(' ^ ')}
           end
         RUBY
+      end
+
+      # @api private
+      def compile_strings_for_equivalent_method
+        respond_to = []
+        equivalent = []
+
+        keys.each do |key|
+          respond_to << "other.respond_to?(#{key.inspect})"
+          equivalent << "#{key} == other.#{key}"
+        end
+
+        [ respond_to, equivalent ]
       end
     end # class Equalizer
   end # module ValueObject

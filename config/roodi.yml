@@ -9,7 +9,7 @@ CyclomaticComplexityBlockCheck:  { complexity: 4 }
 CyclomaticComplexityMethodCheck: { complexity: 4 }
 EmptyRescueBodyCheck:            { }
 ForLoopCheck:                    { }
-MethodLineCountCheck:            { line_count: 9 }
+MethodLineCountCheck:            { line_count: 10 }
 MethodNameCheck:                 { pattern: !ruby/regexp /\A(?:[a-z\d](?:_?[a-z\d])+[?!=]?|\[\]=?|==|<=>|<<|[+*&|-])\z/ }
 ModuleLineCountCheck:            { line_count: 331 }
 ModuleNameCheck:                 { pattern: !ruby/regexp /\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/ }
