@@ -50,7 +50,7 @@ describe Virtus::ValueObject do
       it 'returns true for different objects with the same state' do
         subject.should == instance_with_equal_state
       end
-      
+
       it 'returns false for different objects with different state' do
         subject.should_not == instance_with_different_state
       end
@@ -63,7 +63,7 @@ describe Virtus::ValueObject do
 
       it 'returns false for different objects with different state' do
         subject.should_not eql(instance_with_different_state)
-      end      
+      end
     end
 
     describe '#equal?' do
@@ -73,7 +73,7 @@ describe Virtus::ValueObject do
 
       it 'returns false for different objects with different state' do
         subject.should_not equal(instance_with_different_state)
-      end      
+      end
     end
 
     describe '#hash' do
