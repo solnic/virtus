@@ -5,25 +5,33 @@ module Virtus
       # Name of hosting Class or Module that will be used for #inspect
       #
       # @return [String]
+      #
+      # @api private
       attr_reader :host_name
 
       # List of methods that will be used to define equality methods
       #
       # @return [Array(Symbol)]
+      #
+      # @api private
       attr_reader :keys
 
       # Initialize an Equalizer with the given keys
-      # 
+      #
       # Will use the keys with which it is initialized to define #eql?, #==,
       #   and #hash
+      #
+      # @api private
       def initialize(host_name, keys = [])
         @host_name = host_name
         @keys      = keys
       end
 
       # Append a key and compile the equality methods
-      # 
+      #
       # @return [Equalizer] self
+      #
+      # @api private
       def <<(key)
         @keys << key
         compile
@@ -34,6 +42,8 @@ module Virtus
       # Compile the equalizer methods based on #keys
       #
       # @return [self]
+      #
+      # @api private
       def compile
         define_inspect_method
         define_eql_method
@@ -45,10 +55,11 @@ module Virtus
 
     private
 
-      # Define an inspect method that reports the values of
-      #   the instance's methods identified by #keys
-      # 
+      # Define an inspect method that reports the values of the instance's keys
+      #
       # @return [self]
+      #
+      # @api private
       def define_inspect_method
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def inspect
@@ -58,8 +69,10 @@ module Virtus
       end
 
       # Define an #eql? method based on the instance's values identified by #keys
-      # 
+      #
       # @return [self]
+      #
+      # @api private
       def define_eql_method
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def eql?(other)
@@ -71,8 +84,10 @@ module Virtus
       end
 
       # Define an #== method based on the instance's values identified by #keys
-      # 
+      #
       # @return [self]
+      #
+      # @api private
       def define_equivalent_method
         respond_to = []
         equivalent = []
@@ -93,8 +108,10 @@ module Virtus
       end
 
       # Define a #hash method based on the instance's values identified by #keys
-      # 
+      #
       # @return [self]
+      #
+      # @api private
       def define_hash_method
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def hash

@@ -31,6 +31,8 @@ module Virtus
     #
     # TODO: stacking modules is getting painful
     #   time for Facets' module_inheritance, ActiveSupport::Concern or the like
+    #
+    # @api private
     def self.included(base)
       base.instance_eval do
         include ::Virtus
@@ -50,10 +52,24 @@ module Virtus
     end
 
     module ClassMethods
-      # Define an attribute on the receiver.
+      # Define an attribute on the receiver
       #
       # The Attribute will have private writer methods (eg., immutable instances)
       #   and be used in equality/equivalence comparisons
+      #
+      # @example
+      #   class GeoLocation
+      #     include Virtus::ValueObject
+      #
+      #     attribute :latitude,  Float
+      #     attribute :longitude, Float
+      #   end
+      #
+      # @see Virtus::ClassMethods.attribute
+      #
+      # @return [self]
+      #
+      # @api public
       def attribute(name, type, options = {})
         equalizer << name
         options[:writer] = :private
@@ -61,9 +77,13 @@ module Virtus
         super
       end
 
-      # Define and include a module that provides Value Object semantics for
-      #   this class. Included module will have #inspect, #eql?, #== and #hash
-      #   methods whose definition is based on the _keys_ argument
+      # Define and include a module that provides Value Object semantics
+      #
+      # Included module will have #inspect, #eql?, #== and #hash
+      # methods whose definition is based on the _keys_ argument
+      #
+      # @example
+      #   virtus_class.equalizer
       #
       # @return [Equalizer]
       #   An Equalizer module which defines #inspect, #eql?, #== and #hash
