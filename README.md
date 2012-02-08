@@ -160,6 +160,39 @@ user.phone_numbers # => [#<PhoneNumber:0x007fdb2d3bef88 @number="212-555-1212">,
 user.addresses # => #<Set: {#<Address:0x007fdb2d3be448 @address="1234 Any St.", @locality="Anytown", @region="DC", @postal_code="21234">}>
 ```
 
+*** Value Objects ***
+
+``` ruby
+class GeoLocation
+  include Virtus::ValueObject
+
+  attribute :latitude,  Float
+  attribute :longitude, Float
+end
+
+class Venue
+  include Virtus
+
+  attribute :name,     String
+  attribute :location, GeoLocation
+end
+
+venue = Venue.new(
+  :name     => 'Pub',
+  :location => { :latitude => 37.160317, :longitude => -98.437500 })
+
+venue.location.latitude  # => 37.160317
+venue.location.longitude # => -98.4375
+
+# Supports object's equality
+
+venue_other = Venue.new(
+  :name     => 'Other Pub',
+  :location => { :latitude => 37.160317, :longitude => -98.437500 })
+
+venue.location === venue_other.location # => true
+```
+
 **Adding Coercions**
 
 Virtus comes with a builtin coercion library.
