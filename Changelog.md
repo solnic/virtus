@@ -1,3 +1,11 @@
+# v0.2.0 2012-02-08
+
+* [feature] Support for Value Objects (emmanuel)
+* [feature] New Symbol attribute (solnic)
+* [feature] Time => Integer coercion (solnic)
+
+[Compare v0.1.0..v0.2.0](https://github.com/solnic/virtus/compare/v0.1.0...v0.2.0)
+
 # v0.1.0 2012-02-05
 
 * [feature] New EmbeddedValue attribute (solnic)
