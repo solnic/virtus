@@ -57,7 +57,7 @@ module Virtus
 
       # Define an inspect method that reports the values of the instance's keys
       #
-      # @return [self]
+      # @return [undefined]
       #
       # @api private
       def define_inspect_method
@@ -70,7 +70,7 @@ module Virtus
 
       # Define an #eql? method based on the instance's values identified by #keys
       #
-      # @return [self]
+      # @return [undefined]
       #
       # @api private
       def define_eql_method
@@ -85,7 +85,7 @@ module Virtus
 
       # Define an #== method based on the instance's values identified by #keys
       #
-      # @return [self]
+      # @return [undefined]
       #
       # @api private
       def define_equivalent_method
@@ -101,7 +101,7 @@ module Virtus
 
       # Define a #hash method based on the instance's values identified by #keys
       #
-      # @return [self]
+      # @return [undefined]
       #
       # @api private
       def define_hash_method
@@ -112,6 +112,10 @@ module Virtus
         RUBY
       end
 
+      # Return a list of strings containing ruby code for method generation
+      #
+      # @return [Array(Array<String>, Array<String>)]
+      #
       # @api private
       def compile_strings_for_equivalent_method
         respond_to = []
