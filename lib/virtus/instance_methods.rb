@@ -174,7 +174,7 @@ module Virtus
     #
     # @api private
     def get_attributes
-      self.class.attributes.each_with_object({}) do |attributes, attribute|
+      self.class.attributes.each_with_object({}) do |attribute, attributes|
         attribute_name = attribute.name
         attributes[attribute_name] = get_attribute(attribute_name)
       end
