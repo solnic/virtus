@@ -26,7 +26,7 @@ describe Virtus::Attribute::Collection, '.merge_options' do
     context 'when size is > 1' do
       let(:size) { 2 }
 
-      specify { expect { subject }.to raise_error(NotImplementedError) }
+      specify { expect { subject }.to raise_error(NotImplementedError, "build SumType from list of types (#{type.inspect})") }
     end
   end
 
