@@ -160,7 +160,7 @@ user.phone_numbers # => [#<PhoneNumber:0x007fdb2d3bef88 @number="212-555-1212">,
 user.addresses # => #<Set: {#<Address:0x007fdb2d3be448 @address="1234 Any St.", @locality="Anytown", @region="DC", @postal_code="21234">}>
 ```
 
-*** Value Objects ***
+**Value Objects**
 
 ``` ruby
 class GeoLocation
