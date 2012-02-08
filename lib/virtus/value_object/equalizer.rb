@@ -63,7 +63,7 @@ module Virtus
       def define_inspect_method
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def inspect
-            "#<#{host_name} #{keys.map { |k| "#{k}=\#{#{k}.inspect}" }.join(' ')}>"
+            "#<#{host_name} #{keys.map { |key| "#{key}=\#{#{key}.inspect}" }.join(' ')}>"
           end
         RUBY
       end
