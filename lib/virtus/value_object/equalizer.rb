@@ -37,7 +37,6 @@ module Virtus
       def <<(key)
         @keys << key
         compile
-        self
       end
 
       # Compile the equalizer methods based on #keys
