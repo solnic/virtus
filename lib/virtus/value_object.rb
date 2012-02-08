@@ -15,7 +15,7 @@ module Virtus
   #     attribute :latitude,  Float
   #     attribute :longitude, Float
   #   end
-  # 
+  #
   #   location = GeoLocation.new(:latitude => 10, :longitude => 100)
   #   same_location = GeoLocation.new(:latitude => 10, :longitude => 100)
   #   location == same_location       #=> true
@@ -51,7 +51,7 @@ module Virtus
 
     module ClassMethods
       # Define an attribute on the receiver.
-      # 
+      #
       # The Attribute will have private writer methods (eg., immutable instances)
       #   and be used in equality/equivalence comparisons
       def attribute(name, type, options = {})
@@ -71,7 +71,9 @@ module Virtus
       #
       # @api public
       def equalizer
-        @equalizer ||= begin
+        return @equalizer if instance_variable_defined?('@equalizer')
+
+        @equalizer = begin
           equalizer = Equalizer.new(name || inspect)
           include equalizer
           equalizer
