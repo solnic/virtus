@@ -18,7 +18,7 @@ describe Virtus::Attribute, '.determine_type' do
 
       before do
         if [Virtus::Attribute::EmbeddedValue, Virtus::Attribute::Collection].include? attribute_class
-          pending 
+          pending
         end
       end
 

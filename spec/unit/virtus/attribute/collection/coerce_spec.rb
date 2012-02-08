@@ -11,10 +11,10 @@ describe Virtus::Attribute::Collection, '#coerce' do
   before do
     value.should_receive(:respond_to?).with(:inject).and_return(respond_to_inject)
   end
-  
+
   context 'when coerced value responds to #inject' do
     let(:respond_to_inject) { true }
-  
+
     specify { expect { subject }.to raise_error(NotImplementedError) }
   end
 
