@@ -3,6 +3,8 @@ virtus
 
 [![Build Status](http://travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
 
+[Metrics on CodeClimate](https://codeclimate.com/github/solnic/virtus)
+
 This is a partial extraction of the DataMapper [Property
 API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
 with various modifications and improvements. The goal is to provide a common API
