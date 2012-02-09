@@ -18,11 +18,9 @@ Installation
 $ gem install virtus
 ```
 
-or
+or in your **Gemfile**
 
 ``` ruby
-# ./Gemfile
-
 gem 'virtus'
 ```
 
