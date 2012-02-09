@@ -41,7 +41,7 @@ class User
   attribute :birthday, DateTime
 end
 
-user = User.new :name => 'Piotr', :age => 28
+user = User.new(:name => 'Piotr', :age => 28)
 user.attributes # => { :name => "Piotr", :age => 28 }
 
 user.name # => "Piotr"
@@ -66,7 +66,7 @@ class Page
   attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
 end
 
-page = Page.new :title => 'Virtus Is Awesome'
+page = Page.new(:title => 'Virtus Is Awesome')
 page.slug # => 'virtus-is-awesome'
 page.views # => 0
 ```
@@ -219,7 +219,7 @@ class User
   attribute :password, MD5
 end
 
-user = User.new :name => 'Piotr', :password => 'foobar'
+user = User.new(:name => 'Piotr', :password => 'foobar')
 user.name # => 'Piotr'
 user.password # => '3858f62230ac3c915f300c664312c63f'
 ```
