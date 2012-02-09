@@ -44,19 +44,14 @@ class User
 end
 
 user = User.new :name => 'Piotr', :age => 28
-user.attributes
-  # => { :name => "Piotr", :age => 28 }
+user.attributes # => { :name => "Piotr", :age => 28 }
 
-user.name
-  # => "Piotr"
+user.name # => "Piotr"
 
-user.age = '28'
-  # => 28
-user.age.class
-  # => Fixnum
+user.age = '28' # => 28
+user.age.class # => Fixnum
 
-user.birthday = 'November 18th, 1983'
-  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 ```
 
 
@@ -74,10 +69,8 @@ class Page
 end
 
 page = Page.new :title => 'Virtus Is Awesome'
-page.slug
-  # => 'virtus-is-awesome'
-page.views
-  # => 0
+page.slug # => 'virtus-is-awesome'
+page.views # => 0
 ```
 
 **Embedded Value**
@@ -181,7 +174,7 @@ venue = Venue.new(
   :name     => 'Pub',
   :location => { :latitude => 37.160317, :longitude => -98.437500 })
 
-venue.location.latitude  # => 37.160317
+venue.location.latitude # => 37.160317
 venue.location.longitude # => -98.4375
 
 # Supports object's equality
@@ -229,10 +222,8 @@ class User
 end
 
 user = User.new :name => 'Piotr', :password => 'foobar'
-user.name
-  # => 'Piotr'
-user.password
-  # => '3858f62230ac3c915f300c664312c63f'
+user.name # => 'Piotr'
+user.password # => '3858f62230ac3c915f300c664312c63f'
 ```
 
 **Custom Attributes**
@@ -262,10 +253,8 @@ module MyAppClass
 end
 
 user = MyApp::User.new
-user.info = '{"email":"john@domain.com"}'
-  # => {"email"=>"john@domain.com"}
-user.info.class
-  # => Hash
+user.info = '{"email":"john@domain.com"}' # => {"email"=>"john@domain.com"}
+user.info.class # => Hash
 ```
 
 
