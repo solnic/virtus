@@ -18,11 +18,9 @@ Installation
 $ gem install virtus
 ```
 
-or
+or in your **Gemfile**
 
 ``` ruby
-# ./Gemfile
-
 gem 'virtus'
 ```
 
@@ -33,8 +31,6 @@ Examples
 
 
 ``` ruby
-require 'virtus'
-
 class User
   include Virtus
 
@@ -43,28 +39,21 @@ class User
   attribute :birthday, DateTime
 end
 
-user = User.new :name => 'Piotr', :age => 28
-user.attributes
-  # => { :name => "Piotr", :age => 28 }
+user = User.new(:name => 'Piotr', :age => 28)
+user.attributes # => { :name => "Piotr", :age => 28 }
 
-user.name
-  # => "Piotr"
+user.name # => "Piotr"
 
-user.age = '28'
-  # => 28
-user.age.class
-  # => Fixnum
+user.age = '28' # => 28
+user.age.class # => Fixnum
 
-user.birthday = 'November 18th, 1983'
-  # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 ```
 
 
 **Default values**
 
 ``` ruby
-require 'virtus'
-
 class Page
   include Virtus
 
@@ -73,11 +62,9 @@ class Page
   attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
 end
 
-page = Page.new :title => 'Virtus Is Awesome'
-page.slug
-  # => 'virtus-is-awesome'
-page.views
-  # => 0
+page = Page.new(:title => 'Virtus Is Awesome')
+page.slug # => 'virtus-is-awesome'
+page.views # => 0
 ```
 
 **Embedded Value**
@@ -115,7 +102,6 @@ user.address.city.name # => "NYC"
 
 ``` ruby
 # Support "primitive" classes
-
 class Book
   include Virtus
 
@@ -181,7 +167,7 @@ venue = Venue.new(
   :name     => 'Pub',
   :location => { :latitude => 37.160317, :longitude => -98.437500 })
 
-venue.location.latitude  # => 37.160317
+venue.location.latitude # => 37.160317
 venue.location.longitude # => -98.4375
 
 # Supports object's equality
@@ -200,7 +186,6 @@ It's super easy to add your own coercion classes.
 Take a look:
 
 ``` ruby
-require 'virtus'
 require 'digest/md5'
 
 # Our new attribute type
@@ -228,17 +213,14 @@ class User
   attribute :password, MD5
 end
 
-user = User.new :name => 'Piotr', :password => 'foobar'
-user.name
-  # => 'Piotr'
-user.password
-  # => '3858f62230ac3c915f300c664312c63f'
+user = User.new(:name => 'Piotr', :password => 'foobar')
+user.name # => 'Piotr'
+user.password # => '3858f62230ac3c915f300c664312c63f'
 ```
 
 **Custom Attributes**
 
 ``` ruby
-require 'virtus'
 require 'json'
 
 module MyAppClass
@@ -262,10 +244,8 @@ module MyAppClass
 end
 
 user = MyApp::User.new
-user.info = '{"email":"john@domain.com"}'
-  # => {"email"=>"john@domain.com"}
-user.info.class
-  # => Hash
+user.info = '{"email":"john@domain.com"}' # => {"email"=>"john@domain.com"}
+user.info.class # => Hash
 ```
 
 
@@ -286,7 +266,7 @@ Contributing
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
   future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
+* Commit, do not mess with Rakefile or version
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
