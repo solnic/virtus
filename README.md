@@ -31,8 +31,6 @@ Examples
 
 
 ``` ruby
-require 'virtus'
-
 class User
   include Virtus
 
@@ -56,8 +54,6 @@ user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00
 **Default values**
 
 ``` ruby
-require 'virtus'
-
 class Page
   include Virtus
 
@@ -106,7 +102,6 @@ user.address.city.name # => "NYC"
 
 ``` ruby
 # Support "primitive" classes
-
 class Book
   include Virtus
 
@@ -191,7 +186,6 @@ It's super easy to add your own coercion classes.
 Take a look:
 
 ``` ruby
-require 'virtus'
 require 'digest/md5'
 
 # Our new attribute type
@@ -227,7 +221,6 @@ user.password # => '3858f62230ac3c915f300c664312c63f'
 **Custom Attributes**
 
 ``` ruby
-require 'virtus'
 require 'json'
 
 module MyAppClass
