@@ -93,13 +93,12 @@ module Virtus
       #
       # @api public
       def equalizer
-        return @equalizer if instance_variable_defined?('@equalizer')
-
-        @equalizer = begin
-          equalizer = Equalizer.new(name || inspect)
-          include equalizer
-          equalizer
-        end
+        @equalizer ||=
+          begin
+            equalizer = Equalizer.new(name || inspect)
+            include equalizer
+            equalizer
+          end
       end
 
     end # module ClassMethods
