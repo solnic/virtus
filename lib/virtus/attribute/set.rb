@@ -16,9 +16,7 @@ module Virtus
       primitive       ::Set
       coercion_method :to_set
 
-      def coerce_and_append_member(collection, entry)
-        collection << @member_type_instance.coerce(entry)
-      end
+      include Collection::MemberCoercion
 
     end # class Set
   end # class Attribute

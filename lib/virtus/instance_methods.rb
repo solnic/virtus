@@ -35,7 +35,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      __send__(name)
+      get_attribute(name)
     end
 
     # Sets a value of the attribute with the given name
@@ -62,7 +62,7 @@ module Virtus
     #
     # @api public
     def []=(name, value)
-      __send__("#{name}=", value)
+      set_attribute(name, value)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -82,10 +82,7 @@ module Virtus
     #
     # @api public
     def attributes
-      self.class.attributes.each_with_object({}) do |attribute, attributes|
-        name = attribute.name
-        attributes[name] = self[name] if attribute.public_reader?
-      end
+      get_attributes(&:public_reader?)
     end
 
     # Mass-assign attribute values
@@ -112,11 +109,7 @@ module Virtus
     #
     # @api public
     def attributes=(attribute_values)
-      attributes = self.class.attributes
-      set_attributes(attribute_values.select { |name,|
-        attribute = attributes[name]
-        attribute && attribute.public_writer?
-      })
+      set_attributes(attribute_values, &:public_writer?)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -141,6 +134,18 @@ module Virtus
 
   private
 
+    # Get values of all attributes defined for this class, ignoring privacy
+    #
+    # @return [Hash]
+    #
+    # @api private
+    def get_attributes
+      self.class.attributes.each_with_object({}) do |attribute, attributes|
+        name = attribute.name
+        attributes[name] = get_attribute(name) if yield(attribute)
+      end
+    end
+
     # Mass-assign attribute values
     #
     # Keys in the +attribute_values+ param can be symbols or strings.
@@ -164,8 +169,34 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def set_attributes(attribute_values)
-      attribute_values.each { |name, value| self[name] = value }
+    def set_attributes(attribute_values, &block)
+      attributes = self.class.attributes
+      attribute_values.each do |name, value|
+        attribute = attributes[name]
+        set_attribute(name, value) if attribute && yield(attribute)
+      end
+    end
+
+    # Returns a value of the attribute with the given name
+    #
+    # @see Virtus::InstanceMethods#[]
+    #
+    # @return [Object]
+    #
+    # @api private
+    def get_attribute(name)
+      __send__(name)
+    end
+
+    # Sets a value of the attribute with the given name
+    #
+    # @see Virtus::InstanceMethods#[]=
+    #
+    # @return [Object]
+    #
+    # @api private
+    def set_attribute(name, value)
+      __send__("#{name}=", value)
     end
 
   end # module InstanceMethods
