@@ -30,23 +30,18 @@ module Virtus
 
       # Create a Hash from the Object if possible
       #
-      # @overload value is coercible into Hash
+      # @example
+      #   Virtus::Coercion::Object.to_hash(key => value)  # => { key => value }
       #
-      #   @example
-      #     Virtus::Coercion::Object.to_hash(key => value)  # => { key => value }
+      # @example
+      #   Virtus::Coercion::Object.to_hash(value)  # => value
       #
-      #   @param [#to_hash] value
+      # @param [#to_hash, Object] value
       #
-      #   @return [Hash]
-      #
-      # @overload value is not coercible into Hash
-      #
-      #   @example
-      #     Virtus::Coercion::Object.to_hash(value)  # => value
-      #
-      #   @param [Object] value
-      #
-      #   @return [Object]
+      # @return [Hash]
+      #   returns a Hash when the object can be coerced
+      # @return [Object]
+      #   returns the value when the object cannot be coerced
       #
       # @api public
       def self.to_hash(value)
