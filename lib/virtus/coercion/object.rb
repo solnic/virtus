@@ -48,6 +48,26 @@ module Virtus
         value.respond_to?(:to_hash) ? value.to_hash : value
       end
 
+      # Create a String from the Object if possible
+      #
+      # @example with a coercible object
+      #   Virtus::Coercion::Object.to_string("string")  # => "string"
+      #
+      # @example with an object that is not coercible
+      #   Virtus::Coercion::Object.to_string(value)  # => value
+      #
+      # @param [#to_str, Object] value
+      #
+      # @return [String]
+      #   returns a String when the object can be coerced
+      # @return [Object]
+      #   returns the value when the object cannot be coerced
+      #
+      # @api public
+      def self.to_string(value)
+        value.respond_to?(:to_str) ? value.to_str : value
+      end
+
       # Passthrough given value
       #
       # @param [Object] value
