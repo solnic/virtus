@@ -33,4 +33,19 @@ describe Virtus::Coercion::Object, '.to_array' do
 
     it { should == coerced }
   end
+
+  context 'when the value returns nil from #to_ary' do
+    before do
+      value.should_receive(:to_ary).with().and_return(nil)
+    end
+
+    it 'calls #to_a as a fallback' do
+      value.should_receive(:to_a).with().and_return(coerced)
+      should be(coerced)
+    end
+
+    it 'wraps the value in an Array if #to_a is not available' do
+      should == coerced
+    end
+  end
 end
