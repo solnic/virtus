@@ -68,6 +68,26 @@ module Virtus
         coerce_with_method(value, :to_str)
       end
 
+      # Create an Integer from the Object if possible
+      #
+      # @example with a coercible object
+      #   Virtus::Coercion::Object.to_integer(1)  # => 1
+      #
+      # @example with an object that is not coercible
+      #   Virtus::Coercion::Object.to_integer(value)  # => value
+      #
+      # @param [#to_int, Object] value
+      #
+      # @return [Integer]
+      #   returns an Integer when the object can be coerced
+      # @return [Object]
+      #   returns the value when the object cannot be coerced
+      #
+      # @api public
+      def self.to_integer(value)
+        coerce_with_method(value, :to_int)
+      end
+
       # Passthrough given value
       #
       # @param [Object] value
