@@ -7,7 +7,7 @@ module Virtus
 
       COERCION_METHOD_REGEXP = /\Ato_/.freeze
 
-      # Create a Hash from any Object
+      # Create an Array from any Object
       #
       # @param [#to_a,#to_ary,Object] value
       #
