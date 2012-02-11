@@ -9,6 +9,16 @@ module Virtus
 
       # Create an Array from any Object
       #
+      # @example with an object that does not respond to #to_a or #to_ary
+      #   Virtus::Coercion::Object.to_array(value)         # => [ value ]
+      #
+      # @example with an object that responds to #to_a
+      #   Virtus::Coercion::Object.to_array(Set[ value ])  # => [ value ]
+      #
+      # @example with n object that responds to #to_ary
+      #   Virtus::Coercion::Object.to_array([ value ])     # => [ value ]
+      #
+      # @param [#to_a,#to_ary,Object] value
       # @param [#to_a,#to_ary,Object] value
       #
       # @return [Array]
@@ -22,11 +32,17 @@ module Virtus
       #
       # @overload value is coercible into Hash
       #
+      #   @example
+      #     Virtus::Coercion::Object.to_hash(key => value)  # => { key => value }
+      #
       #   @param [#to_hash] value
       #
       #   @return [Hash]
       #
       # @overload value is not coercible into Hash
+      #
+      #   @example
+      #     Virtus::Coercion::Object.to_hash(value)  # => value
       #
       #   @param [Object] value
       #
