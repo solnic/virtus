@@ -18,6 +18,25 @@ module Virtus
         Array(value)
       end
 
+      # Create a Hash from the Object if possible
+      #
+      # @overload value is coercible into Hash
+      #
+      #   @param [#to_hash] value
+      #
+      #   @return [Hash]
+      #
+      # @overload value is not coercible into Hash
+      #
+      #   @param [Object] value
+      #
+      #   @return [Object]
+      #
+      # @api public
+      def self.to_hash(value)
+        value.respond_to?(:to_hash) ? value.to_hash : value
+      end
+
       # Passthrough given value
       #
       # @param [Object] value
