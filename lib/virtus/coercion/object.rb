@@ -45,7 +45,7 @@ module Virtus
       #
       # @api public
       def self.to_hash(value)
-        value.respond_to?(:to_hash) ? value.to_hash : value
+        coerce_with_method(value, :to_hash)
       end
 
       # Create a String from the Object if possible
@@ -65,7 +65,7 @@ module Virtus
       #
       # @api public
       def self.to_string(value)
-        value.respond_to?(:to_str) ? value.to_str : value
+        coerce_with_method(value, :to_str)
       end
 
       # Passthrough given value
@@ -84,6 +84,21 @@ module Virtus
       end
 
       private_class_method :method_missing
+
+      # Try to use native coercion method on the given value
+      #
+      # @param [Object] value
+      #
+      # @param [Symbol] method
+      #
+      # @return [Object]
+      #
+      # @api private
+      def self.coerce_with_method(value, method)
+        value.respond_to?(method) ? value.send(method) : value
+      end
+
+      private_class_method :coerce_with_method
 
     end # class Object
   end # class Coercion
