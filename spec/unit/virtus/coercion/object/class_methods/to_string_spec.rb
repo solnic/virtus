@@ -6,7 +6,7 @@ describe Virtus::Coercion::Object, '.to_string' do
   let(:object) { described_class }
   let(:value)  { stub('value')   }
 
-  context 'when the value responds to #to_s' do
+  context 'when the value responds to #to_str' do
     let(:coerced) { stub('coerced') }
 
     before do
