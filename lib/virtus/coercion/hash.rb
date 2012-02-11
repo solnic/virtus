@@ -7,17 +7,6 @@ module Virtus
 
       TIME_SEGMENTS = [ :year, :month, :day, :hour, :min, :sec ].freeze
 
-      # Creates an Array instance from a Hash
-      #
-      # @param [Hash] value
-      #
-      # @return [Array]
-      #
-      # @api private
-      def self.to_array(value)
-        value.to_a
-      end
-
       # Creates a Time instance from a Hash
       #
       # Valid keys are: :year, :month, :day, :hour, :min, :sec

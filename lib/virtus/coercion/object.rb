@@ -7,6 +7,17 @@ module Virtus
 
       COERCION_METHOD_REGEXP = /\Ato_/.freeze
 
+      # Create a Hash from any Object
+      #
+      # @param [#to_a,#to_ary,Object] value
+      #
+      # @return [Array]
+      #
+      # @api public
+      def self.to_array(value)
+        Array(value)
+      end
+
       # Passthrough given value
       #
       # @param [Object] value
