@@ -4,7 +4,7 @@ describe Virtus::Coercion::Object, '.to_array' do
   subject { object.to_array(value) }
 
   let(:object)  { described_class }
-  let(:value)   { stub('value')   }
+  let(:value)   { Object.new      }
   let(:coerced) { [ value ]       }
 
   context 'when the value responds to #to_ary' do
