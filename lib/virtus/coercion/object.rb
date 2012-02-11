@@ -22,6 +22,8 @@ module Virtus
         end
       end
 
+      private_class_method :method_missing
+
     end # class Object
   end # class Coercion
 end # module Virtus
