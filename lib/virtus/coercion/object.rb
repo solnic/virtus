@@ -30,10 +30,10 @@ module Virtus
 
       # Create a Hash from the Object if possible
       #
-      # @example
+      # @example with a coercible object
       #   Virtus::Coercion::Object.to_hash(key => value)  # => { key => value }
       #
-      # @example
+      # @example with an object that is not coercible
       #   Virtus::Coercion::Object.to_hash(value)  # => value
       #
       # @param [#to_hash, Object] value
