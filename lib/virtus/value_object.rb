@@ -43,6 +43,8 @@ module Virtus
       end
     end
 
+    private_class_method :included
+
     module InstanceMethods
       # the #get_attributes and #set_attributes methods accept a Proc object
       # that will filter out an attribute when the block returns false. the
