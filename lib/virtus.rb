@@ -7,6 +7,10 @@ require 'bigdecimal/util'
 # Base module which adds Attribute API to your classes
 module Virtus
 
+  # Provides args for const_get and const_defined? to make them behave
+  # consistently across different versions of ruby
+  EXTRA_CONST_ARGS = (RUBY_VERSION < '1.9' || RUBY_ENGINE == 'rbx' ? [] : [ false ]).freeze
+
   # Represents an undefined parameter used by auto-generated option methods
   Undefined = Object.new.freeze
 
