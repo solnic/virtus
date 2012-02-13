@@ -3,8 +3,7 @@ module Virtus
   # A module that adds type lookup to a class
   module TypeLookup
 
-    TYPE_FORMAT      = /\A[A-Z]\w*\z/.freeze
-    EXTRA_CONST_ARGS = RUBY_VERSION < '1.9' || RUBY_ENGINE == 'rbx' ? [] : [ false ]
+    TYPE_FORMAT = /\A[A-Z]\w*\z/.freeze
 
     # Returns a descendant based on a name or class
     #

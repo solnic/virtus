@@ -25,8 +25,15 @@ module Virtus
       #
       # @api public
       def self.to_constant(value)
-        # TODO: add support for namespaced classes like 'Virtus::Attribute::String'
-        ::Object.const_get(value)
+        names = value.split('::')
+        names.shift if names.first.empty?
+        names.inject(::Object) do |mod, name|
+          if mod.const_defined?(name, *EXTRA_CONST_ARGS)
+            mod.const_get(name, *EXTRA_CONST_ARGS)
+          else
+            mod.const_missing(name)
+          end
+        end
       end
 
       # Coerce give value to a symbol
