@@ -17,7 +17,7 @@ describe Virtus::Attribute, '.determine_type' do
       subject { object.determine_type(primitive) }
 
       before do
-        if [Virtus::Attribute::EmbeddedValue, Virtus::Attribute::Collection].include? attribute_class
+        if [Virtus::Attribute::Collection].include? attribute_class
           pending
         end
       end
