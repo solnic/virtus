@@ -25,6 +25,7 @@ module Virtus
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
     class EmbeddedValue < Object
+      primitive       ::OpenStruct
 
       # @see Attribute.merge_options
       #
@@ -33,19 +34,7 @@ module Virtus
       #
       # @api private
       def self.merge_options(type, options)
-        options.merge(:model => type)
-      end
-
-      # Sets @model ivar
-      #
-      # @see Virtus::Attribute#initialize
-      #
-      # @return [undefined]
-      #
-      # @api private
-      def initialize(name, options = {})
-        super
-        @model = options.fetch(:model, OpenStruct)
+        options.merge(:primitive => type)
       end
 
       # Coerce attributes into a virtus object
@@ -57,7 +46,7 @@ module Virtus
       # @api private
       def coerce(attributes_or_object)
         value = if attributes_or_object.kind_of?(::Hash)
-                  @model.new(attributes_or_object)
+                  @primitive.new(attributes_or_object)
                 else
                   attributes_or_object
                 end

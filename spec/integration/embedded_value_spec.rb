@@ -39,6 +39,10 @@ describe 'embedded values' do
     }
   end
 
+  specify 'allows you to check against Attribute::EmbeddedValue#value_coerced?' do
+    Examples::User.attributes[:address].value_coerced?(subject.address).should be_true
+  end
+
   specify 'allows you to pass a hash for the embedded value' do
     user = Examples::User.new
     user.address = address_attributes
