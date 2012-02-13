@@ -11,7 +11,7 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
     let(:value) { Hash[:foo => 'bar'] }
 
     context 'when the options include the model' do
-      let(:object)         { described_class.new(attribute_name, :model => model) }
+      let(:object)         { described_class.new(attribute_name, :primitive => model) }
       let(:model)          { mock('model')                                        }
       let(:model_instance) { mock('model_instance') }
 
