@@ -25,7 +25,7 @@ module Virtus
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
     class EmbeddedValue < Object
-      primitive       ::OpenStruct
+      primitive ::OpenStruct
 
       # @see Attribute.merge_options
       #
