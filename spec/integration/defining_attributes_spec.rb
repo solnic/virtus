@@ -52,7 +52,7 @@ describe "virtus attribute definitions" do
   end
 
   context 'inheritance' do
-    specify 'inherits all the attribtues from the base class' do
+    specify 'inherits all the attributes from the base class' do
       fred = Examples::Manager.new(:name => 'Fred', :age => 29)
       fred.name.should == 'Fred'
       fred.age.should == 29

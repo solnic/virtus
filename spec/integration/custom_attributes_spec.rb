@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'custom attribtues' do
+describe 'custom attributes' do
 
   module Virtus
     class Coercion
