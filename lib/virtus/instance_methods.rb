@@ -109,7 +109,7 @@ module Virtus
     #
     # @api public
     def attributes=(attribute_values)
-      set_attributes(attribute_values, &:public_writer?)
+      set_attributes(attribute_values, self.class.allowed_writer_methods)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -169,10 +169,9 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def set_attributes(attribute_values, &block)
-      writer_methods = self.class.allowed_writer_methods
+    def set_attributes(attribute_values, allowed_writer_methods)
       attribute_values.each do |name, value|
-        set_attribute(name, value) if writer_methods.include?("#{name}=")
+        set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
       end
     end
 

@@ -46,13 +46,17 @@ module Virtus
     private_class_method :included
 
     module InstanceMethods
-      # the #get_attributes and #set_attributes methods accept a Proc object
-      # that will filter out an attribute when the block returns false. the
-      # ValueObject needs all the attributes, so we allow every attribute.
+      # the #get_attributes method accept a Proc object that will filter
+      # out an attribute when the block returns false. the ValueObject
+      # needs all the attributes, so we allow every attribute.
       FILTER_NONE = proc { true }
 
       def initialize(attributes = {})
-        set_attributes(attributes, &FILTER_NONE)
+        # TODO: Think of a better way of doing this
+        allowed_writer_methods = self.class.allowed_writer_methods
+        allowed_writer_methods += self.class.attributes.map{|attr| "#{attr.name}="}
+        allowed_writer_methods.to_set.freeze
+        set_attributes(attributes, allowed_writer_methods)
       end
 
       def with(attribute_updates)
