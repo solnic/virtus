@@ -170,10 +170,9 @@ module Virtus
     #
     # @api private
     def set_attributes(attribute_values, &block)
-      attributes = self.class.attributes
+      writer_methods = self.class.allowed_writer_methods
       attribute_values.each do |name, value|
-        attribute = attributes[name]
-        set_attribute(name, value) if attribute && yield(attribute)
+        set_attribute(name, value) if writer_methods.include?("#{name}=")
       end
     end
 

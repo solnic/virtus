@@ -10,6 +10,14 @@ describe Virtus::InstanceMethods do
       attribute :email, String, :accessor => :private
 
       attr_accessor :non_attribute
+
+      def private_non_attribute_reader
+        @private_non_attribute
+      end
+
+      private
+
+      attr_accessor :private_non_attribute
     end
   end
 
@@ -77,8 +85,12 @@ describe Virtus::InstanceMethods do
         object.attributes.should eql(attributes)
       end
 
-      it 'silently ignores publicly accessible non-Virtus attributes' do
-        expect { subject }.to_not change { object.non_attribute }
+      it 'sets publicly accessible non-Virtus attributes' do
+        expect { subject }.to change { object.non_attribute }
+      end
+
+      it 'silently ignores private non-Virtus attributes' do
+        expect { subject }.to_not change { object.private_non_attribute_reader }
       end
     end
 

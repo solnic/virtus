@@ -27,10 +27,6 @@ describe "mass assignment with accessors" do
 
   subject { Examples::Product.new(:categories => ['Office', 'Printers'], :_id => 100) }
 
-  before do
-    pending
-  end
-
   specify 'works uppon instantiation' do
     subject.category.should == 'Office'
     subject.subcategory.should == 'Printers'
