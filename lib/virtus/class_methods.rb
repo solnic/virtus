@@ -2,6 +2,8 @@ module Virtus
 
   # Class methods that are added when you include Virtus
   module ClassMethods
+    WRITER_METHOD_REGEXP   = /=\z/.freeze
+    INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
 
     # Hook called when module is extended
     #
@@ -76,6 +78,19 @@ module Virtus
       method      = __method__
       parent      = superclass.send(method) if superclass.respond_to?(method)
       @attributes = AttributeSet.new(parent)
+    end
+
+    # The list of writer methods that can be mass-assigned to in #attributes=
+    #
+    # @return [Set]
+    #
+    # @api private
+    def allowed_writer_methods
+      return @allowed_writer_methods if defined?(@allowed_writer_methods)
+
+      @allowed_writer_methods = public_instance_methods.map { |method| method.to_s }.grep(WRITER_METHOD_REGEXP).to_set
+      @allowed_writer_methods -= INVALID_WRITER_METHODS
+      @allowed_writer_methods.freeze
     end
 
   protected
