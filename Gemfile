@@ -20,4 +20,8 @@ group :metrics do
     gem 'rcov',      '~> 0.9.9'
     gem 'ruby2ruby', '=  1.2.2'
   end
+
+  platforms :rbx do
+    gem 'pelusa'
+  end
 end
