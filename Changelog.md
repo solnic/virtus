@@ -1,3 +1,7 @@
+# v0.3.0 to-be-released
+
+[Compare v0.2.0..master](https://github.com/solnic/virtus/compare/v0.2.0...master)
+
 # v0.2.0 2012-02-08
 
 * [feature] Support for Value Objects (emmanuel)
