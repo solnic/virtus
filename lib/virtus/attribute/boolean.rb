@@ -43,7 +43,7 @@ module Virtus
       # @api private
       def define_reader_method(mod)
         super
-        mod.define_reader_method(self, "#{name}?", reader_visibility)
+        mod.define_reader_method(self, "#{name}?", @reader_visibility)
         self
       end
 

@@ -37,20 +37,6 @@ module Virtus
     # @api private
     attr_reader :instance_variable_name
 
-    # Returns reader visibility
-    #
-    # @return [Symbol]
-    #
-    # @api private
-    attr_reader :reader_visibility
-
-    # Returns write visibility
-    #
-    # @return [Symbol]
-    #
-    # @api private
-    attr_reader :writer_visibility
-
     # Returns method name that should be used for coerceing
     #
     # @return [Symbol]
@@ -282,7 +268,7 @@ module Virtus
     #
     # @api private
     def define_reader_method(mod)
-      mod.define_reader_method(self, name, reader_visibility)
+      mod.define_reader_method(self, name, @reader_visibility)
       self
     end
 
@@ -294,7 +280,7 @@ module Virtus
     #
     # @api private
     def define_writer_method(mod)
-      mod.define_writer_method(self, "#{name}=".to_sym, writer_visibility)
+      mod.define_writer_method(self, "#{name}=".to_sym, @writer_visibility)
       self
     end
 
@@ -304,7 +290,7 @@ module Virtus
     #
     # @api private
     def public_reader?
-      reader_visibility == :public
+      @reader_visibility == :public
     end
 
     # Returns a Boolean indicating whether the writer method is public
@@ -313,7 +299,7 @@ module Virtus
     #
     # @api private
     def public_writer?
-      writer_visibility == :public
+      @writer_visibility == :public
     end
 
   private
