@@ -47,7 +47,7 @@ module Virtus
       def define_inspect_method
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def inspect
-            "#<#{@host_name} #{@keys.map { |key| "#{key}=\#{#{key}.inspect}" }.join(' ')}>"
+            "#<#{@host_name} #{compile_keys { |key| "#{key}=\#{#{key}.inspect}" }}>"
           end
         RUBY
       end
@@ -62,7 +62,7 @@ module Virtus
           def eql?(other)
             return true if equal?(other)
             instance_of?(other.class) &&
-            #{@keys.map { |key| "#{key}.eql?(other.#{key})" }.join(' && ')}
+            #{compile_keys(' && ') { |key| "#{key}.eql?(other.#{key})" }}
           end
         RUBY
       end
@@ -91,7 +91,7 @@ module Virtus
       def define_hash_method
         module_eval <<-RUBY, __FILE__, __LINE__ + 1
           def hash
-            self.class.hash ^ #{@keys.map { |key| "#{key}.hash" }.join(' ^ ')}
+            self.class.hash ^ #{compile_keys(' ^ ') { |key| "#{key}.hash" }}
           end
         RUBY
       end
@@ -111,6 +111,12 @@ module Virtus
         end
 
         [ respond_to, equivalent ]
+      end
+
+      # @api private
+      def compile_keys(separator = ' ', &block)
+        keys_map = @keys.map { |key| yield(key) }
+        keys_map.join(separator)
       end
 
     end # class Equalizer
