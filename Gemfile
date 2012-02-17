@@ -22,6 +22,6 @@ group :metrics do
   end
 
   platforms :rbx do
-    gem 'pelusa'
+    gem 'pelusa', :git => 'https://github.com/codegram/pelusa.git'
   end
 end
