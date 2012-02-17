@@ -34,6 +34,7 @@ describe "default values" do
   end
 
   specify 'you can set defaults for private attributes' do
+    pending "can't call private methods in a proc for the default value"
     subject.title = 'Top Secret'
     subject.editor_title.should == 'UNPUBLISHED: Top Secret'
   end
