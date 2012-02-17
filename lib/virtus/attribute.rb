@@ -30,13 +30,6 @@ module Virtus
     # @api private
     attr_reader :options
 
-    # Returns instance variable name of the attribute
-    #
-    # @return [Symbol]
-    #
-    # @api private
-    attr_reader :instance_variable_name
-
     # Returns method name that should be used for coerceing
     #
     # @return [Symbol]
@@ -164,7 +157,7 @@ module Virtus
     #
     # @api public
     def get(instance)
-      if instance.instance_variable_defined?(instance_variable_name)
+      if instance.instance_variable_defined?(@instance_variable_name)
         get!(instance)
       else
         value = default.evaluate(instance)
@@ -183,7 +176,7 @@ module Virtus
     #
     # @api public
     def get!(instance)
-      instance.instance_variable_get(instance_variable_name)
+      instance.instance_variable_get(@instance_variable_name)
     end
 
     # Sets the value on the instance
@@ -207,7 +200,7 @@ module Virtus
     #
     # @api public
     def set!(instance, value)
-      instance.instance_variable_set(instance_variable_name, value)
+      instance.instance_variable_set(@instance_variable_name, value)
       self
     end
 
