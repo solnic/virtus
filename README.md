@@ -1,7 +1,8 @@
 virtus
 ======
 
-[![Build Status](http://travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
+[![Build Status](https://secure.travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
+[![Dependency Status](https://gemnasium.com/solnic/virtus.png)](https://gemnasium.com/solnic/virtus)
 
 [Metrics on CodeClimate](https://codeclimate.com/github/solnic/virtus)
 
