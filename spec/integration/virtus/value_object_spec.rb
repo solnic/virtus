@@ -29,8 +29,8 @@ describe Virtus::ValueObject do
 
   describe 'writer visibility' do
     it 'attributes are configured for private writers' do
-      class_under_test.attributes[:latitude].writer_visibility.should  == :private
-      class_under_test.attributes[:longitude].writer_visibility.should == :private
+      class_under_test.attributes[:latitude].public_reader?.should be(true)
+      class_under_test.attributes[:longitude].public_writer?.should be(false)
     end
 
     it 'writer methods are set to private' do
