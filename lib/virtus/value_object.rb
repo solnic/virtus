@@ -52,11 +52,7 @@ module Virtus
       FILTER_NONE = proc { true }
 
       def initialize(attributes = {})
-        # TODO: Think of a better way of doing this
-        allowed_writer_methods = self.class.allowed_writer_methods
-        allowed_writer_methods += self.class.attributes.map{|attr| "#{attr.name}="}
-        allowed_writer_methods.to_set.freeze
-        set_attributes(attributes, allowed_writer_methods)
+        set_attributes(attributes, self.class.allowed_writer_methods)
       end
 
       def with(attribute_updates)
@@ -110,6 +106,19 @@ module Virtus
             include equalizer
             equalizer
           end
+      end
+
+      # The list of writer methods that can be mass-assigned to in #attributes=
+      #
+      # @return [Set]
+      #
+      # @api private
+      def allowed_writer_methods
+        return @allowed_writer_methods if defined?(@allowed_writer_methods)
+
+        @allowed_writer_methods = super
+        @allowed_writer_methods += attributes.map{|attr| "#{attr.name}="}
+        @allowed_writer_methods.to_set.freeze
       end
 
     end # module ClassMethods
