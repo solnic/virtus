@@ -17,7 +17,6 @@ describe Virtus::ClassMethods, '#allowed_writer_methods' do
   it { should include('some_other_attribute=') }
   it { should_not include('private_attribute=') }
 
-  # TODO: Do we need any other methods blacklisted?
   %w[ == != === []= attributes= ].each do |invalid_method|
     it { should_not include(invalid_method) }
   end
