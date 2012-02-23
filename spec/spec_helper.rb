@@ -1,5 +1,5 @@
-require 'backports'
 require 'rubygems'
+require 'backports'
 
 begin
   require 'rspec'  # try for RSpec 2
