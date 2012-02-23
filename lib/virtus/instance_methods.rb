@@ -88,8 +88,8 @@ module Virtus
     # Mass-assign attribute values
     #
     # Keys in the +attribute_values+ param can be symbols or strings.
-    # Only non-private referenced Attribute writer methods will be called.
-    # Non-attribute setter methods on the receiver will not be called.
+    # All referenced Attribute writer methods *will* be called.
+    # Non-attribute setter methods on the receiver *will* be called.
     #
     # @example
     #   class User
@@ -109,7 +109,7 @@ module Virtus
     #
     # @api public
     def attributes=(attribute_values)
-      set_attributes(attribute_values, &:public_writer?)
+      set_attributes(attribute_values)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -148,32 +148,14 @@ module Virtus
 
     # Mass-assign attribute values
     #
-    # Keys in the +attribute_values+ param can be symbols or strings.
-    # All referenced Attribute writer methods *will* be called.
-    # Non-attribute setter methods on the receiver *will* be called.
-    #
-    # @example
-    #   class User
-    #     include Virtus
-    #
-    #     attribute :name, String
-    #     attribute :age,  Integer
-    #   end
-    #
-    #   user = User.new
-    #   user.attributes = { :name => 'John', 'age' => 28 }
-    #
-    # @param [#to_hash] attribute_values
-    #   a hash of attribute names and values to set on the receiver
+    # @see Virtus::InstanceMethods#attributes=
     #
     # @return [Hash]
     #
     # @api private
-    def set_attributes(attribute_values, &block)
-      attributes = self.class.attributes
+    def set_attributes(attribute_values)
       attribute_values.each do |name, value|
-        attribute = attributes[name]
-        set_attribute(name, value) if attribute && yield(attribute)
+        set_attribute(name, value) if self.class.allowed_writer_methods.include?("#{name}=")
       end
     end
 
