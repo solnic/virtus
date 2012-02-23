@@ -114,11 +114,12 @@ module Virtus
       #
       # @api private
       def allowed_writer_methods
-        return @allowed_writer_methods if defined?(@allowed_writer_methods)
-
-        @allowed_writer_methods = super
-        @allowed_writer_methods += attributes.map{|attr| "#{attr.name}="}
-        @allowed_writer_methods.to_set.freeze
+        @allowed_writer_methods ||=
+          begin
+            allowed_writer_methods = super
+            allowed_writer_methods += attributes.map{|attr| "#{attr.name}="}
+            allowed_writer_methods.to_set.freeze
+          end
       end
 
     end # module ClassMethods
