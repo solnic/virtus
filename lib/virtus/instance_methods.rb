@@ -109,7 +109,7 @@ module Virtus
     #
     # @api public
     def attributes=(attribute_values)
-      set_attributes(attribute_values, self.class.allowed_writer_methods)
+      set_attributes(attribute_values)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -153,9 +153,9 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def set_attributes(attribute_values, allowed_writer_methods)
+    def set_attributes(attribute_values)
       attribute_values.each do |name, value|
-        set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
+        set_attribute(name, value) if self.class.allowed_writer_methods.include?("#{name}=")
       end
     end
 

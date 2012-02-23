@@ -52,7 +52,7 @@ module Virtus
       FILTER_NONE = proc { true }
 
       def initialize(attributes = {})
-        set_attributes(attributes, self.class.allowed_writer_methods)
+        set_attributes(attributes)
       end
 
       def with(attribute_updates)
