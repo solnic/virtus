@@ -2,6 +2,18 @@
 
 [Compare v0.2.0..master](https://github.com/solnic/virtus/compare/v0.2.0...master)
 
+* [feature] Support for mass-assignment via custom setters not generated with attribute (fgrehm)
+* [feature] Virtus::Coercion::String.to_constant handles namespaced names (dkubb)
+* [feature] New coercion: Virtus::Coercion::Object.to_array (dkubb)
+* [feature] New coercion: Virtus::Coercion::Object.to_hash (dkubb)
+* [feature] New coercion: Virtus::Coercion::Object.to_string (dkubb)
+* [feature] New coercion: Virtus::Coercion::Object.to_integer (dkubb)
+* [changed] EmbeddedValue relies on @primitive setting rather than @model (mbj)
+* [BREAKING CHANGE] Removed Attribute#writer_visibility in favor of Attribute#public_writer? (solnic)
+* [BREAKING CHANGE] Removed Attribute#reader_visibility in favor of Attribute#public_reader? (solnic)
+* [BREAKING CHANGE] Removed Attribute#instance_variable_name - this is a private ivar (solnic)
+* [BREAKING CHANGE] Removed Equalizer#host_name and Equalizer#keys (solnic)
+
 # v0.2.0 2012-02-08
 
 * [feature] Support for Value Objects (emmanuel)
