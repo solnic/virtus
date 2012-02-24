@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::DefaultValue, '#evaluate' do
   subject { object.evaluate(instance) }
 
-  let(:object)    { described_class.new(attribute, value) }
+  let(:object)    { described_class.build(attribute, value) }
   let(:attribute) { Virtus::Attribute::String.new(:title) }
   let(:instance)  { Class.new                             }
 

@@ -6,6 +6,32 @@ module Virtus
       SINGLETON_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
                             ::Numeric,  ::Symbol ].freeze
 
+      # @api public
+      def self.build(instance, value)
+        if value.is_a?(Symbol) && instance.respond_to?(value)
+          DefaultValueFromMethod.new(instance, value)
+        elsif value.respond_to?(:call)
+          DefaultValueFromCallable.new(instance, value)
+        elsif cloneable?(value)
+          DefaultValueFromClonable.new(instance, value)
+        else
+          DefaultValue.new(instance, value)
+        end
+      end
+
+      # Returns whether or not the value is cloneable
+      #
+      # return [TrueClass, FalseClass]
+      #
+      # @api private
+      def self.cloneable?(value)
+        case value
+        when *SINGLETON_CLASSES then false
+        else
+          true
+        end
+      end
+
       # Returns the attribute associated with this default value instance
       #
       # @return [Virtus::Attribute::Object]
@@ -40,50 +66,36 @@ module Virtus
       #
       # @api private
       def evaluate(instance)
-        if callable?
-          call(instance)
-        elsif cloneable?
-          value.clone
-        else
-          value
-        end
+        value
+      end
+    end # class DefaultValue
+
+    class DefaultValueFromMethod < DefaultValue
+
+      # @api private
+      def evaluate(instance)
+        instance.send(value)
       end
 
-    private
+    end
 
-      # Evaluates a proc value
-      #
-      # @param [Object]
-      #
-      # @return [Object] evaluated value
-      #
+    class DefaultValueFromCallable < DefaultValue
+
       # @api private
-      def call(instance)
+      def evaluate(instance)
         value.call(instance, attribute)
       end
 
-      # Returns if the value is callable
-      #
-      # @return [TrueClass,FalseClass]
-      #
+    end
+
+    class DefaultValueFromClonable < DefaultValue
+
       # @api private
-      def callable?
-        value.respond_to?(:call)
+      def evaluate(instance)
+        value.clone
       end
 
-      # Returns whether or not the value is cloneable
-      #
-      # # return [TrueClass, FalseClass]
-      #
-      # @api private
-      def cloneable?
-        case value
-        when *SINGLETON_CLASSES then false
-        else
-          true
-        end
-      end
+    end
 
-    end # class DefaultValue
   end # class Attribute
 end # module Virtus
