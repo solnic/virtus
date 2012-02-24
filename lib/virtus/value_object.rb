@@ -46,13 +46,13 @@ module Virtus
     private_class_method :included
 
     module InstanceMethods
-      # the #get_attributes and #set_attributes methods accept a Proc object
-      # that will filter out an attribute when the block returns false. the
-      # ValueObject needs all the attributes, so we allow every attribute.
+      # the #get_attributes method accept a Proc object that will filter
+      # out an attribute when the block returns false. the ValueObject
+      # needs all the attributes, so we allow every attribute.
       FILTER_NONE = proc { true }
 
       def initialize(attributes = {})
-        set_attributes(attributes, &FILTER_NONE)
+        set_attributes(attributes)
       end
 
       def with(attribute_updates)
@@ -105,6 +105,20 @@ module Virtus
             equalizer = Equalizer.new(name || inspect)
             include equalizer
             equalizer
+          end
+      end
+
+      # The list of writer methods that can be mass-assigned to in #attributes=
+      #
+      # @return [Set]
+      #
+      # @api private
+      def allowed_writer_methods
+        @allowed_writer_methods ||=
+          begin
+            allowed_writer_methods = super
+            allowed_writer_methods += attributes.map{|attr| "#{attr.name}="}
+            allowed_writer_methods.to_set.freeze
           end
       end
 
