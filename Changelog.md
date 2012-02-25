@@ -1,4 +1,4 @@
-# v0.3.0 to-be-released
+# v0.3.0 2012-02-25
 
 * [feature] Support for default values from a symbol (which can be a method name) (solnic)
 * [feature] Support for mass-assignment via custom setters not generated with attribute (fgrehm)
@@ -13,7 +13,7 @@
 * [BREAKING CHANGE] Removed Attribute#instance_variable_name - this is a private ivar (solnic)
 * [BREAKING CHANGE] Removed Equalizer#host_name and Equalizer#keys (solnic)
 
-[Compare v0.2.0..master](https://github.com/solnic/virtus/compare/v0.2.0...master)
+[Compare v0.2.0..v0.3.0](https://github.com/solnic/virtus/compare/v0.2.0...v0.3.0)
 
 # v0.2.0 2012-02-08
 
