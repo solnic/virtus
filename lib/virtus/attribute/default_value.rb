@@ -3,20 +3,60 @@ module Virtus
 
     # Class representing the default value option
     class DefaultValue
-      SINGLETON_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
-                            ::Numeric,  ::Symbol ].freeze
+      extend DescendantsTracker
+
+      class FromClonable < DefaultValue
+        SINGLETON_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
+                              ::Numeric,  ::Symbol ].freeze
+
+        # @api private
+        def self.handle?(attribute, value)
+          case value
+          when *SINGLETON_CLASSES
+            false
+          else
+            true
+          end
+        end
+
+        # @api private
+        def evaluate(instance)
+          value.clone
+        end
+
+      end # class FromClonable
+
+      class FromCallable < DefaultValue
+
+        # @api private
+        def self.handle?(attribute, value)
+          value.respond_to?(:call)
+        end
+
+        # @api private
+        def evaluate(instance)
+          value.call(instance, attribute)
+        end
+
+      end # class FromCallable
+
+      class FromSymbol < DefaultValue
+        # @api private
+        def self.handle?(attribute, value)
+          value.is_a?(::Symbol)
+        end
+
+        # @api private
+        def evaluate(instance)
+          instance.respond_to?(value) ? instance.__send__(value) : value
+        end
+
+      end # class FromSymbol
 
       # @api public
-      def self.build(instance, value)
-        if value.is_a?(Symbol) && instance.respond_to?(value)
-          DefaultValueFromMethod.new(instance, value)
-        elsif value.respond_to?(:call)
-          DefaultValueFromCallable.new(instance, value)
-        elsif cloneable?(value)
-          DefaultValueFromClonable.new(instance, value)
-        else
-          DefaultValue.new(instance, value)
-        end
+      def self.build(*args)
+        klass = descendants.detect { |descendant| descendant.handle?(*args) } || self
+        klass.new(*args)
       end
 
       # Returns whether or not the value is cloneable
@@ -25,11 +65,7 @@ module Virtus
       #
       # @api private
       def self.cloneable?(value)
-        case value
-        when *SINGLETON_CLASSES then false
-        else
-          true
-        end
+
       end
 
       # Returns the attribute associated with this default value instance
@@ -69,33 +105,6 @@ module Virtus
         value
       end
     end # class DefaultValue
-
-    class DefaultValueFromMethod < DefaultValue
-
-      # @api private
-      def evaluate(instance)
-        instance.send(value)
-      end
-
-    end
-
-    class DefaultValueFromCallable < DefaultValue
-
-      # @api private
-      def evaluate(instance)
-        value.call(instance, attribute)
-      end
-
-    end
-
-    class DefaultValueFromClonable < DefaultValue
-
-      # @api private
-      def evaluate(instance)
-        value.clone
-      end
-
-    end
 
   end # class Attribute
 end # module Virtus
