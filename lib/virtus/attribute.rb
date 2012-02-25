@@ -127,7 +127,7 @@ module Virtus
       @instance_variable_name = "@#{@name}".to_sym
       @primitive              = @options.fetch(:primitive)
       @coercion_method        = @options.fetch(:coercion_method)
-      @default                = DefaultValue.new(self, @options[:default])
+      @default                = DefaultValue.build(self, @options[:default])
       initialize_visibility
     end
 

@@ -2,9 +2,20 @@ module Virtus
   class Attribute
 
     # Class representing the default value option
+    #
+    # @api private
     class DefaultValue
-      SINGLETON_CLASSES = [ ::NilClass, ::TrueClass, ::FalseClass,
-                            ::Numeric,  ::Symbol ].freeze
+      extend DescendantsTracker
+
+      # Builds a default value instance
+      #
+      # @return [Virtus::Attribute::DefaultValue]
+      #
+      # @api private
+      def self.build(*args)
+        klass = descendants.detect { |descendant| descendant.handle?(*args) } || self
+        klass.new(*args)
+      end
 
       # Returns the attribute associated with this default value instance
       #
@@ -40,50 +51,9 @@ module Virtus
       #
       # @api private
       def evaluate(instance)
-        if callable?
-          call(instance)
-        elsif cloneable?
-          value.clone
-        else
-          value
-        end
+        value
       end
-
-    private
-
-      # Evaluates a proc value
-      #
-      # @param [Object]
-      #
-      # @return [Object] evaluated value
-      #
-      # @api private
-      def call(instance)
-        value.call(instance, attribute)
-      end
-
-      # Returns if the value is callable
-      #
-      # @return [TrueClass,FalseClass]
-      #
-      # @api private
-      def callable?
-        value.respond_to?(:call)
-      end
-
-      # Returns whether or not the value is cloneable
-      #
-      # # return [TrueClass, FalseClass]
-      #
-      # @api private
-      def cloneable?
-        case value
-        when *SINGLETON_CLASSES then false
-        else
-          true
-        end
-      end
-
     end # class DefaultValue
+
   end # class Attribute
 end # module Virtus

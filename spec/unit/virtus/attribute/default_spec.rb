@@ -23,7 +23,7 @@ describe Virtus::Attribute, '#default' do
       options.update(:default => default)
     end
 
-    it { should be_instance_of(Virtus::Attribute::DefaultValue) }
+    it { should be_instance_of(Virtus::Attribute::DefaultValue::FromClonable) }
 
     its(:attribute) { should be(object) }
 
