@@ -7,14 +7,17 @@ describe "default values" do
       class Page
         include Virtus
 
-        attribute :title,      String
-        attribute :slug,       String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }
-        attribute :view_count, Integer, :default => 0
-        attribute :published,  Boolean, :accessor => :private, :default => false
-        attribute :editor_title, String, :default => lambda { |post, attribute|
-          post.published? ? post.title : "UNPUBLISHED: #{post.title}"
-        }
+        attribute :title,        String
+        attribute :slug,         String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }
+        attribute :view_count,   Integer, :default => 0
+        attribute :published,    Boolean, :default => false, :accessor => :private
+        attribute :editor_title, String,  :default => :default_editor_title
+
+        def default_editor_title
+          published? ? title : "UNPUBLISHED: #{title}"
+        end
       end
+
     end
   end
 
@@ -34,7 +37,6 @@ describe "default values" do
   end
 
   specify 'you can set defaults for private attributes' do
-    pending "can't call private methods in a proc for the default value"
     subject.title = 'Top Secret'
     subject.editor_title.should == 'UNPUBLISHED: Top Secret'
   end
