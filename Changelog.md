@@ -1,7 +1,6 @@
 # v0.3.0 to-be-released
 
-[Compare v0.2.0..master](https://github.com/solnic/virtus/compare/v0.2.0...master)
-
+* [feature] Support for default values from a symbol (which can be a method name) (solnic)
 * [feature] Support for mass-assignment via custom setters not generated with attribute (fgrehm)
 * [feature] Virtus::Coercion::String.to_constant handles namespaced names (dkubb)
 * [feature] New coercion: Virtus::Coercion::Object.to_array (dkubb)
@@ -13,6 +12,8 @@
 * [BREAKING CHANGE] Removed Attribute#reader_visibility in favor of Attribute#public_reader? (solnic)
 * [BREAKING CHANGE] Removed Attribute#instance_variable_name - this is a private ivar (solnic)
 * [BREAKING CHANGE] Removed Equalizer#host_name and Equalizer#keys (solnic)
+
+[Compare v0.2.0..master](https://github.com/solnic/virtus/compare/v0.2.0...master)
 
 # v0.2.0 2012-02-08
 
