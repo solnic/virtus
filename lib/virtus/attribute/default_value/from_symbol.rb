@@ -26,7 +26,7 @@ module Virtus
         #
         # @api private
         def evaluate(instance)
-          instance.respond_to?(value) ? instance.__send__(value) : value
+          instance.respond_to?(@value) ? instance.__send__(@value) : @value
         end
 
       end # class FromSymbol

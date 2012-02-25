@@ -31,7 +31,7 @@ module Virtus
         #
         # @api private
         def evaluate(instance)
-          value.clone
+          @value.clone
         end
 
       end # class FromClonable

@@ -24,7 +24,7 @@ module Virtus
         #
         # @api private
         def evaluate(instance)
-          value.call(instance, attribute)
+          @value.call(instance, @attribute)
         end
 
       end # class FromCallable
