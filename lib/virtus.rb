@@ -61,6 +61,10 @@ require 'virtus/coercion/string'
 require 'virtus/coercion/symbol'
 
 require 'virtus/attribute/default_value'
+require 'virtus/attribute/default_value/from_clonable'
+require 'virtus/attribute/default_value/from_callable'
+require 'virtus/attribute/default_value/from_symbol'
+
 require 'virtus/attribute'
 require 'virtus/attribute/object'
 require 'virtus/attribute/class'
