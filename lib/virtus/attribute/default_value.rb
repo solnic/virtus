@@ -7,7 +7,11 @@ module Virtus
     class DefaultValue
       extend DescendantsTracker
 
-      # @api public
+      # Builds a default value instance
+      #
+      # @return [Virtus::Attribute::DefaultValue]
+      #
+      # @api private
       def self.build(*args)
         klass = descendants.detect { |descendant| descendant.handle?(*args) } || self
         klass.new(*args)

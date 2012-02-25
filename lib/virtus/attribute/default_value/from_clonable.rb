@@ -9,6 +9,10 @@ module Virtus
         SINGLETON_CLASSES = [
           ::NilClass, ::TrueClass, ::FalseClass, ::Numeric,  ::Symbol ].freeze
 
+        # Return if the class can handle the value
+        #
+        # @return [Boolean]
+        #
         # @api private
         def self.handle?(attribute, value)
           case value
@@ -19,6 +23,12 @@ module Virtus
           end
         end
 
+        # Evaluates the value via value#clone
+        #
+        # @param [Object]
+        #
+        # @return [Object] evaluated value
+        #
         # @api private
         def evaluate(instance)
           value.clone
