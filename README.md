@@ -61,13 +61,25 @@ class Page
   include Virtus
 
   attribute :title, String
+  
+  # default from a singleton value (integer in this case)
   attribute :views, Integer, :default => 0
+  
+  # default from a callable object (proc in this case)
   attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
+  
+  # default from a method name as symbol
+  attribute :editor_title, String,  :default => :default_editor_title
+
+  def default_editor_title
+    published? ? title : "UNPUBLISHED: #{title}"
+  end
 end
 
-page = Page.new(:title => 'Virtus Is Awesome')
+page = Page.new(:title => 'Virtus Is Awesome', :editor_title => 'Virtus README')
 page.slug # => 'virtus-is-awesome'
 page.views # => 0
+page.editor_title # => "UNPUBSLISHED: Virtus README"
 ```
 
 **Embedded Value**
