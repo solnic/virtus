@@ -270,9 +270,10 @@ Credits
 * Dan Kubb ([dkubb](https://github.com/dkubb))
 * Chris Corbyn ([d11wtq](https://github.com/d11wtq))
 * Emmanuel Gomez ([emmanuel](https://github.com/emmanuel))
+* Fabio Rehm ([fgrehm](https://github.com/fgrehm))
 * Ryan Closner ([rclosner](https://github.com/rclosner))
+* Markus Schirp ([mbj](https://github.com/mbj))
 * Yves Senn ([senny](https://github.com/senny))
-
 
 Contributing
 -------------
