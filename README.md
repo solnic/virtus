@@ -60,15 +60,17 @@ user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00
 class Page
   include Virtus
 
-  attribute :title,     String
-  attribute :published, Boolean
+  attribute :title, String
   
   # default from a singleton value (integer in this case)
   attribute :views, Integer, :default => 0
-  
+
+  # default from a singleton value (boolean in this case)
+  attribute :published, Boolean, :default => false
+
   # default from a callable object (proc in this case)
   attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
-  
+
   # default from a method name as symbol
   attribute :editor_title, String,  :default => :default_editor_title
 
@@ -77,10 +79,11 @@ class Page
   end
 end
 
-page = Page.new(:title => 'Virtus Is Awesome', :editor_title => 'Virtus README')
-page.slug # => 'virtus-is-awesome'
-page.views # => 0
-page.editor_title # => "UNPUBSLISHED: Virtus README"
+page = Page.new(:title => 'Virtus README')
+page.slug         # => 'virtus-readme'
+page.views        # => 0
+page.published    # => false
+page.editor_title # => "UNPUBLISHED: Virtus README"
 ```
 
 **Embedded Value**
@@ -239,7 +242,7 @@ user.password # => '3858f62230ac3c915f300c664312c63f'
 ``` ruby
 require 'json'
 
-module MyAppClass
+module MyApp
 
   # Defining the custom attribute(s)
   module Attributes
