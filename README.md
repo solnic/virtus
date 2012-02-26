@@ -238,7 +238,7 @@ user.password # => '3858f62230ac3c915f300c664312c63f'
 ``` ruby
 require 'json'
 
-module MyAppClass
+module MyApp
 
   # Defining the custom attribute(s)
   module Attributes
