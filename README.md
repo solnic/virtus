@@ -61,7 +61,7 @@ class Page
   include Virtus
 
   attribute :title, String
-  
+
   # default from a singleton value (integer in this case)
   attribute :views, Integer, :default => 0
 
