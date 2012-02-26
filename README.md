@@ -60,7 +60,8 @@ user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00
 class Page
   include Virtus
 
-  attribute :title, String
+  attribute :title,     String
+  attribute :published, Boolean
   
   # default from a singleton value (integer in this case)
   attribute :views, Integer, :default => 0
