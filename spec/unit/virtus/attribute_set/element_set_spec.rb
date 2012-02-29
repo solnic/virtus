@@ -31,8 +31,9 @@ describe Virtus::AttributeSet, '#[]=' do
   end
 
   context 'with a duplicate attribute' do
-    let(:attributes) { [ mock('original', :name => name) ] }
-    let(:attribute)  { mock('attribute', :name => name)    }
+    let(:original)   { mock('original', :name => name)  }
+    let(:attributes) { [ original ]                     }
+    let(:attribute)  { mock('attribute', :name => name) }
 
     it { should equal(attribute) }
 
@@ -41,11 +42,11 @@ describe Virtus::AttributeSet, '#[]=' do
     end
 
     it 'allows #[] to access the attribute with a symbol' do
-      expect { subject }.to change { object['name'] }.from(nil).to(attribute)
+      expect { subject }.to change { object['name'] }.from(original).to(attribute)
     end
 
     it 'allows #[] to access the attribute with a string' do
-      expect { subject }.to change { object[:name] }.from(nil).to(attribute)
+      expect { subject }.to change { object[:name] }.from(original).to(attribute)
     end
 
     it 'allows #reset to track overridden attributes' do
