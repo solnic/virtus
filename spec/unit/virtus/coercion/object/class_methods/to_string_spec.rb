@@ -4,7 +4,7 @@ describe Virtus::Coercion::Object, '.to_string' do
   subject { object.to_string(value) }
 
   let(:object) { described_class }
-  let(:value)  { stub('value')   }
+  let(:value)  { Object.new      }
 
   context 'when the value responds to #to_str' do
     let(:coerced) { stub('coerced') }
