@@ -27,14 +27,27 @@ module Virtus
       def self.to_constant(value)
         names = value.split('::')
         names.shift if names.first.empty?
-        names.inject(::Object) do |mod, name|
-          if mod.const_defined?(name, *EXTRA_CONST_ARGS)
-            mod.const_get(name, *EXTRA_CONST_ARGS)
-          else
-            mod.const_missing(name)
-          end
+        names.inject(::Object) { |*args| constant_lookup(*args) }
+      end
+
+      # Lookup a constant within a module
+      #
+      # @param [Module] mod
+      #
+      # @param [String] name
+      #
+      # @return [Object]
+      #
+      # @api private
+      def self.constant_lookup(mod, name)
+        if mod.const_defined?(name, *EXTRA_CONST_ARGS)
+          mod.const_get(name, *EXTRA_CONST_ARGS)
+        else
+          mod.const_missing(name)
         end
       end
+
+      private_class_method :constant_lookup
 
       # Coerce give value to a symbol
       #
