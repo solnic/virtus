@@ -16,7 +16,6 @@ module Virtus
       @parent       = parent
       @attributes   = attributes.dup
       @index        = {}
-      @string_index = {}
       reset
     end
 
@@ -36,7 +35,7 @@ module Virtus
     # @api public
     def each
       return to_enum unless block_given?
-      @index.each_value { |attribute| yield attribute }
+      @index.values.uniq.each { |attribute| yield attribute }
       self
     end
 
@@ -81,7 +80,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      @index.fetch(name) { @string_index[name] }
+      @index[name]
     end
 
     # Set an attribute by name
@@ -134,7 +133,7 @@ module Virtus
     #
     # @api private
     def update_index(name, attribute)
-      @index[name] = @string_index[name.to_s.freeze] = attribute
+      @index[name] = @index[name.to_s.freeze] = attribute
     end
 
   end # class AttributeSet
