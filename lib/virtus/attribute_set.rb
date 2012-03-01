@@ -4,17 +4,6 @@ module Virtus
   class AttributeSet
     include Enumerable
 
-    # Return the parent attributes
-    #
-    # @return [AttributeSet]
-    #   the parent attributes
-    #
-    # @return [nil]
-    #   nil if there are no parent attributes
-    #
-    # @api private
-    attr_reader :parent
-
     # Initialize an AttributeSet
     #
     # @param [AttributeSet] parent
@@ -117,8 +106,7 @@ module Virtus
     #
     # @api private
     def reset
-      parent = self.parent
-      merge_attributes(parent) if parent
+      merge_attributes(@parent) if @parent
       merge_attributes(@attributes)
       self
     end
