@@ -63,8 +63,8 @@ module Virtus
       def coerce(value)
         coerced = super
         return coerced unless coerced.respond_to?(:inject)
-        coerced.inject(new_collection) do |collection, entry|
-          coerce_and_append_member(collection, entry)
+        coerced.inject(new_collection) do |*args|
+          coerce_and_append_member(*args)
         end
       end
 
