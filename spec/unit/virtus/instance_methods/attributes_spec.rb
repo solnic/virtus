@@ -109,5 +109,11 @@ describe Virtus::InstanceMethods do
         expect { subject }.to_not raise_exception
       end
     end
+
+    context "when nil is provided" do
+      it 'does not raise an exception' do
+        expect { object.attributes = nil }.to_not raise_exception(NoMethodError)
+      end
+    end
   end
 end
