@@ -21,6 +21,14 @@ describe Virtus::InstanceMethods do
     end
   end
 
+  let(:hash_object) do
+    Class.new do
+      def to_hash
+        {:age => 5}
+      end
+    end.new
+  end
+
   let(:attributes) { { :name => 'john', :age => 28 } }
 
   describe '#attributes' do
@@ -110,9 +118,12 @@ describe Virtus::InstanceMethods do
       end
     end
 
-    context "when nil is provided" do
-      it 'does not raise an exception' do
-        expect { object.attributes = nil }.to_not raise_exception(NoMethodError)
+    context "when given values respond_to?(:to_hash)" do
+      let(:attribute_values) { hash_object }
+
+      it 'sets attributes' do
+        subject
+        object.age.should == 5
       end
     end
   end

@@ -154,8 +154,7 @@ module Virtus
     #
     # @api private
     def set_attributes(attribute_values)
-      return unless attribute_values.is_a? Hash
-      attribute_values.each do |name, value|
+      attribute_values.to_hash.each do |name, value|
         set_attribute(name, value) if self.class.allowed_writer_methods.include?("#{name}=")
       end
     end
