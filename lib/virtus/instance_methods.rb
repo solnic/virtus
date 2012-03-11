@@ -12,7 +12,7 @@ module Virtus
     #
     # @api private
     def initialize(attribute_values = {})
-      self.attributes = attribute_values
+      self.attributes = attribute_values if attribute_values
     end
 
     # Returns a value of the attribute with the given name
