@@ -22,8 +22,8 @@ describe Virtus::InstanceMethods, '#initialize' do
     end
   end
 
-  context "with nil argument" do
-    let(:attributes) { nil }
+  context "with 'non-hashy' argument" do
+    let(:attributes) { '' }
 
     it 'does not try to set attributes' do
       expect { subject }.to_not raise_error(NoMethodError)

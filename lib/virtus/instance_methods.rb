@@ -12,7 +12,7 @@ module Virtus
     #
     # @api private
     def initialize(attributes = {})
-      self.attributes = attributes if attributes
+      self.attributes = attributes if attributes.respond_to?(:to_hash)
     end
 
     # Returns a value of the attribute with the given name
