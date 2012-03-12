@@ -154,7 +154,7 @@ module Virtus
     #
     # @api private
     def set_attributes(attributes)
-      attributes.to_hash.each do |name, value|
+      ::Hash.try_convert(attributes).each do |name, value|
         set_attribute(name, value) if self.class.allowed_writer_methods.include?("#{name}=")
       end
     end
