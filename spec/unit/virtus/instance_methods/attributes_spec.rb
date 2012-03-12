@@ -21,6 +21,14 @@ describe Virtus::InstanceMethods do
     end
   end
 
+  let(:hash_object) do
+    Class.new do
+      def to_hash
+        {:age => 5}
+      end
+    end.new
+  end
+
   let(:attributes) { { :name => 'john', :age => 28 } }
 
   describe '#attributes' do
@@ -107,6 +115,23 @@ describe Virtus::InstanceMethods do
 
       it 'silently ignores non-attribute keys' do
         expect { subject }.to_not raise_exception
+      end
+    end
+
+    context "when given values respond_to?(:to_hash)" do
+      let(:attribute_values) { hash_object }
+
+      it 'sets attributes' do
+        subject
+        object.age.should == 5
+      end
+    end
+
+    context "when given values does not respond_to?(:to_hash)" do
+      let(:attribute_values) { '' }
+
+      it 'raises an exception' do
+        expect { subject }.to raise_error(NoMethodError)
       end
     end
   end

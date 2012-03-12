@@ -11,8 +11,8 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(attribute_values = {})
-      self.attributes = attribute_values
+    def initialize(attributes = {})
+      self.attributes = attributes if attributes.respond_to?(:to_hash)
     end
 
     # Returns a value of the attribute with the given name
@@ -87,7 +87,7 @@ module Virtus
 
     # Mass-assign attribute values
     #
-    # Keys in the +attribute_values+ param can be symbols or strings.
+    # Keys in the +attributes+ param can be symbols or strings.
     # All referenced Attribute writer methods *will* be called.
     # Non-attribute setter methods on the receiver *will* be called.
     #
@@ -102,14 +102,14 @@ module Virtus
     #   user = User.new
     #   user.attributes = { :name => 'John', 'age' => 28 }
     #
-    # @param [#to_hash] attribute_values
+    # @param [#to_hash] attributes
     #   a hash of attribute names and values to set on the receiver
     #
     # @return [Hash]
     #
     # @api public
-    def attributes=(attribute_values)
-      set_attributes(attribute_values)
+    def attributes=(attributes)
+      set_attributes(attributes)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -153,8 +153,8 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def set_attributes(attribute_values)
-      attribute_values.each do |name, value|
+    def set_attributes(attributes)
+      attributes.to_hash.each do |name, value|
         set_attribute(name, value) if self.class.allowed_writer_methods.include?("#{name}=")
       end
     end
