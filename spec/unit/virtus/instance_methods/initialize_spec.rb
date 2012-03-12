@@ -8,25 +8,35 @@ describe Virtus::InstanceMethods, '#initialize' do
     end
   end
 
-  let(:subject) do
-    described_class.new(attributes)
-  end
+  context 'with Hash argument' do
+    subject { described_class.new(:name => name) }
 
-  context "with valid argument" do
-    let(:attributes) do
-      {:name => 'john'}
-    end
+    let(:name) { stub('name') }
 
     it 'sets attributes' do
-      subject.name.should == attributes[:name]
+      subject.name.should equal(name)
     end
   end
 
-  context "with 'non-hashy' argument" do
-    let(:attributes) { '' }
+  context 'with nil argument' do
+    subject { described_class.new(nil) }
 
-    it 'does not try to set attributes' do
-      expect { subject }.to_not raise_error(NoMethodError)
+    it 'does not set attributes' do
+      subject.name.should be_nil
     end
+  end
+
+  context 'with no arguments' do
+    subject { described_class.new }
+
+    it 'does not set attributes' do
+      subject.name.should be_nil
+    end
+  end
+
+  context' with argument that does not respond to #to_hash' do
+    subject { described_class.new(Object.new) }
+
+    specify { expect { subject }.to raise_error(NoMethodError) }
   end
 end

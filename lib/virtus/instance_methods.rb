@@ -11,8 +11,8 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(attributes = {})
-      self.attributes = attributes if attributes.respond_to?(:to_hash)
+    def initialize(attributes = nil)
+      self.attributes = attributes if attributes
     end
 
     # Returns a value of the attribute with the given name
