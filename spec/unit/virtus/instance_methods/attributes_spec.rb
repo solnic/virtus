@@ -126,5 +126,13 @@ describe Virtus::InstanceMethods do
         object.age.should == 5
       end
     end
+
+    context "when given values does not respond_to?(:to_hash)" do
+      let(:attribute_values) { '' }
+
+      it 'sets attributes' do
+        expect { subject }.to raise_error(NoMethodError)
+      end
+    end
   end
 end
