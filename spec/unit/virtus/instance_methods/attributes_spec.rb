@@ -130,7 +130,7 @@ describe Virtus::InstanceMethods do
     context "when given values does not respond_to?(:to_hash)" do
       let(:attribute_values) { '' }
 
-      it 'sets attributes' do
+      it 'raises an exception' do
         expect { subject }.to raise_error(NoMethodError)
       end
     end
