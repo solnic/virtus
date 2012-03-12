@@ -180,7 +180,7 @@ module Virtus
       # @api private
       def self.to_numeric(value, method)
         if value =~ NUMERIC_REGEXP
-          $1.send(method)
+          $1.public_send(method)
         else
           value
         end

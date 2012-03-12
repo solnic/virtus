@@ -16,7 +16,7 @@ module Virtus
           value.is_a?(::Symbol)
         end
 
-        # Evaluates the value via instance#__send__(value)
+        # Evaluates the value via instance#public_send(value)
         #
         # Symbol value is returned if the instance doesn't respond to value
         #
@@ -26,7 +26,7 @@ module Virtus
         #
         # @api private
         def evaluate(instance)
-          instance.respond_to?(@value) ? instance.__send__(@value) : @value
+          instance.respond_to?(@value) ? instance.public_send(@value) : @value
         end
 
       end # class FromSymbol

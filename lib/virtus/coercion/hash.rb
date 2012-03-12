@@ -59,7 +59,7 @@ module Virtus
         now = ::Time.now
 
         TIME_SEGMENTS.map do |segment|
-          val = value.fetch(segment, now.send(segment))
+          val = value.fetch(segment, now.public_send(segment))
           Coercion[val.class.name].to_integer(val)
         end
       end

@@ -115,7 +115,7 @@ module Virtus
       #
       # @api private
       def self.coerce_with_method(value, method)
-        value.respond_to?(method) ? value.send(method) : value
+        value.respond_to?(method) ? value.public_send(method) : value
       end
 
       private_class_method :coerce_with_method

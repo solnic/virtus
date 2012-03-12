@@ -74,7 +74,11 @@ module Virtus
       # @api private
       def coerce_with_method(value, method)
         coerced = super
-        coerced.equal?(value) ? String.send(method, to_string(value)) : coerced
+        if coerced.equal?(value)
+          String.public_send(method, to_string(value))
+        else
+          coerced
+        end
       end
 
     end # module TimeCoercions

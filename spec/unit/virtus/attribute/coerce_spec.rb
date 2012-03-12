@@ -9,7 +9,7 @@ describe Virtus::Attribute, '#coerce' do
   let(:coercion_method) { stub('coercion_method')                                          }
   let(:value)           { mock('value', :class => value_class)                             }
   let(:value_class)     { stub('value_class')                                              }
-  let(:coercer)         { mock('coercer', :send => coerced)                                }
+  let(:coercer)         { mock('coercer', :public_send => coerced)                         }
   let(:coerced)         { stub('coerced')                                                  }
 
   before do
@@ -24,7 +24,7 @@ describe Virtus::Attribute, '#coerce' do
   end
 
   it 'asks the coercer to coerce the value' do
-    coercer.should_receive(:send).with(coercion_method, value)
+    coercer.should_receive(:public_send).with(coercion_method, value)
     subject
   end
 end
