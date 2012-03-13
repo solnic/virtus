@@ -5,6 +5,17 @@ module Virtus
 
     TYPE_FORMAT = /\A[A-Z]\w*\z/.freeze
 
+    # Set CACHE on the model
+    #
+    # @param [Class] model
+    #
+    # @return [undefined]
+    #
+    # @api private
+    def self.extended(model)
+      model.const_set('CACHE', {})
+    end
+
     # Returns a descendant based on a name or class
     #
     # @example
@@ -21,14 +32,7 @@ module Virtus
     #
     # @api public
     def determine_type(class_or_name)
-      case class_or_name
-      when singleton_class
-        determine_type_from_descendant(class_or_name)
-      when Class
-        determine_type_from_primitive(class_or_name)
-      else
-        determine_type_from_string(class_or_name.to_s)
-      end
+      self::CACHE[class_or_name] || determine_type_and_cache(class_or_name)
     end
 
     # Return the default primitive supported
@@ -41,6 +45,20 @@ module Virtus
     end
 
   private
+
+    # @api private
+    def determine_type_and_cache(class_or_name)
+      type = case class_or_name
+      when singleton_class
+        determine_type_from_descendant(class_or_name)
+      when Class
+        determine_type_from_primitive(class_or_name)
+      else
+        determine_type_from_string(class_or_name.to_s)
+      end
+
+      self::CACHE[class_or_name] = type
+    end
 
     # Return the class given a descendant
     #
