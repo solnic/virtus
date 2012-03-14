@@ -5,7 +5,7 @@ module Virtus
 
     TYPE_FORMAT = /\A[A-Z]\w*\z/.freeze
 
-    # Set CACHE on the model
+    # Set cache ivar on the model
     #
     # @param [Class] model
     #
@@ -13,7 +13,7 @@ module Virtus
     #
     # @api private
     def self.extended(model)
-      model.const_set('CACHE', {})
+      model.instance_variable_set('@type_lookup_cache', {})
     end
 
     # Returns a descendant based on a name or class
@@ -32,7 +32,7 @@ module Virtus
     #
     # @api public
     def determine_type(class_or_name)
-      self::CACHE[class_or_name] || determine_type_and_cache(class_or_name)
+      @type_lookup_cache[class_or_name] ||= determine_type_and_cache(class_or_name)
     end
 
     # Return the default primitive supported
@@ -56,8 +56,6 @@ module Virtus
       else
         determine_type_from_string(class_or_name.to_s)
       end
-
-      self::CACHE[class_or_name] = type
     end
 
     # Return the class given a descendant
