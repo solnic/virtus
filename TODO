@@ -1,8 +1,8 @@
 * Add missing specs:
   * Add spec file spec/unit/virtus/attribute/collection/member_coercion/coerce_and_append_member_spec.rb for Virtus::Attribute::Collection::MemberCoercion#coerce_and_append_member
+  * Add spec file spec/unit/virtus/attribute/collection/coerce_and_append_member_spec.rb for Virtus::Attribute::Collection#coerce_and_append_member
   * Add spec file spec/unit/virtus/attribute/collection/member_type_spec.rb for Virtus::Attribute::Collection#member_type
   * Add spec file spec/unit/virtus/attribute/collection/new_collection_spec.rb for Virtus::Attribute::Collection#new_collection
-  * Add spec file spec/unit/virtus/attribute/collection/coerce_and_append_member_spec.rb for Virtus::Attribute::Collection#coerce_and_append_member
   * Add spec file spec/unit/virtus/attribute/default_value/from_symbol/class_methods/handle_spec.rb for Virtus::Attribute::DefaultValue::FromSymbol.handle?
   * Add spec file spec/unit/virtus/attribute/default_value/from_symbol/evaluate_spec.rb for Virtus::Attribute::DefaultValue::FromSymbol#evaluate
   * Add spec file spec/unit/virtus/attribute/default_value/from_callable/class_methods/handle_spec.rb for Virtus::Attribute::DefaultValue::FromCallable.handle?
@@ -30,7 +30,8 @@
   * Add spec file spec/unit/virtus/value_object/instance_methods/with_spec.rb for Virtus::ValueObject::InstanceMethods#with
   * Add spec file spec/unit/virtus/value_object/equalizer/append_spec.rb for Virtus::ValueObject::Equalizer#<<
   * Add spec file spec/unit/virtus/value_object/equalizer/compile_spec.rb for Virtus::ValueObject::Equalizer#compile
-  * Add spec file spec/unit/virtus/attributes_accessor/define_reader_method_spec.rb for Virtus::AttributesAccessor#define_reader_method
   * Add spec file spec/unit/virtus/attributes_accessor/define_writer_method_spec.rb for Virtus::AttributesAccessor#define_writer_method
+  * Add spec file spec/unit/virtus/attributes_accessor/define_reader_method_spec.rb for Virtus::AttributesAccessor#define_reader_method
+  * Add spec file spec/unit/virtus/type_lookup/class_methods/extended_spec.rb for Virtus::TypeLookup.extended
 
 * Make #to_time #to_date and #to_datetime work on Ruby 1.8.7 instead of typecasting to string and parsing the value
