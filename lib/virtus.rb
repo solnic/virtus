@@ -83,3 +83,4 @@ require 'virtus/attribute/symbol'
 require 'virtus/attribute/string'
 require 'virtus/attribute/time'
 require 'virtus/attribute/embedded_value'
+
