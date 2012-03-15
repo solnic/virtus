@@ -11,8 +11,6 @@ describe Virtus::Attribute::DefaultValue::FromCallable, '#evaluate' do
 
   before { value.stub(:call => response) }
 
-  specify { object.should be_instance_of(Virtus::Attribute::DefaultValue::FromCallable) }
-
   it { should be(response) }
 
   it 'calls the value with the instance and attribute' do

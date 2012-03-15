@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::DefaultValue::FromClonable, '#evaluate' do
   subject { object.evaluate(instance) }
 
-  let(:object)    { described_class.build(attribute, value) }
+  let(:object)    { described_class.new(attribute, value) }
   let(:attribute) { mock('attribute')                       }
   let(:value)     { mock('value')                           }
   let(:instance)  { mock('instance')                        }
@@ -11,8 +11,6 @@ describe Virtus::Attribute::DefaultValue::FromClonable, '#evaluate' do
   let(:clone)     { mock('clone')                           }
 
   before { value.stub(:clone => clone) }
-
-  specify { object.should be_instance_of(Virtus::Attribute::DefaultValue::FromClonable) }
 
   it { should be(clone) }
 
