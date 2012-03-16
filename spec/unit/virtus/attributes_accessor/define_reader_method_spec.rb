@@ -1,5 +1,36 @@
 require 'spec_helper'
 
 describe Virtus::AttributesAccessor, '#define_reader_method' do
-  it 'should have spec'
+  subject { described_class.new('Test') }
+
+  let(:attribute) { mock('attribute') }
+
+  if RUBY_VERSION < '1.9'
+    let(:method_name) { 'foo_bar' }
+  else
+    let(:method_name) { :foo_bar }
+  end
+
+  before do
+    subject.define_reader_method(attribute, method_name, visibility)
+  end
+
+  context "with public visibility" do
+    let(:visibility) { :public }
+
+    its(:public_instance_methods) { should include(method_name) }
+  end
+
+  context "with private visibility" do
+    let(:visibility) { :private }
+
+    its(:private_instance_methods) { should include(method_name) }
+  end
+
+  context "with protected visibility" do
+    let(:visibility) { :protected }
+
+    its(:protected_instance_methods) { should include(method_name) }
+  end
 end
+
