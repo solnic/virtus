@@ -24,6 +24,8 @@ module Virtus
         compile
       end
 
+    private
+
       # Compile the equalizer methods based on #keys
       #
       # @return [self]
@@ -36,8 +38,6 @@ module Virtus
         define_hash_method
         self
       end
-
-    private
 
       # Define an inspect method that reports the values of the instance's keys
       #
