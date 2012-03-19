@@ -122,3 +122,4 @@ module Virtus
     end # class Equalizer
   end # module ValueObject
 end # module Virtus
+
