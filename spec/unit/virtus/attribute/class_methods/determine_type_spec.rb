@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute, '.determine_type' do
   let(:object) { described_class }
 
-  described_class.descendants.each do |attribute_class|
+  (described_class.descendants - [ Virtus::Attribute::Collection ]).each do |attribute_class|
     context "with class #{attribute_class.inspect}" do
       subject { object.determine_type(attribute_class) }
 
@@ -15,12 +15,6 @@ describe Virtus::Attribute, '.determine_type' do
     primitive = attribute_class.primitive
     context "with #{attribute_class.inspect} and primitive #{primitive.inspect}" do
       subject { object.determine_type(primitive) }
-
-      before do
-        if [Virtus::Attribute::Collection].include? attribute_class
-          pending
-        end
-      end
 
       it 'returns the corresponding attribute class' do
         should be(attribute_class)
