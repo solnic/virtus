@@ -55,7 +55,7 @@ describe Virtus::ValueObject::Equalizer, '#<<' do
   describe "#hash" do
     subject { user_one.hash }
 
-    it { should be(klass.hash ^ first_name.hash ^ last_name.hash) }
+    it { should eql(klass.hash ^ first_name.hash ^ last_name.hash) }
   end
 end
 
