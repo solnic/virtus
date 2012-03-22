@@ -4,7 +4,7 @@
 * [fixed] Fix attributes mass-assignment when nil is passed (fgrehm)
 * [changed] Replace usage of #to_hash with Hash.try_convert (dkubb)
 
-[Compare v0.3.0..v0.4.0](https://github.com/solnic/virtus/compare/v0.3.0...master)
+[Compare v0.3.0..v0.4.0](https://github.com/solnic/virtus/compare/v0.3.0...v0.4.0)
 
 # v0.3.0 2012-02-25
 
