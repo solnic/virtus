@@ -15,4 +15,3 @@ describe Virtus::Attribute::DefaultValue::FromCallable, '.handle?' do
     it { should be(false)  }
   end
 end
-

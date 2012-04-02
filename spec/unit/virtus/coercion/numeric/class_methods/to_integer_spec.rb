@@ -8,4 +8,3 @@ describe Virtus::Coercion::Numeric, '.to_integer' do
 
   it { should eql(1) }
 end
-

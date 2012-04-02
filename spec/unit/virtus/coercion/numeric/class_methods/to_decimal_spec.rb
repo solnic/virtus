@@ -8,4 +8,3 @@ describe Virtus::Coercion::Numeric, '.to_decimal' do
 
   it { should eql(BigDecimal('1.0')) }
 end
-

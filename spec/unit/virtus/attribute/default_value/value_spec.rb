@@ -8,4 +8,3 @@ describe Virtus::Attribute::DefaultValue, '#value' do
 
   it { should be(value) }
 end
-

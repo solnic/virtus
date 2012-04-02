@@ -31,4 +31,3 @@ describe Virtus::Coercion::TimeCoercions, '.to_date' do
     it { should eql(Date.new(2011, 1, 1)) }
   end
 end
-

@@ -21,4 +21,3 @@ describe Virtus::Attribute::DefaultValue, '.build' do
     it { should be_instance_of(Virtus::Attribute::DefaultValue::FromClonable)  }
   end
 end
-

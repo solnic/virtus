@@ -8,4 +8,3 @@ describe Virtus::Coercion::Numeric, '.to_float' do
 
   it { should eql(1.0) }
 end
-

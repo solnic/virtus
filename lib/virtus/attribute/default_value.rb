@@ -47,4 +47,3 @@ module Virtus
     end # class DefaultValue
   end # class Attribute
 end # module Virtus
-

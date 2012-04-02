@@ -10,4 +10,3 @@ describe Virtus::Coercion::Numeric, '.to_string' do
 
   it { should eql(coerced_value) }
 end
-

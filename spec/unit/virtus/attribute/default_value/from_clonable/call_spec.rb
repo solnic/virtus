@@ -18,4 +18,3 @@ describe Virtus::Attribute::DefaultValue::FromClonable, '#call' do
     subject
   end
 end
-

@@ -19,4 +19,3 @@ describe Virtus::Attribute::DefaultValue, '.new' do
     end
   end
 end
-

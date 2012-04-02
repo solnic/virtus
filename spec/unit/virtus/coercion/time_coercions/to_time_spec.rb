@@ -31,4 +31,3 @@ describe Virtus::Coercion::TimeCoercions, '.to_time' do
     it { should eql(Time.utc(2011, 1, 1)) }
   end
 end
-

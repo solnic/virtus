@@ -26,4 +26,3 @@ describe Virtus::Attribute, '#default' do
     its(:value) { should be(default) }
   end
 end
-

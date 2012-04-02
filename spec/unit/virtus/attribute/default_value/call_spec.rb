@@ -19,4 +19,3 @@ describe Virtus::Attribute::DefaultValue, '#call' do
     end
   end
 end
-

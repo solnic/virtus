@@ -17,4 +17,3 @@ describe Virtus::Attribute::DefaultValue::FromCallable, '#call' do
     subject
   end
 end
-

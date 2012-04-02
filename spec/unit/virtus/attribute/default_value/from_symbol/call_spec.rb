@@ -15,4 +15,3 @@ describe Virtus::Attribute::DefaultValue::FromSymbol, '#call' do
     subject
   end
 end
-

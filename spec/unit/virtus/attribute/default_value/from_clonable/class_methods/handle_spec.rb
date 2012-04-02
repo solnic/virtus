@@ -17,4 +17,3 @@ describe Virtus::Attribute::DefaultValue::FromClonable, '.handle?' do
     it { should be(false)  }
   end
 end
-
