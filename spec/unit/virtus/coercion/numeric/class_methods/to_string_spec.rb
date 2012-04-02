@@ -6,5 +6,8 @@ describe Virtus::Coercion::Numeric, '.to_string' do
   let(:object)  { described_class }
   let(:numeric) { Rational(2, 2)  }
 
-  it { should eql('1') }
+  let(:coerced_value) { RUBY_VERSION < '1.9' ? '1' : '1/1' }
+
+  it { should eql(coerced_value) }
 end
+
