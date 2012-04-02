@@ -102,15 +102,12 @@ module Virtus
       #
       # @api private
       def compile_strings_for_equivalent_method
-        respond_to = []
-        equivalent = []
-
-        @keys.each do |key|
-          respond_to << "other.respond_to?(#{key.inspect})"
-          equivalent << "#{key} == other.#{key}"
-        end
-
-        [ respond_to, equivalent ]
+        @keys.map { |key|
+          [
+            "other.respond_to?(#{key.inspect})",  # for #respond_to?
+            "#{key} == other.#{key}",             # for #==
+          ]
+        }.transpose
       end
 
       # @api private
