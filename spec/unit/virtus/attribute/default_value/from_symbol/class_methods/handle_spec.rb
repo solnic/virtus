@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::DefaultValue::FromSymbol, '.handle?' do
-  subject { described_class.handle?(attribute, default) }
-
-  let(:attribute) { mock('attribute') }
+  subject { described_class.handle?(default) }
 
   context 'with a symbol' do
     let(:default) { :method_name  }
@@ -17,3 +15,4 @@ describe Virtus::Attribute::DefaultValue::FromSymbol, '.handle?' do
     it { should be(false)  }
   end
 end
+

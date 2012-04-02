@@ -3,11 +3,10 @@ require 'spec_helper'
 describe Virtus::Attribute::DefaultValue, '#call' do
   subject { object.call(instance) }
 
-  let(:object)    { described_class.build(attribute, value) }
-  let(:attribute) { mock('attribute')                       }
-  let(:value)     { mock('value')                           }
-  let(:instance)  { mock('instance')                        }
-  let(:response)  { stub('response')                        }
+  let(:object)    { described_class.build(value) }
+  let(:value)     { mock('value')                }
+  let(:instance)  { mock('instance')             }
+  let(:response)  { stub('response')             }
 
   # smallest number that is Bignum across major ruby impls
   bignum = 0x7fffffffffffffff + 1

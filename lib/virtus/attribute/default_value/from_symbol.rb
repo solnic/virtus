@@ -12,7 +12,7 @@ module Virtus
         # @return [Boolean]
         #
         # @api private
-        def self.handle?(attribute, value)
+        def self.handle?(value)
           value.is_a?(::Symbol)
         end
 

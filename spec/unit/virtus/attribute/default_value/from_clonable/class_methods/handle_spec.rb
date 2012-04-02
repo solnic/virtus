@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::DefaultValue::FromClonable, '.handle?' do
-  subject { described_class.handle?(attribute, default) }
+  subject { described_class.handle?(default) }
 
   let(:attribute) { mock('attribute') }
 
@@ -17,3 +17,4 @@ describe Virtus::Attribute::DefaultValue::FromClonable, '.handle?' do
     it { should be(false)  }
   end
 end
+

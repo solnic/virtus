@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::DefaultValue, '.build' do
-  subject { described_class.build(attribute, default)  }
-
-  let(:attribute) { mock('attribute')  }
+  subject { described_class.build(default) }
 
   context 'when default is a symbol' do
     let(:default) { :symbol }

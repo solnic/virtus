@@ -14,7 +14,7 @@ module Virtus
         # @return [Boolean]
         #
         # @api private
-        def self.handle?(attribute, value)
+        def self.handle?(value)
           case value
           when *SINGLETON_CLASSES
             false

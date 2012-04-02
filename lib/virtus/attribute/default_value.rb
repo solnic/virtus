@@ -14,7 +14,7 @@ module Virtus
       # @api private
       def self.build(*args)
         klass = descendants.detect { |descendant| descendant.handle?(*args) } || self
-        klass.new(args.last)
+        klass.new(*args)
       end
 
       # Returns the value instance
