@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus::Attribute::DefaultValue::FromClonable, '#evaluate' do
-  subject { object.evaluate(instance) }
+describe Virtus::Attribute::DefaultValue::FromClonable, '#call' do
+  subject { object.call(instance) }
 
   let(:object)    { described_class.new(attribute, value) }
   let(:attribute) { mock('attribute')                       }

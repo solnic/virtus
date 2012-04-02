@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus::Attribute::DefaultValue::FromSymbol, '#evaluate' do
-  subject { object.evaluate(instance) }
+describe Virtus::Attribute::DefaultValue::FromSymbol, '#call' do
+  subject { object.call(instance) }
 
   let(:object)    { described_class.new(attribute, value) }
   let(:attribute) { mock('attribute')                       }
@@ -16,3 +16,4 @@ describe Virtus::Attribute::DefaultValue::FromSymbol, '#evaluate' do
     subject
   end
 end
+

@@ -160,7 +160,7 @@ module Virtus
       if instance.instance_variable_defined?(@instance_variable_name)
         get!(instance)
       else
-        value = default.evaluate(instance)
+        value = default.call(instance)
         set!(instance, value)
         value
       end

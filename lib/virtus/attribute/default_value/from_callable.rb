@@ -23,7 +23,7 @@ module Virtus
         # @return [Object] evaluated value
         #
         # @api private
-        def evaluate(instance)
+        def call(instance)
           @value.call(instance, @attribute)
         end
 
@@ -31,3 +31,4 @@ module Virtus
     end # class DefaultValue
   end # class Attribute
 end # module Virtus
+

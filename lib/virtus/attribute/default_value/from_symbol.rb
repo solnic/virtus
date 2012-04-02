@@ -25,7 +25,7 @@ module Virtus
         # @return [Object] evaluated value
         #
         # @api private
-        def evaluate(instance)
+        def call(instance)
           instance.respond_to?(@value) ? instance.public_send(@value) : @value
         end
 
@@ -33,3 +33,4 @@ module Virtus
     end # class DefaultValue
   end # class Attribute
 end # module Virtus
+

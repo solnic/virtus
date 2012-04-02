@@ -50,10 +50,11 @@ module Virtus
       # @return [Object] evaluated value
       #
       # @api private
-      def evaluate(instance)
+      def call(instance)
         value
       end
-    end # class DefaultValue
 
+    end # class DefaultValue
   end # class Attribute
 end # module Virtus
+
