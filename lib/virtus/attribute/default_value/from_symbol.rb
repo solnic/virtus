@@ -25,7 +25,8 @@ module Virtus
         # @return [Object] evaluated value
         #
         # @api private
-        def call(instance)
+        def call(*args)
+          instance = args.first
           instance.respond_to?(@value) ? instance.public_send(@value) : @value
         end
 

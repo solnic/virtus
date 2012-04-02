@@ -11,8 +11,6 @@ describe Virtus::Attribute, '#default' do
   context 'when the default is not specified' do
     it { should be_instance_of(Virtus::Attribute::DefaultValue) }
 
-    its(:attribute) { should be(object) }
-
     its(:value) { should be_nil }
   end
 
@@ -25,8 +23,7 @@ describe Virtus::Attribute, '#default' do
 
     it { should be_instance_of(Virtus::Attribute::DefaultValue::FromClonable) }
 
-    its(:attribute) { should be(object) }
-
     its(:value) { should be(default) }
   end
 end
+

@@ -30,7 +30,7 @@ module Virtus
         # @return [Object] evaluated value
         #
         # @api private
-        def call(instance)
+        def call(*)
           @value.clone
         end
 

@@ -14,15 +14,8 @@ module Virtus
       # @api private
       def self.build(*args)
         klass = descendants.detect { |descendant| descendant.handle?(*args) } || self
-        klass.new(*args)
+        klass.new(args.last)
       end
-
-      # Returns the attribute associated with this default value instance
-      #
-      # @return [Virtus::Attribute::Object]
-      #
-      # @api private
-      attr_reader :attribute
 
       # Returns the value instance
       #
@@ -33,24 +26,21 @@ module Virtus
 
       # Initializes an default value instance
       #
-      # @param [Virtus::Attribute] attribute
       # @param [Object] value
       #
       # @return [undefined]
       #
       # @api private
-      def initialize(attribute, value)
-        @attribute, @value = attribute, value
+      def initialize(value)
+        @value = value
       end
 
       # Evaluates the value
       #
-      # @param [Object]
-      #
       # @return [Object] evaluated value
       #
       # @api private
-      def call(instance)
+      def call(*)
         value
       end
 

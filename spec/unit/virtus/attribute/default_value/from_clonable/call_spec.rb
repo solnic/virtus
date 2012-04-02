@@ -3,12 +3,11 @@ require 'spec_helper'
 describe Virtus::Attribute::DefaultValue::FromClonable, '#call' do
   subject { object.call(instance) }
 
-  let(:object)    { described_class.new(attribute, value) }
-  let(:attribute) { mock('attribute')                       }
-  let(:value)     { mock('value')                           }
-  let(:instance)  { mock('instance')                        }
-  let(:response)  { mock('response')                        }
-  let(:clone)     { mock('clone')                           }
+  let(:object)    { described_class.new(value) }
+  let(:value)     { mock('value')              }
+  let(:instance)  { mock('instance')           }
+  let(:response)  { mock('response')           }
+  let(:clone)     { mock('clone')              }
 
   before { value.stub(:clone => clone) }
 
@@ -19,3 +18,4 @@ describe Virtus::Attribute::DefaultValue::FromClonable, '#call' do
     subject
   end
 end
+

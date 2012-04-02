@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::DefaultValue::FromSymbol, '#call' do
   subject { object.call(instance) }
 
-  let(:object)    { described_class.new(attribute, value) }
-  let(:attribute) { mock('attribute')                       }
+  let(:object)    { described_class.new(value)              }
   let(:instance)  { mock('instance', value => retval)       }
   let(:value)     { :set_default                            }
   let(:retval)    { mock('retval')                          }

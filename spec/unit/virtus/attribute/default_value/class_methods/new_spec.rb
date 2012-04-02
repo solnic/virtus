@@ -1,9 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::DefaultValue, '.new' do
-  subject { described_class.new(attribute, value) }
-
-  let(:attribute) { Virtus::Attribute::String.new(:attribute) }
+  subject { described_class.new(value) }
 
   context 'with a cloneable value' do
     let(:value) { 'something' }
@@ -21,3 +19,4 @@ describe Virtus::Attribute::DefaultValue, '.new' do
     end
   end
 end
+
