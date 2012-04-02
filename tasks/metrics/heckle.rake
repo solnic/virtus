@@ -110,7 +110,7 @@ begin
         spec_file = spec_prefix.join('class_methods').join(map.file_name(method, mod.name))
 
         unless spec_file.file?
-          warn "No spec file #{spec_file} for #{mod}.#{method}"
+          raise "No spec file #{spec_file} for #{mod}.#{method}"
           next
         end
 
@@ -125,7 +125,7 @@ begin
         spec_file = spec_prefix.join(map.file_name(method, mod.name))
 
         unless spec_file.file?
-          warn "No spec file #{spec_file} for #{mod}##{method}"
+          raise "No spec file #{spec_file} for #{mod}##{method}"
           next
         end
 
