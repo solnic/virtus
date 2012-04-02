@@ -7,4 +7,3 @@ describe Virtus::Coercion::Float, '.to_float' do
 
   it { should be(value) }
 end
-

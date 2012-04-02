@@ -7,4 +7,3 @@ describe Virtus::Coercion::String, '.to_symbol' do
 
   it { should be(:value) }
 end
-

@@ -33,4 +33,3 @@ describe Virtus::AttributesAccessor, '#define_writer_method' do
     its(:protected_instance_methods) { should include(method_name) }
   end
 end
-

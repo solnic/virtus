@@ -7,4 +7,3 @@ describe Virtus::Coercion::Integer, '.to_integer' do
 
   it { should be(value) }
 end
-

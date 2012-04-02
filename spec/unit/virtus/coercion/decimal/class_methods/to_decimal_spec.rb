@@ -7,4 +7,3 @@ describe Virtus::Coercion::Decimal, '.to_decimal' do
 
   it { should be(value) }
 end
-

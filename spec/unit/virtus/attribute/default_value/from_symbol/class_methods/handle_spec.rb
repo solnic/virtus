@@ -17,4 +17,3 @@ describe Virtus::Attribute::DefaultValue::FromSymbol, '.handle?' do
     it { should be(false)  }
   end
 end
-

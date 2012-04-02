@@ -19,4 +19,3 @@ describe Virtus::Attribute::DefaultValue::FromClonable, '#evaluate' do
     subject
   end
 end
-

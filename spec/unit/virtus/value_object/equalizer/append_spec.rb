@@ -58,4 +58,3 @@ describe Virtus::ValueObject::Equalizer, '#<<' do
     it { should eql(klass.hash ^ first_name.hash ^ last_name.hash) }
   end
 end
-

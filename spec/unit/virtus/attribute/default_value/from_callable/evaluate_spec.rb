@@ -18,4 +18,3 @@ describe Virtus::Attribute::DefaultValue::FromCallable, '#evaluate' do
     subject
   end
 end
-

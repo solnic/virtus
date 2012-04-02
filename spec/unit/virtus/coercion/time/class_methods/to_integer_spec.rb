@@ -8,4 +8,3 @@ describe Virtus::Coercion::Time, '.to_integer' do
 
   it { should eql(time.to_i) }
 end
-

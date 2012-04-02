@@ -13,4 +13,3 @@ describe Virtus::ValueObject, '.attribute' do
 
   specify { subject.options[:writer].should be(:private) }
 end
-

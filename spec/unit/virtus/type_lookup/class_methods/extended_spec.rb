@@ -7,4 +7,3 @@ describe Virtus::TypeLookup, '.extended' do
     type.instance_variable_get('@type_lookup_cache').should eql({})
   end
 end
-
