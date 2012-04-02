@@ -8,9 +8,9 @@ module Virtus
       # Coerce given value to String
       #
       # @example
-      #   Virtus::Coercion::Float.to_string(1.0)  # => "1.0"
+      #   Virtus::Coercion::Numeric.to_string(Rational(2, 2))  # => "1.0"
       #
-      # @param [Float] value
+      # @param [Numeric] value
       #
       # @return [String]
       #
@@ -19,14 +19,14 @@ module Virtus
         value.to_s
       end
 
-      # Creates a Fixnum instance from a numeric object
+      # Creates an Integer instance from a numeric object
       #
       # @example
-      #   Virtus::Coercion::BigDecimal.to_integer(BigDecimal('1.0'))  # => 1
+      #   Virtus::Coercion::Numeric.to_integer(Rational(2, 2))  # => 1
       #
-      # @param [BigDecimal] value
+      # @param [Numeric] value
       #
-      # @return [Fixnum]
+      # @return [Integer]
       #
       # @api public
       def self.to_integer(value)
@@ -36,23 +36,23 @@ module Virtus
       # Creates a Float instance from a numeric object
       #
       # @example
-      #   Virtus::Coercion::BigDecimal.to_float(BigDecimal('1.0'))  # => 1.0
+      #   Virtus::Coercion::Numeric.to_float(Rational(2, 2))  # => 1.0
       #
-      # @param [BigDecimal] value
+      # @param [Numeric] value
       #
-      # @return [Fixnum]
+      # @return [Float]
       #
       # @api public
       def self.to_float(value)
         value.to_f
       end
 
-      # Coerce given value to BigDecimal
+      # Coerce a BigDecimal instance from a numeric object
       #
       # @example
-      #   Virtus::Coercion::Float.to_decimal(1.0)  # => BigDecimal('1.0')
+      #   Virtus::Coercion::Numeric.to_decimal(Rational(2, 2))  # => BigDecimal('1.0')
       #
-      # @param [Float] value
+      # @param [Numeric] value
       #
       # @return [BigDecimal]
       #
