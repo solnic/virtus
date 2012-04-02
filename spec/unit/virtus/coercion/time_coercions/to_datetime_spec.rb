@@ -31,3 +31,4 @@ describe Virtus::Coercion::TimeCoercions, '.to_datetime' do
     it { should eql(DateTime.new(2011, 1, 1, 0, 0, 0)) }
   end
 end
+

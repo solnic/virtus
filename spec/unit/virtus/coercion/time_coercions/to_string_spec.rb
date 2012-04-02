@@ -16,3 +16,4 @@ describe Virtus::Coercion::TimeCoercions, '.to_string' do
 
   it { should eql('2011-01-01') }
 end
+
