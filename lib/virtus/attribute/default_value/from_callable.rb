@@ -9,6 +9,8 @@ module Virtus
 
         # Return if the class can handle the value
         #
+        # @param [Object] value
+        #
         # @return [Boolean]
         #
         # @api private

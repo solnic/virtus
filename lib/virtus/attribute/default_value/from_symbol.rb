@@ -9,6 +9,8 @@ module Virtus
 
         # Return if the class can handle the value
         #
+        # @param [Object] value
+        #
         # @return [Boolean]
         #
         # @api private
@@ -19,8 +21,6 @@ module Virtus
         # Evaluates the value via instance#public_send(value)
         #
         # Symbol value is returned if the instance doesn't respond to value
-        #
-        # @param [Object]
         #
         # @return [Object] evaluated value
         #
