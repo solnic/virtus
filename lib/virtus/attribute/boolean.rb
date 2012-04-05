@@ -31,7 +31,7 @@ module Virtus
       #
       # @api public
       def value_coerced?(value)
-        value.equal?(true) || value.equal?(false)
+        value.equal?(true) or value.equal?(false)
       end
 
       # Creates an attribute reader method as a query

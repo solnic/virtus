@@ -143,7 +143,7 @@ module Virtus
     #
     # @api private
     def const_missing(name)
-      Attribute.determine_type(name) || super
+      Attribute.determine_type(name) or super
     end
 
     # Add the attribute to the class' and descendants' attributes
