@@ -6,12 +6,21 @@ module Virtus
 
       # Initialize an Equalizer with the given keys
       #
-      # Will use the keys with which it is initialized to define #eql?, #==,
-      #   and #hash
+      # Will use the keys with which it is initialized to define #cmp?,
+      # #hash, and #inspect
+      #
+      # @param [String] name
+      #
+      # @param [Array<Symbol>] keys
+      #
+      # @return [undefined]
       #
       # @api private
-      def initialize(host_name, keys = [])
-        @host_name, @keys = host_name, keys
+      def initialize(name, keys = [])
+        @name = name.dup.freeze
+        @keys = keys.dup
+        define_methods
+        include_comparison_methods
       end
 
       # Append a key and compile the equality methods
@@ -21,66 +30,32 @@ module Virtus
       # @api private
       def <<(key)
         @keys << key
-        compile
+        self
       end
 
     private
 
-      # Compile the equalizer methods based on #keys
+      # Define the equalizer methods based on #keys
       #
-      # @return [self]
+      # @return [undefined]
       #
       # @api private
-      def compile
-        define_inspect_method
-        define_eql_method
-        define_equivalent_method
+      def define_methods
+        define_cmp_method
         define_hash_method
-        self
+        define_inspect_method
       end
 
-      # Define an inspect method that reports the values of the instance's keys
+      # Define an #cmp? method based on the instance's values identified by #keys
       #
       # @return [undefined]
       #
       # @api private
-      def define_inspect_method
-        module_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def inspect
-            "#<#{@host_name} #{compile_keys { |key| "#{key}=\#{#{key}.inspect}" }}>"
-          end
-        RUBY
-      end
-
-      # Define an #eql? method based on the instance's values identified by #keys
-      #
-      # @return [undefined]
-      #
-      # @api private
-      def define_eql_method
-        module_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def eql?(other)
-            return true if equal?(other)
-            instance_of?(other.class) &&
-            #{compile_keys(' && ') { |key| "#{key}.eql?(other.#{key})" }}
-          end
-        RUBY
-      end
-
-      # Define an #== method based on the instance's values identified by #keys
-      #
-      # @return [undefined]
-      #
-      # @api private
-      def define_equivalent_method
-        respond_to, equivalent = compile_strings_for_equivalent_method
-        module_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def ==(other)
-            return true if equal?(other)
-            return false unless kind_of?(other.class) || other.kind_of?(self.class)
-            #{respond_to.join(' && ')} && #{equivalent.join(' && ')}
-          end
-        RUBY
+      def define_cmp_method
+        keys = @keys
+        define_method(:cmp?) do |comparator, other|
+          keys.all? { |key| send(key).send(comparator, other.send(key)) }
+        end
       end
 
       # Define a #hash method based on the instance's values identified by #keys
@@ -89,36 +64,68 @@ module Virtus
       #
       # @api private
       def define_hash_method
-        module_eval <<-RUBY, __FILE__, __LINE__ + 1
-          def hash
-            self.class.hash ^ #{compile_keys(' ^ ') { |key| "#{key}.hash" }}
-          end
-        RUBY
+        keys = @keys
+        define_method(:hash) do
+          keys.map { |key| send(key).hash }.reduce(self.class.hash, :^)
+        end
       end
 
-      # Return a list of strings containing ruby code for method generation
+      # Define an inspect method that reports the values of the instance's keys
       #
-      # @return [Array(Array<String>, Array<String>)]
+      # @return [undefined]
       #
       # @api private
-      def compile_strings_for_equivalent_method
-        respond_to_and_equivalence = @keys.map do |key|
-          [
-            "other.respond_to?(#{key.inspect})",  # for #respond_to?
-            "#{key} == other.#{key}",             # for #==
-          ]
+      def define_inspect_method
+        name, keys = @name, @keys
+        define_method(:inspect) do
+          "#<#{name}#{keys.map { |key| " #{key}=#{send(key).inspect}" }.join}>"
+        end
+      end
+
+      # Include the #eql? and #== methods
+      #
+      # @return [undefined]
+      #
+      # @api private
+      def include_comparison_methods
+        module_eval { include Methods }
+      end
+
+      # The comparison methods
+      module Methods
+
+        # Compare the object with other object for equality
+        #
+        # @example
+        #   object.eql?(other)  # => true or false
+        #
+        # @param [Object] other
+        #   the other object to compare with
+        #
+        # @return [Boolean]
+        #
+        # @api public
+        def eql?(other)
+          instance_of?(other.class) && cmp?(__method__, other)
         end
 
-        # transpose the instructions into two arrays
-        respond_to_and_equivalence.transpose
-      end
+        # Compare the object with other object for equivalency
+        #
+        # @example
+        #   object == other  # => true or false
+        #
+        # @param [Object] other
+        #   the other object to compare with
+        #
+        # @return [Boolean]
+        #
+        # @api public
+        def ==(other)
+          return false unless self.class <=> other.class
+          cmp?(__method__, other)
+        end
 
-      # @api private
-      def compile_keys(separator = ' ', &block)
-        keys_map = @keys.map { |key| yield(key) }
-        keys_map.join(separator)
-      end
-
+      end # module Methods
     end # class Equalizer
   end # module ValueObject
 end # module Virtus

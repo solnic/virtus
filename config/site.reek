@@ -54,7 +54,7 @@ NestedIterators:
   ignore_iterators: []
   exclude: []
   enabled: true
-  max_allowed_nesting: 1
+  max_allowed_nesting: 2
 LongMethod:
   max_statements: 6
   exclude: []

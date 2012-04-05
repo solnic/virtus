@@ -1,60 +1,82 @@
 require 'spec_helper'
 
 describe Virtus::ValueObject::Equalizer, '#<<' do
-  let(:equalizer) { described_class.new(:user, [ :first_name ]) }
+  subject { object << :last_name }
+
+  let(:object)     { described_class.new(name, attributes) }
+  let(:name)       { 'User'                                }
+  let(:attributes) { [ :first_name ].freeze                }
+  let(:first_name) { 'John'                                }
+  let(:last_name)  { 'Doe'                                 }
 
   let(:klass) do
     klass = Class.new { attr_accessor :first_name, :last_name }
-    klass.send(:include, equalizer)
+    klass.send(:include, object)
+    klass
   end
 
-  let(:user_one) { klass.new }
-  let(:user_two) { klass.new }
-
-  let(:first_name) { 'john' }
-  let(:last_name)  { 'doe'  }
-
-  before do
-    equalizer << :last_name
-
-    user_one.first_name = first_name
-    user_one.last_name  = last_name
-
-    user_two.first_name = first_name
-    user_two.last_name  = last_name
-  end
-
-  describe "#eql?" do
-    subject { user_one.eql?(user_two) }
-
-    context 'when key values match' do
-      it { should be(true) }
-    end
-
-    context 'when key values match' do
-      before { user_two.last_name = 'other' }
-
-      it { should be(false) }
+  let(:instance) do
+    klass.new.tap do |instance|
+      instance.first_name = first_name
+      instance.last_name  = last_name
     end
   end
 
-  describe "#==?" do
-    subject { user_one == user_two }
+  describe '#eql?' do
+    context 'when the objects are similar' do
+      let(:other) { instance.dup }
 
-    context 'when key values match' do
-      it { should be(true) }
+      it 'adds a key to the comparison' do
+        expect { subject }.to_not change { instance.eql?(other) }.from(true)
+      end
     end
 
-    context 'when key values match' do
-      before { user_two.last_name = 'other' }
+    context 'when the objects are different' do
+      let(:other) { instance.dup }
 
-      it { should be(false) }
+      before do
+        other.last_name = 'Smith'
+      end
+
+      it 'adds a key to the comparison' do
+        expect { subject }.to change { instance.eql?(other) }.
+          from(true).to(false)
+      end
     end
   end
 
-  describe "#hash" do
-    subject { user_one.hash }
+  describe '#==' do
+    context 'when the objects are similar' do
+      let(:other) { instance.dup }
 
-    it { should eql(klass.hash ^ first_name.hash ^ last_name.hash) }
+      it 'adds a key to the comparison' do
+        expect { subject }.to_not change { instance == other }.from(true)
+      end
+    end
+
+    context 'when the objects are different' do
+      let(:other) { instance.dup }
+
+      before do
+        other.last_name = 'Smith'
+      end
+
+      it 'adds a key to the comparison' do
+        expect { subject }.to change { instance == other }.
+          from(true).to(false)
+      end
+    end
+  end
+
+  it 'adds a new to #hash' do
+    expect { subject }.to change(instance, :hash).
+      from(klass.hash ^ first_name.hash).
+      to(klass.hash ^ first_name.hash ^ last_name.hash)
+  end
+
+  it 'adds a new to #inspect' do
+    expect { subject }.to change(instance, :inspect).
+      from('#<User first_name="John">').
+      to('#<User first_name="John" last_name="Doe">')
   end
 end
