@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Virtus
   class Attribute
 

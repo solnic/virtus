@@ -11,7 +11,7 @@ describe Virtus::ValueObject, '.equalizer' do
     end
   end
 
-  specify { subject.should be_instance_of(Virtus::ValueObject::Equalizer) }
+  specify { subject.should be_instance_of(Virtus::Equalizer) }
   specify { described_class.included_modules.should include(subject)      }
 
   context 'when equalizer is already initialized' do

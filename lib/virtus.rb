@@ -3,6 +3,7 @@ require 'date'
 require 'time'
 require 'bigdecimal'
 require 'bigdecimal/util'
+require 'ostruct'
 
 # Base module which adds Attribute API to your classes
 module Virtus
@@ -34,6 +35,7 @@ end # module Virtus
 require 'virtus/support/descendants_tracker'
 require 'virtus/support/type_lookup'
 require 'virtus/support/options'
+require 'virtus/support/equalizer'
 
 require 'virtus/attributes_accessor'
 require 'virtus/class_methods'

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::ValueObject::Equalizer, '.new' do
+describe Virtus::Equalizer, '.new' do
   let(:object) { described_class }
   let(:name)   { 'User'          }
 

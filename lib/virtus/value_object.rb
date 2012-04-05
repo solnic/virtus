@@ -1,8 +1,3 @@
-# -*- encoding: utf-8 -*-
-
-require 'virtus'
-require 'virtus/value_object/equalizer'
-
 module Virtus
 
   # Include this Module for Value Object semantics
