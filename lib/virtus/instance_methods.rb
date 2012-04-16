@@ -112,7 +112,8 @@ module Virtus
       set_attributes(attributes)
     end
 
-    # Returns a hash of all publicly accessible attributes
+    # Returns a hash of all publicly accessible attributes by
+    # recursively calling #to_hash on the objects that respond to it.
     #
     # @example
     #   class User
@@ -129,7 +130,13 @@ module Virtus
     #
     # @api public
     def to_hash
-      attributes
+      attrs = attributes.dup
+      attrs.each do |key, value|
+        if value.respond_to?(:to_hash)
+          hash[key] = value.to_hash
+        end
+      end
+      attrs
     end
 
   private
