@@ -116,27 +116,37 @@ module Virtus
     # recursively calling #to_hash on the objects that respond to it.
     #
     # @example
-    #   class User
+    #   class Person
     #     include Virtus
     #
-    #     attribute :name, String
-    #     attribute :age,  Integer
+    #     attribute :name,    String
+    #     attribute :age,     Integer
+    #     attribute :email,   String, :accessor => :private
+    #
+    #     attribute :friend,  Person
     #   end
     #
-    #   user = User.new(:name => 'John', :age => 28)
-    #   user.attributes  # => { :name => 'John', :age => 28 }
+    #   john = Person.new({ :name => 'John', :age => 28 })
+    #   jack = Person.new({ :name => 'Jack', :age => 31, friend => john })
+    #
+    #   user.to_hash  # => { :name => 'John', :age => 28, :friend => { :name => 'Jack', :age => 31 } }
     #
     # @return [Hash]
     #
     # @api public
-    def to_hash
-      attrs = attributes.dup
-      attrs.each do |key, value|
+    def to_hash(options = {})
+      hash = attributes.dup
+      hash.each do |key, value|
         if value.respond_to?(:to_hash)
-          hash[key] = value.to_hash
+          caller_stack = options[:caller_stack] || []
+          if !caller_stack.include?(value.object_id)
+            hash[key] = value.to_hash(options.merge(:caller_stack => (caller_stack << self.object_id)))
+          else
+            hash.delete(key)
+          end
         end
       end
-      attrs
+      hash
     end
 
   private
