@@ -134,13 +134,17 @@ module Virtus
     # @return [Hash]
     #
     # @api public
-    def to_hash(options = {})
+    def to_hash
       hash = attributes.dup
       hash.each do |key, value|
         if value.respond_to?(:to_hash)
-          caller_stack = options[:caller_stack] || []
+          Thread.current[caller.first] ||= []
+          caller_stack = Thread.current[caller.first]
+
           if !caller_stack.include?(value.object_id)
-            hash[key] = value.to_hash(options.merge(:caller_stack => (caller_stack << self.object_id)))
+            caller_stack.push(self.object_id)
+            hash[key] = value.to_hash
+            caller_stack.pop
           else
             hash.delete(key)
           end
