@@ -53,7 +53,7 @@ describe "default values" do
     it 'should not duplicate the ValueObject' do
       page1 = Examples::Page.new
       page2 = Examples::Page.new
-      page1.reference.object_id.should == page2.reference.object_id
+      page1.reference.should equal(page2.reference)
     end
   end
 
