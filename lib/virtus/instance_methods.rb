@@ -137,17 +137,13 @@ module Virtus
     def to_hash
       hash = attributes.dup
       hash.each do |key, value|
-        if value.respond_to?(:to_hash)
-          Thread.current[caller.first] ||= []
-          caller_stack = Thread.current[caller.first]
-
-          if !caller_stack.include?(value.object_id)
-            caller_stack.push(self.object_id)
-            hash[key] = value.to_hash
-            caller_stack.pop
-          else
-            hash.delete(key)
+        case
+        when value.is_a?(Array)
+          hash[key] = value.collect do |item_within_value|
+            safely_recurse_into(item_within_value) { |i| i.respond_to?(:to_hash) ? i.to_hash : i }
           end
+        when value.respond_to?(:to_hash)
+          hash[key] = safely_recurse_into(value) do |v| v.to_hash end
         end
       end
       hash
@@ -200,6 +196,28 @@ module Virtus
     # @api private
     def set_attribute(name, value)
       __send__("#{name}=", value)
+    end
+
+    # Safely recurses into the value, avoiding StackOverflow errors.
+    #
+    # Accepts any value parameter, and a block, which will receive this value parameter.
+    #
+    # @return [Object]
+    #
+    # @api private
+    def safely_recurse_into(value)
+      Thread.current[caller.first] ||= []
+      caller_stack = Thread.current[caller.first]
+
+      return_value = nil
+
+      if !caller_stack.include?(value.object_id)
+        caller_stack.push(self.object_id)
+        return_value = yield(value)
+        caller_stack.pop
+      end
+
+      return_value
     end
 
   end # module InstanceMethods
