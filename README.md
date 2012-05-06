@@ -27,8 +27,6 @@ or in your **Gemfile**
 gem 'virtus'
 ```
 
-*IMPORTANT*: If you are still using Ruby 1.8.7 then you also have to install backports gem!
-
 Examples
 --------
 
