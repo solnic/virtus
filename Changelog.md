@@ -1,3 +1,11 @@
+# v0.4.1 2012-05-06
+
+* [changed] backports gem is now a runtime dependency (solnic)
+* [BREAKING CHANGE] Renamed Virtus::DefaultValue#evaluate => Virtus::DefaultValue#call (solnic)
+* [BREAKING CHANGE] Renamed Virtus::ValueObject::Equalizer to Virtus::Equalizer (dkubb)
+
+[Compare v0.4.0..v0.4.1](https://github.com/solnic/virtus/compare/v0.4.0...v0.4.1)
+
 # v0.4.0 2012-03-22
 
 * [improvement] Add a caching mechanism for type lookups (solnic)
