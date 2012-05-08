@@ -1,3 +1,9 @@
+# v0.4.1 2012-05-08
+
+* [updated] Bump backports dep to ~> 2.5.3 (solnic)
+
+[Compare v0.4.1..v0.4.2](https://github.com/solnic/virtus/compare/v0.4.1...v0.4.2)
+
 # v0.4.1 2012-05-06
 
 * [changed] backports gem is now a runtime dependency (solnic)
