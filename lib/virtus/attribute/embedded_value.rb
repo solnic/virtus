@@ -43,13 +43,11 @@ module Virtus
       #
       # @api private
       def coerce(attributes_or_object)
-        value = if attributes_or_object.kind_of?(::Hash)
-                  @primitive.new(attributes_or_object)
-                else
-                  attributes_or_object
-                end
-
-        super(value)
+        if attributes_or_object.kind_of?(Virtus)
+          attributes_or_object
+        else
+          @primitive.new(attributes_or_object)
+        end
       end
 
     end # class EmbeddedValue

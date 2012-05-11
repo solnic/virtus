@@ -40,10 +40,29 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
   end
 
   context 'when the value is not a hash' do
-    let(:object) { described_class.new(attribute_name) }
-    let(:value)  { mock('value')                       }
+    let(:object)   { described_class.new(attribute_name) }
+    let(:value)    { mock('value')                       }
+    let(:instance) { mock('instance')                    }
 
-    before { model.should_not_receive(:new) }
+    before { model.should_receive(:new).with(value).and_return(instance) }
+
+    it { should be(instance) }
+  end
+
+  context 'when the value is a virtus object' do
+    let(:object) { described_class.new(attribute_name) }
+    let(:value)  { Class.new { include Virtus }.new    }
+
+    before { model.should_not_receive(:new).with(value) }
+
+    it { should be(value) }
+  end
+
+  context 'when the value is a virtus value object' do
+    let(:object) { described_class.new(attribute_name)           }
+    let(:value)  { Class.new { include Virtus::ValueObject }.new }
+
+    before { model.should_not_receive(:new).with(value) }
 
     it { should be(value) }
   end
