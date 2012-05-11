@@ -1,4 +1,10 @@
-# v0.4.1 2012-05-08
+# v0.4.3 to-be-released
+
+* [changed] Allow any input for EmbeddedValue and ValueObject constructors (solnic)
+
+[Compare v0.4.2..master](https://github.com/solnic/virtus/compare/v0.4.2...master)
+
+# v0.4.2 2012-05-08
 
 * [updated] Bump backports dep to ~> 2.5.3 (solnic)
 
