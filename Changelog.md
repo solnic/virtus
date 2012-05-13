@@ -1,4 +1,4 @@
-# v0.4.3 to-be-released
+# v0.5.0 to-be-released
 
 * [changed] Allow any input for EmbeddedValue and ValueObject constructors (solnic)
 
