@@ -81,11 +81,7 @@ module Virtus
     def self.determine_type(class_or_name)
       case class_or_name
       when ::Class
-        if class_or_name <= Virtus
-          Attribute::EmbeddedValue
-        else
-          super
-        end
+        Attribute::EmbeddedValue.determine_type(class_or_name) || super
       when ::Array, ::Set
         super(class_or_name.class)
       else

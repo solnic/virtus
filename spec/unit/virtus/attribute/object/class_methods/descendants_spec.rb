@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Virtus::Attribute::Object, '.descendants' do
   subject { described_class.descendants.map { |c| c.to_s }.sort }
 
+  before { pending 'Remove this spec in favor of Virtus::DescentantsTracker spce' }
+
   let(:known_descendants) do
     [ Virtus::Attribute::EmbeddedValue, Virtus::Attribute::Symbol,
       Virtus::Attribute::Time,          Virtus::Attribute::String,

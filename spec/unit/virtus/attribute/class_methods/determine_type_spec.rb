@@ -4,6 +4,8 @@ describe Virtus::Attribute, '.determine_type' do
   let(:object) { described_class }
 
   (described_class.descendants - [ Virtus::Attribute::Collection ]).each do |attribute_class|
+    next if attribute_class <= Virtus::Attribute::EmbeddedValue
+
     context "with class #{attribute_class.inspect}" do
       subject { object.determine_type(attribute_class) }
 
@@ -36,7 +38,7 @@ describe Virtus::Attribute, '.determine_type' do
 
     let(:primitive) { Class.new { include Virtus } }
 
-    it { should equal(Virtus::Attribute::EmbeddedValue) }
+    it { should equal(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
   end
 
   context 'when the primitive defaults to Object' do
