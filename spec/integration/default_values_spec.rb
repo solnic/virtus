@@ -4,6 +4,13 @@ describe "default values" do
 
   before do
     module Examples
+
+      class Reference
+        include Virtus::ValueObject
+
+        attribute :ref, String
+      end
+
       class Page
         include Virtus
 
@@ -12,6 +19,7 @@ describe "default values" do
         attribute :view_count,   Integer, :default => 0
         attribute :published,    Boolean, :default => false, :accessor => :private
         attribute :editor_title, String,  :default => :default_editor_title
+        attribute :reference,    String,  :default => Reference.new
 
         def default_editor_title
           published? ? title : "UNPUBLISHED: #{title}"
@@ -39,6 +47,14 @@ describe "default values" do
   specify 'you can set defaults for private attributes' do
     subject.title = 'Top Secret'
     subject.editor_title.should == 'UNPUBLISHED: Top Secret'
+  end
+
+  context 'with a ValueObject' do
+    it 'should not duplicate the ValueObject' do
+      page1 = Examples::Page.new
+      page2 = Examples::Page.new
+      page1.reference.should equal(page2.reference)
+    end
   end
 
 end
