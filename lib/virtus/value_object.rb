@@ -53,6 +53,16 @@ module Virtus
       def with(attribute_updates)
         self.class.new(get_attributes(&FILTER_NONE).merge(attribute_updates))
       end
+
+      # ValueObjects are immutable and can't be cloned. They always represent the same value.
+      #
+      # @return [self]
+      #
+      # @api public
+      def clone
+        self
+      end
+      alias dup clone
     end
 
     module ClassMethods
