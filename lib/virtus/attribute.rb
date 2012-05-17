@@ -9,7 +9,7 @@ module Virtus
     extend Options
 
     accept_options :primitive, :accessor, :reader,
-      :writer, :coercion_method, :default
+      :writer, :coercion_method, :default, :required
 
     accessor :public
 
