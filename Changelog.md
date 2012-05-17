@@ -2,6 +2,7 @@
 
 * [feature] Support for Struct as an EmbeddedValue or ValueObject attribute (solnic)
 * [changed] Allow any input for EmbeddedValue and ValueObject constructors (solnic)
+* [changed] ValueObject instances cannot be duped or cloned (senny)
 
 [Compare v0.4.2..master](https://github.com/solnic/virtus/compare/v0.4.2...master)
 
