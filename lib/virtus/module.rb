@@ -20,7 +20,7 @@ module Virtus
     end
 
     def define_attributes(model)
-      attribute_definitions.reverse.each do |attribute_args|
+      attribute_definitions.each do |attribute_args|
         model.attribute(*attribute_args)
       end
     end
