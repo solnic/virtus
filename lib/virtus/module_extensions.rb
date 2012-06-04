@@ -10,7 +10,7 @@ module Virtus
     end
 
     def included(object)
-      object.extend(ClassExtensions)
+      object.send(:include, ClassInclusions)
       define_attributes(object)
     end
 

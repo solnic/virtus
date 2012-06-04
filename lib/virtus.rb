@@ -26,7 +26,7 @@ module Virtus
   def self.included(object)
     super
     case object
-    when Class  then object.extend(ClassExtensions)
+    when Class  then object.send(:include, ClassInclusions)
     when Module then object.extend(ModuleExtensions)
     end
   end
@@ -46,7 +46,7 @@ require 'virtus/support/options'
 require 'virtus/support/equalizer'
 
 require 'virtus/instance_extensions'
-require 'virtus/class_extensions'
+require 'virtus/class_inclusions'
 require 'virtus/module_extensions'
 
 require 'virtus/attributes_accessor'
