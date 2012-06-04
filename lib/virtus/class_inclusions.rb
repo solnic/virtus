@@ -7,6 +7,8 @@ module Virtus
       descendant.send(:include, InstanceMethods)
     end
 
+  private
+
     def _attributes
       self.class.attributes
     end
