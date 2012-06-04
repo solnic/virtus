@@ -102,6 +102,7 @@ module Virtus
       descendants.each { |descendant| descendant.attributes.reset }
     end
 
+    # @api private
     def public_method_list
       public_instance_methods
     end
