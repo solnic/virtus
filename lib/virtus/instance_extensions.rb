@@ -5,21 +5,6 @@ module Virtus
     WRITER_METHOD_REGEXP   = /=\z/.freeze
     INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
 
-    # The list of writer methods that can be mass-assigned to in #attributes=
-    #
-    # @return [Set]
-    #
-    # @api private
-    def allowed_writer_methods
-      @allowed_writer_methods ||=
-        begin
-          allowed_writer_methods  = public_method_list.map(&:to_s)
-          allowed_writer_methods  = allowed_writer_methods.grep(WRITER_METHOD_REGEXP).to_set
-          allowed_writer_methods -= INVALID_WRITER_METHODS
-          allowed_writer_methods.freeze
-      end
-    end
-
     def self.extended(object)
       object.extend(InstanceMethods)
       object.instance_eval do
@@ -61,10 +46,29 @@ module Virtus
       self
     end
 
+    # The list of writer methods that can be mass-assigned to in #attributes=
+    #
+    # @return [Set]
+    #
+    # @api private
+    def allowed_writer_methods
+      @allowed_writer_methods ||=
+        begin
+          allowed_writer_methods  = public_method_list.map(&:to_s)
+          allowed_writer_methods  = allowed_writer_methods.grep(WRITER_METHOD_REGEXP).to_set
+          allowed_writer_methods -= INVALID_WRITER_METHODS
+          allowed_writer_methods.freeze
+      end
+    end
+
+  private
+
+    # @api private
     def _attributes
       @_attributes ||= AttributeSet.new
     end
 
+    # @api private
     def virtus_add_attribute(attribute)
       _attributes << attribute
     end
