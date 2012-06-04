@@ -57,7 +57,6 @@ module Virtus
     def virtus_setup_attributes_accessor_module
       @virtus_attributes_accessor_module = AttributesAccessor.new(inspect)
       include @virtus_attributes_accessor_module
-      self
     end
 
   private
