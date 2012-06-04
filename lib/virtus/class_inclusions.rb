@@ -4,7 +4,6 @@ module Virtus
     def self.included(descendant)
       super
       descendant.extend(ClassMethods)
-      descendant.extend(InstanceExtensions::AllowedWriterMethods)
       descendant.send(:include, InstanceMethods)
     end
 
