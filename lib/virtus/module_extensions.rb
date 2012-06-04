@@ -2,11 +2,16 @@ module Virtus
 
   # Virtus module class that can define attributes for later inclusion
   #
-  module Module
+  module ModuleExtensions
 
-    def included(model)
-      model.send(:include, Virtus)
-      define_attributes(model)
+    def extended(object)
+      object.extend(Virtus)
+      define_attributes(object)
+    end
+
+    def included(object)
+      object.extend(ClassExtensions)
+      define_attributes(object)
     end
 
     def attribute(*args)
@@ -19,9 +24,9 @@ module Virtus
       @_attribute_definitions ||= []
     end
 
-    def define_attributes(model)
+    def define_attributes(object)
       attribute_definitions.each do |attribute_args|
-        model.attribute(*attribute_args)
+        object.attribute(*attribute_args)
       end
     end
 

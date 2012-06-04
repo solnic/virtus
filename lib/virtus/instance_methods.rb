@@ -140,7 +140,7 @@ module Virtus
     #
     # @api private
     def get_attributes
-      self.class.attributes.each_with_object({}) do |attribute, attributes|
+      _attributes.each_with_object({}) do |attribute, attributes|
         name = attribute.name
         attributes[name] = get_attribute(name) if yield(attribute)
       end
@@ -155,7 +155,7 @@ module Virtus
     # @api private
     def set_attributes(attributes)
       ::Hash.try_convert(attributes).each do |name, value|
-        set_attribute(name, value) if self.class.allowed_writer_methods.include?("#{name}=")
+        set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
       end
     end
 
@@ -179,6 +179,11 @@ module Virtus
     # @api private
     def set_attribute(name, value)
       __send__("#{name}=", value)
+    end
+
+    # @api private
+    def public_method_list
+      public_methods
     end
 
   end # module InstanceMethods

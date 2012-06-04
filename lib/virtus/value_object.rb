@@ -63,6 +63,7 @@ module Virtus
         self
       end
       alias dup clone
+
     end
 
     module ClassMethods
@@ -122,7 +123,7 @@ module Virtus
         @allowed_writer_methods ||=
           begin
             allowed_writer_methods = super
-            allowed_writer_methods += attributes.map{|attr| "#{attr.name}="}
+            allowed_writer_methods += _attributes.map{|attr| "#{attr.name}="}
             allowed_writer_methods.to_set.freeze
           end
       end

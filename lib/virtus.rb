@@ -23,10 +23,17 @@ module Virtus
   # @return [undefined]
   #
   # @api private
-  def self.included(descendant)
+  def self.included(object)
     super
-    descendant.extend(ClassMethods)
-    descendant.send(:include, InstanceMethods)
+    case object
+    when Class  then object.extend(ClassExtensions)
+    when Module then object.extend(ModuleExtensions)
+    end
+  end
+
+  def self.extended(object)
+    object.extend(InstanceExtensions)
+    object.extend(InstanceMethods)
   end
 
   private_class_method :included
@@ -38,11 +45,13 @@ require 'virtus/support/type_lookup'
 require 'virtus/support/options'
 require 'virtus/support/equalizer'
 
+require 'virtus/instance_extensions'
+require 'virtus/class_extensions'
+require 'virtus/module_extensions'
+
 require 'virtus/attributes_accessor'
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
-
-require 'virtus/module'
 
 require 'virtus/value_object'
 
