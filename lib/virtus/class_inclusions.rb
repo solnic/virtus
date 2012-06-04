@@ -9,8 +9,8 @@ module Virtus
 
   private
 
-    def _attributes
-      self.class.attributes
+    def attribute_set
+      self.class.attribute_set
     end
 
     def allowed_writer_methods

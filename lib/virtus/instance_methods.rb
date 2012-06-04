@@ -140,7 +140,7 @@ module Virtus
     #
     # @api private
     def get_attributes
-      _attributes.each_with_object({}) do |attribute, attributes|
+      attribute_set.each_with_object({}) do |attribute, attributes|
         name = attribute.name
         attributes[name] = get_attribute(name) if yield(attribute)
       end

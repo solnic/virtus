@@ -64,13 +64,13 @@ module Virtus
   private
 
     # @api private
-    def _attributes
-      @_attributes ||= AttributeSet.new
+    def attribute_set
+      @attribute_set ||= AttributeSet.new
     end
 
     # @api private
     def virtus_add_attribute(attribute)
-      _attributes << attribute
+      attribute_set << attribute
     end
 
   end # module InstanceExtensions

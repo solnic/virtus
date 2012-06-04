@@ -6,7 +6,7 @@ describe Virtus::ValueObject, '.attribute' do
   let(:object)    { Class.new { include Virtus::ValueObject } }
   let(:name)      { :latitude                                 }
   let(:type)      { Float                                     }
-  let(:attribute) { object.attributes[name]                   }
+  let(:attribute) { object.attribute_set[name]                }
 
   it { should be(object) }
 

@@ -38,14 +38,13 @@ module Virtus
     # @return [AttributeSet]
     #
     # @api public
-    def attributes
-      return @attributes if defined?(@attributes)
+    def attribute_set
+      return @attribute_set if defined?(@attribute_set)
       superclass  = self.superclass
       method      = __method__
       parent      = superclass.public_send(method) if superclass.respond_to?(method)
-      @attributes = AttributeSet.new(parent)
+      @attribute_set = AttributeSet.new(parent)
     end
-    alias _attributes attributes
 
   protected
 
@@ -99,7 +98,7 @@ module Virtus
     # @api private
     def virtus_add_attribute(attribute)
       super
-      descendants.each { |descendant| descendant.attributes.reset }
+      descendants.each { |descendant| descendant.attribute_set.reset }
     end
 
     # @api private
