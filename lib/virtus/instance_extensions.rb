@@ -72,5 +72,6 @@ module Virtus
     def virtus_add_attribute(attribute)
       _attributes << attribute
     end
+
   end # module InstanceExtensions
 end # module Virtus
