@@ -30,13 +30,14 @@ module Virtus
     when Module then object.extend(ModuleExtensions)
     end
   end
+  private_class_method :included
 
+  # @api private
   def self.extended(object)
     object.extend(InstanceExtensions)
     object.extend(InstanceMethods)
   end
-
-  private_class_method :included
+  private_class_method :extended
 
 end # module Virtus
 
