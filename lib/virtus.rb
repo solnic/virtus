@@ -25,11 +25,10 @@ module Virtus
   # @api private
   def self.included(object)
     super
-    case object
-    when Class  then object.send(:include, ClassInclusions)
-    when Module then object.extend(ModuleExtensions)
+    if Class === object
+      object.send(:include, ClassInclusions)
     else
-      raise ArgumentError, "Object not supported #{object.inspect}"
+      object.extend(ModuleExtensions)
     end
   end
   private_class_method :included
