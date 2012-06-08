@@ -1,5 +1,7 @@
-# v0.5.0 to-be-released
+# v0.5.0 2012-06-08
 
+* [feature] Support for extending objects (solnic)
+* [feature] Support for defining attributes in modules (solnic)
 * [feature] Support for Struct as an EmbeddedValue or ValueObject attribute (solnic)
 * [changed] Allow any input for EmbeddedValue and ValueObject constructors (solnic)
 * [changed] ValueObject instances cannot be duped or cloned (senny)
