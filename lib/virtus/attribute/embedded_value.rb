@@ -37,6 +37,9 @@ module Virtus
 
       # Determine type based on class
       #
+      # Virtus::EmbeddedValue.determine_type(Struct) # => Virtus::EmbeddedValue::FromStruct
+      # Virtus::EmbeddedValue.determine_type(VirtusClass) # => Virtus::EmbeddedValue::FromOpenStruct
+      #
       # @param [Class] klass
       #
       # @return [Virtus::Attribute::EmbeddedValue]

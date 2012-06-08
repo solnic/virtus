@@ -9,7 +9,7 @@ describe Virtus::ClassMethods, '#attribute' do
   let(:type)       { Virtus::Attribute::String    }
 
   def assert_attribute_added(klass, name, attribute_class)
-    attributes = klass.attributes
+    attributes = klass.attribute_set
     attributes[name].should be_nil
     subject
     attribute = attributes[name]

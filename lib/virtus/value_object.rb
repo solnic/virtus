@@ -41,6 +41,7 @@ module Virtus
     private_class_method :included
 
     module InstanceMethods
+
       # the #get_attributes method accept a Proc object that will filter
       # out an attribute when the block returns false. the ValueObject
       # needs all the attributes, so we allow every attribute.
@@ -54,7 +55,13 @@ module Virtus
         self.class.new(get_attributes(&FILTER_NONE).merge(attribute_updates))
       end
 
-      # ValueObjects are immutable and can't be cloned. They always represent the same value.
+      # ValueObjects are immutable and can't be cloned
+      #
+      # They always represent the same value
+      #
+      # @example
+      #
+      #   value_object.clone === value_object # => true
       #
       # @return [self]
       #
@@ -63,6 +70,7 @@ module Virtus
         self
       end
       alias dup clone
+
     end
 
     module ClassMethods
@@ -122,7 +130,7 @@ module Virtus
         @allowed_writer_methods ||=
           begin
             allowed_writer_methods = super
-            allowed_writer_methods += attributes.map{|attr| "#{attr.name}="}
+            allowed_writer_methods += attribute_set.map{|attr| "#{attr.name}="}
             allowed_writer_methods.to_set.freeze
           end
       end

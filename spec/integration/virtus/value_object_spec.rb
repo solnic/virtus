@@ -13,11 +13,15 @@ describe Virtus::ValueObject do
       attribute :longitude, Float
     end
   end
+
   let(:attribute_values) { { :latitude => 10.0, :longitude => 20.0 } }
+
   let(:instance_with_equal_state) { class_under_test.new(attribute_values) }
+
   let(:instance_with_different_state) do
     class_under_test.new(:latitude => attribute_values[:latitude])
   end
+
   subject { class_under_test.new(attribute_values) }
 
   describe 'initialization' do
@@ -29,8 +33,8 @@ describe Virtus::ValueObject do
 
   describe 'writer visibility' do
     it 'attributes are configured for private writers' do
-      class_under_test.attributes[:latitude].public_reader?.should be(true)
-      class_under_test.attributes[:longitude].public_writer?.should be(false)
+      class_under_test.attribute_set[:latitude].public_reader?.should be(true)
+      class_under_test.attribute_set[:longitude].public_writer?.should be(false)
     end
 
     it 'writer methods are set to private' do
