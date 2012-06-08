@@ -2,7 +2,7 @@ module Virtus
 
   # Class methods that are added when you include Virtus
   module ClassMethods
-    include InstanceExtensions
+    include Extensions
 
     # Hook called when module is extended
     #

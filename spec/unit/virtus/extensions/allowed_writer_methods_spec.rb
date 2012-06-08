@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::InstanceExtensions, '#allowed_writer_methods' do
+describe Virtus::Extensions, '#allowed_writer_methods' do
   subject { object.allowed_writer_methods }
 
   let(:object) do

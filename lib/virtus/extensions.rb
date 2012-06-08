@@ -1,7 +1,7 @@
 module Virtus
 
-  # Instance-level extensions
-  module InstanceExtensions
+  # Extensions common for both classes and instances
+  module Extensions
     WRITER_METHOD_REGEXP   = /=\z/.freeze
     INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
 
@@ -73,5 +73,5 @@ module Virtus
       attribute_set << attribute
     end
 
-  end # module InstanceExtensions
+  end # module Extensions
 end # module Virtus

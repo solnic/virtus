@@ -34,8 +34,7 @@ module Virtus
 
   # @api private
   def self.extended(object)
-    object.extend(InstanceExtensions)
-    object.extend(InstanceMethods)
+    object.extend(Extensions)
   end
   private_class_method :extended
 
@@ -46,7 +45,7 @@ require 'virtus/support/type_lookup'
 require 'virtus/support/options'
 require 'virtus/support/equalizer'
 
-require 'virtus/instance_extensions'
+require 'virtus/extensions'
 require 'virtus/class_inclusions'
 require 'virtus/module_extensions'
 
