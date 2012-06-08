@@ -5,6 +5,12 @@ module Virtus
     WRITER_METHOD_REGEXP   = /=\z/.freeze
     INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
 
+    # A hook called when an object is extended with Virtus
+    #
+    # @param [Object] object
+    #
+    # @return [undefined]
+    #
     # @api private
     def self.extended(object)
       object.extend(InstanceMethods)
@@ -65,11 +71,19 @@ module Virtus
 
   private
 
+    # Return an attribute set for that instance
+    #
+    # @return [AttributeSet]
+    #
     # @api private
     def attribute_set
       @attribute_set ||= AttributeSet.new
     end
 
+    # Add an attribute to the attribute set
+    #
+    # @return [AttributeSet]
+    #
     # @api private
     def virtus_add_attribute(attribute)
       attribute_set << attribute
