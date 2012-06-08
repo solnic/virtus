@@ -5,6 +5,7 @@ module Virtus
     WRITER_METHOD_REGEXP   = /=\z/.freeze
     INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
 
+    # @api private
     def self.extended(object)
       object.extend(InstanceMethods)
       object.instance_eval do
@@ -12,6 +13,7 @@ module Virtus
         extend @virtus_attributes_accessor_module
       end
     end
+    private_class_method :extended
 
     # Defines an attribute on an object's class
     #
