@@ -46,6 +46,16 @@ module Virtus
       @attribute_set = AttributeSet.new(parent)
     end
 
+    # @see Virtus::ClassMethods.attribute_set
+    #
+    # @deprecated
+    #
+    # @api public
+    def attributes
+      warn "#{self}.attributes is deprecated. Use #{self}.attribute_set instead: #{caller.first}"
+      attribute_set
+    end
+
   protected
 
     # Set up the anonymous module which will host Attribute accessor methods

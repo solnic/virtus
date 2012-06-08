@@ -41,7 +41,7 @@ class User
 end
 
 user = User.new(:name => 'Piotr', :age => 28)
-user.attributes # => { :name => "Piotr", :age => 28 }
+user.attribute_set # => { :name => "Piotr", :age => 28 }
 
 user.name # => "Piotr"
 
