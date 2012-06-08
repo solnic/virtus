@@ -16,20 +16,34 @@ module Virtus
   # Represents an undefined parameter used by auto-generated option methods
   Undefined = Object.new.freeze
 
-  # Extends base class with class and instance methods
+  # Extends base class or a module with virtus methods
   #
   # @param [Class] descendant
   #
   # @return [undefined]
   #
   # @api private
-  def self.included(descendant)
+  def self.included(object)
     super
-    descendant.extend(ClassMethods)
-    descendant.send(:include, InstanceMethods)
+    if Class === object
+      object.send(:include, ClassInclusions)
+    else
+      object.extend(ModuleExtensions)
+    end
   end
-
   private_class_method :included
+
+  # Extends an object with virtus extensions
+  #
+  # @param [Object] object
+  #
+  # @return [undefined]
+  #
+  # @api private
+  def self.extended(object)
+    object.extend(Extensions)
+  end
+  private_class_method :extended
 
 end # module Virtus
 
@@ -37,6 +51,10 @@ require 'virtus/support/descendants_tracker'
 require 'virtus/support/type_lookup'
 require 'virtus/support/options'
 require 'virtus/support/equalizer'
+
+require 'virtus/extensions'
+require 'virtus/class_inclusions'
+require 'virtus/module_extensions'
 
 require 'virtus/attributes_accessor'
 require 'virtus/class_methods'
