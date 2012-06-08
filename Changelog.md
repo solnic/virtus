@@ -6,7 +6,7 @@
 * [changed] Allow any input for EmbeddedValue and ValueObject constructors (solnic)
 * [changed] ValueObject instances cannot be duped or cloned (senny)
 
-[Compare v0.4.2..master](https://github.com/solnic/virtus/compare/v0.4.2...master)
+[Compare v0.4.2..v0.5.0](https://github.com/solnic/virtus/compare/v0.4.2...v0.5.0)
 
 # v0.4.2 2012-05-08
 
