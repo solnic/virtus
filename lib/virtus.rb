@@ -28,6 +28,8 @@ module Virtus
     case object
     when Class  then object.send(:include, ClassInclusions)
     when Module then object.extend(ModuleExtensions)
+    else
+      raise ArgumentError, "Object not supported #{object.inspect}"
     end
   end
   private_class_method :included
