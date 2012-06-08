@@ -30,6 +30,9 @@ gem 'virtus'
 Examples
 --------
 
+### Using Virtus with Classes
+
+You can create classes extended with virtus and define attributes:
 
 ``` ruby
 class User
@@ -51,7 +54,7 @@ user.age.class # => Fixnum
 user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 ```
 
-### Using Virtus With Modules
+### Using Virtus with Modules
 
 You can create modules extended with virtus and define attributes for later
 inclusion in your classes:
