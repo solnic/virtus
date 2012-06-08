@@ -5,11 +5,13 @@ module Virtus
   module ModuleExtensions
 
     def extended(object)
+      super
       object.extend(Virtus)
       define_attributes(object)
     end
 
     def included(object)
+      super
       object.send(:include, ClassInclusions)
       define_attributes(object)
     end
