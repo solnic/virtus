@@ -51,6 +51,46 @@ user.age.class # => Fixnum
 user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 ```
 
+**Using Virtus with modules**
+
+You can create modules extended with virtus and define attributes for later
+inclusion in your classes:
+
+```ruby
+module Name
+  include Virtus
+
+  attribute :name, String
+end
+
+module Age
+  include Virtus
+
+  attribute :age, Integer
+end
+
+class User
+  include Name, Age
+end
+
+user = User.new(:name => 'John', :age => '30')
+```
+
+**Dynamically extending instances**
+
+It's also possible to dynamically extend an object with Virtus:
+
+```ruby
+class User
+  # nothing here
+end
+
+user = User.new
+user.extend(Virtus)
+user.attribute :name, String
+user.name = 'John'
+user.name # => 'John'
+```
 
 **Default values**
 
