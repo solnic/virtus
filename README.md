@@ -51,7 +51,7 @@ user.age.class # => Fixnum
 user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 ```
 
-**Using Virtus with modules**
+### Using Virtus With Modules
 
 You can create modules extended with virtus and define attributes for later
 inclusion in your classes:
@@ -76,7 +76,7 @@ end
 user = User.new(:name => 'John', :age => '30')
 ```
 
-**Dynamically extending instances**
+### Dynamically Extending Instances
 
 It's also possible to dynamically extend an object with Virtus:
 
@@ -92,7 +92,7 @@ user.name = 'John'
 user.name # => 'John'
 ```
 
-**Default values**
+### Default Values
 
 ``` ruby
 class Page
@@ -124,7 +124,7 @@ page.published    # => false
 page.editor_title # => "UNPUBLISHED: Virtus README"
 ```
 
-**Embedded Value**
+### Embedded Value
 
 ``` ruby
 class City
@@ -155,7 +155,7 @@ user.address.street # => "Street 1/2"
 user.address.city.name # => "NYC"
 ```
 
-**Collection Member Coercions**
+### Collection Member Coercions
 
 ``` ruby
 # Support "primitive" classes
@@ -203,7 +203,7 @@ user.phone_numbers # => [#<PhoneNumber:0x007fdb2d3bef88 @number="212-555-1212">,
 user.addresses # => #<Set: {#<Address:0x007fdb2d3be448 @address="1234 Any St.", @locality="Anytown", @region="DC", @postal_code="21234">}>
 ```
 
-**Value Objects**
+### Value Objects
 
 ``` ruby
 class GeoLocation
@@ -236,7 +236,7 @@ venue_other = Venue.new(
 venue.location === venue_other.location # => true
 ```
 
-**Adding Coercions**
+### Adding Coercions
 
 Virtus comes with a builtin coercion library.
 It's super easy to add your own coercion classes.
@@ -275,7 +275,7 @@ user.name # => 'Piotr'
 user.password # => '3858f62230ac3c915f300c664312c63f'
 ```
 
-**Custom Attributes**
+### Custom Attributes
 
 ``` ruby
 require 'json'
@@ -304,7 +304,6 @@ user = MyApp::User.new
 user.info = '{"email":"john@domain.com"}' # => {"email"=>"john@domain.com"}
 user.info.class # => Hash
 ```
-
 
 Credits
 -------
