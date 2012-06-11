@@ -27,6 +27,16 @@ describe Virtus::Attribute, '.build' do
     its(:options) { should == Virtus::Attribute::String.options }
   end
 
+  context 'without a type' do
+    subject { object.build(name) }
+
+    it { should be_instance_of(Virtus::Attribute::Object) }
+
+    its(:name) { should be(name) }
+
+    its(:options) { should == Virtus::Attribute::Object.options }
+  end
+
   context 'with an invalid type' do
     subject { object.build(name, type) }
 

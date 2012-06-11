@@ -31,7 +31,8 @@ FeatureEnvy:
     Virtus::ClassMethods#build_attribute,
     Virtus::Coercion::TimeCoercions#to_string,
     Virtus::Coercion::TimeCoercions#coerce_with_method,
-    Virtus::TypeLookup#determine_type_from_primitive
+    Virtus::TypeLookup#determine_type_from_primitive,
+    Virtus::ValueObject::ClassMethods#attribute
   ]
   enabled: true
 ClassVariable:

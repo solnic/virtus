@@ -50,15 +50,15 @@ module Virtus
     #   the name of an attribute
     #
     # @param [Class] type
-    #   the type class of an attribute
+    #   optional type class of an attribute
     #
     # @param [#to_hash] options
-    #   the extra options hash
+    #   optional extra options hash
     #
     # @return [Attribute]
     #
     # @api private
-    def self.build(name, type, options = {})
+    def self.build(name, type = Object, options = {})
       attribute_class = determine_type(type) or
         raise ArgumentError, "#{type.inspect} does not map to an attribute type"
       attribute_options = attribute_class.merge_options(type, options)

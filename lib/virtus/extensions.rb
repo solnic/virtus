@@ -31,6 +31,7 @@ module Virtus
     #      attribute :author,       String
     #      attribute :published_at, DateTime
     #      attribute :page_count,   Integer
+    #      attribute :index                   # defaults to Object
     #    end
     #
     # @param [Symbol] name
