@@ -1,3 +1,9 @@
+# v0.5.1 2012-06-11
+
+* [fixed] EV properly handle nil as the value (solnic)
+
+[Compare v0.5.0..v0.5.1](https://github.com/solnic/virtus/compare/v0.5.0...v0.5.1)
+
 # v0.5.0 2012-06-08
 
 * [feature] Support for extending objects (solnic)
