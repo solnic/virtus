@@ -8,7 +8,9 @@ module Virtus
 
         # @api private
         def coerce(attributes)
-          super or @primitive.new(attributes)
+          unless attributes.nil?
+            super or @primitive.new(attributes)
+          end
         end
 
       end # class FromOpenStruct

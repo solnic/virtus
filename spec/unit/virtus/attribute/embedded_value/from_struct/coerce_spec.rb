@@ -9,6 +9,12 @@ describe Virtus::Attribute::EmbeddedValue::FromStruct, '#coerce' do
     described_class.new(:name, :primitive => primitive)
   end
 
+  context 'when the value is nil' do
+    let(:value) { nil }
+
+    it { should be_nil }
+  end
+
   context 'when the value is a primitive instance' do
     let(:value) { primitive.new }
 
