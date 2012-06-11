@@ -4,8 +4,16 @@ module Virtus
   #
   module ModuleExtensions
 
+    # Define an attribute in the module
+    #
+    # @see Virtus::Extensions#attribute
+    #
+    # @return [self]
+    #
+    # @api private
     def attribute(*args)
       attribute_definitions << args
+      self
     end
 
   private

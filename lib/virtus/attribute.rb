@@ -7,6 +7,7 @@ module Virtus
     extend DescendantsTracker
     extend TypeLookup
     extend Options
+    include Equalizer.new(inspect) << :name << :options
 
     accept_options :primitive, :accessor, :reader,
       :writer, :coercion_method, :default
