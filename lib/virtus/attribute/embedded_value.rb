@@ -44,7 +44,7 @@ module Virtus
       #
       # @return [Virtus::Attribute::EmbeddedValue]
       #
-      # @api public
+      # @api private
       def self.determine_type(klass)
         if klass <= Virtus || klass <= OpenStruct
           FromOpenStruct
