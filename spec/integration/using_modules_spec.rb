@@ -3,14 +3,18 @@ require 'spec_helper'
 describe 'I can define attributes within a module' do
   before do
     module Examples
-      module Name
+      module Common
         include Virtus
+      end
+
+      module Name
+        include Common
 
         attribute :name, String
       end
 
       module Age
-        include Virtus
+        include Common
 
         attribute :age,  Integer
       end
