@@ -45,7 +45,10 @@ begin
     end
 
     aliases = Hash.new { |h,mod| h[mod] = Hash.new { |h,method| h[method] = method } }
-    map     = NameMap.new
+
+    aliases['Virtus::ValueObject::InstanceMethods']['dup'] = 'clone'
+
+    map = NameMap.new
 
     heckle_caught_modules = Hash.new { |hash, key| hash[key] = [] }
     unhandled_mutations = 0
