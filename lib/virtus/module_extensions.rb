@@ -32,7 +32,7 @@ module Virtus
     # @api private
     def included(object)
       super
-      object.send(:include, Virtus)
+      object.module_eval { include Virtus }
       define_attributes(object)
     end
 

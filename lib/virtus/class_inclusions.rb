@@ -13,7 +13,7 @@ module Virtus
     def self.included(descendant)
       super
       descendant.extend(ClassMethods)
-      descendant.send(:include, InstanceMethods)
+      descendant.class_eval { include InstanceMethods }
     end
     private_class_method :included
 
