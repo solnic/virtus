@@ -111,9 +111,13 @@ module Virtus
       descendants.each { |descendant| descendant.attribute_set.reset }
     end
 
+    # The list of allowed public methods
+    #
+    # @return [Array<String>]
+    #
     # @api private
-    def public_method_list
-      public_instance_methods
+    def allowed_methods
+      public_instance_methods.map(&:to_s)
     end
 
   end # module ClassMethods

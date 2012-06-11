@@ -63,8 +63,7 @@ module Virtus
     def allowed_writer_methods
       @allowed_writer_methods ||=
         begin
-          allowed_writer_methods  = public_method_list.map(&:to_s)
-          allowed_writer_methods  = allowed_writer_methods.grep(WRITER_METHOD_REGEXP).to_set
+          allowed_writer_methods  = allowed_methods.grep(WRITER_METHOD_REGEXP).to_set
           allowed_writer_methods -= INVALID_WRITER_METHODS
           allowed_writer_methods.freeze
       end
