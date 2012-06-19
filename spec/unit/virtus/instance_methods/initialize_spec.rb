@@ -27,7 +27,7 @@ describe Virtus::InstanceMethods, '#initialize' do
   context 'with an argument that responds to #to_hash' do
     subject { described_class.new(:name => name) }
 
-    let(:name) { stub('name') }
+    let(:name) { 'name' }
 
     it 'sets attributes' do
       subject.name.should be(name)
