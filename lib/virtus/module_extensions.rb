@@ -66,5 +66,5 @@ module Virtus
       end
     end
 
-  end # class ModuleExtensions
+  end # module ModuleExtensions
 end # module Virtus

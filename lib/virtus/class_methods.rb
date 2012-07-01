@@ -31,7 +31,7 @@ module Virtus
     #     attribute :age,  Integer
     #   end
     #
-    #   User.attributes  # =>
+    #   User.attribute_set  # =>
     #
     #   TODO: implement inspect so the output is not cluttered - solnic
     #
