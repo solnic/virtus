@@ -13,6 +13,7 @@ module Virtus
     #
     # @api private
     def self.extended(object)
+      super
       object.extend(InstanceMethods)
       object.instance_eval do
         @virtus_attributes_accessor_module = AttributesAccessor.new(object.class.inspect)
