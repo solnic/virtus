@@ -15,7 +15,7 @@ module Virtus
       super
       descendant.module_eval do
         extend DescendantsTracker
-        virtus_setup_attributes_accessor_module
+        include attribute_set
       end
     end
 
@@ -56,18 +56,6 @@ module Virtus
       attribute_set
     end
 
-  protected
-
-    # Set up the anonymous module which will host Attribute accessor methods
-    #
-    # @return [self]
-    #
-    # @api private
-    def virtus_setup_attributes_accessor_module
-      @virtus_attributes_accessor_module = AttributesAccessor.new(inspect)
-      include @virtus_attributes_accessor_module
-    end
-
   private
 
     # Setup descendants' own Attribute-accessor-method-hosting modules
@@ -85,7 +73,7 @@ module Virtus
     # @api private
     def inherited(descendant)
       super
-      descendant.virtus_setup_attributes_accessor_module
+      descendant.module_eval { include attribute_set }
     end
 
     # Hooks into const missing process to determine types of attributes

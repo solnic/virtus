@@ -8,6 +8,8 @@ describe Virtus::AttributeSet, '#<<' do
   let(:object)     { described_class.new(parent, attributes) }
   let(:name)       { :name                                   }
 
+  before { attribute.stub(:define_accessor_methods) }
+
   context 'with a new attribute' do
     let(:attribute) { mock('Attribute', :name => name) }
 

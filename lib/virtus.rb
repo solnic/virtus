@@ -56,7 +56,6 @@ require 'virtus/extensions'
 require 'virtus/class_inclusions'
 require 'virtus/module_extensions'
 
-require 'virtus/attributes_accessor'
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
 
