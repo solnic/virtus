@@ -13,6 +13,7 @@ describe Virtus::ClassMethods, '#attribute' do
     attributes[name].should be_nil
     subject
     attribute = attributes[name]
+    attribute.should_not be_nil
     attribute.name.should be(name)
     attribute.class.should be(attribute_class)
   end

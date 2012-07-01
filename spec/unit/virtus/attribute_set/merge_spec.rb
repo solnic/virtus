@@ -9,6 +9,8 @@ describe Virtus::AttributeSet, '#merge' do
   let(:name)       { :name                                   }
   let(:other)      { [ attribute ]                           }
 
+  before { attribute.stub(:define_accessor_methods) }
+
   context 'with a new attribute' do
     let(:attribute) { mock('Attribute', :name => name) }
 

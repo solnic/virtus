@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Virtus::AttributesAccessor, '#inspect' do
+describe Virtus::AttributeSet, '#inspect' do
   subject { object.inspect }
 
   let(:object) { described_class.new('Test') }
 
-  it { should eql('Test::AttributesAccessor') }
+  it { pending; should eql('Test::AttributeSet') }
 end

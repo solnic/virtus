@@ -8,6 +8,8 @@ describe Virtus::AttributeSet, '#reset' do
   let(:attributes) { [ attribute ]                           }
   let(:object)     { described_class.new(parent, attributes) }
 
+  before { attribute.stub(:define_accessor_methods) }
+
   context 'when the parent has no attributes' do
     let(:parent) { described_class.new }
 
@@ -38,6 +40,8 @@ describe Virtus::AttributeSet, '#reset' do
     let(:parent_attribute) { mock('Parent Attribute', :name => :parent_name) }
     let(:parent)           { described_class.new([ parent_attribute ])       }
     let(:new_attribute)    { mock('New Attribute', :name => :parent_name)    }
+
+    before { new_attribute.stub(:define_accessor_methods) }
 
     it { should equal(object) }
 
