@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe Virtus::AttributesAccessor, '#define_writer_method' do
-  subject { described_class.new('Test') }
+describe Virtus::AttributeSet, '#define_reader_method' do
+  subject { described_class.new }
 
   let(:attribute) { mock('attribute') }
 
   if RUBY_VERSION < '1.9'
-    let(:method_name) { 'foo_bar=' }
+    let(:method_name) { 'foo_bar' }
   else
-    let(:method_name) { :foo_bar= }
+    let(:method_name) { :foo_bar }
   end
 
   before do

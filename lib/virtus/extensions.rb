@@ -14,10 +14,9 @@ module Virtus
     # @api private
     def self.extended(object)
       super
-      object.extend(InstanceMethods)
       object.instance_eval do
-        @virtus_attributes_accessor_module = AttributesAccessor.new(object.class.inspect)
-        extend @virtus_attributes_accessor_module
+        extend InstanceMethods
+        extend attribute_set
       end
     end
     private_class_method :extended
@@ -51,7 +50,6 @@ module Virtus
     # @api public
     def attribute(*args)
       attribute = Attribute.build(*args)
-      attribute.define_accessor_methods(@virtus_attributes_accessor_module)
       virtus_add_attribute(attribute)
       self
     end

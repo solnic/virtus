@@ -1,7 +1,7 @@
 module Virtus
 
   # A set of Attribute objects
-  class AttributeSet
+  class AttributeSet < Module
     include Enumerable
 
     # Initialize an AttributeSet
@@ -66,6 +66,7 @@ module Virtus
     # @api public
     def <<(attribute)
       self[attribute.name] = attribute
+      attribute.define_accessor_methods(self)
       self
     end
 
@@ -107,6 +108,36 @@ module Virtus
     def reset
       merge_attributes(@parent) if @parent
       merge_attributes(@attributes)
+      self
+    end
+
+    # Defines an attribute reader method
+    #
+    # @param [Attribute] attribute
+    # @param [Symbol] method_name
+    # @param [Symbol] visibility
+    #
+    # @return [self]
+    #
+    # @api private
+    def define_reader_method(attribute, method_name, visibility)
+      define_method(method_name) { attribute.get(self) }
+      send(visibility, method_name)
+      self
+    end
+
+    # Defines an attribute writer method
+    #
+    # @param [Attribute] attribute
+    # @param [Symbol] method_name
+    # @param [Symbol] visibility
+    #
+    # @return [self]
+    #
+    # @api private
+    def define_writer_method(attribute, method_name, visibility)
+      define_method(method_name) { |value| attribute.set(self, value) }
+      send(visibility, method_name)
       self
     end
 
