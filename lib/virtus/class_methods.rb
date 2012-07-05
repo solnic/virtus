@@ -56,6 +56,17 @@ module Virtus
       attribute_set
     end
 
+    # Hooks into const missing process to determine types of attributes
+    #
+    # @param [String] name
+    #
+    # @return [Class]
+    #
+    # @api private
+    def const_missing(name)
+      Attribute.determine_type(name) or super
+    end
+
   private
 
     # Setup descendants' own Attribute-accessor-method-hosting modules
@@ -74,17 +85,6 @@ module Virtus
     def inherited(descendant)
       super
       descendant.module_eval { include attribute_set }
-    end
-
-    # Hooks into const missing process to determine types of attributes
-    #
-    # @param [String] name
-    #
-    # @return [Class]
-    #
-    # @api private
-    def const_missing(name)
-      Attribute.determine_type(name) or super
     end
 
     # Add the attribute to the class' and descendants' attributes
