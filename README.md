@@ -3,8 +3,7 @@ virtus
 
 [![Build Status](https://secure.travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
 [![Dependency Status](https://gemnasium.com/solnic/virtus.png)](https://gemnasium.com/solnic/virtus)
-
-[Metrics on CodeClimate](https://codeclimate.com/github/solnic/virtus)
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/solnic/virtus)
 
 This is a partial extraction of the DataMapper [Property
 API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
