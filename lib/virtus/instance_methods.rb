@@ -132,6 +132,32 @@ module Virtus
       attributes
     end
 
+    # Freeze object
+    #
+    # @return [self]
+    #
+    # @api public
+    #
+    # @example
+    #
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new(:name => 'John', :age => 28)
+    #   user.frozen? # => false
+    #   user.freeze
+    #   user.frozen? # => true
+    #
+    # @api public
+    def freeze
+      set_defaults
+      super
+    end
+
   private
 
     # Get values of all attributes defined for this class, ignoring privacy
@@ -143,6 +169,17 @@ module Virtus
       attribute_set.each_with_object({}) do |attribute, attributes|
         name = attribute.name
         attributes[name] = get_attribute(name) if yield(attribute)
+      end
+    end
+
+    # Ensure all defaults are set
+    #
+    # @return [AttributeSet]
+    #
+    # @api private
+    def set_defaults
+      attribute_set.each do |attribute|
+        get_attribute(attribute.name)
       end
     end
 
