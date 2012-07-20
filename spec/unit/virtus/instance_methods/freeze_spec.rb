@@ -13,7 +13,6 @@ describe Virtus::InstanceMethods, '#freeze' do
         include Virtus
         attribute :name, String
       end
-
     end
 
     let(:attributes) { { :name => 'John' } }
@@ -27,7 +26,6 @@ describe Virtus::InstanceMethods, '#freeze' do
         include Virtus
         attribute :name, String, :default => 'John'
       end
-
     end
 
     context 'when value is provided' do
@@ -49,7 +47,6 @@ describe Virtus::InstanceMethods, '#freeze' do
         include Virtus
         attribute :name, String, :default => proc { 'John' }
       end
-
     end
 
     context 'when value is provided' do
