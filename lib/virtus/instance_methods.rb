@@ -153,12 +153,8 @@ module Virtus
     #   user.frozen? # => true
     #
     # @api public
-    #
     def freeze
-      # Call get_attribute on all attribute to ensure defaults are set prior to freezing
-      attribute_set.each do |attribute|
-        get_attribute(attribute.name)
-      end
+      set_defaults
       super
     end
 
@@ -173,6 +169,17 @@ module Virtus
       attribute_set.each_with_object({}) do |attribute, attributes|
         name = attribute.name
         attributes[name] = get_attribute(name) if yield(attribute)
+      end
+    end
+
+    # Ensure all defaults are set
+    #
+    # @return [AttributeSet]
+    #
+    # @api private
+    def set_defaults
+      attribute_set.each do |attribute|
+        get_attribute(attribute.name)
       end
     end
 
