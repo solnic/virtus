@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus::InstanceMethods,'#freeze' do
+describe Virtus::InstanceMethods, '#freeze' do
   subject { object.freeze }
 
   let(:object) do
