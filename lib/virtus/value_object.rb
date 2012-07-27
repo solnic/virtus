@@ -35,6 +35,7 @@ module Virtus
         include ::Virtus
         include InstanceMethods
         extend ClassMethods
+        private :attributes=
       end
     end
 
