@@ -40,7 +40,7 @@ describe Virtus::ValueObject do
     it 'writer methods are set to private' do
       private_methods = class_under_test.private_instance_methods
       private_methods.map! { |m| m.to_s }
-      private_methods.should include('latitude=', 'longitude=')
+      private_methods.should include('latitude=', 'longitude=', 'attributes=')
     end
 
     it 'attempts to call attribute writer methods raises NameError' do
