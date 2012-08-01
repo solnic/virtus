@@ -49,8 +49,8 @@ module Virtus
     #
     # @api public
     def attribute(*args)
-      attribute = Attribute.build(*args)
-      virtus_add_attribute(attribute)
+      attributes = Attribute.build(*args)      
+      attributes.each {|attribute| virtus_add_attribute(attribute) }
       self
     end
 

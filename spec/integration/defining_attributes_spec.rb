@@ -7,10 +7,10 @@ describe "virtus attribute definitions" do
       class Person
         include Virtus
 
-        attribute :name, String
+        attributes :name, :title, String
         attribute :age, Integer
         attribute :doctor, Boolean
-        attribute :salery, Decimal
+        attribute :salary, Decimal        
       end
 
       class Manager < Person
@@ -23,7 +23,9 @@ describe "virtus attribute definitions" do
 
   specify 'virtus creates accessor methods' do
     subject.name = 'Peter'
+    subject.title = 'Mr'
     subject.name.should == 'Peter'
+    subject.title.should == 'Mr'
   end
 
   specify 'the constructor accepts a hash for mass-assignment' do
@@ -39,7 +41,7 @@ describe "virtus attribute definitions" do
   end
 
   context 'with attributes' do
-    let(:attributes) { {:name => 'Jane', :age => 45, :doctor => true, :salery => 4500} }
+    let(:attributes) { {:name => 'Jane', :title => 'Mr', :age => 45, :doctor => true, :salary => BigDecimal.new(4500) } }
     subject { Examples::Person.new(attributes) }
 
     specify "#attributes returns the object's attributes as a hash" do
