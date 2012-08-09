@@ -25,10 +25,6 @@ module Virtus
       map(&:name)
     end
 
-    def sym_names
-      names.map(&:to_sym)
-    end
-
     # Iterate over each attribute in the set
     #
     # @example
