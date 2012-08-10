@@ -61,15 +61,21 @@ module Virtus
     # @api private
     def self.build(*args)
       options = args.extract_options!
-      type = args.last.kind_of?(Symbol) ? Object : args.pop
-      args.map do |name|
+      type_arg = args.last      
+      type = case type_arg.class.to_s
+      when 'Symbol' #, 'String'
+        Object
+      else
+        args.pop
+      end
+      attrs = args.map do |name|
         build_one name, type, options        
       end
+      attrs.size == 1 ? attrs.first : attrs
     end
 
     def self.build_one(name, type = Object, options = {})
-      attribute_class = determine_type(type) or
-        raise ArgumentError, "#{type.inspect} does not map to an attribute type"
+      attribute_class = determine_type(type) or raise ArgumentError, "#{type.inspect} does not map to an attribute type"
       attribute_options = attribute_class.merge_options(type, options)
       attribute_class.new(name, attribute_options)
     end

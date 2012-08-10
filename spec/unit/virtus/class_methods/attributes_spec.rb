@@ -17,6 +17,6 @@ describe Virtus::ClassMethods, '#attributes' do
 
   it 'returns a deprecation warning' do
     subject
-    $stderr.string.should =~ /\A#{object}.attributes is deprecated. Use #{object}.attribute_set instead: #{__FILE__}:4\b/
+    $stderr.string.should =~ /\A#{object}.attributes is deprecated for getting the set of attributes. Use #{object}.attribute_set instead: #{__FILE__}:4\b/
   end
 end

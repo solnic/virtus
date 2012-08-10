@@ -50,7 +50,7 @@ module Virtus
     # @api public
     def attribute(*args)
       attributes = Attribute.build(*args)      
-      attributes.each {|attribute| virtus_add_attribute(attribute) }
+      [attributes].flatten.each {|attribute| virtus_add_attribute(attribute) }
       self
     end
 
