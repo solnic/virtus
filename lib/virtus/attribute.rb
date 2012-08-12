@@ -59,9 +59,26 @@ module Virtus
     # @return [Attribute]
     #
     # @api private
-    def self.build(name, type = Object, options = {})
-      attribute_class = determine_type(type) or
-        raise ArgumentError, "#{type.inspect} does not map to an attribute type"
+    def self.build(*args)
+      # puts "build: #{args}"
+      options = args.extract_options!
+      type_arg = args.last      
+      type = if type_arg.kind_of?(Class)
+        args.pop
+      # if no type argument, default to Object
+      elsif type_arg.class.to_s == 'Symbol' 
+        Object
+      else
+        args.pop
+      end
+      attrs = args.map do |name|
+        build_one name, type, options        
+      end
+      attrs.size == 1 ? attrs.first : attrs.flatten
+    end
+
+    def self.build_one(name, type = Object, options = {})
+      attribute_class = determine_type(type) or raise ArgumentError, "#{type.inspect} does not map to an attribute type"
       attribute_options = attribute_class.merge_options(type, options)
       attribute_class.new(name, attribute_options)
     end

@@ -37,20 +37,24 @@ You can create classes extended with virtus and define attributes:
 class User
   include Virtus
 
-  attribute :name, String
+  attributes :first_name, :last_name, String
+  attributes :allow_pets, :allow_smoking, :allow_drinking, Boolean, :as => :rule_options
+
   attribute :age, Integer
   attribute :birthday, DateTime
 end
 
-user = User.new(:name => 'Piotr', :age => 28)
-user.attributes # => { :name => "Piotr", :age => 28 }
+user = User.new(:first_name => 'Piotr', :age => 28)
+user.attribute_set # => { :first_name => "Piotr", :age => 28 }
 
-user.name # => "Piotr"
+user.first_name # => "Piotr"
 
 user.age = '28' # => 28
 user.age.class # => Fixnum
 
 user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+
+User.rule_options # => [:allow_pets, :allow_smoking, :allow_drinking]
 ```
 
 ### Using Virtus with Modules
@@ -62,7 +66,7 @@ inclusion in your classes:
 module Name
   include Virtus
 
-  attribute :name, String
+  attributes :first_name, :last_name, String
 end
 
 module Age
@@ -75,7 +79,7 @@ class User
   include Name, Age
 end
 
-user = User.new(:name => 'John', :age => '30')
+user = User.new(:first_name => 'John', :last_name => 'Adams', :age => '30')
 ```
 
 ### Dynamically Extending Instances
@@ -138,9 +142,8 @@ end
 class Address
   include Virtus
 
-  attribute :street,  String
-  attribute :zipcode, String
-  attribute :city,    City
+  attributes  :street, :zipcode, String
+  attribute   :city, City
 end
 
 class User
@@ -174,10 +177,7 @@ book.page_numbers # => [1, 2, 3]
 class Address
   include Virtus
 
-  attribute :address,     String
-  attribute :locality,    String
-  attribute :region,      String
-  attribute :postal_code, String
+  attributes :address, :locality, :region, :postal_code, String
 end
 
 class PhoneNumber
@@ -211,8 +211,7 @@ user.addresses # => #<Set: {#<Address:0x007fdb2d3be448 @address="1234 Any St.", 
 class GeoLocation
   include Virtus::ValueObject
 
-  attribute :latitude,  Float
-  attribute :longitude, Float
+  attributes :latitude, :longitude, Float
 end
 
 class Venue

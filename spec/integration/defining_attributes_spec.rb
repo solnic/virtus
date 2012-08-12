@@ -7,10 +7,12 @@ describe "virtus attribute definitions" do
       class Person
         include Virtus
 
-        attribute :name, String
+        attributes :allow_pets, :allow_smoking, Boolean, :as => :rule_options
+
+        attributes :name, :title, String
         attribute :age, Integer
         attribute :doctor, Boolean
-        attribute :salery, Decimal
+        attribute :salary, Decimal        
       end
 
       class Manager < Person
@@ -23,7 +25,9 @@ describe "virtus attribute definitions" do
 
   specify 'virtus creates accessor methods' do
     subject.name = 'Peter'
+    subject.title = 'Mr'
     subject.name.should == 'Peter'
+    subject.title.should == 'Mr'
   end
 
   specify 'the constructor accepts a hash for mass-assignment' do
@@ -39,7 +43,17 @@ describe "virtus attribute definitions" do
   end
 
   context 'with attributes' do
-    let(:attributes) { {:name => 'Jane', :age => 45, :doctor => true, :salery => 4500} }
+    let(:attributes) do 
+      {
+        :allow_pets => true,
+        :allow_smoking => false,
+        :name => 'Jane', 
+        :title => 'Mr', 
+        :age => 45, 
+        :doctor => true,
+        :salary => BigDecimal.new('4500.0') 
+      } 
+    end
     subject { Examples::Person.new(attributes) }
 
     specify "#attributes returns the object's attributes as a hash" do
@@ -50,6 +64,13 @@ describe "virtus attribute definitions" do
       subject.to_hash.should == attributes
     end
   end
+
+  context 'attribute group :rule_options defined' do
+    subject { Examples::Person }
+    specify ":as otion creates class method that returns attributes in rule group" do
+      subject.rule_options.should == [:allow_pets, :allow_smoking]
+    end
+  end  
 
   context 'inheritance' do
     specify 'inherits all the attributes from the base class' do

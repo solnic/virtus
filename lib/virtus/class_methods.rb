@@ -51,9 +51,12 @@ module Virtus
     # @deprecated
     #
     # @api public
-    def attributes
-      warn "#{self}.attributes is deprecated. Use #{self}.attribute_set instead: #{caller.first}"
-      attribute_set
+    def attributes *args
+      if args.empty?
+        warn "#{self}.attributes is deprecated for getting the set of attributes. Use #{self}.attribute_set instead: #{caller.first}. #{self}.attributes however can now be used to define a set of attributes sharing the same type and/or default value"
+        return attribute_set        
+      end
+      attribute *args
     end
 
     # Hooks into const missing process to determine types of attributes

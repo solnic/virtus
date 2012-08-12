@@ -2,6 +2,8 @@ module Virtus
 
   # A set of Attribute objects
   class AttributeSet < Module
+    attr_reader :attributes
+
     include Enumerable
 
     # Initialize an AttributeSet
@@ -17,6 +19,10 @@ module Virtus
       @attributes   = attributes.dup
       @index        = {}
       reset
+    end
+
+    def names
+      map(&:name)
     end
 
     # Iterate over each attribute in the set
