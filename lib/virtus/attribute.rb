@@ -60,10 +60,13 @@ module Virtus
     #
     # @api private
     def self.build(*args)
+      # puts "build: #{args}"
       options = args.extract_options!
       type_arg = args.last      
-      type = case type_arg.class.to_s
-      when 'Symbol' #, 'String'
+      type = if type_arg.kind_of?(Class)
+        args.pop
+      # if no type argument, default to Object
+      elsif type_arg.class.to_s == 'Symbol' 
         Object
       else
         args.pop
@@ -71,7 +74,7 @@ module Virtus
       attrs = args.map do |name|
         build_one name, type, options        
       end
-      attrs.size == 1 ? attrs.first : attrs
+      attrs.size == 1 ? attrs.first : attrs.flatten
     end
 
     def self.build_one(name, type = Object, options = {})

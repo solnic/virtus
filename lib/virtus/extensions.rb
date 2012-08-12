@@ -49,9 +49,23 @@ module Virtus
     #
     # @api public
     def attribute(*args)
-      attributes = Attribute.build(*args)      
-      [attributes].flatten.each {|attribute| virtus_add_attribute(attribute) }
+      opts = args.dup.extract_options!
+      
+      attributes = [Attribute.build(*args)].flatten
+      attributes.each {|attribute| virtus_add_attribute(attribute) }
+
+      clazz_meth = opts.delete(:as) if opts[:as]
+      create_attribute_group clazz_meth, attributes if clazz_meth
+
       self
+    end
+
+    def create_attribute_group name, *attrs
+      singleton_class.class_eval do
+        define_method name do
+          attrs.flatten.map &:name
+        end
+      end
     end
 
     # The list of writer methods that can be mass-assigned to in #attributes=

@@ -37,20 +37,24 @@ You can create classes extended with virtus and define attributes:
 class User
   include Virtus
 
-  attributes :name, :title, String
+  attributes :first_name, :last_name, String
+  attributes :allow_pets, :allow_smoking, :allow_drinking, Boolean, :as => :rule_options
+
   attribute :age, Integer
   attribute :birthday, DateTime
 end
 
-user = User.new(:name => 'Piotr', :age => 28)
-user.attribute_set # => { :name => "Piotr", :age => 28 }
+user = User.new(:first_name => 'Piotr', :age => 28)
+user.attribute_set # => { :first_name => "Piotr", :age => 28 }
 
-user.name # => "Piotr"
+user.first_name # => "Piotr"
 
 user.age = '28' # => 28
 user.age.class # => Fixnum
 
 user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
+
+User.rule_options # => [:allow_pets, :allow_smoking, :allow_drinking]
 ```
 
 ### Using Virtus with Modules
