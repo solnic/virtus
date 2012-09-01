@@ -119,7 +119,7 @@ module Virtus
           def []=(key, value)                                                              #  def []=(key, value)
             coerced_key   = Virtus::Coercion[key.class].#{key_coercion_method}(key)        #    coerced_key   = Virtus::Coercion[key.class].to_sym(key)
             coerced_value = Virtus::Coercion[value.class].#{value_coercion_method}(value)  #    coerced_value = Virtus::Coercion[value.class].to_f(value)
-            super(coerced_key, coerced_value)                                              #    super(coerce_key, coerce_value)
+            super(coerced_key, coerced_value)                                              #    super(coerced_key, coerced_value)
           end                                                                              #  end
         eorb
 
