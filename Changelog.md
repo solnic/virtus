@@ -1,4 +1,4 @@
-# v0.5.2 to-be-released
+# v0.5.2 2012-09-01
 
 * [feature] Object is now the default attribute type (dkubb)
 * [fixed] Fix module inclusion problems (dkubb)
@@ -6,7 +6,7 @@
 * [fixed] String representation of a big integer is now properly coerced to an integer (greyblake)
 * [changed] AttributeSet is now a module responsible for defining attribute methods (emmanuel)
 
-[Compare v0.5.1..master](https://github.com/solnic/virtus/compare/v0.5.1...master)
+[Compare v0.5.1..v0.5.2](https://github.com/solnic/virtus/compare/v0.5.1...v0.5.2)
 
 # v0.5.1 2012-06-11
 
