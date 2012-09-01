@@ -17,7 +17,7 @@ group :metrics do
     gem 'json',      '~> 1.7'
     gem 'metric_fu', '~> 2.1.1'
     gem 'mspec',     '~> 1.5.17'
-    gem 'rcov',      '~> 0.9.9'
+    gem 'rcov',      '~> 1.0'
     gem 'ruby2ruby', '=  1.2.2'
   end
 
