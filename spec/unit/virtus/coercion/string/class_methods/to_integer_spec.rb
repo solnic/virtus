@@ -47,4 +47,10 @@ describe Virtus::Coercion::String, '.to_integer' do
 
     it { should equal(string) }
   end
+
+  context 'when integer string is big' do
+    let(:string) { '334490140000101135' }
+
+    it { should == 334490140000101135  }
+  end
 end
