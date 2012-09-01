@@ -1,3 +1,13 @@
+# v0.5.2 to-be-released
+
+* [feature] Object is now the default attribute type (dkubb)
+* [fixed] Fix module inclusion problems (dkubb)
+* [fixed] Evaluate default values when freezing an object (mbj)
+* [fixed] String representation of a big integer is now properly coerced to an integer (greyblake)
+* [changed] AttributeSet is now a module responsible for defining attribute methods (emmanuel)
+
+[Compare v0.5.1..master](https://github.com/solnic/virtus/compare/v0.5.1...master)
+
 # v0.5.1 2012-06-11
 
 * [fixed] EV properly handle nil as the value (solnic)
