@@ -50,7 +50,6 @@ module Virtus
       # @api public
       attr_reader :value_type
 
-
       # Handles hashes with [key_type => value_type] syntax.
       #
       # @param [Class]
