@@ -210,6 +210,19 @@ user.phone_numbers # => [#<PhoneNumber:0x007fdb2d3bef88 @number="212-555-1212">,
 user.addresses # => #<Set: {#<Address:0x007fdb2d3be448 @address="1234 Any St.", @locality="Anytown", @region="DC", @postal_code="21234">}>
 ```
 
+### Hash attributes coercion
+
+``` ruby
+class Package
+  include Virtus
+
+  attribute :dimensions, Hash[Symbol => Float]
+end
+
+package = Package.new(:dimensions => { 'width' => "2.2", :height => 2, "length" => 4.5 })
+package.dimensions  # => { :with => 2.2, :height => 2.0, :length => 4.5 }
+```
+
 ### Value Objects
 
 ``` ruby
