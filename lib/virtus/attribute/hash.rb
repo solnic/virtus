@@ -91,10 +91,9 @@ module Virtus
       # @api private
       def coerce(value)
         coerced = super
-        return coerced unless coerced.respond_to?(:inject)
-        coerced.inject(new_hash) do |hash, key_and_value|
+        return coerced unless coerced.respond_to?(:each_with_object)
+        coerced.each_with_object(new_hash) do |key_and_value, hash|
           hash[key_and_value[0]] = key_and_value[1]
-          hash
         end
       end
 
