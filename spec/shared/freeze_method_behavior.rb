@@ -1,6 +1,6 @@
 shared_examples_for 'a #freeze method' do
   let(:sample_exception) do
-    begin 
+    begin
       object.dup.freeze.instance_variable_set(:@foo,:bar)
     rescue => exception
       exception
