@@ -15,6 +15,7 @@ module Virtus
     class Set < Collection
       primitive       ::Set
       coercion_method :to_set
+      default         primitive.new
 
       include Collection::MemberCoercion
 

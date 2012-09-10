@@ -15,6 +15,7 @@ module Virtus
     class Hash < Object
       primitive       ::Hash
       coercion_method :to_hash
+      default         primitive.new
 
     end # class Hash
   end # class Attribute
