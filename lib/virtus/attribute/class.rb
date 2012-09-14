@@ -7,7 +7,7 @@ module Virtus
     #   class Entity
     #     include Virtus
     #
-    #     attribute :type, Class
+    #     attribute :model, Class
     #   end
     #
     #   post = Entity.new(:model => Model)
