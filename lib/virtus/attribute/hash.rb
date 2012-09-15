@@ -17,6 +17,89 @@ module Virtus
       coercion_method :to_hash
       default         primitive.new
 
+      # The type to which keys of this hash will be coerced
+      #
+      # @example
+      #
+      #   class Request
+      #     include Virtus
+      #
+      #     attribute :headers, Hash[Symbol => String]
+      #   end
+      #
+      #   Post.attributes[:headers].key_type # => Virtus::Attribute::Symbol
+      #
+      # @return [Virtus::Attribute]
+      #
+      # @api public
+      attr_reader :key_type
+
+      # The type to which values of this hash will be coerced
+      #
+      # @example
+      #
+      #   class Request
+      #     include Virtus
+      #
+      #     attribute :headers, Hash[Symbol => String]
+      #   end
+      #
+      #   Post.attributes[:headers].value_type # => Virtus::Attribute::String
+      #
+      # @return [Virtus::Attribute]
+      #
+      # @api public
+      attr_reader :value_type
+
+      # Handles hashes with [key_type => value_type] syntax.
+      #
+      # @param [Class]
+      #
+      # @param [Hash]
+      #
+      # @return [Hash]
+      #
+      # @api private
+      def self.merge_options(type, options)
+        if !type.respond_to?(:size)
+          options
+        elsif type.size > 1
+          raise ArgumentError, "more than one [key => value] pair in `#{type.inspect}`"
+        else
+          options.merge(:key_type => type.keys.first, :value_type => type.values.first)
+        end
+      end
+
+      # Initializes an instance of {Virtus::Attribute::Hash}
+      #
+      # @api private
+      def initialize(*)
+        super
+        if @options.has_key?(:key_type) && @options.has_key?(:value_type)
+          @key_type   = @options[:key_type]
+          @value_type = @options[:value_type]
+          @key_type_instance   = Attribute.build(@name, @key_type)
+          @value_type_instance = Attribute.build(@name, @value_type)
+        end
+      end
+
+      # Coerce a hash with keys and values
+      #
+      # @param [Object]
+      #
+      # @return [Object]
+      #
+      # @api private
+      def coerce(value)
+        coerced = super
+        return coerced unless coerced.respond_to?(:each_with_object)
+        coerced.each_with_object({}) do |key_and_value, hash|
+          key   = @key_type_instance.coerce(key_and_value[0])
+          value = @value_type_instance.coerce(key_and_value[1])
+          hash[key] = value
+        end
+      end
+
     end # class Hash
   end # class Attribute
 end # module Virtus
