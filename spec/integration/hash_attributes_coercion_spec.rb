@@ -33,20 +33,6 @@ describe Package do
       dimensions[:height].should be_eql(2.0)
       dimensions[:length].should be_eql(4.5)
     end
-
-    context 'assign new value' do
-      before do
-        dimensions['width'] = 15
-      end
-
-      it 'should coerce key' do
-        dimensions[:width].should == 15
-      end
-
-      it 'should not add new keys' do
-        dimensions.keys.should =~ [:width, :height, :length]
-      end
-    end
   end
 
   describe '#meta_info' do

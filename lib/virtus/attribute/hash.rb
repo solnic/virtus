@@ -92,36 +92,11 @@ module Virtus
       def coerce(value)
         coerced = super
         return coerced unless coerced.respond_to?(:each_with_object)
-        coerced.each_with_object(new_hash) do |key_and_value, hash|
-          hash[key_and_value[0]] = key_and_value[1]
+        coerced.each_with_object({}) do |key_and_value, hash|
+          key   = @key_type_instance.coerce(key_and_value[0])
+          value = @value_type_instance.coerce(key_and_value[1])
+          hash[key] = value
         end
-      end
-
-      # Return an instance of the Hash with redefined []= method to coerce
-      # keys and values on assigning.
-      #
-      # @return [Hash]
-      #
-      # @api private
-      def new_hash
-        hash = self.class.primitive.new
-        return hash unless @key_type_instance && @value_type_instance
-
-        key_coercion_method   = @key_type_instance.coercion_method
-        value_coercion_method = @value_type_instance.coercion_method
-
-        # Redefine []= method to coerce key and value on assigning.
-        # It requires inlining of Attribute#coerce method to coerce.
-        # An alternative way would be using define_singleton_method or Sinatra's meta_def.
-        hash.instance_eval(<<-eorb, __FILE__, __LINE__+1)
-          def []=(key, value)                                                              #  def []=(key, value)
-            coerced_key   = Virtus::Coercion[key.class].#{key_coercion_method}(key)        #    coerced_key   = Virtus::Coercion[key.class].to_sym(key)
-            coerced_value = Virtus::Coercion[value.class].#{value_coercion_method}(value)  #    coerced_value = Virtus::Coercion[value.class].to_f(value)
-            super(coerced_key, coerced_value)                                              #    super(coerced_key, coerced_value)
-          end                                                                              #  end
-        eorb
-
-        hash
       end
 
     end # class Hash
