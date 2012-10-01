@@ -15,6 +15,7 @@ module Virtus
     class Hash < Object
       primitive       ::Hash
       coercion_method :to_hash
+      default         primitive.new
 
       # The type to which keys of this hash will be coerced
       #

@@ -20,6 +20,9 @@ describe "default values" do
         attribute :published,    Boolean, :default => false, :accessor => :private
         attribute :editor_title, String,  :default => :default_editor_title
         attribute :reference,    String,  :default => Reference.new
+        attribute :revisions,    Array
+        attribute :index,        Hash
+        attribute :authors,      Set
 
         def default_editor_title
           published? ? title : "UNPUBLISHED: #{title}"
@@ -49,12 +52,29 @@ describe "default values" do
     subject.editor_title.should == 'UNPUBLISHED: Top Secret'
   end
 
-  context 'with a ValueObject' do
-    it 'should not duplicate the ValueObject' do
+  context 'a ValueObject' do
+    it 'does not duplicate the ValueObject' do
       page1 = Examples::Page.new
       page2 = Examples::Page.new
       page1.reference.should equal(page2.reference)
     end
   end
 
+  context 'an Array' do
+    specify 'without a default the value is an empty Array' do
+      subject.revisions.should eql([])
+    end
+  end
+
+  context 'a Hash' do
+    specify 'without a default the value is an empty Hash' do
+      subject.index.should eql({})
+    end
+  end
+
+  context 'a Set' do
+    specify 'without a default the value is an empty Set' do
+      subject.authors.should eql(Set.new)
+    end
+  end
 end
