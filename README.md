@@ -220,7 +220,7 @@ class Package
 end
 
 package = Package.new(:dimensions => { 'width' => "2.2", :height => 2, "length" => 4.5 })
-package.dimensions  # => { :with => 2.2, :height => 2.0, :length => 4.5 }
+package.dimensions # => { :width => 2.2, :height => 2.0, :length => 4.5 }
 ```
 
 ### Value Objects
