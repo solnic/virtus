@@ -11,6 +11,9 @@ rvm:
   - rbx-19mode
   - ree
   - jruby-head
+matrix:
+  allow_failures:
+    - rvm: jruby-head
 notifications:
   email:
     - piotr.solnica@gmail.com
