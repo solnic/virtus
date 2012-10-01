@@ -1,5 +1,5 @@
-virtus
 ======
+virtus
 
 [![Build Status](https://secure.travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
 [![Dependency Status](https://gemnasium.com/solnic/virtus.png)](https://gemnasium.com/solnic/virtus)
@@ -221,6 +221,66 @@ end
 
 package = Package.new(:dimensions => { 'width' => "2.2", :height => 2, "length" => 4.5 })
 package.dimensions # => { :width => 2.2, :height => 2.0, :length => 4.5 }
+```
+
+### IMPORTANT note about member coercions
+
+Virtus performs coercions only when a value is being assigned. If you mutate the value later on using its own
+interfaces then coercion won't be triggered.
+
+Here's an example:
+
+``` ruby
+class Book
+  include Virtus
+  
+  attribute :title, String
+end
+
+class Library
+  include Virtus
+  
+  attribute :books, Array[Book]
+end
+
+library = Library.new
+
+# This will coerce Hash to a Book instance
+library.books = [ { :title => 'Introduction to Virtus' } ]
+
+# This WILL NOT COERCE the value because you mutate the books array with Array#<<
+library.books << { :title => 'Another Introduction to Virtus' }
+```
+
+A suggested solution to this problem would be to introduce your own class instead of using Array and implement
+mutation methods that perform coercions. For example:
+
+```
+``` ruby
+class Book
+  include Virtus
+  
+  attribute :title, String
+end
+
+class BookCollection < Array
+  def <<(book)
+   if book.kind_of?(Hash)
+    super(Book.new(book))
+   else
+     super
+   end
+  end
+end
+
+class Library
+  include Virtus
+  
+  attribute :books, BookCollection[Book]
+end
+
+library = Library.new
+library.books << { :title => 'Another Introduction to Virtus' }
 ```
 
 ### Value Objects
