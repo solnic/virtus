@@ -255,7 +255,6 @@ library.books << { :title => 'Another Introduction to Virtus' }
 A suggested solution to this problem would be to introduce your own class instead of using Array and implement
 mutation methods that perform coercions. For example:
 
-```
 ``` ruby
 class Book
   include Virtus
