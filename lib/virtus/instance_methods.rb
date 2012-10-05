@@ -191,7 +191,14 @@ module Virtus
     #
     # @api private
     def set_attributes(attributes)
-      ::Hash.try_convert(attributes).each do |name, value|
+      hash = ::Hash.try_convert(attributes)
+
+      if hash.nil?
+        raise NoMethodError,
+          "Expected #{attributes.inspect} to respond to #to_hash"
+      end
+
+      hash.each do |name, value|
         set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
       end
     end

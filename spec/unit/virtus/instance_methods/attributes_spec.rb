@@ -131,7 +131,9 @@ describe Virtus::InstanceMethods do
       let(:attribute_values) { '' }
 
       it 'raises an exception' do
-        expect { subject }.to raise_error(NoMethodError)
+        expect {
+          subject
+        }.to raise_error(NoMethodError, 'Expected "" to respond to #to_hash')
       end
     end
   end
