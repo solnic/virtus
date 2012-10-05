@@ -25,16 +25,22 @@ describe Virtus::InstanceMethods, '#initialize' do
   end
 
   context 'with an argument that responds to #to_hash' do
-    subject { described_class.new(:name => name) }
+    subject { described_class.new(attributes) }
 
-    let(:name) { stub('name') }
+    let(:attributes) do
+      Class.new do
+        def to_hash
+          {:name => 'John'}
+        end
+      end.new
+    end
 
     it 'sets attributes' do
-      subject.name.should be(name)
+      subject.name.should == 'John'
     end
   end
 
-  context' with an argument that does not respond to #to_hash' do
+  context 'with an argument that does not respond to #to_hash' do
     subject { described_class.new(Object.new) }
 
     specify { expect { subject }.to raise_error(NoMethodError) }
