@@ -1,5 +1,5 @@
+Virtus
 ======
-virtus
 
 [![Build Status](https://secure.travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
 [![Dependency Status](https://gemnasium.com/solnic/virtus.png)](https://gemnasium.com/solnic/virtus)
