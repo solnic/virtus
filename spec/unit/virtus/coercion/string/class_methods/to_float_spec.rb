@@ -27,6 +27,11 @@ describe Virtus::Coercion::String, '.to_float' do
     '.1e-1'   => 0.01,
     '.1E+1'   => 1.0,
     '.1E-1'   => 0.01,
+    '1e1'     => 10.0,
+    '1E+1'    => 10.0,
+    '+1e-1'   => 0.1,
+    '-1E1'    => -10.0,
+    '-1e-1'   => -0.1,
   }.each do |value, expected|
     context "with #{value.inspect}" do
       let(:string) { value }

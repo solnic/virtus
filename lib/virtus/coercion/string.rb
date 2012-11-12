@@ -11,7 +11,7 @@ module Virtus
 
       INTEGER_REGEXP    = /[-+]?(?:0|[1-9]\d*)/.freeze
       EXPONENT_REGEXP   = /(?:[eE][-+]?\d+)/.freeze
-      FRACTIONAL_REGEXP = /(?:\.\d+#{EXPONENT_REGEXP}?)/.freeze
+      FRACTIONAL_REGEXP = /(?:(?:\.\d+)?#{EXPONENT_REGEXP}?)/.freeze
       NUMERIC_REGEXP    = /\A(#{INTEGER_REGEXP}#{FRACTIONAL_REGEXP}?|#{FRACTIONAL_REGEXP})\z/.freeze
 
       # Coerce give value to a constant

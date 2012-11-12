@@ -30,6 +30,11 @@ describe Virtus::Coercion::String, '.to_integer' do
     '.1e-1'        => 0,
     '.1E+1'        => 1,
     '.1E-1'        => 0,
+    '1e1'          => 10,
+    '1E+1'         => 10,
+    '+1e-1'        => 0,
+    '-1E1'         => -10,
+    '-1e-1'        => 0,
     min_float.to_s => min_float.to_i,
     max_float.to_s => max_float.to_i,
   }.each do |value, expected|
