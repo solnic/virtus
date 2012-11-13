@@ -55,6 +55,20 @@ module Virtus
         end
       end
 
+      # Coerce given value to a DateTime
+      #
+      # @example
+      #   Virtus::Coercion::Fixnum.to_datetime(0)  # => Thu, 01 Jan 1970 00:00:00 +0000
+      #
+      # @param [Fixnum] value
+      #
+      # @return [DateTime]
+      #
+      # @api public
+      def self.to_datetime(value)
+        ::DateTime.strptime(value.to_s, "%s")
+      end
+
     end # class Fixnum
   end # class Coercion
 end # module Virtus
