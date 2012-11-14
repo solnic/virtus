@@ -58,4 +58,11 @@ describe Virtus::Coercion::String, '.to_integer' do
 
     it { should == 334490140000101135  }
   end
+
+  context 'string starts with e' do
+    let(:string) { 'e1' }
+
+    # In further version it will raise exception
+    it { should == 'e1' }
+  end
 end

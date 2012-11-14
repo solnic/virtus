@@ -47,4 +47,11 @@ describe Virtus::Coercion::String, '.to_float' do
 
     it { should equal(string) }
   end
+
+  context 'string starts with e' do
+    let(:string) { 'e1' }
+
+    # In further version it will raise exception
+    it { should == 'e1' }
+  end
 end
