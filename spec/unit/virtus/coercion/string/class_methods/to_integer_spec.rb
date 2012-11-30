@@ -30,6 +30,11 @@ describe Virtus::Coercion::String, '.to_integer' do
     '.1e-1'        => 0,
     '.1E+1'        => 1,
     '.1E-1'        => 0,
+    '1e1'          => 10,
+    '1E+1'         => 10,
+    '+1e-1'        => 0,
+    '-1E1'         => -10,
+    '-1e-1'        => 0,
     min_float.to_s => min_float.to_i,
     max_float.to_s => max_float.to_i,
   }.each do |value, expected|
@@ -52,5 +57,12 @@ describe Virtus::Coercion::String, '.to_integer' do
     let(:string) { '334490140000101135' }
 
     it { should == 334490140000101135  }
+  end
+
+  context 'string starts with e' do
+    let(:string) { 'e1' }
+
+    # In further version it will raise exception
+    it { should == 'e1' }
   end
 end
