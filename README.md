@@ -233,13 +233,13 @@ Here's an example:
 ``` ruby
 class Book
   include Virtus
-  
+
   attribute :title, String
 end
 
 class Library
   include Virtus
-  
+
   attribute :books, Array[Book]
 end
 
@@ -258,7 +258,7 @@ mutation methods that perform coercions. For example:
 ``` ruby
 class Book
   include Virtus
-  
+
   attribute :title, String
 end
 
@@ -274,7 +274,7 @@ end
 
 class Library
   include Virtus
-  
+
   attribute :books, BookCollection[Book]
 end
 
