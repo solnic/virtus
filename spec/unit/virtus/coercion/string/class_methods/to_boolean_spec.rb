@@ -9,7 +9,7 @@ describe Virtus::Coercion::String, '.to_boolean' do
     context "with #{value.inspect}" do
       let(:string) { value }
 
-      it { should be(true) }
+      it { should equal(true) }
     end
   end
 
@@ -17,7 +17,7 @@ describe Virtus::Coercion::String, '.to_boolean' do
     context "with #{value.inspect}" do
       let(:string) { value }
 
-      it { should be(false) }
+      it { should equal(false) }
     end
   end
 
