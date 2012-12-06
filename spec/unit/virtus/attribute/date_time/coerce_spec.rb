@@ -64,7 +64,7 @@ describe Virtus::Attribute::DateTime, '#coerce' do
     let(:value) { 1302139609 }
 
     it_should_behave_like 'a correct date time'
-    it { should == ::DateTime.strptime(value.to_s, "%s") }
+    it { should == ::DateTime.strptime((value * 10**3).to_s, "%Q") }
   end
 
   context 'with a float with the seconds and milliseconds since the Unix Epoch' do

@@ -34,5 +34,6 @@ measurements
 .bundle
 Gemfile.lock
 bin/
+vendor/
 
 ## PROJECT::SPECIFIC

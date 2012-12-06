@@ -66,7 +66,8 @@ module Virtus
       #
       # @api public
       def self.to_datetime(value)
-        ::DateTime.strptime(value.to_s, "%s")
+        # OPTIMIZE: We should use "%s"(seconds) but there is a bug in rubinius: see issue #2082
+        ::DateTime.strptime((value * 10**3).to_s, "%Q")
       end
 
     end # class Fixnum
