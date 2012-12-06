@@ -67,8 +67,13 @@ module Virtus
       # @api public
       def self.to_datetime(value)
         # FIXME: Remove after Rubinius 2.0 is released
-        datetime_format = RUBY_ENGINE == 'rbx' ? '%Q' : '%s'
-        value = RUBY_ENGINE == 'rbx' ? "#{value * 10**3}" : "#{value}"
+        if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
+          datetime_format = '%Q'
+          value = "#{value * 10**3}"
+        else
+          datetime_format = '%s'
+          value = "#{value}"
+        end
 
         ::DateTime.strptime(value, datetime_format)
       end
