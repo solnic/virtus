@@ -60,14 +60,17 @@ module Virtus
       # @example
       #   Virtus::Coercion::Fixnum.to_datetime(0)  # => Thu, 01 Jan 1970 00:00:00 +0000
       #
-      # @param [Fixnum] value
+      # @param [Integer] value
       #
       # @return [DateTime]
       #
       # @api public
       def self.to_datetime(value)
-        # OPTIMIZE: We should use "%s"(seconds) but there is a bug in rubinius: see issue #2082
-        ::DateTime.strptime((value * 10**3).to_s, "%Q")
+        # FIXME: Remove after Rubinius 2.0 is released
+        datetime_format = RUBY_ENGINE == 'rbx' ? '%Q' : '%s'
+        value = RUBY_ENGINE == 'rbx' ? "#{value * 10**3}" : "#{value}"
+
+        ::DateTime.strptime(value, datetime_format)
       end
 
     end # class Fixnum

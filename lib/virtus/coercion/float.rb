@@ -22,10 +22,10 @@ module Virtus
       # Coerce given value to a DateTime
       #
       # @example
-      #   date = Virtus::Coercion::Float.to_datetime(1000000000.999)  # => Sun, 09 Sep 2001 01:46:40 +0000
-      #   date.to_f  # => 1000000000.999
+      #   datetime = Virtus::Coercion::Float.to_datetime(1000000000.999)  # => Sun, 09 Sep 2001 01:46:40 +0000
+      #   datetime.to_f  # => 1000000000.999
       #
-      # @param [Fixnum] value
+      # @param [Float] value
       #
       # @return [DateTime]
       #
