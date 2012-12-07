@@ -1,6 +1,5 @@
-require 'rake'
+# encoding: utf-8
 
-FileList['tasks/**/*.rake'].each { |task| import task }
+require 'devtools'
 
-desc 'Default: run all specs'
-task :default => :spec
+Devtools.init
