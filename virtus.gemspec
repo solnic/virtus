@@ -16,7 +16,8 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files -- {spec}/*`.split("\n")
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
 
-  gem.add_dependency('backports', '~> 2.6.1')
+  gem.add_dependency('backports',           '~> 2.6.1')
+  gem.add_dependency('descendants_tracker', '~> 0.0.1')
 
   gem.add_development_dependency('rake',  '~> 0.9.2')
   gem.add_development_dependency('rspec', '~> 2.12')

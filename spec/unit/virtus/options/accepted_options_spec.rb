@@ -7,7 +7,7 @@ describe Virtus::Options, '#accepted_options' do
 
   let(:object) do
     Class.new do
-      extend Virtus::DescendantsTracker
+      extend DescendantsTracker
       extend Virtus::Options
     end
   end

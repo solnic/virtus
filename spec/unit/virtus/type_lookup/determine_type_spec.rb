@@ -5,7 +5,7 @@ describe Virtus::TypeLookup, '#determine_type' do
 
   let!(:object) do
     Class.new do
-      extend Virtus::DescendantsTracker
+      extend DescendantsTracker
       extend Virtus::TypeLookup
     end
   end

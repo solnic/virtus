@@ -5,7 +5,7 @@ describe Virtus::Options, '#options' do
 
   let(:object) do
     Class.new do
-      extend Virtus::Options, Virtus::DescendantsTracker
+      extend Virtus::Options, DescendantsTracker
     end
   end
 

@@ -47,7 +47,8 @@ module Virtus
 
 end # module Virtus
 
-require 'virtus/support/descendants_tracker'
+require 'descendants_tracker'
+
 require 'virtus/support/type_lookup'
 require 'virtus/support/options'
 require 'virtus/support/equalizer'

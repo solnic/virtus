@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Virtus::Options, '#accept_options' do
   class Model
-    extend Virtus::DescendantsTracker
+    extend DescendantsTracker
     extend Virtus::Options
   end
 
