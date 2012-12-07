@@ -27,7 +27,7 @@ group :metrics do
   gem 'reek',      '~> 1.2.8', :git => 'https://github.com/dkubb/reek.git'
   gem 'roodi',     '~> 2.1.0'
   gem 'yardstick', '~> 0.8.0'
-  gem 'mutant',    '~> 0.2.0', :git => 'https://github.com/mbj/mutant.git'
+  gem 'mutant',    '~> 0.2.0'
 
   platforms :ruby_18, :ruby_19 do
     # this indirectly depends on ffi which does not build on ruby-head
