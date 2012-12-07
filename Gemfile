@@ -2,6 +2,6 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'devtools', :git => 'https://github.com/mbj/devtools', :branch => 'rspec-2-mutant'
+gem 'devtools', :git => 'https://github.com/mbj/devtools'
 
 eval File.read('Gemfile.devtools')
