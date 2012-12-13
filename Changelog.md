@@ -1,4 +1,4 @@
-# v0.5.3 2012-09-01 2012-12-13
+# v0.5.3 2012-12-13
 
 * [feature] Added Hash member type coercion [example](https://github.com/solnic/virtus#hash-attributes-coercion) (greyblake)
 * [fixed] Fixed issues with String=>Integer coercion and e-notation (greyblake)
