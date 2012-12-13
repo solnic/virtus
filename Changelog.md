@@ -1,3 +1,12 @@
+# v0.5.3 2012-09-01 2012-12-13
+
+* [feature] Added Hash member type coercion [example](https://github.com/solnic/virtus#hash-attributes-coercion) (greyblake)
+* [fixed] Fixed issues with String=>Integer coercion and e-notation (greyblake)
+* [changed] Replaced internal DescendantsTracker with the extracted gem (solnic)
+* [interal] Switched to rspec 2 and mutant for mutation testing (mbj)
+
+[Compare v0.5.2..v0.5.3](https://github.com/solnic/virtus/compare/v0.5.2...v0.5.3)
+
 # v0.5.2 2012-09-01
 
 * [feature] Object is now the default attribute type (dkubb)
