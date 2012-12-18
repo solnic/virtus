@@ -83,6 +83,8 @@ module Virtus
       case class_or_name
       when ::Class
         Attribute::EmbeddedValue.determine_type(class_or_name) || super
+      when ::String
+        super
       when ::Enumerable
         super(class_or_name.class)
       else
