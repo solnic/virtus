@@ -75,12 +75,10 @@ module Virtus
       # @api private
       def initialize(*)
         super
-        if @options.has_key?(:key_type) && @options.has_key?(:value_type)
-          @key_type   = @options[:key_type]
-          @value_type = @options[:value_type]
-          @key_type_instance   = Attribute.build(@name, @key_type)
-          @value_type_instance = Attribute.build(@name, @value_type)
-        end
+        @key_type   = @options[:key_type] || Object
+        @value_type = @options[:value_type] || Object
+        @key_type_instance   = Attribute.build(@name, @key_type)
+        @value_type_instance = Attribute.build(@name, @value_type)
       end
 
       # Coerce a hash with keys and values
@@ -93,21 +91,9 @@ module Virtus
       def coerce(value)
         coerced = super
         return coerced unless coerced.respond_to?(:each_with_object)
-        coerced.each_with_object({}) do |key_and_value, hash|
-          key   = coerce_key(key_and_value[0])
-          value = coerce_value(key_and_value[1])
-          hash[key] = value
+        coerced.each_with_object({}) do |(key, value), hash|
+          hash[@key_type_instance.coerce(key)] = @value_type_instance.coerce(value)
         end
-      end
-
-      private
-
-      def coerce_key(key)
-        @key_type_instance ? @key_type_instance.coerce(key) : key
-      end
-
-      def coerce_value(value)
-        @value_type_instance ? @value_type_instance.coerce(value) : value
       end
 
     end # class Hash
