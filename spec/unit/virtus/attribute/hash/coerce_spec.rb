@@ -17,4 +17,12 @@ describe Virtus::Attribute::Hash, '#coerce' do
 
     it { should be(:symbol) }
   end
+
+  context "without Hash Coerce type define" do
+    let(:options) { { } }
+    let(:input_value) { { :one => '1', 'two' => 2 } }
+
+    it { should eq(:one => '1', 'two' => 2) }
+
+  end
 end
