@@ -72,4 +72,46 @@ describe Virtus::Attribute, '.determine_type' do
 
     it { should equal(Virtus::Attribute::Set) }
   end
+
+  context 'with an instance of an enumerable' do
+    before do
+      module Examples
+        class EnumerableClass
+          include Enumerable
+
+          def self.[](*args)
+            new
+          end
+        end
+
+        class EnumerableAttribute < Virtus::Attribute::Collection
+          primitive EnumerableClass
+        end
+      end
+    end
+
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Examples::EnumerableClass[String] }
+
+    it { should equal(Examples::EnumerableAttribute) }
+  end
+
+  context 'with an instance of an array subclass' do
+    before do
+      module Examples
+        ArraySubclass = Class.new(Array)
+
+        class ArraySubclassAttribute < Virtus::Attribute::Collection
+          primitive ArraySubclass
+        end
+      end
+    end
+
+    subject { object.determine_type(primitive) }
+
+    let(:primitive) { Examples::ArraySubclass[String] }
+
+    it { should equal(Examples::ArraySubclassAttribute) }
+  end
 end
