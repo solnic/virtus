@@ -55,6 +55,29 @@ module Virtus
         end
       end
 
+      # Coerce given value to a DateTime
+      #
+      # @example
+      #   Virtus::Coercion::Fixnum.to_datetime(0)  # => Thu, 01 Jan 1970 00:00:00 +0000
+      #
+      # @param [Integer] value
+      #
+      # @return [DateTime]
+      #
+      # @api public
+      def self.to_datetime(value)
+        # FIXME: Remove after Rubinius 2.0 is released
+        if defined?(RUBY_ENGINE) && RUBY_ENGINE == 'rbx'
+          datetime_format = '%Q'
+          value = "#{value * 10**3}"
+        else
+          datetime_format = '%s'
+          value = "#{value}"
+        end
+
+        ::DateTime.strptime(value, datetime_format)
+      end
+
     end # class Fixnum
   end # class Coercion
 end # module Virtus

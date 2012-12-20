@@ -60,6 +60,18 @@ describe Virtus::Attribute::DateTime, '#coerce' do
     end
   end
 
+  context 'with an integer with the seconds since the Unix Epoch' do
+    let(:value) { 1302139609 }
+
+    it_should_behave_like 'a correct date time'
+  end
+
+  context 'with a float with the seconds and milliseconds since the Unix Epoch' do
+    let(:value) { 1302139609.664 }
+
+    it_should_behave_like 'a correct date time'
+  end
+
   context 'with a on-date value' do
     let(:value) { 'non-date' }
 
