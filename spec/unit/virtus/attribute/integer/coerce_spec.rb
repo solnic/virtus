@@ -59,6 +59,12 @@ describe Virtus::Attribute::Integer, '#coerce' do
     it { should eql(0) }
   end
 
+  context 'with a positive string float and leading non-significant digits' do
+    let (:value) { '00.0' }
+
+    it { should eql(0) }
+  end
+
   context 'with a zero float' do
     let(:value) { 0.0 }
 
@@ -101,7 +107,7 @@ describe Virtus::Attribute::Integer, '#coerce' do
     it { should eql(value.to_i) }
   end
 
-  [ Object.new, true, false, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
+  [ Object.new, true, false, '0.', '-.0', 'string' ].each do |non_num_value|
     context 'does not coerce non-numeric value #{non_num_value.inspect}' do
       let(:value) { non_num_value }
 

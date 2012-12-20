@@ -59,6 +59,12 @@ describe Virtus::Attribute::Decimal, '#coerce' do
     it { should eql(BigDecimal('0.41')) }
   end
 
+  context 'with a positive string float and leading non-significant digits' do
+    let (:value) { '00.0' }
+
+    it { should eql(BigDecimal('0.0')) }
+  end
+
   context 'with a zero integer' do
     let(:value) { 0 }
 
@@ -107,7 +113,7 @@ describe Virtus::Attribute::Decimal, '#coerce' do
     it { should eql(BigDecimal('-24.35')) }
   end
 
-  [ Object.new, true, '00.0', '0.', '-.0', 'string' ].each do |non_num_value|
+  [ Object.new, true, '0.', '-.0', 'string' ].each do |non_num_value|
     context 'with a non-numeric value = #{non_num_value.inspect}' do
       let(:value) { non_num_value }
 
