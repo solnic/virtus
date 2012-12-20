@@ -4,17 +4,16 @@ describe Virtus::Attribute::Collection, '#coerce' do
   subject { object.coerce(value) }
 
   let(:described_class) { Class.new(Virtus::Attribute::Collection) }
-  let(:object)          { described_class.new(:things) }
-  let(:value)           { [ entry ] }
-  let(:entry)           { mock('entry') }
+  let(:object)          { described_class.new(:things)             }
+  let(:primitive)       { ::Array                                  }
+  let(:entry)           { mock('entry')                            }
 
   before do
-    described_class.primitive ::Array
-    value.should_receive(:respond_to?).with(:inject).and_return(respond_to_inject)
+    described_class.primitive primitive
   end
 
-  context 'when coerced value responds to #inject' do
-    let(:respond_to_inject) { true }
+  context 'when coerced value responds to #each_with_object' do
+    let(:value) { [ entry ] }
 
     context 'when the object has not implemented #coerce_and_append_member' do
       specify { expect { subject }.to raise_error(NotImplementedError, "#{object.class}#coerce_and_append_member has not been implemented") }
@@ -27,13 +26,17 @@ describe Virtus::Attribute::Collection, '#coerce' do
         end
       end
 
-      it { should eql(value) }
+      it { should be_instance_of(primitive) }
+
+      it { should == value }
+
+      it { should_not equal(value) }
     end
   end
 
-  context 'when coerced value does not respond to #inject' do
-    let(:respond_to_inject) { false }
+  context 'when coerced value does not respond to #each_with_object' do
+    let(:value) { stub }
 
-    it { should eql(value) }
+    it { should equal(value) }
   end
 end

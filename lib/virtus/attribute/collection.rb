@@ -44,12 +44,12 @@ module Virtus
         end
       end
 
-      # Init an instance of Virtus::Attribute::Collection
+      # Initialize an instance of {Virtus::Attribute::Collection}
       #
       # @api private
       def initialize(*)
         super
-        @member_type = @options.fetch(:member_type, Virtus::Attribute::Object)
+        @member_type          = @options.fetch(:member_type, Object)
         @member_type_instance = Attribute.build(@name, @member_type)
       end
 
@@ -62,9 +62,9 @@ module Virtus
       # @api private
       def coerce(value)
         coerced = super
-        return coerced unless coerced.respond_to?(:inject)
-        coerced.inject(new_collection) do |*args|
-          coerce_and_append_member(*args)
+        return coerced unless coerced.respond_to?(:each_with_object)
+        coerced.each_with_object(new_collection) do |entry, collection|
+          coerce_and_append_member(collection, entry)
         end
       end
 
@@ -109,6 +109,7 @@ module Virtus
         def coerce_and_append_member(collection, entry)
           collection << @member_type_instance.coerce(entry)
         end
+
       end # module MemberCoercion
 
     end # class Array

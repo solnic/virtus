@@ -1,28 +1,27 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::Hash, '#coerce' do
-  subject { object.coerce(input_value) }
+  subject { object.coerce(value) }
 
   let(:options) { { :key_type => String, :value_type => Float } }
   let(:object)  { Virtus::Attribute::Hash.new('stuff', options) }
 
-  context 'respond to `inject`' do
-    let(:input_value) { { :one => '1', 'two' => 2 } }
+  context 'when coerced value responds to #each_with_object' do
+    let(:value) { { :one => '1', 'two' => 2 } }
 
     it { should eql('one' => 1.0, 'two' => 2.0) }
   end
 
-  context 'does not respond to `inject`' do
-    let(:input_value) { :symbol }
+  context 'when coerced value does not respond to #each_with_object' do
+    let(:value) { stub }
 
-    it { should be(:symbol) }
+    it { should equal(value) }
   end
 
-  context "without Hash Coerce type define" do
-    let(:options) { { } }
-    let(:input_value) { { :one => '1', 'two' => 2 } }
+  context 'without Hash coerce type define' do
+    let(:options) { {}                          }
+    let(:value)   { { :one => '1', 'two' => 2 } }
 
     it { should eq(:one => '1', 'two' => 2) }
-
   end
 end

@@ -66,17 +66,18 @@ module Virtus
         elsif type.size > 1
           raise ArgumentError, "more than one [key => value] pair in `#{type.inspect}`"
         else
-          options.merge(:key_type => type.keys.first, :value_type => type.values.first)
+          key_type, value_type = type.first
+          options.merge(:key_type => key_type, :value_type => value_type)
         end
       end
 
-      # Initializes an instance of {Virtus::Attribute::Hash}
+      # Initialize an instance of {Virtus::Attribute::Hash}
       #
       # @api private
       def initialize(*)
         super
-        @key_type   = @options[:key_type] || Object
-        @value_type = @options[:value_type] || Object
+        @key_type            = @options.fetch(:key_type,   Object)
+        @value_type          = @options.fetch(:value_type, Object)
         @key_type_instance   = Attribute.build(@name, @key_type)
         @value_type_instance = Attribute.build(@name, @value_type)
       end
@@ -91,9 +92,20 @@ module Virtus
       def coerce(value)
         coerced = super
         return coerced unless coerced.respond_to?(:each_with_object)
-        coerced.each_with_object({}) do |(key, value), hash|
+        coerced.each_with_object(new_hash) do |(key, value), hash|
           hash[@key_type_instance.coerce(key)] = @value_type_instance.coerce(value)
         end
+      end
+
+    private
+
+      # Return an instance of the hash
+      #
+      # @return [Hash]
+      #
+      # @api private
+      def new_hash
+        self.class.primitive.new
       end
 
     end # class Hash
