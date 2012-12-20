@@ -9,7 +9,7 @@ module Virtus
       FALSE_VALUES = %w[ 0 off f false n no  ].freeze
       BOOLEAN_MAP  = ::Hash[ TRUE_VALUES.product([ true ]) + FALSE_VALUES.product([ false ]) ].freeze
 
-      INTEGER_REGEXP    = /[-+]?(?:0|[1-9]\d*)/.freeze
+      INTEGER_REGEXP    = /[-+]?(?:[0-9]\d*)/.freeze
       EXPONENT_REGEXP   = /(?:[eE][-+]?\d+)/.freeze
       FRACTIONAL_REGEXP = /(?:\.\d+)/.freeze
 
