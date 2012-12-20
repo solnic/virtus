@@ -89,7 +89,7 @@ module Virtus
 
     # Add the attribute to the class' and descendants' attributes
     #
-    # @param [Attribute]
+    # @param [Attribute] attribute
     #
     # @return [undefined]
     #

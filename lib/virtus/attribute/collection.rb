@@ -27,9 +27,9 @@ module Virtus
 
       # Handles collection with member_type syntax
       #
-      # @param [Class]
+      # @param [Class] type
       #
-      # @param [Hash]
+      # @param [Hash] options
       #
       # @return [Hash]
       #
@@ -55,7 +55,7 @@ module Virtus
 
       # Coerce a collection with members
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [Object]
       #

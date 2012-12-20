@@ -18,8 +18,7 @@ module Virtus
       # @example with n object that responds to #to_ary
       #   Virtus::Coercion::Object.to_array([ value ])     # => [ value ]
       #
-      # @param [#to_a,#to_ary,Object] value
-      # @param [#to_a,#to_ary,Object] value
+      # @param [#to_a, #to_ary, Object] value
       #
       # @return [Array]
       #
@@ -90,7 +89,9 @@ module Virtus
 
       # Passthrough given value
       #
-      # @param [Object] value
+      # @param [Symbol] method
+      #
+      # @param [Object] args
       #
       # @return [Object]
       #

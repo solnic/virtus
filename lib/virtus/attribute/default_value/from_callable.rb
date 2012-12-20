@@ -20,7 +20,7 @@ module Virtus
 
         # Evaluates the value via value#call
         #
-        # @param [Object]
+        # @param [Object] args
         #
         # @return [Object] evaluated value
         #

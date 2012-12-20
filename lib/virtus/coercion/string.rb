@@ -117,7 +117,7 @@ module Virtus
       # @example with "F"
       #   Virtus::Coercion::String.to_boolean('F')  # => false
       #
-      # @param [#to_s]
+      # @param [String] value
       #
       # @return [Boolean]
       #
@@ -131,7 +131,7 @@ module Virtus
       # @example
       #   Virtus::Coercion::String.to_integer('1')  # => 1
       #
-      # @param [Object] value
+      # @param [String] value
       #
       # @return [Integer]
       #
@@ -152,7 +152,7 @@ module Virtus
       # @example
       #   Virtus::Coercion::String.to_float('1.2')  # => 1.2
       #
-      # @param [Object] value
+      # @param [String] value
       #
       # @return [Float]
       #
@@ -166,7 +166,7 @@ module Virtus
       # @example
       #   Virtus::Coercion::String.to_decimal('1.2')  # => #<BigDecimal:b72157d4,'0.12E1',8(8)>
       #
-      # @param [Object] value
+      # @param [String] value
       #
       # @return [BigDecimal]
       #

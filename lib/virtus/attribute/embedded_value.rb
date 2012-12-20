@@ -55,7 +55,7 @@ module Virtus
 
       # Coerce attributes into a virtus object
       #
-      # @param [Hash,Virtus]
+      # @param [Hash,Virtus] value
       #
       # @return [Virtus]
       #

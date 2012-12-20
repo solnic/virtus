@@ -241,7 +241,7 @@ module Virtus
 
     # Define reader and writer methods for an Attribute
     #
-    # @param [Attribute] attribute
+    # @param [Module] mod
     #
     # @return [self]
     #

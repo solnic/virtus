@@ -18,7 +18,7 @@ module Virtus
 
   # Extends base class or a module with virtus methods
   #
-  # @param [Class] descendant
+  # @param [Object] object
   #
   # @return [undefined]
   #

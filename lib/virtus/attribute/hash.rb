@@ -53,9 +53,9 @@ module Virtus
 
       # Handles hashes with [key_type => value_type] syntax.
       #
-      # @param [Class]
+      # @param [Class] type
       #
-      # @param [Hash]
+      # @param [Hash] options
       #
       # @return [Hash]
       #
@@ -84,7 +84,7 @@ module Virtus
 
       # Coerce a hash with keys and values
       #
-      # @param [Object]
+      # @param [Object] value
       #
       # @return [Object]
       #

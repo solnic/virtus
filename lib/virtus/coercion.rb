@@ -19,7 +19,7 @@ module Virtus
     #   Virtus::Coercion['String'] # => Virtus::Coercion::String
     #   Virtus::Coercion[String]   # => Virtus::Coercion::String
     #
-    # @param [String]
+    # @param [String] name
     #
     # @return [Class]
     #
