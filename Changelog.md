@@ -1,3 +1,12 @@
+# v0.5.4 2012-12-20
+
+* [feature] Allow *any* enumerable to be a collection attribute (aptinio)
+* [feature] Add Integer.to_datetime and Float.to_datetime coercion (brutuscat)
+* [fixed] Fixed a regression with Hash attribute introduced by key/member coercion (shingara)
+* [fixed] Change leading non-significant digit type coercion to be coerced (maskact)
+
+[Compare v0.5.3..v0.5.4](https://github.com/solnic/virtus/compare/v0.5.3...v0.5.4)
+
 # v0.5.3 2012-12-13
 
 * [feature] Added Hash member type coercion [example](https://github.com/solnic/virtus#hash-attributes-coercion) (greyblake)
