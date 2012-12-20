@@ -84,7 +84,7 @@ module Virtus
       descendants.reverse_each do |descendant|
         descendant_primitive = descendant.primitive
         next unless primitive <= descendant_primitive
-        type = descendant if type.nil? or type.primitive > descendant_primitive
+        type = descendant if type.nil? || type.primitive > descendant_primitive
       end
       type
     end
@@ -100,7 +100,7 @@ module Virtus
     #
     # @api private
     def determine_type_from_string(string)
-      if string =~ TYPE_FORMAT and const_defined?(string, *EXTRA_CONST_ARGS)
+      if string =~ TYPE_FORMAT && const_defined?(string, *EXTRA_CONST_ARGS)
         const_get(string, *EXTRA_CONST_ARGS)
       end
     end
