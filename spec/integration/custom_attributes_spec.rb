@@ -2,14 +2,6 @@ require 'spec_helper'
 
 describe 'custom attributes' do
 
-  #module Coercible
-    #class Coercer
-      #class RegularExpression < Object
-        #primitive RegExp
-      #end
-    #end
-  #end
-
   before do
     module Examples
       class UpperCase < Virtus::Attribute::Object
