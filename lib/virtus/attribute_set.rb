@@ -13,9 +13,9 @@ module Virtus
     #
     # @api private
     def initialize(parent = nil, attributes = [])
-      @parent       = parent
-      @attributes   = attributes.dup
-      @index        = {}
+      @parent     = parent
+      @attributes = attributes.dup
+      @index      = {}
       reset
     end
 

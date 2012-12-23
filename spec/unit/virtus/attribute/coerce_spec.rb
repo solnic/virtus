@@ -13,13 +13,13 @@ describe Virtus::Attribute, '#coerce' do
   let(:coerced)         { stub('coerced')                                                  }
 
   before do
-    Virtus::Coercion.stub(:[]).with(value_class).and_return(coercer)
+    Virtus.coercer.stub(:[]).with(value_class).and_return(coercer)
   end
 
   it { should be(coerced) }
 
   it 'asks for a coercer object' do
-    Virtus::Coercion.should_receive(:[]).with(value_class)
+    Virtus.coercer.should_receive(:[]).with(value_class)
     subject
   end
 

@@ -2,21 +2,23 @@ require 'spec_helper'
 
 describe 'custom attributes' do
 
-  module Virtus
-    class Coercion
-      class String < Virtus::Coercion::Object
-        def self.to_upcase(value)
-          value.upcase
-        end
-      end
-    end
-  end
+  #module Coercible
+    #class Coercer
+      #class RegularExpression < Object
+        #primitive RegExp
+      #end
+    #end
+  #end
 
   before do
     module Examples
       class UpperCase < Virtus::Attribute::Object
         primitive String
         coercion_method :to_upcase
+
+        def coerce(value)
+          super.upcase
+        end
       end
 
       class RegularExpression < Virtus::Attribute::Object

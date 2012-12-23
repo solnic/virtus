@@ -45,9 +45,15 @@ module Virtus
   end
   private_class_method :extended
 
+  # @api public
+  def self.coercer
+    @coercer ||= Coercible::Coercer.new
+  end
+
 end # module Virtus
 
 require 'descendants_tracker'
+require 'coercible'
 
 require 'virtus/support/type_lookup'
 require 'virtus/support/options'
@@ -63,23 +69,6 @@ require 'virtus/instance_methods'
 require 'virtus/value_object'
 
 require 'virtus/attribute_set'
-
-require 'virtus/coercion'
-require 'virtus/coercion/object'
-require 'virtus/coercion/numeric'
-require 'virtus/coercion/integer'
-require 'virtus/coercion/float'
-require 'virtus/coercion/decimal'
-require 'virtus/coercion/false_class'
-require 'virtus/coercion/true_class'
-require 'virtus/coercion/hash'
-require 'virtus/coercion/array'
-require 'virtus/coercion/time_coercions'
-require 'virtus/coercion/date'
-require 'virtus/coercion/date_time'
-require 'virtus/coercion/time'
-require 'virtus/coercion/string'
-require 'virtus/coercion/symbol'
 
 require 'virtus/attribute/default_value'
 require 'virtus/attribute/default_value/from_clonable'
