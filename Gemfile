@@ -2,8 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-#gem 'coercible', :git => 'https://github.com/solnic/coercible'
-gem 'coercible', :path => '../coercible'
+gem 'coercible', :git => 'https://github.com/solnic/coercible'
 
 gem 'devtools', :git => 'https://github.com/datamapper/devtools'
 
