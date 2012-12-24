@@ -80,6 +80,6 @@ describe Virtus::Attribute::Boolean, '#coerce' do
   context 'with "Foo"' do
     let(:value) { 'Foo' }
 
-    it { should equal(value) }
+    specify { expect { subject }.to raise_error }
   end
 end
