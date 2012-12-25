@@ -1,4 +1,5 @@
 language: ruby
+before_install: gem install bundler
 bundler_args: --without guard metrics
 script: "bundle exec rake spec"
 rvm:
