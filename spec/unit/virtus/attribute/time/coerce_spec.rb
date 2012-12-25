@@ -62,6 +62,8 @@ describe Virtus::Attribute::Time, '#coerce' do
   context 'with a non-date value' do
     let(:value) { '2999' }
 
-    it { should equal(value) }
+    specify do
+      expect { subject }.to raise_error(Coercible::UnsupportedCoercion)
+    end
   end
 end

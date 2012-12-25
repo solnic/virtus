@@ -75,6 +75,8 @@ describe Virtus::Attribute::DateTime, '#coerce' do
   context 'with a on-date value' do
     let(:value) { 'non-date' }
 
-    it { should equal(value) }
+    specify do
+      expect { subject }.to raise_error(Coercible::UnsupportedCoercion)
+    end
   end
 end
