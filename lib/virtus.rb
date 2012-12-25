@@ -41,8 +41,8 @@ module Virtus
   private_class_method :extended
 
   # @api public
-  def self.coercer
-    @coercer ||= Coercible::Coercer.new
+  def self.coercer(&block)
+    @coercer ||= Coercible::Coercer.new(&block)
   end
 
 end # module Virtus

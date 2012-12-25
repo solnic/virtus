@@ -47,6 +47,11 @@ module Virtus
     # @api private
     attr_reader :default
 
+    # Returns coercer instance
+    #
+    # @api private
+    attr_reader :coercer
+
     # Builds an attribute instance
     #
     # @param [Symbol] name
@@ -132,6 +137,7 @@ module Virtus
       @coercion_method        = @options.fetch(:coercion_method)
       @default                = DefaultValue.build(@options[:default])
       @coerce                 = options.fetch(:coerce, true)
+      @coercer                = options.fetch(:coercer, Virtus.coercer)
       initialize_visibility
     end
 
@@ -226,7 +232,7 @@ module Virtus
     #
     # @api public
     def coerce(value)
-      Virtus.coercer[value.class].public_send(coercion_method, value)
+      coercer[value.class].public_send(coercion_method, value)
     end
 
     # Is the given value coerced into the target type for this attribute?

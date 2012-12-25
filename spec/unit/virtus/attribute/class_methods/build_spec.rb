@@ -44,4 +44,12 @@ describe Virtus::Attribute, '.build' do
 
     specify { expect { subject }.to raise_error(ArgumentError, '"test" does not map to an attribute type') }
   end
+
+  context 'with a custom coercer' do
+    let(:coercer) { stub('coercer') }
+
+    subject { object.build(name, type, :coercer => coercer) }
+
+    its(:coercer) { should be(coercer) }
+  end
 end
