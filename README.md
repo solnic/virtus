@@ -315,45 +315,6 @@ venue_other = Venue.new(
 venue.location === venue_other.location # => true
 ```
 
-### Adding Coercions
-
-Virtus comes with a builtin coercion library.
-It's super easy to add your own coercion classes.
-Take a look:
-
-``` ruby
-require 'digest/md5'
-
-# Our new attribute type
-class MD5 < Virtus::Attribute::Object
-  primitive String
-  coercion_method :to_md5
-end
-
-# Defining the Coercion method
-module Virtus
-  class Coercion
-    class String < Virtus::Coercion::Object
-      def self.to_md5(value)
-        Digest::MD5.hexdigest value
-      end
-    end
-  end
-end
-
-# And now the user!
-class User
-  include Virtus
-
-  attribute :name, String
-  attribute :password, MD5
-end
-
-user = User.new(:name => 'Piotr', :password => 'foobar')
-user.name # => 'Piotr'
-user.password # => '3858f62230ac3c915f300c664312c63f'
-```
-
 ### Custom Attributes
 
 ``` ruby
