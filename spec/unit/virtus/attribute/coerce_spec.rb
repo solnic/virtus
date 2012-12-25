@@ -19,7 +19,7 @@ describe Virtus::Attribute, '#coerce' do
   it { should be(coerced) }
 
   it 'asks for a coercer object' do
-    Virtus.coercer.should_receive(:[]).with(value_class)
+    object.coercer.should_receive(:[]).with(value_class)
     subject
   end
 
