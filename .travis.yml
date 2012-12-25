@@ -4,17 +4,14 @@ bundler_args: --without guard metrics
 script: "bundle exec rake spec"
 rvm:
   - 1.8.7
+  - ree
   - 1.9.2
   - 1.9.3
   - jruby-18mode
+  - jruby-19mode
+  - jruby-head
   - rbx-18mode
   - rbx-19mode
-  - ree
-  - jruby-head
-matrix:
-  allow_failures:
-    - rvm: jruby-head
-    - rvm: jruby-19mode
 notifications:
   email:
     - piotr.solnica@gmail.com
