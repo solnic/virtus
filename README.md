@@ -26,6 +26,24 @@ or in your **Gemfile**
 gem 'virtus'
 ```
 
+Coercions
+---------
+
+Virtus uses [Coercible](https://github.com/solnic/coercible) for coercions. This
+feature is turned on by default. You can turn it off for all attributes like that:
+
+```ruby
+# Turn coercions off globally
+Virtus::Attribute.coerce(false)
+
+# ...or you can turn it off for a single attribute
+class User
+  include Virtus
+
+  attribute :name, String, :coerce => false
+end
+```
+
 Examples
 --------
 
