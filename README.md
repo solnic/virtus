@@ -44,6 +44,30 @@ class User
 end
 ```
 
+You can configure coercers too:
+
+```ruby
+Virtus.coercer do |config|
+  config.string.boolean_map = { true => 'yup', false => 'nope' }
+end
+
+# Virtus.coercer instance is used by default for all attributes.
+# You *can* override it for a single attribute if you want:
+
+my_cool_coercer = Coercible::Coercer.new do |config|
+  # some customization
+end
+
+class User
+  include Virtus
+
+  attribute :name, String, :coercer => my_cool_coercer
+end
+```
+
+Please check out [Coercible README](https://github.com/solnic/coercible/blob/master/README.md)
+for more information.
+
 Examples
 --------
 
