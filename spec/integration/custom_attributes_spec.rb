@@ -4,9 +4,8 @@ describe 'custom attributes' do
 
   before do
     module Examples
-      class UpperCase < Virtus::Attribute::Object
-        primitive String
-        coercion_method :to_upcase
+      class UpperCase < Virtus::Attribute::String
+        include Coercion
 
         def coerce(value)
           super.upcase

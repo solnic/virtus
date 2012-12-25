@@ -5,7 +5,7 @@ describe Virtus::Attribute, '.merge_options' do
 
   let(:object)  { described_class }
   let(:type)    { stub('type')    }
-  let(:options) { stub('options') }
+  let(:options) { {} }
 
-  it { should == options }
+  it { should == { :coerce => true } }
 end

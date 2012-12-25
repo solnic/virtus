@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::EmbeddedValue, '#coerce' do
   subject { object.coerce(value) }
 
-  let(:object)   { described_class.new(:name, :primitive => primitive) }
+  let(:object)   { described_class.new(:name, :primitive => primitive).extend(Virtus::Attribute::Coercion) }
   let(:instance) { Object.new                                          }
   let(:value)    { primitive.new                                       }
 

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute, '#coerce' do
   subject { object.coerce(value) }
 
-  let(:object)          { described_class.new(:name, options)                              }
+  let(:object)          { described_class.new(:name, options).extend(Virtus::Attribute::Coercion) }
   let(:options)         { { :primitive => primitive, :coercion_method => coercion_method } }
   let(:primitive)       { stub('primitive')                                                }
   let(:coercion_method) { stub('coercion_method')                                          }

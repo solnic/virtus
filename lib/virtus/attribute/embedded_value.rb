@@ -32,7 +32,8 @@ module Virtus
       #
       # @api private
       def self.merge_options(type, options)
-        options.merge(:primitive => type)
+        merged_options = super
+        merged_options.merge(:primitive => type)
       end
 
       # Determine type based on class

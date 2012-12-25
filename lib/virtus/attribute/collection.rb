@@ -35,13 +35,17 @@ module Virtus
       #
       # @api private
       def self.merge_options(type, options)
+        merged_options = super
+
         if !type.respond_to?(:size)
-          options
+          merged_options
         elsif type.size > 1
           raise NotImplementedError, "build SumType from list of types (#{type.inspect})"
         else
-          options.merge(:member_type => type.first)
+          merged_options.merge!(:member_type => type.first)
         end
+
+        merged_options
       end
 
       # Initialize an instance of {Virtus::Attribute::Collection}
@@ -50,7 +54,7 @@ module Virtus
       def initialize(*)
         super
         @member_type          = @options.fetch(:member_type, Object)
-        @member_type_instance = Attribute.build(@name, @member_type)
+        @member_type_instance = Attribute.build(@name, @member_type, :coerce => coerce?)
       end
 
       # Coerce a collection with members
@@ -112,6 +116,6 @@ module Virtus
 
       end # module MemberCoercion
 
-    end # class Array
+    end # class Collection
   end # class Attribute
 end # module Virtus

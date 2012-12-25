@@ -10,5 +10,5 @@ describe Virtus::Attribute, '#options' do
 
   it { should be_instance_of(Hash) }
 
-  it { should eql(options.merge(:accessor => :public)) }
+  it { should eql(options.merge(:accessor => :public, :coerce => true)) }
 end

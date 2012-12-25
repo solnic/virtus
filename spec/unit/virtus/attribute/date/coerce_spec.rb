@@ -10,7 +10,7 @@ end
 describe Virtus::Attribute::Date, '#coerce' do
   subject { attribute.coerce(value) }
 
-  let(:attribute) { described_class.new(:bday) }
+  let(:attribute) { described_class.new(:bday).extend(Virtus::Attribute::Coercion) }
   let(:year)      { 2011                       }
   let(:month)     { 4                          }
   let(:day)       { 7                          }

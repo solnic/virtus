@@ -10,9 +10,11 @@ module Virtus
     include Equalizer.new(inspect) << :name << :options
 
     accept_options :primitive, :accessor, :reader,
-      :writer, :coercion_method, :default
+      :writer, :coerce, :coercion_method, :default
 
     accessor :public
+
+    coerce true
 
     # Returns name of the attribute
     #
@@ -63,7 +65,9 @@ module Virtus
       attribute_class = determine_type(type) or
         raise ArgumentError, "#{type.inspect} does not map to an attribute type"
       attribute_options = attribute_class.merge_options(type, options)
-      attribute_class.new(name, attribute_options)
+      attribute = attribute_class.new(name, attribute_options)
+      attribute.extend(Coercion) if attribute.coerce?
+      attribute
     end
 
     # Determine attribute type based on class or name
@@ -106,7 +110,7 @@ module Virtus
     #
     # @todo add type arg to Attribute#initialize signature and handle there?
     def self.merge_options(type, options)
-      options
+      { :coerce => coerce }.merge(options)
     end
 
     # Initializes an attribute instance
@@ -127,7 +131,13 @@ module Virtus
       @primitive              = @options.fetch(:primitive)
       @coercion_method        = @options.fetch(:coercion_method)
       @default                = DefaultValue.build(@options[:default])
+      @coerce                 = options.fetch(:coerce, true)
       initialize_visibility
+    end
+
+    # @api public
+    def coerce?
+      @coerce
     end
 
     # Returns a concise string representation of the attribute instance
@@ -187,7 +197,7 @@ module Virtus
     #
     # @api public
     def set(instance, value)
-      set!(instance, coerce(value))
+      set!(instance, value)
     end
 
     # Sets instance variable of the attribute

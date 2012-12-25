@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Boolean, '#coerce' do
   subject { attribute.coerce(value) }
 
-  let(:attribute) { described_class.new(:is_admin) }
+  let(:attribute) { described_class.new(:is_admin).extend(Virtus::Attribute::Coercion) }
 
   context 'with 1' do
     let(:value) { 1 }

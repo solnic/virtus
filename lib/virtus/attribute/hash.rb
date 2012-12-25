@@ -61,14 +61,18 @@ module Virtus
       #
       # @api private
       def self.merge_options(type, options)
+        merged_options = super
+
         if !type.respond_to?(:size)
-          options
+          merged_options
         elsif type.size > 1
           raise ArgumentError, "more than one [key => value] pair in `#{type.inspect}`"
         else
           key_type, value_type = type.first
-          options.merge(:key_type => key_type, :value_type => value_type)
+          merged_options.merge!(:key_type => key_type, :value_type => value_type)
         end
+
+        merged_options
       end
 
       # Initialize an instance of {Virtus::Attribute::Hash}
@@ -78,8 +82,8 @@ module Virtus
         super
         @key_type            = @options.fetch(:key_type,   Object)
         @value_type          = @options.fetch(:value_type, Object)
-        @key_type_instance   = Attribute.build(@name, @key_type)
-        @value_type_instance = Attribute.build(@name, @value_type)
+        @key_type_instance   = Attribute.build(@name, @key_type,   :coerce => coerce?)
+        @value_type_instance = Attribute.build(@name, @value_type, :coerce => coerce?)
       end
 
       # Coerce a hash with keys and values

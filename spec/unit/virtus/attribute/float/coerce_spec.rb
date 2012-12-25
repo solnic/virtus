@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Float, '#coerce' do
   subject { attribute.coerce(value) }
 
-  let(:attribute) { described_class.new(:score) }
+  let(:attribute) { described_class.new(:score).extend(Virtus::Attribute::Coercion) }
 
   context 'with a float' do
     let(:value) { 24.0 }

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Integer, '#coerce' do
   subject { attribute.coerce(value) }
 
-  let(:attribute) { described_class.new(:age) }
+  let(:attribute) { described_class.new(:age).extend(Virtus::Attribute::Coercion) }
 
   context 'with an integer' do
     let(:value) { 24 }

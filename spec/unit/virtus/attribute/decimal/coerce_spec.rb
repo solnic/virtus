@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Decimal, '#coerce' do
   subject { attribute.coerce(value) }
 
-  let(:attribute) { described_class.new(:price) }
+  let(:attribute) { described_class.new(:price).extend(Virtus::Attribute::Coercion) }
 
   context 'with 24.0 big decimal' do
     let(:value) { BigDecimal('24.0') }

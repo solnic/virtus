@@ -26,7 +26,11 @@ describe Virtus::Attribute::Collection, '.merge_options' do
     context 'when size is > 1' do
       let(:size) { 2 }
 
-      specify { expect { subject }.to raise_error(NotImplementedError, "build SumType from list of types (#{type.inspect})") }
+      specify do
+        expect { subject }.to raise_error(
+          NotImplementedError, "build SumType from list of types (#{type.inspect})"
+        )
+      end
     end
   end
 
@@ -35,6 +39,6 @@ describe Virtus::Attribute::Collection, '.merge_options' do
       type.should_receive(:respond_to?).with(:size).and_return(false)
     end
 
-    it { should eql(options) }
+    it { should eql(:coerce => true) }
   end
 end
