@@ -63,6 +63,12 @@ describe 'custom collection attributes' do
       books.should be_kind_of(Examples::BookCollection)
     end
 
+    it 'coerces its members' do
+      library.books = [{ :title => 'Foo' }]
+      books.count.should == 1
+      books.first.should be_kind_of(Examples::Book)
+    end
+
     def books_should_be_an_empty_collection
       books.should be_kind_of(Examples::BookCollection)
       books.count.should == 0

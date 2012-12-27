@@ -37,9 +37,9 @@ module Virtus
       def self.merge_options(type, options)
         merged_options = super
 
-        if !type.respond_to?(:size)
+        if !type.respond_to?(:count)
           merged_options
-        elsif type.size > 1
+        elsif type.count > 1
           raise NotImplementedError, "build SumType from list of types (#{type.inspect})"
         else
           merged_options.merge!(:member_type => type.first)
