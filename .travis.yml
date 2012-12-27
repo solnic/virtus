@@ -12,6 +12,7 @@ rvm:
   - jruby-head
   - rbx-18mode
   - rbx-19mode
+  - ruby-head
 notifications:
   email:
     - piotr.solnica@gmail.com
