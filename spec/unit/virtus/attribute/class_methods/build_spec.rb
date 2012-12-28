@@ -11,8 +11,6 @@ describe Virtus::Attribute, '.build' do
     it { should be_instance_of(Virtus::Attribute::String) }
 
     its(:name) { should be(name) }
-
-    its(:options) { should == Virtus::Attribute::String.options }
   end
 
   context 'with options' do
@@ -23,8 +21,6 @@ describe Virtus::Attribute, '.build' do
     it { should be_instance_of(Virtus::Attribute::String) }
 
     its(:name) { should be(name) }
-
-    its(:options) { should == Virtus::Attribute::String.options }
   end
 
   context 'without a type' do
@@ -33,8 +29,6 @@ describe Virtus::Attribute, '.build' do
     it { should be_instance_of(Virtus::Attribute::Object) }
 
     its(:name) { should be(name) }
-
-    its(:options) { should == Virtus::Attribute::Object.options }
   end
 
   context 'with an invalid type' do
@@ -50,6 +44,8 @@ describe Virtus::Attribute, '.build' do
 
     subject { object.build(name, type, :coercer => coercer) }
 
-    its(:coercer) { should be(coercer) }
+    specify do
+      expect(subject.accessor.writer.coercer).to be(coercer)
+    end
   end
 end
