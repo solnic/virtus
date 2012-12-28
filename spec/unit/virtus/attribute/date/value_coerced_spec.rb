@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Virtus::Attribute::Date, '#value_coerced?' do
   subject { attribute.value_coerced?(value) }
 
-  let(:attribute) { described_class.new(:bday) }
+  let(:attribute) { described_class.new(:bday, accessor) }
+  let(:accessor)  { stub('accessor', :primitive => Date) }
   let(:year)      { 2011                       }
   let(:month)     { 4                          }
   let(:day)       { 7                          }

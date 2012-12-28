@@ -43,7 +43,7 @@ module Virtus
     def self.build(name, type = Object, options = {})
       attribute_class = determine_type(type)
 
-      attribute_options = self.options.merge(options)
+      attribute_options = attribute_class.options.merge(options)
       attribute_options = attribute_class.merge_options(type, attribute_options)
 
       visibility = determine_visibility(attribute_options)
@@ -156,7 +156,7 @@ module Virtus
     #
     # @api private
     def value_coerced?(value)
-      writer.primitive === value
+      accessor.primitive === value
     end
 
     # Define reader and writer methods for an Attribute
@@ -204,7 +204,7 @@ module Virtus
     #
     # @api private
     def public_reader?
-      accessor.reader.public?
+      accessor.public_reader?
     end
 
     # Returns a Boolean indicating whether the writer method is public
@@ -213,7 +213,7 @@ module Virtus
     #
     # @api private
     def public_writer?
-      accessor.writer.public?
+      accessor.public_writer?
     end
 
   end # class Attribute

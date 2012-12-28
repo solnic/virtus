@@ -5,6 +5,8 @@ module Virtus
 
       attr_reader :name
 
+      attr_reader :visibility
+
       attr_reader :default_value
 
       attr_reader :primitive

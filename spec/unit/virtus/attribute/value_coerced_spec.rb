@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Virtus::Attribute, '#value_coerced?' do
   subject { object.value_coerced?(value) }
 
-  let(:object) { described_class::String.new(:name) }
+  let(:object) { described_class::String.new(:name, accessor) }
+  let(:accessor) { stub('accessor', :primitive => String) }
 
   context 'when the value matches the primitive' do
     let(:value) { 'string' }

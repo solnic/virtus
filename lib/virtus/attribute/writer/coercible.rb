@@ -11,7 +11,7 @@ module Virtus
         # @api private
         def initialize(name, visibility, options = {})
           super
-          @coercer         = options.fetch(:coercer)
+          @coercer         = options[:coercer] || Virtus.coercer
           @coercion_method = options.fetch(:coercion_method)
         end
 

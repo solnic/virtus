@@ -20,6 +20,16 @@ module Virtus
       def get(*args)
         reader.get(*args)
       end
+
+      # @api public
+      def public_reader?
+        reader.public?
+      end
+
+      # @api public
+      def public_writer?
+        writer.public?
+      end
     end
 
   end # class Attribute
