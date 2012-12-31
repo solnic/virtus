@@ -21,7 +21,7 @@ module Virtus
     #
     # @return [Symbol]
     #
-    # @api public
+    #  public
     attr_reader :name
 
     attr_reader :accessor
@@ -41,21 +41,33 @@ module Virtus
     #
     # @api private
     def self.build(name, type = Object, options = {})
-      attribute_class = determine_type(type)
+      klass = determine_type(type)
 
-      attribute_options = attribute_class.options.merge(options)
-      attribute_options = attribute_class.merge_options(type, attribute_options)
+      attribute_options = klass.merge_options(type, options)
 
-      visibility = determine_visibility(attribute_options)
+      reader_class = klass.reader_class(attribute_options)
+      writer_class = klass.writer_class(attribute_options)
 
-      reader_class = Reader
-      writer_class = attribute_options[:coerce] ? Writer::Coercible : Writer
-
-      reader   = reader_class.new(name, visibility[:reader])
-      writer   = writer_class.new(name, visibility[:writer], writer_options(attribute_options))
+      reader   = reader_class.new(name, attribute_options[:reader])
+      writer   = writer_class.new(name, attribute_options[:writer], klass.writer_options(attribute_options))
       accessor = Accessor.new(reader, writer)
 
-      attribute_class.new(name, accessor)
+      klass.new(name, accessor)
+    end
+
+    # @api private
+    def self.reader_class(*)
+      Reader
+    end
+
+    # @api private
+    def self.writer_class(options)
+      options[:coerce] ? coercible_writer_class : Writer
+    end
+
+    # @api private
+    def self.coercible_writer_class
+      Writer::Coercible
     end
 
     # Return options accepted by Writer
@@ -64,9 +76,14 @@ module Virtus
     #
     # @api private
     def self.writer_options(attribute_options)
-      [ :coercer, :coercion_method, :primitive ].each_with_object({}) { |key, options|
+      writer_option_names.each_with_object({}) { |key, options|
         options[key] = attribute_options[key]
       }
+    end
+
+    # @api private
+    def self.writer_option_names
+      [ :coercer, :coercion_method, :primitive ]
     end
 
     # Determine attribute type based on class or name
@@ -126,7 +143,8 @@ module Virtus
     #
     # @todo add type arg to Attribute#initialize signature and handle there?
     def self.merge_options(type, options)
-      { :coerce => coerce }.update(options).update(determine_visibility(options))
+      base_options = self.options.merge(options)
+      base_options.update(determine_visibility(base_options))
     end
 
     # Initializes an attribute instance

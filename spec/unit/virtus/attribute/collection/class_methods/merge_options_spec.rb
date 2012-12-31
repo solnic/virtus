@@ -5,12 +5,12 @@ describe Virtus::Attribute::Collection, '.merge_options' do
 
   let(:type)        { mock('type')        }
   let(:member_type) { mock('member_type') }
-  let(:options)     { Hash.new            }
+  let(:options)     { Hash.new }
 
   context 'when `type` responds to `size`' do
     before do
-      type.should_receive(:respond_to?).with(:size).and_return(true)
-      type.should_receive(:size).and_return(size)
+      type.should_receive(:respond_to?).with(:count).and_return(true)
+      type.should_receive(:count).and_return(size)
     end
 
     context 'when size is == 1' do
@@ -36,9 +36,18 @@ describe Virtus::Attribute::Collection, '.merge_options' do
 
   context 'when `type` does not respond to `size`' do
     before do
-      type.should_receive(:respond_to?).with(:size).and_return(false)
+      type.should_receive(:respond_to?).with(:count).and_return(false)
     end
 
-    it { should eql(:coerce => true) }
+    it do
+      should eql(
+        :primitive       => Object,
+        :accessor        => :public,
+        :coerce          => true,
+        :coercion_method => :to_object,
+        :reader          => :public,
+        :writer          => :public
+      )
+    end
   end
 end

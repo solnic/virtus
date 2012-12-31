@@ -9,7 +9,7 @@ module Virtus
         # @api private
         def coerce(attributes)
           unless attributes.nil?
-            super or @primitive.new(*attributes)
+            super or accessor.writer.primitive.new(*attributes)
           end
         end
 

@@ -62,7 +62,7 @@ module Virtus
       #
       # @api private
       def coerce(value)
-        value if value.kind_of?(@primitive)
+        value if value.kind_of?(accessor.writer.primitive)
       end
 
     end # class EmbeddedValue
