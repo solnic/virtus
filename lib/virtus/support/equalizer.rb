@@ -120,8 +120,7 @@ module Virtus
       #
       # @api public
       def ==(other)
-        return false unless self.class <=> other.class
-        cmp?(__method__, other)
+        other.kind_of?(self.class) && cmp?(__method__, other)
       end
 
     end # module Methods

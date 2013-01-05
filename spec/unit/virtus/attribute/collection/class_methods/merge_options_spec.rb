@@ -7,14 +7,14 @@ describe Virtus::Attribute::Collection, '.merge_options' do
   let(:member_type) { mock('member_type') }
   let(:options)     { Hash.new }
 
-  context 'when `type` responds to `size`' do
+  context 'when `type` responds to `count`' do
     before do
       type.should_receive(:respond_to?).with(:count).and_return(true)
-      type.should_receive(:count).and_return(size)
+      type.should_receive(:count).and_return(count)
     end
 
-    context 'when size is == 1' do
-      let(:size) { 1 }
+    context 'when count is == 1' do
+      let(:count) { 1 }
 
       before do
         type.should_receive(:first).and_return(member_type)
@@ -23,8 +23,8 @@ describe Virtus::Attribute::Collection, '.merge_options' do
       specify { subject[:member_type].should eql(member_type) }
     end
 
-    context 'when size is > 1' do
-      let(:size) { 2 }
+    context 'when count is > 1' do
+      let(:count) { 2 }
 
       specify do
         expect { subject }.to raise_error(
@@ -34,7 +34,7 @@ describe Virtus::Attribute::Collection, '.merge_options' do
     end
   end
 
-  context 'when `type` does not respond to `size`' do
+  context 'when `type` does not respond to `count`' do
     before do
       type.should_receive(:respond_to?).with(:count).and_return(false)
     end
