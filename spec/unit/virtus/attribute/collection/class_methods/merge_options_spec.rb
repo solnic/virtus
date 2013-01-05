@@ -40,13 +40,11 @@ describe Virtus::Attribute::Collection, '.merge_options' do
     end
 
     it do
-      should eql(
+      should include(
         :primitive       => Object,
         :accessor        => :public,
         :coerce          => true,
-        :coercion_method => :to_object,
-        :reader          => :public,
-        :writer          => :public
+        :coercion_method => :to_object
       )
     end
   end

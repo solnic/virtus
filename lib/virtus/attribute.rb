@@ -50,13 +50,7 @@ module Virtus
       end
 
       attribute_options = klass.merge_options(type, options)
-
-      reader_class = options.fetch(:reader_class) { klass.reader_class(type, attribute_options) }
-      writer_class = options.fetch(:writer_class) { klass.writer_class(type, attribute_options) }
-
-      reader   = reader_class.new(name, attribute_options[:reader])
-      writer   = writer_class.new(name, attribute_options[:writer], klass.writer_options(attribute_options))
-      accessor = Accessor.new(reader, writer)
+      accessor          = Accessor.build(name, klass, attribute_options)
 
       klass.new(name, accessor, attribute_options[:default])
     end
@@ -118,19 +112,6 @@ module Virtus
       end
     end
 
-    # Determine visibility of reader/write methods based on the options hash
-    #
-    # @return [::Hash]
-    #
-    # @api private
-    def self.determine_visibility(options)
-      default_accessor  = options.fetch(:accessor)
-      reader_visibility = options.fetch(:reader, default_accessor)
-      writer_visibility = options.fetch(:writer, default_accessor)
-
-      { :reader => reader_visibility, :writer => writer_visibility }
-    end
-
     # A hook for Attributes to update options based on the type from the caller
     #
     # @param [Object] type
@@ -145,8 +126,7 @@ module Virtus
     #
     # @todo add type arg to Attribute#initialize signature and handle there?
     def self.merge_options(type, options)
-      base_options = self.options.merge(options)
-      base_options.update(determine_visibility(base_options))
+      self.options.merge(options)
     end
 
     # Initializes an attribute instance
