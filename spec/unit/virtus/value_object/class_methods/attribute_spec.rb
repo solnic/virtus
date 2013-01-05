@@ -19,7 +19,7 @@ describe Virtus::ValueObject, '.attribute' do
 
     it 'sets the writer to be private' do
       subject
-      attribute.options[:writer].should be(:private)
+      expect(attribute).to_not be_public_writer
     end
   end
 
@@ -39,7 +39,7 @@ describe Virtus::ValueObject, '.attribute' do
 
     it 'sets the writer to be private' do
       subject
-      attribute.options[:writer].should be(:private)
+      expect(attribute).to_not be_public_writer
     end
 
     it 'sets the default' do
