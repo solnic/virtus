@@ -45,8 +45,8 @@ module Virtus
 
       attribute_options = klass.merge_options(type, options)
 
-      reader_class = klass.reader_class(attribute_options)
-      writer_class = klass.writer_class(attribute_options)
+      reader_class = options.fetch(:reader_class) { klass.reader_class(attribute_options) }
+      writer_class = options.fetch(:writer_class) { klass.writer_class(attribute_options) }
 
       reader   = reader_class.new(name, attribute_options[:reader])
       writer   = writer_class.new(name, attribute_options[:writer], klass.writer_options(attribute_options))
