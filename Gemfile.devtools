@@ -1,14 +1,56 @@
+# encoding: utf-8
+
 group :development do
-  gem 'rake',    '~> 10.0'
-  gem 'rspec',   '~> 2.12.0'
-  gem 'yard',    '~> 0.8.3'
+  gem 'rake',  '~> 10.0.3'
+  gem 'rspec', '~> 2.12.0'
+  gem 'yard',  '~> 0.8.3'
+end
+
+group :yard do
+  gem 'redcarpet', '~> 2.2.2', :platforms => [ :mri, :rbx ]
 end
 
 group :guard do
-  gem 'guard',         '~> 1.5.4'
+  gem 'guard',         '~> 1.6.1'
   gem 'guard-bundler', '~> 1.0.0'
-  gem 'guard-rspec',   '~> 2.1.1'
-  gem 'rb-inotify', :git => 'https://github.com/mbj/rb-inotify'
+  gem 'guard-rspec',   '~> 2.3.3'
+
+  # file system change event handling
+  gem 'rb-fchange', '~> 0.0.6', :require => false
+  gem 'rb-fsevent', '~> 0.9.3', :require => false
+  gem 'rb-inotify', '~> 0.8.8', :require => false, :git => 'https://github.com/nex3/rb-inotify'
+
+  # notification handling
+  gem 'libnotify',               '~> 0.8.0', :require => false
+  gem 'rb-notifu',               '~> 0.0.4', :require => false
+  gem 'terminal-notifier-guard', '~> 1.5.3', :require => false
+end
+
+group :metrics do
+  gem 'backports', '~> 2.6.5'
+  gem 'flay',      '~> 1.4.3'
+  gem 'flog',      '~> 2.5.3'
+  gem 'mutant',    '~> 0.2.11'
+  gem 'reek',      '~> 1.2.13', :git => 'https://github.com/dkubb/reek.git', :branch => 'fix-redundant-irresponsible-module-warnings'
+  gem 'roodi',     '~> 2.1.0'
+  gem 'yardstick', '~> 0.8.0'
+
+  platforms :ruby_18, :ruby_19 do
+    # this indirectly depends on ffi which does not build on ruby-head
+    gem 'yard-spellcheck', '~> 0.1.5'
+  end
+
+  platforms :mri_18 do
+    gem 'rcov', '~> 1.0.0'
+  end
+
+  platforms :mri_19 do
+    gem 'simplecov', '~> 0.7.1'
+  end
+
+  platforms :rbx do
+    gem 'pelusa', '~> 0.2.2'
+  end
 end
 
 group :benchmarks do
@@ -17,28 +59,6 @@ end
 
 platform :jruby do
   group :jruby do
-    gem 'jruby-openssl', '~> 0.7.4'
-  end
-end
-
-group :metrics do
-  gem 'flay',      '~> 1.4.2'
-  gem 'flog',      '~> 2.5.1'
-  gem 'reek',      '~> 1.2.8', :git => 'https://github.com/dkubb/reek.git'
-  gem 'roodi',     '~> 2.1.0'
-  gem 'yardstick', '~> 0.8.0'
-  gem 'mutant',    '~> 0.2.6'
-
-  platforms :ruby_18, :ruby_19 do
-    # this indirectly depends on ffi which does not build on ruby-head
-    gem 'yard-spellcheck', '~> 0.1.5'
-  end
-
-  platforms :mri_19 do
-    gem 'simplecov',   '~> 0.7'
-  end
-
-  platforms :rbx do
-    gem 'pelusa', '~> 0.2.1'
+    gem 'jruby-openssl', '~> 0.8.2'
   end
 end
