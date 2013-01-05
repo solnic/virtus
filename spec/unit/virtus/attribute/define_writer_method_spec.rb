@@ -11,13 +11,13 @@ describe Virtus::Attribute, '#define_writer_method' do
   let(:mod)         { mock('mod') }
 
   before do
-    mod.stub(:define_writer_method).with(accessor, writer_name, :public)
+    mod.stub(:define_writer_method).with(writer, writer_name, :public)
   end
 
   it { should be(object) }
 
   it 'calls #define_writer_method on the module' do
-    mod.should_receive(:define_writer_method).with(accessor, writer_name, :public)
+    mod.should_receive(:define_writer_method).with(writer, writer_name, :public)
     subject
   end
 end
