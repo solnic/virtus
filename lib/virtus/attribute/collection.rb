@@ -32,7 +32,7 @@ module Virtus
       end
 
       # @api private
-      def self.coercible_writer_class(options)
+      def self.coercible_writer_class(type, options)
         options[:member_type] ? CoercibleWriter : super
       end
 

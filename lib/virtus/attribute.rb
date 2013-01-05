@@ -47,8 +47,8 @@ module Virtus
 
       attribute_options = klass.merge_options(type, options)
 
-      reader_class = options.fetch(:reader_class) { klass.reader_class(attribute_options) }
-      writer_class = options.fetch(:writer_class) { klass.writer_class(attribute_options) }
+      reader_class = options.fetch(:reader_class) { klass.reader_class(type, attribute_options) }
+      writer_class = options.fetch(:writer_class) { klass.writer_class(type, attribute_options) }
 
       reader   = reader_class.new(name, attribute_options[:reader])
       writer   = writer_class.new(name, attribute_options[:writer], klass.writer_options(attribute_options))
@@ -63,12 +63,12 @@ module Virtus
     end
 
     # @api private
-    def self.writer_class(options)
-      options[:coerce] ? coercible_writer_class(options) : Writer
+    def self.writer_class(type, options)
+      options[:coerce] ? coercible_writer_class(type, options) : Writer
     end
 
     # @api private
-    def self.coercible_writer_class(options)
+    def self.coercible_writer_class(type, options)
       Writer::Coercible
     end
 
@@ -102,16 +102,17 @@ module Virtus
     #
     # @api public
     def self.determine_type(class_or_name)
-      type = case class_or_name
-      when ::Class
-        Attribute::EmbeddedValue.determine_type(class_or_name) || super
-      when ::String
-        super
-      when ::Enumerable
-        super(class_or_name.class)
-      else
-        super
-      end
+      type =
+        case class_or_name
+        when ::Class
+          EmbeddedValue.determine_type(class_or_name) or super
+        when ::String
+          super
+        when ::Enumerable
+          super(class_or_name.class)
+        else
+          super
+        end
 
       type or raise(
         ArgumentError, "#{class_or_name.inspect} does not map to an attribute type"
@@ -231,7 +232,7 @@ module Virtus
     # @api private
     def define_writer_method(mod)
       writer = accessor.writer
-      mod.define_writer_method(accessor, writer.name, writer.visibility)
+      mod.define_writer_method(writer, writer.name, writer.visibility)
       self
     end
 

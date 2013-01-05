@@ -47,22 +47,20 @@ module Virtus
       #
       # @api private
       def self.determine_type(klass)
-        if klass <= Virtus || klass <= OpenStruct
-          FromOpenStruct
-        elsif klass <= Struct
-          FromStruct
+        if klass <= Virtus || klass <= OpenStruct || klass <= Struct
+          self
         end
       end
 
-      # Coerce attributes into a virtus object
-      #
-      # @param [Hash,Virtus] value
-      #
-      # @return [Virtus]
-      #
       # @api private
-      def coerce(value)
-        value if value.kind_of?(accessor.writer.primitive)
+      def self.coercible_writer_class(type, options)
+        if type <= Virtus || type <= OpenStruct
+          OpenStructWriter
+        elsif type <= Struct
+          StructWriter
+        else
+          super
+        end
       end
 
     end # class EmbeddedValue

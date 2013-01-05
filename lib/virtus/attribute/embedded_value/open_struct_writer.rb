@@ -2,18 +2,18 @@ module Virtus
   class Attribute
     class EmbeddedValue < Object
 
-      # EmbeddedValue attribute handling Struct primitive
+      # EmbeddedValue attribute handling OpenStruct primitive or Virtus object
       #
-      class FromStruct < EmbeddedValue
+      class OpenStructWriter < Attribute::Writer::Coercible
 
         # @api private
         def coerce(attributes)
           unless attributes.nil?
-            super or accessor.writer.primitive.new(*attributes)
+            primitive.new(attributes)
           end
         end
 
-      end # class FromStruct
+      end # class FromOpenStruct
     end # class EmbeddedValue
   end # class Attribute
 end # module Virtus
