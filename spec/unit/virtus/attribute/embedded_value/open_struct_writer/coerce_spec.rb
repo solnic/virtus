@@ -6,7 +6,7 @@ describe Virtus::Attribute::EmbeddedValue::OpenStructWriter, '#coerce' do
   let(:primitive) { OpenStruct }
 
   let(:object) do
-    described_class.new(:name, :primitive => primitive)
+    described_class.new(:name, :public, :primitive => primitive)
   end
 
   context 'when the value is nil' do
