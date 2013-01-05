@@ -26,6 +26,8 @@ module Virtus
 
     attr_reader :accessor
 
+    attr_reader :default
+
     # Builds an attribute instance
     #
     # @param [Symbol] name
@@ -52,7 +54,7 @@ module Virtus
       writer   = writer_class.new(name, attribute_options[:writer], klass.writer_options(attribute_options))
       accessor = Accessor.new(reader, writer)
 
-      klass.new(name, accessor)
+      klass.new(name, accessor, attribute_options[:default])
     end
 
     # @api private
@@ -62,11 +64,11 @@ module Virtus
 
     # @api private
     def self.writer_class(options)
-      options[:coerce] ? coercible_writer_class : Writer
+      options[:coerce] ? coercible_writer_class(options) : Writer
     end
 
     # @api private
-    def self.coercible_writer_class
+    def self.coercible_writer_class(options)
       Writer::Coercible
     end
 
@@ -158,9 +160,10 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(name, accessor)
+    def initialize(name, accessor, default = nil)
       @name     = name.to_sym
       @accessor = accessor
+      @default  = DefaultValue.build(default)
     end
 
     # @api public
@@ -195,6 +198,17 @@ module Virtus
       self
     end
 
+    # @api private
+    def get(instance)
+      if instance.instance_variable_defined?(accessor.reader.instance_variable_name)
+        accessor.reader.get(instance)
+      else
+        value = default.call(instance, self)
+        accessor.writer.set(instance, value)
+        value
+      end
+    end
+
     # Creates an attribute reader method
     #
     # @param [Module] mod
@@ -204,7 +218,7 @@ module Virtus
     # @api private
     def define_reader_method(mod)
       reader = accessor.reader
-      mod.define_reader_method(accessor, reader.name, reader.visibility)
+      mod.define_reader_method(self, reader.name, reader.visibility)
       self
     end
 

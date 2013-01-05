@@ -76,8 +76,8 @@ module Virtus
       end
 
       # @api private
-      def self.coercible_writer_class
-        CoercibleWriter
+      def self.coercible_writer_class(options)
+        options[:key_type] ? CoercibleWriter : super
       end
 
       # @api private

@@ -7,6 +7,8 @@ module Virtus
 
       attr_reader :visibility
 
+      attr_reader :instance_variable_name
+
       # @api private
       def initialize(name, visibility)
         @name                   = name.to_sym
