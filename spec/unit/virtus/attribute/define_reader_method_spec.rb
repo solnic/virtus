@@ -10,13 +10,13 @@ describe Virtus::Attribute, '#define_reader_method' do
   let(:mod)      { mock('mod') }
 
   before do
-    mod.stub(:define_reader_method).with(accessor, name, :public)
+    mod.stub(:define_reader_method).with(object, name, :public)
   end
 
   it { should be(object) }
 
   it 'calls #define_reader_method on the module' do
-    mod.should_receive(:define_reader_method).with(accessor, name, :public)
+    mod.should_receive(:define_reader_method).with(object, name, :public)
     subject
   end
 end
