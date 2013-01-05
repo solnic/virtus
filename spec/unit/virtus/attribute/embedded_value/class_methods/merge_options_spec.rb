@@ -12,6 +12,6 @@ describe Virtus::Attribute::EmbeddedValue, '.merge_options' do
   it { should_not equal(options) }
 
   it 'merges the type in as the model' do
-    should eql(:primitive => type, :coerce => true)
+    should include(:primitive => type, :coerce => true)
   end
 end
