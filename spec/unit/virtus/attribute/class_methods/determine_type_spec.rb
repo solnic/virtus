@@ -54,9 +54,7 @@ describe Virtus::Attribute, '.determine_type' do
 
     let(:string) { 'Unknown' }
 
-    specify do
-      expect { subject }.to raise_error
-    end
+    it { should be(nil) }
   end
 
   context 'with an instance of an array' do

@@ -45,6 +45,10 @@ module Virtus
     def self.build(name, type = Object, options = {})
       klass = determine_type(type)
 
+      unless klass
+        raise ArgumentError, "#{type.inspect} does not map to an attribute type"
+      end
+
       attribute_options = klass.merge_options(type, options)
 
       reader_class = options.fetch(:reader_class) { klass.reader_class(type, attribute_options) }
@@ -102,21 +106,16 @@ module Virtus
     #
     # @api public
     def self.determine_type(class_or_name)
-      type =
-        case class_or_name
-        when ::Class
-          EmbeddedValue.determine_type(class_or_name) or super
-        when ::String
-          super
-        when ::Enumerable
-          super(class_or_name.class)
-        else
-          super
-        end
-
-      type or raise(
-        ArgumentError, "#{class_or_name.inspect} does not map to an attribute type"
-      )
+      case class_or_name
+      when ::Class
+        EmbeddedValue.determine_type(class_or_name) or super
+      when ::String
+        super
+      when ::Enumerable
+        super(class_or_name.class)
+      else
+        super
+      end
     end
 
     # Determine visibility of reader/write methods based on the options hash
