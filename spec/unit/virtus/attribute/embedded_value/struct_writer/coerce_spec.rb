@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Virtus::Attribute::EmbeddedValue::FromOpenStruct, '#coerce' do
+describe Virtus::Attribute::EmbeddedValue::StructWriter, '#coerce' do
   subject { object.coerce(value) }
 
-  let(:primitive) { OpenStruct }
+  let(:primitive) { Struct.new(:x, :y) }
 
   let(:object) do
-    described_class.new(:name, :primitive => primitive)
+    described_class.new(:name, :public, :primitive => primitive)
   end
 
   context 'when the value is nil' do
@@ -21,12 +21,12 @@ describe Virtus::Attribute::EmbeddedValue::FromOpenStruct, '#coerce' do
     it { should be(value) }
   end
 
-  context 'when the value is a hash' do
-    let(:value)    { Hash[:foo => 'bar'] }
+  context 'when the value is an array' do
+    let(:value)    { [ 1 ,2 ] }
     let(:instance) { mock('instance') }
 
     before do
-      primitive.should_receive(:new).with(value).and_return(instance)
+      primitive.should_receive(:new).with(*value).and_return(instance)
     end
 
     it { should be(instance) }

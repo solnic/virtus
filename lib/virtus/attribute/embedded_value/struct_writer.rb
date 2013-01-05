@@ -8,7 +8,9 @@ module Virtus
 
         # @api private
         def coerce(attributes)
-          unless attributes.nil?
+          if attributes.kind_of?(primitive)
+            attributes
+          elsif not attributes.nil?
             primitive.new(*attributes)
           end
         end
