@@ -168,6 +168,11 @@ module Virtus
       @coerce
     end
 
+    # @api public
+    def coerce(value)
+      accessor.writer.coerce(value)
+    end
+
     # Is the given value coerced into the target type for this attribute?
     #
     # @return [Boolean]
