@@ -170,8 +170,8 @@ module Virtus
     #
     # @api private
     def define_accessor_methods(mod)
-      define_reader_method(mod)
-      define_writer_method(mod)
+      reader.define_method(accessor, mod)
+      writer.define_method(accessor, mod)
       self
     end
 
@@ -184,32 +184,6 @@ module Virtus
         accessor.writer.set(instance, value)
         value
       end
-    end
-
-    # Creates an attribute reader method
-    #
-    # @param [Module] mod
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_reader_method(mod)
-      reader = accessor.reader
-      mod.define_reader_method(accessor, reader.name, reader.visibility)
-      self
-    end
-
-    # Creates an attribute writer method
-    #
-    # @param [Module] mod
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_writer_method(mod)
-      writer = accessor.writer
-      mod.define_writer_method(accessor, writer.name, writer.visibility)
-      self
     end
 
     # Returns a Boolean indicating whether the reader method is public

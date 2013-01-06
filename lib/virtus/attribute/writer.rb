@@ -37,6 +37,18 @@ module Virtus
         @visibility == :public
       end
 
+      # Creates an attribute writer method
+      #
+      # @param [Module] mod
+      #
+      # @return [self]
+      #
+      # @api private
+      def define_method(accessor, mod)
+        mod.define_writer_method(accessor, name, visibility)
+        self
+      end
+
     end # class Writer
 
   end # class Attribute

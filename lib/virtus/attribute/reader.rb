@@ -34,6 +34,18 @@ module Virtus
         @visibility == :public
       end
 
+      # Creates an attribute reader method
+      #
+      # @param [Module] mod
+      #
+      # @return [self]
+      #
+      # @api private
+      def define_method(accessor, mod)
+        mod.define_reader_method(accessor, name, visibility)
+        self
+      end
+
     end # class Reader
 
   end # class Attribute

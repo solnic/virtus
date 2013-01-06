@@ -41,9 +41,9 @@ module Virtus
       # @return [self]
       #
       # @api private
-      def define_reader_method(mod)
+      def define_accessor_methods(mod)
         super
-        mod.define_reader_method(accessor.reader, "#{name}?", accessor.reader.visibility)
+        mod.define_reader_method(reader, "#{name}?", reader.visibility)
         self
       end
 
