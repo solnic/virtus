@@ -13,7 +13,7 @@ module Virtus
         super
         @name          = "#{name}=".to_sym
         @default_value = DefaultValue.build(options[:default])
-        @primitive     = options.fetch(:primitive)
+        @primitive     = options.fetch(:primitive, Object)
       end
 
       # Sets instance variable of the attribute

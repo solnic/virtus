@@ -5,9 +5,9 @@ describe Virtus::Attribute::Reader, '#call' do
 
   let(:object)   { described_class.new(:title) }
   let(:instance) { Object.new }
-  let(:title)    { 'test' }
+  let(:value)    { 'test' }
 
-  before { instance.instance_variable_set("@title", title) }
+  before { instance.instance_variable_set("@title", value) }
 
-  it { should == title }
+  it { should == value }
 end
