@@ -1,6 +1,6 @@
 module Virtus
   class Attribute
-    class Writer
+    class Writer < AccessorMethod
 
       class Coercible < self
 
@@ -15,8 +15,8 @@ module Virtus
           @coercion_method = options[:coercion_method]
         end
 
-        # @api public
-        def set(instance, value)
+        # @api private
+        def call(instance, value)
           super(instance, coerce(value))
         end
 

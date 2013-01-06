@@ -72,6 +72,7 @@ require 'virtus/attribute/default_value/from_symbol'
 
 require 'virtus/attribute'
 require 'virtus/attribute/accessor'
+require 'virtus/attribute/accessor_method'
 require 'virtus/attribute/reader'
 require 'virtus/attribute/writer'
 require 'virtus/attribute/writer/coercible'

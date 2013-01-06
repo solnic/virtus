@@ -1,20 +1,7 @@
 module Virtus
   class Attribute
 
-    class Reader
-
-      attr_reader :name
-
-      attr_reader :visibility
-
-      attr_reader :instance_variable_name
-
-      # @api private
-      def initialize(name, options = {})
-        @name                   = name.to_sym
-        @visibility             = options.fetch(:visibility, :public)
-        @instance_variable_name = "@#{name}".to_sym
-      end
+    class Reader < AccessorMethod
 
       # Returns value of an attribute for the given instance
       #
@@ -25,13 +12,8 @@ module Virtus
       #   value of an attribute
       #
       # @api public
-      def get(instance)
-        instance.instance_variable_get(@instance_variable_name)
-      end
-
-      # @api public
-      def public?
-        @visibility == :public
+      def call(instance)
+        instance.instance_variable_get(instance_variable_name)
       end
 
       # Creates an attribute reader method

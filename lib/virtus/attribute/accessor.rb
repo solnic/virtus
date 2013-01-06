@@ -44,17 +44,17 @@ module Virtus
       # @api public
       def get(instance)
         if instance.instance_variable_defined?(reader.instance_variable_name)
-          reader.get(instance)
+          reader.call(instance)
         else
           value = writer.default_value.call(instance, self)
-          writer.set(instance, value)
+          writer.call(instance, value)
           value
         end
       end
 
       # @api public
       def set(*args)
-        writer.set(*args)
+        writer.call(*args)
       end
 
       # @api public

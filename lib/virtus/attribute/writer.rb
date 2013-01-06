@@ -1,23 +1,19 @@
 module Virtus
   class Attribute
 
-    class Writer
-
-      attr_reader :name
-
-      attr_reader :visibility
-
-      attr_reader :default_value
+    class Writer < AccessorMethod
 
       attr_reader :primitive
 
+      attr_reader :default_value
+
+
       # @api private
       def initialize(name, options = {})
-        @name                   = "#{name}=".to_sym
-        @visibility             = options.fetch(:visibility, :public)
-        @instance_variable_name = "@#{name}".to_sym
-        @default_value          = DefaultValue.build(options[:default])
-        @primitive              = options.fetch(:primitive)
+        super
+        @name          = "#{name}=".to_sym
+        @default_value = DefaultValue.build(options[:default])
+        @primitive     = options.fetch(:primitive)
       end
 
       # Sets instance variable of the attribute
@@ -28,13 +24,8 @@ module Virtus
       # @return [self]
       #
       # @api public
-      def set(instance, value)
-        instance.instance_variable_set(@instance_variable_name, value)
-      end
-
-      # @api public
-      def public?
-        @visibility == :public
+      def call(instance, value)
+        instance.instance_variable_set(instance_variable_name, value)
       end
 
       # Creates an attribute writer method
