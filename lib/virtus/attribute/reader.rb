@@ -1,6 +1,9 @@
 module Virtus
   class Attribute
 
+    # Reader method object
+    #
+    # @api public
     class Reader < AccessorMethod
 
       # Returns value of an attribute for the given instance
