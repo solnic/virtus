@@ -175,17 +175,6 @@ module Virtus
       self
     end
 
-    # @api private
-    def get(instance)
-      if instance.instance_variable_defined?(accessor.reader.instance_variable_name)
-        accessor.reader.get(instance)
-      else
-        value = default.call(instance, self)
-        accessor.writer.set(instance, value)
-        value
-      end
-    end
-
     # Returns a Boolean indicating whether the reader method is public
     #
     # @return [Boolean]
