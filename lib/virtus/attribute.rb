@@ -26,8 +26,6 @@ module Virtus
 
     attr_reader :accessor
 
-    attr_reader :default
-
     # Builds an attribute instance
     #
     # @param [Symbol] name
@@ -52,7 +50,7 @@ module Virtus
       attribute_options = klass.merge_options(type, options)
       accessor          = Accessor.build(name, klass, attribute_options)
 
-      klass.new(name, accessor, attribute_options[:default])
+      klass.new(name, accessor)
     end
 
     # @api private
@@ -83,7 +81,7 @@ module Virtus
 
     # @api private
     def self.writer_option_names
-      [ :coercer, :coercion_method, :primitive ]
+      [ :coercer, :coercion_method, :primitive, :default ]
     end
 
     # Determine attribute type based on class or name
@@ -140,10 +138,9 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(name, accessor, default = nil)
+    def initialize(name, accessor)
       @name     = name.to_sym
       @accessor = accessor
-      @default  = DefaultValue.build(default)
     end
 
     # @api public
@@ -198,7 +195,7 @@ module Virtus
     # @api private
     def define_reader_method(mod)
       reader = accessor.reader
-      mod.define_reader_method(self, reader.name, reader.visibility)
+      mod.define_reader_method(accessor, reader.name, reader.visibility)
       self
     end
 
@@ -211,7 +208,7 @@ module Virtus
     # @api private
     def define_writer_method(mod)
       writer = accessor.writer
-      mod.define_writer_method(writer, writer.name, writer.visibility)
+      mod.define_writer_method(accessor, writer.name, writer.visibility)
       self
     end
 

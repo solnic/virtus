@@ -41,13 +41,19 @@ module Virtus
       end
 
       # @api public
-      def set(*args)
-        writer.set(*args)
+      def get(instance)
+        if instance.instance_variable_defined?(reader.instance_variable_name)
+          reader.get(instance)
+        else
+          value = writer.default_value.call(instance, self)
+          writer.set(instance, value)
+          value
+        end
       end
 
       # @api public
-      def get(*args)
-        reader.get(*args)
+      def set(*args)
+        writer.set(*args)
       end
 
       # @api public
