@@ -48,6 +48,7 @@ module Virtus
 end # module Virtus
 
 require 'descendants_tracker'
+require 'adamantium'
 require 'coercible'
 
 require 'virtus/support/type_lookup'
