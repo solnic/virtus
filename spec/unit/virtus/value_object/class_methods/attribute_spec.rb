@@ -44,7 +44,7 @@ describe Virtus::ValueObject, '.attribute' do
 
     it 'sets the default' do
       subject
-      attribute.default.value.should eql(1.0)
+      attribute.writer.default_value.value.should eql(1.0)
     end
   end
 end

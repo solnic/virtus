@@ -6,7 +6,7 @@ describe Virtus::Attribute::EmbeddedValue::StructWriter, '#coerce' do
   let(:primitive) { Struct.new(:x, :y) }
 
   let(:object) do
-    described_class.new(:name, :public, :primitive => primitive)
+    described_class.new(:name, :primitive => primitive)
   end
 
   context 'when the value is nil' do
