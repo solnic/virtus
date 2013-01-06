@@ -4,11 +4,15 @@ module Virtus
 
       class CoercibleWriter < Attribute::Writer::Coercible
 
+        attr_reader :member_type
+
+        attr_reader :member_writer
+
         # @api private
         def initialize(name, visibility, options)
           super
-          @member_type          = options.fetch(:member_type, Object)
-          @member_type_instance = Attribute.build(@name, @member_type, :coerce => true)
+          @member_type   = options.fetch(:member_type, Object)
+          @member_writer = Attribute.build(name, @member_type, :coerce => true).writer
         end
 
         # Coerce a collection with members
@@ -50,7 +54,7 @@ module Virtus
         #
         # @api private
         def coerce_and_append_member(collection, entry)
-          collection << @member_type_instance.coerce(entry)
+          collection << member_writer.coerce(entry)
         end
 
       end # class CoercibleWriter

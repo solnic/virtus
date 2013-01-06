@@ -38,14 +38,17 @@ module Virtus
         # @api public
         attr_reader :value_type
 
+        attr_reader :key_writer
+
+        attr_reader :value_writer
 
         # @api private
         def initialize(name, visibility, options)
           super
-          @key_type            = options.fetch(:key_type,   Object)
-          @value_type          = options.fetch(:value_type, Object)
-          @key_type_instance   = Attribute.build(@name, @key_type,   :coerce => true)
-          @value_type_instance = Attribute.build(@name, @value_type, :coerce => true)
+          @key_type     = options.fetch(:key_type,   Object)
+          @value_type   = options.fetch(:value_type, Object)
+          @key_writer   = Attribute.build(@name, @key_type,   :coerce => true).writer
+          @value_writer = Attribute.build(@name, @value_type, :coerce => true).writer
         end
 
         # Coerce a hash with keys and values
@@ -59,7 +62,7 @@ module Virtus
           coerced = super
           return coerced unless coerced.respond_to?(:each_with_object)
           coerced.each_with_object(new_hash) do |(key, value), hash|
-            hash[@key_type_instance.coerce(key)] = @value_type_instance.coerce(value)
+            hash[key_writer.coerce(key)] = value_writer.coerce(value)
           end
         end
 

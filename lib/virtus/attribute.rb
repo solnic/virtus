@@ -147,13 +147,13 @@ module Virtus
     end
 
     # @api public
-    def coerce?
-      @coerce
+    def reader
+      accessor.reader
     end
 
     # @api public
-    def coerce(value)
-      accessor.writer.coerce(value)
+    def writer
+      accessor.writer
     end
 
     # Is the given value coerced into the target type for this attribute?
