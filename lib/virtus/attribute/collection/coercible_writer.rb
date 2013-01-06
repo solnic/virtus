@@ -9,7 +9,7 @@ module Virtus
         attr_reader :member_writer
 
         # @api private
-        def initialize(name, visibility, options)
+        def initialize(name, options)
           super
           @member_type   = options.fetch(:member_type, Object)
           @member_writer = Attribute.build(name, @member_type, :coerce => true).writer

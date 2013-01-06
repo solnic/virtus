@@ -14,10 +14,11 @@ module Virtus
         reader_class = options.fetch(:reader_class) { type.reader_class(primitive, options) }
         writer_class = options.fetch(:writer_class) { type.writer_class(primitive, options) }
 
-        writer_options = type.writer_options(options)
+        reader_options = type.reader_options(options).update(:visibility => visibility[:reader])
+        writer_options = type.writer_options(options).update(:visibility => visibility[:writer])
 
-        reader = reader_class.new(name, visibility[:reader])
-        writer = writer_class.new(name, visibility[:writer], writer_options)
+        reader = reader_class.new(name, reader_options)
+        writer = writer_class.new(name, writer_options)
 
         new(reader, writer)
       end

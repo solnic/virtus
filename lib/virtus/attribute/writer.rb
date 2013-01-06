@@ -12,9 +12,9 @@ module Virtus
       attr_reader :primitive
 
       # @api private
-      def initialize(name, visibility, options = {})
+      def initialize(name, options = {})
         @name                   = "#{name}=".to_sym
-        @visibility             = visibility
+        @visibility             = options.fetch(:visibility, :public)
         @instance_variable_name = "@#{name}".to_sym
         @default_value          = DefaultValue.build(options[:default])
         @primitive              = options.fetch(:primitive)

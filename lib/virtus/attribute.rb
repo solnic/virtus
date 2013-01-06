@@ -68,6 +68,11 @@ module Virtus
       Writer::Coercible
     end
 
+    # @api private
+    def self.reader_options(attribute_options)
+      {}
+    end
+
     # Return options accepted by Writer
     #
     # @return [Array<Symbol>]

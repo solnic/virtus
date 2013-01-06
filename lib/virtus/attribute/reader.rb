@@ -10,9 +10,9 @@ module Virtus
       attr_reader :instance_variable_name
 
       # @api private
-      def initialize(name, visibility)
+      def initialize(name, options = {})
         @name                   = name.to_sym
-        @visibility             = visibility
+        @visibility             = options.fetch(:visibility, :public)
         @instance_variable_name = "@#{name}".to_sym
       end
 
