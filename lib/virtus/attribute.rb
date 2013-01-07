@@ -21,9 +21,14 @@ module Virtus
     #
     # @return [Symbol]
     #
-    #  public
+    # @api public
     attr_reader :name
 
+    # Return accessor object
+    #
+    # @return [Accessor]
+    #
+    # @api private
     attr_reader :accessor
 
     # Builds an attribute instance
