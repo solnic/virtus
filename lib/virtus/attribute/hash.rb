@@ -48,7 +48,7 @@ module Virtus
 
       # @api private
       def self.writer_option_names
-        super.concat([ :key_type, :value_type ])
+        super << :key_type << :value_type
       end
 
     end # class Hash

@@ -38,7 +38,7 @@ module Virtus
 
       # @api private
       def self.writer_option_names
-        super.concat([ :member_type ])
+        super << :member_type
       end
 
     end # class Collection
