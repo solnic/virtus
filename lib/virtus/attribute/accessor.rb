@@ -35,6 +35,7 @@ module Virtus
 
         { :reader => reader_visibility, :writer => writer_visibility }
       end
+      private_class_method :determine_visibility
 
       # @api private
       def initialize(reader, writer)
@@ -66,7 +67,8 @@ module Virtus
       def public_writer?
         writer.public?
       end
-    end
+
+    end # class Accessor
 
   end # class Attribute
 end # module Virtus
