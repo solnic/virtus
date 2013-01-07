@@ -1,11 +1,35 @@
 module Virtus
   class Attribute
 
+    # Accessor object providing reader and writer methods
+    #
+    # @api private
     class Accessor
+
+      # Return reader
+      #
+      # @return [Reader]
+      #
+      # @api private
       attr_reader :reader
 
+      # Return writer
+      #
+      # @return [Writer]
+      #
+      # @api private
       attr_reader :writer
 
+      # Build an accessor instance
+      #
+      # @param [Symbol] name
+      #
+      # @param [Class] type
+      #
+      # @param [Hash] options
+      #
+      # @return [Accessor]
+      #
       # @api private
       def self.build(name, type, options)
         primitive  = options[:primitive]
@@ -37,11 +61,23 @@ module Virtus
       end
       private_class_method :determine_visibility
 
+      # Initialize a new accessor instance
+      #
+      # @param [Reader]
+      #
+      # @param [Writer]
+      #
+      # @return [undefined]
+      #
       # @api private
       def initialize(reader, writer)
         @reader, @writer = reader, writer
       end
 
+      # Get a variable value from an object
+      #
+      # @return [Object]
+      #
       # @api public
       def get(instance)
         if instance.instance_variable_defined?(reader.instance_variable_name)
@@ -53,16 +89,28 @@ module Virtus
         end
       end
 
+      # Set a variable on an object
+      #
+      # @return [Object]
+      #
       # @api public
       def set(*args)
         writer.call(*args)
       end
 
+      # Return if reader method is public
+      #
+      # @return [Boolean]
+      #
       # @api public
       def public_reader?
         reader.public?
       end
 
+      # Return if writer method is public
+      #
+      # @return [Boolean]
+      #
       # @api public
       def public_writer?
         writer.public?
