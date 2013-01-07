@@ -79,9 +79,7 @@ module Virtus
     #
     # @api private
     def self.writer_options(attribute_options)
-      writer_option_names.each_with_object({}) { |key, options|
-        options[key] = attribute_options[key]
-      }
+      ::Hash[writer_option_names.zip(attribute_options.values_at(*writer_option_names))]
     end
 
     # @api private
