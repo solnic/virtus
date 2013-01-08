@@ -52,7 +52,7 @@ module Virtus
       end
 
       # @api private
-      def self.coercible_writer_class(type, options)
+      def self.coercible_writer_class(type, _options)
         if type <= Virtus || type <= OpenStruct
           OpenStructWriter
         elsif type <= Struct
