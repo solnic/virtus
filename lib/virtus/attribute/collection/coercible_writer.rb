@@ -2,12 +2,31 @@ module Virtus
   class Attribute
     class Collection
 
+      # Coercible writer for collection attributes
+      #
       class CoercibleWriter < Attribute::Writer::Coercible
 
+        # Return member type
+        #
+        # @return [Class]
+        #
+        # @api private
         attr_reader :member_type
 
+        # Return writer for collection members
+        #
+        #
+        # @return [Writer::Coercible]
+        #
+        # @api private
         attr_reader :member_writer
 
+        # Initialize a new writer instance
+        #
+        # @param [Symbol] name
+        #
+        # @param [::Hash] options
+        #
         # @api private
         def initialize(name, options)
           super
