@@ -45,8 +45,8 @@ module Virtus
         # @api private
         def initialize(name, options)
           super
-          @key_type     = options.fetch(:key_type,   Object)
-          @value_type   = options.fetch(:value_type, Object)
+          @key_type     = options.fetch(:key_type,   ::Object)
+          @value_type   = options.fetch(:value_type, ::Object)
           @key_writer   = Attribute.build(@name, @key_type,   :coerce => true).writer
           @value_writer = Attribute.build(@name, @value_type, :coerce => true).writer
         end
