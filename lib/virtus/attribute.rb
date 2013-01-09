@@ -58,6 +58,11 @@ module Virtus
       klass.new(name, accessor)
     end
 
+    # @api public
+    def self.coercer(*args)
+      Coercer.new(Virtus.coercer, coercion_method)
+    end
+
     # @api private
     def self.reader_class(*)
       Reader
@@ -89,7 +94,7 @@ module Virtus
 
     # @api private
     def self.writer_option_names
-      [ :coercer, :coercion_method, :primitive, :default ]
+      [ :coercer, :primitive, :default ]
     end
 
     # Determine attribute type based on class or name
@@ -129,10 +134,16 @@ module Virtus
     #   New Hash instance, potentially updated with information from the args
     #
     # @api private
-    #
-    # @todo add type arg to Attribute#initialize signature and handle there?
     def self.merge_options(type, options)
-      self.options.merge(options)
+      merged_options = self.options.merge(options)
+
+      if merged_options[:coerce]
+        merged_options.update(
+          :coercer => merged_options.fetch(:coercer) { coercer(type, options) }
+        )
+      end
+
+      merged_options
     end
 
     # Initializes an attribute instance

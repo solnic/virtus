@@ -4,10 +4,15 @@ module Virtus
 
       # EmbeddedValue attribute handling Struct primitive
       #
-      class StructWriter < Attribute::Writer::Coercible
+      class StructCoercer
+        attr_reader :primitive
+
+        def initialize(primitive)
+          @primitive = primitive
+        end
 
         # @api private
-        def coerce(attributes)
+        def call(attributes)
           if attributes.kind_of?(primitive)
             attributes
           elsif not attributes.nil?

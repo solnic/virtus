@@ -4,7 +4,7 @@ describe Virtus::Attribute::EmbeddedValue, '.merge_options' do
   subject { object.merge_options(type, options) }
 
   let(:object)  { described_class }
-  let(:type)    { stub('type')    }
+  let(:type)    { OpenStruct      }
   let(:options) { {}.freeze       }
 
   it { should be_instance_of(Hash) }

@@ -52,11 +52,11 @@ module Virtus
       end
 
       # @api private
-      def self.coercible_writer_class(type, _options)
+      def self.coercer(type, _options = {})
         if type <= Virtus || type <= OpenStruct
-          OpenStructWriter
+          OpenStructCoercer.new(type)
         elsif type <= Struct
-          StructWriter
+          StructCoercer.new(type)
         else
           super
         end

@@ -6,11 +6,6 @@ module Virtus
     # @api public
     class Writer < AccessorMethod
 
-      # Return primitive class
-      #
-      # @return [Class]
-      #
-      # @api private
       attr_reader :primitive
 
       # Return default value instance
@@ -32,8 +27,8 @@ module Virtus
       def initialize(name, options = {})
         super
         @name          = "#{name}=".to_sym
-        @default_value = DefaultValue.build(options[:default])
         @primitive     = options.fetch(:primitive, ::Object)
+        @default_value = DefaultValue.build(options[:default])
       end
 
       # Sets instance variable of the attribute

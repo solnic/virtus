@@ -4,10 +4,15 @@ module Virtus
 
       # EmbeddedValue attribute handling OpenStruct primitive or Virtus object
       #
-      class OpenStructWriter < Attribute::Writer::Coercible
+      class OpenStructCoercer
+        attr_reader :primitive
+
+        def initialize(primitive)
+          @primitive = primitive
+        end
 
         # @api private
-        def coerce(attributes)
+        def call(attributes)
           if attributes.kind_of?(primitive)
             attributes
           elsif not attributes.nil?

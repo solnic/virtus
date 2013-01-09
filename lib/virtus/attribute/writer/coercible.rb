@@ -6,13 +6,10 @@ module Virtus
 
         attr_reader :coercer
 
-        attr_reader :coercion_method
-
         # @api private
         def initialize(name, options = {})
           super
-          @coercer         = options[:coercer] || Virtus.coercer
-          @coercion_method = options[:coercion_method]
+          @coercer = options.fetch(:coercer)
         end
 
         # @api private
@@ -33,7 +30,7 @@ module Virtus
         #
         # @api public
         def coerce(value)
-          coercer[value.class].public_send(coercion_method, value)
+          coercer.call(value)
         end
 
       end # class Coercible

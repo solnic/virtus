@@ -6,12 +6,12 @@ describe Virtus::Attribute::Hash::CoercibleWriter, '#initialize' do
   let(:name) { :test }
 
   context "without options" do
-    let(:options) { {} }
+    let(:options) { { :coercer => mock('coercer') } }
 
-    its(:key_type)   { should be(Object) }
-    its(:key_writer) { should be_instance_of(Virtus::Attribute::Writer::Coercible) }
+    its(:key_type)    { should be(Object) }
+    its(:key_coercer) { should be_instance_of(Virtus::Attribute::Coercer) }
 
-    its(:value_type)   { should be(Object) }
-    its(:value_writer) { should be_instance_of(Virtus::Attribute::Writer::Coercible) }
+    its(:value_type)    { should be(Object) }
+    its(:value_coercer) { should be_instance_of(Virtus::Attribute::Coercer) }
   end
 end

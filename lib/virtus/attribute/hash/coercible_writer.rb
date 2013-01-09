@@ -25,22 +25,22 @@ module Virtus
         # @return [Writer::Coercible]
         #
         # @api private
-        attr_reader :key_writer
+        attr_reader :key_coercer
 
         # Return writer for hash values
         #
         # @return [Writer::Coercible]
         #
         # @api private
-        attr_reader :value_writer
+        attr_reader :value_coercer
 
         # @api private
         def initialize(name, options)
           super
-          @key_type     = options.fetch(:key_type,   ::Object)
-          @value_type   = options.fetch(:value_type, ::Object)
-          @key_writer   = Attribute.build(@name, @key_type,   :coerce => true).writer
-          @value_writer = Attribute.build(@name, @value_type, :coerce => true).writer
+          @key_type      = options.fetch(:key_type,   ::Object)
+          @value_type    = options.fetch(:value_type, ::Object)
+          @key_coercer   = Attribute.determine_type(@key_type).coercer(@key_type)
+          @value_coercer = Attribute.determine_type(@value_type).coercer(@value_type)
         end
 
         # Coerce a hash with keys and values
@@ -54,7 +54,7 @@ module Virtus
           coerced = super
           return coerced unless coerced.respond_to?(:each_with_object)
           coerced.each_with_object(new_hash) do |(key, value), hash|
-            hash[key_writer.coerce(key)] = value_writer.coerce(value)
+            hash[key_coercer.call(key)] = value_coercer.call(value)
           end
         end
 

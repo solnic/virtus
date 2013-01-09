@@ -4,7 +4,7 @@ describe Virtus::Attribute::Hash::CoercibleWriter, '#coerce' do
   subject { object.coerce(value) }
 
   let(:object)  { described_class.new(:test, options) }
-  let(:options) { { :coercion_method => :to_hash, :primitive => Hash, :key_type => String, :value_type => Integer } }
+  let(:options) { { :primitive => Hash, :coercer => Virtus::Attribute::Hash.coercer, :key_type => String, :value_type => Integer } }
 
   let(:value) { [ [ 1, '1' ] ] }
 

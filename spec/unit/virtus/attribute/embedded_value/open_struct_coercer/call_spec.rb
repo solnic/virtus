@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe Virtus::Attribute::EmbeddedValue::OpenStructWriter, '#coerce' do
-  subject { object.coerce(value) }
+describe Virtus::Attribute::EmbeddedValue::OpenStructCoercer, '#call' do
+  subject { object.call(value) }
 
   let(:primitive) { OpenStruct }
 
   let(:object) do
-    described_class.new(:name, :primitive => primitive)
+    described_class.new(primitive)
   end
 
   context 'when the value is nil' do
