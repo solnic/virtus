@@ -30,6 +30,8 @@ module Virtus
           end
         end
 
+        private
+
         # Return an instance of the collection
         #
         # @return [Enumerable]
@@ -38,8 +40,6 @@ module Virtus
         def new_collection
           primitive.new
         end
-
-        private
 
         # Coerce a member of a source collection and append it to the target collection
         #
