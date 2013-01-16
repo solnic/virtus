@@ -8,7 +8,7 @@ describe Virtus::Attribute::Collection::CoercibleWriter, '#initialize' do
   context "without options" do
     let(:options) { { :primitive => Array, :coercer => Virtus::Attribute::Array.coercer } }
 
-    its(:member_type)   { should be(Object) }
-    its(:member_writer) { should be_instance_of(Virtus::Attribute::Coercer) }
+    its(:member_type)    { should be(Object) }
+    its(:member_coercer) { should be_instance_of(Virtus::Attribute::Coercer) }
   end
 end
