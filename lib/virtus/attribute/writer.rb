@@ -6,6 +6,11 @@ module Virtus
     # @api public
     class Writer < AccessorMethod
 
+      # Return primitive
+      #
+      # @return [Class]
+      #
+      # @api private
       attr_reader :primitive
 
       # Return default value instance
