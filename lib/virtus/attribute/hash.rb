@@ -109,7 +109,7 @@ module Virtus
       #
       # @api private
       def new_hash
-        self.class.primitive.new
+        (@options[:primitive] || self.class.primitive).new
       end
 
     end # class Hash

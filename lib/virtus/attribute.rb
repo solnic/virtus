@@ -70,6 +70,9 @@ module Virtus
       attribute_class = determine_type(type) or
         raise ArgumentError, "#{type.inspect} does not map to an attribute type"
       attribute_options = attribute_class.merge_options(type, options)
+      if type.is_a?(::Enumerable) && ! attribute_options.has_key?(:primitive)
+        attribute_options[:primitive] = type.class
+      end
       attribute = attribute_class.new(name, attribute_options)
       attribute.extend(Coercion) if attribute.coerce?
       attribute

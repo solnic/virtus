@@ -78,7 +78,7 @@ module Virtus
       #
       # @api private
       def new_collection
-        self.class.primitive.new
+        (@options[:primitive] || self.class.primitive).new
       end
 
       # Coerce entry and add it to the collection
