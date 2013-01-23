@@ -17,10 +17,13 @@ class PhoneNumber
   attribute :number, String
 end
 
+class PhoneNumbersCollection < Array
+end
+
 class User
   include Virtus
 
-  attribute :phone_numbers, Array[PhoneNumber]
+  attribute :phone_numbers, PhoneNumbersCollection[PhoneNumber]
   attribute :addresses,     Set[Address]
 end
 
@@ -45,6 +48,10 @@ describe User do
   ] }
 
   describe '#phone_numbers' do
+    subject { instance.phone_numbers }
+    it { should_not be_instance_of Array }
+    it { should be_instance_of PhoneNumbersCollection }
+
     describe 'first entry' do
       subject { instance.phone_numbers.first }
 

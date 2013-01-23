@@ -1,10 +1,12 @@
 require 'spec_helper'
 
+class DimensionsHash < Hash
+end
 
 class Package
   include Virtus
 
-  attribute :dimensions, Hash[Symbol => Float]
+  attribute :dimensions, DimensionsHash[Symbol => Float]
   attribute :meta_info , Hash[String => String]
 end
 
@@ -23,6 +25,8 @@ describe Package do
   describe '#dimensions' do
     subject { dimensions }
 
+    it { should_not be_instance_of Hash }
+    it { should be_instance_of DimensionsHash }
     it { should have(3).keys }
     it { should have_key :width  }
     it { should have_key :height }
