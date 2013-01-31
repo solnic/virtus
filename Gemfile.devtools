@@ -18,7 +18,7 @@ group :guard do
   # file system change event handling
   gem 'rb-fchange', '~> 0.0.6', :require => false
   gem 'rb-fsevent', '~> 0.9.3', :require => false
-  gem 'rb-inotify', '~> 0.8.8', :require => false, :git => 'https://github.com/nex3/rb-inotify'
+  gem 'rb-inotify', '>= 0.8.8', :require => false, :github => 'nex3/rb-inotify'
 
   # notification handling
   gem 'libnotify',               '~> 0.8.0', :require => false
@@ -27,13 +27,13 @@ group :guard do
 end
 
 group :metrics do
-  gem 'backports', '~> 2.6.5'
-  gem 'flay',      '~> 1.4.3'
-  gem 'flog',      '~> 2.5.3'
+  gem 'backports', '>= 2.6.5'
+  gem 'flay',      '>= 1.4.3'
+  gem 'flog',      '>= 2.5.3'
   gem 'mutant',    '~> 0.2.15'
-  gem 'reek',      '~> 1.2.13', :git => 'https://github.com/troessner/reek.git'
+  gem 'reek',      '>= 1.2.13', :github => 'troessner/reek'
   gem 'roodi',     '~> 2.1.0'
-  gem 'yardstick', '~> 0.8.0'
+  gem 'yardstick', '>= 0.8.0'
 
   platforms :ruby_18, :ruby_19 do
     # this indirectly depends on ffi which does not build on ruby-head
