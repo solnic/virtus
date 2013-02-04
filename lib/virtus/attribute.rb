@@ -178,7 +178,7 @@ module Virtus
     #
     # @api private
     def value_coerced?(value)
-      writer.coercer.coerced?(value)
+      coercer.coerced?(value)
     end
 
     # Define reader and writer methods for an Attribute
@@ -210,6 +210,17 @@ module Virtus
     # @api private
     def public_writer?
       accessor.public_writer?
+    end
+
+    private
+
+    # Return coercer for this attribute
+    #
+    # @return [Object]
+    #
+    # @api private
+    def coercer
+      writer.coercer[self.class.primitive]
     end
 
   end # class Attribute

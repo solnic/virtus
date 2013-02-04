@@ -8,11 +8,17 @@ describe Virtus::Attribute, '#value_coerced?' do
   let(:writer)   { stub('writer', :coercer => coercer) }
   let(:coercer)  { stub('coercer') }
 
+  let(:string_coercer) { stub('string_coercer') }
+
+  before do
+    coercer.should_receive(:[]).with(String).and_return(string_coercer)
+  end
+
   context 'when the value matches the primitive' do
     let(:value) { 'string' }
 
     before do
-      coercer.should_receive(:coerced?).with(value).and_return(true)
+      string_coercer.should_receive(:coerced?).with(value).and_return(true)
     end
 
     it { should be(true) }
@@ -22,7 +28,7 @@ describe Virtus::Attribute, '#value_coerced?' do
     let(:value) { 1 }
 
     before do
-      coercer.should_receive(:coerced?).with(value).and_return(false)
+      string_coercer.should_receive(:coerced?).with(value).and_return(false)
     end
 
     it { should be(false) }
