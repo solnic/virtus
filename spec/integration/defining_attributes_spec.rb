@@ -10,7 +10,7 @@ describe "virtus attribute definitions" do
         attribute :name, String
         attribute :age, Integer
         attribute :doctor, Boolean
-        attribute :salery, Decimal
+        attribute :salary, Decimal
       end
 
       class Manager < Person
@@ -39,7 +39,7 @@ describe "virtus attribute definitions" do
   end
 
   context 'with attributes' do
-    let(:attributes) { {:name => 'Jane', :age => 45, :doctor => true, :salery => 4500} }
+    let(:attributes) { {:name => 'Jane', :age => 45, :doctor => true, :salary => 4500} }
     subject { Examples::Person.new(attributes) }
 
     specify "#attributes returns the object's attributes as a hash" do

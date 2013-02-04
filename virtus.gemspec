@@ -16,7 +16,8 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files -- {spec}/*`.split("\n")
   gem.extra_rdoc_files = %w[LICENSE README.md TODO]
 
-  gem.add_dependency('backports',           '~> 2.6.1')
+  gem.add_dependency('backports',           '~> 2.7')
   gem.add_dependency('descendants_tracker', '~> 0.0.1')
+  gem.add_dependency('adamantium',          '~> 0.0.5')
   gem.add_dependency('coercible',           '~> 0.0.1')
 end

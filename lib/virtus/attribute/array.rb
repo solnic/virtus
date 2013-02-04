@@ -17,8 +17,6 @@ module Virtus
       coercion_method :to_array
       default         primitive.new
 
-      include Collection::MemberCoercion
-
     end # class Array
   end # class Attribute
 end # module Virtus

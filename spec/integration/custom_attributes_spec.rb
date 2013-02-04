@@ -4,8 +4,7 @@ describe 'custom attributes' do
 
   before do
     module Examples
-      class UpperCase < Virtus::Attribute::String
-        include Coercion
+      class UpperCase < Virtus::Attribute::Writer::Coercible
 
         def coerce(value)
           super.upcase
@@ -20,7 +19,7 @@ describe 'custom attributes' do
         include Virtus
 
         attribute :name, String
-        attribute :scream, UpperCase
+        attribute :scream, String, :writer_class => Examples::UpperCase
         attribute :expression, RegularExpression
       end
     end

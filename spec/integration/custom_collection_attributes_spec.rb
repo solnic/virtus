@@ -19,8 +19,6 @@ describe 'custom collection attributes' do
         primitive BookCollection
         coercion_method :to_book_collection
         default primitive.new
-
-        include Virtus::Attribute::Collection::MemberCoercion
       end
 
       # TODO: find a better way of adding coercion methods

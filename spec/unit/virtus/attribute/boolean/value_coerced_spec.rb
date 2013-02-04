@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Virtus::Attribute::Boolean, '#value_coerced?' do
   subject { attribute.value_coerced?(value) }
 
-  let(:attribute) { described_class.new(:is_admin) }
+  let(:attribute) { described_class.new(:is_admin, accessor) }
+  let(:accessor)  { stub('accessor', :primitive => TrueClass) }
 
   context "with true" do
     let(:value) { true }

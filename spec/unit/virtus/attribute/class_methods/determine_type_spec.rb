@@ -38,7 +38,7 @@ describe Virtus::Attribute, '.determine_type' do
 
     let(:primitive) { Class.new { include Virtus } }
 
-    it { should equal(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
+    it { should equal(Virtus::Attribute::EmbeddedValue) }
   end
 
   context 'when the primitive defaults to Object' do
@@ -54,7 +54,7 @@ describe Virtus::Attribute, '.determine_type' do
 
     let(:string) { 'Unknown' }
 
-    it { should be_nil }
+    it { should be(nil) }
   end
 
   context 'with an instance of an array' do
