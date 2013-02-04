@@ -6,18 +6,18 @@ describe Virtus::Attribute::EmbeddedValue, '.determine_type' do
   context "with Struct" do
     let(:value) { Struct.new(:x) }
 
-    it { should be(Virtus::Attribute::EmbeddedValue::FromStruct) }
+    it { should be(described_class) }
   end
 
   context "with OpenStruct" do
     let(:value) { OpenStruct }
 
-    it { should be(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
+    it { should be(described_class) }
   end
 
   context "with a Virtus descendant" do
     let(:value) { Class.new { include Virtus; self } }
 
-    it { should be(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
+    it { should be(described_class) }
   end
 end

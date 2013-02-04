@@ -5,7 +5,7 @@ describe Virtus::Attribute::Collection, '.merge_options' do
 
   let(:type)        { mock('type')        }
   let(:member_type) { mock('member_type') }
-  let(:options)     { Hash.new            }
+  let(:options)     { Hash.new }
 
   context 'when `type` responds to `count`' do
     before do
@@ -39,6 +39,13 @@ describe Virtus::Attribute::Collection, '.merge_options' do
       type.should_receive(:respond_to?).with(:count).and_return(false)
     end
 
-    it { should eql(:coerce => true) }
+    it do
+      should include(
+        :primitive       => Object,
+        :accessor        => :public,
+        :coerce          => true,
+        :coercion_method => :to_object
+      )
+    end
   end
 end

@@ -32,8 +32,7 @@ module Virtus
       #
       # @api private
       def self.merge_options(type, options)
-        merged_options = super
-        merged_options.merge(:primitive => type)
+        super.update(:primitive => type)
       end
 
       # Determine type based on class
@@ -47,22 +46,20 @@ module Virtus
       #
       # @api private
       def self.determine_type(klass)
-        if klass <= Virtus || klass <= OpenStruct
-          FromOpenStruct
-        elsif klass <= Struct
-          FromStruct
+        if klass <= Virtus || klass <= OpenStruct || klass <= Struct
+          self
         end
       end
 
-      # Coerce attributes into a virtus object
-      #
-      # @param [Hash,Virtus] value
-      #
-      # @return [Virtus]
-      #
       # @api private
-      def coerce(value)
-        value if value.kind_of?(@primitive)
+      def self.coercer(type, _options = {})
+        if type <= Virtus || type <= OpenStruct
+          OpenStructCoercer.new(type)
+        elsif type <= Struct
+          StructCoercer.new(type)
+        else
+          super
+        end
       end
 
     end # class EmbeddedValue
