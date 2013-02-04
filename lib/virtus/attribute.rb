@@ -178,7 +178,7 @@ module Virtus
     #
     # @api private
     def value_coerced?(value)
-      accessor.primitive === value
+      writer.coercer.coerced?(value)
     end
 
     # Define reader and writer methods for an Attribute

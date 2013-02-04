@@ -4,6 +4,11 @@ module Virtus
 
       class Coercible < self
 
+        # Return coercer object used by this writer
+        #
+        # @return [Object]
+        #
+        # @api private
         attr_reader :coercer
 
         # @api private
