@@ -46,11 +46,9 @@ module Virtus
     #
     # @api private
     def self.build(name, type = Object, options = {})
-      klass = determine_type(type)
-
-      unless klass
-        raise ArgumentError, "#{type.inspect} does not map to an attribute type"
-      end
+      klass = determine_type(type) or raise(
+        ArgumentError, "#{type.inspect} does not map to an attribute type"
+      )
 
       attribute_options = klass.merge_options(type, options)
       accessor          = Accessor.build(name, klass, attribute_options)
