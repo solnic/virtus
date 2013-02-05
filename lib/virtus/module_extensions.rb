@@ -29,6 +29,9 @@ module Virtus
       super
       object.extend(Virtus)
       define_attributes(object)
+      object.send(:attribute_set).each do |attribute|
+        attribute.writer.set_default_value(object, attribute)
+      end
     end
 
     # Extend a class with Virtus methods and define attributes

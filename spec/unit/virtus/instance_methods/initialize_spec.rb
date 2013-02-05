@@ -5,6 +5,7 @@ describe Virtus::InstanceMethods, '#initialize' do
     Class.new do
       include Virtus
       attribute :name, String
+      attribute :age,  Integer, :default => 0
     end
   end
 
@@ -36,7 +37,11 @@ describe Virtus::InstanceMethods, '#initialize' do
     end
 
     it 'sets attributes' do
-      subject.name.should == 'John'
+      expect(subject.name).to eql('John')
+    end
+
+    it 'sets default values' do
+      expect(subject.age).to be(0)
     end
   end
 

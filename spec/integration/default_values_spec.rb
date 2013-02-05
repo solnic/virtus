@@ -15,10 +15,10 @@ describe "default values" do
         include Virtus
 
         attribute :title,        String
-        attribute :slug,         String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }
+        attribute :slug,         String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }, :lazy => true
         attribute :view_count,   Integer, :default => 0
         attribute :published,    Boolean, :default => false, :accessor => :private
-        attribute :editor_title, String,  :default => :default_editor_title
+        attribute :editor_title, String,  :default => :default_editor_title, :lazy => true
         attribute :reference,    String,  :default => Reference.new
         attribute :revisions,    Array
         attribute :index,        Hash

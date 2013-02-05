@@ -6,6 +6,22 @@ module Virtus
     # @api private
     class Accessor
 
+      class LazyAccessor < self
+        def get(instance)
+          if instance.instance_variable_defined?(reader.instance_variable_name)
+            reader.call(instance)
+          else
+            value = writer.default_value.call(instance, self)
+            writer.call(instance, value)
+            value
+          end
+        end
+
+        def lazy?
+          true
+        end
+      end
+
       # Return reader
       #
       # @return [Reader]
@@ -44,7 +60,8 @@ module Virtus
         reader = reader_class.new(name, reader_options)
         writer = writer_class.new(name, writer_options)
 
-        new(reader, writer)
+        klass = options[:lazy] ? Accessor::LazyAccessor : self
+        klass.new(reader, writer)
       end
 
       # Determine visibility of reader/write methods based on the options hash
@@ -80,13 +97,7 @@ module Virtus
       #
       # @api public
       def get(instance)
-        if instance.instance_variable_defined?(reader.instance_variable_name)
-          reader.call(instance)
-        else
-          value = writer.default_value.call(instance, self)
-          writer.call(instance, value)
-          value
-        end
+        reader.call(instance)
       end
 
       # Set a variable on an object
@@ -114,6 +125,11 @@ module Virtus
       # @api public
       def public_writer?
         writer.public?
+      end
+
+      # @api private
+      def lazy?
+        false
       end
 
     end # class Accessor

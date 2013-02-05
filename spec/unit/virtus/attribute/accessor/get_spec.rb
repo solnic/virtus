@@ -11,25 +11,12 @@ describe Virtus::Attribute::Accessor, '#get' do
 
   let(:instance) { Class.new { attr_accessor :test }.new }
 
-  context "when ivar is set" do
-    let(:value) { 'other' }
+  let(:value) { 'other' }
 
-    before do
-      instance.test = value
-      reader.should_receive(:call).with(instance).and_return(value)
-    end
-
-    it { should be(value) }
+  before do
+    instance.test = value
+    reader.should_receive(:call).with(instance).and_return(value)
   end
 
-  context "when ivar is not set" do
-    let(:value) { 'default' }
-
-    before do
-      default_value.should_receive(:call).with(instance, object).and_return(value)
-      writer.should_receive(:call).with(instance, value)
-    end
-
-    it { should be(value) }
-  end
+  it { should be(value) }
 end
