@@ -6,6 +6,7 @@ module Virtus
   class Attribute
     extend DescendantsTracker, TypeLookup, Options
 
+    include Adamantium::Flat
     include Equalizer.new(inspect) << :name
 
     accept_options :primitive, :accessor, :reader,

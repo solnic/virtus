@@ -5,6 +5,7 @@ module Virtus
     #
     # @api private
     class Accessor
+      include Adamantium::Flat
 
       # Return reader
       #

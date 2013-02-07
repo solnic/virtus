@@ -7,6 +7,7 @@ module Virtus
     #
     # @abstract
     class AccessorMethod
+      include Adamantium::Flat
 
       # Return name
       #
