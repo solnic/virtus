@@ -133,6 +133,32 @@ module Virtus
       attributes
     end
 
+    # Freeze object
+    #
+    # @return [self]
+    #
+    # @api public
+    #
+    # @example
+    #
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    #   user = User.new(:name => 'John', :age => 28)
+    #   user.frozen? # => false
+    #   user.freeze
+    #   user.frozen? # => true
+    #
+    # @api public
+    def freeze
+      set_defaults
+      super
+    end
+
   private
 
     # Get values of all attributes defined for this class, ignoring privacy
@@ -165,12 +191,12 @@ module Virtus
     # @return [hash]
     #
     # @api private
-    def set_defaults(attributes)
+    def set_defaults(attributes = {})
       hash = coerce_input_attributes(attributes)
 
       (attribute_set.map(&:name) - hash.keys.map(&:to_sym)).each do |name|
         attribute = attribute_set[name]
-        next if attribute.accessor.lazy?
+        next if attribute.accessor.lazy? || instance_variable_defined?(attribute.reader.instance_variable_name)
         attribute.writer.set_default_value(self, attribute)
       end
 
