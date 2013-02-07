@@ -159,6 +159,23 @@ module Virtus
       super
     end
 
+    # Set default attributes
+    #
+    # @return [hash]
+    #
+    # @api private
+    def set_defaults(attributes = {})
+      hash = coerce_input_attributes(attributes)
+
+      (attribute_set.map(&:name) - hash.keys.map(&:to_sym)).each do |name|
+        attribute = attribute_set[name]
+        next if attribute.accessor.lazy? || instance_variable_defined?(attribute.reader.instance_variable_name)
+        attribute.writer.set_default_value(self, attribute)
+      end
+
+      hash
+    end
+
   private
 
     # Get values of all attributes defined for this class, ignoring privacy
@@ -184,23 +201,6 @@ module Virtus
       attributes.each do |name, value|
         set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
       end
-    end
-
-    # Set default attributes
-    #
-    # @return [hash]
-    #
-    # @api private
-    def set_defaults(attributes = {})
-      hash = coerce_input_attributes(attributes)
-
-      (attribute_set.map(&:name) - hash.keys.map(&:to_sym)).each do |name|
-        attribute = attribute_set[name]
-        next if attribute.accessor.lazy? || instance_variable_defined?(attribute.reader.instance_variable_name)
-        attribute.writer.set_default_value(self, attribute)
-      end
-
-      hash
     end
 
     # @api private
