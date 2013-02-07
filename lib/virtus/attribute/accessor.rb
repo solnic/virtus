@@ -6,22 +6,6 @@ module Virtus
     # @api private
     class Accessor
 
-      class LazyAccessor < self
-        def get(instance)
-          if instance.instance_variable_defined?(reader.instance_variable_name)
-            reader.call(instance)
-          else
-            value = writer.default_value.call(instance, self)
-            writer.call(instance, value)
-            value
-          end
-        end
-
-        def lazy?
-          true
-        end
-      end
-
       # Return reader
       #
       # @return [Reader]
