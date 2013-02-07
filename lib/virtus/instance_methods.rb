@@ -12,8 +12,8 @@ module Virtus
     #
     # @api private
     def initialize(attributes = nil)
-      hash = set_defaults(attributes || {})
-      set_attributes(hash) if attributes
+      set_attributes(attributes) if attributes
+      set_defaults
     end
 
     # Returns a value of the attribute with the given name
@@ -161,19 +161,17 @@ module Virtus
 
     # Set default attributes
     #
-    # @return [hash]
+    # @return [self]
     #
     # @api private
     def set_defaults(attributes = {})
-      hash = coerce_input_attributes(attributes)
-
-      (attribute_set.map(&:name) - hash.keys.map(&:to_sym)).each do |name|
-        attribute = attribute_set[name]
-        next if attribute.accessor.lazy? || instance_variable_defined?(attribute.reader.instance_variable_name)
+      attribute_set.each do |attribute|
+        if instance_variable_defined?(attribute.reader.instance_variable_name) || attribute.accessor.lazy?
+          next
+        end
         attribute.writer.set_default_value(self, attribute)
       end
-
-      hash
+      self
     end
 
   private
@@ -198,11 +196,15 @@ module Virtus
     #
     # @api private
     def set_attributes(attributes)
-      attributes.each do |name, value|
+      coerce_input_attributes(attributes).each do |name, value|
         set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
       end
     end
 
+    # Coerce attributes received in the constructor
+    #
+    # @return [Hash]
+    #
     # @api private
     def coerce_input_attributes(attributes)
       ::Hash.try_convert(attributes) or raise(
