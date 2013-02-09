@@ -85,6 +85,7 @@ module Virtus
     def attributes
       attribute_set.get(self, &:public_reader?)
     end
+    alias_method :to_hash, :attributes
 
     # Mass-assign attribute values
     #
@@ -111,26 +112,6 @@ module Virtus
     # @api public
     def attributes=(attributes)
       attribute_set.set(self, attributes)
-    end
-
-    # Returns a hash of all publicly accessible attributes
-    #
-    # @example
-    #   class User
-    #     include Virtus
-    #
-    #     attribute :name, String
-    #     attribute :age,  Integer
-    #   end
-    #
-    #   user = User.new(:name => 'John', :age => 28)
-    #   user.attributes  # => { :name => 'John', :age => 28 }
-    #
-    # @return [Hash]
-    #
-    # @api public
-    def to_hash
-      attributes
     end
 
     # Freeze object
