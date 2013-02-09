@@ -12,8 +12,8 @@ module Virtus
     #
     # @api private
     def initialize(attributes = nil)
-      set_attributes(attributes) if attributes
-      set_defaults
+      attribute_set.set(self, attributes) if attributes
+      set_default_attributes
     end
 
     # Returns a value of the attribute with the given name
@@ -36,7 +36,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      get_attribute(name)
+      public_send(name)
     end
 
     # Sets a value of the attribute with the given name
@@ -63,7 +63,7 @@ module Virtus
     #
     # @api public
     def []=(name, value)
-      set_attribute(name, value)
+      public_send("#{name}=", value)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -83,7 +83,7 @@ module Virtus
     #
     # @api public
     def attributes
-      get_attributes(&:public_reader?)
+      attribute_set.get(self, &:public_reader?)
     end
 
     # Mass-assign attribute values
@@ -110,7 +110,7 @@ module Virtus
     #
     # @api public
     def attributes=(attributes)
-      set_attributes(coerce_input_attributes(attributes))
+      attribute_set.set(self, attributes)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -155,84 +155,19 @@ module Virtus
     #
     # @api public
     def freeze
-      set_defaults
+      set_default_attributes
       super
     end
 
     # Set default attributes
     #
     # @return [self]
-    #
-    # @api private
-    def set_defaults(attributes = {})
-      attribute_set.each do |attribute|
-        if instance_variable_defined?(attribute.reader.instance_variable_name) || attribute.accessor.lazy?
-          next
-        end
-        attribute.writer.set_default_value(self, attribute)
-      end
+    def set_default_attributes
+      attribute_set.set_defaults(self)
       self
     end
 
   private
-
-    # Get values of all attributes defined for this class, ignoring privacy
-    #
-    # @return [Hash]
-    #
-    # @api private
-    def get_attributes
-      attribute_set.each_with_object({}) do |attribute, attributes|
-        name = attribute.name
-        attributes[name] = get_attribute(name) if yield(attribute)
-      end
-    end
-
-    # Mass-assign attribute values
-    #
-    # @see Virtus::InstanceMethods#attributes=
-    #
-    # @return [Hash]
-    #
-    # @api private
-    def set_attributes(attributes)
-      coerce_input_attributes(attributes).each do |name, value|
-        set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
-      end
-    end
-
-    # Coerce attributes received in the constructor
-    #
-    # @return [Hash]
-    #
-    # @api private
-    def coerce_input_attributes(attributes)
-      ::Hash.try_convert(attributes) or raise(
-        NoMethodError, "Expected #{attributes.inspect} to respond to #to_hash"
-      )
-    end
-
-    # Returns a value of the attribute with the given name
-    #
-    # @see Virtus::InstanceMethods#[]
-    #
-    # @return [Object]
-    #
-    # @api private
-    def get_attribute(name)
-      __send__(name)
-    end
-
-    # Sets a value of the attribute with the given name
-    #
-    # @see Virtus::InstanceMethods#[]=
-    #
-    # @return [Object]
-    #
-    # @api private
-    def set_attribute(name, value = nil)
-      __send__("#{name}=", value)
-    end
 
     # The list of allowed public methods
     #

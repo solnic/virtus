@@ -29,7 +29,7 @@ module Virtus
       super
       object.extend(Virtus)
       define_attributes(object)
-      object.set_defaults
+      object.set_default_attributes
     end
 
     # Extend a class with Virtus methods and define attributes
