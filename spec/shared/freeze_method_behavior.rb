@@ -1,7 +1,7 @@
 shared_examples_for 'a #freeze method' do
   let(:sample_exception) do
     begin
-      object.dup.freeze.instance_variable_set(:@foo,:bar)
+      object.dup.freeze.instance_variable_set(:@foo, :bar)
     rescue => exception
       exception
     end
@@ -26,7 +26,7 @@ shared_examples_for 'a #freeze method' do
   it 'prevents future modifications' do
     subject
     expectation = raise_error(expected_exception_class,expected_exception_message)
-    expect { object.instance_variable_set(:@foo,:bar) }.to(expectation)
+    expect { object.instance_variable_set(:@foo, :bar) }.to(expectation)
   end
 
   its(:frozen?) { should be(true) }

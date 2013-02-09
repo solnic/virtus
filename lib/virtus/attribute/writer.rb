@@ -48,6 +48,11 @@ module Virtus
         instance.instance_variable_set(instance_variable_name, value)
       end
 
+      # @api private
+      def set_default_value(instance, attribute)
+        call(instance, default_value.call(instance, attribute))
+      end
+
       # Creates an attribute writer method
       #
       # @param [Module] mod

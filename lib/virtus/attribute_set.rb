@@ -141,6 +141,59 @@ module Virtus
       self
     end
 
+    # Get values of all attributes defined for this class, ignoring privacy
+    #
+    # @return [Hash]
+    #
+    # @api private
+    def get(object, &block)
+      each_with_object({}) do |attribute, attributes|
+        name = attribute.name
+        attributes[name] = object.__send__(name) if yield(attribute)
+      end
+    end
+
+    # Mass-assign attribute values
+    #
+    # @see Virtus::InstanceMethods#attributes=
+    #
+    # @return [Hash]
+    #
+    # @api private
+    def set(object, attributes)
+      coerce(attributes).each do |name, value|
+        writer_name = "#{name}="
+        if object.allowed_writer_methods.include?(writer_name)
+          object.__send__(writer_name, value)
+        end
+      end
+    end
+
+    # Set default attributes
+    #
+    # @return [self]
+    #
+    # @api private
+    def set_defaults(object)
+      each do |attribute|
+        if object.instance_variable_defined?(attribute.reader.instance_variable_name) || attribute.accessor.lazy?
+          next
+        end
+        attribute.writer.set_default_value(object, attribute)
+      end
+    end
+
+    # Coerce attributes received to a hash
+    #
+    # @return [Hash]
+    #
+    # @api private
+    def coerce(attributes)
+      ::Hash.try_convert(attributes) or raise(
+        NoMethodError, "Expected #{attributes.inspect} to respond to #to_hash"
+      )
+    end
+
   private
 
     # Merge the attributes into the index

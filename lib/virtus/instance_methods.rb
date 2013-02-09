@@ -12,7 +12,8 @@ module Virtus
     #
     # @api private
     def initialize(attributes = nil)
-      self.attributes = attributes if attributes
+      attribute_set.set(self, attributes) if attributes
+      set_default_attributes
     end
 
     # Returns a value of the attribute with the given name
@@ -35,7 +36,7 @@ module Virtus
     #
     # @api public
     def [](name)
-      get_attribute(name)
+      public_send(name)
     end
 
     # Sets a value of the attribute with the given name
@@ -62,7 +63,7 @@ module Virtus
     #
     # @api public
     def []=(name, value)
-      set_attribute(name, value)
+      public_send("#{name}=", value)
     end
 
     # Returns a hash of all publicly accessible attributes
@@ -82,8 +83,9 @@ module Virtus
     #
     # @api public
     def attributes
-      get_attributes(&:public_reader?)
+      attribute_set.get(self, &:public_reader?)
     end
+    alias_method :to_hash, :attributes
 
     # Mass-assign attribute values
     #
@@ -109,27 +111,7 @@ module Virtus
     #
     # @api public
     def attributes=(attributes)
-      set_attributes(attributes)
-    end
-
-    # Returns a hash of all publicly accessible attributes
-    #
-    # @example
-    #   class User
-    #     include Virtus
-    #
-    #     attribute :name, String
-    #     attribute :age,  Integer
-    #   end
-    #
-    #   user = User.new(:name => 'John', :age => 28)
-    #   user.attributes  # => { :name => 'John', :age => 28 }
-    #
-    # @return [Hash]
-    #
-    # @api public
-    def to_hash
-      attributes
+      attribute_set.set(self, attributes)
     end
 
     # Freeze object
@@ -154,76 +136,19 @@ module Virtus
     #
     # @api public
     def freeze
-      set_defaults
+      set_default_attributes
       super
     end
 
+    # Set default attributes
+    #
+    # @return [self]
+    def set_default_attributes
+      attribute_set.set_defaults(self)
+      self
+    end
+
   private
-
-    # Get values of all attributes defined for this class, ignoring privacy
-    #
-    # @return [Hash]
-    #
-    # @api private
-    def get_attributes
-      attribute_set.each_with_object({}) do |attribute, attributes|
-        name = attribute.name
-        attributes[name] = get_attribute(name) if yield(attribute)
-      end
-    end
-
-    # Ensure all defaults are set
-    #
-    # @return [AttributeSet]
-    #
-    # @api private
-    def set_defaults
-      attribute_set.each do |attribute|
-        get_attribute(attribute.name)
-      end
-    end
-
-    # Mass-assign attribute values
-    #
-    # @see Virtus::InstanceMethods#attributes=
-    #
-    # @return [Hash]
-    #
-    # @api private
-    def set_attributes(attributes)
-      hash = ::Hash.try_convert(attributes)
-
-      if hash.nil?
-        raise NoMethodError,
-          "Expected #{attributes.inspect} to respond to #to_hash"
-      end
-
-      hash.each do |name, value|
-        set_attribute(name, value) if allowed_writer_methods.include?("#{name}=")
-      end
-    end
-
-    # Returns a value of the attribute with the given name
-    #
-    # @see Virtus::InstanceMethods#[]
-    #
-    # @return [Object]
-    #
-    # @api private
-    def get_attribute(name)
-      __send__(name)
-    end
-
-    # Sets a value of the attribute with the given name
-    #
-    # @see Virtus::InstanceMethods#[]=
-    #
-    # @return [Object]
-    #
-    # @api private
-    def set_attribute(name, value)
-      __send__("#{name}=", value)
-    end
 
     # The list of allowed public methods
     #

@@ -48,12 +48,11 @@ module Virtus
       # needs all the attributes, so we allow every attribute.
       FILTER_NONE = proc { true }
 
-      def initialize(attributes = {})
-        set_attributes(attributes)
-      end
-
+      # @api private
       def with(attribute_updates)
-        self.class.new(get_attributes(&FILTER_NONE).merge(attribute_updates))
+        self.class.new(
+          attribute_set.get(self, &FILTER_NONE).merge(attribute_updates)
+        )
       end
 
       # ValueObjects are immutable and can't be cloned

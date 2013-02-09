@@ -17,6 +17,15 @@ module Virtus
     end
     private_class_method :included
 
+    # Return a list of allowed writer method names
+    #
+    # @return [Set]
+    #
+    # @api private
+    def allowed_writer_methods
+      self.class.allowed_writer_methods
+    end
+
   private
 
     # Return class' attribute set
@@ -26,15 +35,6 @@ module Virtus
     # @api private
     def attribute_set
       self.class.attribute_set
-    end
-
-    # Return a list of allowed writer method names
-    #
-    # @return [Set]
-    #
-    # @api private
-    def allowed_writer_methods
-      self.class.allowed_writer_methods
     end
 
   end # module ClassInclusions

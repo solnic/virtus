@@ -48,7 +48,8 @@ describe Virtus::Attribute::Accessor, '.build' do
       { :reader_class => other_reader_class,
         :writer_class => other_writer_class,
         :reader       => :private,
-        :writer       => :protected }
+        :writer       => :protected,
+        :lazy         => true }
     }
 
     before do
@@ -56,7 +57,7 @@ describe Virtus::Attribute::Accessor, '.build' do
       other_writer_class.should_receive(:new).with(name, :bar => :foo, :visibility => :protected).and_return(writer)
     end
 
-    it { should be_instance_of(described_class) }
+    it { should be_instance_of(described_class::LazyAccessor) }
 
     its(:reader) { should be(reader) }
     its(:writer) { should be(writer) }
