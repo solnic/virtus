@@ -357,32 +357,24 @@ venue_other = Venue.new(
 venue.location === venue_other.location # => true
 ```
 
-### Custom Attributes
+### Custom Attribute Writers
 
 ``` ruby
 require 'json'
 
-module MyApp
-
-  # Defining the custom attribute(s)
-  module Attributes
-    class JSON < Virtus::Attribute::Object
-      primitive Hash
-
-      def coerce(value)
-        ::JSON.parse value
-      end
-    end
-  end
-
-  class User
-    include Virtus
-
-    attribute :info, Attributes::JSON
+class JsonWriter < Virtus::Attribute::Writer::Coercible
+  def coerce(value)
+    value.is_a?(Hash) ? value : JSON.parse(value)
   end
 end
 
-user = MyApp::User.new
+class User
+  include Virtus
+
+  attribute :info, Hash, :writer_class => JsonWriter
+end
+
+user = User.new
 user.info = '{"email":"john@domain.com"}' # => {"email"=>"john@domain.com"}
 user.info.class # => Hash
 ```
