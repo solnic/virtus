@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency('backports',           '~> 2.8')
   gem.add_dependency('descendants_tracker', '~> 0.0.1')
   gem.add_dependency('adamantium',          '~> 0.0.5')
-  gem.add_dependency('coercible',           '~> 0.0.1')
+  gem.add_dependency('coercible',           '~> 0.0.2')
 end
