@@ -3,7 +3,7 @@
 group :development do
   gem 'rake',  '~> 10.0.3'
   gem 'rspec', '~> 2.12.0'
-  gem 'yard',  '~> 0.8.3'
+  gem 'yard',  '~> 0.8.4.1'
 end
 
 group :yard do
@@ -11,7 +11,7 @@ group :yard do
 end
 
 group :guard do
-  gem 'guard',         '~> 1.6.1'
+  gem 'guard',         '~> 1.6.2'
   gem 'guard-bundler', '~> 1.0.0'
   gem 'guard-rspec',   '~> 2.3.3'
 
@@ -30,17 +30,19 @@ group :guard do
 end
 
 group :metrics do
-  gem 'backports', '~> 2.7.0'
   gem 'flay',      '~> 1.4.3'
   gem 'flog',      '~> 2.5.3'
-  gem 'mutant',    '~> 0.2.16'
   gem 'reek',      '~> 1.2.13', :git => 'https://github.com/troessner/reek.git', :ref => 'ef77fcecaa21c9ebcbe4d9a79d41b0e70196bf18'
-  gem 'roodi',     '~> 2.1.0'
-  gem 'yardstick', '~> 0.9.1'
+  gem 'roodi',     '~> 2.2.0'
+  gem 'yardstick', '~> 0.9.2'
 
   platforms :ruby_18, :ruby_19 do
     # this indirectly depends on ffi which does not build on ruby-head
     gem 'yard-spellcheck', '~> 0.1.5'
+  end
+
+  platforms :mri_19, :rbx do
+#    gem 'mutant', '~> 0.2.16'
   end
 
   platforms :mri_19 do
