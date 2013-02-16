@@ -10,7 +10,7 @@ module Virtus
     include Equalizer.new(inspect) << :name
 
     accept_options :primitive, :accessor, :reader,
-      :writer, :coerce, :coercion_method, :default
+      :writer, :coerce, :coercion_method, :default, :lazy
 
     accessor :public
     coerce true

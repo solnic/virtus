@@ -4,9 +4,17 @@ describe 'custom attributes' do
 
   before do
     module Examples
-      class UpperCase < Virtus::Attribute::Writer::Coercible
-        def coerce(value)
-          super.upcase
+      class NoisyString < Virtus::Attribute::String
+        class UpperCase < Virtus::Attribute::Writer::Coercible
+          def coerce(value)
+            super.upcase
+          end
+        end
+
+        lazy true
+
+        def self.writer_class(*)
+          UpperCase
         end
       end
 
@@ -18,7 +26,7 @@ describe 'custom attributes' do
         include Virtus
 
         attribute :name, String
-        attribute :scream, String, :writer_class => Examples::UpperCase, :lazy => true
+        attribute :scream, NoisyString
         attribute :expression, RegularExpression
       end
     end
