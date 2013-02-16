@@ -143,6 +143,8 @@ module Virtus
     # Set default attributes
     #
     # @return [self]
+    #
+    # @api private
     def set_default_attributes
       attribute_set.set_defaults(self)
       self
