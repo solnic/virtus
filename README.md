@@ -357,11 +357,12 @@ venue_other = Venue.new(
 venue.location === venue_other.location # => true
 ```
 
-### Custom Attribute Writers
+### Custom Coercions
 
 ``` ruby
 require 'json'
 
+# With a custom writer class
 class JsonWriter < Virtus::Attribute::Writer::Coercible
   def coerce(value)
     value.is_a?(Hash) ? value : JSON.parse(value)
@@ -377,6 +378,28 @@ end
 user = User.new
 user.info = '{"email":"john@domain.com"}' # => {"email"=>"john@domain.com"}
 user.info.class # => Hash
+
+# With a custom attribute encapsulating coercion-specific configuration
+class NoisyString < Virtus::Attribute::String
+  class UpperCase < Virtus::Attribute::Writer::Coercible
+    def coerce(value)
+      super.upcase
+    end
+  end
+
+  def self.writer_class(*)
+    UpperCase
+  end
+end
+
+class User
+  include Virtus
+
+  attribute :scream, NoisyString
+end
+
+user = User.new(:scream => 'hello world!')
+user.scream # => "HELLO WORLD!"
 ```
 
 Credits
@@ -404,7 +427,7 @@ Contributing
 License
 -------
 
-Copyright (c) 2011-2012 Piotr Solnica
+Copyright (c) 2011-2013 Piotr Solnica
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
