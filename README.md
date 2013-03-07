@@ -402,6 +402,28 @@ user = User.new(:scream => 'hello world!')
 user.scream # => "HELLO WORLD!"
 ```
 
+### Private Attributes
+
+``` ruby
+class User
+  include Virtus
+
+  attribute :unique_id, String, :writer => :private
+
+  def set_unique_id(id)
+    self.unique_id = id
+  end
+end
+
+user = User.new(:unique_id => '1234-1234')
+user.unique_id # => nil
+
+user.unique_id = '1234-1234' # => NoMethodError: private method `unique_id='
+
+user.set_unique_id('1234-1234')
+user.unique_id # => '1234-1234'
+```
+
 Credits
 -------
 
