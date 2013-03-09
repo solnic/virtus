@@ -1,17 +1,16 @@
 ---
-AbcMetricMethodCheck:            { score: 12.1 }
+AbcMetricMethodCheck:            { score: 9.0 }
 AssignmentInConditionalCheck:    { }
 CaseMissingElseCheck:            { }
-ClassLineCountCheck:             { line_count: 325 }
-ClassNameCheck:                  { pattern: !ruby/regexp /\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/ }
+ClassLineCountCheck:             { line_count: 250 }
+ClassNameCheck:                  { pattern: !ruby/regexp '/\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/' }
 ClassVariableCheck:              { }
 CyclomaticComplexityBlockCheck:  { complexity: 4 }
 CyclomaticComplexityMethodCheck: { complexity: 4 }
 EmptyRescueBodyCheck:            { }
 ForLoopCheck:                    { }
-MethodLineCountCheck:            { line_count: 10 }
-MethodNameCheck:                 { pattern: !ruby/regexp /\A(?:[a-z\d](?:_?[a-z\d])+[?!=]?|\[\]=?|==|<=>|<<|[+*&|-])\z/ }
-ModuleLineCountCheck:            { line_count: 331 }
-ModuleNameCheck:                 { pattern: !ruby/regexp /\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/ }
-# TODO: decrease parameter_count to 2 or less
+MethodLineCountCheck:            { line_count: 6 }
+MethodNameCheck:                 { pattern: !ruby/regexp '/\A(?:[a-z\d](?:_?[a-z\d])+[?!=]?|\[\]=?|==|<=>|<<|[+*&|-])\z/' }
+ModuleLineCountCheck:            { line_count: 235 }
+ModuleNameCheck:                 { pattern: !ruby/regexp '/\A(?:[A-Z]+|[A-Z][a-z](?:[A-Z]?[a-z])+)\z/' }
 ParameterNumberCheck:            { parameter_count: 3 }
