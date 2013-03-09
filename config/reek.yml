@@ -27,12 +27,12 @@ LongParameterList:
   overrides: {}
 FeatureEnvy:
   exclude: [
-    Virtus::Attribute::Boolean#value_coerced?,
-    Virtus::ClassMethods#build_attribute,
-    Virtus::Coercion::TimeCoercions#to_string,
-    Virtus::Coercion::TimeCoercions#coerce_with_method,
-    Virtus::TypeLookup#determine_type_from_primitive,
-    Virtus::ValueObject::ClassMethods#attribute
+    'Virtus::Attribute::Boolean#value_coerced?',
+    'Virtus::ClassMethods#build_attribute',
+    'Virtus::Coercion::TimeCoercions#to_string',
+    'Virtus::Coercion::TimeCoercions#coerce_with_method',
+    'Virtus::TypeLookup#determine_type_from_primitive',
+    'Virtus::ValueObject::ClassMethods#attribute'
   ]
   enabled: true
 ClassVariable:
@@ -63,15 +63,20 @@ LongMethod:
 Duplication:
   allow_calls: []
   exclude: [
-    Virtus::Attribute::DefaultValue#evaluate
+    'Virtus::Attribute::DefaultValue#evaluate',
+    'Virtus::Attribute#define_accessor_methods',
+    'Virtus::Attribute#self.writer_options',
+    'Virtus::Attribute::Accessor::LazyAccessor#get',
+    'Virtus::Attribute::EmbeddedValue::OpenStructCoercer#call',
+    'Virtus::Attribute::EmbeddedValue::StructCoercer#call'
   ]
   enabled: true
   max_calls: 1
 UtilityFunction:
   max_helper_calls: 1
   exclude: [
-    Virtus::Attribute::Boolean#value_coerced?,
-    Virtus::ClassMethods#build_attribute
+    'Virtus::Attribute::Boolean#value_coerced?',
+    'Virtus::ClassMethods#build_attribute'
   ]
   enabled: true
 Attribute:
