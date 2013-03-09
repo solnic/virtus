@@ -171,25 +171,16 @@ module Virtus
       accessor.writer
     end
 
-    # Is the given value coerced into the target type for this attribute?
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def value_coerced?(value)
-      coercer.coerced?(value)
-    end
-
     # Define reader and writer methods for an Attribute
     #
-    # @param [Module] mod
+    # @param [AttributeSet] mod
     #
     # @return [self]
     #
     # @api private
-    def define_accessor_methods(mod)
-      reader.define_method(accessor, mod)
-      writer.define_method(accessor, mod)
+    def define_accessor_methods(attribute_set)
+      reader.define_method(accessor, attribute_set)
+      writer.define_method(accessor, attribute_set)
       self
     end
 
@@ -209,6 +200,15 @@ module Virtus
     # @api private
     def public_writer?
       accessor.public_writer?
+    end
+
+    # Returns if the given value is coerced into the target type
+    #
+    # @return [Boolean]
+    #
+    # @api private
+    def value_coerced?(value)
+      coercer.coerced?(value)
     end
 
     private
