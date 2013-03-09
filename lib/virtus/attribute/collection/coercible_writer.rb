@@ -41,7 +41,7 @@ module Virtus
         # @return [Object]
         #
         # @api private
-        def coerce(value)
+        def coerce(_value)
           coerced = super
           return coerced unless coerced.respond_to?(:each_with_object)
           coerced.each_with_object(new_collection) do |entry, collection|

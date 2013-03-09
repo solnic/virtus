@@ -31,7 +31,7 @@ module Virtus
       #   an updated options hash for configuring an EmbeddedValue instance
       #
       # @api private
-      def self.merge_options(type, options)
+      def self.merge_options(type, _options)
         super.update(:primitive => type)
       end
 

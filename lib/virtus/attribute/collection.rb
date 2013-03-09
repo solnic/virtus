@@ -17,7 +17,7 @@ module Virtus
       # @return [Hash]
       #
       # @api private
-      def self.merge_options(type, options)
+      def self.merge_options(type, _options)
         merged_options = super
 
         if !type.respond_to?(:count)
@@ -32,7 +32,7 @@ module Virtus
       end
 
       # @api private
-      def self.coercible_writer_class(type, options)
+      def self.coercible_writer_class(_type, options)
         options[:member_type] ? CoercibleWriter : super
       end
 

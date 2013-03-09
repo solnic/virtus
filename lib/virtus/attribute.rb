@@ -58,7 +58,7 @@ module Virtus
     end
 
     # @api public
-    def self.coercer(*args)
+    def self.coercer(*)
       Coercer.new(Virtus.coercer, coercion_method)
     end
 
@@ -73,12 +73,12 @@ module Virtus
     end
 
     # @api private
-    def self.coercible_writer_class(type, options)
+    def self.coercible_writer_class(_type, _options)
       Writer::Coercible
     end
 
     # @api private
-    def self.reader_options(attribute_options)
+    def self.reader_options(*)
       {}
     end
 
