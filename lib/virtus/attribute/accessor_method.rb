@@ -9,6 +9,12 @@ module Virtus
     class AccessorMethod
       include Adamantium::Flat
 
+      include AbstractType
+
+      abstract_method :call
+
+      abstract_method :define_method
+
       # Return name
       #
       # @return [Symbol]
@@ -52,26 +58,6 @@ module Virtus
       # @api public
       def public?
         visibility == :public
-      end
-
-      # Call this method
-      #
-      # @abstract
-      #
-      # @api public
-      def call(*)
-        raise NotImplementedError
-      end
-
-      # Define method via provided module
-      #
-      # @param [Accessor] accessor
-      #
-      # @param [AttributeSet] mod
-      #
-      # @api private
-      def define_method(accessor, mod)
-        raise NotImplementedError
       end
 
     end # class AccessorMethod

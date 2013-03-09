@@ -47,6 +47,7 @@ module Virtus
 
 end # module Virtus
 
+require 'abstract_type'
 require 'descendants_tracker'
 require 'adamantium'
 require 'coercible'
