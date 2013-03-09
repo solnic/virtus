@@ -11,6 +11,8 @@ module Virtus
         #
         # @see Accessor#get
         #
+        # @return [Object]
+        #
         # @api private
         def get(instance)
           if instance.instance_variable_defined?(reader.instance_variable_name)

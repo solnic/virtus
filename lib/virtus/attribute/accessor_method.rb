@@ -19,21 +19,21 @@ module Virtus
       #
       # @return [Symbol]
       #
-      # @api public
+      # @api private
       attr_reader :name
 
       # Return visibility
       #
       # @return [Symbol]
       #
-      # @api public
+      # @api private
       attr_reader :visibility
 
       # Return instance variable name
       #
       # @return [Symbol]
       #
-      # @api public
+      # @api private
       attr_reader :instance_variable_name
 
       # Initialize accessor method instance
@@ -55,7 +55,7 @@ module Virtus
       #
       # @return [TrueClass,FalseClass]
       #
-      # @api public
+      # @api private
       def public?
         visibility == :public
       end

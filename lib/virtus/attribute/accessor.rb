@@ -80,7 +80,7 @@ module Virtus
       #
       # @return [Object]
       #
-      # @api public
+      # @api private
       def get(instance)
         reader.call(instance)
       end
@@ -89,7 +89,7 @@ module Virtus
       #
       # @return [Object]
       #
-      # @api public
+      # @api private
       def set(*args)
         writer.call(*args)
       end
@@ -98,7 +98,7 @@ module Virtus
       #
       # @return [Boolean]
       #
-      # @api public
+      # @api private
       def public_reader?
         reader.public?
       end
@@ -107,11 +107,15 @@ module Virtus
       #
       # @return [Boolean]
       #
-      # @api public
+      # @api private
       def public_writer?
         writer.public?
       end
 
+      # Return if this accessor is lazy
+      #
+      # @return [FalseClass]
+      #
       # @api private
       def lazy?
         false

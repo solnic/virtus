@@ -17,7 +17,7 @@ module Virtus
       coercion_method :to_hash
       default         primitive.new
 
-      # Handles hashes with [key_type => value_type] syntax.
+      # Handles hashes with [key_type => value_type] syntax
       #
       # @param [Class] type
       #
@@ -41,11 +41,19 @@ module Virtus
         merged_options
       end
 
+      # @see Virtus::Attribute.coercible_writer_class
+      #
+      # @return [::Class]
+      #
       # @api private
       def self.coercible_writer_class(_type, options)
         options[:key_type] && options[:value_type] ? CoercibleWriter : super
       end
 
+      # @see Virtus::Attribute.writer_option_names
+      #
+      # @return [Array<Symbol>]
+      #
       # @api private
       def self.writer_option_names
         super << :key_type << :value_type

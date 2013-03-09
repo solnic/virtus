@@ -2,15 +2,30 @@ module Virtus
   class Attribute
     class EmbeddedValue < Object
 
-      # EmbeddedValue attribute handling OpenStruct primitive or Virtus object
+      # EmbeddedValue coercer handling OpenStruct primitive or Virtus object
       #
       class OpenStructCoercer
+
+        # Return primitive class
+        #
+        # @return [::Class]
+        #
+        # @api private
         attr_reader :primitive
 
+        # Initialize coercer object
+        #
+        # @return [undefined]
+        #
+        # @api private
         def initialize(primitive)
           @primitive = primitive
         end
 
+        # Build object from attribute hash
+        #
+        # @return [::Object]
+        #
         # @api private
         def call(attributes)
           if attributes.kind_of?(primitive)
@@ -20,7 +35,7 @@ module Virtus
           end
         end
 
-      end # class FromOpenStruct
+      end # class OpenStructCoercer
     end # class EmbeddedValue
   end # class Attribute
 end # module Virtus

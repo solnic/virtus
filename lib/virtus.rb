@@ -40,6 +40,16 @@ module Virtus
   end
   private_class_method :extended
 
+  # Setup coercer
+  #
+  # @example
+  #
+  #   Virtus.coercer do |config|
+  #     config.string.boolea_map = { true => '1', false => '0' }
+  #   end
+  #
+  # @return [Coercible::Coercer]
+  #
   # @api public
   def self.coercer(&block)
     @coercer ||= Coercible::Coercer.new(&block)

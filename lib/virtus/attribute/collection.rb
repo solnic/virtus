@@ -31,11 +31,19 @@ module Virtus
         merged_options
       end
 
+      # @see Virtus::Attribute.coercible_writer_class
+      #
+      # @return [::Class]
+      #
       # @api private
       def self.coercible_writer_class(_type, options)
         options[:member_type] ? CoercibleWriter : super
       end
 
+      # @see Virtus::Attribute.writer_option_names
+      #
+      # @return [Array<Symbol>]
+      #
       # @api private
       def self.writer_option_names
         super << :member_type

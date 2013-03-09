@@ -57,32 +57,62 @@ module Virtus
       klass.new(name, accessor)
     end
 
+    # Build coercer wrapper
+    #
+    # @example
+    #
+    #   Virtus::Attribute.coercer # => #<Virtus::Attribute::Coercer ...>
+    #
+    # @return [Coercer]
+    #
     # @api public
     def self.coercer(*)
       Coercer.new(Virtus.coercer, coercion_method)
     end
 
+    # Return default reader class
+    #
+    # @return [::Class]
+    #
     # @api private
     def self.reader_class(*)
       Reader
     end
 
+    # Return default writer class
+    #
+    # @param [::Class] attribute type
+    # @param [::Hash] attribute options
+    #
+    # @return [::Class]
+    #
     # @api private
     def self.writer_class(type, options)
       options[:coerce] ? coercible_writer_class(type, options) : Writer
     end
 
+    # Return default coercible writer class
+    #
+    # @param [::Class] attribute type
+    # @param [::Hash] attribute options
+    #
+    # @return [::Class]
+    #
     # @api private
     def self.coercible_writer_class(_type, _options)
       Writer::Coercible
     end
 
+    # Return default options for writer class
+    #
+    # @return [::Hash]
+    #
     # @api private
     def self.reader_options(*)
       {}
     end
 
-    # Return options accepted by Writer
+    # Return options accepted by writer class
     #
     # @return [Array<Symbol>]
     #
@@ -91,6 +121,10 @@ module Virtus
       ::Hash[writer_option_names.zip(attribute_options.values_at(*writer_option_names))]
     end
 
+    # Return acceptable option names for write class
+    #
+    # @return [Array<Symbol>]
+    #
     # @api private
     def self.writer_option_names
       [ :coercer, :primitive, :default ]
@@ -161,11 +195,27 @@ module Virtus
       @accessor = accessor
     end
 
+    # Return reader object
+    #
+    # @example
+    #
+    #   attribute.reader # => #<Virtus::Attribute::Reader ...>
+    #
+    # @return [Reader]
+    #
     # @api public
     def reader
       accessor.reader
     end
 
+    # Return writer object
+    #
+    # @example
+    #
+    #   attribute.writer # => #<Virtus::Attribute::Writer ...>
+    #
+    # @return [Writer]
+    #
     # @api public
     def writer
       accessor.writer
