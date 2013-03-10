@@ -8,8 +8,8 @@ describe Virtus::Attribute::Accessor::Builder, '.call' do
   let(:type) {
     mock(
       'attribute_type',
-      reader_class: reader_class,
-      writer_class: writer_class
+      :reader_class => reader_class,
+      :writer_class => writer_class
     )
   }
 
@@ -23,8 +23,8 @@ describe Virtus::Attribute::Accessor::Builder, '.call' do
     type.should_receive(:reader_options).with(options).and_return({})
     type.should_receive(:writer_options).with(options).and_return({})
 
-    reader_class.should_receive(:new).with(name, visibility: :public).and_return(reader)
-    writer_class.should_receive(:new).with(name, visibility: :public).and_return(writer)
+    reader_class.should_receive(:new).with(name, :visibility => :public).and_return(reader)
+    writer_class.should_receive(:new).with(name, :visibility => :public).and_return(writer)
   end
 
   it { should be_instance_of(Virtus::Attribute::Accessor) }
