@@ -13,7 +13,7 @@ module Virtus
           @name       = name
           @type       = type
           @options    = options
-          @primitive  = options[:primitive]
+          @primitive  = options.fetch(:primitive, ::Object)
           @visibility = determine_visibility
         end
 

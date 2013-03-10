@@ -6,7 +6,7 @@ describe Virtus::Attribute::Accessor::Builder, '#reader_class' do
   let(:object)       { described_class.new('test', type, options) }
   let(:type)         { mock('attribute_type') }
   let(:reader_class) { mock('reader_class') }
-  let(:primitive)    { options[:primitive] }
+  let(:primitive)    { Object }
 
   context "when options provides reader_class" do
     let(:options) { { :reader_class => reader_class } }
