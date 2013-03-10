@@ -32,21 +32,8 @@ module Virtus
       # @return [Accessor]
       #
       # @api private
-      def self.build(name, type, options)
-        primitive  = options[:primitive]
-        visibility = determine_visibility(options)
-
-        reader_class = options.fetch(:reader_class) { type.reader_class(primitive, options) }
-        writer_class = options.fetch(:writer_class) { type.writer_class(primitive, options) }
-
-        reader_options = type.reader_options(options).update(:visibility => visibility[:reader])
-        writer_options = type.writer_options(options).update(:visibility => visibility[:writer])
-
-        reader = reader_class.new(name, reader_options)
-        writer = writer_class.new(name, writer_options)
-
-        klass = options[:lazy] ? Accessor::LazyAccessor : self
-        klass.new(reader, writer)
+      def self.build(*args)
+        Builder.call(*args)
       end
 
       # Determine visibility of reader/write methods based on the options hash

@@ -84,6 +84,7 @@ require 'virtus/attribute/default_value/from_symbol'
 
 require 'virtus/attribute'
 require 'virtus/attribute/coercer'
+require 'virtus/attribute/accessor/builder'
 require 'virtus/attribute/accessor'
 require 'virtus/attribute/accessor/lazy_accessor'
 require 'virtus/attribute/accessor_method'
