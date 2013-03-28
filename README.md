@@ -2,10 +2,10 @@ Virtus
 ======
 
 [![Gem Version](https://badge.fury.io/rb/virtus.png)][gem]
-[![Build Status](https://secure.travis-ci.org/solnic/virtus.png)](http://travis-ci.org/solnic/virtus)
-[![Dependency Status](https://gemnasium.com/solnic/virtus.png)](https://gemnasium.com/solnic/virtus)
-[![Code Climate](https://codeclimate.com/github/solnic/virtus.png)](https://codeclimate.com/github/solnic/virtus)
-[![Coverage Status](https://coveralls.io/repos/solnic/virtus/badge.png?branch=master)](https://coveralls.io/r/solnic/virtus)
+[![Build Status](https://secure.travis-ci.org/solnic/virtus.png?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/solnic/virtus.png)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/solnic/virtus.png)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/solnic/virtus/badge.png?branch=master)][coveralls]
 
 This is a partial extraction of the DataMapper [Property
 API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
