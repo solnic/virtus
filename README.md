@@ -7,6 +7,12 @@ Virtus
 [![Code Climate](https://codeclimate.com/github/solnic/virtus.png)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/solnic/virtus/badge.png?branch=master)][coveralls]
 
+[gem]: https://rubygems.org/gems/virtus
+[travis]: https://travis-ci.org/solnic/virtus
+[gemnasium]: https://gemnasium.com/solnic/virtus
+[codeclimate]: https://codeclimate.com/github/solnic/virtus
+[coveralls]: https://coveralls.io/r/solnic/virtus
+
 This is a partial extraction of the DataMapper [Property
 API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
 with various modifications and improvements. The goal is to provide a common API
