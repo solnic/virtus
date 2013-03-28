@@ -1,7 +1,17 @@
-if ENV['COVERAGE']
+if ENV['COVERAGE'] == 'true'
   require 'simplecov'
+  require 'coveralls'
+
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ]
+
   SimpleCov.start do
-    add_filter "/spec/"
+    command_name     'spec:unit'
+    add_filter       'config'
+    add_filter       'spec'
+    minimum_coverage 100
   end
 end
 
