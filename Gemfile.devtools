@@ -1,26 +1,25 @@
 # encoding: utf-8
 
 group :development do
-  gem 'rake',  '~> 10.0.3'
+  gem 'rake',  '~> 10.0.4'
   gem 'rspec', '~> 2.13.0'
-  gem 'yard',  '~> 0.8.5'
+  gem 'yard',  '~> 0.8.5.2'
 end
 
 group :yard do
-  gem 'kramdown', '~> 0.14.2'
+  gem 'kramdown', '~> 1.0.1'
 end
 
 group :guard do
   gem 'guard',         '~> 1.6.2'
   gem 'guard-bundler', '~> 1.0.0'
-  gem 'guard-rspec',   '~> 2.5.0'
+  gem 'guard-rspec',   '~> 2.5.1'
 
   # file system change event handling
+  gem 'listen',     '~> 0.7.3'
   gem 'rb-fchange', '~> 0.0.6', :require => false
   gem 'rb-fsevent', '~> 0.9.3', :require => false
   gem 'rb-inotify', '~> 0.9.0', :require => false
-
-  gem 'listen', '~> 0.7.3'
 
   # notification handling
   gem 'libnotify',               '~> 0.8.0', :require => false
@@ -29,24 +28,17 @@ group :guard do
 end
 
 group :metrics do
-  gem 'backports',       '~> 3.0', '>= 3.1.0'
+  gem 'backports',       '~> 3.1', '>= 3.1.1'
+  gem 'coveralls',       '~> 0.6.2'
   gem 'flay',            '~> 2.1.0'
-  gem 'flog',            '~> 3.2.2'
+  gem 'flog',            '~> 3.2.3'
   gem 'reek',            '~> 1.3.1', :git => 'https://github.com/troessner/reek.git'
-  gem 'metric_fu-roodi', '~> 2.2.1'
-  gem 'yardstick',       '~> 0.9.4'
-
-  platforms :ruby_18, :ruby_19 do
-    # this indirectly depends on ffi which does not build on ruby-head
-    gem 'yard-spellcheck', '~> 0.1.5'
-  end
+  gem 'simplecov',       '~> 0.7.1'
+  gem 'yardstick',       '~> 0.9.5'
+  gem 'yard-spellcheck', '~> 0.1.5'
 
   platforms :mri_19, :rbx do
     gem 'mutant', '~> 0.2.20'
-  end
-
-  platforms :mri_19 do
-    gem 'simplecov', '~> 0.7.1'
   end
 
   platforms :rbx do
@@ -60,6 +52,6 @@ end
 
 platform :jruby do
   group :jruby do
-    gem 'jruby-openssl', '~> 0.8.2'
+    gem 'jruby-openssl', '~> 0.8.5'
   end
 end
