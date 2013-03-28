@@ -26,7 +26,7 @@ module Virtus
         #
         # @api private
         def call(instance, *)
-          instance.respond_to?(@value) ? instance.public_send(@value) : @value
+          instance.respond_to?(@value, true) ? instance.send(@value) : @value
         end
 
       end # class FromSymbol
