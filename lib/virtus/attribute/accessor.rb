@@ -36,20 +36,6 @@ module Virtus
         Builder.call(*args)
       end
 
-      # Determine visibility of reader/write methods based on the options hash
-      #
-      # @return [::Hash]
-      #
-      # @api private
-      def self.determine_visibility(options)
-        default_accessor  = options.fetch(:accessor, :public)
-        reader_visibility = options.fetch(:reader, default_accessor)
-        writer_visibility = options.fetch(:writer, default_accessor)
-
-        { :reader => reader_visibility, :writer => writer_visibility }
-      end
-      private_class_method :determine_visibility
-
       # Initialize a new accessor instance
       #
       # @param [Reader]
