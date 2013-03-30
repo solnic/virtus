@@ -5,3 +5,5 @@ gemspec
 gem 'devtools', :git => 'https://github.com/datamapper/devtools'
 
 eval File.read('Gemfile.devtools')
+
+gem 'axiom-types', :git => 'https://github.com/dkubb/axiom-types'
