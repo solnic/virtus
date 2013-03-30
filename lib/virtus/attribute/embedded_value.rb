@@ -22,7 +22,7 @@ module Virtus
     #   user = User.new(:address => {
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
-    class EmbeddedValue < Object
+    class EmbeddedValue < Axiom::Types::Object
       primitive ::OpenStruct
 
       # @see Attribute.merge_options
@@ -45,7 +45,7 @@ module Virtus
       # @return [Virtus::Attribute::EmbeddedValue]
       #
       # @api private
-      def self.determine_type(klass)
+      def self.infer(klass)
         if klass <= Virtus || klass <= OpenStruct || klass <= Struct
           self
         end
