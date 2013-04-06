@@ -4,7 +4,7 @@ module Virtus
   #
   # @abstract
   class Attribute
-    extend DescendantsTracker, TypeLookup, Options
+    extend DescendantsTracker
 
     include Adamantium::Flat
     include Equalizer.new(inspect) << :name
@@ -47,136 +47,7 @@ module Virtus
     #
     # @api private
     def self.build(name, type = Object, options = {})
-      klass = determine_type(type) or raise(
-        ArgumentError, "#{type.inspect} does not map to an attribute type"
-      )
-
-      attribute_options = klass.merge_options(type, options)
-      accessor          = Accessor.build(name, klass, attribute_options)
-
-      klass.new(name, accessor)
-    end
-
-    # Build coercer wrapper
-    #
-    # @example
-    #
-    #   Virtus::Attribute.coercer # => #<Virtus::Attribute::Coercer ...>
-    #
-    # @return [Coercer]
-    #
-    # @api public
-    def self.coercer(*)
-      Coercer.new(Virtus.coercer, coercion_method)
-    end
-
-    # Return default reader class
-    #
-    # @return [::Class]
-    #
-    # @api private
-    def self.reader_class(*)
-      Reader
-    end
-
-    # Return default writer class
-    #
-    # @param [::Class] attribute type
-    # @param [::Hash] attribute options
-    #
-    # @return [::Class]
-    #
-    # @api private
-    def self.writer_class(type, options)
-      options[:coerce] ? coercible_writer_class(type, options) : Writer
-    end
-
-    # Return default coercible writer class
-    #
-    # @param [::Class] attribute type
-    # @param [::Hash] attribute options
-    #
-    # @return [::Class]
-    #
-    # @api private
-    def self.coercible_writer_class(_type, _options)
-      Writer::Coercible
-    end
-
-    # Return default options for writer class
-    #
-    # @return [::Hash]
-    #
-    # @api private
-    def self.reader_options(*)
-      {}
-    end
-
-    # Return options accepted by writer class
-    #
-    # @return [Array<Symbol>]
-    #
-    # @api private
-    def self.writer_options(attribute_options)
-      ::Hash[writer_option_names.zip(attribute_options.values_at(*writer_option_names))]
-    end
-
-    # Return acceptable option names for write class
-    #
-    # @return [Array<Symbol>]
-    #
-    # @api private
-    def self.writer_option_names
-      [ :coercer, :primitive, :default ]
-    end
-
-    # Determine attribute type based on class or name
-    #
-    # Returns Attribute::EmbeddedValue if a virtus class is passed
-    #
-    # @example
-    #   address_class = Class.new { include Virtus }
-    #   Virtus::Attribute.determine_type(address_class) # => Virtus::Attribute::EmbeddedValue
-    #
-    # @see Virtus::Support::TypeLookup.determine_type
-    #
-    # @return [Class]
-    #
-    # @api public
-    def self.determine_type(class_or_name)
-      case class_or_name
-      when ::Class
-        EmbeddedValue.determine_type(class_or_name) or super
-      when ::String
-        super
-      when ::Enumerable
-        super(class_or_name.class)
-      else
-        super
-      end
-    end
-
-    # A hook for Attributes to update options based on the type from the caller
-    #
-    # @param [Object] type
-    #   The raw type, typically given by the caller of ClassMethods#attribute
-    # @param [Hash] options
-    #   Attribute configuration options
-    #
-    # @return [Hash]
-    #   New Hash instance, potentially updated with information from the args
-    #
-    # @api private
-    def self.merge_options(type, options)
-      merged_options = self.options.merge(options)
-
-      if merged_options[:coerce]
-        merged_options.update(
-          :coercer => merged_options.fetch(:coercer) { coercer(type, options) }
-        )
-      end
-
-      merged_options
+      Builder.new(name, type, options).attribute
     end
 
     # Initializes an attribute instance
