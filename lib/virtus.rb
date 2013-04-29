@@ -45,7 +45,7 @@ module Virtus
   # @example
   #
   #   Virtus.coercer do |config|
-  #     config.string.boolea_map = { true => '1', false => '0' }
+  #     config.string.boolean_map = { true => '1', false => '0' }
   #   end
   #
   # @return [Coercible::Coercer]
