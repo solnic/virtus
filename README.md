@@ -56,7 +56,7 @@ You can configure coercers too:
 
 ```ruby
 Virtus.coercer do |config|
-  config.string.boolean_map = { true => 'yup', false => 'nope' }
+  config.string.boolean_map = { 'yup' => true, 'nope' => false }
 end
 
 # Virtus.coercer instance is used by default for all attributes.
