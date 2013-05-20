@@ -6,17 +6,16 @@ describe Virtus::Options, '#accept_options' do
     extend Virtus::Options
   end
 
-  let(:object)     { Model             }
+  let(:object)     { Model.dup         }
   let(:descendant) { Class.new(object) }
   let(:new_option) { :width            }
 
-  specify { object.should     respond_to(:accept_options) }
-  specify { descendant.should respond_to(:accept_options) }
-
-  before :all do
-    object.accepted_options.should_not include(new_option)
-    descendant.accepted_options.should_not include(new_option)
+  before do
     object.accept_options(new_option)
+  end
+
+  it 'does not have accepted options by default' do
+    Model.accepted_options.should_not include(new_option)
   end
 
   it 'sets new accepted options on itself' do
