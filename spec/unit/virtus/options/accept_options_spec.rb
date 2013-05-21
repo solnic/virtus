@@ -1,22 +1,22 @@
 require 'spec_helper'
 
 describe Virtus::Options, '#accept_options' do
-  class Model
-    extend DescendantsTracker
-    extend Virtus::Options
+  let!(:object) do
+    Class.new do
+      extend DescendantsTracker
+      extend Virtus::Options
+    end
+  end
+  let!(:object_without_options) { object.dup }
+  let(:descendant)              { Class.new(object) }
+  let(:new_option)              { :width            }
+
+  before do
+    object.accept_options(new_option)
   end
 
-  let(:object)     { Model             }
-  let(:descendant) { Class.new(object) }
-  let(:new_option) { :width            }
-
-  specify { object.should     respond_to(:accept_options) }
-  specify { descendant.should respond_to(:accept_options) }
-
-  before :all do
-    object.accepted_options.should_not include(new_option)
-    descendant.accepted_options.should_not include(new_option)
-    object.accept_options(new_option)
+  it 'does not have accepted options by default' do
+    object_without_options.accepted_options.should_not include(new_option)
   end
 
   it 'sets new accepted options on itself' do
