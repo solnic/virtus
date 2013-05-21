@@ -39,6 +39,7 @@ module Virtus
   end
   private_class_method :extended
 
+# BACKWARDS COMPAT
   # Setup coercer
   #
   # @example
@@ -51,7 +52,29 @@ module Virtus
   #
   # @api public
   def self.coercer(&block)
-    @coercer ||= Coercible::Coercer.new(&block)
+    configuration.coercer(&block)
+  end
+
+  # TODO: are there helpers to um, help with these?
+  def self.coerce=(value)
+    configuration.coerce = value
+    self
+  end
+
+  def self.coerce
+    configuration.coerce
+  end
+
+  def self.config(&block)
+    configuration.call(&block)
+  end
+
+  def self.module(&block)
+    ModuleBuilder.call(&block)
+  end
+
+  def self.configuration
+    @configuration ||= Configuration.new
   end
 
 end # module Virtus
@@ -68,6 +91,9 @@ require 'virtus/support/equalizer'
 require 'virtus/extensions'
 require 'virtus/class_inclusions'
 require 'virtus/module_extensions'
+
+require 'virtus/configuration'
+require 'virtus/module_builder'
 
 require 'virtus/class_methods'
 require 'virtus/instance_methods'

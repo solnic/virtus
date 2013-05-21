@@ -13,7 +13,7 @@ module Virtus
       :writer, :coerce, :coercion_method, :default, :lazy
 
     accessor :public
-    coerce true
+    coerce Virtus.coerce # default for backwards compatibility
 
     # Returns name of the attribute
     #
@@ -66,8 +66,10 @@ module Virtus
     # @return [Coercer]
     #
     # @api public
-    def self.coercer(*)
-      Coercer.new(Virtus.coercer, coercion_method)
+    def self.coercer(type = nil, options = {})
+      #FIXME: Better name for the raw coercer?
+      coercer = options.fetch(:configured_coercer){ Virtus.coercer }
+      Coercer.new(coercer, coercion_method)
     end
 
     # Return default reader class
