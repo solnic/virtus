@@ -126,11 +126,17 @@ module Age
   attribute :age, Integer
 end
 
-class User
-  include Name, Age
+module Admin
+  include Virtus
+
+  attribute :admin, Virtus::Attribute::Boolean
 end
 
-user = User.new(:name => 'John', :age => '30')
+class User
+  include Name, Age, Admin
+end
+
+user = User.new(:name => 'John', :age => '30', :admin => true)
 ```
 
 ### Dynamically Extending Instances
