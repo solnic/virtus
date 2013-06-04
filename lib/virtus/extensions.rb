@@ -88,6 +88,11 @@ module Virtus
       attribute_set << attribute
     end
 
+    # Merge default options
+    #
+    # @return [Hash]
+    #
+    # @api private
     def merge_options(options)
       { :coerce => Virtus.coerce }.merge(options)
     end
