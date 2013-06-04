@@ -39,8 +39,7 @@ module Virtus
   end
   private_class_method :extended
 
-# BACKWARDS COMPAT
-  # Setup coercer
+  # Sets the global coercer configuration
   #
   # @example
   #
@@ -55,24 +54,70 @@ module Virtus
     configuration.coercer(&block)
   end
 
-  # TODO: are there helpers to um, help with these?
+  # Sets the global coercion configuration value
+  #
+  # @param [Boolean] value
+  #
+  # @return [Virtus]
+  #
+  # @api public
   def self.coerce=(value)
     configuration.coerce = value
     self
   end
 
+  # Returns the global coercion setting
+  #
+  # @return [Boolean]
+  #
+  # @api public
   def self.coerce
     configuration.coerce
   end
 
+  # Provides access to the global Virtus configuration
+  #
+  # @example
+  #   Virtus.config do |config|
+  #     config.coerce = false
+  #   end
+  #
+  # @return [Configuration]
+  #
+  # @api public
   def self.config(&block)
     configuration.call(&block)
   end
 
+  # Provides access to the Virtus module builder
+  #
+  # @example
+  #   MyVirtusModule = Virtus.module do |mod|
+  #     mod.coerce = true
+  #
+  #     mod.coercer do |coercer|
+  #       coercer.string.boolean_map = { 'yup' => true, 'nope' => false }
+  #     end
+  #   end
+  #
+  #   class Book
+  #     include MyVirtusModule
+  #
+  #     attribute :published, Boolean
+  #   end
+  #
+  # @return [Module]
+  #
+  # @api public
   def self.module(&block)
     ModuleBuilder.call(&block)
   end
 
+  # Global configuration instance
+  #
+  # @ return [Configuration]
+  #
+  # @api private
   def self.configuration
     @configuration ||= Configuration.new
   end
