@@ -11,13 +11,15 @@ module Virtus
 
     def initialize(configuration)
       @configuration = configuration
+
+      @mod = Module.new do
+        include Virtus
+      end
     end
 
     # Accessor for the anonymous module
     def mod
-      @mod ||= Module.new do
-        include Virtus
-      end
+      @mod
     end
 
     # Adds the .included hook to the anonymous module which then defines the
