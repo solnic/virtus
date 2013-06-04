@@ -5,7 +5,8 @@ module Virtus
     attr_accessor :coerce
 
     def initialize
-      @coerce = true # default
+      @coerce  = true
+      @coercer = Coercible::Coercer.new
     end
 
     def call(&block)
@@ -14,7 +15,8 @@ module Virtus
     end
 
     def coercer(&block)
-      @coercer ||= Coercible::Coercer.new(&block)
+      @coercer = Coercible::Coercer.new(&block) if block
+      @coercer
     end
 
   end # class Configuration
