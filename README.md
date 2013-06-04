@@ -34,48 +34,6 @@ or in your **Gemfile**
 gem 'virtus'
 ```
 
-Coercions
----------
-
-Virtus uses [Coercible](https://github.com/solnic/coercible) for coercions. This
-feature is turned on by default. You can turn it off for all attributes like that:
-
-```ruby
-# Turn coercions off globally
-Virtus::Attribute.coerce(false)
-
-# ...or you can turn it off for a single attribute
-class User
-  include Virtus
-
-  attribute :name, String, :coerce => false
-end
-```
-
-You can configure coercers too:
-
-```ruby
-Virtus.coercer do |config|
-  config.string.boolean_map = { 'yup' => true, 'nope' => false }
-end
-
-# Virtus.coercer instance is used by default for all attributes.
-# You *can* override it for a single attribute if you want:
-
-my_cool_coercer = Coercible::Coercer.new do |config|
-  # some customization
-end
-
-class User
-  include Virtus
-
-  attribute :name, String, :coercer => my_cool_coercer
-end
-```
-
-Please check out [Coercible README](https://github.com/solnic/coercible/blob/master/README.md)
-for more information.
-
 Examples
 --------
 
@@ -431,6 +389,48 @@ user.unique_id = '1234-1234' # => NoMethodError: private method `unique_id='
 user.set_unique_id('1234-1234')
 user.unique_id # => '1234-1234'
 ```
+
+Coercions
+---------
+
+Virtus uses [Coercible](https://github.com/solnic/coercible) for coercions. This
+feature is turned on by default. You can turn it off for all attributes like that:
+
+```ruby
+# Turn coercions off globally
+Virtus::Attribute.coerce(false)
+
+# ...or you can turn it off for a single attribute
+class User
+  include Virtus
+
+  attribute :name, String, :coerce => false
+end
+```
+
+You can configure coercers too:
+
+```ruby
+Virtus.coercer do |config|
+  config.string.boolean_map = { 'yup' => true, 'nope' => false }
+end
+
+# Virtus.coercer instance is used by default for all attributes.
+# You *can* override it for a single attribute if you want:
+
+my_cool_coercer = Coercible::Coercer.new do |config|
+  # some customization
+end
+
+class User
+  include Virtus
+
+  attribute :name, String, :coercer => my_cool_coercer
+end
+```
+
+Please check out [Coercible README](https://github.com/solnic/coercible/blob/master/README.md)
+for more information.
 
 Credits
 -------
