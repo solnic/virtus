@@ -42,7 +42,6 @@ module Virtus
   # Sets the global coercer configuration
   #
   # @example
-  #
   #   Virtus.coercer do |config|
   #     config.string.boolean_map = { true => '1', false => '0' }
   #   end
@@ -90,21 +89,24 @@ module Virtus
   end
 
   # Provides access to the Virtus module builder
+  # see Virtus::ModuleBuilder
   #
   # @example
-  #   MyVirtusModule = Virtus.module do |mod|
-  #     mod.coerce = true
+  #   MyVirtusModule = Virtus.configure { |config|
+  #     config.coercion = true
+  #     config.string.boolean_map = { 'yup' => true, 'nope' => false }
+  #   }
   #
-  #     mod.coercer do |coercer|
-  #       coercer.string.boolean_map = { 'yup' => true, 'nope' => false }
-  #     end
-  #   end
+  #  class Book
+  #    include MyVirtusModule
   #
-  #   class Book
-  #     include MyVirtusModule
+  #    attribute :published, Boolean
+  #  end
   #
-  #     attribute :published, Boolean
-  #   end
+  #  # This could be made more succinct as well
+  #  class OtherBook
+  #    include Virtus.module { |m| # config }
+  #  end
   #
   # @return [Module]
   #
