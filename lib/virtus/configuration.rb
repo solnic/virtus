@@ -9,7 +9,6 @@ module Virtus
       @coercer = Coercible::Coercer.new
     end
 
-    def call(&block)
       yield self if block_given?
       self
     end
