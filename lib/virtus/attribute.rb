@@ -10,10 +10,21 @@ module Virtus
     include Equalizer.new(inspect) << :name
 
     accept_options :primitive, :accessor, :reader,
-      :writer, :coerce, :coercion_method, :default, :lazy
+      :writer, :coercion_method, :default, :lazy
 
     accessor :public
-    coerce Virtus.coerce # default for backwards compatibility
+
+    # @see Virtus.coerce
+    #
+    # @deprecated
+    #
+    # @api public
+    def self.coerce(value = Undefined)
+      warn "#{self}.coerce is deprecated and will be removed in a future version. Use Virtus.coerce instead: ##{caller.first}"
+      return Virtus.coerce if value.equal?(Undefined)
+      Virtus.coerce = value
+      self
+    end
 
     # Returns name of the attribute
     #
@@ -90,7 +101,8 @@ module Virtus
     #
     # @api private
     def self.writer_class(type, options)
-      options[:coerce] ? coercible_writer_class(type, options) : Writer
+      coerce = options.fetch(:coerce){ Virtus.coerce }
+      coerce ? coercible_writer_class(type, options) : Writer
     end
 
     # Return default coercible writer class
