@@ -1,11 +1,15 @@
 require 'spec_helper'
 
 describe Virtus, '.coerce' do
-  subject { described_class.coerce = false }
+  subject { described_class }
 
-  after do
-    Virtus.coerce = true
+  before do
+    subject.coerce = false
   end
 
-  it(:coerce)  { should be(false) }
+  after do
+    subject.coerce = true
+  end
+
+  it { expect(subject.coerce).to be(false) }
 end
