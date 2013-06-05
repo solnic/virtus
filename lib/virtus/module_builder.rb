@@ -7,6 +7,20 @@ module Virtus
   # which is implemented using Virtus::Configuration.
   class ModuleBuilder
 
+    # Return module
+    #
+    # @return [Module]
+    #
+    # @api private
+    attr_reader :module
+
+    # Return configuration
+    #
+    # @return [Configuration]
+    #
+    # @api private
+    attr_reader :configuration
+
     # Builds a new Virtus module
     #
     # The block is passed to Virtus::Configuration
@@ -23,7 +37,7 @@ module Virtus
       config  = Configuration.new.call(&block)
       builder = self.new(config)
       builder.add_included_hook
-      builder.mod
+      builder.module
     end
 
     # Initializes a new ModuleBuilder
@@ -33,19 +47,7 @@ module Virtus
     # @api private
     def initialize(configuration)
       @configuration = configuration
-
-      @mod = Module.new do
-        include Virtus
-      end
-    end
-
-    # Accessor for the anonymous module
-    #
-    # @return [Module]
-    #
-    # @api private
-    def mod
-      @mod
+      @module        = Module.new { include Virtus }
     end
 
     # Adds the .included hook to the anonymous module which then defines the
@@ -55,10 +57,9 @@ module Virtus
     #
     # @api private
     def add_included_hook
-      configuration    = @configuration
       attribute_method = self.attribute_method(configuration)
 
-      mod.module_eval do
+      self.module.module_eval do
         define_singleton_method :included do |object|
           super(object)
           object.send :define_singleton_method, :attribute, attribute_method
