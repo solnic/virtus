@@ -42,12 +42,16 @@ module Virtus
 
     # Initializes a new ModuleBuilder
     #
+    # @param [Configuration] configuration
+    #
+    # @param [Module] mod
+    #
     # @return [undefined]
     #
     # @api private
-    def initialize(configuration)
+    def initialize(configuration, mod = Module.new)
       @configuration = configuration
-      @module        = Module.new { include Virtus }
+      @module        = mod.send(:include, Virtus)
     end
 
     # Adds the .included hook to the anonymous module which then defines the
