@@ -34,8 +34,8 @@ module Virtus
     #
     # @api public
     def self.call(&block)
-      config  = Configuration.new.call(&block)
-      builder = self.new(config)
+      config  = Configuration.build(&block)
+      builder = new(config)
       builder.add_included_hook
       builder.module
     end

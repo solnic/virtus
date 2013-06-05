@@ -6,6 +6,20 @@ module Virtus
     # Access the coerce setting for this instance
     attr_accessor :coerce
 
+    # Build new configuration instance using the passed block
+    #
+    # @example
+    #   Configuration.build do |config|
+    #     config.coerce = false
+    #   end
+    #
+    # @return [Configuration]
+    #
+    # @api public
+    def self.build(&block)
+      new.call(&block)
+    end
+
     # Initialized a configuration instance
     #
     # @return [undefined]
@@ -19,14 +33,14 @@ module Virtus
     # Provide access to the attributes and methods via the passed block
     #
     # @example
-    #   Configuration.new.call do |config|
+    #   configuration.call do |config|
     #     config.coerce = false
     #   end
     #
     # @return [self]
     #
     # @api private
-    def call
+    def call(&block)
       yield self if block_given?
       self
     end
@@ -43,7 +57,7 @@ module Virtus
     #
     # @api private
     def coercer(&block)
-      @coercer = Coercible::Coercer.new(&block) if block
+      @coercer = Coercible::Coercer.new(&block) if block_given?
       @coercer
     end
 
