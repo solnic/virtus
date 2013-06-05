@@ -5,5 +5,5 @@ describe Virtus::Configuration, '#coercer' do
 
   let(:block) { Proc.new {} }
 
-  it { should be_instance_of(Coercible::Coercer) }
+  it { expect(subject).to be_instance_of(Coercible::Coercer) }
 end

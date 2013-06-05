@@ -1,19 +1,19 @@
 require 'spec_helper'
 
 describe Virtus::Configuration, '#call' do
-  subject { described_class.new.call(&block) } # { |config| config.coerce = false } }
+  subject { described_class.new.call(&block) }
 
   let(:block) { Proc.new {} }
 
-  its(:coercer) { should be_instance_of(Coercible::Coercer) }
+  it { expect(subject.coercer).to be_instance_of(Coercible::Coercer) }
 
   context "when coerce option isn't explicity set" do
-    its(:coerce) { should be(true) }
+    it { expect(subject.coerce).to be(true) }
   end
 
   context "when coerce option is set to false" do
     let(:block) { Proc.new { |config| config.coerce = false } }
 
-    its(:coerce) { should be(false) }
+    it { expect(subject.coerce).to be(false) }
   end
 end
