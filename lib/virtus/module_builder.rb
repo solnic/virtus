@@ -61,13 +61,11 @@ module Virtus
     #
     # @api private
     def add_included_hook
-      attribute_method = self.attribute_method(configuration)
+      attribute_proc = attribute_method(configuration)
 
-      self.module.module_eval do
-        define_singleton_method :included do |object|
-          super(object)
-          object.send :define_singleton_method, :attribute, attribute_method
-        end
+      self.module.define_singleton_method :included do |object|
+        super(object)
+        object.send :define_singleton_method, :attribute, attribute_proc
       end
     end
 
