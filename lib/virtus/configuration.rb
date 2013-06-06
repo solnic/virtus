@@ -41,7 +41,7 @@ module Virtus
     #
     # @api private
     def call(&block)
-      yield self if block_given?
+      block.call(self) if block_given?
       self
     end
 
