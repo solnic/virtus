@@ -53,7 +53,7 @@ module Virtus
     #     config.string.boolean_map = { true => '1', false => '0' }
     #   end
     #
-    # @ return [Coercer]
+    # @return [Coercer]
     #
     # @api private
     def coercer(&block)
