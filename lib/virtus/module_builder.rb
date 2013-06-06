@@ -71,16 +71,16 @@ module Virtus
       end
     end
 
-    # Wrapper for the attribute method (proc) that is used in .add_included_hook
+    # Wrapper for the attribute method that is used in .add_included_hook
     # The coercer is passed in the unused key :configured_coercer to allow the
     # property encapsulation by Virtus::Attribute::Coercer, where the
     # coercion method is known.
     #
-    # @return [Proc]
+    # @return [Proc(lambda)]
     #
     # @api private
     def attribute_method(configuration)
-      Proc.new do |name, type, options = {}|
+      lambda do |name, type, options = {}|
         module_options = {
           :coerce => configuration.coerce,
           :configured_coercer => configuration.coercer
