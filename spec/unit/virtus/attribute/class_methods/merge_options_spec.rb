@@ -7,5 +7,5 @@ describe Virtus::Attribute, '.merge_options' do
   let(:type)    { stub('type')    }
   let(:options) { { :accessor => :public } }
 
-  it { should include(:coerce => true, :accessor => :public) }
+  it { should include(:accessor => :public) }
 end
