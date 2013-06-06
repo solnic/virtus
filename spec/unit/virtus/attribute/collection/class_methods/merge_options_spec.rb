@@ -43,7 +43,6 @@ describe Virtus::Attribute::Collection, '.merge_options' do
       should include(
         :primitive       => Object,
         :accessor        => :public,
-        :coerce          => true,
         :coercion_method => :to_object
       )
     end

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus, '.coercer' do
-  subject { described_class.coercer(&block) }
+describe Virtus::Configuration, '#coercer' do
+  subject { described_class.new.coercer(&block) }
 
   let(:block) { Proc.new {} }
 
