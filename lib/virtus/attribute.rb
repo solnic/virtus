@@ -78,7 +78,6 @@ module Virtus
     #
     # @api public
     def self.coercer(type = nil, options = {})
-      #FIXME: Better name for the raw coercer?
       coercer = options.fetch(:configured_coercer){ Virtus.coercer }
       Coercer.new(coercer, coercion_method)
     end

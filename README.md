@@ -398,7 +398,7 @@ feature is turned on by default. You can turn it off for all attributes like tha
 
 ```ruby
 # Turn coercions off globally
-Virtus::Attribute.coerce(false)
+Virtus.coerce(false)
 
 # ...or you can turn it off for a single attribute
 class User
@@ -426,6 +426,30 @@ class User
   include Virtus
 
   attribute :name, String, :coercer => my_cool_coercer
+end
+```
+
+You can also build Virtus modules that contain their own configuration.
+
+```ruby
+YupNopeBooleans = Virtus.module { |mod|
+  mod.coerce = true
+  mod.string.boolean_map = { 'yup' => true, 'nope' => false }
+}
+
+class User
+  include YupNopeBooleans
+
+  attribute :name, String
+  attribute :admin, Boolean
+end
+
+# Or just include the module straight away ...
+class User
+  include Virtus.module { |m| m.coerce = false }
+
+  attribute :name, String
+  attribute :admin, Boolean
 end
 ```
 
