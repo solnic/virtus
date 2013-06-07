@@ -92,9 +92,9 @@ module Virtus
   # see Virtus::ModuleBuilder
   #
   # @example
-  #   MyVirtusModule = Virtus.configure { |config|
-  #     config.coercion = true
-  #     config.string.boolean_map = { 'yup' => true, 'nope' => false }
+  #   MyVirtusModule = Virtus.module { |mod|
+  #     mod.coerce = true
+  #     mod.string.boolean_map = { 'yup' => true, 'nope' => false }
   #   }
   #
   #  class Book
@@ -105,7 +105,7 @@ module Virtus
   #
   #  # This could be made more succinct as well
   #  class OtherBook
-  #    include Virtus.module { |m| # config }
+  #    include Virtus.module { |m| m.coerce = false }
   #  end
   #
   # @return [Module]
