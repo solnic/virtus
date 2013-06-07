@@ -429,6 +429,8 @@ class User
 end
 ```
 
+## Building modules with custom configuration
+
 You can also build Virtus modules that contain their own configuration.
 
 ```ruby
