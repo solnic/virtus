@@ -16,6 +16,18 @@ module Virtus
       self
     end
 
+    # Hooks into const missing process to determine types of attributes
+    #
+    # @param [String] name
+    #
+    # @return [Class]
+    #
+    # @api private
+    def const_missing(name)
+      Attribute.determine_type(name) or super
+    end
+
+
   private
 
     # Extend an object with Virtus methods and define attributes
