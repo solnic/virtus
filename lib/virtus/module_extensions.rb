@@ -3,6 +3,7 @@ module Virtus
   # Virtus module that can define attributes for later inclusion
   #
   module ModuleExtensions
+    include Common
 
     # Define an attribute in the module
     #
@@ -15,18 +16,6 @@ module Virtus
       attribute_definitions << args
       self
     end
-
-    # Hooks into const missing process to determine types of attributes
-    #
-    # @param [String] name
-    #
-    # @return [Class]
-    #
-    # @api private
-    def const_missing(name)
-      Attribute.determine_type(name) or super
-    end
-
 
   private
 
