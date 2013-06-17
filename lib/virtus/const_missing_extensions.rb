@@ -1,5 +1,5 @@
 module Virtus
-  module Common
+  module ConstMissingExtensions
 
     # Hooks into const missing process to determine types of attributes
     #
