@@ -11,6 +11,7 @@ describe 'I can define attributes within a module' do
         include Common
 
         attribute :name, String
+        attribute :gamer, Boolean
       end
 
       module Age
@@ -33,6 +34,7 @@ describe 'I can define attributes within a module' do
 
   specify 'including a module with attributes into a class' do
     Examples::User.attribute_set[:name].should be_instance_of(Virtus::Attribute::String)
+    Examples::User.attribute_set[:gamer].should be_instance_of(Virtus::Attribute::Boolean)
 
     Examples::Admin.attribute_set[:name].should be_instance_of(Virtus::Attribute::String)
     Examples::Admin.attribute_set[:age].should be_instance_of(Virtus::Attribute::Integer)

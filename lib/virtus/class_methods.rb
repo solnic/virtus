@@ -3,6 +3,7 @@ module Virtus
   # Class methods that are added when you include Virtus
   module ClassMethods
     include Extensions
+    include ConstMissingExtensions
 
     # Hook called when module is extended
     #
@@ -54,17 +55,6 @@ module Virtus
     def attributes
       warn "#{self}.attributes is deprecated. Use #{self}.attribute_set instead: #{caller.first}"
       attribute_set
-    end
-
-    # Hooks into const missing process to determine types of attributes
-    #
-    # @param [String] name
-    #
-    # @return [Class]
-    #
-    # @api private
-    def const_missing(name)
-      Attribute.determine_type(name) or super
     end
 
   private
