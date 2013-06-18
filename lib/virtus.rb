@@ -136,7 +136,7 @@ require 'virtus/support/options'
 require 'virtus/support/equalizer'
 
 require 'virtus/extensions'
-require 'virtus/common'
+require 'virtus/const_missing_extensions'
 require 'virtus/class_inclusions'
 require 'virtus/module_extensions'
 
