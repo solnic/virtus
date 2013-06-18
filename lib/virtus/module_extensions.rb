@@ -3,6 +3,7 @@ module Virtus
   # Virtus module that can define attributes for later inclusion
   #
   module ModuleExtensions
+    include ConstMissingExtensions
 
     # Define an attribute in the module
     #
