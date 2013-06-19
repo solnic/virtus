@@ -36,6 +36,13 @@ module Virtus
       # @api private
       attr_reader :instance_variable_name
 
+      # Return options
+      #
+      # @return [Hash]
+      #
+      # @api private
+      attr_reader :options
+
       # Initialize accessor method instance
       #
       # @param [#to_sym] name
@@ -47,6 +54,7 @@ module Virtus
       # @api private
       def initialize(name, options = {})
         @name                   = name.to_sym
+        @options                = options
         @visibility             = options.fetch(:visibility, :public)
         @instance_variable_name = "@#{name}".to_sym
       end

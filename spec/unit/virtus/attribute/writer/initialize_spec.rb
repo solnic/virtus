@@ -11,6 +11,7 @@ describe Virtus::Attribute::Writer, '#initialize' do
     its(:name)                   { should be(:test=) }
     its(:visibility)             { should be(:public) }
     its(:instance_variable_name) { should be(:@test) }
+    its(:options)                { should be_a(Hash) }
     its(:primitive)              { should be(Object) }
     its(:default_value)          { should be_instance_of(Virtus::Attribute::DefaultValue) }
   end
@@ -20,6 +21,7 @@ describe Virtus::Attribute::Writer, '#initialize' do
 
     its(:name)          { should be(:test=) }
     its(:visibility)    { should be(:private) }
+    its(:options)       { should == options }
     its(:primitive)     { should be(String) }
     its(:default_value) { should be_instance_of(Virtus::Attribute::DefaultValue::FromClonable) }
   end
