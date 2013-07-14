@@ -14,6 +14,10 @@ module Virtus
     def initialize(attributes = nil)
       attribute_set.set(self, attributes) if attributes
       set_default_attributes
+
+       # Our ancestor will often be Object, in which case we can't pass along
+       # the attributes since Object#initialize takes no arguments.
+      super()
     end
 
     # Returns a value of the attribute with the given name
