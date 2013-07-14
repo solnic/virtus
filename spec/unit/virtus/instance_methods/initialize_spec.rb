@@ -50,4 +50,23 @@ describe Virtus::InstanceMethods, '#initialize' do
 
     specify { expect { subject }.to raise_error(NoMethodError) }
   end
+
+  context 'when virtus is included in a module' do
+    let(:described_class) do
+      described_module = Module.new do
+        include Virtus
+        attr_reader :module_initializer_ran
+        def initialize(*args)
+          @module_initializer_ran = true
+        end
+      end
+      Class.new do
+        include described_module
+      end
+    end
+
+    it 'runs the superclass initializer' do
+      expect(subject.module_initializer_ran).to eql(true)
+    end
+  end
 end
