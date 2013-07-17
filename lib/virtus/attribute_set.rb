@@ -185,8 +185,18 @@ module Virtus
         if filter.call(object, attribute)
           next
         end
-        attribute.set_default_value(object)
+        attribute.writer.set_default_value(object, attribute)
       end
+    end
+
+    # Set default attribute
+    #
+    # @return [default value]
+    #
+    # @api private
+    def set_default_for(object, attribute_name)
+      attribute = self[attribute_name]
+      attribute.writer.set_default_value(object, attribute) if attribute
     end
 
     # Coerce attributes received to a hash
