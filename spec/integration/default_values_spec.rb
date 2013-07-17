@@ -52,6 +52,13 @@ describe "default values" do
     subject.editor_title.should == 'UNPUBLISHED: Top Secret'
   end
 
+  specify 'you can reset attribute to its default' do
+    subject.view_count = 10
+    expect do
+      subject.set_default(:view_count)
+    end.to change { subject.view_count }.to(0)
+  end
+
   context 'a ValueObject' do
     it 'does not duplicate the ValueObject' do
       page1 = Examples::Page.new
