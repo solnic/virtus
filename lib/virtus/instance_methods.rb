@@ -142,7 +142,7 @@ module Virtus
 
     # Reset an attribute to its default
     #
-    # @return [default value]
+    # @return [self]
     #
     # @api public
     #
@@ -164,6 +164,7 @@ module Virtus
     def reset_attribute(attribute_name)
       attribute = attribute_set[attribute_name]
       attribute_set.set_default(self, attribute) if attribute
+      self
     end
 
     # Set default attributes
