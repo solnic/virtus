@@ -137,6 +137,11 @@ page.slug         # => 'virtus-readme'
 page.views        # => 0
 page.published    # => false
 page.editor_title # => "UNPUBLISHED: Virtus README"
+
+page.views = 10
+page.views                    # => 10
+page.reset_attribute(:views)  # => 0
+page.views                    # => 0
 ```
 
 ### Embedded Value

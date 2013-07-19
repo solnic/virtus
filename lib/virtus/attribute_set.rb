@@ -179,8 +179,17 @@ module Virtus
         if object.instance_variable_defined?(attribute.reader.instance_variable_name) || attribute.accessor.lazy?
           next
         end
-        attribute.writer.set_default_value(object, attribute)
+        set_default(object, attribute)
       end
+    end
+
+    # Set default attribute
+    #
+    # @return [default value]
+    #
+    # @api private
+    def set_default(object, attribute)
+      attribute.writer.set_default_value(object, attribute)
     end
 
     # Coerce attributes received to a hash

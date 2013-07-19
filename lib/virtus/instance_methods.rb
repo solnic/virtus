@@ -140,6 +140,33 @@ module Virtus
       super
     end
 
+    # Reset an attribute to its default
+    #
+    # @return [self]
+    #
+    # @api public
+    #
+    # @example
+    #
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :age,  Integer, default: 21
+    #   end
+    #
+    #   user = User.new(:name => 'John', :age => 28)
+    #   user.age = 30
+    #   user.age # => 30
+    #   user.reset_attribute(:age)
+    #   user.age # => 21
+    #
+    # @api public
+    def reset_attribute(attribute_name)
+      attribute = attribute_set[attribute_name]
+      attribute_set.set_default(self, attribute) if attribute
+      self
+    end
+
     # Set default attributes
     #
     # @return [self]
