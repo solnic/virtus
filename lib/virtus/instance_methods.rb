@@ -157,12 +157,13 @@ module Virtus
     #   user = User.new(:name => 'John', :age => 28)
     #   user.age = 30
     #   user.age # => 30
-    #   user.set_default(:age)
+    #   user.reset_attribute(:age)
     #   user.age # => 21
     #
     # @api public
-    def set_default(attribute_name)
-      attribute_set.set_default_for(self, attribute_name)
+    def reset_attribute(attribute_name)
+      attribute = attribute_set[attribute_name]
+      attribute_set.set_default(self, attribute) if attribute
     end
 
     # Set default attributes
