@@ -55,7 +55,7 @@ describe "default values" do
   specify 'you can reset attribute to its default' do
     subject.view_count = 10
     expect do
-      subject.set_default(:view_count)
+      subject.reset_attribute(:view_count)
     end.to change { subject.view_count }.to(0)
   end
 
