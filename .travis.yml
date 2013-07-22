@@ -9,6 +9,9 @@ rvm:
   - jruby-head
   - rbx-19mode
   - ruby-head
+matrix:
+  allow_failures:
+    - rvm: ruby-head
 notifications:
   email:
     - piotr.solnica@gmail.com
