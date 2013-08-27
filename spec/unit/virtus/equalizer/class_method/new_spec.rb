@@ -25,7 +25,7 @@ describe Virtus::Equalizer, '.new' do
       end
 
       context 'when the objects are different' do
-        let(:other) { stub('other') }
+        let(:other) { double('other') }
 
         it { instance.eql?(other).should be(false) }
       end
@@ -39,7 +39,7 @@ describe Virtus::Equalizer, '.new' do
       end
 
       context 'when the objects are different' do
-        let(:other) { stub('other') }
+        let(:other) { double('other') }
 
         it { (instance == other).should be(false) }
       end
@@ -80,7 +80,7 @@ describe Virtus::Equalizer, '.new' do
       end
 
       context 'when the objects are different' do
-        let(:other) { stub('other') }
+        let(:other) { double('other') }
 
         it { instance.eql?(other).should be(false) }
       end
@@ -94,7 +94,7 @@ describe Virtus::Equalizer, '.new' do
       end
 
       context 'when the objects are different' do
-        let(:other) { stub('other') }
+        let(:other) { double('other') }
 
         it { (instance == other).should be(false) }
       end

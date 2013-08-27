@@ -6,7 +6,7 @@ describe Virtus::Attribute::DefaultValue, '#call' do
   let(:object)    { described_class.build(value) }
   let(:value)     { double('value')                }
   let(:instance)  { double('instance')             }
-  let(:response)  { stub('response')             }
+  let(:response)  { double('response')             }
 
   # smallest number that is Bignum across major ruby impls
   bignum = 0x7fffffffffffffff + 1

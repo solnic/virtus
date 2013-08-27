@@ -7,7 +7,7 @@ describe Virtus::Attribute, '#define_accessor_methods' do
   let(:accessor) { double('accessor', :reader => reader, :writer => writer) }
   let(:reader)   { double('reader').as_null_object }
   let(:writer)   { double('writer').as_null_object }
-  let(:mod)      { stub('mod') }
+  let(:mod)      { double('mod') }
 
   it 'delegates to reader#define_method' do
     reader.should_receive(:define_method).with(accessor, mod)

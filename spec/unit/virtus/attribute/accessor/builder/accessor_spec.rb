@@ -11,7 +11,7 @@ describe Virtus::Attribute::Accessor::Builder, '#accessor' do
   let(:klass)    { double('accessor_class') }
 
   before do
-    object.stub!(:reader => reader, :writer => writer, :accessor_class => klass)
+    object.stub(:reader => reader, :writer => writer, :accessor_class => klass)
     klass.should_receive(:new).with(reader, writer).and_return(accessor)
   end
 

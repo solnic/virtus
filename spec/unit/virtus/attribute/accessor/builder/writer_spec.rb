@@ -11,7 +11,7 @@ describe Virtus::Attribute::Accessor::Builder, '#writer' do
   let(:writer)       { double('writer') }
 
   before do
-    object.stub!(
+    object.stub(
       :writer_class   => writer_class,
       :writer_options => writer_opts
     )

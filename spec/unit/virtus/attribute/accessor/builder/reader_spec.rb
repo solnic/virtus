@@ -11,7 +11,7 @@ describe Virtus::Attribute::Accessor::Builder, '#reader' do
   let(:reader)       { double('reader') }
 
   before do
-    object.stub!(
+    object.stub(
       :reader_class   => reader_class,
       :reader_options => reader_opts
     )
