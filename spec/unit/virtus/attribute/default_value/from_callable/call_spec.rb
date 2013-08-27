@@ -4,8 +4,8 @@ describe Virtus::Attribute::DefaultValue::FromCallable, '#call' do
   subject { object.call(instance) }
 
   let(:object)    { described_class.new(value) }
-  let(:value)     { mock('value')              }
-  let(:instance)  { mock('instance')           }
+  let(:value)     { double('value')              }
+  let(:instance)  { double('instance')           }
   let(:response)  { stub('response')           }
 
   before { value.stub(:call => response) }

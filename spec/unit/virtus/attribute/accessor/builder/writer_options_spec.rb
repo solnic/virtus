@@ -4,7 +4,7 @@ describe Virtus::Attribute::Accessor::Builder, '#writer_options' do
   subject { object.writer_options }
 
   let(:object)  { described_class.new('test', type, options) }
-  let(:type)    { mock('attribute_type') }
+  let(:type)    { double('attribute_type') }
   let(:options) { {} }
 
   before do

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::DefaultValue::FromClonable, '.handle?' do
   subject { described_class.handle?(default) }
 
-  let(:attribute) { mock('attribute') }
+  let(:attribute) { double('attribute') }
 
   context 'with a clonable' do
     let(:default) { 'clonable'  }

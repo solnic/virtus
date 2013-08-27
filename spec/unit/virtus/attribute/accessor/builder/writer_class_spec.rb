@@ -4,8 +4,8 @@ describe Virtus::Attribute::Accessor::Builder, '#reader_class' do
   subject { object.reader_class }
 
   let(:object)       { described_class.new('test', type, options) }
-  let(:type)         { mock('attribute_type') }
-  let(:reader_class) { mock('reader_class') }
+  let(:type)         { double('attribute_type') }
+  let(:reader_class) { double('reader_class') }
   let(:primitive)    { Object }
 
   context "when options provides reader_class" do

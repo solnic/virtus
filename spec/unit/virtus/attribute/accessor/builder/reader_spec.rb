@@ -4,11 +4,11 @@ describe Virtus::Attribute::Accessor::Builder, '#reader' do
   subject { object.reader }
 
   let(:object) { described_class.new('test', type) }
-  let(:type)   { mock('attribute_type').as_null_object }
+  let(:type)   { double('attribute_type').as_null_object }
 
-  let(:reader_class) { mock('reader_class') }
-  let(:reader_opts)  { mock('reader_opts') }
-  let(:reader)       { mock('reader') }
+  let(:reader_class) { double('reader_class') }
+  let(:reader_opts)  { double('reader_opts') }
+  let(:reader)       { double('reader') }
 
   before do
     object.stub!(

@@ -11,7 +11,7 @@ describe Virtus::AttributeSet, '#<<' do
   before { attribute.stub(:define_accessor_methods) }
 
   context 'with a new attribute' do
-    let(:attribute) { mock('Attribute', :name => name) }
+    let(:attribute) { double('Attribute', :name => name) }
 
     it { should equal(object) }
 
@@ -35,8 +35,8 @@ describe Virtus::AttributeSet, '#<<' do
   end
 
   context 'with a duplicate attribute' do
-    let(:attributes) { [ mock('Attribute', :name => name) ] }
-    let(:attribute)  { mock('Duplicate', :name => name)     }
+    let(:attributes) { [ double('Attribute', :name => name) ] }
+    let(:attribute)  { double('Duplicate', :name => name)     }
 
     it { should equal(object) }
 

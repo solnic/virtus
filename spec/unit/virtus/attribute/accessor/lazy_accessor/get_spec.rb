@@ -5,9 +5,9 @@ describe Virtus::Attribute::Accessor::LazyAccessor, '#get' do
 
   let(:object) { described_class.new(reader, writer) }
 
-  let(:reader)        { mock('reader', :instance_variable_name => :@test) }
-  let(:writer)        { mock('writer', :default_value => default_value) }
-  let(:default_value) { mock('default_value') }
+  let(:reader)        { double('reader', :instance_variable_name => :@test) }
+  let(:writer)        { double('writer', :default_value => default_value) }
+  let(:default_value) { double('default_value') }
 
   let(:instance) { Class.new { attr_accessor :test }.new }
 

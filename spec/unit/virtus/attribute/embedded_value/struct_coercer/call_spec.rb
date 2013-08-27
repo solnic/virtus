@@ -23,7 +23,7 @@ describe Virtus::Attribute::EmbeddedValue::StructCoercer, '#call' do
 
   context 'when the value is an array' do
     let(:value)    { [ 1 ,2 ] }
-    let(:instance) { mock('instance') }
+    let(:instance) { double('instance') }
 
     before do
       primitive.should_receive(:new).with(*value).and_return(instance)

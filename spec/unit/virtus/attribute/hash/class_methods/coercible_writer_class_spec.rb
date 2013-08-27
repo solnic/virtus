@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Hash, '.coercible_writer_class' do
   subject { described_class.coercible_writer_class(type, options) }
 
-  let(:type) { mock('type') }
+  let(:type) { double('type') }
 
   context "when key_type and value_type are set in options" do
     let(:options) { { :key_type => String, :value_type => String } }

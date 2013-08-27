@@ -4,8 +4,8 @@ describe Virtus::Attribute::DefaultValue, '#call' do
   subject { object.call(instance) }
 
   let(:object)    { described_class.build(value) }
-  let(:value)     { mock('value')                }
-  let(:instance)  { mock('instance')             }
+  let(:value)     { double('value')                }
+  let(:instance)  { double('instance')             }
   let(:response)  { stub('response')             }
 
   # smallest number that is Bignum across major ruby impls

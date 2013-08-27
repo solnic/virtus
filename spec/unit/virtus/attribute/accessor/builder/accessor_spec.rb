@@ -4,11 +4,11 @@ describe Virtus::Attribute::Accessor::Builder, '#accessor' do
   subject { object.accessor }
 
   let(:object)   { described_class.new('test', type) }
-  let(:type)     { mock('attribute_type') }
-  let(:reader)   { mock('reader') }
-  let(:writer)   { mock('writer') }
-  let(:accessor) { mock('accessor') }
-  let(:klass)    { mock('accessor_class') }
+  let(:type)     { double('attribute_type') }
+  let(:reader)   { double('reader') }
+  let(:writer)   { double('writer') }
+  let(:accessor) { double('accessor') }
+  let(:klass)    { double('accessor_class') }
 
   before do
     object.stub!(:reader => reader, :writer => writer, :accessor_class => klass)

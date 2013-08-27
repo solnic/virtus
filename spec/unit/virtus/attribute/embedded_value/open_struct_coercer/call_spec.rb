@@ -23,7 +23,7 @@ describe Virtus::Attribute::EmbeddedValue::OpenStructCoercer, '#call' do
 
   context 'when the value is a hash' do
     let(:value)    { Hash[:foo => 'bar'] }
-    let(:instance) { mock('instance') }
+    let(:instance) { double('instance') }
 
     before do
       primitive.should_receive(:new).with(value).and_return(instance)
