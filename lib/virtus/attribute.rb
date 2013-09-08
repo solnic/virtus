@@ -4,7 +4,7 @@ module Virtus
   #
   # @abstract
   class Attribute
-    extend DescendantsTracker
+    extend DescendantsTracker, Options
 
     include Adamantium::Flat
     include Equalizer.new(inspect) << :name
