@@ -57,7 +57,7 @@ module Virtus
     # @return [Attribute]
     #
     # @api private
-    def self.build(name, type = Object, options = {})
+    def self.build(name, type, options = {})
       Builder.new(name, type, options).attribute
     end
 
@@ -134,6 +134,15 @@ module Virtus
       accessor.public_writer?
     end
 
+    # Return if the attribute is coercible
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def coercible?
+      writer.kind_of?(Writer::Coercible)
+    end
+
     # Returns if the given value is coerced into the target type
     #
     # @return [Boolean]
@@ -143,15 +152,13 @@ module Virtus
       coercer.coerced?(value)
     end
 
-    private
-
     # Return coercer for this attribute
     #
     # @return [Object]
     #
     # @api private
     def coercer
-      writer.coercer[self.class.primitive]
+      writer.coercer[writer.primitive]
     end
 
   end # class Attribute

@@ -13,15 +13,18 @@ module Virtus
       end
 
       def initialize(name, type, options)
+        @klass   = Attribute
         @type    = Axiom::Types.infer(type)
         @options = merge_options(options)
 
         @accessor  = Accessor.build(name, self, @options)
-        @attribute = Attribute.new(name, accessor)
+        @attribute = Attribute.new(name, @accessor)
       end
 
       def merge_options(options)
-        merged_options = @type.options.merge(options)
+        merged_options = @klass.options.merge(
+          :coerce => Virtus.coerce, :primitive => @type.primitive
+        ).update(options)
 
         if merged_options[:coerce]
           merged_options.update(
@@ -32,19 +35,23 @@ module Virtus
         merged_options
       end
 
-      def writer_options
+      def writer_options(*)
         ::Hash[writer_option_names.zip(@options.values_at(*writer_option_names))]
       end
 
       def writer_option_names
-        [ :coercer, :primitive, :default ]
+        [:coercer, :primitive, :default]
       end
 
-      def reader_class
+      def reader_options(*)
+        {}
+      end
+
+      def reader_class(*)
         Reader
       end
 
-      def writer_class
+      def writer_class(*)
         @options[:coerce] ? coercible_writer_class : Writer
       end
 
