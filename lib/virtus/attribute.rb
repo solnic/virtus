@@ -43,6 +43,8 @@ module Virtus
     # @api private
     attr_reader :accessor
 
+    attr_reader :instance_variable_name
+
     # Builds an attribute instance
     #
     # @param [Symbol] name
@@ -73,8 +75,19 @@ module Virtus
     #
     # @api private
     def initialize(name, accessor)
-      @name     = name.to_sym
+      @name     = name
       @accessor = accessor
+      @instance_variable_name = "@#{@name}"
+    end
+
+    # @api public
+    def set(instance, value)
+      instance.instance_variable_set(instance_variable_name, value)
+    end
+
+    # @api public
+    def get(instance)
+      instance.instance_variable_get(instance_variable_name)
     end
 
     # Return reader object
