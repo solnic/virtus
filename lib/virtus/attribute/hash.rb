@@ -13,9 +13,8 @@ module Virtus
     #   Post.new(:meta => { :tags => %w(foo bar) })
     #
     class Hash < Attribute
-      primitive       ::Hash
-      coercion_method :to_hash
-      default         primitive.new
+      primitive ::Hash
+      default   primitive.new
 
       # Handles hashes with [key_type => value_type] syntax
       #

@@ -1,18 +1,89 @@
 module Virtus
 
-  # Abstract class implementing base API for attribute types
-  #
-  # @abstract
   class Attribute
     extend DescendantsTracker, Options
 
-    include Adamantium::Flat
     include Equalizer.new(inspect) << :name
 
-    accept_options :primitive, :accessor, :reader,
-      :writer, :coercion_method, :default, :lazy
+    accept_options :primitive, :accessor, :reader, :writer, :default, :lazy
 
     accessor :public
+
+    module Named
+      # @api public
+      def name
+        options[:name]
+      end
+
+      # @api public
+      def get(instance)
+        instance.instance_variable_get(instance_variable_name)
+      end
+
+      # @api public
+      def set(instance, value)
+        instance.instance_variable_set(instance_variable_name, value)
+      end
+
+      # @api public
+      def set_default_value(instance)
+        default_value.call(instance, self)
+      end
+
+      def define_accessor_methods(attribute_set)
+        attribute_set.define_reader_method(self, name,       options[:reader])
+        attribute_set.define_writer_method(self, "#{name}=", options[:writer])
+        self
+      end
+
+      # Returns a Boolean indicating whether the reader method is public
+      #
+      # @return [Boolean]
+      #
+      # @api private
+      def public_reader?
+        options[:reader] == :public
+      end
+
+      # Returns a Boolean indicating whether the writer method is public
+      #
+      # @return [Boolean]
+      #
+      # @api private
+      def public_writer?
+        options[:writer] == :public
+      end
+
+      private
+
+      def instance_variable_name
+        "@#{name}"
+      end
+    end
+
+    module Coercible
+      def set(instance, value)
+        super(instance, coercer.call(value))
+      end
+
+      def coercer
+        options[:coercer]
+      end
+
+      def value_coerced?(value)
+        coercer.coerced?(value)
+      end
+    end
+
+    module LazyDefault
+      def get(instance)
+        if instance.instance_variable_defined?(instance_variable_name)
+          super
+        else
+          set_default_value(instance)
+        end
+      end
+    end
 
     # @see Virtus.coerce
     #
@@ -26,24 +97,7 @@ module Virtus
       self
     end
 
-    # Returns name of the attribute
-    #
-    # @example
-    #   User.attributes[:age].name  # => :age
-    #
-    # @return [Symbol]
-    #
-    # @api public
-    attr_reader :name
-
-    # Return accessor object
-    #
-    # @return [Accessor]
-    #
-    # @api private
-    attr_reader :accessor
-
-    attr_reader :instance_variable_name
+    attr_reader :type, :options, :default_value
 
     # Builds an attribute instance
     #
@@ -59,8 +113,8 @@ module Virtus
     # @return [Attribute]
     #
     # @api private
-    def self.build(name, type, options = {})
-      Builder.new(name, type, options).attribute
+    def self.build(type, options = {})
+      Builder.new(type, options).attribute
     end
 
     # Initializes an attribute instance
@@ -74,77 +128,10 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(name, accessor)
-      @name     = name
-      @accessor = accessor
-      @instance_variable_name = "@#{@name}"
-    end
-
-    # @api public
-    def set(instance, value)
-      instance.instance_variable_set(instance_variable_name, value)
-    end
-
-    # @api public
-    def get(instance)
-      instance.instance_variable_get(instance_variable_name)
-    end
-
-    # Return reader object
-    #
-    # @example
-    #
-    #   attribute.reader # => #<Virtus::Attribute::Reader ...>
-    #
-    # @return [Reader]
-    #
-    # @api public
-    def reader
-      accessor.reader
-    end
-
-    # Return writer object
-    #
-    # @example
-    #
-    #   attribute.writer # => #<Virtus::Attribute::Writer ...>
-    #
-    # @return [Writer]
-    #
-    # @api public
-    def writer
-      accessor.writer
-    end
-
-    # Define reader and writer methods for an Attribute
-    #
-    # @param [AttributeSet] mod
-    #
-    # @return [self]
-    #
-    # @api private
-    def define_accessor_methods(attribute_set)
-      reader.define_method(accessor, attribute_set)
-      writer.define_method(accessor, attribute_set)
-      self
-    end
-
-    # Returns a Boolean indicating whether the reader method is public
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def public_reader?
-      accessor.public_reader?
-    end
-
-    # Returns a Boolean indicating whether the writer method is public
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def public_writer?
-      accessor.public_writer?
+    def initialize(type, options)
+      @type          = type
+      @options       = options
+      @default_value = options.fetch(:default_value)
     end
 
     # Return if the attribute is coercible
@@ -153,25 +140,11 @@ module Virtus
     #
     # @api public
     def coercible?
-      writer.kind_of?(Writer::Coercible)
+      kind_of?(Coercible)
     end
 
-    # Returns if the given value is coerced into the target type
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    def value_coerced?(value)
-      coercer.coerced?(value)
-    end
-
-    # Return coercer for this attribute
-    #
-    # @return [Object]
-    #
-    # @api private
-    def coercer
-      writer.coercer[writer.primitive]
+    def lazy?
+      kind_of?(LazyDefault)
     end
 
   end # class Attribute

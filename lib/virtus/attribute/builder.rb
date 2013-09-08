@@ -12,19 +12,26 @@ module Virtus
         false
       end
 
-      def initialize(name, type, options)
+      def initialize(type, options)
         @klass   = Attribute
-        @type    = Axiom::Types.infer(type)
+        @type    = Axiom::Types.infer(type).new
         @options = merge_options(options)
 
-        @accessor  = Accessor.build(name, self, @options)
-        @attribute = Attribute.new(name, @accessor)
+        determine_visibility!
+
+        @attribute = Attribute.new(@type, @options)
+
+        @attribute.extend(Attribute::Named)       if @options[:name]
+        @attribute.extend(Attribute::Coercible)   if @options[:coercer]
+        @attribute.extend(Attribute::LazyDefault) if @options[:lazy]
       end
 
       def merge_options(options)
         merged_options = @klass.options.merge(
           :coerce => Virtus.coerce, :primitive => @type.primitive
         ).update(options)
+
+        merged_options.update(:default_value => DefaultValue.build(options[:default]))
 
         if merged_options[:coerce]
           merged_options.update(
@@ -35,28 +42,11 @@ module Virtus
         merged_options
       end
 
-      def writer_options(*)
-        ::Hash[writer_option_names.zip(@options.values_at(*writer_option_names))]
-      end
-
-      def writer_option_names
-        [:coercer, :primitive, :default]
-      end
-
-      def reader_options(*)
-        {}
-      end
-
-      def reader_class(*)
-        Reader
-      end
-
-      def writer_class(*)
-        @options[:coerce] ? coercible_writer_class : Writer
-      end
-
-      def coercible_writer_class
-        Writer::Coercible
+      def determine_visibility!
+        default_accessor  = @options.fetch(:accessor)
+        reader_visibility = @options.fetch(:reader, default_accessor)
+        writer_visibility = @options.fetch(:writer, default_accessor)
+        @options.update(:reader => reader_visibility, :writer => writer_visibility)
       end
 
       def coercer(*)

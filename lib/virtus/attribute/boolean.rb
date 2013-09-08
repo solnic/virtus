@@ -15,8 +15,7 @@ module Virtus
     #   post.published?  # => false
     #
     class Boolean < Attribute
-      primitive       TrueClass
-      coercion_method :to_boolean
+      primitive TrueClass
 
       # Returns if the given value is either true or false
       #
@@ -43,7 +42,7 @@ module Virtus
       # @api private
       def define_accessor_methods(mod)
         super
-        mod.define_reader_method(accessor, "#{name}?", reader.visibility)
+        mod.define_reader_method(accessor, "#{name}?", options[:reader])
         self
       end
 

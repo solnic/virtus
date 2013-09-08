@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::Attribute, '.build' do
-  subject { described_class.build(name, type, options) }
+  subject { described_class.build(type, options.merge(:name => name)) }
 
   let(:name) { :test }
   let(:type) { String }
@@ -18,11 +18,10 @@ describe Virtus::Attribute, '.build' do
     it { should be_coercible }
     it { should be_public_reader }
     it { should be_public_writer }
-
-    its(:accessor) { should_not be_lazy }
+    it { should_not be_lazy }
 
     it 'sets up a coercer' do
-      expect(subject.coercer).to be_instance_of(Coercible::Coercer::String)
+      expect(subject.coercer).to be_instance_of(Virtus::Attribute::Coercer)
     end
   end
 
@@ -57,6 +56,6 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:accessor) { should be_lazy }
+    it { should be_lazy }
   end
 end
