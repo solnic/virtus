@@ -6,7 +6,7 @@ describe Virtus::Attribute::Accessor::Builder, '.call' do
   let(:name) { 'test' }
 
   let(:type) {
-    mock(
+    double(
       'attribute_type',
       :reader_class => reader_class,
       :writer_class => writer_class
@@ -14,10 +14,10 @@ describe Virtus::Attribute::Accessor::Builder, '.call' do
   }
 
   let(:options)      { {} }
-  let(:reader_class) { mock('reader_class') }
-  let(:writer_class) { mock('writer_class') }
-  let(:reader)       { mock('reader') }
-  let(:writer)       { mock('writer') }
+  let(:reader_class) { double('reader_class') }
+  let(:writer_class) { double('writer_class') }
+  let(:reader)       { double('reader') }
+  let(:writer)       { double('writer') }
 
   before do
     type.should_receive(:reader_options).with(options).and_return({})

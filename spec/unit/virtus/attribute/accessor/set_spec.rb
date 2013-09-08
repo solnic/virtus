@@ -5,8 +5,8 @@ describe Virtus::Attribute::Accessor, '#set' do
 
   let(:object) { described_class.new(reader, writer) }
 
-  let(:reader)   { mock('reader') }
-  let(:writer)   { mock('writer') }
+  let(:reader)   { double('reader') }
+  let(:writer)   { double('writer') }
   let(:instance) { Class.new { attr_accessor :test }.new }
   let(:value)    { 'test' }
 

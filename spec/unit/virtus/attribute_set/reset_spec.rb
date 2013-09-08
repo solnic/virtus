@@ -4,7 +4,7 @@ describe Virtus::AttributeSet, '#reset' do
   subject { object.reset }
 
   let(:name)       { :name                                   }
-  let(:attribute)  { mock('Attribute', :name => name)        }
+  let(:attribute)  { double('Attribute', :name => name)        }
   let(:attributes) { [ attribute ]                           }
   let(:object)     { described_class.new(parent, attributes) }
 
@@ -19,7 +19,7 @@ describe Virtus::AttributeSet, '#reset' do
   end
 
   context 'when the parent has attributes that are not duplicates' do
-    let(:parent_attribute) { mock('Parent Attribute', :name => :parent_name) }
+    let(:parent_attribute) { double('Parent Attribute', :name => :parent_name) }
     let(:parent)           { described_class.new([ parent_attribute ])       }
 
     it { should equal(object) }
@@ -28,7 +28,7 @@ describe Virtus::AttributeSet, '#reset' do
   end
 
   context 'when the parent has attributes that are duplicates' do
-    let(:parent_attribute) { mock('Parent Attribute', :name => name)   }
+    let(:parent_attribute) { double('Parent Attribute', :name => name)   }
     let(:parent)           { described_class.new([ parent_attribute ]) }
 
     it { should equal(object) }
@@ -37,9 +37,9 @@ describe Virtus::AttributeSet, '#reset' do
   end
 
   context 'when the parent has changed' do
-    let(:parent_attribute) { mock('Parent Attribute', :name => :parent_name) }
+    let(:parent_attribute) { double('Parent Attribute', :name => :parent_name) }
     let(:parent)           { described_class.new([ parent_attribute ])       }
-    let(:new_attribute)    { mock('New Attribute', :name => :parent_name)    }
+    let(:new_attribute)    { double('New Attribute', :name => :parent_name)    }
 
     before { new_attribute.stub(:define_accessor_methods) }
 

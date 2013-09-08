@@ -4,10 +4,10 @@ describe Virtus::Attribute::DefaultValue::FromClonable, '#call' do
   subject { object.call(instance) }
 
   let(:object)    { described_class.new(value) }
-  let(:value)     { mock('value')              }
-  let(:instance)  { mock('instance')           }
-  let(:response)  { mock('response')           }
-  let(:clone)     { mock('clone')              }
+  let(:value)     { double('value')              }
+  let(:instance)  { double('instance')           }
+  let(:response)  { double('response')           }
+  let(:clone)     { double('clone')              }
 
   before { value.stub(:clone => clone) }
 

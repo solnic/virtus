@@ -1,48 +1,46 @@
 # encoding: utf-8
 
 group :development do
-  gem 'rake',  '~> 10.0.4'
-  gem 'rspec', '~> 2.13.0'
-  gem 'yard',  '~> 0.8.5.2'
+  gem 'rake',  '~> 10.1.0'
+  gem 'rspec', '~> 2.14.1'
+  gem 'yard',  '~> 0.8.7'
 end
 
 group :yard do
-  gem 'kramdown', '~> 1.0.1'
+  gem 'kramdown', '~> 1.1.0'
 end
 
 group :guard do
-  gem 'guard',         '~> 1.6.2'
+  gem 'guard',         '~> 1.8.1'
   gem 'guard-bundler', '~> 1.0.0'
-  gem 'guard-rspec',   '~> 2.5.1'
+  gem 'guard-rspec',   '~> 3.0.2'
+  gem 'guard-rubocop', '~> 0.2.0'
+  gem 'guard-mutant',  '~> 0.0.1'
 
   # file system change event handling
-  gem 'listen',     '~> 0.7.3'
-  gem 'rb-fchange', '~> 0.0.6', :require => false
-  gem 'rb-fsevent', '~> 0.9.3', :require => false
-  gem 'rb-inotify', '~> 0.9.0', :require => false
+  gem 'listen',     '~> 1.3.0'
+  gem 'rb-fchange', '~> 0.0.6', require: false
+  gem 'rb-fsevent', '~> 0.9.3', require: false
+  gem 'rb-inotify', '~> 0.9.0', require: false
 
   # notification handling
-  gem 'libnotify',               '~> 0.8.0', :require => false
-  gem 'rb-notifu',               '~> 0.0.4', :require => false
-  gem 'terminal-notifier-guard', '~> 1.5.3', :require => false
+  gem 'libnotify',               '~> 0.8.0', require: false
+  gem 'rb-notifu',               '~> 0.0.4', require: false
+  gem 'terminal-notifier-guard', '~> 1.5.3', require: false
 end
 
 group :metrics do
-  gem 'backports',       '~> 3.1', '>= 3.1.1'
-  gem 'coveralls',       '~> 0.6.2'
-  gem 'flay',            '~> 2.1.0'
-  gem 'flog',            '~> 3.2.3'
-  gem 'reek',            '~> 1.3.1', :git => 'https://github.com/troessner/reek.git'
-  gem 'simplecov',       '~> 0.7.1'
-  gem 'yardstick',       '~> 0.9.5'
-  gem 'yard-spellcheck', '~> 0.1.5'
+  gem 'coveralls', '~> 0.6.7'
+  gem 'flay',      '~> 2.4.0'
+  gem 'flog',      '~> 4.1.1'
+  gem 'reek',      '~> 1.3.2'
+  gem 'rubocop',   '~> 0.11.0'
+  gem 'simplecov', '~> 0.7.1'
+  gem 'yardstick', '~> 0.9.7', git: 'https://github.com/dkubb/yardstick.git'
 
-  platforms :mri_19, :rbx do
-    gem 'mutant', '~> 0.2.20'
-  end
-
-  platforms :rbx do
-    gem 'pelusa', '~> 0.2.2'
+  platforms :ruby_19, :ruby_20 do
+    gem 'mutant', git: 'https://github.com/mbj/mutant.git'
+    gem 'yard-spellcheck', '~> 0.1.5'
   end
 end
 

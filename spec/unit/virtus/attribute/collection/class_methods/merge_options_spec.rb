@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Virtus::Attribute::Collection, '.merge_options' do
   subject { described_class.merge_options(type, options) }
 
-  let(:type)        { mock('type')        }
-  let(:member_type) { mock('member_type') }
+  let(:type)        { double('type')        }
+  let(:member_type) { double('member_type') }
   let(:options)     { Hash.new }
 
   context 'when `type` responds to `count`' do
@@ -43,7 +43,6 @@ describe Virtus::Attribute::Collection, '.merge_options' do
       should include(
         :primitive       => Object,
         :accessor        => :public,
-        :coerce          => true,
         :coercion_method => :to_object
       )
     end

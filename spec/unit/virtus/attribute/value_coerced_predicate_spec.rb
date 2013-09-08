@@ -4,11 +4,11 @@ describe Virtus::Attribute, '#value_coerced?' do
   subject { object.value_coerced?(value) }
 
   let(:object)   { described_class::String.new(:name, accessor) }
-  let(:accessor) { stub('accessor', :writer => writer) }
-  let(:writer)   { stub('writer', :coercer => coercer) }
-  let(:coercer)  { stub('coercer') }
+  let(:accessor) { double('accessor', :writer => writer) }
+  let(:writer)   { double('writer', :coercer => coercer) }
+  let(:coercer)  { double('coercer') }
 
-  let(:string_coercer) { stub('string_coercer') }
+  let(:string_coercer) { double('string_coercer') }
 
   before do
     coercer.should_receive(:[]).with(String).and_return(string_coercer)

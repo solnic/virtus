@@ -6,7 +6,7 @@ describe Virtus::Attribute::Accessor, '.build' do
   let(:name) { :test }
 
   let(:type) {
-    mock('type',
+    double('type',
          :reader_class   => reader_class,
          :writer_class   => writer_class,
          :reader_options => reader_options,
@@ -14,14 +14,14 @@ describe Virtus::Attribute::Accessor, '.build' do
         )
   }
 
-  let(:reader_class) { mock('reader_class') }
-  let(:writer_class) { mock('writer_class') }
+  let(:reader_class) { double('reader_class') }
+  let(:writer_class) { double('writer_class') }
 
   let(:reader_options) { {} }
   let(:writer_options) { {} }
 
-  let(:reader) { mock('reader') }
-  let(:writer) { mock('writer') }
+  let(:reader) { double('reader') }
+  let(:writer) { double('writer') }
 
   let(:options) { {} }
 
@@ -38,8 +38,8 @@ describe Virtus::Attribute::Accessor, '.build' do
   end
 
   context "with options" do
-    let(:other_reader_class) { mock('other_reader_class') }
-    let(:other_writer_class) { mock('other_writer_class') }
+    let(:other_reader_class) { double('other_reader_class') }
+    let(:other_writer_class) { double('other_writer_class') }
 
     let(:reader_options) { { :foo => :bar } }
     let(:writer_options) { { :bar => :foo } }

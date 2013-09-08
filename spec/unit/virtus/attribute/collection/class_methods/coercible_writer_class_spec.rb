@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Collection, '.coercible_writer_class' do
   subject { described_class.coercible_writer_class(type, options) }
 
-  let(:type) { mock('type') }
+  let(:type) { double('type') }
 
   context "when member_type is set in options" do
     let(:options) { { :member_type => String } }

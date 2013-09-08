@@ -4,8 +4,8 @@ describe Virtus::Attribute::Accessor::Builder, '#writer_class' do
   subject { object.writer_class }
 
   let(:object)       { described_class.new('test', type, options) }
-  let(:type)         { mock('attribute_type') }
-  let(:writer_class) { mock('writer_class') }
+  let(:type)         { double('attribute_type') }
+  let(:writer_class) { double('writer_class') }
   let(:primitive)    { Object }
 
   context "when options provides writer_class" do

@@ -4,7 +4,7 @@ describe Virtus::Attribute::Accessor::Builder, '#accessor_class' do
   subject { object.accessor_class }
 
   let(:object) { described_class.new('test', type, options) }
-  let(:type)   { mock('attribute_type').as_null_object }
+  let(:type)   { double('attribute_type').as_null_object }
 
   context "when :lazy is set to false" do
     let(:options) { { :lazy => false } }

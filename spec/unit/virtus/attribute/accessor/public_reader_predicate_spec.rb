@@ -5,8 +5,8 @@ describe Virtus::Attribute::Accessor, '#public_reader?' do
 
   let(:object) { described_class.new(reader, writer) }
 
-  let(:reader)   { mock('reader', :public? => is_public) }
-  let(:writer)   { mock('writer') }
+  let(:reader)   { double('reader', :public? => is_public) }
+  let(:writer)   { double('writer') }
 
   context "when reader is public" do
     let(:is_public) { true }

@@ -48,8 +48,8 @@ module Virtus
     # @see Attribute.build
     #
     # @api public
-    def attribute(*args)
-      attribute = Attribute.build(*args)
+    def attribute(name, type, options = {})
+      attribute = Attribute.build(name, type, merge_options(options))
       virtus_add_attribute(attribute)
       self
     end
@@ -86,6 +86,15 @@ module Virtus
     # @api private
     def virtus_add_attribute(attribute)
       attribute_set << attribute
+    end
+
+    # Merge default options
+    #
+    # @return [Hash]
+    #
+    # @api private
+    def merge_options(options)
+      { :coerce => Virtus.coerce }.merge(options)
     end
 
   end # module Extensions

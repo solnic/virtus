@@ -40,7 +40,7 @@ describe Virtus::Attribute, '.build' do
   end
 
   context 'with a custom coercer' do
-    let(:coercer) { stub('coercer') }
+    let(:coercer) { double('coercer') }
 
     subject { object.build(name, type, :coercer => coercer) }
 

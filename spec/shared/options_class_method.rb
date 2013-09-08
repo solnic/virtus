@@ -8,7 +8,7 @@ shared_examples_for 'an options class method' do
   context 'with a default value' do
     subject { object.send(method, value) }
 
-    let(:value) { stub('value') }
+    let(:value) { double('value') }
 
     it { should equal(object) }
 

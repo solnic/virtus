@@ -28,6 +28,6 @@ describe Virtus::Attribute::Hash, '.merge_options' do
       type.should_receive(:respond_to?).with(:size).and_return(false)
     end
 
-    it { should include(options.merge(:coerce => true)) }
+    it { should include(options) }
   end
 end

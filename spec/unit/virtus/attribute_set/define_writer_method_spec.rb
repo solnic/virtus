@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::AttributeSet, '#define_writer_method' do
   subject { described_class.new }
 
-  let(:attribute) { mock('attribute') }
+  let(:attribute) { double('attribute') }
 
   if RUBY_VERSION < '1.9'
     let(:method_name) { 'foo_bar=' }

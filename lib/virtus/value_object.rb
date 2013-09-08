@@ -93,10 +93,9 @@ module Virtus
       # @return [self]
       #
       # @api public
-      def attribute(name, *args)
+      def attribute(name, type, options = {})
         equalizer << name
-        options = args.last.kind_of?(Hash) ? args.pop : {}
-        super name, *args << options.merge(:writer => :private)
+        super name, type, options.merge(:writer => :private)
       end
 
       # Define and include a module that provides Value Object semantics

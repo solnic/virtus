@@ -10,7 +10,7 @@ describe Virtus::Options, '#options' do
   end
 
   context 'with an option that has a default value' do
-    let(:default_value) { stub('default_value') }
+    let(:default_value) { double('default_value') }
 
     before do
       object.accept_options :name

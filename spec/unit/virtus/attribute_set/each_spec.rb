@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Virtus::AttributeSet, '#each' do
   let(:name)       { :name                                   }
-  let(:attribute)  { mock('Attribute', :name => name)        }
+  let(:attribute)  { double('Attribute', :name => name)        }
   let(:attributes) { [ attribute ]                           }
   let(:parent)     { described_class.new                     }
   let(:object)     { described_class.new(parent, attributes) }
@@ -32,7 +32,7 @@ describe Virtus::AttributeSet, '#each' do
     end
 
     context 'when the parent has attributes that are not duplicates' do
-      let(:parent_attribute) { mock('Parent Attribute', :name => :parent_name) }
+      let(:parent_attribute) { double('Parent Attribute', :name => :parent_name) }
       let(:parent)           { described_class.new([ parent_attribute ])       }
 
       it { should equal(object) }
@@ -45,7 +45,7 @@ describe Virtus::AttributeSet, '#each' do
     end
 
     context 'when the parent has attributes that are duplicates' do
-      let(:parent_attribute) { mock('Parent Attribute', :name => name)   }
+      let(:parent_attribute) { double('Parent Attribute', :name => name)   }
       let(:parent)           { described_class.new([ parent_attribute ]) }
 
       it { should equal(object) }
