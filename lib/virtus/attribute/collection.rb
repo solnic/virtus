@@ -6,7 +6,7 @@ module Virtus
     # Handles coercing members to the designated member type.
     #
     # @abstract
-    class Collection < Object
+    class Collection < Attribute
 
       # Handles collection with member_type syntax
       #

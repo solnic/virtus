@@ -14,7 +14,7 @@ module Virtus
     #   post = Post.new(:published => false)
     #   post.published?  # => false
     #
-    class Boolean < Object
+    class Boolean < Attribute
       primitive       TrueClass
       coercion_method :to_boolean
 

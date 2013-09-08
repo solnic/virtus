@@ -12,7 +12,7 @@ module Virtus
     #
     #   Post.new(:meta => { :tags => %w(foo bar) })
     #
-    class Hash < Object
+    class Hash < Attribute
       primitive       ::Hash
       coercion_method :to_hash
       default         primitive.new
