@@ -12,14 +12,28 @@ module Virtus
         false
       end
 
+      def self.determine_type(primitive)
+        Attribute.descendants.detect { |descendant|
+          descendant.primitive == primitive
+        } || Attribute
+      end
+
       def initialize(type, options)
-        @klass   = Attribute
-        @type    = Axiom::Types.infer(type).new
+        @primitive =
+          if type.instance_of?(::Hash)
+            ::Hash
+          else
+            type
+          end
+
+        @klass = self.class.determine_type(@primitive)
+        @type  = @klass.build_type(type, options)
+
         @options = merge_options(options)
 
         determine_visibility!
 
-        @attribute = Attribute.new(@type, @options)
+        @attribute = @klass.new(@type, @options)
 
         @attribute.extend(Attribute::Named)       if @options[:name]
         @attribute.extend(Attribute::Coercible)   if @options[:coercer]
@@ -27,9 +41,7 @@ module Virtus
       end
 
       def merge_options(options)
-        merged_options = @klass.options.merge(
-          :coerce => Virtus.coerce, :primitive => @type.primitive
-        ).update(options)
+        merged_options = @klass.options.merge(:coerce => Virtus.coerce).update(options)
 
         merged_options.update(:default_value => DefaultValue.build(options[:default]))
 

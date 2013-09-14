@@ -22,7 +22,7 @@ module Virtus
     #   user = User.new(:address => {
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
-    class EmbeddedValue < Axiom::Types::Object
+    class EmbeddedValue < Attribute
       primitive ::OpenStruct
 
       # @see Attribute.merge_options

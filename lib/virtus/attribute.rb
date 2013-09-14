@@ -117,6 +117,11 @@ module Virtus
       Builder.new(type, options).attribute
     end
 
+    # @api private
+    def self.build_type(type, _options)
+      Axiom::Types.infer(type).new
+    end
+
     # Initializes an attribute instance
     #
     # @param [#to_sym] name

@@ -3,16 +3,16 @@ require 'spec_helper'
 describe Virtus::Attribute, '.build' do
   subject { described_class.build(type, options.merge(:name => name)) }
 
-  let(:name) { :test }
-  let(:type) { String }
+  let(:name)    { :test }
+  let(:type)    { String }
+  let(:options) { {} }
+
 
   share_examples_for 'a valid attribute instance' do
     it { should be_instance_of(Virtus::Attribute) }
   end
 
   context 'without options' do
-    let(:options) { {} }
-
     it_behaves_like 'a valid attribute instance'
 
     it { should be_coercible }
@@ -57,5 +57,25 @@ describe Virtus::Attribute, '.build' do
     it_behaves_like 'a valid attribute instance'
 
     it { should be_lazy }
+  end
+
+  context 'when type is Hash' do
+    let(:type) { Hash }
+
+    it { should be_instance_of(Virtus::Attribute::Hash) }
+  end
+
+  context 'when type is Hash[String => Integer]' do
+    let(:type) { Hash[String => Integer] }
+
+    it { should be_instance_of(Virtus::Attribute::Hash) }
+
+    it 'sets key type' do
+      expect(subject.type.key_type).to be(Axiom::Types::String)
+    end
+
+    it 'sets value type' do
+      expect(subject.type.value_type).to be(Axiom::Types::Integer)
+    end
   end
 end

@@ -16,6 +16,16 @@ module Virtus
       primitive ::Hash
       default   primitive.new
 
+      # @api private
+      def self.build_type(primitive, options)
+        type_options = infer_options(primitive)
+
+        Axiom::Types.infer(primitive).new do
+          key_type   type_options.fetch(:key_type,   Axiom::Types::Object)
+          value_type type_options.fetch(:value_type, Axiom::Types::Object)
+        end
+      end
+
       # Handles hashes with [key_type => value_type] syntax
       #
       # @param [Class] type
@@ -25,37 +35,23 @@ module Virtus
       # @return [Hash]
       #
       # @api private
-      def self.merge_options(type, _options)
-        merged_options = super
+      def self.infer_options(type)
+        options = {}
 
         if !type.respond_to?(:size)
-          merged_options
+          options
         elsif type.size > 1
           raise ArgumentError, "more than one [key => value] pair in `#{type.inspect}`"
         else
           key_type, value_type = type.first
-          merged_options.merge!(:key_type => key_type, :value_type => value_type)
+
+          options.merge!(
+            :key_type   => Axiom::Types.infer(key_type),
+            :value_type => Axiom::Types.infer(value_type)
+          )
         end
 
-        merged_options
-      end
-
-      # @see Virtus::Attribute.coercible_writer_class
-      #
-      # @return [::Class]
-      #
-      # @api private
-      def self.coercible_writer_class(_type, options)
-        options[:key_type] && options[:value_type] ? CoercibleWriter : super
-      end
-
-      # @see Virtus::Attribute.writer_option_names
-      #
-      # @return [Array<Symbol>]
-      #
-      # @api private
-      def self.writer_option_names
-        super << :key_type << :value_type
+        options
       end
 
     end # class Hash
