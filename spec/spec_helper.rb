@@ -17,6 +17,7 @@ if ENV['COVERAGE'] == 'true'
 end
 
 require 'rspec'
+require 'bogus/rspec'
 require 'virtus'
 
 ENV['TZ'] = 'UTC'

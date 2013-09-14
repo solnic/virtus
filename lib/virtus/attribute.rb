@@ -63,7 +63,11 @@ module Virtus
 
     module Coercible
       def set(instance, value)
-        super(instance, coercer.call(value))
+        super(instance, coerce(value))
+      end
+
+      def coerce(value)
+        coercer.call(value)
       end
 
       def coercer
