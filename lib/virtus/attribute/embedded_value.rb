@@ -45,7 +45,7 @@ module Virtus
       # @return [Virtus::Attribute::EmbeddedValue]
       #
       # @api private
-      def self.infer(klass)
+      def self.determine_type(klass)
         if klass <= Virtus || klass <= OpenStruct || klass <= Struct
           self
         end

@@ -13,15 +13,21 @@ module Virtus
       end
 
       def self.determine_type(primitive)
-        Attribute.descendants.detect { |descendant|
-          descendant.primitive == primitive
-        } || Attribute
+        if primitive == Array || primitive == Set
+          Collection
+        else
+          Attribute.descendants.detect { |descendant| descendant.primitive == primitive } || Attribute
+        end
       end
 
       def initialize(type, options)
         @primitive =
           if type.instance_of?(::Hash)
             ::Hash
+          elsif type.instance_of?(::Array) || type == Array
+            ::Array
+          elsif type.instance_of?(::Set) || type == Set
+            ::Set
           else
             type
           end

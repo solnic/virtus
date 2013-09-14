@@ -63,6 +63,14 @@ describe Virtus::Attribute, '.build' do
     let(:type) { Hash }
 
     it { should be_instance_of(Virtus::Attribute::Hash) }
+
+    it 'sets default key type' do
+      expect(subject.type.key_type).to be(Axiom::Types::Object)
+    end
+
+    it 'sets default value type' do
+      expect(subject.type.value_type).to be(Axiom::Types::Object)
+    end
   end
 
   context 'when type is Hash[String => Integer]' do
@@ -76,6 +84,46 @@ describe Virtus::Attribute, '.build' do
 
     it 'sets value type' do
       expect(subject.type.value_type).to be(Axiom::Types::Integer)
+    end
+  end
+
+  context 'when type is Array' do
+    let(:type) { Array }
+
+    it { should be_instance_of(Virtus::Attribute::Collection) }
+
+    it 'sets default member type' do
+      expect(subject.type.member_type).to be(Axiom::Types::Object)
+    end
+  end
+
+  context 'when type is Array[Float]' do
+    let(:type) { Array[Float] }
+
+    it { should be_instance_of(Virtus::Attribute::Collection) }
+
+    it 'sets member type' do
+      expect(subject.type.member_type).to be(Axiom::Types::Float)
+    end
+  end
+
+  context 'when type is Set' do
+    let(:type) { Set }
+
+    it { should be_instance_of(Virtus::Attribute::Collection) }
+
+    it 'sets default member type' do
+      expect(subject.type.member_type).to be(Axiom::Types::Object)
+    end
+  end
+
+  context 'when type is Set[Float]' do
+    let(:type) { Set[Float] }
+
+    it { should be_instance_of(Virtus::Attribute::Collection) }
+
+    it 'sets member type' do
+      expect(subject.type.member_type).to be(Axiom::Types::Float)
     end
   end
 end

@@ -8,6 +8,14 @@ module Virtus
     # @abstract
     class Collection < Attribute
 
+      def self.build_type(primitive, options)
+        type_options = infer_options(primitive)
+
+        Axiom::Types.infer(primitive).new do
+          member_type type_options.fetch(:member_type, Axiom::Types::Object)
+        end
+      end
+
       # Handles collection with member_type syntax
       #
       # @param [Class] type
@@ -17,18 +25,18 @@ module Virtus
       # @return [Hash]
       #
       # @api private
-      def self.merge_options(type, _options)
-        merged_options = super
+      def self.infer_options(type)
+        options = {}
 
         if !type.respond_to?(:count)
-          merged_options
+          options
         elsif type.count > 1
           raise NotImplementedError, "build SumType from list of types (#{type.inspect})"
         else
-          merged_options.merge!(:member_type => type.first)
+          options.merge!(:member_type => Axiom::Types.infer(type.first))
         end
 
-        merged_options
+        options
       end
 
       # @see Virtus::Attribute.coercible_writer_class
