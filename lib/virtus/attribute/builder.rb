@@ -48,8 +48,6 @@ module Virtus
 
         @options = merge_options(options)
 
-        @options[:primitive] = type
-
         @klass.merge_options!(@type, @options)
 
         determine_visibility!

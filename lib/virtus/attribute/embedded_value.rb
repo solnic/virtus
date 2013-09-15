@@ -57,9 +57,14 @@ module Virtus
         end
       end
 
+      # @api private
+      def self.build_type(type, _)
+        Axiom::Types::Object.new { primitive type }
+      end
+
       # @api public
       def primitive
-        @options[:primitive]
+        type.primitive
       end
 
     end # class EmbeddedValue
