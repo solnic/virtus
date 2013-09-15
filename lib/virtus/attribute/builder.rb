@@ -15,8 +15,10 @@ module Virtus
       def self.determine_type(primitive)
         if primitive == Array || primitive == Set
           Collection
-        elsif primitive <= Virtus || primitive <= OpenStruct || primitive <= Struct
-          EmbeddedValue
+        elsif primitive <= Virtus || primitive <= OpenStruct
+          EmbeddedValue::FromOpenStruct
+        elsif primitive <= Struct
+          EmbeddedValue::FromStruct
         else
           Attribute.descendants.detect { |descendant| descendant.primitive == primitive } || Attribute
         end
@@ -38,6 +40,8 @@ module Virtus
         @type  = @klass.build_type(type, options)
 
         @options = merge_options(options)
+
+        @options[:primitive] = type
 
         @klass.merge_options!(@type, @options)
 

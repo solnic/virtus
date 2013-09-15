@@ -3,27 +3,55 @@ require 'spec_helper'
 describe Virtus::Attribute::EmbeddedValue, '#coerce' do
   subject { object.coerce(input) }
 
-  let(:model)  { OpenStruct }
   let(:object) { described_class.build(model) }
 
-  context 'when input is an attribute hash' do
-    let(:input) { Hash[name: 'Piotr', age: 30] }
+  context 'when primitive is OpenStruct' do
+    let(:model)  { OpenStruct }
 
-    it { should be_instance_of(model) }
+    context 'when input is an attribute hash' do
+      let(:input) { Hash[name: 'Piotr', age: 30] }
 
-    its(:name) { should eql('Piotr') }
-    its(:age)  { should eql(30) }
+      it { should be_instance_of(model) }
+
+      its(:name) { should eql('Piotr') }
+      its(:age)  { should eql(30) }
+    end
+
+    context 'when input is nil' do
+      let(:input) { nil }
+
+      it { should be(nil) }
+    end
+
+    context 'when input is a model instance' do
+      let(:input) { OpenStruct.new }
+
+      it { should be(input) }
+    end
   end
 
-  context 'when input is nil' do
-    let(:input) { nil }
+  context 'when primitive is Struct' do
+    let(:model)  { Struct.new(:name, :age) }
 
-    it { should be(nil) }
-  end
+    context 'when input is an attribute hash' do
+      let(:input) { ['Piotr', 30] }
 
-  context 'when input is a model instance' do
-    let(:input) { OpenStruct.new }
+      it { should be_instance_of(model) }
 
-    it { should be(input) }
+      its(:name) { should eql('Piotr') }
+      its(:age)  { should eql(30) }
+    end
+
+    context 'when input is nil' do
+      let(:input) { nil }
+
+      it { should be(nil) }
+    end
+
+    context 'when input is a model instance' do
+      let(:input) { model.new('Piotr', 30) }
+
+      it { should be(input) }
+    end
   end
 end

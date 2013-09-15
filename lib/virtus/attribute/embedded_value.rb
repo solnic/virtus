@@ -23,18 +23,30 @@ module Virtus
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
     class EmbeddedValue < Attribute
-      primitive ::OpenStruct
 
-      # @api public
-      def coerce(input)
-        if input.kind_of?(primitive)
-          input
-        elsif input.kind_of?(::Hash)
-          primitive.new(input)
-        else
-          input
+      class FromStruct < self
+
+        # @api public
+        def coerce(input)
+          if input.kind_of?(primitive)
+            input
+          elsif not input.nil?
+            primitive.new(*input)
+          end
         end
-      end
+      end # FromStruct
+
+      class FromOpenStruct < self
+
+        # @api public
+        def coerce(input)
+          if input.kind_of?(primitive)
+            input
+          elsif not input.nil?
+            primitive.new(input)
+          end
+        end
+      end # FromOpenStruct
 
       # @api public
       def primitive
