@@ -32,7 +32,7 @@ module Virtus
         if EmbeddedValue.determine_type(member)
           Type.new(self.primitive || klass.primitive, member)
         else
-          Axiom::Types.infer(primitive)
+          klass.new { member_type Axiom::Types.infer(member) }
         end
       end
 

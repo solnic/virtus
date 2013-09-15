@@ -32,7 +32,10 @@ module Virtus
         if EmbeddedValue.determine_type(key_class) || EmbeddedValue.determine_type(value_class)
           Type.new(key_class, value_class)
         else
-          Axiom::Types::Hash.infer(primitive)
+          Axiom::Types::Hash.new do
+            key_type   Axiom::Types.infer(key_class)
+            value_type Axiom::Types.infer(value_class)
+          end
         end
       end
 
