@@ -7,7 +7,7 @@ group :development do
 end
 
 group :yard do
-  gem 'kramdown', '~> 1.1.0'
+  gem 'kramdown', '~> 1.2.0'
 end
 
 group :guard do
@@ -34,7 +34,7 @@ group :metrics do
   gem 'flay',      '~> 2.4.0'
   gem 'flog',      '~> 4.1.1'
   gem 'reek',      '~> 1.3.2'
-  gem 'rubocop',   '~> 0.11.0'
+  gem 'rubocop',   '~> 0.13.0'
   gem 'simplecov', '~> 0.7.1'
   gem 'yardstick', '~> 0.9.7', git: 'https://github.com/dkubb/yardstick.git'
 
