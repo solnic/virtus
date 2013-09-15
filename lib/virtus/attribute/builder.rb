@@ -20,10 +20,9 @@ module Virtus
           case class_or_name
           when ::Class
             EmbeddedValue.determine_type(class_or_name) ||
-              Collection.determine_type(class_or_name) ||
+              Attribute.determine_type(class_or_name)   ||
+              Collection.determine_type(class_or_name)  ||
               Attribute.determine_type(class_or_name)
-          when ::Enumerable
-            Attribute.determine_type(class_or_name.class)
           else
             Attribute.determine_type(class_or_name)
           end
@@ -33,12 +32,14 @@ module Virtus
 
       def initialize(type, options)
         @primitive =
-          if type.instance_of?(::Hash) || type == Hash
+          if type.instance_of?(::Hash) || type == ::Hash
             ::Hash
-          elsif type.instance_of?(::Array) || type == Array
+          elsif type.instance_of?(::Array) || type == ::Array
             ::Array
-          elsif type.instance_of?(::Set) || type == Set
+          elsif type.instance_of?(::Set) || type == ::Set
             ::Set
+          elsif type.kind_of?(Enumerable)
+            type.class
           else
             type
           end
@@ -82,8 +83,11 @@ module Virtus
         @options.update(:reader => reader_visibility, :writer => writer_visibility)
       end
 
-      def coercer(*)
-        Coercer.new(Virtus.coercer, @type.coercion_method)
+      def coercer(options)
+        Coercer.new(
+          options.fetch(:configured_coercer) { Virtus.coercer },
+          @type.coercion_method
+        )
       end
 
     end # class Builder

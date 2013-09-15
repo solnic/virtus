@@ -16,13 +16,26 @@ module Virtus
       primitive ::Hash
       default   primitive.new
 
+      Type = Struct.new(:key_type, :value_type) do
+        def coercion_method
+          :to_hash
+        end
+      end
+
       # @api private
       def self.build_type(primitive, options)
         type_options = infer_options(primitive)
 
-        Axiom::Types.infer(primitive).new do
-          key_type   type_options.fetch(:key_type,   Axiom::Types::Object)
-          value_type type_options.fetch(:value_type, Axiom::Types::Object)
+        key_class   = type_options.fetch(:key_type, Axiom::Types::Object)
+        value_class = type_options.fetch(:value_type, Axiom::Types::Object)
+
+        if EmbeddedValue.determine_type(key_class) || EmbeddedValue.determine_type(value_class)
+          Type.new(key_class, value_class)
+        else
+          Axiom::Types::Hash.new do
+            key_type   Axiom::Types.infer(key_class)
+            value_type Axiom::Types.infer(value_class)
+          end
         end
       end
 
@@ -45,10 +58,7 @@ module Virtus
         else
           key_type, value_type = type.first
 
-          options.merge!(
-            :key_type   => Axiom::Types.infer(key_type),
-            :value_type => Axiom::Types.infer(value_type)
-          )
+          options.merge!(:key_type => key_type, :value_type => value_type)
         end
 
         options

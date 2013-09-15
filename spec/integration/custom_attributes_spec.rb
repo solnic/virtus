@@ -4,21 +4,15 @@ describe 'custom attributes' do
 
   before do
     module Examples
-      class NoisyString < Virtus::Attribute::String
-        class UpperCase < Virtus::Attribute::Writer::Coercible
-          def coerce(value)
-            super.upcase
-          end
-        end
-
+      class NoisyString < Virtus::Attribute
         lazy true
 
-        def self.writer_class(*)
-          UpperCase
+        def coerce(input)
+          input.to_s.upcase
         end
       end
 
-      class RegularExpression < Virtus::Attribute::Object
+      class RegularExpression < Virtus::Attribute
         primitive Regexp
       end
 

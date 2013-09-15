@@ -17,6 +17,11 @@ module Virtus
     class Boolean < Attribute
       primitive TrueClass
 
+      # @api private
+      def self.build_type(*)
+        Axiom::Types::Boolean
+      end
+
       # Returns if the given value is either true or false
       #
       # @example

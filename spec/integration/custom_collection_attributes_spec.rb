@@ -17,15 +17,6 @@ describe 'custom collection attributes' do
 
       class BookCollectionAttribute < Virtus::Attribute::Collection
         primitive BookCollection
-        coercion_method :to_book_collection
-        default primitive.new
-      end
-
-      # TODO: find a better way of adding coercion methods
-      class Coercible::Coercer::Object
-        def to_book_collection(value)
-          BookCollection.new Array(value)
-        end
       end
 
       class Library
@@ -90,11 +81,11 @@ describe 'custom collection attributes' do
         def_delegators :@array, :each, :<<
 
         def initialize(*args)
-          @array = Array.new(*args)
+          @array = Array[*args]
         end
 
         def self.[](*args)
-          new args
+          new(*args)
         end
       end
     }

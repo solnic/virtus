@@ -9,9 +9,15 @@ module Virtus
     class Collection < Attribute
       default Proc.new { |_, attribute| attribute.type.primitive.new }
 
+      Type = Struct.new(:primitive, :member_type) do
+        def coercion_method
+          :to_array
+        end
+      end
+
       # @api private
       def self.determine_type(primitive)
-        if primitive == Array || primitive == Set
+        if primitive < Enumerable
           self
         end
       end
@@ -19,8 +25,14 @@ module Virtus
       def self.build_type(primitive, options)
         type_options = infer_options(primitive)
 
-        Axiom::Types.infer(primitive).new do
-          member_type type_options.fetch(:member_type, Axiom::Types::Object)
+        klass  = Axiom::Types.infer(primitive)
+        member = type_options.fetch(:member_type, Axiom::Types::Object)
+
+        # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type
+        if EmbeddedValue.determine_type(member)
+          Type.new(self.primitive || klass.primitive, member)
+        else
+          klass.new { member_type Axiom::Types.infer(member) }
         end
       end
 
@@ -41,7 +53,7 @@ module Virtus
         elsif type.count > 1
           raise NotImplementedError, "build SumType from list of types (#{type.inspect})"
         else
-          options.merge!(:member_type => Axiom::Types.infer(type.first))
+          options.merge!(:member_type => type.first)
         end
 
         options
@@ -56,6 +68,7 @@ module Virtus
         end
       end
 
+      # @api public
       def coerce(input)
         coerced = super
 

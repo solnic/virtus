@@ -33,11 +33,11 @@ describe 'I can define attributes within a module' do
   end
 
   specify 'including a module with attributes into a class' do
-    Examples::User.attribute_set[:name].should be_instance_of(Virtus::Attribute::String)
+    Examples::User.attribute_set[:name].should be_instance_of(Virtus::Attribute)
     Examples::User.attribute_set[:gamer].should be_instance_of(Virtus::Attribute::Boolean)
 
-    Examples::Admin.attribute_set[:name].should be_instance_of(Virtus::Attribute::String)
-    Examples::Admin.attribute_set[:age].should be_instance_of(Virtus::Attribute::Integer)
+    Examples::Admin.attribute_set[:name].should be_instance_of(Virtus::Attribute)
+    Examples::Admin.attribute_set[:age].should be_instance_of(Virtus::Attribute)
 
     user = Examples::Admin.new(:name => 'Piotr', :age => 29)
     user.name.should eql('Piotr')
