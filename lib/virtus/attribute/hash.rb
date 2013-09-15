@@ -54,6 +54,40 @@ module Virtus
         options
       end
 
+      # @api private
+      def self.merge_options!(type, options)
+        super
+
+        unless options.key?(:key_type)
+          options[:key_type] = Attribute.build(type.key_type)
+        end
+
+        unless options.key?(:value_type)
+          options[:value_type] = Attribute.build(type.value_type)
+        end
+      end
+
+      # @api public
+      def coerce(input)
+        coerced = super
+
+        return coerced unless coerced.respond_to?(:each_with_object)
+
+        coerced.each_with_object({}) do |(key, value), hash|
+          hash[key_type.coerce(key)] = value_type.coerce(value)
+        end
+      end
+
+      # @api private
+      def key_type
+        @options[:key_type]
+      end
+
+      # @api private
+      def value_type
+        @options[:value_type]
+      end
+
     end # class Hash
   end # class Attribute
 end # module Virtus

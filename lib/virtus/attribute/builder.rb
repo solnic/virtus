@@ -22,7 +22,7 @@ module Virtus
 
       def initialize(type, options)
         @primitive =
-          if type.instance_of?(::Hash)
+          if type.instance_of?(::Hash) || type == Hash
             ::Hash
           elsif type.instance_of?(::Array) || type == Array
             ::Array
@@ -36,6 +36,8 @@ module Virtus
         @type  = @klass.build_type(type, options)
 
         @options = merge_options(options)
+
+        @klass.merge_options!(@type, @options)
 
         determine_visibility!
 

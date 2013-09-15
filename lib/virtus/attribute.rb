@@ -65,18 +65,6 @@ module Virtus
       def set(instance, value)
         super(instance, coerce(value))
       end
-
-      def coerce(value)
-        coercer.call(value)
-      end
-
-      def coercer
-        options[:coercer]
-      end
-
-      def value_coerced?(value)
-        coercer.coerced?(value)
-      end
     end
 
     module LazyDefault
@@ -123,7 +111,12 @@ module Virtus
 
     # @api private
     def self.build_type(type, _options)
-      Axiom::Types.infer(type).new
+      Axiom::Types.infer(type)
+    end
+
+    # @api private
+    def self.merge_options!(*)
+      # noop
     end
 
     # Initializes an attribute instance
@@ -141,6 +134,18 @@ module Virtus
       @type          = type
       @options       = options
       @default_value = options.fetch(:default_value)
+    end
+
+    def coerce(value)
+      coercer.call(value)
+    end
+
+    def coercer
+      options[:coercer]
+    end
+
+    def value_coerced?(value)
+      coercer.coerced?(value)
     end
 
     # Return if the attribute is coercible

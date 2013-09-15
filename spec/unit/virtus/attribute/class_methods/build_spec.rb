@@ -7,6 +7,9 @@ describe Virtus::Attribute, '.build' do
   let(:type)    { String }
   let(:options) { {} }
 
+  before :all do
+    Axiom::Types.finalize
+  end
 
   share_examples_for 'a valid attribute instance' do
     it { should be_instance_of(Virtus::Attribute) }

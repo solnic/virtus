@@ -39,22 +39,31 @@ module Virtus
         options
       end
 
-      # @see Virtus::Attribute.coercible_writer_class
-      #
-      # @return [::Class]
-      #
       # @api private
-      def self.coercible_writer_class(_type, options)
-        options[:member_type] ? CoercibleWriter : super
+      def self.merge_options!(type, options)
+        super
+
+        unless options.key?(:member_type)
+          options[:member_type] = Attribute.build(type.member_type)
+        end
       end
 
-      # @see Virtus::Attribute.writer_option_names
-      #
-      # @return [Array<Symbol>]
-      #
-      # @api private
-      def self.writer_option_names
-        super << :member_type
+      def coerce(input)
+        coerced = super
+
+        return coerced unless coerced.respond_to?(:each_with_object)
+
+        coerced.each_with_object(new_collection) do |entry, collection|
+          collection << member_type.coerce(entry)
+        end
+      end
+
+      def new_collection
+        type.primitive.new
+      end
+
+      def member_type
+        @options[:member_type]
       end
 
     end # class Collection
