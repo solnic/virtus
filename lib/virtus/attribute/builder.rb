@@ -21,8 +21,7 @@ module Virtus
           when ::Class
             EmbeddedValue.determine_type(class_or_name) ||
               Attribute.determine_type(class_or_name)   ||
-              Collection.determine_type(class_or_name)  ||
-              Attribute.determine_type(class_or_name)
+              Collection.determine_type(class_or_name)
           else
             Attribute.determine_type(class_or_name)
           end
