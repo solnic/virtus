@@ -25,41 +25,20 @@ module Virtus
     class EmbeddedValue < Attribute
       primitive ::OpenStruct
 
-      # @see Attribute.merge_options
-      #
-      # @return [Hash]
-      #   an updated options hash for configuring an EmbeddedValue instance
-      #
-      # @api private
-      def self.merge_options(type, _options)
-        super.update(:primitive => type)
-      end
-
-      # Determine type based on class
-      #
-      # Virtus::EmbeddedValue.determine_type(Struct) # => Virtus::EmbeddedValue::FromStruct
-      # Virtus::EmbeddedValue.determine_type(VirtusClass) # => Virtus::EmbeddedValue::FromOpenStruct
-      #
-      # @param [Class] klass
-      #
-      # @return [Virtus::Attribute::EmbeddedValue]
-      #
-      # @api private
-      def self.determine_type(klass)
-        if klass <= Virtus || klass <= OpenStruct || klass <= Struct
-          self
-        end
-      end
-
-      # @api private
-      def self.coercer(type, _options = {})
-        if type <= Virtus || type <= OpenStruct
-          OpenStructCoercer.new(type)
-        elsif type <= Struct
-          StructCoercer.new(type)
+      # @api public
+      def coerce(input)
+        if input.kind_of?(primitive)
+          input
+        elsif input.kind_of?(::Hash)
+          primitive.new(input)
         else
-          super
+          input
         end
+      end
+
+      # @api public
+      def primitive
+        @options[:primitive]
       end
 
     end # class EmbeddedValue

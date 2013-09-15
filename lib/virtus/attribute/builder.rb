@@ -15,6 +15,8 @@ module Virtus
       def self.determine_type(primitive)
         if primitive == Array || primitive == Set
           Collection
+        elsif primitive <= Virtus || primitive <= OpenStruct || primitive <= Struct
+          EmbeddedValue
         else
           Attribute.descendants.detect { |descendant| descendant.primitive == primitive } || Attribute
         end

@@ -129,4 +129,10 @@ describe Virtus::Attribute, '.build' do
       expect(subject.type.member_type).to be(Axiom::Types::Float)
     end
   end
+
+  context 'when type is a virtus model' do
+    let(:type) { Class.new { include Virtus } }
+
+    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+  end
 end
