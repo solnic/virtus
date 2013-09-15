@@ -48,6 +48,15 @@ module Virtus
         end
       end # FromOpenStruct
 
+      # @api private
+      def self.determine_type(klass)
+        if klass <= Virtus || klass <= OpenStruct
+          FromOpenStruct
+        elsif klass <= Struct
+          FromStruct
+        end
+      end
+
       # @api public
       def primitive
         @options[:primitive]

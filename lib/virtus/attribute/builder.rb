@@ -1,27 +1,34 @@
 module Virtus
   class Attribute
 
+    # @private
     class Builder
       attr_reader :attribute
 
+      # @api private
       def self.call(*args)
         new(*args).attribute
       end
 
-      def self.handles?(type)
-        false
-      end
-
-      def self.determine_type(primitive)
-        if primitive == Array || primitive == Set
-          Collection
-        elsif primitive <= Virtus || primitive <= OpenStruct
-          EmbeddedValue::FromOpenStruct
-        elsif primitive <= Struct
-          EmbeddedValue::FromStruct
-        else
-          Attribute.descendants.detect { |descendant| descendant.primitive == primitive } || Attribute
+      # @api private
+      def self.determine_type(class_or_name)
+        if class_or_name.is_a?(Class) && class_or_name <= Attribute
+          return class_or_name
         end
+
+        type =
+          case class_or_name
+          when ::Class
+            EmbeddedValue.determine_type(class_or_name) ||
+              Collection.determine_type(class_or_name) ||
+              Attribute.determine_type(class_or_name)
+          when ::Enumerable
+            Attribute.determine_type(class_or_name.class)
+          else
+            Attribute.determine_type(class_or_name)
+          end
+
+        type || Attribute
       end
 
       def initialize(type, options)
@@ -57,7 +64,7 @@ module Virtus
       def merge_options(options)
         merged_options = @klass.options.merge(:coerce => Virtus.coerce).update(options)
 
-        merged_options.update(:default_value => DefaultValue.build(options[:default]))
+        merged_options.update(:default_value => DefaultValue.build(merged_options[:default]))
 
         if merged_options[:coerce]
           merged_options.update(

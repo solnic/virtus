@@ -176,10 +176,10 @@ module Virtus
     # @api private
     def set_defaults(object)
       each do |attribute|
-        if object.instance_variable_defined?(attribute.reader.instance_variable_name) || attribute.accessor.lazy?
+        if object.instance_variable_defined?(attribute.instance_variable_name) || attribute.lazy?
           next
         end
-        attribute.writer.set_default_value(object, attribute)
+        attribute.set_default_value(object)
       end
     end
 

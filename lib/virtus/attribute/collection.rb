@@ -7,6 +7,14 @@ module Virtus
     #
     # @abstract
     class Collection < Attribute
+      default Proc.new { |_, attribute| attribute.type.primitive.new }
+
+      # @api private
+      def self.determine_type(primitive)
+        if primitive == Array || primitive == Set
+          self
+        end
+      end
 
       def self.build_type(primitive, options)
         type_options = infer_options(primitive)

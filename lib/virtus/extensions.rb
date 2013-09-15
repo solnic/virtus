@@ -49,7 +49,7 @@ module Virtus
     #
     # @api public
     def attribute(name, type, options = {})
-      attribute = Attribute.build(name, type, merge_options(options))
+      attribute = Attribute.build(type, merge_options(name, options))
       virtus_add_attribute(attribute)
       self
     end
@@ -93,8 +93,8 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def merge_options(options)
-      { :coerce => Virtus.coerce }.merge(options)
+    def merge_options(name, options)
+      { :coerce => Virtus.coerce, :name => name }.merge(options)
     end
 
   end # module Extensions

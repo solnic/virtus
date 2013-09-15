@@ -1,7 +1,7 @@
 module Virtus
 
   class Attribute
-    extend DescendantsTracker, Options
+    extend DescendantsTracker, Options, TypeLookup
 
     include Equalizer.new(inspect) << :name
 
@@ -27,13 +27,7 @@ module Virtus
 
       # @api public
       def set_default_value(instance)
-        default_value.call(instance, self)
-      end
-
-      def define_accessor_methods(attribute_set)
-        attribute_set.define_reader_method(self, name,       options[:reader])
-        attribute_set.define_writer_method(self, "#{name}=", options[:writer])
-        self
+        set(instance, default_value.call(instance, self))
       end
 
       # Returns a Boolean indicating whether the reader method is public
@@ -53,8 +47,6 @@ module Virtus
       def public_writer?
         options[:writer] == :public
       end
-
-      private
 
       def instance_variable_name
         "@#{name}"
@@ -106,7 +98,7 @@ module Virtus
     #
     # @api private
     def self.build(type, options = {})
-      Builder.new(type, options).attribute
+      Builder.call(type, options)
     end
 
     # @api private
@@ -159,6 +151,13 @@ module Virtus
 
     def lazy?
       kind_of?(LazyDefault)
+    end
+
+    # @api private
+    def define_accessor_methods(attribute_set)
+      attribute_set.define_reader_method(self, name,       options[:reader])
+      attribute_set.define_writer_method(self, "#{name}=", options[:writer])
+      self
     end
 
   end # class Attribute
