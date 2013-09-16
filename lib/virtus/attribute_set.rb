@@ -146,10 +146,10 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def get(object, &block)
+    def get(object)
       each_with_object({}) do |attribute, attributes|
         name = attribute.name
-        attributes[name] = object.__send__(name) if yield(attribute)
+        attributes[name] = object.__send__(name) if attribute.public_reader?
       end
     end
 

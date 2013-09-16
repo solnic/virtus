@@ -83,7 +83,7 @@ module Virtus
     #
     # @api public
     def attributes
-      attribute_set.get(self, &:public_reader?)
+      attribute_set.get(self)
     end
     alias_method :to_hash, :attributes
 
