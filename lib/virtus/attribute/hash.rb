@@ -20,6 +20,10 @@ module Virtus
         def coercion_method
           :to_hash
         end
+
+        def primitive
+          Hash
+        end
       end
 
       # @api private

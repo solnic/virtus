@@ -73,6 +73,7 @@ describe Virtus::Attribute, '.build' do
     let(:attribute) { Class.new(Virtus::Attribute) }
 
     before do
+      pending
       attribute.primitive(primitive)
     end
 
@@ -106,6 +107,17 @@ describe Virtus::Attribute, '.build' do
 
     it 'sets value type' do
       expect(subject.type.value_type).to be(Axiom::Types::Integer)
+    end
+  end
+
+  context 'when type is Hash[String => Integer, Integer => String]' do
+    let(:type) { Hash[String => Integer, Integer => String] }
+
+    specify do
+      expect { subject }.to raise_error(
+        ArgumentError,
+        "more than one [key => value] pair in `#{type.inspect}`"
+      )
     end
   end
 
