@@ -3,7 +3,7 @@ module Virtus
   class Attribute
     extend DescendantsTracker, Options, TypeLookup
 
-    include Equalizer.new(inspect) << :name
+    include Equalizer.new(inspect) << :type << :options
 
     accept_options :primitive, :accessor, :default, :lazy
 

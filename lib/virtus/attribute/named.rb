@@ -5,7 +5,7 @@ module Virtus
       attr_reader :name, :instance_variable_name
 
       def finalize
-        @name                   = options.fetch(:name)
+        @name                   = options.fetch(:name).to_sym
         @instance_variable_name = "@#{@name}"
         super
       end
