@@ -68,24 +68,44 @@ describe Virtus, '#attribute' do
       end
 
       it_behaves_like 'a class with boolean attribute'
+
+      context 'with a subclass' do
+        it_behaves_like 'a class with boolean attribute' do
+          subject { Class.new(Test) }
+        end
+      end
     end
   end
 
   context 'with a module' do
-    let(:mod) { Module.new { include Virtus } }
+    let(:mod) {
+      Module.new {
+        include Virtus
+
+        attribute :test, String
+      }
+    }
+
     let(:model) { Class.new }
 
-    before do
-      mod.attribute(:test, String)
-      model.send(:include, mod)
+    context 'included in the class' do
+      before do
+        model.send(:include, mod)
+      end
+
+      it 'adds attributes from the module to a class that includes it' do
+        expect(model.attribute_set[:test]).to be_instance_of(Virtus::Attribute)
+      end
+
+      it_behaves_like 'an object with string attribute' do
+        subject { model.new }
+      end
     end
 
-    it 'adds attributes from the module to a class that includes it' do
-      expect(model.attribute_set[:test]).to be_instance_of(Virtus::Attribute)
-    end
-
-    it_behaves_like 'an object with string attribute' do
-      subject { model.new }
+    context 'included in the class' do
+      it_behaves_like 'an object with string attribute' do
+        subject { model.new.extend(mod) }
+      end
     end
   end
 
