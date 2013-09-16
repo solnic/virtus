@@ -56,18 +56,23 @@ module Virtus
 
     # @api public
     def values(&block)
-      instance_eval do
-        private :attributes=
+      unless superclass.kind_of?(ValueObject::InstanceMethods)
+        instance_eval do
+          private :attributes=
 
-        def attribute(name, type, options = {})
-          super(name, type, options.merge(:writer => :private))
+          def attribute(name, type, options = {})
+            super(name, type, options.merge(:writer => :private))
+          end
         end
       end
 
       yield
 
-      extend(ValueObject::AllowedWriterMethods)
-      include(ValueObject::InstanceMethods)
+      unless kind_of?(ValueObject::InstanceMethods)
+        extend(ValueObject::AllowedWriterMethods)
+        include(ValueObject::InstanceMethods)
+      end
+
       include(::Equalizer.new(*attribute_set.map(&:name)))
 
       self
