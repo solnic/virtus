@@ -28,6 +28,12 @@ describe Virtus, '#attributes=' do
     it_behaves_like 'mass-assignment' do
       subject { model.new }
     end
+
+    it 'raises when attributes is not hash-like object' do
+      expect { model.new('not a hash, really') }.to raise_error(
+        NoMethodError, 'Expected "not a hash, really" to respond to #to_hash'
+      )
+    end
   end
 
   context 'with an instance' do

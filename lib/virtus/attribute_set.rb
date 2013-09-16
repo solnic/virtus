@@ -67,7 +67,6 @@ module Virtus
     def <<(attribute)
       self[attribute.name] = attribute
       attribute.define_accessor_methods(self)
-      self
     end
 
     # Get an attribute by name
@@ -117,13 +116,12 @@ module Virtus
     # @param [Symbol] method_name
     # @param [Symbol] visibility
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def define_reader_method(attribute, method_name, visibility)
       define_method(method_name) { attribute.get(self) }
       send(visibility, method_name)
-      self
     end
 
     # Defines an attribute writer method
@@ -132,13 +130,12 @@ module Virtus
     # @param [Symbol] method_name
     # @param [Symbol] visibility
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def define_writer_method(attribute, method_name, visibility)
       define_method(method_name) { |value| attribute.set(self, value) }
       send(visibility, method_name)
-      self
     end
 
     # Get values of all attributes defined for this class, ignoring privacy
