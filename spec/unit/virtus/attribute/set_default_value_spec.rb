@@ -19,6 +19,16 @@ describe Virtus::Attribute, '#set_default_value' do
     its(:instance_variables) { should include(:'@test') }
   end
 
+  context 'with a non-clonable object' do
+    subject { instance }
+
+    let(:object)  { described_class.build('Boolean', options.merge(:name => name, :default => default)) }
+    let(:default) { true }
+
+    its(:test) { should be(true) }
+    its(:instance_variables) { should include(:'@test') }
+  end
+
   context 'with a clonable' do
     subject { instance }
 
