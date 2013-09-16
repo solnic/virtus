@@ -15,7 +15,7 @@ module Virtus
     #
     # @api public
     def self.coerce(value = Undefined)
-      warn "#{self}.coerce is deprecated and will be removed in a future version. Use Virtus.coerce instead: ##{caller.first}"
+      Virtus.warn "#{self}.coerce is deprecated and will be removed in a future version. Use Virtus.coerce instead: ##{caller.first}"
       return Virtus.coerce if value.equal?(Undefined)
       Virtus.coerce = value
       self
@@ -42,9 +42,9 @@ module Virtus
     end
 
     # @api private
-    def self.new(*args, &block)
+    def self.new(*args)
       attribute = super
-      yield(attribute) if block
+      yield(attribute)
       attribute.finalize
     end
 

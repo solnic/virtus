@@ -20,6 +20,12 @@ require 'rspec'
 require 'bogus/rspec'
 require 'virtus'
 
+module Virtus
+  def self.warn(*)
+    # shut up in tests
+  end
+end
+
 ENV['TZ'] = 'UTC'
 
 # require spec support files and shared behavior

@@ -124,6 +124,11 @@ module Virtus
     @configuration ||= Configuration.new
   end
 
+  # @api private
+  def self.warn(msg)
+    warn(msg)
+  end
+
 end # module Virtus
 
 require 'abstract_type'

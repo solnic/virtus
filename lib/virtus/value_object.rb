@@ -31,7 +31,7 @@ module Virtus
     #
     # @api private
     def self.included(base)
-      warn "Virtus::ValueObject is deprecated and will be removed in 1.0.0 #{caller.first}"
+      Virtus.warn "Virtus::ValueObject is deprecated and will be removed in 1.0.0 #{caller.first}"
 
       base.instance_eval do
         include ::Virtus
