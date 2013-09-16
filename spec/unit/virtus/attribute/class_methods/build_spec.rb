@@ -26,6 +26,12 @@ describe Virtus::Attribute, '.build' do
     end
   end
 
+  context 'when name is passed as a string' do
+    let(:name) { 'something' }
+
+    its(:name) { should be(:something) }
+  end
+
   context 'when coercion is turned off in options' do
     let(:options) { { :coerce => false } }
 
