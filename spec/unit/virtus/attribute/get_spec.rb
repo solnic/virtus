@@ -5,7 +5,7 @@ describe Virtus::Attribute, '#get' do
 
   let(:object) { described_class.build(String, options.update(:name => name)) }
 
-  let(:model)    { Class.new { attr_writer :test } }
+  let(:model)    { Class.new { attr_accessor :test } }
   let(:name)     { :test }
   let(:instance) { model.new }
   let(:value)    { 'Jane Doe' }
@@ -23,5 +23,10 @@ describe Virtus::Attribute, '#get' do
     let(:options) { { :lazy => true, :default => value } }
 
     it { should eql(value) }
+
+    it 'sets default only on first access' do
+      expect(object.get(instance)).to eql(value)
+      expect(object.get(instance)).to be(instance.test)
+    end
   end
 end
