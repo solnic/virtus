@@ -58,8 +58,8 @@ module Virtus
       end
 
       # @api private
-      def self.build_type(type, _)
-        Axiom::Types::Object.new { primitive type }
+      def self.build_type(options)
+        Axiom::Types::Object.new { primitive options[:type] }
       end
 
       # @api public

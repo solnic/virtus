@@ -23,8 +23,9 @@ module Virtus
       end
 
       # @api private
-      def self.build_type(primitive, options)
-        type_options = infer_options(primitive)
+      def self.build_type(options)
+        type         = options[:type]
+        type_options = infer_options(type)
 
         key_class   = type_options.fetch(:key_type, Axiom::Types::Object)
         value_class = type_options.fetch(:value_type, Axiom::Types::Object)

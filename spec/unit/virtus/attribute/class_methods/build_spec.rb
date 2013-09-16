@@ -60,6 +60,14 @@ describe Virtus::Attribute, '.build' do
     it { should be_lazy }
   end
 
+  context 'when type is a string' do
+    let(:type) { 'Integer' }
+
+    it_behaves_like 'a valid attribute instance'
+
+    its(:type) { should be(Axiom::Types::Integer) }
+  end
+
   context 'when type is Hash' do
     let(:type) { Hash }
 

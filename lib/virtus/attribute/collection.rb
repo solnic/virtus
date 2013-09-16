@@ -22,10 +22,11 @@ module Virtus
         end
       end
 
-      def self.build_type(primitive, options)
-        type_options = infer_options(primitive)
+      def self.build_type(options)
+        type    = options[:type]
+        type_options = infer_options(type)
 
-        klass  = Axiom::Types.infer(primitive)
+        klass  = Axiom::Types.infer(type)
         member = type_options.fetch(:member_type, Axiom::Types::Object)
 
         # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type

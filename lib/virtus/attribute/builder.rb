@@ -15,19 +15,16 @@ module Virtus
       end
 
       # @api private
-      def self.determine_type(class_or_name)
-        if class_or_name.is_a?(Class) && class_or_name <= Attribute
-          return class_or_name
-        end
-
+      def self.determine_type(klass)
         type =
-          case class_or_name
-          when ::Class
-            EmbeddedValue.determine_type(class_or_name) ||
-              Attribute.determine_type(class_or_name)   ||
-              Collection.determine_type(class_or_name)
+          if klass.is_a?(Class)
+            return klass if klass <= Attribute
+
+            EmbeddedValue.determine_type(klass) ||
+              Attribute.determine_type(klass)   ||
+              Collection.determine_type(klass)
           else
-            Attribute.determine_type(class_or_name)
+            Attribute.determine_type(klass)
           end
 
         type || Attribute
@@ -37,7 +34,7 @@ module Virtus
       def initialize(type, options)
         initialize_primitive(type)
         initialize_class
-        initialize_type(type, options)
+        initialize_type(:type => type, :primitive => @primitive)
         initialize_options(options)
         initialize_default_value
         initialize_coercer
@@ -67,17 +64,28 @@ module Virtus
 
       # @api private
       def initialize_primitive(type)
-        @primitive =
-          if type.instance_of?(::Hash) || type == ::Hash
-            ::Hash
-          elsif type.instance_of?(::Array) || type == ::Array
-            ::Array
-          elsif type.instance_of?(::Set) || type == ::Set
-            ::Set
-          elsif type.kind_of?(Enumerable)
-            type.class
+        const =
+          if type.instance_of?(String) || type.instance_of?(Symbol)
+            begin
+              Object.const_get(type)
+            rescue
+              type
+            end
           else
             type
+          end
+
+        @primitive =
+          if const.instance_of?(::Hash) || const == ::Hash
+            ::Hash
+          elsif const.instance_of?(::Array) || const == ::Array
+            ::Array
+          elsif const.instance_of?(::Set) || const == ::Set
+            ::Set
+          elsif const.kind_of?(Enumerable)
+            const.class
+          else
+            const
           end
       end
 
@@ -87,8 +95,8 @@ module Virtus
       end
 
       # @api private
-      def initialize_type(type, options)
-        @type = @klass.build_type(type, options)
+      def initialize_type(options)
+        @type = @klass.build_type(options)
       end
 
       # @api private
