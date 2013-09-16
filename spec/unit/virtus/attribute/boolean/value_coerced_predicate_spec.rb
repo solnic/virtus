@@ -5,8 +5,14 @@ describe Virtus::Attribute::Boolean, '#value_coerced?' do
 
   let(:object) { described_class.build('Boolean') }
 
-  context 'when input is coerced' do
+  context 'when input is true' do
     let(:input) { true }
+
+    it { should be(true) }
+  end
+
+  context 'when input is false' do
+    let(:input) { false }
 
     it { should be(true) }
   end

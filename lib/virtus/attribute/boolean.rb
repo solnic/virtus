@@ -42,13 +42,12 @@ module Virtus
       #
       # @param [Module] mod
       #
-      # @return [self]
+      # @return [undefined]
       #
       # @api private
       def define_accessor_methods(attribute_set)
         super
         attribute_set.define_reader_method(self, "#{name}?", options[:reader])
-        self
       end
 
     end # class Boolean

@@ -5,10 +5,18 @@ describe Virtus, '#attribute' do
   let(:options) { {} }
 
   share_examples_for 'a class with boolean attribute' do
-    subject { Test }
+    let(:object) { Test.new }
 
-    its(:instance_methods) { should include(:test) }
-    its(:instance_methods) { should include(:test?) }
+    it 'defines reader and writer' do
+      object.test = true
+      expect(object.test).to be(true)
+    end
+
+    it 'defines predicate method' do
+      object.test = false
+
+      expect(object).to_not be_test
+    end
   end
 
   share_examples_for 'an object with string attribute' do
