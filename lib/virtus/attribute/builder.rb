@@ -16,6 +16,7 @@ module Virtus
 
       # @api private
       def self.determine_type(klass)
+
         type =
           if klass.is_a?(Class)
             return klass if klass <= Attribute
@@ -23,6 +24,7 @@ module Virtus
             EmbeddedValue.determine_type(klass) ||
               Attribute.determine_type(klass)   ||
               Collection.determine_type(klass)
+
           else
             Attribute.determine_type(klass)
           end

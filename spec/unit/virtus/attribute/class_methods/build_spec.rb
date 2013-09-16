@@ -68,6 +68,19 @@ describe Virtus::Attribute, '.build' do
     its(:type) { should be(Axiom::Types::Integer) }
   end
 
+  context 'when custom attribute class exists for a given primitive' do
+    let(:primitive) { Class.new }
+    let(:attribute) { Class.new(Virtus::Attribute) }
+
+    before do
+      attribute.primitive(primitive)
+    end
+
+    it { should be_instance_of(attribute) }
+
+    its(:type) { should be(Axiom::Types::Object) }
+  end
+
   context 'when type is Hash' do
     let(:type) { Hash }
 
