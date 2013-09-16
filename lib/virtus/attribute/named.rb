@@ -2,10 +2,12 @@ module Virtus
   class Attribute
 
     module Named
+      attr_reader :name, :instance_variable_name
 
-      # @api public
-      def name
-        options[:name]
+      def finalize
+        @name                   = options.fetch(:name)
+        @instance_variable_name = "@#{@name}"
+        super
       end
 
       # @api public
@@ -39,11 +41,6 @@ module Virtus
       # @api private
       def public_writer?
         options[:writer] == :public
-      end
-
-      # @api private
-      def instance_variable_name
-        "@#{name}"
       end
 
     end # Named

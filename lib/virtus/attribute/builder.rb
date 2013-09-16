@@ -40,7 +40,7 @@ module Virtus
         initialize_type(type, options)
         initialize_options(options)
         initialize_default_value
-        initialize_coercer if coerce?
+        initialize_coercer
         initialize_attribute
       end
 
@@ -50,7 +50,7 @@ module Virtus
       def initialize_attribute
         @attribute = @klass.new(@type, @options) do |attribute|
           attribute.extend(Attribute::Named)       if @options[:name]
-          attribute.extend(Attribute::Coercible)   if @options[:coercer]
+          attribute.extend(Attribute::Coercible)   if @options[:coerce]
           attribute.extend(Attribute::LazyDefault) if @options[:lazy]
         end
       end
@@ -104,11 +104,6 @@ module Virtus
         reader_visibility = @options.fetch(:reader, default_accessor)
         writer_visibility = @options.fetch(:writer, default_accessor)
         @options.update(:reader => reader_visibility, :writer => writer_visibility)
-      end
-
-      # @api private
-      def coerce?
-        @options[:coerce]
       end
 
       # @api private
