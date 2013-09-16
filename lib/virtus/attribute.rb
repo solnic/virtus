@@ -42,6 +42,13 @@ module Virtus
     end
 
     # @api private
+    def self.new(*args, &block)
+      attribute = super
+      yield(attribute) if block
+      attribute.finalize
+    end
+
+    # @api private
     def self.build_type(type, _)
       Axiom::Types.infer(type)
     end
@@ -98,6 +105,10 @@ module Virtus
       attribute_set.define_reader_method(self, name,       options[:reader])
       attribute_set.define_writer_method(self, "#{name}=", options[:writer])
       self
+    end
+
+    def finalize
+      freeze
     end
 
   end # class Attribute
