@@ -1,6 +1,10 @@
 module Virtus
   class Attribute
 
+    # TODO: this is a huge class and it might be a good idea to split it into
+    #       smaller chunks. We probably need some option parser with dedicated
+    #       sub-classes per attribute type (different one for Hash, Collection, EV)
+    #
     # @private
     class Builder
       attr_reader :attribute
@@ -29,7 +33,40 @@ module Virtus
         type || Attribute
       end
 
+      # @api private
       def initialize(type, options)
+        initialize_primitive(type)
+        initialize_class
+        initialize_type(type, options)
+        initialize_options(options)
+        initialize_default_value
+        initialize_coercer if coerce?
+        initialize_attribute
+      end
+
+      private
+
+      # @api private
+      def initialize_attribute
+        @attribute = @klass.new(@type, @options)
+
+        @attribute.extend(Attribute::Named)       if @options[:name]
+        @attribute.extend(Attribute::Coercible)   if @options[:coercer]
+        @attribute.extend(Attribute::LazyDefault) if @options[:lazy]
+      end
+
+      # @api private
+      def initialize_default_value
+        @options.update(:default_value => DefaultValue.build(@options[:default]))
+      end
+
+      # @api private
+      def initialize_coercer
+        @options.update(:coercer => @options.fetch(:coercer) { build_coercer })
+      end
+
+      # @api private
+      def initialize_primitive(type)
         @primitive =
           if type.instance_of?(::Hash) || type == ::Hash
             ::Hash
@@ -42,37 +79,26 @@ module Virtus
           else
             type
           end
+      end
 
+      # @api private
+      def initialize_class
         @klass = self.class.determine_type(@primitive)
-        @type  = @klass.build_type(type, options)
+      end
 
-        @options = merge_options(options)
+      # @api private
+      def initialize_type(type, options)
+        @type = @klass.build_type(type, options)
+      end
 
+      # @api private
+      def initialize_options(options)
+        @options = @klass.options.merge(:coerce => Virtus.coerce).update(options)
         @klass.merge_options!(@type, @options)
-
         determine_visibility!
-
-        @attribute = @klass.new(@type, @options)
-
-        @attribute.extend(Attribute::Named)       if @options[:name]
-        @attribute.extend(Attribute::Coercible)   if @options[:coercer]
-        @attribute.extend(Attribute::LazyDefault) if @options[:lazy]
       end
 
-      def merge_options(options)
-        merged_options = @klass.options.merge(:coerce => Virtus.coerce).update(options)
-
-        merged_options.update(:default_value => DefaultValue.build(merged_options[:default]))
-
-        if merged_options[:coerce]
-          merged_options.update(
-            :coercer => merged_options.fetch(:coercer) { coercer(options) }
-          )
-        end
-
-        merged_options
-      end
-
+      # @api private
       def determine_visibility!
         default_accessor  = @options.fetch(:accessor)
         reader_visibility = @options.fetch(:reader, default_accessor)
@@ -80,9 +106,15 @@ module Virtus
         @options.update(:reader => reader_visibility, :writer => writer_visibility)
       end
 
-      def coercer(options)
+      # @api private
+      def coerce?
+        @options[:coerce]
+      end
+
+      # @api private
+      def build_coercer
         Coercer.new(
-          options.fetch(:configured_coercer) { Virtus.coercer },
+          @options.fetch(:configured_coercer) { Virtus.coercer },
           @type.coercion_method
         )
       end

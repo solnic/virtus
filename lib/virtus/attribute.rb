@@ -102,7 +102,7 @@ module Virtus
     end
 
     # @api private
-    def self.build_type(type, _options)
+    def self.build_type(type, _)
       Axiom::Types.infer(type)
     end
 
