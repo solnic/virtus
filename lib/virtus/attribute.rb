@@ -21,7 +21,7 @@ module Virtus
       self
     end
 
-    attr_reader :type, :options, :default_value, :coercer
+    attr_reader :type, :primitive, :options, :default_value, :coercer
 
     # Builds an attribute instance
     #
@@ -71,6 +71,7 @@ module Virtus
     # @api private
     def initialize(type, options)
       @type          = type
+      @primitive     = type.primitive
       @options       = options
       @default_value = options.fetch(:default_value)
       @coercer       = options.fetch(:coercer)
@@ -83,7 +84,7 @@ module Virtus
 
     # @api public
     def value_coerced?(value)
-      coercer.coerced?(value)
+      coercer[primitive].coerced?(value)
     end
 
     # Return if the attribute is coercible
@@ -106,6 +107,7 @@ module Virtus
       self
     end
 
+    # @api private
     def finalize
       freeze
     end
