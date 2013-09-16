@@ -54,6 +54,25 @@ module Virtus
       self
     end
 
+    # @api public
+    def values(&block)
+      instance_eval do
+        private :attributes=
+
+        def attribute(name, type, options = {})
+          super(name, type, options.merge(:writer => :private))
+        end
+      end
+
+      yield
+
+      extend(ValueObject::AllowedWriterMethods)
+      include(ValueObject::InstanceMethods)
+      include(::Equalizer.new(*attribute_set.map(&:name)))
+
+      self
+    end
+
     # The list of writer methods that can be mass-assigned to in #attributes=
     #
     # @return [Set]

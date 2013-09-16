@@ -128,13 +128,14 @@ end # module Virtus
 
 require 'abstract_type'
 require 'descendants_tracker'
+require 'equalizer'
 require 'adamantium'
 require 'axiom-types'
 require 'coercible'
 
+require 'virtus/support/equalizer'
 require 'virtus/support/options'
 require 'virtus/support/type_lookup'
-require 'virtus/support/equalizer'
 
 require 'virtus/extensions'
 require 'virtus/const_missing_extensions'
