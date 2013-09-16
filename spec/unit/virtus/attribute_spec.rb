@@ -60,4 +60,16 @@ describe Virtus, '#attribute' do
       it_behaves_like 'a class with boolean attribute'
     end
   end
+
+  context 'with a module' do
+    let(:mod) { Module.new { include Virtus } }
+    let(:model) { Class.new }
+
+    it 'adds attributes from the module to a class that includes it' do
+      mod.attribute(:test, String)
+      model.send(:include, mod)
+
+      expect(model.attribute_set[:test]).to be_instance_of(Virtus::Attribute)
+    end
+  end
 end
