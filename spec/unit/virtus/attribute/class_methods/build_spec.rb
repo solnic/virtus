@@ -141,6 +141,17 @@ describe Virtus::Attribute, '.build' do
     end
   end
 
+  context 'when type is Array[String, Integer]' do
+    let(:type) { Array[String, Integer] }
+
+    specify do
+      expect { subject }.to raise_error(
+        NotImplementedError,
+        "build SumType from list of types (#{type.inspect})"
+      )
+    end
+  end
+
   context 'when type is Set' do
     let(:type) { Set }
 
