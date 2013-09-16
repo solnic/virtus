@@ -105,7 +105,6 @@ module Virtus
     def define_accessor_methods(attribute_set)
       attribute_set.define_reader_method(self, name,       options[:reader])
       attribute_set.define_writer_method(self, "#{name}=", options[:writer])
-      self
     end
 
     # @api private
