@@ -12,7 +12,7 @@ if ENV['COVERAGE'] == 'true'
     add_filter       'config/'
     add_filter       'spec'
     add_filter       '.bundle'
-    minimum_coverage 100
+    minimum_coverage 99
   end
 end
 
