@@ -96,6 +96,7 @@ module Virtus
       kind_of?(Coercible)
     end
 
+    # @api public
     def lazy?
       kind_of?(LazyDefault)
     end
