@@ -9,6 +9,8 @@ describe Virtus::Attribute, '.build' do
 
   share_examples_for 'a valid attribute instance' do
     it { should be_instance_of(Virtus::Attribute) }
+
+    it { should be_frozen }
   end
 
   context 'without options' do
@@ -123,6 +125,28 @@ describe Virtus::Attribute, '.build' do
 
     it 'sets member type' do
       expect(subject.type.member_type).to be(Axiom::Types::Float)
+    end
+  end
+
+  context 'when type is an Enumerable' do
+    let(:type) { Class.new { include Enumerable } }
+
+    it { should be_instance_of(Virtus::Attribute::Collection) }
+  end
+
+  context 'when type is an array subclass' do
+    let(:type) { Class.new(Array) }
+
+    it { should be_instance_of(Virtus::Attribute::Collection) }
+  end
+
+  context 'when type is a custom collection instance' do
+    let(:type) { Class.new(Array)[String] }
+
+    it { should be_instance_of(Virtus::Attribute::Collection) }
+
+    it 'sets member type' do
+      expect(subject.type.member_type).to be(Axiom::Types::String)
     end
   end
 
