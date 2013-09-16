@@ -10,4 +10,4 @@ gem 'devtools', :git => 'https://github.com/rom-rb/devtools', branch: 'master'
 
 eval_gemfile 'Gemfile.devtools'
 
-gem 'mutant', git: 'https://github.com/mbj/mutant.git', :ref => '868dd0846cd3c47d429c8ebce8ebf6f2c33cd577'
+gem 'mutant', git: 'https://github.com/solnic/mutant.git', branch: 'auto-expand-scope'
