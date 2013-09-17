@@ -49,7 +49,7 @@ module Virtus
         end
 
         def primitive
-          Hash
+          ::Hash
         end
       end
 

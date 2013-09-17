@@ -16,9 +16,12 @@ module Virtus
           member = infer_member_type(type) || Object
 
           if EmbeddedValue.determine_type(member)
-            Type.new(primitive || klass.primitive, member)
+            Type.new(primitive, member)
           else
-            klass.new { member_type Axiom::Types.infer(member) }
+            klass.new {
+              primitive primitive
+              member_type Axiom::Types.infer(member)
+            }
           end
         end
 
@@ -46,7 +49,7 @@ module Virtus
 
       # @api private
       def self.build_type(options)
-        Type.infer(options[:type], primitive)
+        Type.infer(options.fetch(:type), options.fetch(:primitive))
       end
 
       # @api private
@@ -58,13 +61,9 @@ module Virtus
 
       # @api public
       def coerce(*)
-        super.each_with_object(new_collection) do |entry, collection|
+        super.each_with_object(primitive.new) do |entry, collection|
           collection << member_type.coerce(entry)
         end
-      end
-
-      def new_collection
-        type.primitive.new
       end
 
       def member_type

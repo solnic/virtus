@@ -63,28 +63,19 @@ module Virtus
 
       # @api private
       def initialize_primitive(type)
-        const =
+        @primitive =
           if type.instance_of?(String) || type.instance_of?(Symbol)
             begin
               Object.const_get(type)
             rescue
               type
             end
+          elsif type.is_a?(Class) && type < Axiom::Types::Type
+            type.primitive
+          elsif not type.is_a?(Class)
+            type.class
           else
             type
-          end
-
-        @primitive =
-          if const.instance_of?(::Hash) || const == ::Hash
-            ::Hash
-          elsif const.instance_of?(::Array) || const == ::Array
-            ::Array
-          elsif const.instance_of?(::Set) || const == ::Set
-            ::Set
-          elsif const.kind_of?(Enumerable)
-            const.class
-          else
-            const
           end
       end
 
