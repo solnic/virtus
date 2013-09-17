@@ -15,7 +15,7 @@ module Virtus
         #
         # @api private
         def self.handle?(value)
-          value.is_a?(::Symbol)
+          value.is_a?(Symbol)
         end
 
         # Evaluates the value via instance#public_send(value)
@@ -25,7 +25,7 @@ module Virtus
         # @return [Object] evaluated value
         #
         # @api private
-        def call(instance, *)
+        def call(instance, _)
           instance.respond_to?(@value, true) ? instance.send(@value) : @value
         end
 

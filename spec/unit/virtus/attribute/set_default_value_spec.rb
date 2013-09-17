@@ -41,7 +41,7 @@ describe Virtus::Attribute, '#set_default_value' do
   context 'with a callable' do
     subject { instance }
 
-    let(:default) { proc { |model, attribute| "#{model.name}-#{attribute.name}" } }
+    let(:default) { lambda { |model, attribute| "#{model.name}-#{attribute.name}" } }
 
     its(:test) { should eq('model-test') }
   end
@@ -51,9 +51,18 @@ describe Virtus::Attribute, '#set_default_value' do
 
     context 'when it is a method name' do
       let(:default) { :set_test }
-      let(:model)   { Class.new { attr_reader :test; def set_test; @test = 'hello world'; end } }
 
-      its(:test) { should eq('hello world') }
+      context 'when method is public' do
+        let(:model) { Class.new { attr_reader :test; def set_test; @test = 'hello world'; end } }
+
+        its(:test) { should eq('hello world') }
+      end
+
+      context 'when method is private' do
+        let(:model) { Class.new { attr_reader :test; private; def set_test; @test = 'hello world'; end } }
+
+        its(:test) { should eq('hello world') }
+      end
     end
 
     context 'when it is not a method name' do
