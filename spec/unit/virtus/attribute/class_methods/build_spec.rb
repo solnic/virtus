@@ -74,6 +74,14 @@ describe Virtus::Attribute, '.build' do
     its(:type) { should be(Axiom::Types::Integer) }
   end
 
+  context 'when type is a symbol' do
+    let(:type) { :String }
+
+    it_behaves_like 'a valid attribute instance'
+
+    its(:type) { should be(Axiom::Types::String) }
+  end
+
   context 'when custom attribute class exists for a given primitive' do
     let(:primitive) { Class.new }
     let(:attribute) { Class.new(Virtus::Attribute) }

@@ -70,8 +70,6 @@ module Virtus
             rescue
               type
             end
-          elsif type.is_a?(Class) && type < Axiom::Types::Type
-            type.primitive
           elsif not type.is_a?(Class)
             type.class
           else
