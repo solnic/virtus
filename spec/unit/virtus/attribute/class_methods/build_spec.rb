@@ -116,13 +116,43 @@ describe Virtus::Attribute, '.build' do
     end
   end
 
+  context 'when type is Hash[Struct.new(:id) => Integer]' do
+    let(:type)     { Hash[key_type => Integer] }
+    let(:key_type) { Struct.new(:id) }
+
+    it { should be_instance_of(Virtus::Attribute::Hash) }
+
+    it 'sets key type' do
+      expect(subject.type.key_type).to be(key_type)
+    end
+
+    it 'sets value type' do
+      expect(subject.type.value_type).to be(Axiom::Types::Integer)
+    end
+  end
+
+  context 'when type is Hash[String => Struct.new(:id)]' do
+    let(:type)       { Hash[String => value_type] }
+    let(:value_type) { Struct.new(:id) }
+
+    it { should be_instance_of(Virtus::Attribute::Hash) }
+
+    it 'sets key type' do
+      expect(subject.type.key_type).to be(Axiom::Types::String)
+    end
+
+    it 'sets value type' do
+      expect(subject.type.value_type).to be(value_type)
+    end
+  end
+
   context 'when type is Hash[String => Integer, Integer => String]' do
-    let(:type) { Hash[String => Integer, Integer => String] }
+    let(:type) { Hash[String => Integer, :Integer => :String] }
 
     specify do
       expect { subject }.to raise_error(
         ArgumentError,
-        "more than one [key => value] pair in `#{type.inspect}`"
+        "more than one [key => value] pair in `#{type}`"
       )
     end
   end

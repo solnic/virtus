@@ -16,7 +16,34 @@ module Virtus
       primitive ::Hash
       default   primitive.new
 
+      # FIXME: remove this once axiom-types supports it
       Type = Struct.new(:key_type, :value_type) do
+        def self.infer(type)
+          type_options = infer_key_and_value_types(type)
+          key_class    = determine_type(type_options.fetch(:key_type,   Object))
+          value_class  = determine_type(type_options.fetch(:value_type, Object))
+
+          new(key_class, value_class)
+        end
+
+        def self.determine_type(type)
+          if EmbeddedValue.determine_type(type)
+            type
+          else
+            Axiom::Types.infer(type)
+          end
+        end
+
+        def self.infer_key_and_value_types(type)
+          return {} unless type.kind_of?(::Hash)
+
+          if type.size > 1
+            raise ArgumentError, "more than one [key => value] pair in `#{type}`"
+          else
+            { :key_type => type.keys.first, :value_type => type.values.first }
+          end
+        end
+
         def coercion_method
           :to_hash
         end
@@ -28,48 +55,11 @@ module Virtus
 
       # @api private
       def self.build_type(options)
-        type         = options[:type]
-        type_options = infer_options(type)
-
-        key_class   = type_options.fetch(:key_type, Axiom::Types::Object)
-        value_class = type_options.fetch(:value_type, Axiom::Types::Object)
-
-        if EmbeddedValue.determine_type(key_class) || EmbeddedValue.determine_type(value_class)
-          Type.new(key_class, value_class)
-        else
-          Axiom::Types::Hash.infer(type)
-        end
-      end
-
-      # Handles hashes with [key_type => value_type] syntax
-      #
-      # @param [Class] type
-      #
-      # @param [Hash] options
-      #
-      # @return [Hash]
-      #
-      # @api private
-      def self.infer_options(type)
-        options = {}
-
-        if !type.respond_to?(:size)
-          options
-        elsif type.size > 1
-          raise ArgumentError, "more than one [key => value] pair in `#{type.inspect}`"
-        else
-          key_type, value_type = type.first
-
-          options.merge!(:key_type => key_type, :value_type => value_type)
-        end
-
-        options
+        Type.infer(options[:type])
       end
 
       # @api private
       def self.merge_options!(type, options)
-        super
-
         unless options.key?(:key_type)
           options[:key_type] = Attribute.build(type.key_type)
         end
