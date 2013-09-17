@@ -9,7 +9,29 @@ module Virtus
     class Collection < Attribute
       default Proc.new { |_, attribute| attribute.type.primitive.new }
 
+      # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type
       Type = Struct.new(:primitive, :member_type) do
+        def self.infer(type, primitive)
+          klass  = Axiom::Types.infer(type)
+          member = infer_member_type(type) || Object
+
+          if EmbeddedValue.determine_type(member)
+            Type.new(primitive || klass.primitive, member)
+          else
+            klass.new { member_type Axiom::Types.infer(member) }
+          end
+        end
+
+        def self.infer_member_type(type)
+          return unless type.respond_to?(:count)
+
+          if type.count > 1
+            raise NotImplementedError, "build SumType from list of types (#{type})"
+          else
+            type.first
+          end
+        end
+
         def coercion_method
           :to_array
         end
@@ -22,48 +44,13 @@ module Virtus
         end
       end
 
-      def self.build_type(options)
-        type    = options[:type]
-        type_options = infer_options(type)
-
-        klass  = Axiom::Types.infer(type)
-        member = type_options.fetch(:member_type, Axiom::Types::Object)
-
-        # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type
-        if EmbeddedValue.determine_type(member)
-          Type.new(self.primitive || klass.primitive, member)
-        else
-          klass.new { member_type Axiom::Types.infer(member) }
-        end
-      end
-
-      # Handles collection with member_type syntax
-      #
-      # @param [Class] type
-      #
-      # @param [Hash] options
-      #
-      # @return [Hash]
-      #
       # @api private
-      def self.infer_options(type)
-        options = {}
-
-        if !type.respond_to?(:count)
-          options
-        elsif type.count > 1
-          raise NotImplementedError, "build SumType from list of types (#{type.inspect})"
-        else
-          options.merge!(:member_type => type.first)
-        end
-
-        options
+      def self.build_type(options)
+        Type.infer(options[:type], primitive)
       end
 
       # @api private
       def self.merge_options!(type, options)
-        super
-
         unless options.key?(:member_type)
           options[:member_type] = Attribute.build(type.member_type)
         end
