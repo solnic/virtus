@@ -80,7 +80,7 @@ module Virtus
       end
 
       # @api public
-      def coerce(input)
+      def coerce(*)
         coerced = super
 
         return coerced unless coerced.respond_to?(:each_with_object)

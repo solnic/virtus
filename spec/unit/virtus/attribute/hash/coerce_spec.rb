@@ -13,11 +13,18 @@ describe Virtus::Attribute::Hash, '#coerce' do
 
   let(:options) { {} }
 
-  context 'when input is not a hash' do
+  context 'when input is coercible to hash' do
     let(:input)  { Class.new { def to_hash; { :hello => 'World' }; end }.new }
     let(:object) { described_class.build(Hash) }
 
     it { should eq(:hello => 'World') }
+  end
+
+  context 'when input is not coercible to hash' do
+    let(:input)  { 'not really a hash' }
+    let(:object) { described_class.build(Hash) }
+
+    it { should be(input) }
   end
 
   context 'when input is a hash' do
