@@ -27,7 +27,7 @@ module Virtus
         end
 
         def self.determine_type(type)
-          if EmbeddedValue.determine_type(type)
+          if EmbeddedValue.handles?(type)
             type
           else
             Axiom::Types.infer(type)

@@ -49,6 +49,11 @@ module Virtus
       end # FromOpenStruct
 
       # @api private
+      def self.handles?(type)
+        type.is_a?(Class) && determine_type(type)
+      end
+
+      # @api private
       def self.determine_type(klass)
         if klass <= Virtus || klass <= OpenStruct
           FromOpenStruct
