@@ -126,7 +126,7 @@ module Virtus
 
   # @api private
   def self.warn(msg)
-    warn(msg)
+    Kernel.warn(msg)
   end
 
 end # module Virtus

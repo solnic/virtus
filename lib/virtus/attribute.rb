@@ -15,7 +15,7 @@ module Virtus
     #
     # @api public
     def self.coerce(value = Undefined)
-      Virtus.warn "#{self}.coerce is deprecated and will be removed in a future version. Use Virtus.coerce instead: ##{caller.first}"
+      Virtus.warn "#{self}.coerce is deprecated and will be removed in 1.0.0. Use Virtus.coerce instead: ##{caller.first}"
       return Virtus.coerce if value.equal?(Undefined)
       Virtus.coerce = value
       self
