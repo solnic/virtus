@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::AttributeSet, '#define_reader_method' do
   subject { described_class.new }
 
-  let(:attribute) { double('attribute') }
+  let(:attribute) { Virtus::Attribute.build(String, :name => method_name) }
 
   if RUBY_VERSION < '1.9'
     let(:method_name) { 'foo_bar' }

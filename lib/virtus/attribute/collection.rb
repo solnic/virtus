@@ -6,47 +6,63 @@ module Virtus
     # Handles coercing members to the designated member type.
     #
     # @abstract
-    class Collection < Object
+    class Collection < Attribute
+      default Proc.new { |_, attribute| attribute.type.primitive.new }
 
-      # Handles collection with member_type syntax
-      #
-      # @param [Class] type
-      #
-      # @param [Hash] options
-      #
-      # @return [Hash]
-      #
-      # @api private
-      def self.merge_options(type, _options)
-        merged_options = super
+      # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type
+      Type = Struct.new(:primitive, :member_type) do
+        def self.infer(type, primitive)
+          return type if type.is_a?(Class) && type < Axiom::Types::Type
 
-        if !type.respond_to?(:count)
-          merged_options
-        elsif type.count > 1
-          raise NotImplementedError, "build SumType from list of types (#{type.inspect})"
-        else
-          merged_options.merge!(:member_type => type.first)
+          klass  = Axiom::Types.infer(type)
+          member = infer_member_type(type) || Object
+
+          if EmbeddedValue.handles?(member)
+            Type.new(primitive, member)
+          else
+            klass.new {
+              primitive primitive
+              member_type Axiom::Types.infer(member)
+            }
+          end
         end
 
-        merged_options
+        def self.infer_member_type(type)
+          return unless type.respond_to?(:count)
+
+          if type.count > 1
+            raise NotImplementedError, "build SumType from list of types (#{type})"
+          else
+            type.first
+          end
+        end
+
+        def coercion_method
+          :to_array
+        end
       end
 
-      # @see Virtus::Attribute.coercible_writer_class
-      #
-      # @return [::Class]
-      #
       # @api private
-      def self.coercible_writer_class(_type, options)
-        options[:member_type] ? CoercibleWriter : super
+      def self.build_type(options)
+        Type.infer(options.fetch(:type), options.fetch(:primitive))
       end
 
-      # @see Virtus::Attribute.writer_option_names
-      #
-      # @return [Array<Symbol>]
-      #
       # @api private
-      def self.writer_option_names
-        super << :member_type
+      def self.merge_options!(type, options)
+        unless options.key?(:member_type)
+          options[:member_type] = Attribute.build(type.member_type)
+        end
+      end
+
+      # @api public
+      def coerce(*)
+        super.each_with_object(primitive.new) do |entry, collection|
+          collection << member_type.coerce(entry)
+        end
+      end
+
+      def member_type
+        @options[:member_type]
       end
 
     end # class Collection

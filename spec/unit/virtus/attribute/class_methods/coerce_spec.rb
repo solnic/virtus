@@ -3,41 +3,30 @@ require 'spec_helper'
 describe Virtus::Attribute, '.coerce' do
   subject { described_class.coerce }
 
-  before do
-    @original_stderr, $stderr = $stderr, StringIO.new
+  after :all do
+    described_class.coerce(true)
   end
 
-  after do
-    $stderr = @original_stderr
-  end
-
-  # it { expect(subject).to be_kind_of(Virtus::Attribute) }
-
-  it 'returns a deprecation warning' do
-    subject
-    $stderr.string.should =~ /\AVirtus::Attribute.coerce is deprecated and will be removed in a future version. Use Virtus.coerce instead: ##{__FILE__}:4\b/
-  end
-
-  context 'when value is Undefined' do
-    subject { described_class.coerce }
-
-    it 'returns Virtus.coerce' do
-      expect(subject).to be(Virtus.coerce)
+  context 'with a value' do
+    it 'sets the value and return self' do
+      expect(described_class.coerce(false)).to be(described_class)
+      expect(subject).to be(false)
     end
   end
 
-  context 'when value is supplied' do
-    subject { described_class.coerce(false) }
-
-    after do
-      Virtus.coerce = true
+  context 'when it is set to true' do
+    before do
+      described_class.coerce(true)
     end
 
-    it { expect(subject).to be(Virtus::Attribute) }
+    it { should be(true) }
+  end
 
-    it 'modifies Virtus.coerce' do
-      subject
-      expect(Virtus.coerce).to be(false)
+  context 'when it is set to false' do
+    before do
+      described_class.coerce(false)
     end
+
+    it { should be(false) }
   end
 end

@@ -14,6 +14,7 @@ module Virtus
     # @api private
     def self.extended(object)
       super
+      object.instance_variable_set('@attribute_set', AttributeSet.new)
       object.instance_eval do
         extend InstanceMethods
         extend attribute_set
@@ -49,8 +50,27 @@ module Virtus
     #
     # @api public
     def attribute(name, type, options = {})
-      attribute = Attribute.build(name, type, merge_options(options))
-      virtus_add_attribute(attribute)
+      attribute_set << Attribute.build(type, merge_options(name, options))
+      self
+    end
+
+    # @api public
+    def values(&block)
+      instance_eval do
+        private :attributes=
+
+        def attribute(name, type, options = {})
+          super(name, type, options.merge(:writer => :private))
+        end
+      end
+
+      yield
+
+      extend(ValueObject::AllowedWriterMethods)
+      include(ValueObject::InstanceMethods)
+
+      include(::Equalizer.new(*attribute_set.map(&:name)))
+
       self
     end
 
@@ -76,16 +96,7 @@ module Virtus
     #
     # @api private
     def attribute_set
-      @attribute_set ||= AttributeSet.new
-    end
-
-    # Add an attribute to the attribute set
-    #
-    # @return [AttributeSet]
-    #
-    # @api private
-    def virtus_add_attribute(attribute)
-      attribute_set << attribute
+      @attribute_set
     end
 
     # Merge default options
@@ -93,8 +104,8 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def merge_options(options)
-      { :coerce => Virtus.coerce }.merge(options)
+    def merge_options(name, options)
+      { :name => name }.merge(options)
     end
 
   end # module Extensions

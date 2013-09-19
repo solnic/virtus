@@ -9,7 +9,7 @@ module Virtus
     #
     # @api private
     def const_missing(name)
-      Attribute.determine_type(name) or super
+      Attribute::Builder.determine_type(name) or Axiom::Types.const_get(name) or super
     end
 
   end

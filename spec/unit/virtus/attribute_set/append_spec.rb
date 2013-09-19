@@ -8,10 +8,8 @@ describe Virtus::AttributeSet, '#<<' do
   let(:object)     { described_class.new(parent, attributes) }
   let(:name)       { :name                                   }
 
-  before { attribute.stub(:define_accessor_methods) }
-
   context 'with a new attribute' do
-    let(:attribute) { double('Attribute', :name => name) }
+    let(:attribute) { Virtus::Attribute.build(String, :name => name) }
 
     it { should equal(object) }
 
@@ -35,8 +33,8 @@ describe Virtus::AttributeSet, '#<<' do
   end
 
   context 'with a duplicate attribute' do
-    let(:attributes) { [ double('Attribute', :name => name) ] }
-    let(:attribute)  { double('Duplicate', :name => name)     }
+    let(:attributes) { [Virtus::Attribute.build(String, :name => name)] }
+    let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
 
     it { should equal(object) }
 

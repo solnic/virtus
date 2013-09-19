@@ -1,110 +1,96 @@
 ---
-UncommunicativeParameterName:
-  accept: []
-  exclude: []
+Attribute:
   enabled: true
-  reject:
-  - !ruby/regexp /^.$/
-  - !ruby/regexp /[0-9]$/
-  - !ruby/regexp /[A-Z]/
-LargeClass:
-  max_methods: 14
   exclude: []
+BooleanParameter:
   enabled: true
-  max_instance_variables: 8
+  exclude: []
+ClassVariable:
+  enabled: true
+  exclude: []
+ControlParameter:
+  enabled: true
+  exclude: []
+DataClump:
+  enabled: true
+  exclude: []
+  max_copies: 2
+  min_clump_size: 2
+DuplicateMethodCall:
+  enabled: false
+FeatureEnvy:
+  enabled: true
+  exclude: []
+IrresponsibleModule:
+  enabled: true
+  exclude: []
+LongParameterList:
+  enabled: true
+  exclude: []
+  max_params: 2
+LongYieldList:
+  enabled: true
+  exclude: []
+  max_params: 2
+NestedIterators:
+  enabled: true
+  max_allowed_nesting: 1
+  ignore_iterators: []
+  exclude: []
+NilCheck:
+  enabled: true
+  exclude: []
+RepeatedConditional:
+  enabled: true
+  exclude: []
+  max_ifs: 1
+TooManyInstanceVariables:
+  enabled: true
+  exclude: []
+  max_instance_variables: 3
+TooManyMethods:
+  enabled: true
+  exclude: []
+  max_methods: 10
+TooManyStatements:
+  enabled: true
+  exclude: []
+  max_statements: 4
 UncommunicativeMethodName:
-  accept: []
-  exclude: []
   enabled: true
+  exclude: []
   reject:
   - !ruby/regexp /^[a-z]$/
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
-LongParameterList:
-  max_params: 3
-  exclude: []
-  enabled: true
-  overrides: {}
-FeatureEnvy:
-  exclude: [
-    'Virtus::Attribute::Boolean#value_coerced?',
-    'Virtus::ClassMethods#build_attribute',
-    'Virtus::Coercion::TimeCoercions#to_string',
-    'Virtus::Coercion::TimeCoercions#coerce_with_method',
-    'Virtus::TypeLookup#determine_type_from_primitive',
-    'Virtus::ValueObject::ClassMethods#attribute'
-  ]
-  enabled: true
-ClassVariable:
-  exclude: []
-  enabled: true
-BooleanParameter:
-  exclude: []
-  enabled: true
-IrresponsibleModule:
-  exclude: []
-  enabled: true
-UncommunicativeModuleName:
   accept: []
-  exclude: []
+UncommunicativeModuleName:
   enabled: true
+  exclude: []
   reject:
   - !ruby/regexp /^.$/
   - !ruby/regexp /[0-9]$/
-NestedIterators:
-  ignore_iterators: []
-  exclude: []
-  enabled: true
-  max_allowed_nesting: 2
-LongMethod:
-  max_statements: 6
-  exclude: []
-  enabled: true
-Duplication:
-  allow_calls: []
-  exclude: [
-    'Virtus::Attribute::DefaultValue#evaluate',
-    'Virtus::Attribute#define_accessor_methods',
-    'Virtus::Attribute#self.writer_options',
-    'Virtus::Attribute::Accessor::LazyAccessor#get',
-    'Virtus::Attribute::EmbeddedValue::OpenStructCoercer#call',
-    'Virtus::Attribute::EmbeddedValue::StructCoercer#call'
-  ]
-  enabled: true
-  max_calls: 1
-UtilityFunction:
-  max_helper_calls: 1
-  exclude: [
-    'Virtus::Attribute::Boolean#value_coerced?',
-    'Virtus::ClassMethods#build_attribute'
-  ]
-  enabled: true
-Attribute:
-  exclude: []
-  enabled: false
-UncommunicativeVariableName:
   accept: []
-  exclude: []
+UncommunicativeParameterName:
   enabled: true
+  exclude: []
   reject:
   - !ruby/regexp /^.$/
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
-SimulatedPolymorphism:
+  accept: []
+UncommunicativeVariableName:
+  enabled: true
   exclude: []
+  reject:
+  - !ruby/regexp /^.$/
+  - !ruby/regexp /[0-9]$/
+  - !ruby/regexp /[A-Z]/
+  accept: []
+UnusedParameters:
   enabled: true
-  max_ifs: 1
-DataClump:
   exclude: []
+UtilityFunction:
   enabled: true
-  max_copies: 2
-  min_clump_size: 2
-ControlCouple:
-  exclude: [
-    'Virtus::InstanceMethods#initialize'
-  ]
-  enabled: true
-LongYieldList:
-  max_params: 1
   exclude: []
-  enabled: true
+  max_helper_calls: 0

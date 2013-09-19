@@ -31,10 +31,13 @@ module Virtus
     #
     # @api private
     def self.included(base)
+      Virtus.warn "Virtus::ValueObject is deprecated and will be removed in 1.0.0 #{caller.first}"
+
       base.instance_eval do
         include ::Virtus
         include InstanceMethods
         extend ClassMethods
+        extend AllowedWriterMethods
         private :attributes=
       end
     end
@@ -42,18 +45,6 @@ module Virtus
     private_class_method :included
 
     module InstanceMethods
-
-      # the #get_attributes method accept a Proc object that will filter
-      # out an attribute when the block returns false. the ValueObject
-      # needs all the attributes, so we allow every attribute.
-      FILTER_NONE = proc { true }
-
-      # @api private
-      def with(attribute_updates)
-        self.class.new(
-          attribute_set.get(self, &FILTER_NONE).merge(attribute_updates)
-        )
-      end
 
       # ValueObjects are immutable and can't be cloned
       #
@@ -71,6 +62,22 @@ module Virtus
       end
       alias dup clone
 
+    end
+
+    module AllowedWriterMethods
+      # The list of writer methods that can be mass-assigned to in #attributes=
+      #
+      # @return [Set]
+      #
+      # @api private
+      def allowed_writer_methods
+        @allowed_writer_methods ||=
+          begin
+            allowed_writer_methods = super
+            allowed_writer_methods += attribute_set.map{|attr| "#{attr.name}="}
+            allowed_writer_methods.to_set.freeze
+          end
+      end
     end
 
     module ClassMethods
@@ -114,26 +121,14 @@ module Virtus
       def equalizer
         @equalizer ||=
           begin
-            equalizer = Equalizer.new(name || inspect)
+            equalizer = Virtus::Equalizer.new(name || inspect)
             include equalizer
             equalizer
           end
       end
 
-      # The list of writer methods that can be mass-assigned to in #attributes=
-      #
-      # @return [Set]
-      #
-      # @api private
-      def allowed_writer_methods
-        @allowed_writer_methods ||=
-          begin
-            allowed_writer_methods = super
-            allowed_writer_methods += attribute_set.map{|attr| "#{attr.name}="}
-            allowed_writer_methods.to_set.freeze
-          end
-      end
-
     end # module ClassMethods
+
   end # module ValueObject
+
 end # module Virtus

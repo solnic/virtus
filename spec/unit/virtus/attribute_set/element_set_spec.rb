@@ -9,7 +9,7 @@ describe Virtus::AttributeSet, '#[]=' do
   let(:name)       { :name                                   }
 
   context 'with a new attribute' do
-    let(:attribute) { double('attribute', :name => name) }
+    let(:attribute) { Virtus::Attribute.build(String, :name => name) }
 
     it { should equal(attribute) }
 
@@ -31,9 +31,9 @@ describe Virtus::AttributeSet, '#[]=' do
   end
 
   context 'with a duplicate attribute' do
-    let(:original)   { double('original', :name => name)  }
-    let(:attributes) { [ original ]                     }
-    let(:attribute)  { double('attribute', :name => name) }
+    let(:original)   { Virtus::Attribute.build(String, :name => name) }
+    let(:attributes) { [ original ] }
+    let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
 
     it { should equal(attribute) }
 

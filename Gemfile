@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'devtools', :git => 'https://github.com/rom-rb/devtools'
+gem 'bogus', '~> 0.1'
 
-eval File.read('Gemfile.devtools')
+gem 'axiom-types', :git => 'https://github.com/dkubb/axiom-types'
+
+gem 'devtools', :git => 'https://github.com/rom-rb/devtools', branch: 'master'
+
+eval_gemfile 'Gemfile.devtools'
+
+gem 'mutant', git: 'https://github.com/solnic/mutant.git', branch: 'auto-expand-scope'

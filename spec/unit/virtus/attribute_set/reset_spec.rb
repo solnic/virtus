@@ -3,12 +3,10 @@ require 'spec_helper'
 describe Virtus::AttributeSet, '#reset' do
   subject { object.reset }
 
-  let(:name)       { :name                                   }
-  let(:attribute)  { double('Attribute', :name => name)        }
+  let(:name)       { :name }
+  let(:attribute)  { Virtus::Attribute.build(String, :name => :name) }
   let(:attributes) { [ attribute ]                           }
   let(:object)     { described_class.new(parent, attributes) }
-
-  before { attribute.stub(:define_accessor_methods) }
 
   context 'when the parent has no attributes' do
     let(:parent) { described_class.new }
@@ -19,7 +17,7 @@ describe Virtus::AttributeSet, '#reset' do
   end
 
   context 'when the parent has attributes that are not duplicates' do
-    let(:parent_attribute) { double('Parent Attribute', :name => :parent_name) }
+    let(:parent_attribute) { Virtus::Attribute.build(String, :name => :parent_name) }
     let(:parent)           { described_class.new([ parent_attribute ])       }
 
     it { should equal(object) }
@@ -28,7 +26,7 @@ describe Virtus::AttributeSet, '#reset' do
   end
 
   context 'when the parent has attributes that are duplicates' do
-    let(:parent_attribute) { double('Parent Attribute', :name => name)   }
+    let(:parent_attribute) { Virtus::Attribute.build(String, :name => name) }
     let(:parent)           { described_class.new([ parent_attribute ]) }
 
     it { should equal(object) }
@@ -37,11 +35,9 @@ describe Virtus::AttributeSet, '#reset' do
   end
 
   context 'when the parent has changed' do
-    let(:parent_attribute) { double('Parent Attribute', :name => :parent_name) }
+    let(:parent_attribute) { Virtus::Attribute.build(String, :name => :parent_name) }
     let(:parent)           { described_class.new([ parent_attribute ])       }
-    let(:new_attribute)    { double('New Attribute', :name => :parent_name)    }
-
-    before { new_attribute.stub(:define_accessor_methods) }
+    let(:new_attribute)    { Virtus::Attribute.build(String, :name => :parent_name) }
 
     it { should equal(object) }
 

@@ -22,44 +22,55 @@ module Virtus
     #   user = User.new(:address => {
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
-    class EmbeddedValue < Object
-      primitive ::OpenStruct
+    class EmbeddedValue < Attribute
+      TYPES = [Struct, OpenStruct, Virtus].freeze
 
-      # @see Attribute.merge_options
-      #
-      # @return [Hash]
-      #   an updated options hash for configuring an EmbeddedValue instance
-      #
+      class FromStruct < self
+
+        # @api public
+        def coerce(input)
+          if input.kind_of?(primitive)
+            input
+          elsif not input.nil?
+            primitive.new(*input)
+          end
+        end
+      end # FromStruct
+
+      class FromOpenStruct < self
+
+        # @api public
+        def coerce(input)
+          if input.kind_of?(primitive)
+            input
+          elsif not input.nil?
+            primitive.new(input)
+          end
+        end
+      end # FromOpenStruct
+
       # @api private
-      def self.merge_options(type, _options)
-        super.update(:primitive => type)
+      def self.handles?(klass)
+        klass.is_a?(Class) && TYPES.any? { |type| klass <= type }
       end
 
-      # Determine type based on class
-      #
-      # Virtus::EmbeddedValue.determine_type(Struct) # => Virtus::EmbeddedValue::FromStruct
-      # Virtus::EmbeddedValue.determine_type(VirtusClass) # => Virtus::EmbeddedValue::FromOpenStruct
-      #
-      # @param [Class] klass
-      #
-      # @return [Virtus::Attribute::EmbeddedValue]
-      #
       # @api private
       def self.determine_type(klass)
-        if klass <= Virtus || klass <= OpenStruct || klass <= Struct
-          self
+        if klass < Virtus || klass <= OpenStruct
+          FromOpenStruct
+        elsif klass < Struct
+          FromStruct
         end
       end
 
       # @api private
-      def self.coercer(type, _options = {})
-        if type <= Virtus || type <= OpenStruct
-          OpenStructCoercer.new(type)
-        elsif type <= Struct
-          StructCoercer.new(type)
-        else
-          super
-        end
+      def self.build_type(options)
+        Axiom::Types::Object.new { primitive options[:type] }
+      end
+
+      # @api public
+      def primitive
+        type.primitive
       end
 
     end # class EmbeddedValue

@@ -1,35 +1,18 @@
 require 'spec_helper'
 
 describe Virtus::Attribute, '#value_coerced?' do
-  subject { object.value_coerced?(value) }
+  subject { object.value_coerced?(input) }
 
-  let(:object)   { described_class::String.new(:name, accessor) }
-  let(:accessor) { double('accessor', :writer => writer) }
-  let(:writer)   { double('writer', :coercer => coercer) }
-  let(:coercer)  { double('coercer') }
+  let(:object) { described_class.build(String) }
 
-  let(:string_coercer) { double('string_coercer') }
-
-  before do
-    coercer.should_receive(:[]).with(String).and_return(string_coercer)
-  end
-
-  context 'when the value matches the primitive' do
-    let(:value) { 'string' }
-
-    before do
-      string_coercer.should_receive(:coerced?).with(value).and_return(true)
-    end
+  context 'when input is coerced' do
+    let(:input)  { '1' }
 
     it { should be(true) }
   end
 
-  context 'when the value does not match the primitive' do
-    let(:value) { 1 }
-
-    before do
-      string_coercer.should_receive(:coerced?).with(value).and_return(false)
-    end
+  context 'when input is not coerced' do
+    let(:input)  { 1 }
 
     it { should be(false) }
   end

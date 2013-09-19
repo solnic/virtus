@@ -1,0 +1,105 @@
+require 'spec_helper'
+
+describe Virtus::ValueObject do
+  share_examples_for 'a valid value object' do
+    subject { model.new(attributes) }
+
+    let(:attributes) { Hash[:id => 1, :name => 'Jane Doe'] }
+
+    its(:id)   { should be(1) }
+    its(:name) { should eql('Jane Doe') }
+
+    it 'sets private writers' do
+      expect(subject.class.attribute_set[:id]).to_not be_public_writer
+      expect(subject.class.attribute_set[:name]).to_not be_public_writer
+    end
+
+    it 'disallows mass-assignment' do
+      expect(subject.private_methods).to include(:attributes=)
+    end
+
+    it 'disallows cloning' do
+      expect(subject.clone).to be(subject)
+    end
+
+    it 'defines #eql?' do
+      expect(subject).to eql(subject.class.new(attributes))
+    end
+
+    it 'defines #==' do
+      expect(subject == subject.class.new(attributes)).to be(true)
+    end
+
+    it 'defines #hash' do
+      expect(subject.hash).to eql(subject.class.new(attributes).hash)
+    end
+
+    it 'defines #inspect' do
+      expect(subject.inspect).to eql(
+        %(#<Model #{attributes.map { |k, v| "#{k}=#{v.inspect}" }.join(' ')}>)
+      )
+    end
+  end
+
+  context 'using new values {} block' do
+    let(:model) {
+      Class.new {
+        include Virtus
+
+        def self.name
+          'Model'
+        end
+
+        values do
+          attribute :id,   Integer
+          attribute :name, String
+        end
+      }
+    }
+
+    it_behaves_like 'a valid value object'
+
+    context 'with a model subclass' do
+      let(:subclass) {
+        Class.new(model) {
+          values do
+            attribute :email, String
+          end
+        }
+      }
+
+      it_behaves_like 'a valid value object' do
+        subject { subclass.new(attributes) }
+
+        let(:attributes) { Hash[:id => 1, :name => 'Jane Doe', :email => 'jane@doe.com'] }
+
+        its(:email) { should eql('jane@doe.com') }
+
+        it 'sets private writers for additional values' do
+          expect(subclass.attribute_set[:email]).to_not be_public_writer
+        end
+
+        it 'defines valid #== for a subclass' do
+          expect(subject == subject.class.new(attributes.merge(:id => 2))).to be(false)
+        end
+      end
+    end
+  end
+
+  context 'using deprecated inclusion' do
+    let(:model) {
+      Class.new {
+        include Virtus::ValueObject
+
+        def self.name
+          'Model'
+        end
+
+        attribute :id,   Integer
+        attribute :name, String
+      }
+    }
+
+    it_behaves_like 'a valid value object'
+  end
+end
