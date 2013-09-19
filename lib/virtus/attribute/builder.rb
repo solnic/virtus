@@ -15,7 +15,7 @@ module Virtus
       end
 
       # @api private
-      def self.determine_type(klass)
+      def self.determine_type(klass, default = nil)
         type = Attribute.determine_type(klass)
 
         if klass.is_a?(Class)
@@ -31,7 +31,7 @@ module Virtus
             end
         end
 
-        type || Attribute
+        type || default
       end
 
       # @api private
@@ -50,9 +50,9 @@ module Virtus
       # @api private
       def initialize_attribute
         @attribute = @klass.new(@type, @options) do |attribute|
-          attribute.extend(Attribute::Named)       if @options[:name]
-          attribute.extend(Attribute::Coercible)   if @options[:coerce]
-          attribute.extend(Attribute::LazyDefault) if @options[:lazy]
+          attribute.extend(Named)       if @options[:name]
+          attribute.extend(Coercible)   if @options[:coerce]
+          attribute.extend(LazyDefault) if @options[:lazy]
         end
       end
 
@@ -84,7 +84,7 @@ module Virtus
 
       # @api private
       def initialize_class
-        @klass = self.class.determine_type(@primitive)
+        @klass = self.class.determine_type(@primitive, Attribute)
       end
 
       # @api private

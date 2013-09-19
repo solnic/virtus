@@ -83,6 +83,24 @@ describe Virtus, '#attribute' do
         end
       end
     end
+
+    context 'when type is Decimal' do
+      before :all do
+        class Test
+          include Virtus
+
+          attribute :test, Decimal
+        end
+      end
+
+      after :all do
+        Object.send(:remove_const, :Test)
+      end
+
+      it 'maps type to the corresponding axiom type' do
+        expect(Test.attribute_set[:test].type).to be(Axiom::Types::Decimal)
+      end
+    end
   end
 
   context 'with a module' do

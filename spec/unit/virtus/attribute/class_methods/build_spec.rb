@@ -22,6 +22,7 @@ describe Virtus::Attribute, '.build' do
     it { should_not be_lazy }
 
     it 'sets up a coercer' do
+      expect(subject.options[:coerce]).to be(true)
       expect(subject.coercer).to be_instance_of(Virtus::Attribute::Coercer)
     end
   end
@@ -74,12 +75,20 @@ describe Virtus::Attribute, '.build' do
     its(:type) { should be(Axiom::Types::Integer) }
   end
 
-  context 'when type is a symbol' do
+  context 'when type is a symbol of an existing class constant' do
     let(:type) { :String }
 
     it_behaves_like 'a valid attribute instance'
 
     its(:type) { should be(Axiom::Types::String) }
+  end
+
+  context 'when type is an axiom type' do
+    let(:type) { Axiom::Types::Integer }
+
+    it_behaves_like 'a valid attribute instance'
+
+    its(:type) { should be(type) }
   end
 
   context 'when custom attribute class exists for a given primitive' do
@@ -93,5 +102,31 @@ describe Virtus::Attribute, '.build' do
     it { should be_instance_of(attribute) }
 
     its(:type) { should be(Axiom::Types::Object) }
+  end
+
+  context 'when custom attribute class exists for a given array with member coercion defined' do
+    let(:type)      { Class.new(Array)[String] }
+    let(:attribute) { Class.new(Virtus::Attribute) }
+
+    before do
+      attribute.primitive(type.class)
+    end
+
+    it { should be_instance_of(attribute) }
+
+    its(:type) { should be < Axiom::Types::Collection }
+  end
+
+  context 'when custom collection-like attribute class exists for a given enumerable primitive' do
+    let(:type)      { Class.new { include Enumerable } }
+    let(:attribute) { Class.new(Virtus::Attribute::Collection) }
+
+    before do
+      attribute.primitive(type)
+    end
+
+    it { should be_instance_of(attribute) }
+
+    its(:type) { should be < Axiom::Types::Collection }
   end
 end
