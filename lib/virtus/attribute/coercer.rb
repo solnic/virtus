@@ -5,6 +5,7 @@ module Virtus
     #
     # @api private
     class Coercer
+      attr_reader :method
 
       # Initialize a new coercer object
       #

@@ -17,12 +17,7 @@ module Virtus
         #
         # @api private
         def self.handle?(value)
-          case value
-          when *SINGLETON_CLASSES
-            false
-          else
-            true
-          end
+          SINGLETON_CLASSES.none? { |klass| value.kind_of?(klass) }
         end
 
         # Evaluates the value via value#clone

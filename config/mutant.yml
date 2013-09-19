@@ -1,3 +1,14 @@
 ---
 name: virtus
-namespace: Virtus
+namespace:
+  - 'Virtus::Attribute'
+  - 'Virtus::AttributeSet'
+  - 'Virtus::ClassInclusions'
+  - 'Virtus::ClassMethods'
+  - 'Virtus::Configuration'
+  - 'Virtus::ConstMissingExtensions'
+  - 'Virtus::Extensions'
+  - 'Virtus::InstanceMethods'
+  - 'Virtus::ModuleBuilder'
+  - 'Virtus::ModuleExtensions'
+  - 'Virtus::ValueObject'

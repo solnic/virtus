@@ -124,16 +124,23 @@ module Virtus
     @configuration ||= Configuration.new
   end
 
+  # @api private
+  def self.warn(msg)
+    warn(msg)
+  end
+
 end # module Virtus
 
 require 'abstract_type'
 require 'descendants_tracker'
+require 'equalizer'
 require 'adamantium'
+require 'axiom-types'
 require 'coercible'
 
-require 'virtus/support/type_lookup'
-require 'virtus/support/options'
 require 'virtus/support/equalizer'
+require 'virtus/support/options'
+require 'virtus/support/type_lookup'
 
 require 'virtus/extensions'
 require 'virtus/const_missing_extensions'
@@ -156,33 +163,13 @@ require 'virtus/attribute/default_value/from_callable'
 require 'virtus/attribute/default_value/from_symbol'
 
 require 'virtus/attribute'
+require 'virtus/attribute/builder'
 require 'virtus/attribute/coercer'
-require 'virtus/attribute/accessor/builder'
-require 'virtus/attribute/accessor'
-require 'virtus/attribute/accessor/lazy_accessor'
-require 'virtus/attribute/accessor_method'
-require 'virtus/attribute/reader'
-require 'virtus/attribute/writer'
-require 'virtus/attribute/writer/coercible'
+require 'virtus/attribute/named'
+require 'virtus/attribute/coercible'
+require 'virtus/attribute/lazy_default'
 
-require 'virtus/attribute/object'
-require 'virtus/attribute/class'
-require 'virtus/attribute/collection'
-require 'virtus/attribute/collection/coercible_writer'
-require 'virtus/attribute/array'
-require 'virtus/attribute/set'
 require 'virtus/attribute/boolean'
-require 'virtus/attribute/date'
-require 'virtus/attribute/date_time'
-require 'virtus/attribute/numeric'
-require 'virtus/attribute/decimal'
-require 'virtus/attribute/float'
+require 'virtus/attribute/collection'
 require 'virtus/attribute/hash'
-require 'virtus/attribute/hash/coercible_writer'
-require 'virtus/attribute/integer'
-require 'virtus/attribute/symbol'
-require 'virtus/attribute/string'
-require 'virtus/attribute/time'
 require 'virtus/attribute/embedded_value'
-require 'virtus/attribute/embedded_value/struct_coercer'
-require 'virtus/attribute/embedded_value/open_struct_coercer'

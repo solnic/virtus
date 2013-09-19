@@ -32,9 +32,9 @@ describe 'I can create a Virtus module' do
   end
 
   specify 'including a custom module with coercion disabled' do
-    user = Examples::NoncoercedUser.new(:name => 'Giorgio', :happy => 'yes')
+    user = Examples::NoncoercedUser.new(:name => :Giorgio, :happy => 'yes')
 
-    expect(user.name).to eql('Giorgio')
+    expect(user.name).to be(:Giorgio)
     expect(user.happy).to eql('yes')
   end
 

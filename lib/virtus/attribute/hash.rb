@@ -12,51 +12,86 @@ module Virtus
     #
     #   Post.new(:meta => { :tags => %w(foo bar) })
     #
-    class Hash < Object
-      primitive       ::Hash
-      coercion_method :to_hash
-      default         primitive.new
+    class Hash < Attribute
+      primitive ::Hash
+      default   primitive.new
 
-      # Handles hashes with [key_type => value_type] syntax
-      #
-      # @param [Class] type
-      #
-      # @param [Hash] options
-      #
-      # @return [Hash]
-      #
-      # @api private
-      def self.merge_options(type, _options)
-        merged_options = super
+      # FIXME: remove this once axiom-types supports it
+      Type = Struct.new(:key_type, :value_type) do
+        def self.infer(type)
+          if type.is_a?(Class) && type < Axiom::Types::Type
+            new(type.key_type, type.value_type)
+          else
+            type_options = infer_key_and_value_types(type)
+            key_class    = determine_type(type_options.fetch(:key_type,   Object))
+            value_class  = determine_type(type_options.fetch(:value_type, Object))
 
-        if !type.respond_to?(:size)
-          merged_options
-        elsif type.size > 1
-          raise ArgumentError, "more than one [key => value] pair in `#{type.inspect}`"
-        else
-          key_type, value_type = type.first
-          merged_options.merge!(:key_type => key_type, :value_type => value_type)
+            new(key_class, value_class)
+          end
         end
 
-        merged_options
+        def self.determine_type(type)
+          if EmbeddedValue.handles?(type)
+            type
+          else
+            Axiom::Types.infer(type)
+          end
+        end
+
+        def self.infer_key_and_value_types(type)
+          return {} unless type.kind_of?(::Hash)
+
+          if type.size > 1
+            raise ArgumentError, "more than one [key => value] pair in `#{type}`"
+          else
+            { :key_type => type.keys.first, :value_type => type.values.first }
+          end
+        end
+
+        def coercion_method
+          :to_hash
+        end
+
+        def primitive
+          ::Hash
+        end
       end
 
-      # @see Virtus::Attribute.coercible_writer_class
-      #
-      # @return [::Class]
-      #
       # @api private
-      def self.coercible_writer_class(_type, options)
-        options[:key_type] && options[:value_type] ? CoercibleWriter : super
+      def self.build_type(options)
+        Type.infer(options[:type])
       end
 
-      # @see Virtus::Attribute.writer_option_names
-      #
-      # @return [Array<Symbol>]
-      #
       # @api private
-      def self.writer_option_names
-        super << :key_type << :value_type
+      def self.merge_options!(type, options)
+        unless options.key?(:key_type)
+          options[:key_type] = Attribute.build(type.key_type)
+        end
+
+        unless options.key?(:value_type)
+          options[:value_type] = Attribute.build(type.value_type)
+        end
+      end
+
+      # @api public
+      def coerce(*)
+        coerced = super
+
+        return coerced unless coerced.respond_to?(:each_with_object)
+
+        coerced.each_with_object({}) do |(key, value), hash|
+          hash[key_type.coerce(key)] = value_type.coerce(value)
+        end
+      end
+
+      # @api private
+      def key_type
+        @options[:key_type]
+      end
+
+      # @api private
+      def value_type
+        @options[:value_type]
       end
 
     end # class Hash

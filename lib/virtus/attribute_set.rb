@@ -4,6 +4,15 @@ module Virtus
   class AttributeSet < Module
     include Enumerable
 
+    # @api private
+    def self.create(descendant)
+      superclass = descendant.superclass
+      if superclass.respond_to?(:attribute_set)
+        parent = superclass.public_send(:attribute_set)
+      end
+      descendant.instance_variable_set('@attribute_set', AttributeSet.new(parent))
+    end
+
     # Initialize an AttributeSet
     #
     # @param [AttributeSet] parent
@@ -67,7 +76,6 @@ module Virtus
     def <<(attribute)
       self[attribute.name] = attribute
       attribute.define_accessor_methods(self)
-      self
     end
 
     # Get an attribute by name
@@ -117,13 +125,12 @@ module Virtus
     # @param [Symbol] method_name
     # @param [Symbol] visibility
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def define_reader_method(attribute, method_name, visibility)
       define_method(method_name) { attribute.get(self) }
       send(visibility, method_name)
-      self
     end
 
     # Defines an attribute writer method
@@ -132,13 +139,12 @@ module Virtus
     # @param [Symbol] method_name
     # @param [Symbol] visibility
     #
-    # @return [self]
+    # @return [undefined]
     #
     # @api private
     def define_writer_method(attribute, method_name, visibility)
       define_method(method_name) { |value| attribute.set(self, value) }
       send(visibility, method_name)
-      self
     end
 
     # Get values of all attributes defined for this class, ignoring privacy
@@ -146,10 +152,10 @@ module Virtus
     # @return [Hash]
     #
     # @api private
-    def get(object, &block)
+    def get(object)
       each_with_object({}) do |attribute, attributes|
         name = attribute.name
-        attributes[name] = object.__send__(name) if yield(attribute)
+        attributes[name] = object.__send__(name) if attribute.public_reader?
       end
     end
 
@@ -174,12 +180,12 @@ module Virtus
     # @return [self]
     #
     # @api private
-    def set_defaults(object)
+    def set_defaults(object, filter = method(:skip_default?))
       each do |attribute|
-        if object.instance_variable_defined?(attribute.reader.instance_variable_name) || attribute.accessor.lazy?
+        if filter.call(object, attribute)
           next
         end
-        attribute.writer.set_default_value(object, attribute)
+        attribute.set_default_value(object)
       end
     end
 
@@ -194,7 +200,12 @@ module Virtus
       )
     end
 
-  private
+    private
+
+    # @api private
+    def skip_default?(object, attribute)
+      attribute.lazy? || object.instance_variable_defined?(attribute.instance_variable_name)
+    end
 
     # Merge the attributes into the index
     #

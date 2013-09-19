@@ -14,9 +14,13 @@ module Virtus
     #   post = Post.new(:published => false)
     #   post.published?  # => false
     #
-    class Boolean < Object
-      primitive       TrueClass
-      coercion_method :to_boolean
+    class Boolean < Attribute
+      primitive TrueClass
+
+      # @api private
+      def self.build_type(*)
+        Axiom::Types::Boolean
+      end
 
       # Returns if the given value is either true or false
       #
@@ -38,13 +42,12 @@ module Virtus
       #
       # @param [Module] mod
       #
-      # @return [self]
+      # @return [undefined]
       #
       # @api private
-      def define_accessor_methods(mod)
+      def define_accessor_methods(attribute_set)
         super
-        mod.define_reader_method(accessor, "#{name}?", reader.visibility)
-        self
+        attribute_set.define_reader_method(self, "#{name}?", options[:reader])
       end
 
     end # class Boolean
