@@ -43,13 +43,6 @@ module Virtus
       end
 
       # @api private
-      def self.determine_type(type)
-        if (!(type <= ::Hash) && type < Enumerable) || type <= Axiom::Types::Collection
-          self
-        end
-      end
-
-      # @api private
       def self.build_type(options)
         Type.infer(options.fetch(:type), options.fetch(:primitive))
       end

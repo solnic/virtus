@@ -22,12 +22,10 @@ module Virtus
           type ||=
             if klass < Axiom::Types::Type
               determine_type(klass.primitive)
-            else
-              if EmbeddedValue.handles?(klass)
-                EmbeddedValue.determine_type(klass)
-              elsif klass < Enumerable
-                Collection
-              end
+            elsif EmbeddedValue.handles?(klass)
+              EmbeddedValue.determine_type(klass)
+            elsif klass < Enumerable
+              Collection
             end
         end
 

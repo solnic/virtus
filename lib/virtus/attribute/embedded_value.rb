@@ -56,9 +56,9 @@ module Virtus
 
       # @api private
       def self.determine_type(klass)
-        if klass <= Virtus || klass <= OpenStruct
+        if klass < Virtus || klass <= OpenStruct
           FromOpenStruct
-        elsif klass <= Struct
+        elsif klass < Struct
           FromStruct
         end
       end
