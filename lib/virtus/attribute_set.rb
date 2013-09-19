@@ -195,7 +195,7 @@ module Virtus
     #
     # @api private
     def set_default(object, attribute)
-      attribute.set_default_value(object, attribute.default.call)
+      attribute.set_default_value(object)
     end
 
     # Coerce attributes received to a hash
