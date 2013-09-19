@@ -29,6 +29,11 @@ describe Virtus, '#attribute' do
     end
   end
 
+  it 'returns self' do
+    klass = Class.new { include Virtus }
+    expect(klass.attribute(:test, String)).to be(klass)
+  end
+
   context 'with a class' do
     context 'when type is Boolean' do
       before :all do
