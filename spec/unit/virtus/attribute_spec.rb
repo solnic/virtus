@@ -69,6 +69,26 @@ describe Virtus, '#attribute' do
       it_behaves_like 'a class with boolean attribute'
     end
 
+    context 'when type is Axiom::Types::Boolean' do
+      before :all do
+        class Test
+          include Virtus
+
+          attribute :test, Axiom::Types::Boolean
+        end
+      end
+
+      after :all do
+        Object.send(:remove_const, :Test)
+      end
+
+      it_behaves_like 'a class with boolean attribute' do
+        before do
+          pending 'this will be fixed once Attribute::Boolean subclass is gone'
+        end
+      end
+    end
+
     context 'when type is :Boolean' do
       before :all do
         class Test
