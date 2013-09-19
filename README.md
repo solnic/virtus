@@ -328,17 +328,16 @@ venue.location === venue_other.location # => true
 ``` ruby
 require 'json'
 
-# With a custom writer class
-class JsonWriter < Virtus::Attribute::Writer::Coercible
+class Json < Virtus::Attribute
   def coerce(value)
-    value.is_a?(Hash) ? value : JSON.parse(value)
+    value.is_a?(::Hash) ? value : JSON.parse(value)
   end
 end
 
 class User
   include Virtus
 
-  attribute :info, Hash, :writer_class => JsonWriter
+  attribute :info, Json
 end
 
 user = User.new
@@ -346,15 +345,9 @@ user.info = '{"email":"john@domain.com"}' # => {"email"=>"john@domain.com"}
 user.info.class # => Hash
 
 # With a custom attribute encapsulating coercion-specific configuration
-class NoisyString < Virtus::Attribute::String
-  class UpperCase < Virtus::Attribute::Writer::Coercible
-    def coerce(value)
-      super.upcase
-    end
-  end
-
-  def self.writer_class(*)
-    UpperCase
+class NoisyString < Virtus::Attribute
+  def coerce(value)
+    coercer[value.class].to_string.upcase
   end
 end
 
