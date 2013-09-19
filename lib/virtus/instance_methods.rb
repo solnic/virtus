@@ -136,7 +136,7 @@ module Virtus
     #
     # @api public
     def freeze
-      set_default_attributes
+      set_default_attributes!
       super
     end
 
@@ -147,6 +147,16 @@ module Virtus
     # @api private
     def set_default_attributes
       attribute_set.set_defaults(self)
+      self
+    end
+
+    # Set default attributes even lazy ones
+    #
+    # @return [self]
+    #
+    # @api public
+    def set_default_attributes!
+      attribute_set.set_defaults(self, proc { |_| false })
       self
     end
 

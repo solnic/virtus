@@ -171,9 +171,9 @@ module Virtus
     # @return [self]
     #
     # @api private
-    def set_defaults(object)
+    def set_defaults(object, filter = method(:skip_default?))
       each do |attribute|
-        if object.instance_variable_defined?(attribute.instance_variable_name) || attribute.lazy?
+        if filter.call(object, attribute)
           next
         end
         attribute.set_default_value(object)
@@ -191,7 +191,12 @@ module Virtus
       )
     end
 
-  private
+    private
+
+    # @api private
+    def skip_default?(object, attribute)
+      attribute.lazy? || object.instance_variable_defined?(attribute.instance_variable_name)
+    end
 
     # Merge the attributes into the index
     #

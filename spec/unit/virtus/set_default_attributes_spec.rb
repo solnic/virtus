@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Virtus, '#freeze' do
-  subject { object.freeze }
+describe Virtus, '#set_default_attributes!' do
+  subject { object.set_default_attributes! }
 
   let(:model) {
     Class.new {
@@ -14,7 +14,11 @@ describe Virtus, '#freeze' do
 
   let(:object) { model.new }
 
-  it { should be_frozen }
+  before do
+    object.set_default_attributes!
+  end
+
+  it { should be(object) }
 
   its(:name) { should eql('foo') }
   its(:age)  { should be(30) }
