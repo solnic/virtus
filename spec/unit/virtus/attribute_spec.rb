@@ -5,7 +5,9 @@ describe Virtus, '#attribute' do
   let(:options) { {} }
 
   share_examples_for 'a class with boolean attribute' do
-    let(:object) { Test.new }
+    subject { Test }
+
+    let(:object) { subject.new }
 
     it 'defines reader and writer' do
       object.test = true
@@ -85,6 +87,11 @@ describe Virtus, '#attribute' do
       context 'with a subclass' do
         it_behaves_like 'a class with boolean attribute' do
           subject { Class.new(Test) }
+
+          it 'gets attributes from the parent class' do
+            Test.attribute :other, Integer
+            expect(subject.attribute_set[:other]).to eql(Test.attribute_set[:other])
+          end
         end
       end
     end

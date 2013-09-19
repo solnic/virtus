@@ -14,12 +14,12 @@ module Virtus
     # @api private
     def self.extended(descendant)
       super
+      AttributeSet.create(descendant)
       descendant.module_eval do
         extend DescendantsTracker
         include attribute_set
       end
     end
-
     private_class_method :extended
 
     # Returns all the attributes defined on a Class
@@ -40,11 +40,7 @@ module Virtus
     #
     # @api public
     def attribute_set
-      return @attribute_set if defined?(@attribute_set)
-      superclass  = self.superclass
-      method      = __method__
-      parent      = superclass.public_send(method) if superclass.respond_to?(method)
-      @attribute_set = AttributeSet.new(parent)
+      @attribute_set
     end
 
     # @see Virtus::ClassMethods.attribute_set
@@ -57,7 +53,7 @@ module Virtus
       attribute_set
     end
 
-  private
+    private
 
     # Setup descendants' own Attribute-accessor-method-hosting modules
     #
@@ -74,19 +70,8 @@ module Virtus
     # @api private
     def inherited(descendant)
       super
+      AttributeSet.create(descendant)
       descendant.module_eval { include attribute_set }
-    end
-
-    # Add the attribute to the class' and descendants' attributes
-    #
-    # @param [Attribute] attribute
-    #
-    # @return [undefined]
-    #
-    # @api private
-    def virtus_add_attribute(attribute)
-      super
-      descendants.each { |descendant| descendant.attribute_set.reset }
     end
 
     # The list of allowed public methods

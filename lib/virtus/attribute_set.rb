@@ -4,6 +4,15 @@ module Virtus
   class AttributeSet < Module
     include Enumerable
 
+    # @api private
+    def self.create(descendant)
+      superclass = descendant.superclass
+      if superclass.respond_to?(:attribute_set)
+        parent = superclass.public_send(:attribute_set)
+      end
+      descendant.instance_variable_set('@attribute_set', AttributeSet.new(parent))
+    end
+
     # Initialize an AttributeSet
     #
     # @param [AttributeSet] parent
