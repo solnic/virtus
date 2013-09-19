@@ -83,12 +83,11 @@ describe Virtus::Attribute, '.build' do
   end
 
   context 'when custom attribute class exists for a given primitive' do
-    let(:primitive) { Class.new }
+    let(:type)      { Class.new }
     let(:attribute) { Class.new(Virtus::Attribute) }
 
     before do
-      pending
-      attribute.primitive(primitive)
+      attribute.primitive(type)
     end
 
     it { should be_instance_of(attribute) }

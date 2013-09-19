@@ -23,6 +23,7 @@ module Virtus
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
     class EmbeddedValue < Attribute
+      TYPES = [Struct, OpenStruct, Virtus].freeze
 
       class FromStruct < self
 
@@ -49,8 +50,8 @@ module Virtus
       end # FromOpenStruct
 
       # @api private
-      def self.handles?(type)
-        type.is_a?(Class) && determine_type(type)
+      def self.handles?(klass)
+        klass.is_a?(Class) && TYPES.any? { |type| klass <= type }
       end
 
       # @api private

@@ -16,15 +16,20 @@ module Virtus
 
       # @api private
       def self.determine_type(klass)
-        type =
-          if klass.is_a?(Class)
-            EmbeddedValue.determine_type(klass) ||
-              Attribute.determine_type(klass)   ||
-              Collection.determine_type(klass)
+        type = Attribute.determine_type(klass)
 
-          else
-            Attribute.determine_type(klass)
-          end
+        if klass.is_a?(Class)
+          type ||=
+            if klass < Axiom::Types::Type
+              determine_type(klass.primitive)
+            else
+              if EmbeddedValue.handles?(klass)
+                EmbeddedValue.determine_type(klass)
+              elsif klass < Enumerable
+                Collection
+              end
+            end
+        end
 
         type || Attribute
       end

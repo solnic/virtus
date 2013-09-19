@@ -61,14 +61,29 @@ describe Virtus::Attribute::Hash, '#coerce' do
       let(:key_primitive)   { OpenStruct }
       let(:value_primitive) { Struct.new(:id) }
 
-      let(:input) { Hash[{ :name => 'Test' } => [1]] }
+      let(:input)  { Hash[{:name => 'Test'} => [1]] }
+      let(:output) { Hash[key_primitive.new(:name => 'Test') => value_primitive.new(1)] }
 
-      it 'coerces key input' do
-        expect(subject.keys.first).to eq(key_primitive.new(:name => 'Test'))
+      it 'coerces keys and values' do
+        # FIXME: expect(subject).to eq(output) crashes in rspec
+        expect(subject.keys.first).to eq(output.keys.first)
+        expect(subject.values.first).to eq(output.values.first)
+        expect(subject.size).to be(1)
       end
+    end
 
-      it 'coerces value input' do
-        expect(subject.values.first).to eq(value_primitive.new(1))
+    context 'when key type is an array and value type is another hash' do
+      let(:key_primitive)   { Array[String] }
+      let(:value_primitive) { Hash[String => Integer] }
+
+      let(:key_attribute)   { Virtus::Attribute.build(key_primitive) }
+      let(:value_attribute) { Virtus::Attribute.build(value_primitive) }
+
+      let(:input)  { Hash[[1, 2], {:one => '1', :two => '2'}] }
+      let(:output) { Hash[key_attribute.coerce(input.keys.first) => value_attribute.coerce(input.values.first)] }
+
+      it 'coerces keys and values' do
+        expect(subject).to eq(output)
       end
     end
   end

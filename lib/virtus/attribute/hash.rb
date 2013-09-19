@@ -19,11 +19,15 @@ module Virtus
       # FIXME: remove this once axiom-types supports it
       Type = Struct.new(:key_type, :value_type) do
         def self.infer(type)
-          type_options = infer_key_and_value_types(type)
-          key_class    = determine_type(type_options.fetch(:key_type,   Object))
-          value_class  = determine_type(type_options.fetch(:value_type, Object))
+          if type.is_a?(Class) && type < Axiom::Types::Type
+            new(type.key_type, type.value_type)
+          else
+            type_options = infer_key_and_value_types(type)
+            key_class    = determine_type(type_options.fetch(:key_type,   Object))
+            value_class  = determine_type(type_options.fetch(:value_type, Object))
 
-          new(key_class, value_class)
+            new(key_class, value_class)
+          end
         end
 
         def self.determine_type(type)

@@ -27,6 +27,12 @@ describe 'custom collection attributes' do
     end
   end
 
+  after do
+    [:BookCollectionAttribute, :BookCollection, :Book, :Library].each do |const|
+      Examples.send(:remove_const, const)
+    end
+  end
+
   shared_examples_for 'a collection' do
     it 'can be used as Virtus attributes' do
       attribute = Examples::Library.attribute_set[:books]

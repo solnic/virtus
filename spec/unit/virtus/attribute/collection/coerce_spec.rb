@@ -36,5 +36,17 @@ describe Virtus::Attribute::Collection, '#coerce' do
         expect(subject).to eq([member_primitive.new(1), member_primitive.new(2)])
       end
     end
+
+    context 'when member type is a hash with key/value coercion' do
+      let(:member_primitive) { Hash[String => Integer] }
+      let(:member_attribute) { Virtus::Attribute.build(member_primitive) }
+      let(:input)            { [{:one => '1'}, {:two => '2'}] }
+      let(:output)           { [member_attribute.coerce(input.first), member_attribute.coerce(input.last)] }
+      let(:object)           { described_class.build(Array[member_primitive]) }
+
+      it 'coerces members' do
+        expect(subject).to eq(output)
+      end
+    end
   end
 end
