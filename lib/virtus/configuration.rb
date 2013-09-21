@@ -6,6 +6,12 @@ module Virtus
     # Access the coerce setting for this instance
     attr_accessor :coerce
 
+    # Access the constructor setting for this instance
+    attr_accessor :constructor
+
+    # Access the mass-assignment setting for this instance
+    attr_accessor :mass_assignment
+
     # Build new configuration instance using the passed block
     #
     # @example
@@ -26,8 +32,10 @@ module Virtus
     #
     # @api private
     def initialize
-      @coerce  = true
-      @coercer = Coercible::Coercer.new
+      @coerce          = true
+      @constructor     = true
+      @mass_assignment = true
+      @coercer         = Coercible::Coercer.new
     end
 
     # Provide access to the attributes and methods via the passed block

@@ -61,11 +61,15 @@ module Virtus
     #
     # @api private
     def add_included_hook
-      attribute_proc = attribute_method(configuration)
+      attribute_proc  = attribute_method(configuration)
+      constructor     = configuration.constructor
+      mass_assignment = configuration.mass_assignment
 
       self.module.define_singleton_method :included do |object|
         super(object)
-        object.send :include, Virtus::Model
+        object.send :include, Virtus::Model::Core
+        object.send :include, Virtus::Model::Constructor    if constructor
+        object.send :include, Virtus::Model::MassAssignment if mass_assignment
         object.send :define_singleton_method, :attribute, attribute_proc
       end
     end
