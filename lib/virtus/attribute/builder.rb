@@ -48,7 +48,7 @@ module Virtus
       # @api private
       def initialize_attribute
         @attribute = @klass.new(@type, @options) do |attribute|
-          attribute.extend(Named)       if @options[:name]
+          attribute.extend(Accessor)    if @options[:name]
           attribute.extend(Coercible)   if @options[:coerce]
           attribute.extend(LazyDefault) if @options[:lazy]
         end

@@ -165,7 +165,7 @@ require 'virtus/attribute/default_value/from_symbol'
 require 'virtus/attribute'
 require 'virtus/attribute/builder'
 require 'virtus/attribute/coercer'
-require 'virtus/attribute/named'
+require 'virtus/attribute/accessor'
 require 'virtus/attribute/coercible'
 require 'virtus/attribute/lazy_default'
 
