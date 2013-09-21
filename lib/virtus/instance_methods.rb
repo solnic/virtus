@@ -187,7 +187,7 @@ module Virtus
       self
     end
 
-  private
+    private
 
     # The list of allowed public methods
     #
