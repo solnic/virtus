@@ -36,6 +36,13 @@ describe Virtus, '#attribute' do
     expect(klass.attribute(:test, String)).to be(klass)
   end
 
+  it 'raises error when :name is a reserved name' do
+    klass = Class.new { include Virtus }
+    expect { klass.attribute(:attributes, Set) }.to raise_error(
+      ArgumentError, ':attributes is not allowed as an attribute name'
+    )
+  end
+
   context 'with a class' do
     context 'when type is Boolean' do
       before :all do

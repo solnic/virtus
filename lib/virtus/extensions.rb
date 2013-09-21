@@ -4,6 +4,7 @@ module Virtus
   module Extensions
     WRITER_METHOD_REGEXP   = /=\z/.freeze
     INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
+    RESERVED_NAMES         = [:attributes].to_set.freeze
 
     # A hook called when an object is extended with Virtus
     #
@@ -50,6 +51,7 @@ module Virtus
     #
     # @api public
     def attribute(name, type, options = {})
+      assert_valid_name(name)
       attribute_set << Attribute.build(type, merge_options(name, options))
       self
     end
@@ -88,7 +90,7 @@ module Virtus
         end
     end
 
-  private
+    private
 
     # Return an attribute set for that instance
     #
@@ -106,6 +108,13 @@ module Virtus
     # @api private
     def merge_options(name, options)
       { :name => name }.merge(options)
+    end
+
+    # @api private
+    def assert_valid_name(name)
+      if RESERVED_NAMES.include?(name.to_sym)
+        raise ArgumentError, "#{name.inspect} is not allowed as an attribute name"
+      end
     end
 
   end # module Extensions
