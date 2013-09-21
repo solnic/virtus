@@ -142,6 +142,7 @@ require 'virtus/support/equalizer'
 require 'virtus/support/options'
 require 'virtus/support/type_lookup'
 
+require 'virtus/model'
 require 'virtus/extensions'
 require 'virtus/const_missing_extensions'
 require 'virtus/class_inclusions'

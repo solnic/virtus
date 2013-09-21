@@ -51,7 +51,7 @@ module Virtus
     # @api private
     def initialize(configuration, mod = Module.new)
       @configuration = configuration
-      @module        = mod.send(:include, Virtus)
+      @module        = mod
     end
 
     # Adds the .included hook to the anonymous module which then defines the
@@ -65,6 +65,7 @@ module Virtus
 
       self.module.define_singleton_method :included do |object|
         super(object)
+        object.send :include, Virtus::Model
         object.send :define_singleton_method, :attribute, attribute_proc
       end
     end

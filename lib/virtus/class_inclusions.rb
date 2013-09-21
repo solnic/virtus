@@ -13,29 +13,36 @@ module Virtus
     def self.included(descendant)
       super
       descendant.extend(ClassMethods)
+      descendant.class_eval { include Methods }
       descendant.class_eval { include InstanceMethods }
+      descendant.class_eval { include InstanceMethods::Constructor }
+      descendant.class_eval { include InstanceMethods::MassAssignment }
     end
     private_class_method :included
 
-    # Return a list of allowed writer method names
-    #
-    # @return [Set]
-    #
-    # @api private
-    def allowed_writer_methods
-      self.class.allowed_writer_methods
-    end
+    module Methods
 
-  private
+      # Return a list of allowed writer method names
+      #
+      # @return [Set]
+      #
+      # @api private
+      def allowed_writer_methods
+        self.class.allowed_writer_methods
+      end
 
-    # Return class' attribute set
-    #
-    # @return [Virtus::AttributeSet]
-    #
-    # @api private
-    def attribute_set
-      self.class.attribute_set
-    end
+      private
+
+      # Return class' attribute set
+      #
+      # @return [Virtus::AttributeSet]
+      #
+      # @api private
+      def attribute_set
+        self.class.attribute_set
+      end
+
+    end # Methods
 
   end # module ClassInclusions
 end # module Virtus

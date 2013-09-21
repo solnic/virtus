@@ -18,6 +18,8 @@ module Virtus
       object.instance_variable_set('@attribute_set', AttributeSet.new)
       object.instance_eval do
         extend InstanceMethods
+        extend InstanceMethods::Constructor
+        extend InstanceMethods::MassAssignment
         extend attribute_set
       end
     end
