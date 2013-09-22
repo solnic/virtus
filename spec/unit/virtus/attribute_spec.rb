@@ -192,7 +192,7 @@ describe Virtus, '#attribute' do
 
     let(:model) {
       Class.new {
-        include Virtus.module { |config| config.coerce = false }
+        include Virtus.model { |config| config.coerce = false }
 
         attribute :test, String
       }

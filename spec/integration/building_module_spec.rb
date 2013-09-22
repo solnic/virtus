@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'I can create a Virtus module' do
   before do
     module Examples
-      NoncoercingModule = Virtus.module { |config|
+      NoncoercingModule = Virtus.model { |config|
         config.coerce = false
       }
 
-      CoercingModule = Virtus.module { |config|
+      CoercingModule = Virtus.model { |config|
         config.coerce = true
 
         config.coercer do |coercer|

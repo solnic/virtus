@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Virtus, '.module' do
+describe Virtus, '.model' do
   share_examples_for 'a model with constructor' do
     it 'accepts attribute hash' do
       instance = subject.new(:name => 'Jane')
@@ -23,7 +23,7 @@ describe Virtus, '.module' do
   end
 
   context 'with default configuration' do
-    let(:mod) { Virtus.module }
+    let(:mod) { Virtus.model }
 
     context 'with a class' do
       subject { Class.new }
@@ -57,7 +57,7 @@ describe Virtus, '.module' do
   context 'when constructor is disabled' do
     subject { Class.new.send(:include, mod) }
 
-    let(:mod) { Virtus.module { |config| config.constructor = false } }
+    let(:mod) { Virtus.model { |config| config.constructor = false } }
 
     it 'does not accept attribute hash in the constructor' do
       expect { subject.new({}) }.to raise_error(ArgumentError)
@@ -65,7 +65,7 @@ describe Virtus, '.module' do
   end
 
   context 'when mass-assignment is disabled' do
-    let(:mod)   { Virtus.module { |config| config.mass_assignment = false } }
+    let(:mod)   { Virtus.model { |config| config.mass_assignment = false } }
     let(:model) { Class.new }
 
     context 'with a class' do

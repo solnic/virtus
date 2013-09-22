@@ -111,7 +111,7 @@ module Virtus
   # @return [Module]
   #
   # @api public
-  def self.module(&block)
+  def self.model(&block)
     ModuleBuilder.call(&block)
   end
 
