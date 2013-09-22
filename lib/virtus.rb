@@ -36,6 +36,7 @@ module Virtus
   #
   # @api private
   def self.extended(object)
+    Virtus.warn("extending with Virtus module is deprecated. Use 'extend(Virtus.model)' instead #{caller.first}")
     object.extend(Extensions)
   end
   private_class_method :extended
