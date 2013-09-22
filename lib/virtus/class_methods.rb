@@ -83,5 +83,12 @@ module Virtus
       public_instance_methods.map(&:to_s)
     end
 
+    # @api private
+    def assert_valid_name(name)
+      if instance_methods.include?(name.to_sym)
+        raise ArgumentError, "#{name.inspect} is not allowed as an attribute name"
+      end
+    end
+
   end # module ClassMethods
 end # module Virtus

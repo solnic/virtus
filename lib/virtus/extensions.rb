@@ -123,13 +123,6 @@ module Virtus
         { :name => name }.merge(options)
       end
 
-      # @api private
-      def assert_valid_name(name)
-        if RESERVED_NAMES.include?(name.to_sym)
-          raise ArgumentError, "#{name.inspect} is not allowed as an attribute name"
-        end
-      end
-
     end # Methods
 
   end # module Extensions

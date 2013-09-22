@@ -36,11 +36,24 @@ describe Virtus, '#attribute' do
     expect(klass.attribute(:test, String)).to be(klass)
   end
 
-  it 'raises error when :name is a reserved name' do
+  it 'raises error when :name is a reserved name on a class' do
     klass = Class.new { include Virtus }
     expect { klass.attribute(:attributes, Set) }.to raise_error(
       ArgumentError, ':attributes is not allowed as an attribute name'
     )
+  end
+
+  it 'raises error when :name is a reserved name on an instance' do
+    object = Class.new.new.extend(Virtus)
+    expect { object.attribute(:attributes, Set) }.to raise_error(
+      ArgumentError, ':attributes is not allowed as an attribute name'
+    )
+  end
+
+  it 'allows :attributes as an attribute name when mass-assignment is not included' do
+    klass = Class.new { include Virtus::Model::Core }
+    klass.attribute(:attributes, Set)
+    expect(klass.attribute_set[:attributes]).to be_instance_of(Virtus::Attribute::Collection)
   end
 
   context 'with a class' do
