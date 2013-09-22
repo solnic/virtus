@@ -43,7 +43,7 @@ You can create classes extended with virtus and define attributes:
 
 ``` ruby
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :name, String
   attribute :age, Integer
@@ -121,13 +121,13 @@ inclusion in your classes:
 
 ```ruby
 module Name
-  include Virtus
+  include Virtus.model
 
   attribute :name, String
 end
 
 module Age
-  include Virtus
+  include Virtus.model
 
   attribute :age, Integer
 end
@@ -159,7 +159,7 @@ user.name # => 'John'
 
 ``` ruby
 class Page
-  include Virtus
+  include Virtus.model
 
   attribute :title, String
 
@@ -196,13 +196,13 @@ page.views                    # => 0
 
 ``` ruby
 class City
-  include Virtus
+  include Virtus.model
 
   attribute :name, String
 end
 
 class Address
-  include Virtus
+  include Virtus.model
 
   attribute :street,  String
   attribute :zipcode, String
@@ -210,7 +210,7 @@ class Address
 end
 
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :name,    String
   attribute :address, Address
@@ -228,7 +228,7 @@ user.address.city.name # => "NYC"
 ``` ruby
 # Support "primitive" classes
 class Book
-  include Virtus
+  include Virtus.model
 
   attribute :page_numbers, Array[Integer]
 end
@@ -238,7 +238,7 @@ book.page_numbers # => [1, 2, 3]
 
 # Support EmbeddedValues, too!
 class Address
-  include Virtus
+  include Virtus.model
 
   attribute :address,     String
   attribute :locality,    String
@@ -247,13 +247,13 @@ class Address
 end
 
 class PhoneNumber
-  include Virtus
+  include Virtus.model
 
   attribute :number, String
 end
 
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :phone_numbers, Array[PhoneNumber]
   attribute :addresses,     Set[Address]
@@ -275,7 +275,7 @@ user.addresses # => #<Set: {#<Address:0x007fdb2d3be448 @address="1234 Any St.", 
 
 ``` ruby
 class Package
-  include Virtus
+  include Virtus.model
 
   attribute :dimensions, Hash[Symbol => Float]
 end
@@ -293,13 +293,13 @@ Here's an example:
 
 ``` ruby
 class Book
-  include Virtus
+  include Virtus.model
 
   attribute :title, String
 end
 
 class Library
-  include Virtus
+  include Virtus.model
 
   attribute :books, Array[Book]
 end
@@ -318,7 +318,7 @@ mutation methods that perform coercions. For example:
 
 ``` ruby
 class Book
-  include Virtus
+  include Virtus.model
 
   attribute :title, String
 end
@@ -334,7 +334,7 @@ class BookCollection < Array
 end
 
 class Library
-  include Virtus
+  include Virtus.model
 
   attribute :books, BookCollection[Book]
 end
@@ -347,17 +347,21 @@ library.books << { :title => 'Another Introduction to Virtus' }
 
 ``` ruby
 class GeoLocation
-  include Virtus::ValueObject
+  include Virtus.value_object
 
-  attribute :latitude,  Float
-  attribute :longitude, Float
+  values do
+    attribute :latitude,  Float
+    attribute :longitude, Float
+  end
 end
 
 class Venue
-  include Virtus
+  include Virtus.value_object
 
-  attribute :name,     String
-  attribute :location, GeoLocation
+  values do
+    attribute :name,     String
+    attribute :location, GeoLocation
+  end
 end
 
 venue = Venue.new(
@@ -388,7 +392,7 @@ class Json < Virtus::Attribute
 end
 
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :info, Json
 end
@@ -405,7 +409,7 @@ class NoisyString < Virtus::Attribute
 end
 
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :scream, NoisyString
 end
@@ -418,7 +422,7 @@ user.scream # => "HELLO WORLD!"
 
 ``` ruby
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :unique_id, String, :writer => :private
 
@@ -448,7 +452,7 @@ Virtus.coerce(false)
 
 # ...or you can turn it off for a single attribute
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :name, String, :coerce => false
 end
@@ -469,7 +473,7 @@ my_cool_coercer = Coercible::Coercer.new do |config|
 end
 
 class User
-  include Virtus
+  include Virtus.model
 
   attribute :name, String, :coercer => my_cool_coercer
 end
@@ -480,7 +484,7 @@ end
 You can also build Virtus modules that contain their own configuration.
 
 ```ruby
-YupNopeBooleans = Virtus.module { |mod|
+YupNopeBooleans = Virtus.model { |mod|
   mod.coerce = true
   mod.string.boolean_map = { 'yup' => true, 'nope' => false }
 }
@@ -494,7 +498,7 @@ end
 
 # Or just include the module straight away ...
 class User
-  include Virtus.module { |m| m.coerce = false }
+  include Virtus.model { |m| m.coerce = false }
 
   attribute :name, String
   attribute :admin, Boolean
