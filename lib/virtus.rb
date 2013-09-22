@@ -20,6 +20,7 @@ module Virtus
   def self.included(object)
     super
     if Class === object
+      Virtus.warn("including Virtus module is deprecated. Use 'include Virtus.model' instead #{caller.first}")
       object.send(:include, ClassInclusions)
     else
       object.extend(ModuleExtensions)
