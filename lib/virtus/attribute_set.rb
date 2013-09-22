@@ -6,9 +6,8 @@ module Virtus
 
     # @api private
     def self.create(descendant)
-      superclass = descendant.superclass
-      if superclass.respond_to?(:attribute_set)
-        parent = superclass.public_send(:attribute_set)
+      if descendant.respond_to?(:superclass) && descendant.superclass.respond_to?(:attribute_set)
+        parent = descendant.superclass.public_send(:attribute_set)
       end
       descendant.instance_variable_set('@attribute_set', AttributeSet.new(parent))
     end

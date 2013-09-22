@@ -2,7 +2,7 @@ module Virtus
 
   # Class methods that are added when you include Virtus
   module ClassMethods
-    include Extensions
+    include Extensions::Methods
     include ConstMissingExtensions
 
     # Hook called when module is extended

@@ -26,8 +26,8 @@ module Virtus
       # @api private
       def self.extended(descendant)
         super
-        descendant.extend(ClassMethods)
-        descendant.send(:include, InstanceMethods)
+        descendant.extend(Extensions::Methods)
+        descendant.extend(InstanceMethods)
       end
       private_class_method :included
 
@@ -50,6 +50,13 @@ module Virtus
       def self.included(descendant)
         super
         descendant.send(:include, InstanceMethods::MassAssignment)
+      end
+      private_class_method :included
+
+      # @api private
+      def self.extended(descendant)
+        super
+        descendant.extend(InstanceMethods::MassAssignment)
       end
       private_class_method :included
 

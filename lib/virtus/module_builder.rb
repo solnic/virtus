@@ -37,6 +37,7 @@ module Virtus
       config  = Configuration.build(&block)
       builder = new(config)
       builder.add_included_hook
+      builder.add_extended_hook
       builder.module
     end
 
@@ -70,6 +71,19 @@ module Virtus
         object.send :include, Virtus::Model::Core
         object.send :include, Virtus::Model::Constructor    if constructor
         object.send :include, Virtus::Model::MassAssignment if mass_assignment
+        object.send :define_singleton_method, :attribute, attribute_proc
+      end
+    end
+
+    # @api private
+    def add_extended_hook
+      attribute_proc  = attribute_method(configuration)
+      mass_assignment = configuration.mass_assignment
+
+      self.module.define_singleton_method :extended do |object|
+        super(object)
+        object.extend Virtus::Model::Core
+        object.extend Virtus::Model::MassAssignment if mass_assignment
         object.send :define_singleton_method, :attribute, attribute_proc
       end
     end
