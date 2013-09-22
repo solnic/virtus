@@ -115,6 +115,13 @@ module Virtus
     ModuleBuilder.call(&block)
   end
 
+  # Builds a module for value object models
+  #
+  # @api public
+  def self.value_object(&block)
+    ValueObjectBuilder.call(&block)
+  end
+
   # Global configuration instance
   #
   # @ return [Configuration]

@@ -5,6 +5,8 @@ module Virtus
   # This allows for individual Virtus modules to be included in
   # classes and not impacted by the global Virtus configuration,
   # which is implemented using Virtus::Configuration.
+  #
+  # @private
   class ModuleBuilder
 
     # Return module
@@ -65,13 +67,16 @@ module Virtus
       attribute_proc  = attribute_method(configuration)
       constructor     = configuration.constructor
       mass_assignment = configuration.mass_assignment
+      extensions      = core_extensions
+      inclusions      = core_inclusions
 
       self.module.define_singleton_method :included do |object|
         super(object)
-        object.send :include, Virtus::Model::Core
-        object.send :include, Virtus::Model::Constructor    if constructor
-        object.send :include, Virtus::Model::MassAssignment if mass_assignment
-        object.send :define_singleton_method, :attribute, attribute_proc
+        extensions.each { |mod| object.extend(mod) }
+        inclusions.each { |mod| object.send(:include, mod) }
+        object.send(:include, Virtus::Model::Constructor)    if constructor
+        object.send(:include, Virtus::Model::MassAssignment) if mass_assignment
+        object.send(:define_singleton_method, :attribute, attribute_proc)
       end
     end
 
@@ -79,11 +84,12 @@ module Virtus
     def add_extended_hook
       attribute_proc  = attribute_method(configuration)
       mass_assignment = configuration.mass_assignment
+      extensions      = core_inclusions + core_extensions
 
       self.module.define_singleton_method :extended do |object|
         super(object)
-        object.extend Virtus::Model::Core
-        object.extend Virtus::Model::MassAssignment if mass_assignment
+        extensions.each { |mod| object.extend(mod) }
+        object.extend(Virtus::Model::MassAssignment) if mass_assignment
         object.send :define_singleton_method, :attribute, attribute_proc
       end
     end
@@ -97,15 +103,55 @@ module Virtus
     #
     # @api private
     def attribute_method(configuration)
-      lambda do |name, type, options = {}|
-        module_options = {
-          :coerce => configuration.coerce,
-          :configured_coercer => configuration.coercer
-        }
+      module_options = self.module_options
 
+      lambda do |name, type, options = {}|
         super(name, type, module_options.merge(options))
       end
     end
 
+    # @api private
+    def module_options
+      { :coerce             => configuration.coerce,
+        :configured_coercer => configuration.coercer }
+    end
+
+    # @api private
+    def core_inclusions
+      [Virtus::Model::Core]
+    end
+
+    # @api private
+    def core_extensions
+      []
+    end
+
   end # class ModuleBuilder
+
+  # @private
+  class ValueObjectBuilder < ModuleBuilder
+
+    # @api private
+    def initialize(configuration, mod = Module.new)
+      super
+      @configuration.constructor = true
+    end
+
+    # @api private
+    def module_options
+      super.update(:writer => :private)
+    end
+
+    # @api private
+    def core_inclusions
+      super << ValueObject::AllowedWriterMethods << ValueObject::InstanceMethods
+    end
+
+    # @api private
+    def core_extensions
+      super << ValueObject::AllowedWriterMethods
+    end
+
+  end # ValueObjectBuilder
+
 end # module Virtus
