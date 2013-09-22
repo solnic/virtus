@@ -66,6 +66,54 @@ user.name # => "Jane"
 user.age  # => 21
 ```
 
+### Cherry-picking extensions
+
+``` ruby
+# include just the attribute DSL
+class User
+  include Virtus::Model::Core
+
+  attribute :name, String
+end
+
+user = User.new
+user.name = 'Piotr'
+
+# include attribute DSL + constructor
+class User
+  include Virtus::Model::Core
+  include Virtus::Model::Constructor
+
+  attribute :name, String
+end
+
+User.new(:name => 'Piotr')
+
+# include attribute DSL + constructor + mass-assignment
+class User
+  include Virtus::Model::Core
+  include Virtus::Model::Constructor
+  include Virtus::Model::MassAssignment
+
+  attribute :name, String
+end
+
+user = User.new(:name => 'Piotr')
+user.attributes = { :name => 'John' }
+user.attributes
+# => {:name => 'John'}
+
+# starting from virtus 1.0.0 preffered way to do this is to use module builder
+MyModel = Virtus.model { |config|
+  config.constructor     = false
+  config.mass_assignment = false
+}
+
+class User
+  include MyModel
+end
+```
+
 ### Using Virtus with Modules
 
 You can create modules extended with virtus and define attributes for later
