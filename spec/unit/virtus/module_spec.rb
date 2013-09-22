@@ -53,4 +53,41 @@ describe Virtus, '.module' do
       end
     end
   end
+
+  context 'when constructor is disabled' do
+    subject { Class.new.send(:include, mod) }
+
+    let(:mod) { Virtus.module { |config| config.constructor = false } }
+
+    it 'does not accept attribute hash in the constructor' do
+      expect { subject.new({}) }.to raise_error(ArgumentError)
+    end
+  end
+
+  context 'when mass-assignment is disabled' do
+    let(:mod)   { Virtus.module { |config| config.mass_assignment = false } }
+    let(:model) { Class.new }
+
+    context 'with a class' do
+      subject { model.new }
+
+      before do
+        model.send(:include, mod)
+      end
+
+      it { should_not respond_to(:attributes) }
+      it { should_not respond_to(:attributes=) }
+    end
+
+    context 'with an instance' do
+      subject { model.new }
+
+      before do
+        subject.extend(mod)
+      end
+
+      it { should_not respond_to(:attributes) }
+      it { should_not respond_to(:attributes=) }
+    end
+  end
 end
