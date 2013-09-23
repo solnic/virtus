@@ -50,6 +50,7 @@ module Virtus
         @attribute = @klass.new(@type, @options) do |attribute|
           attribute.extend(Accessor)    if @options[:name]
           attribute.extend(Coercible)   if @options[:coerce]
+          attribute.extend(Strict)      if @options[:strict]
           attribute.extend(LazyDefault) if @options[:lazy]
         end
       end

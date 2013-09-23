@@ -67,6 +67,14 @@ describe Virtus::Attribute, '.build' do
     it { should be_lazy }
   end
 
+  context 'when options specify strict mode' do
+    let(:options) { { :strict => true } }
+
+    it_behaves_like 'a valid attribute instance'
+
+    it { should be_strict }
+  end
+
   context 'when type is a string' do
     let(:type) { 'Integer' }
 

@@ -5,8 +5,9 @@ module Virtus
 
     include ::Equalizer.new(:type, :options)
 
-    accept_options :primitive, :accessor, :default, :lazy
+    accept_options :primitive, :accessor, :default, :lazy, :strict
 
+    strict false
     accessor :public
 
     # @see Virtus.coerce
@@ -84,7 +85,7 @@ module Virtus
 
     # @api public
     def value_coerced?(value)
-      coercer[primitive].coerced?(value)
+      coercer.success?(primitive, value)
     end
 
     # Return if the attribute is coercible
@@ -99,6 +100,11 @@ module Virtus
     # @api public
     def lazy?
       kind_of?(LazyDefault)
+    end
+
+    # @api public
+    def strict?
+      kind_of?(Strict)
     end
 
     # @api private

@@ -177,6 +177,7 @@ require 'virtus/attribute/builder'
 require 'virtus/attribute/coercer'
 require 'virtus/attribute/accessor'
 require 'virtus/attribute/coercible'
+require 'virtus/attribute/strict'
 require 'virtus/attribute/lazy_default'
 
 require 'virtus/attribute/boolean'

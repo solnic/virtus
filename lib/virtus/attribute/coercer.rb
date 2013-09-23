@@ -29,6 +29,11 @@ module Virtus
         self[value.class].public_send(@method, value)
       end
 
+      # @api public
+      def success?(primitive, value)
+        self[primitive].coerced?(value)
+      end
+
       # Return coercer object for the given type
       #
       # @return [Object]
