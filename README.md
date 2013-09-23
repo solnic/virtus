@@ -479,6 +479,23 @@ class User
 end
 ```
 
+## Strict Coercion Mode
+
+By default virtus returns input value even when it couldn't coerce it to expected type.
+If you want to catch such cases in a noisy way you can use the strict mode in which
+virtus raises an exception when it failed to coerce an input value.
+
+``` ruby
+class User
+  include Virtus.model { |config| config.strict = true }
+
+  attribute :admin, Boolean
+end
+
+# this will raise an error
+User.new :admin => "can't really say if true or false"
+```
+
 ## Building modules with custom configuration
 
 You can also build Virtus modules that contain their own configuration.
