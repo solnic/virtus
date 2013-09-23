@@ -27,6 +27,8 @@ module Virtus
       # @api private
       def call(value)
         self[value.class].public_send(@method, value)
+      rescue ::Coercible::UnsupportedCoercion
+        value
       end
 
       # @api public

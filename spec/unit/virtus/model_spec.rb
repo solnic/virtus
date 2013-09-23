@@ -22,6 +22,12 @@ describe Virtus, '.model' do
     end
   end
 
+  share_examples_for 'a model with strict mode turned off' do
+    it 'has attributes with strict set to false' do
+      expect(subject.send(:attribute_set)[:name]).to_not be_strict
+    end
+  end
+
   context 'with default configuration' do
     let(:mod) { Virtus.model }
 
@@ -34,6 +40,8 @@ describe Virtus, '.model' do
       end
 
       it_behaves_like 'a model with constructor'
+
+      it_behaves_like 'a model with strict mode turned off'
 
       it_behaves_like 'a model with mass-assignment' do
         let(:instance) { subject.new }
@@ -48,6 +56,8 @@ describe Virtus, '.model' do
         subject.attribute :name, String
       end
 
+      it_behaves_like 'a model with strict mode turned off'
+
       it_behaves_like 'a model with mass-assignment' do
         let(:instance) { subject }
       end
@@ -61,6 +71,37 @@ describe Virtus, '.model' do
 
     it 'does not accept attribute hash in the constructor' do
       expect { subject.new({}) }.to raise_error(ArgumentError)
+    end
+  end
+
+  context 'when strict mode is enabled' do
+    let(:mod)   { Virtus.model { |config| config.strict = true } }
+    let(:model) { Class.new }
+
+    context 'with a class' do
+      subject { model.new }
+
+      before do
+        model.send(:include, mod)
+        model.attribute :name, String
+      end
+
+      it 'has attributes with strict set to true' do
+        expect(model.attribute_set[:name]).to be_strict
+      end
+    end
+
+    context 'with an instance' do
+      subject { model.new }
+
+      before do
+        subject.extend(mod)
+        subject.attribute :name, String
+      end
+
+      it 'has attributes with strict set to true' do
+        expect(subject.send(:attribute_set)[:name]).to be_strict
+      end
     end
   end
 

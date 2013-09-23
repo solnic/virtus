@@ -6,6 +6,9 @@ module Virtus
     # Access the coerce setting for this instance
     attr_accessor :coerce
 
+    # Access the strict setting for this instance
+    attr_accessor :strict
+
     # Access the constructor setting for this instance
     attr_accessor :constructor
 
@@ -33,6 +36,7 @@ module Virtus
     # @api private
     def initialize
       @coerce          = true
+      @strict          = false
       @constructor     = true
       @mass_assignment = true
       @coercer         = Coercible::Coercer.new

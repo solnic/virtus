@@ -15,6 +15,10 @@ describe 'I can create a Virtus module' do
         end
       }
 
+      StrictModule = Virtus.model { |config|
+        config.strict = true
+      }
+
       class NoncoercedUser
         include NoncoercingModule
 
@@ -27,6 +31,13 @@ describe 'I can create a Virtus module' do
 
         attribute :name, String
         attribute :happy, Boolean
+      end
+
+      class StrictModel
+        include StrictModule
+
+        attribute :stuff, Hash
+        attribute :happy, Boolean, :strict => false
       end
     end
   end
@@ -43,5 +54,15 @@ describe 'I can create a Virtus module' do
 
     expect(user.name).to eql('Paul')
     expect(user.happy).to be(false)
+  end
+
+  specify 'including a custom module with strict enabled' do
+    model = Examples::StrictModel.new
+
+    expect { model.stuff = 'foo' }.to raise_error(ArgumentError)
+
+    model.happy = 'foo'
+
+    expect(model.happy).to eql('foo')
   end
 end

@@ -113,6 +113,7 @@ module Virtus
     # @api private
     def module_options
       { :coerce             => configuration.coerce,
+        :strict             => configuration.strict,
         :configured_coercer => configuration.coercer }
     end
 
