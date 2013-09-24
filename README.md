@@ -149,7 +149,7 @@ class User
 end
 
 user = User.new
-user.extend(Virtus)
+user.extend(Virtus.model)
 user.attribute :name, String
 user.name = 'John'
 user.name # => 'John'
