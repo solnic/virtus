@@ -23,6 +23,7 @@ module Virtus
       Virtus.warn("including Virtus module is deprecated. Use 'include Virtus.model' instead #{caller.first}")
       object.send(:include, ClassInclusions)
     else
+      Virtus.warn("including Virtus module is deprecated. Use 'include Virtus.module' instead #{caller.first}")
       object.extend(ModuleExtensions)
     end
   end
