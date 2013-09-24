@@ -104,10 +104,7 @@ user.attributes
 # => {:name => 'John'}
 
 # starting from virtus 1.0.0 preffered way to do this is to use module builder
-MyModel = Virtus.model { |config|
-  config.constructor     = false
-  config.mass_assignment = false
-}
+MyModel = Virtus.model(:constructor => false, :mass_assignment => false)
 
 class User
   include MyModel
@@ -127,7 +124,7 @@ module Name
 end
 
 module Age
-  include Virtus.module { |config| config.coerce = false }
+  include Virtus.module(:coerce => false)
 
   attribute :age, Integer
 end
@@ -487,7 +484,7 @@ virtus raises an exception when it failed to coerce an input value.
 
 ``` ruby
 class User
-  include Virtus.model { |config| config.strict = true }
+  include Virtus.model(:strict => true)
 
   attribute :admin, Boolean
 end
@@ -515,7 +512,7 @@ end
 
 # Or just include the module straight away ...
 class User
-  include Virtus.model { |m| m.coerce = false }
+  include Virtus.model(:coerce => false)
 
   attribute :name, String
   attribute :admin, Boolean
