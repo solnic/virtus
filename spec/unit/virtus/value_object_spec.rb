@@ -44,7 +44,7 @@ describe Virtus::ValueObject do
   context 'using new values {} block' do
     let(:model) {
       Class.new {
-        include Virtus.value_object
+        include Virtus.value_object(:coerce => false)
 
         def self.name
           'Model'

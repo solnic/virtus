@@ -67,7 +67,7 @@ describe Virtus, '.model' do
   context 'when constructor is disabled' do
     subject { Class.new.send(:include, mod) }
 
-    let(:mod) { Virtus.model { |config| config.constructor = false } }
+    let(:mod) { Virtus.model(:constructor => false) }
 
     it 'does not accept attribute hash in the constructor' do
       expect { subject.new({}) }.to raise_error(ArgumentError)
@@ -75,7 +75,7 @@ describe Virtus, '.model' do
   end
 
   context 'when strict mode is enabled' do
-    let(:mod)   { Virtus.model { |config| config.strict = true } }
+    let(:mod)   { Virtus.model(:strict => true) }
     let(:model) { Class.new }
 
     context 'with a class' do
@@ -106,7 +106,7 @@ describe Virtus, '.model' do
   end
 
   context 'when mass-assignment is disabled' do
-    let(:mod)   { Virtus.model { |config| config.mass_assignment = false } }
+    let(:mod)   { Virtus.model(:mass_assignment => false) }
     let(:model) { Class.new }
 
     context 'with a class' do

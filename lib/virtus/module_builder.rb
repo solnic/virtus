@@ -35,8 +35,9 @@ module Virtus
     # @return [Module]
     #
     # @api public
-    def self.call(&block)
+    def self.call(options = {}, &block)
       config  = Configuration.build(&block)
+      options.each { |key, value| config.public_send("#{key}=", value) }
       builder = new(config)
       builder.add_included_hook
       builder.add_extended_hook

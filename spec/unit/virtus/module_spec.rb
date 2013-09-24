@@ -18,7 +18,7 @@ describe Virtus, '.module' do
     end
 
     context 'with constructor turned off' do
-      subject { Virtus.module { |c| c.constructor = false } }
+      subject { Virtus.module(:constructor => false) }
 
       it_behaves_like 'a valid virtus object' do
         let(:instance) { model.new }
@@ -30,7 +30,7 @@ describe Virtus, '.module' do
     end
 
     context 'with mass assignment is turned off' do
-      subject { Virtus.module { |c| c.mass_assignment = false } }
+      subject { Virtus.module(:mass_assignment => false) }
 
       it_behaves_like 'a valid virtus object'
 
