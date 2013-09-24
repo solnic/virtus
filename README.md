@@ -121,13 +121,13 @@ inclusion in your classes:
 
 ```ruby
 module Name
-  include Virtus.model
+  include Virtus.module
 
   attribute :name, String
 end
 
 module Age
-  include Virtus.model
+  include Virtus.module { |config| config.coerce = false }
 
   attribute :age, Integer
 end
@@ -136,7 +136,7 @@ class User
   include Name, Age
 end
 
-user = User.new(:name => 'John', :age => '30')
+user = User.new(:name => 'John', :age => 30)
 ```
 
 ### Dynamically Extending Instances
