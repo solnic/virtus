@@ -36,7 +36,7 @@ describe Virtus, '.model' do
 
       before do
         subject.send(:include, mod)
-        subject.attribute :name, String
+        subject.attribute :name
       end
 
       it_behaves_like 'a model with constructor'

@@ -106,7 +106,7 @@ module Virtus
     def attribute_method(configuration)
       module_options = self.module_options
 
-      lambda do |name, type, options = {}|
+      lambda do |name, type = Object, options = {}|
         super(name, type, module_options.merge(options))
       end
     end
