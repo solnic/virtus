@@ -56,6 +56,12 @@ describe Virtus, '#attribute' do
     expect(klass.attribute_set[:attributes]).to be_instance_of(Virtus::Attribute::Collection)
   end
 
+  it 'allows specifying attribute without type' do
+    klass = Class.new { include Virtus::Model::Core }
+    klass.attribute(:name)
+    expect(klass.attribute_set[:name]).to be_instance_of(Virtus::Attribute)
+  end
+
   context 'with a class' do
     context 'when type is Boolean' do
       before :all do

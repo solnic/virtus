@@ -63,7 +63,7 @@ module Virtus
       # @see Attribute.build
       #
       # @api public
-      def attribute(name, type, options = {})
+      def attribute(name, type = Object, options = {})
         assert_valid_name(name)
         attribute_set << Attribute.build(type, merge_options(name, options))
         self
