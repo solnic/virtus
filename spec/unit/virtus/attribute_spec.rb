@@ -224,5 +224,12 @@ describe Virtus, '#attribute' do
       subject.test = :foo
       expect(subject.test).to be(:foo)
     end
+
+    it 'allows specifying attribute without type' do
+      model.attribute(:name)
+      expect(model.attribute_set[:name]).to be_instance_of(Virtus::Attribute)
+    end
+
+
   end
 end
