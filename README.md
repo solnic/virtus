@@ -18,8 +18,8 @@ API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
 with various modifications and improvements. The goal is to provide a common API
 for defining attributes on a model so all ORMs/ODMs could use it instead of
 reinventing the wheel all over again. It is also suitable for any other
-usecase where you need to extend your ruby objects with attributes that require
-data type coercions.
+use case where you need to extend your ruby objects with attributes that require
+data-type coercions.
 
 Installation
 ------------
@@ -39,7 +39,7 @@ Examples
 
 ### Using Virtus with Classes
 
-You can create classes extended with virtus and define attributes:
+You can create classes extended with Virtus and define attributes:
 
 ``` ruby
 class User
@@ -103,7 +103,7 @@ user.attributes = { :name => 'John' }
 user.attributes
 # => {:name => 'John'}
 
-# starting from virtus 1.0.0 preffered way to do this is to use module builder
+# starting from virtus 1.0.0 preferred way to do this is to use module builder
 MyModel = Virtus.model(:constructor => false, :mass_assignment => false)
 
 class User
@@ -113,7 +113,7 @@ end
 
 ### Using Virtus with Modules
 
-You can create modules extended with virtus and define attributes for later
+You can create modules extended with Virtus and define attributes for later
 inclusion in your classes:
 
 ```ruby
@@ -478,9 +478,9 @@ end
 
 ## Strict Coercion Mode
 
-By default virtus returns input value even when it couldn't coerce it to expected type.
+By default Virtus returns the input value even when it couldn't coerce it to the expected type.
 If you want to catch such cases in a noisy way you can use the strict mode in which
-virtus raises an exception when it failed to coerce an input value.
+Virtus raises an exception when it failed to coerce an input value.
 
 ``` ruby
 class User
