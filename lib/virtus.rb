@@ -150,7 +150,6 @@ end # module Virtus
 
 require 'descendants_tracker'
 require 'equalizer'
-require 'adamantium'
 require 'axiom-types'
 require 'coercible'
 
