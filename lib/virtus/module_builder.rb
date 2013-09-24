@@ -74,8 +74,8 @@ module Virtus
         super(object)
         extensions.each { |mod| object.extend(mod) }
         inclusions.each { |mod| object.send(:include, mod) }
-        object.send(:include, Virtus::Model::Constructor)    if constructor
-        object.send(:include, Virtus::Model::MassAssignment) if mass_assignment
+        object.send(:include, Model::Constructor)    if constructor
+        object.send(:include, Model::MassAssignment) if mass_assignment
         object.send(:define_singleton_method, :attribute, attribute_proc)
       end
     end
@@ -89,7 +89,7 @@ module Virtus
       self.module.define_singleton_method :extended do |object|
         super(object)
         extensions.each { |mod| object.extend(mod) }
-        object.extend(Virtus::Model::MassAssignment) if mass_assignment
+        object.extend(Model::MassAssignment) if mass_assignment
         object.send :define_singleton_method, :attribute, attribute_proc
       end
     end
@@ -119,7 +119,7 @@ module Virtus
 
     # @api private
     def core_inclusions
-      [Virtus::Model::Core]
+      [Model::Core]
     end
 
     # @api private
@@ -137,20 +137,21 @@ module Virtus
   class ModuleExtensionBuilder < ExtensionBuilder
 
     # @api private
-    def initialize(configuration, mod = Module.new)
-      super
-    end
-
-    # @api private
     def add_included_hook
       attribute_proc = attribute_method(configuration)
+      inclusions     = core_inclusions
+
+      inclusions << Model::Constructor    if configuration.constructor
+      inclusions << Model::MassAssignment if configuration.mass_assignment
 
       self.module.define_singleton_method :included do |object|
         super(object)
         object.extend(ModuleExtensions)
+        object.instance_variable_set('@inclusions', inclusions)
         object.send(:define_singleton_method, :attribute, attribute_proc)
       end
     end
+
   end # ModuleExtensionBuilder
 
   # @private

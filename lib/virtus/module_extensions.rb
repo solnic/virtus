@@ -2,8 +2,21 @@ module Virtus
 
   # Virtus module that can define attributes for later inclusion
   #
+  # @private
   module ModuleExtensions
     include ConstMissingExtensions
+
+    # @api private
+    def self.extended(mod)
+      super
+      setup(mod)
+    end
+
+    # @api private
+    def self.setup(mod, inclusions = [Model], attribute_definitions = [])
+      mod.instance_variable_set('@inclusions', inclusions)
+      mod.instance_variable_set('@attribute_definitions', attribute_definitions)
+    end
 
     # Define an attribute in the module
     #
@@ -13,11 +26,11 @@ module Virtus
     #
     # @api private
     def attribute(*args)
-      attribute_definitions << args
+      @attribute_definitions << args
       self
     end
 
-  private
+    private
 
     # Extend an object with Virtus methods and define attributes
     #
@@ -28,7 +41,7 @@ module Virtus
     # @api private
     def extended(object)
       super
-      object.extend(Virtus)
+      @inclusions.each { |mod| object.extend(mod) }
       define_attributes(object)
       object.set_default_attributes
     end
@@ -42,17 +55,14 @@ module Virtus
     # @api private
     def included(object)
       super
-      object.module_eval { include Virtus }
-      define_attributes(object)
-    end
 
-    # Return attribute definitions
-    #
-    # @return [Array<Hash>]
-    #
-    # @api private
-    def attribute_definitions
-      @_attribute_definitions ||= []
+      if Class === object
+        @inclusions.each { |mod| object.send(:include, mod) }
+        define_attributes(object)
+      else
+        object.extend(ModuleExtensions)
+        ModuleExtensions.setup(object, @inclusions, @attribute_definitions)
+      end
     end
 
     # Define attributes on a class or instance
@@ -63,7 +73,7 @@ module Virtus
     #
     # @api private
     def define_attributes(object)
-      attribute_definitions.each do |attribute_args|
+      @attribute_definitions.each do |attribute_args|
         object.attribute(*attribute_args)
       end
     end

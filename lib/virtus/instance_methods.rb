@@ -208,7 +208,7 @@ module Virtus
 
     # @api private
     def assert_valid_name(name)
-      if respond_to?(name.to_sym)
+      if respond_to?(:attributes) && name.to_sym == :attributes || name.to_sym == :attribute_set
         raise ArgumentError, "#{name.inspect} is not allowed as an attribute name"
       end
     end

@@ -4,12 +4,14 @@ module Virtus
 
     # @api private
     def self.included(descendant)
-      return unless descendant.is_a?(Class)
-      descendant.class_eval {
-        include Core
-        include Constructor
-        include MassAssignment
-      }
+      super
+      descendant.send(:include, ClassInclusions) if Class === descendant
+    end
+
+    # @api private
+    def self.extended(descendant)
+      super
+      descendant.extend(Extensions)
     end
 
     module Core
