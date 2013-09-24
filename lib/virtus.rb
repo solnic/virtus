@@ -114,14 +114,21 @@ module Virtus
   #
   # @api public
   def self.model(&block)
-    ModuleBuilder.call(&block)
+    ModelExtensionBuilder.call(&block)
+  end
+
+  # Builds a module for...modules
+  #
+  # @api public
+  def self.module(&block)
+    ModuleExtensionBuilder.call(&block)
   end
 
   # Builds a module for value object models
   #
   # @api public
   def self.value_object(&block)
-    ValueObjectBuilder.call(&block)
+    ValueObjectExtensionBuilder.call(&block)
   end
 
   # Global configuration instance

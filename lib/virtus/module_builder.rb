@@ -7,7 +7,7 @@ module Virtus
   # which is implemented using Virtus::Configuration.
   #
   # @private
-  class ModuleBuilder
+  class ExtensionBuilder
 
     # Return module
     #
@@ -127,10 +127,34 @@ module Virtus
       []
     end
 
-  end # class ModuleBuilder
+  end # class ExtensionBuilder
 
   # @private
-  class ValueObjectBuilder < ModuleBuilder
+  class ModelExtensionBuilder < ExtensionBuilder
+  end # ModelExtensionBuilder
+
+  # @private
+  class ModuleExtensionBuilder < ExtensionBuilder
+
+    # @api private
+    def initialize(configuration, mod = Module.new)
+      super
+    end
+
+    # @api private
+    def add_included_hook
+      attribute_proc = attribute_method(configuration)
+
+      self.module.define_singleton_method :included do |object|
+        super(object)
+        object.extend(ModuleExtensions)
+        object.send(:define_singleton_method, :attribute, attribute_proc)
+      end
+    end
+  end # ModuleExtensionBuilder
+
+  # @private
+  class ValueObjectExtensionBuilder < ExtensionBuilder
 
     # @api private
     def initialize(configuration, mod = Module.new)
