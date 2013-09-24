@@ -4,7 +4,7 @@ describe 'embedded values' do
   before do
     module Examples
       class City
-        include Virtus
+        include Virtus.model
 
         attribute :name, String
       end
