@@ -66,15 +66,6 @@ module Virtus
       end
 
       # @api private
-      #def self.determine_type(klass)
-        #if klass < Virtus || klass < Model::Constructor || klass <= OpenStruct
-          #FromOpenStruct
-        #elsif klass < Struct
-          #FromStruct
-        #end
-      #end
-
-      # @api private
       def self.build_type(options)
         Axiom::Types::Object.new { primitive options[:type] }
       end
