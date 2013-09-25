@@ -23,7 +23,7 @@ module Virtus
     #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
     #
     class EmbeddedValue < Attribute
-      TYPES = [Struct, OpenStruct, Virtus].freeze
+      TYPES = [Struct, OpenStruct, Virtus, Model::Constructor].freeze
 
       class FromStruct < self
 
@@ -56,7 +56,7 @@ module Virtus
 
       # @api private
       def self.determine_type(klass)
-        if klass < Virtus || klass <= OpenStruct
+        if klass < Virtus || klass < Model::Constructor || klass <= OpenStruct
           FromOpenStruct
         elsif klass < Struct
           FromStruct

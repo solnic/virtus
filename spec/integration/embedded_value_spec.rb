@@ -4,13 +4,13 @@ describe 'embedded values' do
   before do
     module Examples
       class City
-        include Virtus
+        include Virtus.model
 
         attribute :name, String
       end
 
       class Address
-        include Virtus
+        include Virtus.model
 
         attribute :street,  String
         attribute :zipcode, String
@@ -18,7 +18,7 @@ describe 'embedded values' do
       end
 
       class User
-        include Virtus
+        include Virtus.model
 
         attribute :name,    String
         attribute :address, Address
