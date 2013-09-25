@@ -43,6 +43,14 @@ module Virtus
     end
 
     # @api private
+    def self.build_coercer(type, options = {})
+      Coercer.new(
+        options.fetch(:configured_coercer) { Virtus.coercer },
+        type.coercion_method
+      )
+    end
+
+    # @api private
     def self.new(*args)
       attribute = super
       yield(attribute)
