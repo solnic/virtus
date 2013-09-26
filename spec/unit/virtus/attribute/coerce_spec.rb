@@ -5,9 +5,14 @@ describe Virtus::Attribute, '#coerce' do
 
   fake(:coercer) { Virtus::Attribute::Coercer }
 
-  let(:object) { described_class.build(String, :coercer => coercer, :strict => strict) }
-  let(:input)  { 1 }
-  let(:output) { '1' }
+  let(:object)   {
+    described_class.build(String,
+      :coercer => coercer, :strict => strict, :required => required)
+  }
+
+  let(:required) { true }
+  let(:input)    { 1 }
+  let(:output)   { '1' }
 
   context 'when strict mode is turned off' do
     let(:strict) { false }
@@ -34,11 +39,40 @@ describe Virtus::Attribute, '#coerce' do
       expect(coercer).to have_received.success?(String, output)
     end
 
+    context 'when attribute is not required and input is nil' do
+      let(:required) { false }
+      let(:input)    { nil }
+
+      it 'returns nil' do
+        stub(coercer).call(input) { input }
+        stub(coercer).success?(String, input) { false }
+
+        expect(subject).to be(nil)
+
+        expect(coercer).to have_received.call(input)
+        expect(coercer).to have_received.success?(String, input)
+      end
+    end
+
+    context 'when attribute is required and input is nil' do
+      let(:input) { nil }
+
+      it 'returns raises error' do
+        stub(coercer).call(input) { input }
+        stub(coercer).success?(String, input) { false }
+
+        expect { subject }.to raise_error(Virtus::CoercionError)
+
+        expect(coercer).to have_received.call(input)
+        expect(coercer).to have_received.success?(String, input)
+      end
+    end
+
     it 'raises error when input was not coerced' do
       stub(coercer).call(input) { input }
       stub(coercer).success?(String, input) { false }
 
-      expect { subject }.to raise_error(ArgumentError)
+      expect { subject }.to raise_error(Virtus::CoercionError)
 
       expect(coercer).to have_received.call(input)
       expect(coercer).to have_received.success?(String, input)

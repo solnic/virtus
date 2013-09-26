@@ -10,6 +10,15 @@ module Virtus
   # Represents an undefined parameter used by auto-generated option methods
   Undefined = Object.new.freeze
 
+  class CoercionError < StandardError
+    attr_reader :output, :primitive
+
+    def initialize(output, primitive)
+      @output, @private = output, primitive
+      super("Failed to coerce #{output.inspect} into #{primitive.inspect}")
+    end
+  end
+
   # Extends base class or a module with virtus methods
   #
   # @param [Object] object

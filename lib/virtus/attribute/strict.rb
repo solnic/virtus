@@ -4,10 +4,14 @@ module Virtus
     module Strict
 
       # @api public
-      def coerce(input)
-        coerced = super
-        raise ArgumentError unless coercer.success?(primitive, coerced)
-        coerced
+      def coerce(*)
+        output = super
+
+        if coercer.success?(primitive, output) || !required? && output.nil?
+          output
+        else
+          raise CoercionError.new(output, primitive)
+        end
       end
 
     end # Strict
