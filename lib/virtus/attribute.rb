@@ -92,6 +92,11 @@ module Virtus
     end
 
     # @api public
+    def rename(name)
+      self.class.build(type, options.merge(:name => name))
+    end
+
+    # @api public
     def value_coerced?(value)
       coercer.success?(primitive, value)
     end
