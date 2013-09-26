@@ -44,6 +44,11 @@ module Virtus
       builder.module
     end
 
+    # @api private
+    def self.pending
+      @pending ||= []
+    end
+
     # Initializes a new ModuleBuilder
     #
     # @param [Configuration] configuration
@@ -70,9 +75,11 @@ module Virtus
       mass_assignment = configuration.mass_assignment
       extensions      = core_extensions
       inclusions      = core_inclusions
+      finalize        = true # configuration.finalize
 
       self.module.define_singleton_method :included do |object|
         super(object)
+        ExtensionBuilder.pending << object if finalize
         extensions.each { |mod| object.extend(mod) }
         inclusions.each { |mod| object.send(:include, mod) }
         object.send(:include, Model::Constructor)    if constructor

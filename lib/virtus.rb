@@ -141,6 +141,13 @@ module Virtus
     @configuration ||= Configuration.new
   end
 
+  # @api public
+  def self.finalize
+    ExtensionBuilder.pending.each do |klass|
+      klass.attribute_set.finalize
+    end
+  end
+
   # @api private
   def self.warn(msg)
     Kernel.warn(msg)

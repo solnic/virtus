@@ -74,7 +74,9 @@ module Virtus
     # @api public
     def <<(attribute)
       self[attribute.name] = attribute
-      attribute.define_accessor_methods(self)
+      if attribute.respond_to?(:define_accessor_methods)
+        attribute.define_accessor_methods(self)
+      end
     end
 
     # Get an attribute by name
@@ -206,6 +208,12 @@ module Virtus
       ::Hash.try_convert(attributes) or raise(
         NoMethodError, "Expected #{attributes.inspect} to respond to #to_hash"
       )
+    end
+
+    def finalize
+      each do |attribute|
+        self << attribute.finalize if attribute.is_a?(PendingAttribute)
+      end
     end
 
     private

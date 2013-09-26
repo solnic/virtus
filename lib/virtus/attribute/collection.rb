@@ -12,12 +12,12 @@ module Virtus
       # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type
       Type = Struct.new(:primitive, :member_type) do
         def self.infer(type, primitive)
-          return type if type.is_a?(Class) && type < Axiom::Types::Type
+          return type if axiom_type?(type)
 
           klass  = Axiom::Types.infer(type)
           member = infer_member_type(type) || Object
 
-          if EmbeddedValue.handles?(member)
+          if EmbeddedValue.handles?(member) || pending?(member)
             Type.new(primitive, member)
           else
             klass.new {
@@ -25,6 +25,14 @@ module Virtus
               member_type Axiom::Types.infer(member)
             }
           end
+        end
+
+        def self.pending?(primitive)
+          primitive.is_a?(String) || primitive.is_a?(Symbol)
+        end
+
+        def self.axiom_type?(type)
+          type.is_a?(Class) && type < Axiom::Types::Type
         end
 
         def self.infer_member_type(type)
@@ -61,10 +69,12 @@ module Virtus
         end
       end
 
+      # @api private
       def member_type
         @options[:member_type]
       end
 
     end # class Collection
+
   end # class Attribute
 end # module Virtus

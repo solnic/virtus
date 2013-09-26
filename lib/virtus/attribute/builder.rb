@@ -1,4 +1,32 @@
 module Virtus
+
+  # @private
+  class PendingAttribute
+    attr_reader :name
+
+    # @api private
+    def initialize(type, options)
+      @type    = type
+      @options = options
+      @name    = options[:name]
+    end
+
+    # @api private
+    def finalize
+      Attribute::Builder.call(determine_type, @options)
+    end
+
+    # @api private
+    def determine_type
+      if @type.include?('::')
+        raise NotImplementedError
+      else
+        Object.const_get(@type)
+      end
+    end
+
+  end # PendingAttribute
+
   class Attribute
 
     # TODO: this is a huge class and it might be a good idea to split it into
@@ -35,12 +63,17 @@ module Virtus
       # @api private
       def initialize(type, options)
         initialize_primitive(type)
-        initialize_class
-        initialize_type(:type => type, :primitive => @primitive)
-        initialize_options(options)
-        initialize_default_value
-        initialize_coercer
-        initialize_attribute
+
+        if @pending
+          @attribute = PendingAttribute.new(type, options)
+        else
+          initialize_class
+          initialize_type(:type => type, :primitive => @primitive)
+          initialize_options(options)
+          initialize_default_value
+          initialize_coercer
+          initialize_attribute
+        end
       end
 
       private
@@ -69,9 +102,12 @@ module Virtus
       def initialize_primitive(type)
         @primitive =
           if type.instance_of?(String) || type.instance_of?(Symbol)
-            begin
+            if Object.const_defined?(type)
               Object.const_get(type)
-            rescue
+            elsif not self.class.determine_type(type)
+              @pending = true
+              type
+            else
               type
             end
           elsif not type.is_a?(Class)
@@ -108,6 +144,7 @@ module Virtus
 
       # @api private
       def build_coercer
+        puts "AAA: #{@type.inspect} #{@primitive}"
         Coercer.new(
           @options.fetch(:configured_coercer) { Virtus.coercer },
           @type.coercion_method
