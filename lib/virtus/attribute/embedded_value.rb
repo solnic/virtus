@@ -87,5 +87,6 @@ module Virtus
       end
 
     end # class EmbeddedValue
+
   end # class Attribute
 end # module Virtus
