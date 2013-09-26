@@ -25,28 +25,39 @@ module Virtus
     class EmbeddedValue < Attribute
       TYPES = [Struct, OpenStruct, Virtus, Model::Constructor].freeze
 
-      class FromStruct < self
+      class Coercer
+        attr_reader :primitive
+
+        def initialize(primitive)
+          @primitive = primitive
+        end
+
+      end # Coercer
+
+      class FromStruct < Coercer
 
         # @api public
-        def coerce(input)
+        def call(input)
           if input.kind_of?(primitive)
             input
           elsif not input.nil?
             primitive.new(*input)
           end
         end
+
       end # FromStruct
 
-      class FromOpenStruct < self
+      class FromOpenStruct < Coercer
 
         # @api public
-        def coerce(input)
+        def call(input)
           if input.kind_of?(primitive)
             input
           elsif not input.nil?
             primitive.new(input)
           end
         end
+
       end # FromOpenStruct
 
       # @api private
@@ -55,18 +66,21 @@ module Virtus
       end
 
       # @api private
-      def self.determine_type(klass)
-        if klass < Virtus || klass < Model::Constructor || klass <= OpenStruct
-          FromOpenStruct
-        elsif klass < Struct
-          FromStruct
-        end
+      def self.build_type(options)
+        klass = options[:primitive].is_a?(Class) ? options[:primitive] : options[:type]
+
+        Axiom::Types::Object.new { primitive klass }
       end
 
       # @api private
-      def self.build_type(options)
-        klass = options[:primitive].is_a?(Class) ? options[:primitive] : options[:type]
-        Axiom::Types::Object.new { primitive klass }
+      def self.build_coercer(type, _options)
+        primitive = type.primitive
+
+        if primitive < Virtus || primitive < Model::Constructor || primitive <= OpenStruct
+          FromOpenStruct.new(primitive)
+        elsif primitive < Struct
+          FromStruct.new(primitive)
+        end
       end
 
       # @api public
@@ -75,5 +89,6 @@ module Virtus
       end
 
     end # class EmbeddedValue
+
   end # class Attribute
 end # module Virtus

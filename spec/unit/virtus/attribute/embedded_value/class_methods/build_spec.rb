@@ -8,7 +8,9 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
+    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+
+    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
   end
 
   context 'when type includes Virtus' do
@@ -16,7 +18,9 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
+    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+
+    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
   end
 
   context 'when type is an OpenStruct subclass' do
@@ -24,7 +28,9 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
+    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+
+    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
   end
 
   context 'when type is OpenStruct' do
@@ -32,7 +38,9 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue::FromOpenStruct) }
+    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+
+    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
   end
 
   context 'when type is Struct' do
@@ -40,6 +48,8 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue::FromStruct) }
+    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+
+    its(:coercer) { should be_instance_of(described_class::FromStruct) }
   end
 end
