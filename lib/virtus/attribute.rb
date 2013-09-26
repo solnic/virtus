@@ -5,9 +5,10 @@ module Virtus
 
     include ::Equalizer.new(:type, :options)
 
-    accept_options :primitive, :accessor, :default, :lazy, :strict
+    accept_options :primitive, :accessor, :default, :lazy, :strict, :required
 
     strict false
+    required true
     accessor :public
 
     # @see Virtus.coerce
@@ -118,6 +119,11 @@ module Virtus
     # @api public
     def strict?
       kind_of?(Strict)
+    end
+
+    # @api public
+    def required?
+      options[:required]
     end
 
     # @api private

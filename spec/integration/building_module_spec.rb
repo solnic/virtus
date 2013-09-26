@@ -59,7 +59,7 @@ describe 'I can create a Virtus module' do
   specify 'including a custom module with strict enabled' do
     model = Examples::StrictModel.new
 
-    expect { model.stuff = 'foo' }.to raise_error(ArgumentError)
+    expect { model.stuff = 'foo' }.to raise_error(Virtus::CoercionError)
 
     model.happy = 'foo'
 
