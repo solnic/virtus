@@ -23,7 +23,7 @@ module Virtus
             if klass < Axiom::Types::Type
               determine_type(klass.primitive)
             elsif EmbeddedValue.handles?(klass)
-              EmbeddedValue.determine_type(klass)
+              EmbeddedValue
             elsif klass < Enumerable
               Collection
             end
@@ -62,7 +62,7 @@ module Virtus
 
       # @api private
       def initialize_coercer
-        @options.update(:coercer => @options.fetch(:coercer) { build_coercer })
+        @options.update(:coercer => @options.fetch(:coercer) { @klass.build_coercer(@type, @options) })
       end
 
       # @api private
@@ -104,14 +104,6 @@ module Virtus
         reader_visibility = @options.fetch(:reader, default_accessor)
         writer_visibility = @options.fetch(:writer, default_accessor)
         @options.update(:reader => reader_visibility, :writer => writer_visibility)
-      end
-
-      # @api private
-      def build_coercer
-        Coercer.new(
-          @options.fetch(:configured_coercer) { Virtus.coercer },
-          @type.coercion_method
-        )
       end
 
     end # class Builder
