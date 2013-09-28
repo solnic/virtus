@@ -519,6 +519,35 @@ class User
 end
 ```
 
+## Attribute Finalization and Circular Dependencies
+
+If a type references another type which happens to not be available yet you need
+to use lazy-finalization of attributes and finalize virtus manually after all 
+types have been already loaded:
+
+``` ruby
+# in blog.rb
+class Blog
+  include Virtus.model(:finalize => false)
+
+  attribute :posts, Array['Post']
+end
+
+# in post.rb
+class Post
+  include Virtus.model(:finalize => false)
+
+  attribute :blog, 'Blog'
+end
+
+# after loading both files just do:
+Virtus.finalize
+
+# constants will be resolved:
+Blog.attribute_set[:posts].member_type.primitive # => Post
+Post.attribute_set[:blog].type.primitive # => Blog
+```
+
 Please check out [Coercible README](https://github.com/solnic/coercible/blob/master/README.md)
 for more information.
 
