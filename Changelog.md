@@ -1,3 +1,26 @@
+# v1.0.0 [to-be-released]
+
+* [BREAKING CHANGE] Integrated with axiom-types, most of the attribute sub-classes are gone (solnic)
+* [feature] Configurable coercion via coercible integration (solnic)
+* [feature] Strict mode for coercions via `:strict` option (solnic)
+* [feature] Lazy-loaded default values via `:lazy` option (solnic)
+* [feature] Finalizing models solving circular-dependency issue (see #81) (solnic)
+* [feature] Ability to cherry-pick which extension should be included (solnic)
+* [feature] Ability to inject a custom coercer object via :coercer option (solnic)
+* [feature] Extension module builder with pre-defined configuration for attributes (elskwid & solnic)
+* [feature] `Virtus::Attribute` exposes a public API - you can easily build, rename and clone attribute instances and use their coercion power (solnic)
+* [feature] Ability to reset attributes to their default values (pewniak747)
+* [changed] A meaningful error will be raised if a reserved name is used as an attribute name (solnic)
+* [changed] Default value can be set via private and protected methods now (solnic)
+* [changed] New syntax for value objects (solnic)
+* [deprecated] `Virtus::Attribute.coerce` in favor of `Virtus.coerce` or a customized configured module (solnic)
+* [deprecated] `include Virtus` in favor of include `Virtus.model` (for classes) or `Virtus.module` (for modules) (solnic)
+* [deprecated] `include Virtus::ValueObject` in favor of include `Virtus.value_object` (solnic)
+* [deprecated] `Virtus#attributes` in favor of `Virtus#attribute_set` (solnic)
+* [fixed] const missing hook now works correctly in modules too (cored)
+* [fixed] value object with Hash type works correctly (solnic)
+* [fixed] issues with value-object subclasses and `#==` method (solnic)
+
 # v0.5.4 2012-12-20
 
 * [feature] Allow *any* enumerable to be a collection attribute (aptinio)
@@ -12,7 +35,7 @@
 * [feature] Added Hash member type coercion [example](https://github.com/solnic/virtus#hash-attributes-coercion) (greyblake)
 * [fixed] Fixed issues with String=>Integer coercion and e-notation (greyblake)
 * [changed] Replaced internal DescendantsTracker with the extracted gem (solnic)
-* [interal] Switched to rspec 2 and mutant for mutation testing (mbj)
+* [internal] Switched to rspec 2 and mutant for mutation testing (mbj)
 
 [Compare v0.5.2..v0.5.3](https://github.com/solnic/virtus/compare/v0.5.2...v0.5.3)
 
