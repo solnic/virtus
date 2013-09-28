@@ -9,6 +9,8 @@ module Virtus
     class Collection < Attribute
       default Proc.new { |_, attribute| attribute.type.primitive.new }
 
+      attr_reader :member_type
+
       # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type
       Type = Struct.new(:primitive, :member_type) do
         def self.infer(type, primitive)
@@ -70,8 +72,15 @@ module Virtus
       end
 
       # @api private
-      def member_type
-        @options[:member_type]
+      def finalize
+        return self if finalized?
+        @member_type = @options[:member_type].finalize
+        super
+      end
+
+      # @api private
+      def finalized?
+        super && member_type.finalized?
       end
 
     end # class Collection

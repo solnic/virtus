@@ -74,9 +74,8 @@ module Virtus
     # @api public
     def <<(attribute)
       self[attribute.name] = attribute
-      if attribute.respond_to?(:define_accessor_methods)
-        attribute.define_accessor_methods(self)
-      end
+      attribute.define_accessor_methods(self) if attribute.finalized?
+      self
     end
 
     # Get an attribute by name
@@ -210,9 +209,10 @@ module Virtus
       )
     end
 
+    # @api private
     def finalize
       each do |attribute|
-        self << attribute.finalize if attribute.is_a?(PendingAttribute)
+        self << attribute.finalize unless attribute.finalized?
       end
     end
 

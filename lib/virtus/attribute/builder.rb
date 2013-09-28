@@ -13,13 +13,24 @@ module Virtus
 
     # @api private
     def finalize
-      Attribute::Builder.call(determine_type, @options)
+      Attribute::Builder.call(determine_type, @options).finalize
+    end
+
+    # @api private
+    def finalized?
+      false
     end
 
     # @api private
     def determine_type
       if @type.include?('::')
-        raise NotImplementedError
+        # TODO: wrap it up in Virtus.constantize and use feature-detection to
+        #       pick up either Inflecto or ActiveSupport, whateve is available
+        if defined?(Inflecto)
+          Inflecto.constantize(@type)
+        else
+          raise NotImplementedError, 'Virtus needs inflecto gem to constantize namespaced constant names'
+        end
       else
         Object.const_get(@type)
       end
@@ -47,7 +58,7 @@ module Virtus
     def initialize_primitive
       @primitive =
         if type.instance_of?(String) || type.instance_of?(Symbol)
-          if Object.const_defined?(type)
+          if !type.to_s.include?('::') && Object.const_defined?(type)
             Object.const_get(type)
           elsif not Attribute::Builder.determine_type(type)
             @pending = true
@@ -159,6 +170,7 @@ module Virtus
           attribute.extend(Strict)      if @options[:strict]
           attribute.extend(LazyDefault) if @options[:lazy]
         end
+        @attribute.finalize if @options[:finalize]
       end
 
     end # class Builder

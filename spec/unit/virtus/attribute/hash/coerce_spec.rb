@@ -41,9 +41,11 @@ describe Virtus::Attribute::Hash, '#coerce' do
       it 'uses coercer to coerce key and value' do
         stub(coercer).call(input) { input }
 
+        stub(key_type).finalize { key_type }
         stub(key_type).coerce(1) { '1' }
         stub(key_type).coerce(2) { '2' }
 
+        stub(value_type).finalize { value_type }
         stub(value_type).coerce('1') { 1 }
         stub(value_type).coerce('2') { 2 }
 

@@ -73,13 +73,13 @@ module Virtus
       attribute_proc  = attribute_method(configuration)
       constructor     = configuration.constructor
       mass_assignment = configuration.mass_assignment
+      finalize        = configuration.finalize
       extensions      = core_extensions
       inclusions      = core_inclusions
-      finalize        = true # configuration.finalize
 
       self.module.define_singleton_method :included do |object|
         super(object)
-        ExtensionBuilder.pending << object if finalize
+        ExtensionBuilder.pending << object unless finalize
         extensions.each { |mod| object.extend(mod) }
         inclusions.each { |mod| object.send(:include, mod) }
         object.send(:include, Model::Constructor)    if constructor
@@ -121,6 +121,7 @@ module Virtus
     # @api private
     def module_options
       { :coerce             => configuration.coerce,
+        :finalize           => configuration.finalize,
         :strict             => configuration.strict,
         :configured_coercer => configuration.coercer }
     end

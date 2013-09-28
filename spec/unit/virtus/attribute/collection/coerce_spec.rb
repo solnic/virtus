@@ -17,6 +17,7 @@ describe Virtus::Attribute::Collection, '#coerce' do
 
       it 'uses coercer to coerce members' do
         stub(coercer).call(input) { input }
+        stub(member_type).finalize { member_type }
         stub(member_type).coerce('1') { 1 }
         stub(member_type).coerce('2') { 2 }
 

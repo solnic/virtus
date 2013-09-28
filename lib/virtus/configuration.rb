@@ -3,6 +3,9 @@ module Virtus
   # A Configuration instance
   class Configuration
 
+    # Access the finalize setting for this instance
+    attr_accessor :finalize
+
     # Access the coerce setting for this instance
     attr_accessor :coerce
 
@@ -35,6 +38,7 @@ module Virtus
     #
     # @api private
     def initialize
+      @finalize        = true
       @coerce          = true
       @strict          = false
       @constructor     = true

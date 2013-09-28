@@ -16,10 +16,13 @@ module Virtus
       primitive ::Hash
       default   primitive.new
 
+      attr_reader :key_type
+      attr_reader :value_type
+
       # FIXME: remove this once axiom-types supports it
       Type = Struct.new(:key_type, :value_type) do
         def self.infer(type)
-          if type.is_a?(Class) && type < Axiom::Types::Type
+          if axiom_type?(type)
             new(type.key_type, type.value_type)
           else
             type_options = infer_key_and_value_types(type)
@@ -30,7 +33,17 @@ module Virtus
           end
         end
 
+        def self.pending?(primitive)
+          primitive.is_a?(String) || primitive.is_a?(Symbol)
+        end
+
+        def self.axiom_type?(type)
+          type.is_a?(Class) && type < Axiom::Types::Type
+        end
+
         def self.determine_type(type)
+          return type if pending?(type)
+
           if EmbeddedValue.handles?(type)
             type
           else
@@ -85,13 +98,16 @@ module Virtus
       end
 
       # @api private
-      def key_type
-        @options[:key_type]
+      def finalize
+        return self if finalized?
+        @key_type   = options[:key_type].finalize
+        @value_type = options[:value_type].finalize
+        super
       end
 
       # @api private
-      def value_type
-        @options[:value_type]
+      def finalized?
+        super && key_type.finalized? && value_type.finalized?
       end
 
     end # class Hash

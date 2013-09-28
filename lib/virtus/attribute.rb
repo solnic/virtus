@@ -5,11 +5,12 @@ module Virtus
 
     include ::Equalizer.new(:type, :options)
 
-    accept_options :primitive, :accessor, :default, :lazy, :strict, :required
+    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize
 
     strict false
     required true
     accessor :public
+    finalize true
 
     # @see Virtus.coerce
     #
@@ -55,7 +56,7 @@ module Virtus
     def self.new(*args)
       attribute = super
       yield(attribute)
-      attribute.finalize
+      attribute
     end
 
     # @api private
@@ -126,6 +127,11 @@ module Virtus
       options[:required]
     end
 
+    # @api public
+    def finalized?
+      frozen?
+    end
+
     # @api private
     def define_accessor_methods(attribute_set)
       attribute_set.define_reader_method(self, name,       options[:reader])
@@ -135,6 +141,7 @@ module Virtus
     # @api private
     def finalize
       freeze
+      self
     end
 
   end # class Attribute
