@@ -9,6 +9,32 @@ module Virtus
   # @private
   class Builder
 
+    # @private
+    class HookContext
+      attr_reader :attribute_method, :config
+
+      # @api private
+      def initialize(attribute_method, config)
+        @attribute_method, @config = attribute_method, config
+      end
+
+      # @api private
+      def constructor?
+        config.constructor
+      end
+
+      # @api private
+      def mass_assignment?
+        config.mass_assignment
+      end
+
+      # @api private
+      def finalize?
+        config.finalize
+      end
+
+    end # HookContext
+
     # Return module
     #
     # @return [Module]
@@ -44,7 +70,7 @@ module Virtus
       @pending ||= []
     end
 
-    # Initializes a new ModuleBuilder
+    # Initializes a new Builder
     #
     # @param [Configuration] config
     # @param [Module] mod
@@ -58,55 +84,9 @@ module Virtus
       add_extended_hook
     end
 
-    private
-
-    # Adds the .included hook to the anonymous module which then defines the
-    # .attribute method to override the default.
-    #
-    # @return [Module]
-    #
     # @api private
-    def add_included_hook
-      with_attribute_method do |attribute_method|
-        constructor     = config.constructor
-        mass_assignment = config.mass_assignment
-        finalize        = config.finalize
-        extensions      = core_extensions
-        inclusions      = core_inclusions
-
-        mod.define_singleton_method :included do |object|
-          super(object)
-          Builder.pending << object unless finalize
-          extensions.each { |mod| object.extend(mod) }
-          inclusions.each { |mod| object.send(:include, mod) }
-          object.send(:include, Model::Constructor)    if constructor
-          object.send(:include, Model::MassAssignment) if mass_assignment
-          object.send(:define_singleton_method, :attribute, attribute_method)
-        end
-      end
-    end
-
-    # @api private
-    def add_extended_hook
-      with_attribute_method do |attribute_method|
-        mass_assignment = config.mass_assignment
-        extensions      = core_inclusions + core_extensions
-
-        mod.define_singleton_method :extended do |object|
-          super(object)
-          extensions.each { |mod| object.extend(mod) }
-          object.extend(Model::MassAssignment) if mass_assignment
-          object.send :define_singleton_method, :attribute, attribute_method
-        end
-      end
-    end
-
-    # @api private
-    def options
-      { :coerce             => config.coerce,
-        :finalize           => config.finalize,
-        :strict             => config.strict,
-        :configured_coercer => config.coercer }
+    def all_extensions
+      core_inclusions + core_extensions
     end
 
     # @api private
@@ -119,6 +99,47 @@ module Virtus
       []
     end
 
+    private
+
+    # Adds the .included hook to the anonymous module which then defines the
+    # .attribute method to override the default.
+    #
+    # @return [Module]
+    #
+    # @api private
+    def add_included_hook
+      with_hook_context do |context, builder|
+        mod.define_singleton_method :included do |object|
+          super(object)
+          Builder.pending << object unless context.finalize?
+          builder.core_extensions.each { |mod| object.extend(mod) }
+          builder.core_inclusions.each { |mod| object.send(:include, mod) }
+          object.send(:include, Model::Constructor)    if context.constructor?
+          object.send(:include, Model::MassAssignment) if context.mass_assignment?
+          object.define_singleton_method(:attribute, context.attribute_method)
+        end
+      end
+    end
+
+    # @api private
+    def add_extended_hook
+      with_hook_context do |context, builder|
+        mod.define_singleton_method :extended do |object|
+          super(object)
+          builder.all_extensions.each { |mod| object.extend(mod) }
+          object.extend(Model::MassAssignment) if context.mass_assignment?
+          object.define_singleton_method(:attribute, context.attribute_method)
+        end
+      end
+    end
+
+    # @api private
+    def options
+      { :coerce             => config.coerce,
+        :finalize           => config.finalize,
+        :strict             => config.strict,
+        :configured_coercer => config.coercer }
+    end
 
     # Wrapper for the attribute method that is used in .add_included_hook
     # The coercer is passed in the unused key :configured_coercer to allow the
@@ -129,16 +150,16 @@ module Virtus
     #
     # @api private
     def attribute_method
-      module_options = options
+      method_options = options
 
       lambda do |name, type = Object, options = {}|
-        super(name, type, module_options.merge(options))
+        super(name, type, method_options.update(options))
       end
     end
 
     # @api private
-    def with_attribute_method
-      yield(attribute_method)
+    def with_hook_context
+      yield(HookContext.new(attribute_method, config), self)
     end
 
   end # class Builder
@@ -154,17 +175,17 @@ module Virtus
 
     # @api private
     def add_included_hook
-      with_attribute_method do |attribute_method|
+      with_hook_context do |context, builder|
         inclusions = core_inclusions
 
-        inclusions << Model::Constructor    if config.constructor
-        inclusions << Model::MassAssignment if config.mass_assignment
+        inclusions << Model::Constructor    if context.constructor?
+        inclusions << Model::MassAssignment if context.mass_assignment?
 
         mod.define_singleton_method :included do |object|
           super(object)
           object.extend(ModuleExtensions)
           object.instance_variable_set('@inclusions', inclusions)
-          object.send(:define_singleton_method, :attribute, attribute_method)
+          object.send(:define_singleton_method, :attribute, context.attribute_method)
         end
       end
     end
@@ -180,13 +201,6 @@ module Virtus
       @config.constructor = true
     end
 
-    private
-
-    # @api private
-    def options
-      super.update(:writer => :private)
-    end
-
     # @api private
     def core_inclusions
       super << ValueObject::AllowedWriterMethods << ValueObject::InstanceMethods
@@ -195,6 +209,13 @@ module Virtus
     # @api private
     def core_extensions
       super << ValueObject::AllowedWriterMethods
+    end
+
+    private
+
+    # @api private
+    def options
+      super.update(:writer => :private)
     end
 
   end # ValueObjectBuilder
