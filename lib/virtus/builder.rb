@@ -36,9 +36,7 @@ module Virtus
     #
     # @api public
     def self.call(options = {}, &block)
-      config  = Configuration.build(&block)
-      options.each { |key, value| config.public_send("#{key}=", value) }
-      new(config).mod
+      new(Configuration.build(options, &block)).mod
     end
 
     # @api private

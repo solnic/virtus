@@ -28,8 +28,10 @@ module Virtus
     # @return [Configuration]
     #
     # @api public
-    def self.build(&block)
-      new.call(&block)
+    def self.build(options = {}, &block)
+      config = new.call(&block)
+      options.each { |key, value| config.public_send("#{key}=", value) }
+      config
     end
 
     # Initialized a configuration instance
