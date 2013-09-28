@@ -476,6 +476,9 @@ class User
 end
 ```
 
+Please check out [Coercible README](https://github.com/solnic/coercible/blob/master/README.md)
+for more information.
+
 ## Strict Coercion Mode
 
 By default Virtus returns the input value even when it couldn't coerce it to the expected type.
@@ -547,9 +550,6 @@ Virtus.finalize
 Blog.attribute_set[:posts].member_type.primitive # => Post
 Post.attribute_set[:blog].type.primitive # => Blog
 ```
-
-Please check out [Coercible README](https://github.com/solnic/coercible/blob/master/README.md)
-for more information.
 
 Credits
 -------
