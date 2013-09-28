@@ -1,10 +1,10 @@
 module Virtus
 
-  # Class to build a Virtus module with it's own configuration
+  # Class to build a Virtus module with it's own config
   #
   # This allows for individual Virtus modules to be included in
-  # classes and not impacted by the global Virtus configuration,
-  # which is implemented using Virtus::Configuration.
+  # classes and not impacted by the global Virtus config,
+  # which is implemented using Virtus::config.
   #
   # @private
   class Builder
@@ -14,18 +14,18 @@ module Virtus
     # @return [Module]
     #
     # @api private
-    attr_reader :module
+    attr_reader :mod
 
-    # Return configuration
+    # Return config
     #
-    # @return [Configuration]
+    # @return [config]
     #
     # @api private
-    attr_reader :configuration
+    attr_reader :config
 
     # Builds a new Virtus module
     #
-    # The block is passed to Virtus::Configuration
+    # The block is passed to Virtus::config
     #
     # @example
     #   ModuleBuilder.call do |config|
@@ -38,10 +38,7 @@ module Virtus
     def self.call(options = {}, &block)
       config  = Configuration.build(&block)
       options.each { |key, value| config.public_send("#{key}=", value) }
-      builder = new(config)
-      builder.add_included_hook
-      builder.add_extended_hook
-      builder.module
+      new(config).mod
     end
 
     # @api private
@@ -51,17 +48,19 @@ module Virtus
 
     # Initializes a new ModuleBuilder
     #
-    # @param [Configuration] configuration
-    #
+    # @param [Configuration] config
     # @param [Module] mod
     #
     # @return [undefined]
     #
     # @api private
-    def initialize(configuration, mod = Module.new)
-      @configuration = configuration
-      @module        = mod
+    def initialize(conf, mod = Module.new)
+      @config, @mod = conf, mod
+      add_included_hook
+      add_extended_hook
     end
+
+    private
 
     # Adds the .included hook to the anonymous module which then defines the
     # .attribute method to override the default.
@@ -71,13 +70,13 @@ module Virtus
     # @api private
     def add_included_hook
       with_attribute_method do |attribute_method|
-        constructor     = configuration.constructor
-        mass_assignment = configuration.mass_assignment
-        finalize        = configuration.finalize
+        constructor     = config.constructor
+        mass_assignment = config.mass_assignment
+        finalize        = config.finalize
         extensions      = core_extensions
         inclusions      = core_inclusions
 
-        self.module.define_singleton_method :included do |object|
+        mod.define_singleton_method :included do |object|
           super(object)
           Builder.pending << object unless finalize
           extensions.each { |mod| object.extend(mod) }
@@ -92,10 +91,10 @@ module Virtus
     # @api private
     def add_extended_hook
       with_attribute_method do |attribute_method|
-        mass_assignment = configuration.mass_assignment
+        mass_assignment = config.mass_assignment
         extensions      = core_inclusions + core_extensions
 
-        self.module.define_singleton_method :extended do |object|
+        mod.define_singleton_method :extended do |object|
           super(object)
           extensions.each { |mod| object.extend(mod) }
           object.extend(Model::MassAssignment) if mass_assignment
@@ -105,11 +104,11 @@ module Virtus
     end
 
     # @api private
-    def module_options
-      { :coerce             => configuration.coerce,
-        :finalize           => configuration.finalize,
-        :strict             => configuration.strict,
-        :configured_coercer => configuration.coercer }
+    def options
+      { :coerce             => config.coerce,
+        :finalize           => config.finalize,
+        :strict             => config.strict,
+        :configured_coercer => config.coercer }
     end
 
     # @api private
@@ -122,7 +121,6 @@ module Virtus
       []
     end
 
-    private
 
     # Wrapper for the attribute method that is used in .add_included_hook
     # The coercer is passed in the unused key :configured_coercer to allow the
@@ -133,7 +131,7 @@ module Virtus
     #
     # @api private
     def attribute_method
-      module_options = self.module_options
+      module_options = options
 
       lambda do |name, type = Object, options = {}|
         super(name, type, module_options.merge(options))
@@ -154,15 +152,17 @@ module Virtus
   # @private
   class ModuleBuilder < Builder
 
+    private
+
     # @api private
     def add_included_hook
       with_attribute_method do |attribute_method|
-        inclusions     = core_inclusions
+        inclusions = core_inclusions
 
-        inclusions << Model::Constructor    if configuration.constructor
-        inclusions << Model::MassAssignment if configuration.mass_assignment
+        inclusions << Model::Constructor    if config.constructor
+        inclusions << Model::MassAssignment if config.mass_assignment
 
-        self.module.define_singleton_method :included do |object|
+        mod.define_singleton_method :included do |object|
           super(object)
           object.extend(ModuleExtensions)
           object.instance_variable_set('@inclusions', inclusions)
@@ -177,13 +177,15 @@ module Virtus
   class ValueObjectBuilder < Builder
 
     # @api private
-    def initialize(configuration, mod = Module.new)
+    def initialize(config, mod = Module.new)
       super
-      @configuration.constructor = true
+      @config.constructor = true
     end
 
+    private
+
     # @api private
-    def module_options
+    def options
       super.update(:writer => :private)
     end
 
