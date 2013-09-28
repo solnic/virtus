@@ -51,8 +51,8 @@ module Virtus
       end
 
       # @api private
-      def self.build_type(options)
-        Type.infer(options.fetch(:type), options.fetch(:primitive))
+      def self.build_type(definition)
+        Type.infer(definition.type, definition.primitive)
       end
 
       # @api private

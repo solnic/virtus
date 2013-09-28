@@ -107,7 +107,7 @@ module Virtus
         @type_definition = type_definition
 
         initialize_class
-        initialize_type(:type => type_definition.type, :primitive => type_definition.primitive)
+        initialize_type
         initialize_options(options)
         initialize_default_value
         initialize_coercer
@@ -117,33 +117,13 @@ module Virtus
       private
 
       # @api private
-      def initialize_attribute
-        @attribute = @klass.new(@type, @options) do |attribute|
-          attribute.extend(Accessor)    if @options[:name]
-          attribute.extend(Coercible)   if @options[:coerce]
-          attribute.extend(Strict)      if @options[:strict]
-          attribute.extend(LazyDefault) if @options[:lazy]
-        end
-      end
-
-      # @api private
-      def initialize_default_value
-        @options.update(:default_value => DefaultValue.build(@options[:default]))
-      end
-
-      # @api private
-      def initialize_coercer
-        @options.update(:coercer => @options.fetch(:coercer) { @klass.build_coercer(@type, @options) })
-      end
-
-      # @api private
       def initialize_class
         @klass = self.class.determine_type(@type_definition.primitive, Attribute)
       end
 
       # @api private
-      def initialize_type(options)
-        @type = @klass.build_type(options)
+      def initialize_type
+        @type = @klass.build_type(@type_definition)
       end
 
       # @api private
@@ -159,6 +139,26 @@ module Virtus
         reader_visibility = @options.fetch(:reader, default_accessor)
         writer_visibility = @options.fetch(:writer, default_accessor)
         @options.update(:reader => reader_visibility, :writer => writer_visibility)
+      end
+
+      # @api private
+      def initialize_default_value
+        @options.update(:default_value => DefaultValue.build(@options[:default]))
+      end
+
+      # @api private
+      def initialize_coercer
+        @options.update(:coercer => @options.fetch(:coercer) { @klass.build_coercer(@type, @options) })
+      end
+
+      # @api private
+      def initialize_attribute
+        @attribute = @klass.new(@type, @options) do |attribute|
+          attribute.extend(Accessor)    if @options[:name]
+          attribute.extend(Coercible)   if @options[:coerce]
+          attribute.extend(Strict)      if @options[:strict]
+          attribute.extend(LazyDefault) if @options[:lazy]
+        end
       end
 
     end # class Builder

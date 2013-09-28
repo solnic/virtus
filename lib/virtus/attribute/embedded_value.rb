@@ -66,9 +66,8 @@ module Virtus
       end
 
       # @api private
-      def self.build_type(options)
-        klass = options[:primitive].is_a?(Class) ? options[:primitive] : options[:type]
-
+      def self.build_type(definition)
+        klass = definition.primitive.is_a?(Class) ? definition.primitive : definition.type
         Axiom::Types::Object.new { primitive klass }
       end
 

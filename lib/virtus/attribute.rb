@@ -59,8 +59,8 @@ module Virtus
     end
 
     # @api private
-    def self.build_type(options)
-      Axiom::Types.infer(options[:primitive])
+    def self.build_type(definition)
+      Axiom::Types.infer(definition.primitive)
     end
 
     # @api private
