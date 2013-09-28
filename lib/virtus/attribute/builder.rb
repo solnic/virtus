@@ -27,6 +27,42 @@ module Virtus
 
   end # PendingAttribute
 
+  class TypeDefinition
+    attr_reader :type, :primitive
+
+    # @api private
+    def initialize(type)
+      @type = type
+      initialize_primitive
+    end
+
+    # @api private
+    def pending?
+      @pending
+    end
+
+    private
+
+    # @api private
+    def initialize_primitive
+      @primitive =
+        if type.instance_of?(String) || type.instance_of?(Symbol)
+          if Object.const_defined?(type)
+            Object.const_get(type)
+          elsif not Attribute::Builder.determine_type(type)
+            @pending = true
+            type
+          else
+            type
+          end
+        elsif not type.is_a?(Class)
+          type.class
+        else
+          type
+        end
+    end
+  end
+
   class Attribute
 
     # TODO: this is a huge class and it might be a good idea to split it into
@@ -38,8 +74,14 @@ module Virtus
       attr_reader :attribute
 
       # @api private
-      def self.call(*args)
-        new(*args).attribute
+      def self.call(type, options = {})
+        type_definition = TypeDefinition.new(type)
+
+        if type_definition.pending?
+          PendingAttribute.new(type, options)
+        else
+          new(type_definition, options).attribute
+        end
       end
 
       # @api private
@@ -61,19 +103,15 @@ module Virtus
       end
 
       # @api private
-      def initialize(type, options)
-        initialize_primitive(type)
+      def initialize(type_definition, options)
+        @type_definition = type_definition
 
-        if @pending
-          @attribute = PendingAttribute.new(type, options)
-        else
-          initialize_class
-          initialize_type(:type => type, :primitive => @primitive)
-          initialize_options(options)
-          initialize_default_value
-          initialize_coercer
-          initialize_attribute
-        end
+        initialize_class
+        initialize_type(:type => type_definition.type, :primitive => type_definition.primitive)
+        initialize_options(options)
+        initialize_default_value
+        initialize_coercer
+        initialize_attribute
       end
 
       private
@@ -99,27 +137,8 @@ module Virtus
       end
 
       # @api private
-      def initialize_primitive(type)
-        @primitive =
-          if type.instance_of?(String) || type.instance_of?(Symbol)
-            if Object.const_defined?(type)
-              Object.const_get(type)
-            elsif not self.class.determine_type(type)
-              @pending = true
-              type
-            else
-              type
-            end
-          elsif not type.is_a?(Class)
-            type.class
-          else
-            type
-          end
-      end
-
-      # @api private
       def initialize_class
-        @klass = self.class.determine_type(@primitive, Attribute)
+        @klass = self.class.determine_type(@type_definition.primitive, Attribute)
       end
 
       # @api private
