@@ -1,5 +1,7 @@
 # v1.0.0 [to-be-released]
 
+This release no longer works with Ruby 1.8.7.
+
 * [BREAKING CHANGE] Integrated with axiom-types, most of the attribute sub-classes are gone (solnic)
 * [feature] Configurable coercion via coercible integration (solnic)
 * [feature] Strict mode for coercions via `:strict` option (solnic)
@@ -20,6 +22,8 @@
 * [fixed] const missing hook now works correctly in modules too (cored)
 * [fixed] value object with Hash type works correctly (solnic)
 * [fixed] issues with value-object subclasses and `#==` method (solnic)
+
+[Compare v0.5.4..master](https://github.com/solnic/virtus/compare/v0.5.4...master)
 
 # v0.5.4 2012-12-20
 
