@@ -2,6 +2,8 @@ require 'spec_helper'
 
 describe Virtus, '.finalize' do
   it 'works' do
+    pending
+
     class Person
       include Virtus.model
 
