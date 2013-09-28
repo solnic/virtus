@@ -70,51 +70,37 @@ module Virtus
     #
     # @api private
     def add_included_hook
-      attribute_proc  = attribute_method(configuration)
-      constructor     = configuration.constructor
-      mass_assignment = configuration.mass_assignment
-      finalize        = configuration.finalize
-      extensions      = core_extensions
-      inclusions      = core_inclusions
+      with_attribute_method do |attribute_method|
+        constructor     = configuration.constructor
+        mass_assignment = configuration.mass_assignment
+        finalize        = configuration.finalize
+        extensions      = core_extensions
+        inclusions      = core_inclusions
 
-      self.module.define_singleton_method :included do |object|
-        super(object)
-        Builder.pending << object unless finalize
-        extensions.each { |mod| object.extend(mod) }
-        inclusions.each { |mod| object.send(:include, mod) }
-        object.send(:include, Model::Constructor)    if constructor
-        object.send(:include, Model::MassAssignment) if mass_assignment
-        object.send(:define_singleton_method, :attribute, attribute_proc)
+        self.module.define_singleton_method :included do |object|
+          super(object)
+          Builder.pending << object unless finalize
+          extensions.each { |mod| object.extend(mod) }
+          inclusions.each { |mod| object.send(:include, mod) }
+          object.send(:include, Model::Constructor)    if constructor
+          object.send(:include, Model::MassAssignment) if mass_assignment
+          object.send(:define_singleton_method, :attribute, attribute_method)
+        end
       end
     end
 
     # @api private
     def add_extended_hook
-      attribute_proc  = attribute_method(configuration)
-      mass_assignment = configuration.mass_assignment
-      extensions      = core_inclusions + core_extensions
+      with_attribute_method do |attribute_method|
+        mass_assignment = configuration.mass_assignment
+        extensions      = core_inclusions + core_extensions
 
-      self.module.define_singleton_method :extended do |object|
-        super(object)
-        extensions.each { |mod| object.extend(mod) }
-        object.extend(Model::MassAssignment) if mass_assignment
-        object.send :define_singleton_method, :attribute, attribute_proc
-      end
-    end
-
-    # Wrapper for the attribute method that is used in .add_included_hook
-    # The coercer is passed in the unused key :configured_coercer to allow the
-    # property encapsulation by Virtus::Attribute::Coercer, where the
-    # coercion method is known.
-    #
-    # @return [Proc(lambda)]
-    #
-    # @api private
-    def attribute_method(configuration)
-      module_options = self.module_options
-
-      lambda do |name, type = Object, options = {}|
-        super(name, type, module_options.merge(options))
+        self.module.define_singleton_method :extended do |object|
+          super(object)
+          extensions.each { |mod| object.extend(mod) }
+          object.extend(Model::MassAssignment) if mass_assignment
+          object.send :define_singleton_method, :attribute, attribute_method
+        end
       end
     end
 
@@ -136,6 +122,29 @@ module Virtus
       []
     end
 
+    private
+
+    # Wrapper for the attribute method that is used in .add_included_hook
+    # The coercer is passed in the unused key :configured_coercer to allow the
+    # property encapsulation by Virtus::Attribute::Coercer, where the
+    # coercion method is known.
+    #
+    # @return [Proc(lambda)]
+    #
+    # @api private
+    def attribute_method
+      module_options = self.module_options
+
+      lambda do |name, type = Object, options = {}|
+        super(name, type, module_options.merge(options))
+      end
+    end
+
+    # @api private
+    def with_attribute_method
+      yield(attribute_method)
+    end
+
   end # class Builder
 
   # @private
@@ -147,17 +156,18 @@ module Virtus
 
     # @api private
     def add_included_hook
-      attribute_proc = attribute_method(configuration)
-      inclusions     = core_inclusions
+      with_attribute_method do |attribute_method|
+        inclusions     = core_inclusions
 
-      inclusions << Model::Constructor    if configuration.constructor
-      inclusions << Model::MassAssignment if configuration.mass_assignment
+        inclusions << Model::Constructor    if configuration.constructor
+        inclusions << Model::MassAssignment if configuration.mass_assignment
 
-      self.module.define_singleton_method :included do |object|
-        super(object)
-        object.extend(ModuleExtensions)
-        object.instance_variable_set('@inclusions', inclusions)
-        object.send(:define_singleton_method, :attribute, attribute_proc)
+        self.module.define_singleton_method :included do |object|
+          super(object)
+          object.extend(ModuleExtensions)
+          object.instance_variable_set('@inclusions', inclusions)
+          object.send(:define_singleton_method, :attribute, attribute_method)
+        end
       end
     end
 
