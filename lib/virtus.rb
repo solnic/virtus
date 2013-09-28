@@ -124,21 +124,21 @@ module Virtus
   #
   # @api public
   def self.model(options = {}, &block)
-    ModelExtensionBuilder.call(options, &block)
+    ModelBuilder.call(options, &block)
   end
 
   # Builds a module for...modules
   #
   # @api public
   def self.module(options = {}, &block)
-    ModuleExtensionBuilder.call(options, &block)
+    ModuleBuilder.call(options, &block)
   end
 
   # Builds a module for value object models
   #
   # @api public
   def self.value_object(options = {}, &block)
-    ValueObjectExtensionBuilder.call(options, &block)
+    ValueObjectBuilder.call(options, &block)
   end
 
   # Global configuration instance
@@ -152,7 +152,7 @@ module Virtus
 
   # @api public
   def self.finalize
-    ExtensionBuilder.pending.each do |klass|
+    Builder.pending.each do |klass|
       klass.attribute_set.finalize
     end
   end
@@ -180,7 +180,8 @@ require 'virtus/class_inclusions'
 require 'virtus/module_extensions'
 
 require 'virtus/configuration'
-require 'virtus/module_builder'
+require 'virtus/builder'
+
 
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
