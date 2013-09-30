@@ -59,9 +59,7 @@ module Virtus
 
       # @api private
       def self.merge_options!(type, options)
-        unless options.key?(:member_type)
-          options[:member_type] = Attribute.build(type.member_type)
-        end
+        options[:member_type] ||= Attribute.build(type.member_type)
       end
 
       # @api public
