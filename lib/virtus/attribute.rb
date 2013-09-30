@@ -53,13 +53,6 @@ module Virtus
     end
 
     # @api private
-    def self.new(*args)
-      attribute = super
-      yield(attribute)
-      attribute
-    end
-
-    # @api private
     def self.build_type(definition)
       Axiom::Types.infer(definition.primitive)
     end
