@@ -10,6 +10,7 @@ Gem::Specification.new do |gem|
   gem.description = "Attributes on Steroids for Plain Old Ruby Objects"
   gem.summary     = gem.description
   gem.homepage    = "https://github.com/solnic/virtus"
+  gem.license     = 'MIT'
 
   gem.require_paths    = [ "lib" ]
   gem.files            = `git ls-files`.split("\n")
