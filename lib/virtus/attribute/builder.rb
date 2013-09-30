@@ -2,18 +2,17 @@ module Virtus
 
   # @private
   class PendingAttribute
-    attr_reader :name
+    attr_reader :type, :options, :name
 
     # @api private
     def initialize(type, options)
-      @type    = type
-      @options = options
-      @name    = options[:name]
+      @type, @options = type, options
+      @name = options[:name]
     end
 
     # @api private
     def finalize
-      Attribute::Builder.call(determine_type, @options).finalize
+      Attribute::Builder.call(determine_type, options).finalize
     end
 
     # @api private
@@ -23,16 +22,16 @@ module Virtus
 
     # @api private
     def determine_type
-      if @type.include?('::')
+      if type.include?('::')
         # TODO: wrap it up in Virtus.constantize and use feature-detection to
         #       pick up either Inflecto or ActiveSupport, whateve is available
         if defined?(Inflecto)
-          Inflecto.constantize(@type)
+          Inflecto.constantize(type)
         else
           raise NotImplementedError, 'Virtus needs inflecto gem to constantize namespaced constant names'
         end
       else
-        Object.const_get(@type)
+        Object.const_get(type)
       end
     end
 
@@ -82,7 +81,7 @@ module Virtus
     #
     # @private
     class Builder
-      attr_reader :attribute
+      attr_reader :attribute, :options, :type_definition, :klass, :type
 
       # @api private
       def self.call(type, options = {})
@@ -129,54 +128,54 @@ module Virtus
 
       # @api private
       def initialize_class
-        @klass = self.class.determine_type(@type_definition.primitive, Attribute)
+        @klass = self.class.determine_type(type_definition.primitive, Attribute)
       end
 
       # @api private
       def initialize_type
-        @type = @klass.build_type(@type_definition)
+        @type = klass.build_type(type_definition)
       end
 
       # @api private
       def initialize_options(options)
-        @options = @klass.options.merge(:coerce => Virtus.coerce).update(options)
-        @klass.merge_options!(@type, @options)
+        @options = klass.options.merge(:coerce => Virtus.coerce).update(options)
+        klass.merge_options!(type, @options)
         determine_visibility
       end
 
       # @api private
       def initialize_default_value
-        @options.update(:default_value => DefaultValue.build(@options[:default]))
+        options.update(:default_value => DefaultValue.build(options[:default]))
       end
 
       # @api private
       def initialize_coercer
-        @options.update(:coercer => determine_coercer)
+        options.update(:coercer => determine_coercer)
       end
 
       # @api private
       def initialize_attribute
-        @attribute = @klass.new(@type, @options)
+        @attribute = klass.new(type, options)
 
-        @attribute.extend(Accessor)    if @options[:name]
-        @attribute.extend(Coercible)   if @options[:coerce]
-        @attribute.extend(Strict)      if @options[:strict]
-        @attribute.extend(LazyDefault) if @options[:lazy]
+        @attribute.extend(Accessor)    if options[:name]
+        @attribute.extend(Coercible)   if options[:coerce]
+        @attribute.extend(Strict)      if options[:strict]
+        @attribute.extend(LazyDefault) if options[:lazy]
 
-        @attribute.finalize if @options[:finalize]
+        @attribute.finalize if options[:finalize]
       end
 
       # @api private
       def determine_coercer
-        @options.fetch(:coercer) { @klass.build_coercer(@type, @options) }
+        options.fetch(:coercer) { klass.build_coercer(type, options) }
       end
 
       # @api private
       def determine_visibility
-        default_accessor  = @options.fetch(:accessor)
-        reader_visibility = @options.fetch(:reader, default_accessor)
-        writer_visibility = @options.fetch(:writer, default_accessor)
-        @options.update(:reader => reader_visibility, :writer => writer_visibility)
+        default_accessor  = options.fetch(:accessor)
+        reader_visibility = options.fetch(:reader, default_accessor)
+        writer_visibility = options.fetch(:writer, default_accessor)
+        options.update(:reader => reader_visibility, :writer => writer_visibility)
       end
 
     end # class Builder
