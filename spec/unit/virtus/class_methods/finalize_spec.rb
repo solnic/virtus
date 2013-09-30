@@ -7,14 +7,14 @@ describe Virtus, '.finalize' do
         include Virtus.model(:finalize => false)
 
         attribute :articles, Array['Examples::Article']
-        attribute :address,  'Examples::Address'
+        attribute :address,  :'Examples::Address'
       end
 
       class Article
         include Virtus.model(:finalize => false)
 
         attribute :posts, Hash['Examples::Person' => 'Examples::Post']
-        attribute :person, 'Examples::Person'
+        attribute :person, :'Examples::Person'
       end
 
       class Post

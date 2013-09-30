@@ -6,7 +6,7 @@ module Virtus
 
     # @api private
     def initialize(type, options)
-      @type, @options = type, options
+      @type, @options = type.to_s, options
       @name = options[:name]
     end
 
