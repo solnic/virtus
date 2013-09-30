@@ -141,15 +141,7 @@ module Virtus
       def initialize_options(options)
         @options = @klass.options.merge(:coerce => Virtus.coerce).update(options)
         @klass.merge_options!(@type, @options)
-        determine_visibility!
-      end
-
-      # @api private
-      def determine_visibility!
-        default_accessor  = @options.fetch(:accessor)
-        reader_visibility = @options.fetch(:reader, default_accessor)
-        writer_visibility = @options.fetch(:writer, default_accessor)
-        @options.update(:reader => reader_visibility, :writer => writer_visibility)
+        determine_visibility
       end
 
       # @api private
@@ -159,7 +151,7 @@ module Virtus
 
       # @api private
       def initialize_coercer
-        @options.update(:coercer => @options.fetch(:coercer) { @klass.build_coercer(@type, @options) })
+        @options.update(:coercer => determine_coercer)
       end
 
       # @api private
@@ -172,6 +164,19 @@ module Virtus
         @attribute.extend(LazyDefault) if @options[:lazy]
 
         @attribute.finalize if @options[:finalize]
+      end
+
+      # @api private
+      def determine_coercer
+        @options.fetch(:coercer) { @klass.build_coercer(@type, @options) }
+      end
+
+      # @api private
+      def determine_visibility
+        default_accessor  = @options.fetch(:accessor)
+        reader_visibility = @options.fetch(:reader, default_accessor)
+        writer_visibility = @options.fetch(:writer, default_accessor)
+        @options.update(:reader => reader_visibility, :writer => writer_visibility)
       end
 
     end # class Builder
