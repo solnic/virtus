@@ -515,7 +515,7 @@ end
 ## Attribute Finalization and Circular Dependencies
 
 If a type references another type which happens to not be available yet you need
-to use lazy-finalization of attributes and finalize virtus manually after all 
+to use lazy-finalization of attributes and finalize virtus manually after all
 types have been already loaded:
 
 ``` ruby
