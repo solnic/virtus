@@ -153,7 +153,7 @@ module Virtus
       method_options = options
 
       lambda do |name, type = Object, options = {}|
-        super(name, type, method_options.update(options))
+        super(name, type, method_options.merge(options))
       end
     end
 

@@ -32,11 +32,13 @@ describe Virtus, '.model' do
     let(:mod) { Virtus.model }
 
     context 'with a class' do
-      subject { Class.new }
+      let(:model) { Class.new }
+
+      subject { model }
 
       before do
         subject.send(:include, mod)
-        subject.attribute :name
+        subject.attribute :name, String, :default => 'Jane'
       end
 
       it_behaves_like 'a model with constructor'
@@ -45,6 +47,28 @@ describe Virtus, '.model' do
 
       it_behaves_like 'a model with mass-assignment' do
         let(:instance) { subject.new }
+      end
+
+      context 'with a sub-class' do
+        subject { Class.new(model) }
+
+        before do
+          subject.attribute :age, Integer
+        end
+
+        it_behaves_like 'a model with constructor'
+
+        it_behaves_like 'a model with strict mode turned off'
+
+        it_behaves_like 'a model with mass-assignment' do
+          let(:instance) { subject.new }
+
+          let(:attributes) { { :name => 'Jane', :age => 23 } }
+        end
+
+        it 'has its own attributes' do
+          expect(subject.attribute_set[:age]).to be_kind_of(Virtus::Attribute)
+        end
       end
     end
 
