@@ -189,6 +189,8 @@ module Virtus
       end
     end
 
+    # FIXME: this should be removed in favor of Attribute#set_default_value
+    #
     # Set default attribute
     #
     # @return [default value]
@@ -218,6 +220,8 @@ module Virtus
 
     private
 
+    # FIXME: this should belong to the attribute
+    #
     # @api private
     def skip_default?(object, attribute)
       attribute.lazy? || object.instance_variable_defined?(attribute.instance_variable_name)

@@ -1,7 +1,6 @@
 ---
 Attribute:
-  enabled: true
-  exclude: []
+  enabled: false
 BooleanParameter:
   enabled: true
   exclude: []
@@ -10,23 +9,40 @@ ClassVariable:
   exclude: []
 ControlParameter:
   enabled: true
-  exclude: []
+  exclude:
+    - 'Virtus::InstanceMethods::Constructor#initialize'
 DataClump:
   enabled: true
-  exclude: []
   max_copies: 2
   min_clump_size: 2
+  exclude:
+    - 'Virtus::AttributeSet'
 DuplicateMethodCall:
   enabled: false
 FeatureEnvy:
   enabled: true
-  exclude: []
+  exclude:
+    - 'Virtus::Attribute::Boolean#value_coerced?'
+    - 'Virtus::AttributeSet#get'
+    - 'Virtus::AttributeSet#set'
+    - 'Virtus::AttributeSet#set_default'
+    - 'Virtus::AttributeSet#skip_default?'
+    - 'Virtus::Builder#add_extended_hook'
+    - 'Virtus::Builder#add_included_hook'
+    - 'Virtus::InstanceMethods#assert_valid_name'
+    - 'Virtus::TypeLookup#determine_type_from_primitive'
 IrresponsibleModule:
   enabled: true
   exclude: []
 LongParameterList:
   enabled: true
-  exclude: []
+  exclude:
+    - 'Virtus::AttributeSet#define_reader_method'
+    - 'Virtus::AttributeSet#define_writer_method'
+    - 'Virtus::Extensions::Methods#attribute'
+    - 'Virtus::ModuleExtensions#attribute'
+    - 'Virtus::ModuleExtensions#self.setup'
+    - 'Virtus::ValueObject::ClassMethods#attribute'
   max_params: 2
 LongYieldList:
   enabled: true
@@ -36,34 +52,65 @@ NestedIterators:
   enabled: true
   max_allowed_nesting: 1
   ignore_iterators: []
-  exclude: []
+  exclude:
+    - 'Virtus::Builder#add_extended_hook'
+    - 'Virtus::Builder#add_included_hook'
+    - 'Virtus::ModuleBuilder#add_included_hook'
+    - 'Virtus::Equalizer#define_cmp_method'
+    - 'Virtus::Equalizer#define_hash_method'
+    - 'Virtus::Equalizer#define_inspect_method'
 NilCheck:
   enabled: true
-  exclude: []
+  exclude:
+    - 'Virtus::Attribute::EmbeddedValue::FromOpenStruct#call'
+    - 'Virtus::Attribute::EmbeddedValue::FromStruct#call'
+    - 'Virtus::Attribute::Strict#coerce'
+    - 'Virtus::Options#options'
+    - 'Virtus::TypeLookup#determine_type_from_primitive'
 RepeatedConditional:
   enabled: true
-  exclude: []
   max_ifs: 1
+  exclude:
+    - 'Virtus::AttributeSet'
+    - 'Virtus::Builder'
 TooManyInstanceVariables:
   enabled: true
-  exclude: []
   max_instance_variables: 3
+  exclude:
+    - 'Virtus::Attribute'
+    - 'Virtus::Attribute::Builder'
+    - 'Virtus::Configuration'
 TooManyMethods:
   enabled: true
-  exclude: []
-  max_methods: 10
+  max_methods: 6
+  exclude:
+    - 'Virtus::Equalizer'
+    - 'Virtus::Builder'
+    - 'Virtus::Attribute'
+    - 'Virtus::AttributeSet'
 TooManyStatements:
   enabled: true
-  exclude: []
   max_statements: 4
+  exclude:
+    - 'Virtus#self.included'
+    - 'Virtus::Attribute::Builder#self.determine_type'
+    - 'Virtus::Attribute::Collection#self.infer'
+    - 'Virtus::Attribute::Hash#self.infer'
+    - 'Virtus::Builder#add_extended_hook'
+    - 'Virtus::Builder#add_included_hook'
+    - 'Virtus::ModuleBuilder#add_included_hook'
+    - 'Virtus::ClassInclusions#self.included'
+    - 'Virtus::ClassMethods#self.extended'
+    - 'Virtus::Extensions#self.extended'
+    - 'Virtus::ModuleExtensions#included'
+    - 'Virtus::TypeLookup#determine_type_from_primitive'
+    - 'Virtus::ValueObject#self.included'
 UncommunicativeMethodName:
   enabled: true
-  exclude: []
   reject:
   - !ruby/regexp /^[a-z]$/
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
-  accept: []
 UncommunicativeModuleName:
   enabled: true
   exclude: []
@@ -78,7 +125,7 @@ UncommunicativeParameterName:
   - !ruby/regexp /^.$/
   - !ruby/regexp /[0-9]$/
   - !ruby/regexp /[A-Z]/
-  accept: []
+  accept: ['_']
 UncommunicativeVariableName:
   enabled: true
   exclude: []
@@ -92,5 +139,9 @@ UnusedParameters:
   exclude: []
 UtilityFunction:
   enabled: true
-  exclude: []
   max_helper_calls: 0
+  exclude:
+    - 'Virtus::Attribute::Boolean#value_coerced?'
+    - 'Virtus::AttributeSet#set_default'
+    - 'Virtus::AttributeSet#skip_default?'
+    - 'Virtus::Extensions::Methods#merge_options'
