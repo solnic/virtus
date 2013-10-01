@@ -92,11 +92,6 @@ module Virtus
         end
       end
 
-      # @api public
-      def primitive
-        type.primitive
-      end
-
     end # class EmbeddedValue
 
   end # class Attribute
