@@ -138,7 +138,7 @@ module Virtus
       { :coerce             => config.coerce,
         :finalize           => config.finalize,
         :strict             => config.strict,
-        :configured_coercer => config.coercer }
+        :configured_coercer => config.coercer }.freeze
     end
 
     # Wrapper for the attribute method that is used in .add_included_hook
@@ -215,7 +215,7 @@ module Virtus
 
     # @api private
     def options
-      super.update(:writer => :private)
+      super.merge(:writer => :private)
     end
 
   end # ValueObjectBuilder
