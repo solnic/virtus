@@ -25,7 +25,6 @@ FeatureEnvy:
     - 'Virtus::Attribute::Boolean#value_coerced?'
     - 'Virtus::AttributeSet#get'
     - 'Virtus::AttributeSet#set'
-    - 'Virtus::AttributeSet#set_default'
     - 'Virtus::AttributeSet#skip_default?'
     - 'Virtus::Builder#add_extended_hook'
     - 'Virtus::Builder#add_included_hook'
