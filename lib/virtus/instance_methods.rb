@@ -171,7 +171,7 @@ module Virtus
     # @api public
     def reset_attribute(attribute_name)
       attribute = attribute_set[attribute_name]
-      attribute_set.set_default(self, attribute) if attribute
+      attribute.set_default_value(self) if attribute
       self
     end
 

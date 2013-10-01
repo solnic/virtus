@@ -182,22 +182,9 @@ module Virtus
     # @api private
     def set_defaults(object, filter = method(:skip_default?))
       each do |attribute|
-        if filter.call(object, attribute)
-          next
-        end
-        set_default(object, attribute)
+        next if filter.call(object, attribute)
+        attribute.set_default_value(object)
       end
-    end
-
-    # FIXME: this should be removed in favor of Attribute#set_default_value
-    #
-    # Set default attribute
-    #
-    # @return [default value]
-    #
-    # @api private
-    def set_default(object, attribute)
-      attribute.set_default_value(object)
     end
 
     # Coerce attributes received to a hash
@@ -220,8 +207,6 @@ module Virtus
 
     private
 
-    # FIXME: this should belong to the attribute
-    #
     # @api private
     def skip_default?(object, attribute)
       attribute.lazy? || object.instance_variable_defined?(attribute.instance_variable_name)
