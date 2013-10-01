@@ -25,6 +25,9 @@ module Virtus
     class EmbeddedValue < Attribute
       TYPES = [Struct, OpenStruct, Virtus, Model::Constructor].freeze
 
+      # Abstract EV coercer class
+      #
+      # @private
       class Coercer
         attr_reader :primitive
 
@@ -34,6 +37,10 @@ module Virtus
 
       end # Coercer
 
+      # Builds Struct-like instance with attributes passed to the constructor as
+      # a list of args rather than a hash
+      #
+      # @private
       class FromStruct < Coercer
 
         # @api public
@@ -47,6 +54,10 @@ module Virtus
 
       end # FromStruct
 
+      # Builds OpenStruct-like instance with attributes passed to the constructor
+      # as a hash
+      #
+      # @private
       class FromOpenStruct < Coercer
 
         # @api public

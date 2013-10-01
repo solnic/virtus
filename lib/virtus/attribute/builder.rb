@@ -1,5 +1,7 @@
 module Virtus
 
+  # Attribute placeholder used when type constant is passed as a string or symbol
+  #
   # @private
   class PendingAttribute
     attr_reader :type, :options, :name
@@ -37,6 +39,9 @@ module Virtus
 
   end # PendingAttribute
 
+  # Extracts the actual type primitive from input type
+  #
+  # @private
   class TypeDefinition
     attr_reader :type, :primitive
 
@@ -75,9 +80,7 @@ module Virtus
 
   class Attribute
 
-    # TODO: this is a huge class and it might be a good idea to split it into
-    #       smaller chunks. We probably need some option parser with dedicated
-    #       sub-classes per attribute type (different one for Hash, Collection, EV)
+    # Builder is used to set up an attribute instance based on input type and options
     #
     # @private
     class Builder

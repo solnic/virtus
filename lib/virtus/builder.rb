@@ -9,6 +9,8 @@ module Virtus
   # @private
   class Builder
 
+    # Context used for building "included" and "extended" hooks
+    #
     # @private
     class HookContext
       attr_reader :attribute_method, :config
