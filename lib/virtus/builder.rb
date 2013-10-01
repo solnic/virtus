@@ -198,12 +198,6 @@ module Virtus
   class ValueObjectBuilder < Builder
 
     # @api private
-    def initialize(config, mod = Module.new)
-      super
-      @config.constructor = true
-    end
-
-    # @api private
     def core_inclusions
       super << ValueObject::AllowedWriterMethods << ValueObject::InstanceMethods
     end

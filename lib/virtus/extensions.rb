@@ -71,7 +71,7 @@ module Virtus
 
       # @api public
       def values(&block)
-        private :attributes=
+        private :attributes= if instance_methods.include?(:attributes=)
         yield
         include(::Equalizer.new(*attribute_set.map(&:name)))
         self

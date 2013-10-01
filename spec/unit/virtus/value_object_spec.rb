@@ -14,10 +14,6 @@ describe Virtus::ValueObject do
       expect(subject.class.attribute_set[:name]).to_not be_public_writer
     end
 
-    it 'disallows mass-assignment' do
-      expect(subject.private_methods).to include(:attributes=)
-    end
-
     it 'disallows cloning' do
       expect(subject.clone).to be(subject)
     end
@@ -41,10 +37,20 @@ describe Virtus::ValueObject do
     end
   end
 
+  share_examples_for 'a valid value object with mass-assignment turned on' do
+    subject { model.new }
+
+    it 'disallows mass-assignment' do
+      expect(subject.private_methods).to include(:attributes=)
+    end
+  end
+
   context 'using new values {} block' do
     let(:model) {
+      model = Virtus.value_object(:coerce => false, :mass_assignment => mass_assignment)
+
       Class.new {
-        include Virtus.value_object(:coerce => false)
+        include model
 
         def self.name
           'Model'
@@ -57,30 +63,41 @@ describe Virtus::ValueObject do
       }
     }
 
-    it_behaves_like 'a valid value object'
+    context 'without mass-assignment' do
+      let(:mass_assignment) { false }
 
-    context 'with a model subclass' do
-      let(:subclass) {
-        Class.new(model) {
-          values do
-            attribute :email, String
-          end
+      it_behaves_like 'a valid value object'
+    end
+
+    context 'with mass-assignment' do
+      let(:mass_assignment) { true }
+
+      it_behaves_like 'a valid value object'
+      it_behaves_like 'a valid value object with mass-assignment turned on'
+
+      context 'with a model subclass' do
+        let(:subclass) {
+          Class.new(model) {
+            values do
+              attribute :email, String
+            end
+          }
         }
-      }
 
-      it_behaves_like 'a valid value object' do
-        subject { subclass.new(attributes) }
+        it_behaves_like 'a valid value object' do
+          subject { subclass.new(attributes) }
 
-        let(:attributes) { Hash[:id => 1, :name => 'Jane Doe', :email => 'jane@doe.com'] }
+          let(:attributes) { Hash[:id => 1, :name => 'Jane Doe', :email => 'jane@doe.com'] }
 
-        its(:email) { should eql('jane@doe.com') }
+          its(:email) { should eql('jane@doe.com') }
 
-        it 'sets private writers for additional values' do
-          expect(subclass.attribute_set[:email]).to_not be_public_writer
-        end
+          it 'sets private writers for additional values' do
+            expect(subclass.attribute_set[:email]).to_not be_public_writer
+          end
 
-        it 'defines valid #== for a subclass' do
-          expect(subject == subject.class.new(attributes.merge(:id => 2))).to be(false)
+          it 'defines valid #== for a subclass' do
+            expect(subject == subject.class.new(attributes.merge(:id => 2))).to be(false)
+          end
         end
       end
     end
