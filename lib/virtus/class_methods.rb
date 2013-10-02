@@ -14,11 +14,7 @@ module Virtus
     # @api private
     def self.extended(descendant)
       super
-      AttributeSet.create(descendant)
-      descendant.module_eval do
-        extend DescendantsTracker
-        include attribute_set
-      end
+      descendant.send(:include, AttributeSet.create(descendant))
     end
     private_class_method :extended
 
