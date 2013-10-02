@@ -76,18 +76,8 @@ module Virtus
     end
 
     # @api private
-    def all_extensions
-      core_inclusions + core_extensions
-    end
-
-    # @api private
-    def core_inclusions
+    def extensions
       [Model::Core]
-    end
-
-    # @api private
-    def core_extensions
-      []
     end
 
     private
@@ -101,12 +91,13 @@ module Virtus
     def add_included_hook
       with_hook_context do |context, builder|
         mod.define_singleton_method :included do |object|
-          super(object)
           Builder.pending << object unless context.finalize?
-          builder.core_extensions.each { |mod| object.extend(mod) }
-          builder.core_inclusions.each { |mod| object.send(:include, mod) }
+
+          builder.extensions.each { |mod| object.send(:include, mod) }
+
           object.send(:include, Model::Constructor)    if context.constructor?
           object.send(:include, Model::MassAssignment) if context.mass_assignment?
+
           object.define_singleton_method(:attribute, context.attribute_method)
         end
       end
@@ -117,7 +108,7 @@ module Virtus
       with_hook_context do |context, builder|
         mod.define_singleton_method :extended do |object|
           super(object)
-          builder.all_extensions.each { |mod| object.extend(mod) }
+          builder.extensions.each { |mod| object.extend(mod) }
           object.extend(Model::MassAssignment) if context.mass_assignment?
           object.define_singleton_method(:attribute, context.attribute_method)
         end
@@ -167,7 +158,7 @@ module Virtus
     # @api private
     def add_included_hook
       with_hook_context do |context, builder|
-        inclusions = core_inclusions
+        inclusions = extensions
 
         inclusions << Model::Constructor    if context.constructor?
         inclusions << Model::MassAssignment if context.mass_assignment?
@@ -187,13 +178,8 @@ module Virtus
   class ValueObjectBuilder < Builder
 
     # @api private
-    def core_inclusions
+    def extensions
       super << ValueObject::AllowedWriterMethods << ValueObject::InstanceMethods
-    end
-
-    # @api private
-    def core_extensions
-      super << ValueObject::AllowedWriterMethods
     end
 
     private
