@@ -20,7 +20,6 @@ module Virtus
         extend InstanceMethods
         extend InstanceMethods::Constructor
         extend InstanceMethods::MassAssignment
-        extend attribute_set
       end
     end
     private_class_method :extended
