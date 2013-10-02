@@ -19,6 +19,16 @@ describe Virtus::Attribute, '.build' do
     end
   end
 
+  context 'when type is Array[Virtus::Attribute::Boolean]' do
+    let(:type) { Array[Virtus::Attribute::Boolean] }
+
+    it_behaves_like 'a valid collection attribute instance'
+
+    it 'sets member type' do
+      expect(subject.type.member_type).to be(Axiom::Types::Boolean)
+    end
+  end
+
   context 'when type is Array[Float]' do
     let(:type) { Array[Float] }
 

@@ -57,7 +57,23 @@ module Virtus
           if type.size > 1
             raise ArgumentError, "more than one [key => value] pair in `#{type}`"
           else
-            { :key_type => type.keys.first, :value_type => type.values.first }
+            key_type, value_type = type.keys.first, type.values.first
+
+            key_primitive =
+              if key_type.is_a?(Class) && key_type < Attribute && key_type.primitive
+                key_type.primitive
+              else
+                key_type
+              end
+
+            value_primitive =
+              if value_type.is_a?(Class) && value_type < Attribute && value_type.primitive
+                value_type.primitive
+              else
+                value_type
+              end
+
+            { :key_type   => key_primitive, :value_type => value_primitive}
           end
         end
 

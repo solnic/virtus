@@ -37,6 +37,20 @@ describe Virtus::Attribute::Hash, '.build' do
     end
   end
 
+  context 'when type is Hash[Virtus::Attribute::Hash => Virtus::Attribute::Boolean]' do
+    let(:type) { Hash[Virtus::Attribute::Hash => Virtus::Attribute::Boolean] }
+
+    it { should be_instance_of(Virtus::Attribute::Hash) }
+
+    it 'sets key type' do
+      expect(subject.type.key_type).to be(Axiom::Types::Hash)
+    end
+
+    it 'sets value type' do
+      expect(subject.type.value_type).to be(Axiom::Types::Boolean)
+    end
+  end
+
   context 'when type is Hash[Struct.new(:id) => Integer]' do
     let(:type)     { Hash[key_type => Integer] }
     let(:key_type) { Struct.new(:id) }

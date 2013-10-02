@@ -40,10 +40,17 @@ module Virtus
         def self.infer_member_type(type)
           return unless type.respond_to?(:count)
 
-          if type.count > 1
-            raise NotImplementedError, "build SumType from list of types (#{type})"
+          member_type =
+            if type.count > 1
+              raise NotImplementedError, "build SumType from list of types (#{type})"
+            else
+              type.first
+            end
+
+          if member_type.is_a?(Class) && member_type < Attribute && member_type.primitive
+            member_type.primitive
           else
-            type.first
+            member_type
           end
         end
 
