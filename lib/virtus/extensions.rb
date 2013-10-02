@@ -18,7 +18,6 @@ module Virtus
       object.instance_eval do
         extend Methods
         extend InstanceMethods
-        extend InstanceMethods::Constructor
         extend InstanceMethods::MassAssignment
       end
     end
