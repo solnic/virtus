@@ -51,19 +51,8 @@ module Virtus
     # @api private
     attr_reader :config
 
-    # Builds a new Virtus module
-    #
-    # The block is passed to Virtus::config
-    #
-    # @example
-    #   ModuleBuilder.call do |config|
-    #     # config settings
-    #   end
-    #
-    # @return [Module]
-    #
-    # @api public
-    def self.call(options = {}, &block)
+    # @api private
+    def self.call(options, &block)
       new(Configuration.build(options, &block)).mod
     end
 
