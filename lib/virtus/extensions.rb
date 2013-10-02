@@ -64,7 +64,7 @@ module Virtus
       # @api public
       def attribute(name, type = nil, options = {})
         assert_valid_name(name)
-        attribute_set << Attribute.build(type, merge_options(name, options))
+        attribute_set << Attribute.build(type, options.merge(:name => name))
         self
       end
 
@@ -100,15 +100,6 @@ module Virtus
       # @api private
       def attribute_set
         @attribute_set
-      end
-
-      # Merge default options
-      #
-      # @return [Hash]
-      #
-      # @api private
-      def merge_options(name, options)
-        { :name => name }.merge(options)
       end
 
     end # Methods
