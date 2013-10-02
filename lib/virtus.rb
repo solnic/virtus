@@ -25,6 +25,8 @@ module Virtus
   #
   # @return [undefined]
   #
+  # @deprecated
+  #
   # @api private
   def self.included(object)
     super
@@ -43,6 +45,8 @@ module Virtus
   # @param [Object] object
   #
   # @return [undefined]
+  #
+  # @deprecated
   #
   # @api private
   def self.extended(object)
@@ -129,12 +133,44 @@ module Virtus
 
   # Builds a module for...modules
   #
+  # @example
+  #
+  #   module Common
+  #     include Virtus.module
+  #
+  #     attribute :name, String
+  #     attribute :age,  Integer
+  #   end
+  #
+  #   class User
+  #     include Common
+  #   end
+  #
+  #   class Admin
+  #     include Common
+  #   end
+  #
+  # @return [Module]
+  #
   # @api public
   def self.module(options = {}, &block)
     ModuleBuilder.call(options, &block)
   end
 
   # Builds a module for value object models
+  #
+  # @example
+  #
+  #   class GeoLocation
+  #     include Virtus.value_object
+  #
+  #     values do
+  #       attribute :lat, Float
+  #       attribute :lng, Float
+  #     end
+  #   end
+  #
+  # @return [Module]
   #
   # @api public
   def self.value_object(options = {}, &block)
@@ -150,6 +186,25 @@ module Virtus
     @configuration ||= Configuration.new
   end
 
+  # Finalize pending attributes
+  #
+  # @example
+  #   class User
+  #     include Virtus.model(:finalize => false)
+  #
+  #     attribute :address, 'Address'
+  #   end
+  #
+  #   class Address
+  #     include Virtus.model(:finalize => false)
+  #
+  #     attribute :user, 'User'
+  #   end
+  #
+  #   Virtus.finalize # this will resolve constant names
+  #
+  # @return [Array] array of finalized models
+  #
   # @api public
   def self.finalize
     Builder.pending.each do |klass|
