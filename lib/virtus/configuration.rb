@@ -79,5 +79,13 @@ module Virtus
       @coercer
     end
 
+    # @api private
+    def to_h
+      { :coerce             => coerce,
+        :finalize           => finalize,
+        :strict             => strict,
+        :configured_coercer => coercer }.freeze
+    end
+
   end # class Configuration
 end # module Virtus

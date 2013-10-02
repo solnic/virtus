@@ -9,34 +9,6 @@ module Virtus
   # @private
   class Builder
 
-    # Context used for building "included" and "extended" hooks
-    #
-    # @private
-    class HookContext
-      attr_reader :attribute_method, :config
-
-      # @api private
-      def initialize(attribute_method, config)
-        @attribute_method, @config = attribute_method, config
-      end
-
-      # @api private
-      def constructor?
-        config.constructor
-      end
-
-      # @api private
-      def mass_assignment?
-        config.mass_assignment
-      end
-
-      # @api private
-      def finalize?
-        config.finalize
-      end
-
-    end # HookContext
-
     # Return module
     #
     # @return [Module]
@@ -80,6 +52,11 @@ module Virtus
       [Model::Core]
     end
 
+    # @api private
+    def options
+      config.to_h
+    end
+
     private
 
     # Adds the .included hook to the anonymous module which then defines the
@@ -89,15 +66,10 @@ module Virtus
     #
     # @api private
     def add_included_hook
-      with_hook_context do |context, builder|
+      with_hook_context do |context|
         mod.define_singleton_method :included do |object|
           Builder.pending << object unless context.finalize?
-
-          builder.extensions.each { |mod| object.send(:include, mod) }
-
-          object.send(:include, Model::Constructor)    if context.constructor?
-          object.send(:include, Model::MassAssignment) if context.mass_assignment?
-
+          context.modules.each { |mod| object.send(:include, mod) }
           object.define_singleton_method(:attribute, context.attribute_method)
         end
       end
@@ -105,43 +77,17 @@ module Virtus
 
     # @api private
     def add_extended_hook
-      with_hook_context do |context, builder|
+      with_hook_context do |context|
         mod.define_singleton_method :extended do |object|
-          super(object)
-          builder.extensions.each { |mod| object.extend(mod) }
-          object.extend(Model::MassAssignment) if context.mass_assignment?
+          context.modules.each { |mod| object.extend(mod) }
           object.define_singleton_method(:attribute, context.attribute_method)
         end
       end
     end
 
     # @api private
-    def options
-      { :coerce             => config.coerce,
-        :finalize           => config.finalize,
-        :strict             => config.strict,
-        :configured_coercer => config.coercer }.freeze
-    end
-
-    # Wrapper for the attribute method that is used in .add_included_hook
-    # The coercer is passed in the unused key :configured_coercer to allow the
-    # property encapsulation by Virtus::Attribute::Coercer, where the
-    # coercion method is known.
-    #
-    # @return [Proc(lambda)]
-    #
-    # @api private
-    def attribute_method
-      method_options = options
-
-      lambda do |name, type = Object, options = {}|
-        super(name, type, method_options.merge(options))
-      end
-    end
-
-    # @api private
     def with_hook_context
-      yield(HookContext.new(attribute_method, config), self)
+      yield(HookContext.new(self, config))
     end
 
   end # class Builder
@@ -158,16 +104,11 @@ module Virtus
     # @api private
     def add_included_hook
       with_hook_context do |context, builder|
-        inclusions = extensions
-
-        inclusions << Model::Constructor    if context.constructor?
-        inclusions << Model::MassAssignment if context.mass_assignment?
-
         mod.define_singleton_method :included do |object|
           super(object)
           object.extend(ModuleExtensions)
-          object.instance_variable_set('@inclusions', inclusions)
-          object.send(:define_singleton_method, :attribute, context.attribute_method)
+          ModuleExtensions.setup(object, context.modules)
+          object.define_singleton_method(:attribute, context.attribute_method)
         end
       end
     end
@@ -181,8 +122,6 @@ module Virtus
     def extensions
       super << ValueObject::AllowedWriterMethods << ValueObject::InstanceMethods
     end
-
-    private
 
     # @api private
     def options

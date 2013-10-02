@@ -48,6 +48,7 @@ describe Virtus, '.module' do
   before do
     mod.send(:include, subject)
     mod.attribute :name, String
+    mod.attribute :something
   end
 
   context 'with a class' do
@@ -57,6 +58,10 @@ describe Virtus, '.module' do
 
     it 'provides attributes for the model' do
       expect(model.attribute_set[:name]).to be_kind_of(Virtus::Attribute)
+    end
+
+    it 'defaults to Object for attribute type' do
+      expect(model.attribute_set[:something].type).to be(Axiom::Types::Object)
     end
 
     it_behaves_like 'an object extended with virtus module'

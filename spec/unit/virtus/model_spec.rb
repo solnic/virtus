@@ -10,7 +10,7 @@ describe Virtus, '.model' do
 
   share_examples_for 'a model with mass-assignment' do
     let(:attributes) do
-      { :name => 'Jane' }
+      { :name => 'Jane', :something => nil }
     end
 
     before do
@@ -39,6 +39,7 @@ describe Virtus, '.model' do
       before do
         subject.send(:include, mod)
         subject.attribute :name, String, :default => 'Jane'
+        subject.attribute :something
       end
 
       it_behaves_like 'a model with constructor'
@@ -47,6 +48,10 @@ describe Virtus, '.model' do
 
       it_behaves_like 'a model with mass-assignment' do
         let(:instance) { subject.new }
+      end
+
+      it 'defaults to Object for attribute type' do
+        expect(model.attribute_set[:something].type).to be(Axiom::Types::Object)
       end
 
       context 'with a sub-class' do
@@ -63,7 +68,9 @@ describe Virtus, '.model' do
         it_behaves_like 'a model with mass-assignment' do
           let(:instance) { subject.new }
 
-          let(:attributes) { { :name => 'Jane', :age => 23 } }
+          let(:attributes) {
+            { :name => 'Jane', :something => nil, :age => 23 }
+          }
         end
 
         it 'has its own attributes' do
@@ -78,6 +85,7 @@ describe Virtus, '.model' do
       before do
         subject.extend(mod)
         subject.attribute :name, String
+        subject.attribute :something
       end
 
       it_behaves_like 'a model with strict mode turned off'
