@@ -35,11 +35,11 @@ module Virtus
       end
       private_class_method :extended
 
-      # Defines an attribute on an object's class
+      # Defines an attribute on an object's class or instance
       #
       # @example
       #    class Book
-      #      include Virtus
+      #      include Virtus.model
       #
       #      attribute :title,        String
       #      attribute :author,       String
@@ -51,7 +51,7 @@ module Virtus
       # @param [Symbol] name
       #   the name of an attribute
       #
-      # @param [Class] type
+      # @param [Class,Array,Hash,Axiom::Types::Type,String,Symbol] type
       #   the type class of an attribute
       #
       # @param [#to_hash] options
