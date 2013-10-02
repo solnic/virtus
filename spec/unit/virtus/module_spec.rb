@@ -39,6 +39,16 @@ describe Virtus, '.module' do
         expect(instance).not_to respond_to(:attributes=)
       end
     end
+
+    context 'with coercion turned off' do
+      subject { Virtus.module(:coerce => false) }
+
+      it_behaves_like 'a valid virtus object'
+
+      it 'builds non-coercible attributes' do
+        expect(object.send(:attribute_set)[:name]).not_to be_coercible
+      end
+    end
   end
 
   let(:mod)      { Module.new }
@@ -52,6 +62,8 @@ describe Virtus, '.module' do
   end
 
   context 'with a class' do
+    let(:object) { model }
+
     before do
       model.send(:include, mod)
     end
@@ -68,6 +80,8 @@ describe Virtus, '.module' do
   end
 
   context 'with a model instance' do
+    let(:object) { instance }
+
     before do
       instance.extend(mod)
     end

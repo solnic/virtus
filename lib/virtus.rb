@@ -183,7 +183,6 @@ require 'virtus/configuration'
 require 'virtus/builder'
 require 'virtus/builder/hook_context'
 
-
 require 'virtus/class_methods'
 require 'virtus/instance_methods'
 

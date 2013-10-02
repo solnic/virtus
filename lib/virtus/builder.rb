@@ -103,7 +103,7 @@ module Virtus
 
     # @api private
     def add_included_hook
-      with_hook_context do |context, builder|
+      with_hook_context do |context|
         mod.define_singleton_method :included do |object|
           super(object)
           object.extend(ModuleExtensions)
