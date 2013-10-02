@@ -18,17 +18,23 @@ describe Virtus, '.finalize' do
       end
 
       class Post
-        include Virtus.model(:finalize => false)
+        include Virtus.model
 
         attribute :title, String
       end
 
       class Address
-        include Virtus.model(:finalize => false)
+        include Virtus.model
 
         attribute :street, String
       end
     end
+
+    expect(Examples::Post.attribute_set[:title]).to be_finalized
+    expect(Examples::Address.attribute_set[:street]).to be_finalized
+
+    expect(Virtus::Builder.pending).not_to include(Examples::Post)
+    expect(Virtus::Builder.pending).not_to include(Examples::Address)
 
     Virtus.finalize
   end
