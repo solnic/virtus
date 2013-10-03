@@ -27,10 +27,8 @@ module Virtus
 
       # @api private
       def self.extended(descendant)
-        AttributeSet.create(descendant)
-        descendant.instance_eval do
-          extend attribute_set
-        end
+        super
+        descendant.extend(AttributeSet.create(descendant))
       end
       private_class_method :extended
 
