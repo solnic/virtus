@@ -34,7 +34,7 @@ module Virtus
       Virtus.warn "Virtus::ValueObject is deprecated and will be removed in 1.0.0 #{caller.first}"
 
       base.instance_eval do
-        include ::Virtus
+        include Virtus
         include InstanceMethods
         extend ClassMethods
         extend AllowedWriterMethods
