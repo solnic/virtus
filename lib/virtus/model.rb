@@ -5,7 +5,7 @@ module Virtus
     # @api private
     def self.included(descendant)
       super
-      descendant.send(:include, ClassInclusions) if Class === descendant
+      descendant.send(:include, ClassInclusions)
     end
 
     # @api private
