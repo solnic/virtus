@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Virtus, '.module' do
   share_examples_for 'a valid virtus object' do
     it 'reads and writes attribute' do
-      instance.name = 'Jane'
-      expect(instance.name).to eql('Jane')
+      instance.name = 'John'
+      expect(instance.name).to eql('John')
     end
   end
 
@@ -14,6 +14,10 @@ describe Virtus, '.module' do
 
       it_behaves_like 'a valid virtus object' do
         let(:instance) { model.new }
+      end
+
+      it 'sets defaults' do
+        expect(instance.name).to eql('Jane')
       end
     end
 
@@ -57,7 +61,7 @@ describe Virtus, '.module' do
 
   before do
     mod.send(:include, subject)
-    mod.attribute :name, String
+    mod.attribute :name, String, :default => 'Jane'
     mod.attribute :something
   end
 
@@ -92,4 +96,22 @@ describe Virtus, '.module' do
 
     it_behaves_like 'an object extended with virtus module'
   end
+
+  context 'with another module' do
+    let(:other)  { Module.new }
+
+    let(:object) { instance }
+
+    before do
+      other.send(:include, mod)
+      model.send(:include, other)
+    end
+
+    it_behaves_like 'an object extended with virtus module'
+
+    it 'provides attributes for the model' do
+      expect(model.attribute_set[:name]).to be_kind_of(Virtus::Attribute)
+    end
+  end
+
 end
