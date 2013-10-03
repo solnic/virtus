@@ -164,6 +164,7 @@ module Virtus
         @attribute.extend(Coercible)   if options[:coerce]
         @attribute.extend(Strict)      if options[:strict]
         @attribute.extend(LazyDefault) if options[:lazy]
+        klass.extensions_for(@attribute).each { |ext| @attribute.extend(ext) }
 
         @attribute.finalize if options[:finalize]
       end

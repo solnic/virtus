@@ -16,7 +16,7 @@ module Virtus
   #   # => Virtus::CoercionError: Failed to coerce "fsafa" into Integer
   #
   class Attribute
-    extend DescendantsTracker, Options, TypeLookup
+    extend DescendantsTracker, Options, TypeLookup, Extendable
 
     include ::Equalizer.new(:type, :options)
 

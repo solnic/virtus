@@ -227,6 +227,7 @@ require 'coercible'
 require 'virtus/support/equalizer'
 require 'virtus/support/options'
 require 'virtus/support/type_lookup'
+require 'virtus/support/extendable'
 
 require 'virtus/model'
 require 'virtus/extensions'

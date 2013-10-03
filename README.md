@@ -271,6 +271,30 @@ package = Package.new(:dimensions => { 'width' => "2.2", :height => 2, "length" 
 package.dimensions # => { :width => 2.2, :height => 2.0, :length => 4.5 }
 ```
 
+### Attribute extensions
+
+``` ruby
+module Virtus::Attribute::Format
+  def self.extend?(attribute)
+    attribute.options.key?(:format)
+  end
+
+  def format
+    options[:format]
+  end
+end
+
+Virtus::Attribute.register_extension(Virtus::Attribute::Format)
+
+class Person
+  include Virtus.model
+
+  attribute :birth_datetime, Datetime, format: '%Y-%m-%d'
+end
+
+Person.attribute_set[:birth_datetime].format
+```
+
 ### IMPORTANT note about member coercions
 
 Virtus performs coercions only when a value is being assigned. If you mutate the value later on using its own
