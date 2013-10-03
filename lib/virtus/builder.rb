@@ -120,7 +120,11 @@ module Virtus
 
     # @api private
     def extensions
-      super << ValueObject::AllowedWriterMethods << ValueObject::InstanceMethods
+      super + [
+        Extensions::AllowedWriterMethods,
+        ValueObject::AllowedWriterMethods,
+        ValueObject::InstanceMethods
+      ]
     end
 
     # @api private

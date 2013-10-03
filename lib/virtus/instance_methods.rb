@@ -14,7 +14,7 @@ module Virtus
       #
       # @api private
       def initialize(attributes = nil)
-        attribute_set.set(self, attributes) if attributes
+        self.class.attribute_set.set(self, attributes) if attributes
         set_default_attributes
       end
 
