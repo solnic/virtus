@@ -15,6 +15,7 @@ This release no longer works with Ruby 1.8.7.
 * [changed] A meaningful error will be raised if a reserved name is used as an attribute name (solnic)
 * [changed] Default value can be set via private and protected methods now (solnic)
 * [changed] New syntax for value objects (solnic)
+* [changed] Default values are now set in the constructor for non-lazy attributes (solnic)
 * [deprecated] `Virtus::Attribute.coerce` in favor of `Virtus.coerce` or a customized configured module (solnic)
 * [deprecated] `include Virtus` in favor of `include Virtus.model` (for classes) or `Virtus.module` (for modules) (solnic)
 * [deprecated] `include Virtus::ValueObject` in favor of `include Virtus.value_object` (solnic)
