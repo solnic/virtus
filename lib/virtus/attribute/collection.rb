@@ -1,14 +1,14 @@
 module Virtus
   class Attribute
 
-    # Abstract superclass for collection Attributes.
+    # Collection attribute handles enumerable-like types
     #
     # Handles coercing members to the designated member type.
     #
-    # @abstract
     class Collection < Attribute
       default Proc.new { |_, attribute| attribute.type.primitive.new }
 
+      # @api private
       attr_reader :member_type
 
       # FIXME: temporary hack, remove when Axiom::Type works with EV as member_type
