@@ -6,7 +6,7 @@ module Virtus
     # Handles coercing members to the designated member type.
     #
     class Collection < Attribute
-      default Proc.new { |_, attribute| attribute.type.primitive.new }
+      default Proc.new { |_, attribute| attribute.primitive.new }
 
       # @api private
       attr_reader :member_type
