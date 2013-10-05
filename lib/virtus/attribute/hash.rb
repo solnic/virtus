@@ -1,25 +1,18 @@
 module Virtus
   class Attribute
 
-    # Hash
-    #
-    # @example
-    #   class Post
-    #     include Virtus
-    #
-    #     attribute :meta, Hash
-    #   end
-    #
-    #   Post.new(:meta => { :tags => %w(foo bar) })
+    # Handles attributes with Hash type
     #
     class Hash < Attribute
       primitive ::Hash
       default   primitive.new
 
-      attr_reader :key_type
-      attr_reader :value_type
+      # @api private
+      attr_reader :key_type, :value_type
 
       # FIXME: remove this once axiom-types supports it
+      #
+      # @private
       Type = Struct.new(:key_type, :value_type) do
         def self.infer(type)
           if axiom_type?(type)
@@ -33,14 +26,17 @@ module Virtus
           end
         end
 
+        # @api private
         def self.pending?(primitive)
           primitive.is_a?(String) || primitive.is_a?(Symbol)
         end
 
+        # @api private
         def self.axiom_type?(type)
           type.is_a?(Class) && type < Axiom::Types::Type
         end
 
+        # @api private
         def self.determine_type(type)
           return type if pending?(type)
 
@@ -51,6 +47,7 @@ module Virtus
           end
         end
 
+        # @api private
         def self.infer_key_and_value_types(type)
           return {} unless type.kind_of?(::Hash)
 
@@ -77,10 +74,12 @@ module Virtus
           end
         end
 
+        # @api private
         def coercion_method
           :to_hash
         end
 
+        # @api private
         def primitive
           ::Hash
         end
@@ -97,6 +96,10 @@ module Virtus
         options[:value_type] ||= Attribute.build(type.value_type)
       end
 
+      # Coerce members
+      #
+      # @see [Attribute#coerce]
+      #
       # @api public
       def coerce(*)
         coerced = super
@@ -122,5 +125,6 @@ module Virtus
       end
 
     end # class Hash
+
   end # class Attribute
 end # module Virtus
