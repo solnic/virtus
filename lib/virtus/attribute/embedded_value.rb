@@ -1,26 +1,7 @@
 module Virtus
   class Attribute
 
-    # EmbeddedValue
-    #
-    # @example
-    #
-    #   class Address
-    #     include Virtus
-    #
-    #     attribute :street,  String
-    #     attribute :zipcode, String
-    #     attribute :city,    String
-    #   end
-    #
-    #   class User
-    #     include Virtus
-    #
-    #     attribute :address, Address
-    #   end
-    #
-    #   user = User.new(:address => {
-    #     :street => 'Street 1/2', :zipcode => '12345', :city => 'NYC' })
+    # EmbeddedValue handles virtus-like objects, OpenStruct and Struct
     #
     class EmbeddedValue < Attribute
       TYPES = [Struct, OpenStruct, Virtus, Model::Constructor].freeze
