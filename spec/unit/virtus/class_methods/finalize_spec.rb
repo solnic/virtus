@@ -6,6 +6,7 @@ describe Virtus, '.finalize' do
       class Person
         include Virtus.model(:finalize => false)
 
+        attribute :name,     String
         attribute :articles, Array['Examples::Article']
         attribute :address,  :'Examples::Address'
       end
@@ -37,6 +38,11 @@ describe Virtus, '.finalize' do
     expect(Virtus::Builder.pending).not_to include(Examples::Address)
 
     Virtus.finalize
+  end
+
+  it "sets attributes that don't require finalization" do
+    expect(Examples::Person.attribute_set[:name]).to be_instance_of(Virtus::Attribute)
+    expect(Examples::Person.attribute_set[:name].primitive).to be(String)
   end
 
   it 'it finalizes member type for a collection attribute' do

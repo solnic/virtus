@@ -26,6 +26,14 @@ module Virtus
       # @api private
       attr_reader :instance_variable_name
 
+      # @api private
+      def self.extended(descendant)
+        super
+        name = descendant.options.fetch(:name).to_sym
+        descendant.instance_variable_set('@name', name)
+        descendant.instance_variable_set('@instance_variable_name', "@#{name}")
+      end
+
       # Return value of the attribute
       #
       # @param [Object] instance
@@ -76,13 +84,6 @@ module Virtus
       # @api private
       def public_writer?
         options[:writer] == :public
-      end
-
-      # @api private
-      def finalize
-        @name                   = options.fetch(:name).to_sym
-        @instance_variable_name = "@#{@name}"
-        super
       end
 
     end # Accessor
