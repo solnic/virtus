@@ -4,8 +4,10 @@ module Virtus
     # Coercer accessor wrapper
     #
     # @api private
-    class Coercer
-      attr_reader :method
+    class Coercer < Virtus::Coercer
+
+      # @api private
+      attr_reader :method, :coercers
 
       # Initialize a new coercer object
       #
@@ -15,9 +17,10 @@ module Virtus
       # @return [undefined]
       #
       # @api private
-      def initialize(coercers, method)
+      def initialize(type, coercers)
+        super(type)
+        @method   = type.coercion_method
         @coercers = coercers
-        @method   = method
       end
 
       # Coerce given value
@@ -26,23 +29,14 @@ module Virtus
       #
       # @api private
       def call(value)
-        self[value.class].public_send(@method, value)
+        coercers[value.class].public_send(method, value)
       rescue ::Coercible::UnsupportedCoercion
         value
       end
 
       # @api public
       def success?(primitive, value)
-        self[primitive].coerced?(value)
-      end
-
-      # Return coercer object for the given type
-      #
-      # @return [Object]
-      #
-      # @api private
-      def [](type)
-        @coercers[type]
+        coercers[primitive].coerced?(value)
       end
 
     end # class Coercer

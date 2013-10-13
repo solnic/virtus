@@ -243,6 +243,7 @@ require 'virtus/instance_methods'
 
 require 'virtus/value_object'
 
+require 'virtus/coercer'
 require 'virtus/attribute_set'
 
 require 'virtus/attribute/default_value'

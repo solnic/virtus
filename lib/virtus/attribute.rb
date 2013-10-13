@@ -67,10 +67,7 @@ module Virtus
 
     # @api private
     def self.build_coercer(type, options = {})
-      Coercer.new(
-        options.fetch(:configured_coercer) { Virtus.coercer },
-        type.coercion_method
-      )
+      Coercer.new(type, options.fetch(:configured_coercer) { Virtus.coercer })
     end
 
     # @api private
