@@ -1,4 +1,4 @@
-# v1.0.0 [to-be-released]
+# v1.0.0 2013-10-16
 
 This release no longer works with Ruby 1.8.7.
 
