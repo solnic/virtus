@@ -35,6 +35,12 @@ describe Virtus::ValueObject do
         %(#<Model #{attributes.map { |k, v| "#{k}=#{v.inspect}" }.join(' ')}>)
       )
     end
+
+    it 'allows to construct new values using #with' do
+      new_instance = subject.with(:name => "John Doe")
+      expect(new_instance.id).to eql(subject.id)
+      expect(new_instance.name).to eql("John Doe")
+    end
   end
 
   share_examples_for 'a valid value object with mass-assignment turned on' do

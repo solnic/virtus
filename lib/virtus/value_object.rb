@@ -62,6 +62,22 @@ module Virtus
       end
       alias dup clone
 
+      # Create a new ValueObject by combining the passed attribute hash with
+      # the instances attributes.
+      #
+      # @example
+      #
+      #   number = PhoneNumber.new(kind: "mobile", number: "123-456-78-90")
+      #   number.with(number: "987-654-32-10")
+      #   # => #<PhoneNumber kind="mobile" number="987-654-32-10">
+      #
+      # @return [Object]
+      #
+      # @api public
+      def with(attribute_updates)
+        self.class.new(attribute_set.get(self).merge(attribute_updates))
+      end
+
     end
 
     module AllowedWriterMethods
