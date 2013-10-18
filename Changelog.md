@@ -1,3 +1,7 @@
+# Unreleased
+
+* [feature] re-introduce `ValueObject#with`, which was removed in the past (senny)
+
 # v1.0.0 2013-10-16
 
 This release no longer works with Ruby 1.8.7.
