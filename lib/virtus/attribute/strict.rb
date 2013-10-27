@@ -13,7 +13,7 @@ module Virtus
       def coerce(*)
         output = super
 
-        if coercer.success?(primitive, output) || !required? && output.nil?
+        if value_coerced?(output) || !required? && output.nil?
           output
         else
           raise CoercionError.new(output, primitive)
