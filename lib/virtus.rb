@@ -14,7 +14,7 @@ module Virtus
     attr_reader :output, :primitive
 
     def initialize(output, primitive)
-      @output, @private = output, primitive
+      @output, @primitive = output, primitive
       super("Failed to coerce #{output.inspect} into #{primitive.inspect}")
     end
   end
