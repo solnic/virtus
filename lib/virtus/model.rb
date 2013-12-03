@@ -62,7 +62,7 @@ module Virtus
         descendant.extend(Extensions::AllowedWriterMethods)
         descendant.extend(InstanceMethods::MassAssignment)
       end
-      private_class_method :included
+      private_class_method :extended
 
     end # MassAssignment
 
