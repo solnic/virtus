@@ -3,7 +3,7 @@
 * [feature] re-introduce `ValueObject#with`, which was removed in the past (senny)
 * [fixed] strict mode for Boolean type (solnic)
 
-[Compare v1.0.0..master](https://github.com/solnic/virtus/compare/v1.0.0...master)
+[Compare v1.0.0..v1.0.1](https://github.com/solnic/virtus/compare/v1.0.0...v1.0.1)
 
 # v1.0.0 2013-10-16
 
