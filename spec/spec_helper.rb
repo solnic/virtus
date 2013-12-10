@@ -12,7 +12,6 @@ if ENV['COVERAGE'] == 'true'
     add_filter       'config/'
     add_filter       'spec'
     add_filter       '.bundle'
-    minimum_coverage 98
   end
 end
 
