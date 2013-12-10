@@ -1,6 +1,9 @@
-# Unreleased
+# v1.0.0 2013-12-10
 
 * [feature] re-introduce `ValueObject#with`, which was removed in the past (senny)
+* [fixed] strict mode for Boolean type (solnic)
+
+[Compare v1.0.0..master](https://github.com/solnic/virtus/compare/v1.0.0...master)
 
 # v1.0.0 2013-10-16
 
@@ -28,7 +31,7 @@ This release no longer works with Ruby 1.8.7.
 * [fixed] value object with Hash type works correctly (solnic)
 * [fixed] issues with value-object subclasses and `#==` method (solnic)
 
-[Compare v0.5.4..master](https://github.com/solnic/virtus/compare/v0.5.4...master)
+[Compare v0.5.4..v1.0.0](https://github.com/solnic/virtus/compare/v0.5.4...v1.0.0)
 
 # v0.5.4 2012-12-20
 
