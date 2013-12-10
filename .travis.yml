@@ -11,6 +11,7 @@ rvm:
 matrix:
   allow_failures:
     - rvm: ruby-head
+    - rvm: rbx
 notifications:
   email:
     - piotr.solnica@gmail.com
