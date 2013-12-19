@@ -65,7 +65,7 @@ module Virtus
     def define_hash_method
       keys = @keys
       define_method(:hash) do
-        keys.map { |key| send(key).hash }.reduce(self.class.hash, :^)
+        keys.map { |key| send(key) }.push(self.class).hash
       end
     end
 
