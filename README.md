@@ -50,7 +50,7 @@ class User
   attribute :birthday, DateTime
 end
 
-user = User.new(:name => 'Piotr', :age => 29)
+user = User.new(name: 'Piotr', age: 29)
 user.attributes # => { :name => "Piotr", :age => 29 }
 
 user.name # => "Piotr"
@@ -61,7 +61,7 @@ user.age.class # => Fixnum
 user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
 
 # mass-assignment
-user.attributes = { :name => 'Jane', :age => 21 }
+user.attributes = { name: 'Jane', age: 21 }
 user.name # => "Jane"
 user.age  # => 21
 ```
@@ -76,23 +76,23 @@ class User
   attribute :name, String
 end
 
-user = User.new(:name => 'Piotr')
-user.attributes = { :name => 'John' }
+user = User.new(name: 'Piotr')
+user.attributes = { name: 'John' }
 user.attributes
 # => {:name => 'John'}
 
 # include attribute DSL + constructor
 class User
-  include Virtus.model(:mass_assignment => false)
+  include Virtus.model(mass_assignment: false)
 
   attribute :name, String
 end
 
-User.new(:name => 'Piotr')
+User.new(name: 'Piotr')
 
 # include just the attribute DSL
 class User
-  include Virtus.model(:constructor => false, :mass_assignment => false)
+  include Virtus.model(constructor: false, mass_assignment: false)
 
   attribute :name, String
 end
@@ -114,7 +114,7 @@ module Name
 end
 
 module Age
-  include Virtus.module(:coerce => false)
+  include Virtus.module(coerce: false)
 
   attribute :age, Integer
 end
@@ -123,7 +123,7 @@ class User
   include Name, Age
 end
 
-user = User.new(:name => 'John', :age => 30)
+user = User.new(name: 'John', age: 30)
 ```
 
 ### Dynamically Extending Instances
@@ -151,23 +151,23 @@ class Page
   attribute :title, String
 
   # default from a singleton value (integer in this case)
-  attribute :views, Integer, :default => 0
+  attribute :views, Integer, default: 0
 
   # default from a singleton value (boolean in this case)
-  attribute :published, Boolean, :default => false
+  attribute :published, Boolean, default: false
 
   # default from a callable object (proc in this case)
-  attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
+  attribute :slug, String, default: -> page, attribute { page.title.downcase.gsub(' ', '-') }
 
   # default from a method name as symbol
-  attribute :editor_title, String,  :default => :default_editor_title
+  attribute :editor_title, String, default: :default_editor_title
 
   def default_editor_title
     published? ? title : "UNPUBLISHED: #{title}"
   end
 end
 
-page = Page.new(:title => 'Virtus README')
+page = Page.new(title: 'Virtus README')
 page.slug         # => 'virtus-readme'
 page.views        # => 0
 page.published    # => false
@@ -203,8 +203,8 @@ class User
   attribute :address, Address
 end
 
-user = User.new(:address => {
-  :street => 'Street 1/2', :zipcode => '12345', :city => { :name => 'NYC' } })
+user = User.new(address: {
+  street: 'Street 1/2', zipcode: '12345', city: { name: 'NYC' } })
 
 user.address.street # => "Street 1/2"
 user.address.city.name # => "NYC"
@@ -247,11 +247,11 @@ class User
 end
 
 user = User.new(
-  :phone_numbers => [
-    { :number => '212-555-1212' },
-    { :number => '919-444-3265' } ],
-  :addresses => [
-    { :address => '1234 Any St.', :locality => 'Anytown', :region => "DC", :postal_code => "21234" } ])
+  phone_numbers: [
+    { number: '212-555-1212' },
+    { number: '919-444-3265' } ],
+  addresses: [
+    { address: '1234 Any St.', locality: 'Anytown', region: "DC", postal_code: "21234" } ])
 
 user.phone_numbers # => [#<PhoneNumber:0x007fdb2d3bef88 @number="212-555-1212">, #<PhoneNumber:0x007fdb2d3beb00 @number="919-444-3265">]
 
@@ -267,7 +267,7 @@ class Package
   attribute :dimensions, Hash[Symbol => Float]
 end
 
-package = Package.new(:dimensions => { 'width' => "2.2", :height => 2, "length" => 4.5 })
+package = Package.new(dimensions: { 'width' => "2.2", height: 2, "length" => 4.5 })
 package.dimensions # => { :width => 2.2, :height => 2.0, :length => 4.5 }
 ```
 
@@ -294,10 +294,10 @@ end
 library = Library.new
 
 # This will coerce Hash to a Book instance
-library.books = [ { :title => 'Introduction to Virtus' } ]
+library.books = [ { title: 'Introduction to Virtus' } ]
 
 # This WILL NOT COERCE the value because you mutate the books array with Array#<<
-library.books << { :title => 'Another Introduction to Virtus' }
+library.books << { title: 'Another Introduction to Virtus' }
 ```
 
 A suggested solution to this problem would be to introduce your own class instead of using Array and implement
@@ -313,7 +313,7 @@ end
 class BookCollection < Array
   def <<(book)
    if book.kind_of?(Hash)
-    super(Book.new(book))
+     super(Book.new(book))
    else
      super
    end
@@ -327,7 +327,7 @@ class Library
 end
 
 library = Library.new
-library.books << { :title => 'Another Introduction to Virtus' }
+library.books << { title: 'Another Introduction to Virtus' }
 ```
 
 ### Value Objects
@@ -352,8 +352,8 @@ class Venue
 end
 
 venue = Venue.new(
-  :name     => 'Pub',
-  :location => { :latitude => 37.160317, :longitude => -98.437500 })
+  name:     'Pub',
+  location: { latitude: 37.160317, longitude: -98.437500 })
 
 venue.location.latitude # => 37.160317
 venue.location.longitude # => -98.4375
@@ -361,8 +361,8 @@ venue.location.longitude # => -98.4375
 # Supports object's equality
 
 venue_other = Venue.new(
-  :name     => 'Other Pub',
-  :location => { :latitude => 37.160317, :longitude => -98.437500 })
+  name:     'Other Pub',
+  location: { :latitude => 37.160317, :longitude => -98.437500 })
 
 venue.location === venue_other.location # => true
 ```
@@ -374,7 +374,7 @@ require 'json'
 
 class Json < Virtus::Attribute
   def coerce(value)
-    value.is_a?(::Hash) ? value : JSON.parse(value)
+    value.is_a?(Hash) ? value : JSON.parse(value)
   end
 end
 
@@ -401,7 +401,7 @@ class User
   attribute :scream, NoisyString
 end
 
-user = User.new(:scream => 'hello world!')
+user = User.new(scream: 'hello world!')
 user.scream # => "HELLO WORLD!"
 ```
 
@@ -411,14 +411,14 @@ user.scream # => "HELLO WORLD!"
 class User
   include Virtus.model
 
-  attribute :unique_id, String, :writer => :private
+  attribute :unique_id, String, writer: :private
 
   def set_unique_id(id)
     self.unique_id = id
   end
 end
 
-user = User.new(:unique_id => '1234-1234')
+user = User.new(unique_id: '1234-1234')
 user.unique_id # => nil
 
 user.unique_id = '1234-1234' # => NoMethodError: private method `unique_id='
@@ -441,7 +441,7 @@ Virtus.coerce(false)
 class User
   include Virtus.model
 
-  attribute :name, String, :coerce => false
+  attribute :name, String, coerce: false
 end
 ```
 
@@ -462,7 +462,7 @@ end
 class User
   include Virtus.model
 
-  attribute :name, String, :coercer => my_cool_coercer
+  attribute :name, String, coercer: my_cool_coercer
 end
 ```
 
@@ -477,13 +477,13 @@ Virtus raises an exception when it failed to coerce an input value.
 
 ``` ruby
 class User
-  include Virtus.model(:strict => true)
+  include Virtus.model(strict: true)
 
   attribute :admin, Boolean
 end
 
 # this will raise an error
-User.new :admin => "can't really say if true or false"
+User.new admin: "can't really say if true or false"
 ```
 
 ## Building modules with custom configuration
@@ -505,7 +505,7 @@ end
 
 # Or just include the module straight away ...
 class User
-  include Virtus.model(:coerce => false)
+  include Virtus.model(coerce: false)
 
   attribute :name, String
   attribute :admin, Boolean
@@ -521,14 +521,14 @@ types have been already loaded:
 ``` ruby
 # in blog.rb
 class Blog
-  include Virtus.model(:finalize => false)
+  include Virtus.model(finalize: false)
 
   attribute :posts, Array['Post']
 end
 
 # in post.rb
 class Post
-  include Virtus.model(:finalize => false)
+  include Virtus.model(finalize: false)
 
   attribute :blog, 'Blog'
 end
