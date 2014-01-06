@@ -43,7 +43,7 @@ module Virtus
     # @api public
     def each
       return to_enum unless block_given?
-      @index.values.uniq.each { |attribute| yield attribute }
+      @index.each { |name, attribute| yield attribute if name.kind_of?(Symbol) }
       self
     end
 
