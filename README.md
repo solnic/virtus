@@ -427,48 +427,6 @@ user.set_unique_id('1234-1234')
 user.unique_id # => '1234-1234'
 ```
 
-Coercions
----------
-
-Virtus uses [Coercible](https://github.com/solnic/coercible) for coercions. This
-feature is turned on by default. You can turn it off for all attributes like that:
-
-```ruby
-# Turn coercions off globally
-Virtus.coerce(false)
-
-# ...or you can turn it off for a single attribute
-class User
-  include Virtus.model
-
-  attribute :name, String, :coerce => false
-end
-```
-
-You can configure coercers too:
-
-```ruby
-Virtus.coercer do |config|
-  config.string.boolean_map = { 'yup' => true, 'nope' => false }
-end
-
-# Virtus.coercer instance is used by default for all attributes.
-# You *can* override it for a single attribute if you want:
-
-my_cool_coercer = Coercible::Coercer.new do |config|
-  # some customization
-end
-
-class User
-  include Virtus.model
-
-  attribute :name, String, :coercer => my_cool_coercer
-end
-```
-
-Please check out [Coercible README](https://github.com/solnic/coercible/blob/master/README.md)
-for more information.
-
 ## Strict Coercion Mode
 
 By default Virtus returns the input value even when it couldn't coerce it to the expected type.
@@ -562,27 +520,3 @@ Contributing
 * Commit, do not mess with Rakefile or version
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
-
-License
--------
-
-Copyright (c) 2011-2013 Piotr Solnica
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
