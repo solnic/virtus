@@ -191,7 +191,7 @@ module Virtus
     #
     # @api public
     def set_default_attributes!
-      attribute_set.set_defaults(self, proc { |_| false })
+      attribute_set.set_defaults(self, proc { |object, attribute| attribute.defined?(object) })
       self
     end
 
