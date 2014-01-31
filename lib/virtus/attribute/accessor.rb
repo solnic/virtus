@@ -34,6 +34,17 @@ module Virtus
         descendant.instance_variable_set('@instance_variable_name', "@#{name}")
       end
 
+      # Return if attribute value is defined
+      #
+      # @param [Object] instance
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def defined?(instance)
+        instance.instance_variable_defined?(instance_variable_name)
+      end
+
       # Return value of the attribute
       #
       # @param [Object] instance
