@@ -1,4 +1,12 @@
-# v1.0.0 2013-12-10
+# v1.0.2 2014-12-03
+
+* [improvement] Don’t override already-defined default values when freezing (amarshall)
+* [improvement] Improved performance of `AttributeSet#each` (Antti)
+* updated axiom-types dependency to ~> 0.1 (solnic)
+
+[Compare v1.0.1..v1.0.2](https://github.com/solnic/virtus/compare/v1.0.1...v1.0.2)
+
+# v1.0.1 2013-12-10
 
 * [feature] re-introduce `ValueObject#with`, which was removed in the past (senny)
 * [fixed] strict mode for Boolean type (solnic)
