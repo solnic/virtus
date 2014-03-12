@@ -1,24 +1,28 @@
 # encoding: utf-8
 
 group :development do
-  gem 'rake',  '~> 10.1.0'
-  gem 'rspec', '~> 2.14.1'
-  gem 'yard',  '~> 0.8.7'
+  gem 'rake',       '~> 10.1.0'
+  gem 'rspec',      '~> 2.14.1'
+  gem 'rspec-core', '~> 2.14.8'
+  gem 'yard',       '~> 0.8.7'
+
+  platform :rbx do
+    gem 'rubysl-singleton', '~> 2.0.0'
+  end
 end
 
 group :yard do
-  gem 'kramdown', '~> 1.2.0'
+  gem 'kramdown', '~> 1.3.2'
 end
 
 group :guard do
-  gem 'guard',         '~> 1.8.1'
-  gem 'guard-bundler', '~> 1.0.0'
-  gem 'guard-rspec',   '~> 3.0.2'
-  gem 'guard-rubocop', '~> 0.2.0'
-  gem 'guard-mutant',  '~> 0.0.1'
+  gem 'guard',         '~> 2.4.0'
+  gem 'guard-bundler', '~> 2.0.0'
+  gem 'guard-rspec',   '~> 4.2.6'
+  gem 'guard-rubocop', '~> 1.0.2'
 
   # file system change event handling
-  gem 'listen',     '~> 1.3.0'
+  gem 'listen',     '~> 2.5.0'
   gem 'rb-fchange', '~> 0.0.6', require: false
   gem 'rb-fsevent', '~> 0.9.3', require: false
   gem 'rb-inotify', '~> 0.9.0', require: false
@@ -30,16 +34,23 @@ group :guard do
 end
 
 group :metrics do
-  gem 'coveralls', '~> 0.6.7'
+  gem 'coveralls', '~> 0.7.0'
   gem 'flay',      '~> 2.4.0'
-  gem 'flog',      '~> 4.1.1'
+  gem 'flog',      '~> 4.2.0'
   gem 'reek',      '~> 1.3.2'
-  gem 'rubocop',   '~> 0.13.0'
-  gem 'simplecov', '~> 0.7.1'
-  gem 'yardstick', '~> 0.9.7', git: 'https://github.com/dkubb/yardstick.git'
+  gem 'simplecov', '~> 0.8.2'
+  gem 'yardstick', '~> 0.9.9'
 
   platforms :ruby_19, :ruby_20 do
     gem 'yard-spellcheck', '~> 0.1.5'
+  end
+
+  platform :rbx do
+    gem 'json',               '~> 1.8.1'
+    gem 'racc',               '~> 1.4'
+    gem 'rubysl-logger',      '~> 2.0.0'
+    gem 'rubysl-open-uri',    '~> 2.0.0'
+    gem 'rubysl-prettyprint', '~> 2.0.2'
   end
 end
 
