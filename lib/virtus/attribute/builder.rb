@@ -53,7 +53,7 @@ module Virtus
 
     # @api private
     def pending?
-      @pending
+      @pending if defined?(@pending)
     end
 
     private
