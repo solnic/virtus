@@ -48,7 +48,7 @@ module Virtus
 
     # @api private
     def determine_type_and_cache(class_or_name)
-      type = case class_or_name
+      case class_or_name
       when singleton_class
         determine_type_from_descendant(class_or_name)
       when Class
