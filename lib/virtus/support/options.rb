@@ -61,6 +61,7 @@ module Virtus
     def define_option_method(option)
       class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def self.#{option}(value = Undefined)           # def self.primitive(value = Undefined)
+          @#{option} ||= nil                            #   @primitive ||= nil
           return @#{option} if value.equal?(Undefined)  #   return @primitive if value.equal?(Undefined)
           @#{option} = value                            #   @primitive = value
           self                                          #   self
