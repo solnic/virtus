@@ -453,7 +453,7 @@ You can also build Virtus modules that contain their own configuration.
 ```ruby
 YupNopeBooleans = Virtus.model { |mod|
   mod.coerce = true
-  mod.string.boolean_map = { 'yup' => true, 'nope' => false }
+  mod.coercer.config.string.boolean_map = { 'nope' => false, 'yup' => true }
 }
 
 class User
