@@ -16,7 +16,7 @@ module Virtus
         if value_coerced?(output) || !required? && output.nil?
           output
         else
-          raise CoercionError.new(output, primitive)
+          raise CoercionError.new(output, self)
         end
       end
 

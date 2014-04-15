@@ -13,7 +13,7 @@ describe 'Using required attributes' do
   end
 
   it 'raises coercion error when required attribute is nil' do
-    expect { Examples::User.new(:name => nil) }.to raise_error(Virtus::CoercionError)
+    expect { Examples::User.new(:name => nil) }.to raise_error(Virtus::CoercionError, "Failed to coerce attribute `name' from nil into String")
   end
 
   it 'does not raise coercion error when not required attribute is nil' do

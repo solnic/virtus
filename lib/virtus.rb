@@ -11,11 +11,31 @@ module Virtus
   Undefined = Object.new.freeze
 
   class CoercionError < StandardError
-    attr_reader :output, :primitive
+    attr_reader :output, :attribute
 
-    def initialize(output, primitive)
-      @output, @primitive = output, primitive
-      super("Failed to coerce #{output.inspect} into #{primitive.inspect}")
+    def initialize(output, attribute)
+      @output, @attribute = output, attribute
+      super(build_message)
+    end
+
+    def build_message
+      if attribute_name?
+        "Failed to coerce attribute `#{attribute_name}' from #{output.inspect} into #{target_type}"
+      else
+        "Failed to coerce #{output.inspect} into #{target_type}"
+      end
+    end
+
+    def attribute_name
+      attribute.options[:name]
+    end
+
+    def attribute_name?
+      attribute_name ? true : false
+    end
+
+    def target_type
+      attribute.primitive.inspect
     end
   end
 
