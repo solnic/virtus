@@ -28,8 +28,9 @@ module Virtus
     # @return [Configuration]
     #
     # @api public
-    def self.build(options = {},&block)
-      config = new(options).call(&block)
+    def self.build(options = {})
+      config = new(options)
+      yield config if block_given?
       config
     end
 
@@ -45,21 +46,6 @@ module Virtus
       @constructor     = options.fetch(:constructor,true)
       @mass_assignment = options.fetch(:mass_assignment,true)
       @coercer         = Coercible::Coercer.new
-    end
-
-    # Provide access to the attributes and methods via the passed block
-    #
-    # @example
-    #   configuration.call do |config|
-    #     config.coerce = false
-    #   end
-    #
-    # @return [self]
-    #
-    # @api private
-    def call(&block)
-      block.call(self) if block_given?
-      self
     end
 
     # Access the coercer for this instance and optional configure a
