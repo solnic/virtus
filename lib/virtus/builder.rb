@@ -25,7 +25,7 @@ module Virtus
 
     # @api private
     def self.call(options, &block)
-      new(Configuration.build(options, &block)).mod
+      new(Configuration.new(options, &block)).mod
     end
 
     # @api private

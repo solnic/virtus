@@ -18,22 +18,6 @@ module Virtus
     # Access the mass-assignment setting for this instance
     attr_accessor :mass_assignment
 
-    # Build new configuration instance using the passed block
-    #
-    # @example
-    #   Configuration.build do |config|
-    #     config.coerce = false
-    #   end
-    #
-    # @return [Configuration]
-    #
-    # @api public
-    def self.build(options = {})
-      config = new(options)
-      yield config if block_given?
-      config
-    end
-
     # Initialized a configuration instance
     #
     # @return [undefined]
@@ -46,6 +30,8 @@ module Virtus
       @constructor     = options.fetch(:constructor,true)
       @mass_assignment = options.fetch(:mass_assignment,true)
       @coercer         = Coercible::Coercer.new
+
+      yield self if block_given?
     end
 
     # Access the coercer for this instance and optional configure a
