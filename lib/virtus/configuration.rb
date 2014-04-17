@@ -18,49 +18,20 @@ module Virtus
     # Access the mass-assignment setting for this instance
     attr_accessor :mass_assignment
 
-    # Build new configuration instance using the passed block
-    #
-    # @example
-    #   Configuration.build do |config|
-    #     config.coerce = false
-    #   end
-    #
-    # @return [Configuration]
-    #
-    # @api public
-    def self.build(options = {}, &block)
-      config = new.call(&block)
-      options.each { |key, value| config.public_send("#{key}=", value) }
-      config
-    end
-
     # Initialized a configuration instance
     #
     # @return [undefined]
     #
     # @api private
-    def initialize
-      @finalize        = true
-      @coerce          = true
-      @strict          = false
-      @constructor     = true
-      @mass_assignment = true
+    def initialize(options={})
+      @finalize        = options.fetch(:finalize,true)
+      @coerce          = options.fetch(:coerce,true)
+      @strict          = options.fetch(:strict,false)
+      @constructor     = options.fetch(:constructor,true)
+      @mass_assignment = options.fetch(:mass_assignment,true)
       @coercer         = Coercible::Coercer.new
-    end
 
-    # Provide access to the attributes and methods via the passed block
-    #
-    # @example
-    #   configuration.call do |config|
-    #     config.coerce = false
-    #   end
-    #
-    # @return [self]
-    #
-    # @api private
-    def call(&block)
-      block.call(self) if block_given?
-      self
+      yield self if block_given?
     end
 
     # Access the coercer for this instance and optional configure a

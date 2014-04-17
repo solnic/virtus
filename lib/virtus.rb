@@ -121,7 +121,8 @@ module Virtus
   #
   # @api public
   def self.config(&block)
-    configuration.call(&block)
+    yield configuration if block_given?
+    configuration
   end
 
   # Provides access to the Virtus module builder
