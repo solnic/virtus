@@ -23,28 +23,32 @@ describe Package do
   describe '#dimensions' do
     subject { dimensions }
 
-    it { should have(3).keys }
+    it 'has 3 keys' do
+      expect(subject.keys.size).to eq(3)
+    end
     it { should have_key :width  }
     it { should have_key :height }
     it { should have_key :length }
 
     it 'should be coerced to [Symbol => Float] format' do
-      dimensions[:width].should  be_eql(2.2)
-      dimensions[:height].should be_eql(2.0)
-      dimensions[:length].should be_eql(4.5)
+      expect(dimensions[:width]).to  be_eql(2.2)
+      expect(dimensions[:height]).to be_eql(2.0)
+      expect(dimensions[:length]).to be_eql(4.5)
     end
   end
 
   describe '#meta_info' do
     subject { meta_info }
 
-    it { should have(2).keys }
+    it 'has 2 keys' do
+      expect(subject.keys.size).to eq(2)
+    end
     it { should have_key 'from' }
     it { should have_key 'to'   }
 
     it 'should be coerced to [String => String] format' do
-      meta_info['from'].should == 'Me'
-      meta_info['to'].should == 'You'
+      expect(meta_info['from']).to eq('Me')
+      expect(meta_info['to']).to eq('You')
     end
   end
 end
