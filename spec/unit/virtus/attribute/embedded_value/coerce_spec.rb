@@ -14,8 +14,15 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
 
       it { should be_instance_of(model) }
 
-      its(:name) { should eql('Piotr') }
-      its(:age)  { should eql(30) }
+      describe '#name' do
+        subject { super().name }
+        it { should eql('Piotr') }
+      end
+
+      describe '#age' do
+        subject { super().age }
+        it  { should eql(30) }
+      end
     end
 
     context 'when input is nil' do
@@ -39,8 +46,15 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
 
       it { should be_instance_of(model) }
 
-      its(:name) { should eql('Piotr') }
-      its(:age)  { should eql(30) }
+      describe '#name' do
+        subject { super().name }
+        it { should eql('Piotr') }
+      end
+
+      describe '#age' do
+        subject { super().age }
+        it  { should eql(30) }
+      end
     end
 
     context 'when input is nil' do

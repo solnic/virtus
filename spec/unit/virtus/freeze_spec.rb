@@ -17,8 +17,15 @@ describe Virtus, '#freeze' do
 
   it { should be_frozen }
 
-  its(:name) { should eql('foo') }
-  its(:age)  { should be(30) }
+  describe '#name' do
+    subject { super().name }
+    it { should eql('foo') }
+  end
+
+  describe '#age' do
+    subject { super().age }
+    it  { should be(30) }
+  end
 
   it "does not change dynamic default values" do
     original_value = object.rand

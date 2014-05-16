@@ -21,15 +21,15 @@ describe 'I can extend objects' do
     admin.name = 'John'
     admin.age  = 29
 
-    admin.name.should eql('John')
-    admin.age.should eql(29)
+    expect(admin.name).to eql('John')
+    expect(admin.age).to eql(29)
 
-    admin.attributes.should eql(attributes)
+    expect(admin.attributes).to eql(attributes)
 
     new_attributes   = { :name => 'Jane', :age => 28 }
     admin.attributes = new_attributes
 
-    admin.name.should eql('Jane')
-    admin.age.should eql(28)
+    expect(admin.name).to eql('Jane')
+    expect(admin.age).to eql(28)
   end
 end

@@ -33,15 +33,15 @@ describe 'I can define attributes within a module' do
   end
 
   specify 'including a module with attributes into a class' do
-    Examples::User.attribute_set[:name].should be_instance_of(Virtus::Attribute)
-    Examples::User.attribute_set[:gamer].should be_instance_of(Virtus::Attribute::Boolean)
+    expect(Examples::User.attribute_set[:name]).to be_instance_of(Virtus::Attribute)
+    expect(Examples::User.attribute_set[:gamer]).to be_instance_of(Virtus::Attribute::Boolean)
 
-    Examples::Admin.attribute_set[:name].should be_instance_of(Virtus::Attribute)
-    Examples::Admin.attribute_set[:age].should be_instance_of(Virtus::Attribute)
+    expect(Examples::Admin.attribute_set[:name]).to be_instance_of(Virtus::Attribute)
+    expect(Examples::Admin.attribute_set[:age]).to be_instance_of(Virtus::Attribute)
 
     user = Examples::Admin.new(:name => 'Piotr', :age => 29)
-    user.name.should eql('Piotr')
-    user.age.should eql(29)
+    expect(user.name).to eql('Piotr')
+    expect(user.age).to eql(29)
   end
 
   specify 'including a module with attributes into an instance' do
@@ -49,7 +49,7 @@ describe 'I can define attributes within a module' do
     moderator.extend(Examples::Name, Examples::Age)
 
     moderator.attributes = { :name => 'John', :age => 21 }
-    moderator.name.should eql('John')
-    moderator.age.should eql(21)
+    expect(moderator.name).to eql('John')
+    expect(moderator.age).to eql(21)
   end
 end

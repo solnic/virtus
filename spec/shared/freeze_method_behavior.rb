@@ -29,9 +29,12 @@ shared_examples_for 'a #freeze method' do
     expect { object.instance_variable_set(:@foo, :bar) }.to(expectation)
   end
 
-  its(:frozen?) { should be(true) }
+  describe '#frozen?' do
+    subject { super().frozen? }
+    it { should be(true) }
+  end
 
   it 'allows to access attribute' do
-    subject.name.should eql('John')
+    expect(subject.name).to eql('John')
   end
 end

@@ -33,10 +33,10 @@ describe "Defining a ValueObject with a custom constructor" do
   end
 
   specify "initialize a value object attribute with correct attributes" do
-    subject.top_left.x.should be(3)
-    subject.top_left.y.should be(4)
+    expect(subject.top_left.x).to be(3)
+    expect(subject.top_left.y).to be(4)
 
-    subject.bottom_right.x.should be(5)
-    subject.bottom_right.y.should be(8)
+    expect(subject.bottom_right.x).to be(5)
+    expect(subject.bottom_right.y).to be(8)
   end
 end

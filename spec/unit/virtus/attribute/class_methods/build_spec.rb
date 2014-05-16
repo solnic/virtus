@@ -30,7 +30,10 @@ describe Virtus::Attribute, '.build' do
   context 'when name is passed as a string' do
     let(:name) { 'something' }
 
-    its(:name) { should be(:something) }
+    describe '#name' do
+      subject { super().name }
+      it { should be(:something) }
+    end
   end
 
   context 'when coercion is turned off in options' do
@@ -80,7 +83,10 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:type) { should be(Axiom::Types::Integer) }
+    describe '#type' do
+      subject { super().type }
+      it { should be(Axiom::Types::Integer) }
+    end
   end
 
   context 'when type is a symbol of an existing class constant' do
@@ -88,7 +94,10 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:type) { should be(Axiom::Types::String) }
+    describe '#type' do
+      subject { super().type }
+      it { should be(Axiom::Types::String) }
+    end
   end
 
   context 'when type is an axiom type' do
@@ -96,7 +105,10 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:type) { should be(type) }
+    describe '#type' do
+      subject { super().type }
+      it { should be(type) }
+    end
   end
 
   context 'when custom attribute class exists for a given primitive' do
@@ -109,7 +121,10 @@ describe Virtus::Attribute, '.build' do
 
     it { should be_instance_of(attribute) }
 
-    its(:type) { should be(Axiom::Types::Object) }
+    describe '#type' do
+      subject { super().type }
+      it { should be(Axiom::Types::Object) }
+    end
   end
 
   context 'when custom attribute class exists for a given array with member coercion defined' do
@@ -122,7 +137,10 @@ describe Virtus::Attribute, '.build' do
 
     it { should be_instance_of(attribute) }
 
-    its(:type) { should be < Axiom::Types::Collection }
+    describe '#type' do
+      subject { super().type }
+      it { should be < Axiom::Types::Collection }
+    end
   end
 
   context 'when custom collection-like attribute class exists for a given enumerable primitive' do
@@ -135,6 +153,9 @@ describe Virtus::Attribute, '.build' do
 
     it { should be_instance_of(attribute) }
 
-    its(:type) { should be < Axiom::Types::Collection }
+    describe '#type' do
+      subject { super().type }
+      it { should be < Axiom::Types::Collection }
+    end
   end
 end

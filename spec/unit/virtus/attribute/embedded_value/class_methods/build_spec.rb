@@ -10,7 +10,10 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { should be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type includes Virtus' do
@@ -20,7 +23,10 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { should be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type is an OpenStruct subclass' do
@@ -30,7 +36,10 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { should be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type is OpenStruct' do
@@ -40,7 +49,10 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { should be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type is Struct' do
@@ -50,6 +62,9 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
 
     it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { should be_instance_of(described_class::FromStruct) }
+    end
   end
 end
