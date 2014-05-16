@@ -12,6 +12,6 @@ describe Virtus::AttributeSet, '#[]' do
   it { should equal(attribute) }
 
   it 'allows indexed access to attributes by the string representation of their name' do
-    object[name.to_s].should equal(attribute)
+    expect(object[name.to_s]).to equal(attribute)
   end
 end

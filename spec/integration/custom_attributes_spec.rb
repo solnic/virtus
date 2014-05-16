@@ -31,12 +31,12 @@ describe 'custom attributes' do
   specify 'allows you to define custom attributes' do
     regexp = /awesome/
     subject.expression = regexp
-    subject.expression.should == regexp
+    expect(subject.expression).to eq(regexp)
   end
 
   specify 'allows you to define coercion methods' do
     subject.scream = 'welcome'
-    subject.scream.should == 'WELCOME'
+    expect(subject.scream).to eq('WELCOME')
   end
 
 end

@@ -33,18 +33,18 @@ describe 'embedded values' do
   end
 
   specify '#attributes returns instances of the embedded values' do
-    subject.attributes.should == {
+    expect(subject.attributes).to eq({
       :name => 'the guy',
       :address => subject.address
-    }
+    })
   end
 
   specify 'allows you to pass a hash for the embedded value' do
     user = Examples::User.new
     user.address = address_attributes
-    user.address.street.should == 'Street 1/2'
-    user.address.zipcode.should == '12345'
-    user.address.city.name.should == 'NYC'
+    expect(user.address.street).to eq('Street 1/2')
+    expect(user.address.zipcode).to eq('12345')
+    expect(user.address.city.name).to eq('NYC')
   end
 
 end

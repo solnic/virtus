@@ -50,7 +50,10 @@ describe User do
 
       it { should be_instance_of(PhoneNumber) }
 
-      its(:number)  { should eql('212-555-1212') }
+      describe '#number' do
+        subject { super().number }
+        it  { should eql('212-555-1212') }
+      end
     end
 
     describe 'last entry' do
@@ -58,7 +61,10 @@ describe User do
 
       it { should be_instance_of(PhoneNumber) }
 
-      its(:number)  { should eql('919-444-3265') }
+      describe '#number' do
+        subject { super().number }
+        it  { should eql('919-444-3265') }
+      end
     end
   end
 
@@ -67,9 +73,24 @@ describe User do
 
     it { should be_instance_of(Address) }
 
-    its(:address)     { should eql('1234 Any St.') }
-    its(:locality)    { should eql('Anytown')      }
-    its(:region)      { should eql('DC')           }
-    its(:postal_code) { should eql('21234')        }
+    describe '#address' do
+      subject { super().address }
+      it     { should eql('1234 Any St.') }
+    end
+
+    describe '#locality' do
+      subject { super().locality }
+      it    { should eql('Anytown')      }
+    end
+
+    describe '#region' do
+      subject { super().region }
+      it      { should eql('DC')           }
+    end
+
+    describe '#postal_code' do
+      subject { super().postal_code }
+      it { should eql('21234')        }
+    end
   end
 end

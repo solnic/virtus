@@ -13,7 +13,10 @@ describe Virtus::AttributeSet, '#reset' do
 
     it { should equal(object) }
 
-    its(:to_set) { should == Set[ attribute ] }
+    describe '#to_set' do
+      subject { super().to_set }
+      it { should == Set[ attribute ] }
+    end
   end
 
   context 'when the parent has attributes that are not duplicates' do
@@ -22,7 +25,10 @@ describe Virtus::AttributeSet, '#reset' do
 
     it { should equal(object) }
 
-    its(:to_set) { should == Set[ attribute, parent_attribute ] }
+    describe '#to_set' do
+      subject { super().to_set }
+      it { should == Set[ attribute, parent_attribute ] }
+    end
   end
 
   context 'when the parent has attributes that are duplicates' do
@@ -31,7 +37,10 @@ describe Virtus::AttributeSet, '#reset' do
 
     it { should equal(object) }
 
-    its(:to_set) { should == Set[ attribute ] }
+    describe '#to_set' do
+      subject { super().to_set }
+      it { should == Set[ attribute ] }
+    end
   end
 
   context 'when the parent has changed' do

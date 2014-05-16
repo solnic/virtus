@@ -6,7 +6,10 @@ describe Virtus::Attribute, '#rename' do
   let(:object) { described_class.build(String, :name => :foo, :strict => true) }
   let(:other)  { described_class.build(String, :name => :bar, :strict => true) }
 
-  its(:name) { should be(:bar) }
+  describe '#name' do
+    subject { super().name }
+    it { should be(:bar) }
+  end
 
   it { should_not be(object) }
   it { should be_strict }

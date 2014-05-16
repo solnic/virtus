@@ -19,10 +19,10 @@ describe 'Using Struct as an embedded value attribute' do
   end
 
   specify 'initialize a struct object with correct attributes' do
-    subject.top_left.x.should be(3)
-    subject.top_left.y.should be(5)
+    expect(subject.top_left.x).to be(3)
+    expect(subject.top_left.y).to be(5)
 
-    subject.bottom_right.x.should be(8)
-    subject.bottom_right.y.should be(7)
+    expect(subject.bottom_right.x).to be(8)
+    expect(subject.bottom_right.y).to be(7)
   end
 end

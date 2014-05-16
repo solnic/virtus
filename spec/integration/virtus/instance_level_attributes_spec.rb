@@ -17,7 +17,7 @@ describe Virtus, 'instance level attributes' do
     it 'allows setting the attribute value on the instance' do
       attribute
       subject.name = 'foo'
-      subject.name.should eql('foo')
+      expect(subject.name).to eql('foo')
     end
   end
 end

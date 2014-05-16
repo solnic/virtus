@@ -22,11 +22,11 @@ describe 'overriding virtus behavior' do
 
   describe 'overriding an attribute getter' do
     specify 'calls the defined getter' do
-      Examples::Article.new.title.should == '<unknown>'
+      expect(Examples::Article.new.title).to eq('<unknown>')
     end
 
     specify 'super can be used to access the getter defined by virtus' do
-      Examples::Article.new(:title => 'example article').title.should == 'example article'
+      expect(Examples::Article.new(:title => 'example article').title).to eq('example article')
     end
   end
 
@@ -34,13 +34,13 @@ describe 'overriding virtus behavior' do
     specify 'calls the defined setter' do
       article = Examples::Article.new(:title => "can't be changed")
       article.title = 'this will never be assigned'
-      article.title.should == "can't be changed"
+      expect(article.title).to eq("can't be changed")
     end
 
     specify 'super can be used to access the setter defined by virtus' do
       article = Examples::Article.new(:title => 'example article')
       article.title = 'my new title'
-      article.title.should == 'my new title'
+      expect(article.title).to eq('my new title')
     end
   end
 end
