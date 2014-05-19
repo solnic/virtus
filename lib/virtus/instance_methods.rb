@@ -42,6 +42,7 @@ module Virtus
         attribute_set.get(self)
       end
       alias_method :to_hash, :attributes
+      alias_method :to_h, :attributes
 
       # Mass-assign attribute values
       #
