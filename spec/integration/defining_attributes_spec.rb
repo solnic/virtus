@@ -49,6 +49,10 @@ describe "virtus attribute definitions" do
     specify "#to_hash returns the object's attributes as a hash" do
       subject.to_hash.should == attributes
     end
+
+    specify "#to_h returns the object's attributes as a hash" do
+      subject.to_h.should == attributes
+    end
   end
 
   context 'inheritance' do
