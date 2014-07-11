@@ -57,7 +57,9 @@ module Virtus
       super
 
       if Class === object
-        @inclusions.each { |mod| object.send(:include, mod) }
+        @inclusions.each do |mod|
+          object.send(:include, mod) unless object.ancestors.include?(mod)
+        end
         define_attributes(object)
       else
         object.extend(ModuleExtensions)

@@ -114,4 +114,30 @@ describe Virtus, '.module' do
     end
   end
 
+  context 'as a peer to another module within a class' do
+    subject { Virtus.module }
+    let(:other)  { Module.new }
+
+    before do
+      other.send(:include, Virtus.module)
+      other.attribute :last_name, String, :default => 'Doe'
+      other.attribute :something_else
+      model.send(:include, mod)
+      model.send(:include, other)
+    end
+
+    it 'provides attributes for the model from both modules' do
+      expect(model.attribute_set[:name]).to be_kind_of(Virtus::Attribute)
+      expect(model.attribute_set[:something]).to be_kind_of(Virtus::Attribute)
+      expect(model.attribute_set[:last_name]).to be_kind_of(Virtus::Attribute)
+      expect(model.attribute_set[:something_else]).to be_kind_of(Virtus::Attribute)
+    end
+
+    it 'includes the attributes from both modules' do
+      expect(model.new.attributes.keys).to eq(
+        [:name, :something, :last_name, :something_else]
+      )
+    end
+  end
+
 end
