@@ -429,6 +429,31 @@ user.set_unique_id('1234-1234')
 user.unique_id # => '1234-1234'
 ```
 
+### Overriding setters
+
+``` ruby
+class User
+  include Virtus.model
+
+  attribute :name, String
+
+  def name=(new_name)
+    custom_name = nil
+    if new_name == "Godzilla"
+      custom_name = "Can't tell"
+    end
+    super custom_name || new_name
+  end
+end
+
+user = User.new(name: "Frank")
+user.name # => 'Frank'
+
+user = User.new(name: "Godzilla")
+user.name # => 'Can't tell'
+
+```
+
 ## Strict Coercion Mode
 
 By default Virtus returns the input value even when it couldn't coerce it to the expected type.
