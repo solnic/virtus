@@ -71,8 +71,11 @@ module Virtus
 
       # @api public
       def coerce(value)
-        return value unless super(value).respond_to?(:each_with_object)
-        super(value).each_with_object(primitive.new) do |entry, collection|
+        coerced = super
+
+        return coerced unless coerced.respond_to?(:each_with_object)
+
+        coerced.each_with_object(primitive.new) do |entry, collection|
           collection << member_type.coerce(entry)
         end
       end
