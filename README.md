@@ -383,7 +383,7 @@ end
 class User
   include Virtus.model
 
-  attribute :info, Json
+  attribute :info, Json, default: {}
 end
 
 user = User.new
