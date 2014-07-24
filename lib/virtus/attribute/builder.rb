@@ -107,7 +107,7 @@ module Virtus
               determine_type(klass.primitive)
             elsif EmbeddedValue.handles?(klass)
               EmbeddedValue
-            elsif klass < Enumerable
+            elsif klass < Enumerable && !(klass <= Range)
               Collection
             end
         end
