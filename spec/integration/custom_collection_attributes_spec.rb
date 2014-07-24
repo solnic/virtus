@@ -36,7 +36,7 @@ describe 'custom collection attributes' do
   shared_examples_for 'a collection' do
     it 'can be used as Virtus attributes' do
       attribute = Examples::Library.attribute_set[:books]
-      attribute.should be_kind_of(Examples::BookCollectionAttribute)
+      expect(attribute).to be_kind_of(Examples::BookCollectionAttribute)
     end
 
     it 'defaults to an empty collection' do
@@ -55,18 +55,18 @@ describe 'custom collection attributes' do
 
     it 'coerces an array of attribute hashes' do
       library.books = [{ :title => 'Foo' }]
-      books.should be_kind_of(Examples::BookCollection)
+      expect(books).to be_kind_of(Examples::BookCollection)
     end
 
     it 'coerces its members' do
       library.books = [{ :title => 'Foo' }]
-      books.count.should == 1
-      books.first.should be_kind_of(Examples::Book)
+      expect(books.count).to eq(1)
+      expect(books.first).to be_kind_of(Examples::Book)
     end
 
     def books_should_be_an_empty_collection
-      books.should be_kind_of(Examples::BookCollection)
-      books.count.should == 0
+      expect(books).to be_kind_of(Examples::BookCollection)
+      expect(books.count).to eq(0)
     end
   end
 

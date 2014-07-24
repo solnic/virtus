@@ -32,6 +32,6 @@ shared_examples_for 'a #freeze method' do
   its(:frozen?) { should be(true) }
 
   it 'allows to access attribute' do
-    subject.name.should eql('John')
+    expect(subject.name).to eql('John')
   end
 end

@@ -35,21 +35,21 @@ describe "default values" do
   subject { Examples::Page.new }
 
   specify 'without a default the value is nil' do
-    subject.title.should be_nil
+    expect(subject.title).to be_nil
   end
 
   specify 'can be supplied with the :default option' do
-    subject.view_count.should == 0
+    expect(subject.view_count).to eq(0)
   end
 
   specify "you can pass a 'callable-object' to the :default option" do
     subject.title = 'Example Blog Post'
-    subject.slug.should == 'example-blog-post'
+    expect(subject.slug).to eq('example-blog-post')
   end
 
   specify 'you can set defaults for private attributes' do
     subject.title = 'Top Secret'
-    subject.editor_title.should == 'UNPUBLISHED: Top Secret'
+    expect(subject.editor_title).to eq('UNPUBLISHED: Top Secret')
   end
 
   specify 'you can reset attribute to its default' do
@@ -63,25 +63,25 @@ describe "default values" do
     it 'does not duplicate the ValueObject' do
       page1 = Examples::Page.new
       page2 = Examples::Page.new
-      page1.reference.should equal(page2.reference)
+      expect(page1.reference).to equal(page2.reference)
     end
   end
 
   context 'an Array' do
     specify 'without a default the value is an empty Array' do
-      subject.revisions.should eql([])
+      expect(subject.revisions).to eql([])
     end
   end
 
   context 'a Hash' do
     specify 'without a default the value is an empty Hash' do
-      subject.index.should eql({})
+      expect(subject.index).to eql({})
     end
   end
 
   context 'a Set' do
     specify 'without a default the value is an empty Set' do
-      subject.authors.should eql(Set.new)
+      expect(subject.authors).to eql(Set.new)
     end
   end
 end

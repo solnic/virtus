@@ -28,17 +28,17 @@ describe "mass assignment with accessors" do
   subject { Examples::Product.new(:categories => ['Office', 'Printers'], :_id => 100) }
 
   specify 'works uppon instantiation' do
-    subject.category.should == 'Office'
-    subject.subcategory.should == 'Printers'
+    expect(subject.category).to eq('Office')
+    expect(subject.subcategory).to eq('Printers')
   end
 
   specify 'can be set with #attributes=' do
     subject.attributes = {:categories => ['Home', 'Furniture']}
-    subject.category.should == 'Home'
-    subject.subcategory.should == 'Furniture'
+    expect(subject.category).to eq('Home')
+    expect(subject.subcategory).to eq('Furniture')
   end
 
   specify 'respects accessor visibility' do
-    subject.id.should_not == 100
+    expect(subject.id).not_to eq(100)
   end
 end

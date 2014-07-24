@@ -14,7 +14,7 @@ describe Virtus::AttributeSet, '#each' do
     it { should be_instance_of(to_enum.class) }
 
     it 'yields the expected attributes' do
-      subject.to_a.should eql(object.to_a)
+      expect(subject.to_a).to eql(object.to_a)
     end
   end
 
