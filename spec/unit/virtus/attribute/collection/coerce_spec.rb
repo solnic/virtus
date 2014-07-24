@@ -50,4 +50,19 @@ describe Virtus::Attribute::Collection, '#coerce' do
       end
     end
   end
+
+  context 'when input is nil' do
+    let(:input) { nil }
+    fake(:coercer)     { Virtus::Attribute::Coercer }
+    fake(:member_type) { Virtus::Attribute }
+
+    let(:member_primitive) { Integer }
+    let(:object) {
+      described_class.build(Array[member_primitive], :coercer => coercer, :member_type => member_type)
+    }
+
+    it 'returns nil' do
+      expect(subject).to be_nil
+    end
+  end
 end
