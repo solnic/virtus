@@ -5,6 +5,7 @@
 * [fixed] Fix handling of nil in collection coercion (edgibbs)
 * [fixed] Fix issues with using multiple virtus modules (trptcolin)
 * [fixed] Fix handling of Range type (hampei)
+* [fixed] Fix strict mode for collection and hash types (solnic)
 
 [Compare v1.0.2..v1.0.3](https://github.com/solnic/virtus/compare/v1.0.2...v1.0.3)
 
