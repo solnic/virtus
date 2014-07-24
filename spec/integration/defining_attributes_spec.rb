@@ -19,11 +19,13 @@ describe "virtus attribute definitions" do
     end
   end
 
-  subject { Examples::Person.new }
+  subject(:person) { Examples::Person.new(attributes) }
+
+  let(:attributes) { {} }
 
   specify 'virtus creates accessor methods' do
-    subject.name = 'Peter'
-    expect(subject.name).to eq('Peter')
+    person.name = 'Peter'
+    expect(person.name).to eq('Peter')
   end
 
   specify 'the constructor accepts a hash for mass-assignment' do
@@ -32,26 +34,25 @@ describe "virtus attribute definitions" do
     expect(john.age).to eq(13)
   end
 
-  specify 'Boolean attributes have a getter with questionmark' do
-    expect(subject.doctor?).to be_false
-    subject.doctor = true
-    expect(subject.doctor?).to be_true
+  specify 'Boolean attributes have a predicate method' do
+    expect(person).not_to be_doctor
+    person.doctor = true
+    expect(person).to be_doctor
   end
 
   context 'with attributes' do
     let(:attributes) { {:name => 'Jane', :age => 45, :doctor => true, :salary => 4500} }
-    subject { Examples::Person.new(attributes) }
 
     specify "#attributes returns the object's attributes as a hash" do
-      expect(subject.attributes).to eq(attributes)
+      expect(person.attributes).to eq(attributes)
     end
 
     specify "#to_hash returns the object's attributes as a hash" do
-      expect(subject.to_hash).to eq(attributes)
+      expect(person.to_hash).to eq(attributes)
     end
 
     specify "#to_h returns the object's attributes as a hash" do
-      subject.to_h.should == attributes
+      expect(person.to_h).to eql(attributes)
     end
   end
 
@@ -72,9 +73,11 @@ describe "virtus attribute definitions" do
     specify 'lets you add attributes to the subclass at runtime' do
       person_jack = Examples::Person.new(:name => 'Jack')
       manager_frank = Examples::Manager.new(:name => 'Frank')
+
       Examples::Manager.attribute :just_added, String
 
       manager_frank.just_added = 'awesome!'
+
       expect(manager_frank.just_added).to eq('awesome!')
       expect(person_jack).not_to respond_to(:just_added)
       expect(person_jack).not_to respond_to(:just_added=)

@@ -11,7 +11,8 @@ describe Virtus, '#attribute' do
 
     it 'defines reader and writer' do
       object.test = true
-      expect(object.test).to be(true)
+
+      expect(object).to be_test
     end
 
     it 'defines predicate method' do

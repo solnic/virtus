@@ -42,9 +42,11 @@ describe Virtus::AttributeSet, '#reset' do
     it { should equal(object) }
 
     it 'includes changes from the parent' do
-      expect { parent << new_attribute; subject }.to change { object.to_set }.
-        from(Set[ attribute, parent_attribute ]).
-        to(Set[ attribute, new_attribute ])
+      expect(object.to_set).to eql(Set[attribute, parent_attribute])
+
+      parent << new_attribute
+
+      expect(subject.to_set).to eql(Set[attribute, new_attribute])
     end
   end
 
