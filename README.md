@@ -273,6 +273,22 @@ package = Package.new(:dimensions => { 'width' => "2.2", :height => 2, "length" 
 package.dimensions # => { :width => 2.2, :height => 2.0, :length => 4.5 }
 ```
 
+### IMPORTANT note about Boolean type
+
+Be aware that some libraries may do a terrible thing and define a global Boolean
+constant which breaks virtus' constant type lookup, if you see issues with the
+boolean type you can workaround it like that:
+
+``` ruby
+class User
+  include Virtus.model
+
+  attribute :admin, Axiom::Types::Boolean
+end
+```
+
+This will be improved in Virtus 2.0.
+
 ### IMPORTANT note about member coercions
 
 Virtus performs coercions only when a value is being assigned. If you mutate the value later on using its own
