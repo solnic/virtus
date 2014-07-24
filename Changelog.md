@@ -1,3 +1,12 @@
+# v1.0.3 2014-07-24
+
+* [improvement] Expose attribute name in the exception when in strict mode (ntl)
+* [improvement] Set #to_h as an alias to #to_hash (fnando)
+* [fixed] Fix handling of nil in collection coercion (edgibbs)
+* [fixed] Fix issues with using multiple virtus modules (trptcolin)
+
+[Compare v1.0.2..v1.0.3](https://github.com/solnic/virtus/compare/v1.0.2...v1.0.3)
+
 # v1.0.2 2014-12-03
 
 * [improvement] Don’t override already-defined default values when freezing (amarshall)
