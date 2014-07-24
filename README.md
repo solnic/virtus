@@ -526,6 +526,17 @@ Blog.attribute_set[:posts].member_type.primitive # => Post
 Post.attribute_set[:blog].type.primitive # => Blog
 ```
 
+Ruby version support
+--------------------
+
+Virtus is known to work correctly with the following rubies:
+
+* 1.9.3
+* 2.0.0
+* 2.1.2
+* jruby
+* (probably) rbx
+
 Credits
 -------
 
