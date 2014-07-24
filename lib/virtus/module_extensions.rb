@@ -15,7 +15,9 @@ module Virtus
     # @api private
     def self.setup(mod, inclusions = [Model], attribute_definitions = [])
       mod.instance_variable_set('@inclusions', inclusions)
-      mod.instance_variable_set('@attribute_definitions', attribute_definitions)
+      existing_attributes = mod.instance_variable_get('@attribute_definitions')
+      new_attributes = (existing_attributes || []) + attribute_definitions
+      mod.instance_variable_set('@attribute_definitions', new_attributes)
     end
 
     # Define an attribute in the module
@@ -57,8 +59,10 @@ module Virtus
       super
 
       if Class === object
-        @inclusions.each do |mod|
-          object.send(:include, mod) unless object.ancestors.include?(mod)
+        @inclusions.reject do |mod|
+          object.ancestors.include?(mod)
+        end.each do |mod|
+          object.send(:include, mod)
         end
         define_attributes(object)
       else

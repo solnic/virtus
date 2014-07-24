@@ -140,4 +140,35 @@ describe Virtus, '.module' do
     end
   end
 
+  context 'with multiple other modules mixed into it' do
+    subject { Virtus.module }
+    let(:other)  { Module.new }
+    let(:yet_another)  { Module.new }
+
+    before do
+      other.send(:include, Virtus.module)
+      other.attribute :last_name, String, :default => 'Doe'
+      other.attribute :something_else
+      yet_another.send(:include, Virtus.module)
+      yet_another.send(:include, mod)
+      yet_another.send(:include, other)
+      yet_another.attribute :middle_name, String, :default => 'Foobar'
+      model.send(:include, yet_another)
+    end
+
+    it 'provides attributes for the model from all modules' do
+      expect(model.attribute_set[:name]).to be_kind_of(Virtus::Attribute)
+      expect(model.attribute_set[:something]).to be_kind_of(Virtus::Attribute)
+      expect(model.attribute_set[:last_name]).to be_kind_of(Virtus::Attribute)
+      expect(model.attribute_set[:something_else]).to be_kind_of(Virtus::Attribute)
+      expect(model.attribute_set[:middle_name]).to be_kind_of(Virtus::Attribute)
+    end
+
+    it 'includes the attributes from all modules' do
+      expect(model.new.attributes.keys).to eq(
+        [:name, :something, :last_name, :something_else, :middle_name]
+      )
+    end
+  end
+
 end
