@@ -83,6 +83,14 @@ describe Virtus::Attribute, '.build' do
     its(:type) { should be(Axiom::Types::Integer) }
   end
 
+  context 'when type is a range' do
+    let(:type) { 0..10 }
+
+    it_behaves_like 'a valid attribute instance'
+
+    its(:type) { should be(Axiom::Types.infer(Range)) }
+  end
+
   context 'when type is a symbol of an existing class constant' do
     let(:type) { :String }
 
