@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Hash, '.build' do
   subject { described_class.build(type) }
 
-  share_examples_for 'a valid hash attribute instance' do
+  shared_examples_for 'a valid hash attribute instance' do
     it { should be_instance_of(Virtus::Attribute::Hash) }
 
     it { should be_frozen }

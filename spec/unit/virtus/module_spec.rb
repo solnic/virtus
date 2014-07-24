@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Virtus, '.module' do
-  share_examples_for 'a valid virtus object' do
+  shared_examples_for 'a valid virtus object' do
     it 'reads and writes attribute' do
       instance.name = 'John'
       expect(instance.name).to eql('John')
     end
   end
 
-  share_examples_for 'an object extended with virtus module' do
+  shared_examples_for 'an object extended with virtus module' do
     context 'with default configuration' do
       subject { Virtus.module }
 

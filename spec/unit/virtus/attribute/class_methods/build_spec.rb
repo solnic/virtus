@@ -7,7 +7,7 @@ describe Virtus::Attribute, '.build' do
   let(:type)    { String }
   let(:options) { {} }
 
-  share_examples_for 'a valid attribute instance' do
+  shared_examples_for 'a valid attribute instance' do
     it { should be_instance_of(Virtus::Attribute) }
 
     it { should be_frozen }

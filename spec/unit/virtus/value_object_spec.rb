@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Virtus::ValueObject do
-  share_examples_for 'a valid value object' do
+  shared_examples_for 'a valid value object' do
     subject { model.new(attributes) }
 
     let(:attributes) { Hash[:id => 1, :name => 'Jane Doe'] }
@@ -43,7 +43,7 @@ describe Virtus::ValueObject do
     end
   end
 
-  share_examples_for 'a valid value object with mass-assignment turned on' do
+  shared_examples_for 'a valid value object with mass-assignment turned on' do
     subject { model.new }
 
     it 'disallows mass-assignment' do

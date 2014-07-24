@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute, '.build' do
   subject { described_class.build(type) }
 
-  share_examples_for 'a valid collection attribute instance' do
+  shared_examples_for 'a valid collection attribute instance' do
     it { should be_instance_of(Virtus::Attribute::Collection) }
 
     it { should be_frozen }

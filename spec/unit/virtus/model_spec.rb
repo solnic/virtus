@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Virtus, '.model' do
-  share_examples_for 'a model with constructor' do
+  shared_examples_for 'a model with constructor' do
     it 'accepts attribute hash' do
       instance = subject.new(:name => 'Jane')
       expect(instance.name).to eql('Jane')
     end
   end
 
-  share_examples_for 'a model with mass-assignment' do
+  shared_examples_for 'a model with mass-assignment' do
     let(:attributes) do
       { :name => 'Jane', :something => nil }
     end
@@ -22,7 +22,7 @@ describe Virtus, '.model' do
     end
   end
 
-  share_examples_for 'a model with strict mode turned off' do
+  shared_examples_for 'a model with strict mode turned off' do
     it 'has attributes with strict set to false' do
       expect(subject.send(:attribute_set)[:name]).to_not be_strict
     end

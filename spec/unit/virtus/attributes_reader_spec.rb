@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Virtus, '#attributes' do
 
-  share_examples_for 'attribute hash' do
+  shared_examples_for 'attribute hash' do
     it 'includes all attributes' do
       subject.attributes = { :test => 'Hello World', :test_priv => 'Yo' }
 

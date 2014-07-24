@@ -4,7 +4,7 @@ describe Virtus, '#attribute' do
   let(:name)    { :test }
   let(:options) { {} }
 
-  share_examples_for 'a class with boolean attribute' do
+  shared_examples_for 'a class with boolean attribute' do
     subject { Test }
 
     let(:object) { subject.new }
@@ -21,7 +21,7 @@ describe Virtus, '#attribute' do
     end
   end
 
-  share_examples_for 'an object with string attribute' do
+  shared_examples_for 'an object with string attribute' do
     it { should respond_to(:test) }
     it { should respond_to(:test=) }
 

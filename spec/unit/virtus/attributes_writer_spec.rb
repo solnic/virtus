@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Virtus, '#attributes=' do
 
-  share_examples_for 'mass-assignment' do
+  shared_examples_for 'mass-assignment' do
     it 'allows writing known attributes' do
       subject.attributes = { :test => 'Hello World' }
 
