@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Virtus::Attribute, '.build' do
-  subject { described_class.build(type) }
+  subject { described_class.build(type, options) }
+
+  let(:options) { {} }
 
   shared_examples_for 'a valid collection attribute instance' do
     it { should be_instance_of(Virtus::Attribute::Collection) }
@@ -89,6 +91,15 @@ describe Virtus::Attribute, '.build' do
 
     it 'sets member type' do
       expect(subject.type.member_type).to be(Axiom::Types::String)
+    end
+  end
+
+  context 'when strict mode is used' do
+    let(:type) { Array[String] }
+    let(:options) { { strict: true } }
+
+    it 'sets strict mode for member type' do
+      expect(subject.member_type).to be_strict
     end
   end
 end

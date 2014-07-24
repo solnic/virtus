@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe Virtus::Attribute::Hash, '.build' do
-  subject { described_class.build(type) }
+  subject { described_class.build(type, options) }
+
+  let(:options) { {} }
 
   shared_examples_for 'a valid hash attribute instance' do
     it { should be_instance_of(Virtus::Attribute::Hash) }
@@ -89,6 +91,16 @@ describe Virtus::Attribute::Hash, '.build' do
         ArgumentError,
         "more than one [key => value] pair in `#{type}`"
       )
+    end
+  end
+
+  context 'when strict mode is used' do
+    let(:type) { Hash[String => Integer] }
+    let(:options) { { :strict => true } }
+
+    it 'sets the strict mode for key/value types' do
+      expect(subject.key_type).to be_strict
+      expect(subject.value_type).to be_strict
     end
   end
 end
