@@ -9,7 +9,7 @@
 
 [Compare v1.0.2..v1.0.3](https://github.com/solnic/virtus/compare/v1.0.2...v1.0.3)
 
-# v1.0.2 2014-12-03
+# v1.0.2 2013-12-03
 
 * [improvement] Don’t override already-defined default values when freezing (amarshall)
 * [improvement] Improved performance of `AttributeSet#each` (Antti)
