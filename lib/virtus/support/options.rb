@@ -37,7 +37,7 @@ module Virtus
     # Defines which options are valid for a given attribute class
     #
     # @example
-    #   class MyAttribute < Virtus::Attribute::Object
+    #   class MyAttribute < Virtus::Attribute
     #     accept_options :foo, :bar
     #   end
     #
