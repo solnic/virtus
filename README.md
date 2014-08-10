@@ -409,7 +409,7 @@ user.info.class # => Hash
 # With a custom attribute encapsulating coercion-specific configuration
 class NoisyString < Virtus::Attribute
   def coerce(value)
-    coercer[value.class].to_string.upcase
+    value.to_s.upcase
   end
 end
 
