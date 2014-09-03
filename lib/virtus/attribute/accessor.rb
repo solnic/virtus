@@ -34,6 +34,18 @@ module Virtus
         descendant.instance_variable_set('@instance_variable_name', "@#{name}")
       end
 
+      # Return if attribute value is something other than
+      # a nil value when attribute does not accept nil values
+      #
+      # @param [Object] instance
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def present?(instance)
+        self.allow_nil? ? self.defined?(instance) : !instance.instance_variable_get(instance_variable_name).nil?
+      end
+
       # Return if attribute value is defined
       #
       # @param [Object] instance
