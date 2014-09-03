@@ -209,7 +209,7 @@ module Virtus
 
     # @api private
     def skip_default?(object, attribute)
-      attribute.lazy? || attribute.defined?(object)
+      attribute.lazy? || attribute.present?(object)
     end
 
     # Merge the attributes into the index

@@ -5,7 +5,7 @@ module Virtus
 
       # @api public
       def get(instance)
-        if instance.instance_variable_defined?(instance_variable_name)
+        if present?(instance)
           super
         else
           set_default_value(instance)

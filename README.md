@@ -157,6 +157,10 @@ class Page
 
   # default from a singleton value (boolean in this case)
   attribute :published, Boolean, :default => false
+  
+  # default from a singleton value (string in this case),
+  # that doesn't allow a nil value
+  attribute :author, String, :default => 'Mies', :allow_nil => false
 
   # default from a callable object (proc in this case)
   attribute :slug, String, :default => lambda { |page, attribute| page.title.downcase.gsub(' ', '-') }
@@ -169,10 +173,11 @@ class Page
   end
 end
 
-page = Page.new(:title => 'Virtus README')
+page = Page.new(:title => 'Virtus README', :author => nil)
 page.slug         # => 'virtus-readme'
 page.views        # => 0
 page.published    # => false
+page.author       # => 'Mies'
 page.editor_title # => "UNPUBLISHED: Virtus README"
 
 page.views = 10
