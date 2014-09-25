@@ -244,6 +244,8 @@ require 'descendants_tracker'
 require 'equalizer'
 require 'axiom-types'
 require 'coercible'
+require 'i18n'
+I18n.enforce_available_locales = false
 
 require 'virtus/support/equalizer'
 require 'virtus/support/options'
