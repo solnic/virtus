@@ -210,10 +210,24 @@ module Virtus
       frozen?
     end
 
+    # Returns if the attribute is localized
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def localized?
+      options[:localized]
+    end
+
     # @api private
     def define_accessor_methods(attribute_set)
-      attribute_set.define_reader_method(self, name,       options[:reader])
-      attribute_set.define_writer_method(self, "#{name}=", options[:writer])
+      if self.localized?
+        attribute_set.define_localized_reader_method(self, name,       options[:reader])
+        attribute_set.define_localized_writer_method(self, "#{name}=", options[:writer])
+      else
+        attribute_set.define_reader_method(self, name,       options[:reader])
+        attribute_set.define_writer_method(self, "#{name}=", options[:writer])
+      end
     end
 
     # @api private

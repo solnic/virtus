@@ -21,4 +21,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency('equalizer',           '~> 0.0', '>= 0.0.9')
   gem.add_dependency('coercible',           '~> 1.0')
   gem.add_dependency('axiom-types',         '~> 0.1')
+  gem.add_dependency('i18n',                '~> 0.6')
 end
