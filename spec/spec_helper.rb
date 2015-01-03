@@ -1,20 +1,3 @@
-if ENV['COVERAGE'] == 'true'
-  require 'simplecov'
-  require 'coveralls'
-
-  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-    SimpleCov::Formatter::HTMLFormatter,
-    Coveralls::SimpleCov::Formatter
-  ]
-
-  SimpleCov.start do
-    command_name     'spec:unit'
-    add_filter       'config/'
-    add_filter       'spec'
-    add_filter       '.bundle'
-  end
-end
-
 require 'rspec'
 require 'rspec/its'
 require 'bogus/rspec'
@@ -33,7 +16,6 @@ ENV['TZ'] = 'UTC'
 Dir[File.expand_path('../shared/**/*.rb', __FILE__)].each { |file| require file }
 
 RSpec.configure do |config|
-
   # Remove anonymous- and example- Attribute classes from Attribute descendants
   config.after :all do
     stack = [ Virtus::Attribute ]
@@ -53,5 +35,4 @@ RSpec.configure do |config|
       end
     end
   end
-
 end
