@@ -1,4 +1,4 @@
-[gem]: https://rubygems.org/gems/rom
+[gem]: https://rubygems.org/gems/virtus
 [travis]: https://travis-ci.org/solnic/virtus
 [gemnasium]: https://gemnasium.com/solnic/virtus
 [codeclimate]: https://codeclimate.com/github/solnic/virtus
