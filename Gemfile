@@ -2,11 +2,22 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'bogus', '~> 0.1'
-gem 'devtools', :git => 'https://github.com/rom-rb/devtools', branch: 'master'
-
 group :test do
+  gem 'bogus', '~> 0.1'
   gem 'inflecto', '~> 0.0.2'
+  gem 'rspec-its', '~> 1.0'
+  gem 'rspec-core', '~> 3.1'
+  gem 'rspec-expectations', '~> 3.1'
 end
 
-eval_gemfile 'Gemfile.devtools'
+group :tools do
+  gem 'guard'
+  gem 'guard-rspec'
+
+  gem 'rubocop'
+
+  platform :mri do
+    gem 'mutant'
+    gem 'mutant-rspec'
+  end
+end
