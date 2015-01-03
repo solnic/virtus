@@ -12,6 +12,9 @@ module Virtus
     # Access the strict setting for this instance
     attr_accessor :strict
 
+    # Access the required setting for this instance
+    attr_accessor :required
+
     # Access the constructor setting for this instance
     attr_accessor :constructor
 
@@ -24,11 +27,12 @@ module Virtus
     #
     # @api private
     def initialize(options={})
-      @finalize        = options.fetch(:finalize,true)
-      @coerce          = options.fetch(:coerce,true)
-      @strict          = options.fetch(:strict,false)
-      @constructor     = options.fetch(:constructor,true)
-      @mass_assignment = options.fetch(:mass_assignment,true)
+      @finalize        = options.fetch(:finalize, true)
+      @coerce          = options.fetch(:coerce, true)
+      @strict          = options.fetch(:strict, false)
+      @required        = options.fetch(:required, true)
+      @constructor     = options.fetch(:constructor, true)
+      @mass_assignment = options.fetch(:mass_assignment, true)
       @coercer         = Coercible::Coercer.new
 
       yield self if block_given?
@@ -55,6 +59,7 @@ module Virtus
       { :coerce             => coerce,
         :finalize           => finalize,
         :strict             => strict,
+        :required           => required,
         :configured_coercer => coercer }.freeze
     end
 

@@ -163,4 +163,35 @@ describe Virtus, '.model' do
       it { should_not respond_to(:attributes=) }
     end
   end
+
+  context 'when :required is set' do
+    let(:mod)   { Virtus.model(:required => false) }
+    let(:model) { Class.new }
+
+    context 'with a class' do
+      subject { model.new }
+
+      before do
+        model.send(:include, mod)
+        model.attribute :name, String
+      end
+
+      it 'has attributes with :required option inherited from module' do
+        expect(model.attribute_set[:name]).to_not be_required
+      end
+    end
+
+    context 'with an instance' do
+      subject { model.new }
+
+      before do
+        subject.extend(mod)
+        subject.attribute :name, String
+      end
+
+      it 'has attributes with strict set to true' do
+        expect(subject.send(:attribute_set)[:name]).not_to be_required
+      end
+    end
+  end
 end
