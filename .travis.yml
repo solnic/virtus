@@ -1,11 +1,12 @@
 language: ruby
 before_install: gem install bundler
 bundler_args: --without yard guard benchmarks
-script: "bundle exec rake metrics:coverage spec:integration"
+script: "bundle exec rake spec"
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.2
+  - 1.9
+  - 2.0
+  - 2.1
+  - 2.2
   - jruby
   - rbx
   - ruby-head
