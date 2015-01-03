@@ -17,13 +17,19 @@ Virtus
 [![Test Coverage](https://codeclimate.com/github/solnic/virtus/badges/coverage.svg)][codeclimate]
 [![Inline docs](http://inch-ci.org/github/solnic/virtus.svg?branch=master)][inchpages]
 
-This is a partial extraction of the DataMapper [Property
-API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
-with various modifications and improvements. The goal is to provide a common API
-for defining attributes on a model so all ORMs/ODMs could use it instead of
-reinventing the wheel all over again. It is also suitable for any other
-use case where you need to extend your ruby objects with attributes that require
-data-type coercions.
+Virtus allows you to define attributes on classes, modules or class instances with
+optional information about types, reader/writer method visibility and coercion
+behavior. It supports a lot of coercions and advanced mapping of embedded objects
+and collections.
+
+You can use it in many different contexts like:
+
+* Input parameter sanitization and coercion in web applications
+* Mapping JSON to domain objects
+* Encapsulating data-access in Value Objects
+* Domain model prototyping
+
+And probably more.
 
 Installation
 ------------
