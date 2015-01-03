@@ -1,8 +1,8 @@
-# v1.0.4 to-be-released
+# v1.0.4 2015-01-03
 
 * [feature] Support for :required option when configuring a virtus module (solnic)
 
-[Compare v1.0.3..master](https://github.com/solnic/virtus/compare/v1.0.2...master)
+[Compare v1.0.3..v1.0.4](https://github.com/solnic/virtus/compare/v1.0.3...v1.0.4)
 
 # v1.0.3 2014-07-24
 
