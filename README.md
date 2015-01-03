@@ -1,19 +1,21 @@
-Virtus
-======
-
-[![Gem Version](https://badge.fury.io/rb/virtus.png)][gem]
-[![Build Status](https://secure.travis-ci.org/solnic/virtus.png?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/solnic/virtus.png)][gemnasium]
-[![Code Climate](https://codeclimate.com/github/solnic/virtus.png)][codeclimate]
-[![Coverage Status](https://coveralls.io/repos/solnic/virtus/badge.png?branch=master)][coveralls]
-[![Inline docs](http://inch-ci.org/github/solnic/virtus.png)][inchpages]
-
-[gem]: https://rubygems.org/gems/virtus
+[gem]: https://rubygems.org/gems/rom
 [travis]: https://travis-ci.org/solnic/virtus
 [gemnasium]: https://gemnasium.com/solnic/virtus
 [codeclimate]: https://codeclimate.com/github/solnic/virtus
 [coveralls]: https://coveralls.io/r/solnic/virtus
-[inchpages]: http://inch-ci.org/github/solnic/virtus
+[inchpages]: http://inch-ci.org/github/solnic/virtus/
+
+Virtus
+======
+
+# Ruby Object Mapper
+
+[![Gem Version](https://badge.fury.io/rb/rom.svg)][gem]
+[![Build Status](https://travis-ci.org/solnic/virtus.svg?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/solnic/virtus.png)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/solnic/virtus/badges/gpa.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/solnic/virtus/badges/coverage.svg)][codeclimate]
+[![Inline docs](http://inch-ci.org/github/solnic/virtus.svg?branch=master)][inchpages]
 
 This is a partial extraction of the DataMapper [Property
 API](http://rubydoc.info/github/datamapper/dm-core/master/DataMapper/Property)
