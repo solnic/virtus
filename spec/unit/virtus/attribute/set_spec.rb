@@ -11,7 +11,7 @@ describe Virtus::Attribute, '#set' do
   let(:value)    { 'Jane Doe' }
   let(:options)  { {} }
 
-  it { should be(value) }
+  it { is_expected.to be(value) }
 
   context 'without coercion' do
     specify do

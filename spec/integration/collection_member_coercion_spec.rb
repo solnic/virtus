@@ -25,10 +25,10 @@ class User
 end
 
 describe User do
-  it { should respond_to(:phone_numbers)  }
-  it { should respond_to(:phone_numbers=) }
-  it { should respond_to(:addresses)  }
-  it { should respond_to(:addresses=) }
+  it { is_expected.to respond_to(:phone_numbers)  }
+  it { is_expected.to respond_to(:phone_numbers=) }
+  it { is_expected.to respond_to(:addresses)  }
+  it { is_expected.to respond_to(:addresses=) }
 
   let(:instance) do
     described_class.new(:phone_numbers => phone_numbers_attributes,
@@ -48,28 +48,49 @@ describe User do
     describe 'first entry' do
       subject { instance.phone_numbers.first }
 
-      it { should be_instance_of(PhoneNumber) }
+      it { is_expected.to be_instance_of(PhoneNumber) }
 
-      its(:number)  { should eql('212-555-1212') }
+      describe '#number' do
+        subject { super().number }
+        it { is_expected.to eql('212-555-1212') }
+      end
     end
 
     describe 'last entry' do
       subject { instance.phone_numbers.last }
 
-      it { should be_instance_of(PhoneNumber) }
+      it { is_expected.to be_instance_of(PhoneNumber) }
 
-      its(:number)  { should eql('919-444-3265') }
+      describe '#number' do
+        subject { super().number }
+        it { is_expected.to eql('919-444-3265') }
+      end
     end
   end
 
   describe '#addresses' do
     subject { instance.addresses.first }
 
-    it { should be_instance_of(Address) }
+    it { is_expected.to be_instance_of(Address) }
 
-    its(:address)     { should eql('1234 Any St.') }
-    its(:locality)    { should eql('Anytown')      }
-    its(:region)      { should eql('DC')           }
-    its(:postal_code) { should eql('21234')        }
+    describe '#address' do
+      subject { super().address }
+      it { is_expected.to eql('1234 Any St.') }
+    end
+
+    describe '#locality' do
+      subject { super().locality }
+      it { is_expected.to eql('Anytown')      }
+    end
+
+    describe '#region' do
+      subject { super().region }
+      it { is_expected.to eql('DC')           }
+    end
+
+    describe '#postal_code' do
+      subject { super().postal_code }
+      it { is_expected.to eql('21234')        }
+    end
   end
 end

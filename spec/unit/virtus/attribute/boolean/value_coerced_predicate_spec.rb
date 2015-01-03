@@ -8,18 +8,18 @@ describe Virtus::Attribute::Boolean, '#value_coerced?' do
   context 'when input is true' do
     let(:input) { true }
 
-    it { should be(true) }
+    it { is_expected.to be(true) }
   end
 
   context 'when input is false' do
     let(:input) { false }
 
-    it { should be(true) }
+    it { is_expected.to be(true) }
   end
 
   context 'when input is not coerced' do
     let(:input) { 1 }
 
-    it { should be(false) }
+    it { is_expected.to be(false) }
   end
 end

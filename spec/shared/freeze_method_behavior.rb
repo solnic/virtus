@@ -20,7 +20,7 @@ shared_examples_for 'a #freeze method' do
   it_should_behave_like 'an idempotent method'
 
   it 'returns object' do
-    should be(object)
+    is_expected.to be(object)
   end
 
   it 'prevents future modifications' do
@@ -29,7 +29,10 @@ shared_examples_for 'a #freeze method' do
     expect { object.instance_variable_set(:@foo, :bar) }.to(expectation)
   end
 
-  its(:frozen?) { should be(true) }
+  describe '#frozen?' do
+    subject { super().frozen? }
+    it { is_expected.to be(true) }
+  end
 
   it 'allows to access attribute' do
     expect(subject.name).to eql('John')

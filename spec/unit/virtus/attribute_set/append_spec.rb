@@ -11,7 +11,7 @@ describe Virtus::AttributeSet, '#<<' do
   context 'with a new attribute' do
     let(:attribute) { Virtus::Attribute.build(String, :name => name) }
 
-    it { should equal(object) }
+    it { is_expected.to equal(object) }
 
     it 'adds an attribute' do
       expect { subject }.to change { object.to_a }.
@@ -36,7 +36,7 @@ describe Virtus::AttributeSet, '#<<' do
     let(:attributes) { [Virtus::Attribute.build(String, :name => name)] }
     let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
 
-    it { should equal(object) }
+    it { is_expected.to equal(object) }
 
     it 'replaces the original attribute' do
       expect { subject }.to change { object.to_a }.

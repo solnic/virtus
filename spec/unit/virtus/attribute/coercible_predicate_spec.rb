@@ -9,12 +9,12 @@ describe Virtus::Attribute, '#coercible?' do
   context 'when :coerce is set to true' do
     let(:coerce) { true }
 
-    it { should be(true) }
+    it { is_expected.to be(true) }
   end
 
   context 'when :coerce is set to false' do
     let(:coerce) { false }
 
-    it { should be(false) }
+    it { is_expected.to be(false) }
   end
 end

@@ -9,7 +9,7 @@ describe Virtus::AttributeSet, '#[]' do
   let(:parent)     { described_class.new                     }
   let(:object)     { described_class.new(parent, attributes) }
 
-  it { should equal(attribute) }
+  it { is_expected.to equal(attribute) }
 
   it 'allows indexed access to attributes by the string representation of their name' do
     expect(object[name.to_s]).to equal(attribute)

@@ -1,5 +1,4 @@
 require 'rspec'
-require 'rspec/its'
 require 'bogus/rspec'
 require 'virtus'
 require 'inflecto' # for resolving namespaced constant names

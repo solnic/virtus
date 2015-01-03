@@ -8,18 +8,18 @@ describe Virtus::Attribute, '.build' do
   let(:options) { {} }
 
   shared_examples_for 'a valid attribute instance' do
-    it { should be_instance_of(Virtus::Attribute) }
+    it { is_expected.to be_instance_of(Virtus::Attribute) }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
   end
 
   context 'without options' do
     it_behaves_like 'a valid attribute instance'
 
-    it { should be_coercible }
-    it { should be_public_reader }
-    it { should be_public_writer }
-    it { should_not be_lazy }
+    it { is_expected.to be_coercible }
+    it { is_expected.to be_public_reader }
+    it { is_expected.to be_public_writer }
+    it { is_expected.not_to be_lazy }
 
     it 'sets up a coercer' do
       expect(subject.options[:coerce]).to be(true)
@@ -30,7 +30,10 @@ describe Virtus::Attribute, '.build' do
   context 'when name is passed as a string' do
     let(:name) { 'something' }
 
-    its(:name) { should be(:something) }
+    describe '#name' do
+      subject { super().name }
+      it { is_expected.to be(:something) }
+    end
   end
 
   context 'when coercion is turned off in options' do
@@ -38,7 +41,7 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    it { should_not be_coercible }
+    it { is_expected.not_to be_coercible }
   end
 
   context 'when options specify reader visibility' do
@@ -46,8 +49,8 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    it { should_not be_public_reader }
-    it { should be_public_writer }
+    it { is_expected.not_to be_public_reader }
+    it { is_expected.to be_public_writer }
   end
 
   context 'when options specify writer visibility' do
@@ -55,8 +58,8 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    it { should be_public_reader }
-    it { should_not be_public_writer }
+    it { is_expected.to be_public_reader }
+    it { is_expected.not_to be_public_writer }
   end
 
   context 'when options specify lazy accessor' do
@@ -64,7 +67,7 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    it { should be_lazy }
+    it { is_expected.to be_lazy }
   end
 
   context 'when options specify strict mode' do
@@ -72,7 +75,7 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    it { should be_strict }
+    it { is_expected.to be_strict }
   end
 
   context 'when type is a string' do
@@ -80,7 +83,10 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:type) { should be(Axiom::Types::Integer) }
+    describe '#type' do
+      subject { super().type }
+      it { is_expected.to be(Axiom::Types::Integer) }
+    end
   end
 
   context 'when type is a range' do
@@ -88,7 +94,10 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:type) { should be(Axiom::Types.infer(Range)) }
+    describe '#type' do
+      subject { super().type }
+      it { is_expected.to be(Axiom::Types.infer(Range)) }
+    end
   end
 
   context 'when type is a symbol of an existing class constant' do
@@ -96,7 +105,10 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:type) { should be(Axiom::Types::String) }
+    describe '#type' do
+      subject { super().type }
+      it { is_expected.to be(Axiom::Types::String) }
+    end
   end
 
   context 'when type is an axiom type' do
@@ -104,7 +116,10 @@ describe Virtus::Attribute, '.build' do
 
     it_behaves_like 'a valid attribute instance'
 
-    its(:type) { should be(type) }
+    describe '#type' do
+      subject { super().type }
+      it { is_expected.to be(type) }
+    end
   end
 
   context 'when custom attribute class exists for a given primitive' do
@@ -115,9 +130,12 @@ describe Virtus::Attribute, '.build' do
       attribute.primitive(type)
     end
 
-    it { should be_instance_of(attribute) }
+    it { is_expected.to be_instance_of(attribute) }
 
-    its(:type) { should be(Axiom::Types::Object) }
+    describe '#type' do
+      subject { super().type }
+      it { is_expected.to be(Axiom::Types::Object) }
+    end
   end
 
   context 'when custom attribute class exists for a given array with member coercion defined' do
@@ -128,9 +146,12 @@ describe Virtus::Attribute, '.build' do
       attribute.primitive(type.class)
     end
 
-    it { should be_instance_of(attribute) }
+    it { is_expected.to be_instance_of(attribute) }
 
-    its(:type) { should be < Axiom::Types::Collection }
+    describe '#type' do
+      subject { super().type }
+      it { is_expected.to be < Axiom::Types::Collection }
+    end
   end
 
   context 'when custom collection-like attribute class exists for a given enumerable primitive' do
@@ -141,8 +162,11 @@ describe Virtus::Attribute, '.build' do
       attribute.primitive(type)
     end
 
-    it { should be_instance_of(attribute) }
+    it { is_expected.to be_instance_of(attribute) }
 
-    its(:type) { should be < Axiom::Types::Collection }
+    describe '#type' do
+      subject { super().type }
+      it { is_expected.to be < Axiom::Types::Collection }
+    end
   end
 end

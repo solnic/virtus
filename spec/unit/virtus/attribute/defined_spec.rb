@@ -10,11 +10,11 @@ describe Virtus::Attribute, '#defined?' do
   let(:instance) { model.new }
 
   context 'when the attribute value has not been defined' do
-    it { should be(false) }
+    it { is_expected.to be(false) }
   end
 
   context 'when the attribute value has been defined' do
     before { instance.test = nil }
-    it { should be(true) }
+    it { is_expected.to be(true) }
   end
 end

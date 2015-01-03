@@ -18,8 +18,15 @@ describe Virtus, '#set_default_attributes!' do
     object.set_default_attributes!
   end
 
-  it { should be(object) }
+  it { is_expected.to be(object) }
 
-  its(:name) { should eql('foo') }
-  its(:age)  { should be(30) }
+  describe '#name' do
+    subject { super().name }
+    it { is_expected.to eql('foo') }
+  end
+
+  describe '#age' do
+    subject { super().age }
+    it { is_expected.to be(30) }
+  end
 end

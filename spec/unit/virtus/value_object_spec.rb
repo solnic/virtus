@@ -6,8 +6,15 @@ describe Virtus::ValueObject do
 
     let(:attributes) { Hash[:id => 1, :name => 'Jane Doe'] }
 
-    its(:id)   { should be(1) }
-    its(:name) { should eql('Jane Doe') }
+    describe '#id' do
+      subject { super().id }
+      it { is_expected.to be(1) }
+    end
+
+    describe '#name' do
+      subject { super().name }
+      it { is_expected.to eql('Jane Doe') }
+    end
 
     it 'sets private writers' do
       expect(subject.class.attribute_set[:id]).to_not be_public_writer
@@ -95,7 +102,10 @@ describe Virtus::ValueObject do
 
           let(:attributes) { Hash[:id => 1, :name => 'Jane Doe', :email => 'jane@doe.com'] }
 
-          its(:email) { should eql('jane@doe.com') }
+          describe '#email' do
+            subject { super().email }
+            it { is_expected.to eql('jane@doe.com') }
+          end
 
           it 'sets private writers for additional values' do
             expect(subclass.attribute_set[:email]).to_not be_public_writer

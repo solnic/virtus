@@ -6,9 +6,9 @@ describe Virtus::Attribute, '.build' do
   let(:options) { {} }
 
   shared_examples_for 'a valid collection attribute instance' do
-    it { should be_instance_of(Virtus::Attribute::Collection) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::Collection) }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
   end
 
   context 'when type is Array' do

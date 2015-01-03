@@ -9,12 +9,12 @@ describe Virtus::Attribute, '#lazy?' do
   context 'when :lazy is set to true' do
     let(:lazy) { true }
 
-    it { should be(true) }
+    it { is_expected.to be(true) }
   end
 
   context 'when :lazy is set to false' do
     let(:lazy) { false }
 
-    it { should be(false) }
+    it { is_expected.to be(false) }
   end
 end

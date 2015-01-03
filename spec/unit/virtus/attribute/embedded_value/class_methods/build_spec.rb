@@ -6,50 +6,65 @@ describe Virtus::Attribute::EmbeddedValue, '.build' do
   context 'when type is a Virtus.model' do
     let(:type) { Class.new { include Virtus.model } }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { is_expected.to be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type includes Virtus' do
     let(:type) { Class.new { include Virtus } }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { is_expected.to be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type is an OpenStruct subclass' do
     let(:type) { Class.new(OpenStruct) }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { is_expected.to be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type is OpenStruct' do
     let(:type) { OpenStruct }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromOpenStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { is_expected.to be_instance_of(described_class::FromOpenStruct) }
+    end
   end
 
   context 'when type is Struct' do
     let(:type) { Struct.new(:test) }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
 
-    it { should be_instance_of(Virtus::Attribute::EmbeddedValue) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::EmbeddedValue) }
 
-    its(:coercer) { should be_instance_of(described_class::FromStruct) }
+    describe '#coercer' do
+      subject { super().coercer }
+      it { is_expected.to be_instance_of(described_class::FromStruct) }
+    end
   end
 end

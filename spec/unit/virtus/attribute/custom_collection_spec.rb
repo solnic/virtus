@@ -12,12 +12,18 @@ describe Virtus::Attribute::Collection, 'custom subclass' do
   context 'when primitive is set on the attribute subclass' do
     let(:attribute_class) { Class.new(described_class).primitive(primitive) }
 
-    its(:primitive) { should be(primitive) }
+    describe '#primitive' do
+      subject { super().primitive }
+      it { is_expected.to be(primitive) }
+    end
   end
 
   context 'when primitive is not set on the attribute subclass' do
     let(:attribute_class) { Class.new(described_class) }
 
-    its(:primitive) { should be(primitive) }
+    describe '#primitive' do
+      subject { super().primitive }
+      it { is_expected.to be(primitive) }
+    end
   end
 end

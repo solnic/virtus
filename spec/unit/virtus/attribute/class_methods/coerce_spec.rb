@@ -19,7 +19,7 @@ describe Virtus::Attribute, '.coerce' do
       described_class.coerce(true)
     end
 
-    it { should be(true) }
+    it { is_expected.to be(true) }
   end
 
   context 'when it is set to false' do
@@ -27,6 +27,6 @@ describe Virtus::Attribute, '.coerce' do
       described_class.coerce(false)
     end
 
-    it { should be(false) }
+    it { is_expected.to be(false) }
   end
 end

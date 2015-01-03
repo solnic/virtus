@@ -16,13 +16,13 @@ describe Virtus::Attribute, '#get' do
       instance.test = value
     end
 
-    it { should be(value) }
+    it { is_expected.to be(value) }
   end
 
   context 'with :lazy is set to true' do
     let(:options) { { :lazy => true, :default => value } }
 
-    it { should eql(value) }
+    it { is_expected.to eql(value) }
 
     it 'sets default only on first access' do
       expect(object.get(instance)).to eql(value)

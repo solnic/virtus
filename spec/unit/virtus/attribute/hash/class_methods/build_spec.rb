@@ -6,15 +6,15 @@ describe Virtus::Attribute::Hash, '.build' do
   let(:options) { {} }
 
   shared_examples_for 'a valid hash attribute instance' do
-    it { should be_instance_of(Virtus::Attribute::Hash) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::Hash) }
 
-    it { should be_frozen }
+    it { is_expected.to be_frozen }
   end
 
   context 'when type is Hash' do
     let(:type) { Hash }
 
-    it { should be_instance_of(Virtus::Attribute::Hash) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::Hash) }
 
     it 'sets default key type' do
       expect(subject.type.key_type).to be(Axiom::Types::Object)
@@ -28,7 +28,7 @@ describe Virtus::Attribute::Hash, '.build' do
   context 'when type is Hash[String => Integer]' do
     let(:type) { Hash[String => Integer] }
 
-    it { should be_instance_of(Virtus::Attribute::Hash) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::Hash) }
 
     it 'sets key type' do
       expect(subject.type.key_type).to be(Axiom::Types::String)
@@ -42,7 +42,7 @@ describe Virtus::Attribute::Hash, '.build' do
   context 'when type is Hash[Virtus::Attribute::Hash => Virtus::Attribute::Boolean]' do
     let(:type) { Hash[Virtus::Attribute::Hash => Virtus::Attribute::Boolean] }
 
-    it { should be_instance_of(Virtus::Attribute::Hash) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::Hash) }
 
     it 'sets key type' do
       expect(subject.type.key_type).to be(Axiom::Types::Hash)
@@ -57,7 +57,7 @@ describe Virtus::Attribute::Hash, '.build' do
     let(:type)     { Hash[key_type => Integer] }
     let(:key_type) { Struct.new(:id) }
 
-    it { should be_instance_of(Virtus::Attribute::Hash) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::Hash) }
 
     it 'sets key type' do
       expect(subject.type.key_type).to be(key_type)
@@ -72,7 +72,7 @@ describe Virtus::Attribute::Hash, '.build' do
     let(:type)       { Hash[String => value_type] }
     let(:value_type) { Struct.new(:id) }
 
-    it { should be_instance_of(Virtus::Attribute::Hash) }
+    it { is_expected.to be_instance_of(Virtus::Attribute::Hash) }
 
     it 'sets key type' do
       expect(subject.type.key_type).to be(Axiom::Types::String)

@@ -23,8 +23,8 @@ describe Virtus, '#attribute' do
   end
 
   shared_examples_for 'an object with string attribute' do
-    it { should respond_to(:test) }
-    it { should respond_to(:test=) }
+    it { is_expected.to respond_to(:test) }
+    it { is_expected.to respond_to(:test=) }
 
     it 'can write and read the attribute' do
       subject.test = :foo
@@ -218,8 +218,8 @@ describe Virtus, '#attribute' do
       }
     }
 
-    it { should respond_to(:test) }
-    it { should respond_to(:test=) }
+    it { is_expected.to respond_to(:test) }
+    it { is_expected.to respond_to(:test=) }
 
     it 'writes and reads attributes' do
       subject.test = :foo

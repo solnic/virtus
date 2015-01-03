@@ -15,10 +15,17 @@ describe Virtus, '#freeze' do
 
   let(:object) { model.new }
 
-  it { should be_frozen }
+  it { is_expected.to be_frozen }
 
-  its(:name) { should eql('foo') }
-  its(:age)  { should be(30) }
+  describe '#name' do
+    subject { super().name }
+    it { is_expected.to eql('foo') }
+  end
+
+  describe '#age' do
+    subject { super().age }
+    it { is_expected.to be(30) }
+  end
 
   it "does not change dynamic default values" do
     original_value = object.rand

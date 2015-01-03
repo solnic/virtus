@@ -12,7 +12,7 @@ describe Virtus::AttributeSet, '#merge' do
     let(:attributes) { [] }
     let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
 
-    it { should equal(object) }
+    it { is_expected.to equal(object) }
 
     it 'adds an attribute' do
       expect { subject }.to change { object.to_a }.from(attributes).to([attribute])
@@ -23,7 +23,7 @@ describe Virtus::AttributeSet, '#merge' do
     let(:attributes) { [Virtus::Attribute.build(String, :name => name)] }
     let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
 
-    it { should equal(object) }
+    it { is_expected.to equal(object) }
 
     it 'replaces the original attribute' do
       expect { subject }.to change { object.to_a }.from(attributes).to([attribute])

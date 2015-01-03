@@ -148,8 +148,8 @@ describe Virtus, '.model' do
         model.send(:include, mod)
       end
 
-      it { should_not respond_to(:attributes) }
-      it { should_not respond_to(:attributes=) }
+      it { is_expected.not_to respond_to(:attributes) }
+      it { is_expected.not_to respond_to(:attributes=) }
     end
 
     context 'with an instance' do
@@ -159,8 +159,8 @@ describe Virtus, '.model' do
         subject.extend(mod)
       end
 
-      it { should_not respond_to(:attributes) }
-      it { should_not respond_to(:attributes=) }
+      it { is_expected.not_to respond_to(:attributes) }
+      it { is_expected.not_to respond_to(:attributes=) }
     end
   end
 

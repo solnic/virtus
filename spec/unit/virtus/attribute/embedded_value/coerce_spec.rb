@@ -12,22 +12,29 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
     context 'when input is an attribute hash' do
       let(:input) { Hash[name: 'Piotr', age: 30] }
 
-      it { should be_instance_of(model) }
+      it { is_expected.to be_instance_of(model) }
 
-      its(:name) { should eql('Piotr') }
-      its(:age)  { should eql(30) }
+      describe '#name' do
+        subject { super().name }
+        it { is_expected.to eql('Piotr') }
+      end
+
+      describe '#age' do
+        subject { super().age }
+        it { is_expected.to eql(30) }
+      end
     end
 
     context 'when input is nil' do
       let(:input) { nil }
 
-      it { should be(nil) }
+      it { is_expected.to be(nil) }
     end
 
     context 'when input is a model instance' do
       let(:input) { OpenStruct.new }
 
-      it { should be(input) }
+      it { is_expected.to be(input) }
     end
   end
 
@@ -37,22 +44,29 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
     context 'when input is an attribute hash' do
       let(:input) { ['Piotr', 30] }
 
-      it { should be_instance_of(model) }
+      it { is_expected.to be_instance_of(model) }
 
-      its(:name) { should eql('Piotr') }
-      its(:age)  { should eql(30) }
+      describe '#name' do
+        subject { super().name }
+        it { is_expected.to eql('Piotr') }
+      end
+
+      describe '#age' do
+        subject { super().age }
+        it { is_expected.to eql(30) }
+      end
     end
 
     context 'when input is nil' do
       let(:input) { nil }
 
-      it { should be(nil) }
+      it { is_expected.to be(nil) }
     end
 
     context 'when input is a model instance' do
       let(:input) { model.new('Piotr', 30) }
 
-      it { should be(input) }
+      it { is_expected.to be(input) }
     end
   end
 
@@ -63,7 +77,7 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
     context 'when input is coercible' do
       let(:input) { ['Piotr'] }
 
-      it { should eql(model.new('Piotr')) }
+      it { is_expected.to eql(model.new('Piotr')) }
     end
 
     context 'when input is not coercible' do

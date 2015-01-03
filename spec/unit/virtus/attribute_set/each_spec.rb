@@ -25,7 +25,7 @@ describe Virtus::AttributeSet, '#each' do
     subject { attribute_set.each { |attribute| yields << attribute } }
 
     context 'when the parent has no attributes' do
-      it { should equal(attribute_set) }
+      it { is_expected.to equal(attribute_set) }
 
       it 'yields the expected attributes' do
         expect { subject }.to change { yields.dup }.
@@ -38,7 +38,7 @@ describe Virtus::AttributeSet, '#each' do
       let(:parent_attribute) { Virtus::Attribute.build(String, :name => :parent_name) }
       let(:parent)           { described_class.new([ parent_attribute ])       }
 
-      it { should equal(attribute_set) }
+      it { is_expected.to equal(attribute_set) }
 
       it 'yields the expected attributes' do
         result = []
@@ -53,7 +53,7 @@ describe Virtus::AttributeSet, '#each' do
       let(:parent_attribute) { Virtus::Attribute.build(String, :name => name) }
       let(:parent)           { described_class.new([ parent_attribute ]) }
 
-      it { should equal(attribute_set) }
+      it { is_expected.to equal(attribute_set) }
 
       it 'yields the expected attributes' do
         expect { subject }.to change { yields.dup }.

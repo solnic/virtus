@@ -18,7 +18,7 @@ describe Virtus::Attribute, '#coerce' do
     let(:strict) { false }
 
     it 'uses coercer to coerce the input value' do
-      stub(coercer).call(input) { output }
+      mock(coercer).call(input) { output }
 
       expect(subject).to be(output)
 
@@ -30,8 +30,8 @@ describe Virtus::Attribute, '#coerce' do
     let(:strict) { true }
 
     it 'uses coercer to coerce the input value' do
-      stub(coercer).call(input) { output }
-      stub(coercer).success?(String, output) { true }
+      mock(coercer).call(input) { output }
+      mock(coercer).success?(String, output) { true }
 
       expect(subject).to be(output)
 
@@ -44,8 +44,8 @@ describe Virtus::Attribute, '#coerce' do
       let(:input)    { nil }
 
       it 'returns nil' do
-        stub(coercer).call(input) { input }
-        stub(coercer).success?(String, input) { false }
+        mock(coercer).call(input) { input }
+        mock(coercer).success?(String, input) { false }
 
         expect(subject).to be(nil)
 
@@ -58,8 +58,8 @@ describe Virtus::Attribute, '#coerce' do
       let(:input) { nil }
 
       it 'returns raises error' do
-        stub(coercer).call(input) { input }
-        stub(coercer).success?(String, input) { false }
+        mock(coercer).call(input) { input }
+        mock(coercer).success?(String, input) { false }
 
         expect { subject }.to raise_error(Virtus::CoercionError)
 
@@ -69,8 +69,8 @@ describe Virtus::Attribute, '#coerce' do
     end
 
     it 'raises error when input was not coerced' do
-      stub(coercer).call(input) { input }
-      stub(coercer).success?(String, input) { false }
+      mock(coercer).call(input) { input }
+      mock(coercer).success?(String, input) { false }
 
       expect { subject }.to raise_error(Virtus::CoercionError)
 

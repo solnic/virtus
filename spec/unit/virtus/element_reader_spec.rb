@@ -17,5 +17,5 @@ describe Virtus, '#[]' do
     object.test = 'foo'
   end
 
-  it { should eq('foo') }
+  it { is_expected.to eq('foo') }
 end

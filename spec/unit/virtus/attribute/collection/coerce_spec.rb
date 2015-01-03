@@ -16,10 +16,10 @@ describe Virtus::Attribute::Collection, '#coerce' do
       }
 
       it 'uses coercer to coerce members' do
-        stub(coercer).call(input) { input }
-        stub(member_type).finalize { member_type }
-        stub(member_type).coerce('1') { 1 }
-        stub(member_type).coerce('2') { 2 }
+        mock(coercer).call(input) { input }
+        mock(member_type).finalize { member_type }
+        mock(member_type).coerce('1') { 1 }
+        mock(member_type).coerce('2') { 2 }
 
         expect(subject).to eq([1, 2])
 
@@ -66,7 +66,7 @@ describe Virtus::Attribute::Collection, '#coerce' do
     }
 
     it 'returns nil' do
-      stub(coercer).call(input) { input }
+      mock(coercer).call(input) { input }
 
       expect(subject).to be(input)
     end

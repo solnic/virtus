@@ -10,13 +10,13 @@ describe Virtus::Attribute::Boolean, '#coerce' do
     context 'with a truthy value' do
       let(:input) { 1 }
 
-      it { should be(true) }
+      it { is_expected.to be(true) }
     end
 
     context 'with a falsy value' do
       let(:input) { 0 }
 
-      it { should be(false) }
+      it { is_expected.to be(false) }
     end
   end
 
@@ -26,7 +26,7 @@ describe Virtus::Attribute::Boolean, '#coerce' do
     context 'with a coercible input' do
       let(:input) { 1 }
 
-      it { should be(true) }
+      it { is_expected.to be(true) }
     end
 
     context 'with a non-coercible input' do

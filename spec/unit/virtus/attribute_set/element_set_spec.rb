@@ -11,7 +11,7 @@ describe Virtus::AttributeSet, '#[]=' do
   context 'with a new attribute' do
     let(:attribute) { Virtus::Attribute.build(String, :name => name) }
 
-    it { should equal(attribute) }
+    it { is_expected.to equal(attribute) }
 
     it 'adds an attribute' do
       expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])
@@ -35,7 +35,7 @@ describe Virtus::AttributeSet, '#[]=' do
     let(:attributes) { [ original ] }
     let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
 
-    it { should equal(attribute) }
+    it { is_expected.to equal(attribute) }
 
     it 'replaces the original attribute' do
       expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])

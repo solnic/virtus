@@ -26,9 +26,9 @@ describe Package do
     it 'has 3 keys' do
       expect(subject.keys.size).to eq(3)
     end
-    it { should have_key :width  }
-    it { should have_key :height }
-    it { should have_key :length }
+    it { is_expected.to have_key :width  }
+    it { is_expected.to have_key :height }
+    it { is_expected.to have_key :length }
 
     it 'should be coerced to [Symbol => Float] format' do
       expect(dimensions[:width]).to  be_eql(2.2)
@@ -43,8 +43,8 @@ describe Package do
     it 'has 2 keys' do
       expect(subject.keys.size).to eq(2)
     end
-    it { should have_key 'from' }
-    it { should have_key 'to'   }
+    it { is_expected.to have_key 'from' }
+    it { is_expected.to have_key 'to'   }
 
     it 'should be coerced to [String => String] format' do
       expect(meta_info['from']).to eq('Me')

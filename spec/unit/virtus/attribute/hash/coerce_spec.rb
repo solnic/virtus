@@ -17,14 +17,14 @@ describe Virtus::Attribute::Hash, '#coerce' do
     let(:input)  { Class.new { def to_hash; { :hello => 'World' }; end }.new }
     let(:object) { described_class.build(Hash) }
 
-    it { should eq(:hello => 'World') }
+    it { is_expected.to eq(:hello => 'World') }
   end
 
   context 'when input is not coercible to hash' do
     let(:input)  { 'not really a hash' }
     let(:object) { described_class.build(Hash) }
 
-    it { should be(input) }
+    it { is_expected.to be(input) }
   end
 
   context 'when input is a hash' do
@@ -39,15 +39,15 @@ describe Virtus::Attribute::Hash, '#coerce' do
       let(:input) { Hash[1 => '1', 2 => '2'] }
 
       it 'uses coercer to coerce key and value' do
-        stub(coercer).call(input) { input }
+        mock(coercer).call(input) { input }
 
-        stub(key_type).finalize { key_type }
-        stub(key_type).coerce(1) { '1' }
-        stub(key_type).coerce(2) { '2' }
+        mock(key_type).finalize { key_type }
+        mock(key_type).coerce(1) { '1' }
+        mock(key_type).coerce(2) { '2' }
 
-        stub(value_type).finalize { value_type }
-        stub(value_type).coerce('1') { 1 }
-        stub(value_type).coerce('2') { 2 }
+        mock(value_type).finalize { value_type }
+        mock(value_type).coerce('1') { 1 }
+        mock(value_type).coerce('2') { 2 }
 
         expect(subject).to eq(Hash['1' => 1, '2' => 2])
 

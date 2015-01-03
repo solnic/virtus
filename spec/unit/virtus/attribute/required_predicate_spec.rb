@@ -8,12 +8,12 @@ describe Virtus::Attribute, '#required?' do
   context 'when required option is true' do
     let(:required) { true }
 
-    it { should be(true) }
+    it { is_expected.to be(true) }
   end
 
   context 'when required option is false' do
     let(:required) { false }
 
-    it { should be(false) }
+    it { is_expected.to be(false) }
   end
 end
