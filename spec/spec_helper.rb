@@ -1,3 +1,8 @@
+if RUBY_ENGINE == "rbx"
+  require "codeclimate-test-reporter"
+  CodeClimate::TestReporter.start
+end
+
 require 'rspec'
 require 'bogus/rspec'
 require 'virtus'
