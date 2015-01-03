@@ -181,6 +181,19 @@ page.reset_attribute(:views)  # => 0
 page.views                    # => 0
 ```
 
+### Default values on dynamically extended instances
+
+This requires you to set `:lazy` option because default values are set in the
+constructor if it's set to false (which is the default setting):
+
+``` ruby
+User = Class.new
+user = User.new
+user.extend(Virtus.model)
+user.attribute :name, String, default: 'jane', lazy: true
+user.name # => "jane"
+```
+
 ### Embedded Value
 
 ``` ruby
