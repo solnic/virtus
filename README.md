@@ -10,7 +10,7 @@ Virtus
 
 # Ruby Object Mapper
 
-[![Gem Version](https://badge.fury.io/rb/rom.svg)][gem]
+[![Gem Version](https://badge.fury.io/rb/virtus.svg)][gem]
 [![Build Status](https://travis-ci.org/solnic/virtus.svg?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/solnic/virtus.png)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/solnic/virtus/badges/gpa.svg)][codeclimate]
