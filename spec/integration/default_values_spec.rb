@@ -15,6 +15,7 @@ describe "default values" do
         include Virtus
 
         attribute :title,        String
+        attribute :author,       String,  :default => 'Mies', :allow_nil => false
         attribute :slug,         String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }, :lazy => true
         attribute :view_count,   Integer, :default => 0
         attribute :published,    Boolean, :default => false, :accessor => :private
@@ -57,6 +58,13 @@ describe "default values" do
     expect do
       subject.reset_attribute(:view_count)
     end.to change { subject.view_count }.to(0)
+  end
+
+  context 'when attribute is assigned as nil' do
+    specify 'you can set a default with the :allow_nil option' do
+      page = Examples::Page.new :author => nil
+      expect(page.author).to eql 'Mies'
+    end
   end
 
   context 'a ValueObject' do

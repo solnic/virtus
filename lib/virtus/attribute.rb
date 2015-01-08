@@ -20,12 +20,13 @@ module Virtus
 
     include ::Equalizer.new(:type, :options)
 
-    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize
+    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize, :allow_nil
 
     strict false
     required true
     accessor :public
     finalize true
+    allow_nil true
 
     # @see Virtus.coerce
     #
@@ -208,6 +209,23 @@ module Virtus
     # @api public
     def finalized?
       frozen?
+    end
+
+    # Return if the attribute accepts nil as value when default value is set
+    #
+    # @example
+    #
+    #   attr = Virtus::Attribute.build(String, :default => 'foo', :allow_nil => true)
+    #   attr.allow_nil? # => true
+    #
+    #   attr = Virtus::Attribute.build(String, :default => 'foo', :allow_nil => false)
+    #   attr.allow_nil? # => false
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def allow_nil?
+      options[:allow_nil]
     end
 
     # @api private
