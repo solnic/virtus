@@ -70,6 +70,7 @@ module Virtus
         mod.define_singleton_method :included do |object|
           Builder.pending << object unless context.finalize?
           context.modules.each { |mod| object.send(:include, mod) }
+          object.singleton_class.class_eval { undef :attribute if method_defined?(:attribute) }
           object.define_singleton_method(:attribute, context.attribute_method)
         end
       end
