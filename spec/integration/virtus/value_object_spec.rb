@@ -7,7 +7,8 @@ describe Virtus::ValueObject do
         'GeoLocation'
       end
 
-      include Virtus::ValueObject
+      # include Virtus::ValueObject
+      include Virtus.value_object
 
       attribute :latitude,  Float
       attribute :longitude, Float
