@@ -98,6 +98,10 @@ module Virtus
 
     module ClassMethods
 
+      def self.included(base)
+        base.extend(self)
+      end
+      
       # Define an attribute on the receiver
       #
       # The Attribute will have private writer methods (eg., immutable instances)

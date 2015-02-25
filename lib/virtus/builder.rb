@@ -123,7 +123,8 @@ module Virtus
       super + [
         Extensions::AllowedWriterMethods,
         ValueObject::AllowedWriterMethods,
-        ValueObject::InstanceMethods
+        ValueObject::InstanceMethods,
+        ValueObject::ClassMethods
       ]
     end
 
