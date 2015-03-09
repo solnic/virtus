@@ -12,6 +12,9 @@ module Virtus
     # Access the strict setting for this instance
     attr_accessor :strict
 
+    # Access the nullify_blank setting for this instance
+    attr_accessor :nullify_blank
+
     # Access the required setting for this instance
     attr_accessor :required
 
@@ -30,6 +33,7 @@ module Virtus
       @finalize        = options.fetch(:finalize, true)
       @coerce          = options.fetch(:coerce, true)
       @strict          = options.fetch(:strict, false)
+      @nullify_blank   = options.fetch(:nullify_blank, false)
       @required        = options.fetch(:required, true)
       @constructor     = options.fetch(:constructor, true)
       @mass_assignment = options.fetch(:mass_assignment, true)
@@ -59,6 +63,7 @@ module Virtus
       { :coerce             => coerce,
         :finalize           => finalize,
         :strict             => strict,
+        :nullify_blank      => nullify_blank,
         :required           => required,
         :configured_coercer => coercer }.freeze
     end

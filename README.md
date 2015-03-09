@@ -508,6 +508,22 @@ end
 User.new :admin => "can't really say if true or false"
 ```
 
+## Nullify Blank Strings Mode
+
+If you want to replace empty Strings with `nil` values (since they can't be
+coerced into the expected type), you can use the `:nullify_blank` option.
+
+``` ruby
+class User
+  include Virtus.model(:nullify_blank => true)
+
+  attribute :birthday, Date
+end
+
+User.new(:birthday => "").birthday # => nil
+```
+
+
 ## Building modules with custom configuration
 
 You can also build Virtus modules that contain their own configuration.

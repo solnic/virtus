@@ -20,12 +20,13 @@ module Virtus
 
     include ::Equalizer.new(:type, :options)
 
-    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize
+    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize, :nullify_blank
 
     strict false
     required true
     accessor :public
     finalize true
+    nullify_blank false
 
     # @see Virtus.coerce
     #
@@ -174,6 +175,23 @@ module Virtus
     # @api public
     def strict?
       kind_of?(Strict)
+    end
+
+    # Return if the attribute is in the nullify blank coercion mode
+    #
+    # @example
+    #
+    #   attr = Virtus::Attribute.build(String, :nullify_blank => true)
+    #   attr.nullify_blank? # => true
+    #
+    #   attr = Virtus::Attribute.build(String, :nullify_blank => false)
+    #   attr.nullify_blank? # => false
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def nullify_blank?
+      kind_of?(NullifyBlank)
     end
 
     # Return if the attribute is accepts nil values as valid coercion output

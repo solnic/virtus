@@ -78,6 +78,14 @@ describe Virtus::Attribute, '.build' do
     it { is_expected.to be_strict }
   end
 
+  context 'when options specify nullify blank mode' do
+    let(:options) { { :nullify_blank => true } }
+
+    it_behaves_like 'a valid attribute instance'
+
+    it { is_expected.to be_nullify_blank }
+  end
+
   context 'when type is a string' do
     let(:type) { 'Integer' }
 
