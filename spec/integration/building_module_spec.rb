@@ -19,6 +19,10 @@ describe 'I can create a Virtus module' do
         config.strict = true
       }
 
+      BlankModule = Virtus.model { |config|
+        config.nullify_blank = true
+      }
+
       class NoncoercedUser
         include NoncoercingModule
 
@@ -38,6 +42,13 @@ describe 'I can create a Virtus module' do
 
         attribute :stuff, Hash
         attribute :happy, Boolean, :strict => false
+      end
+
+      class BlankModel
+        include BlankModule
+
+        attribute :stuff, Hash
+        attribute :happy, Boolean, :nullify_blank => false
       end
     end
   end
@@ -60,6 +71,17 @@ describe 'I can create a Virtus module' do
     model = Examples::StrictModel.new
 
     expect { model.stuff = 'foo' }.to raise_error(Virtus::CoercionError)
+
+    model.happy = 'foo'
+
+    expect(model.happy).to eql('foo')
+  end
+
+  specify 'including a custom module with nullify blank enabled' do
+    model = Examples::BlankModel.new
+
+    model.stuff = ''
+    expect(model.stuff).to be_nil
 
     model.happy = 'foo'
 

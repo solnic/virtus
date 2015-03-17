@@ -279,6 +279,7 @@ require 'virtus/attribute/accessor'
 require 'virtus/attribute/coercible'
 require 'virtus/attribute/strict'
 require 'virtus/attribute/lazy_default'
+require 'virtus/attribute/nullify_blank'
 
 require 'virtus/attribute/boolean'
 require 'virtus/attribute/collection'
