@@ -1,3 +1,9 @@
+# v1.0.5 2015-03-18
+
+* [feature] Support for :nullify_blank option when configuring a virtus module (lucasmazza)
+
+[Compare v1.0.4..v1.0.5](https://github.com/solnic/virtus/compare/v1.0.4...v1.0.5)
+
 # v1.0.4 2015-01-03
 
 * [feature] Support for :required option when configuring a virtus module (solnic)
