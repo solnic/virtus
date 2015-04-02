@@ -13,7 +13,7 @@ module Virtus
   #   # strict mode
   #   attr = Virtus::Attribute.build(Integer, :strict => true)
   #   attr.coerce('not really coercible')
-  #   # => Virtus::CoercionError: Failed to coerce "fsafa" into Integer
+  #   # => Virtus::CoercionError: Failed to coerce "not really coercible" into Integer
   #
   class Attribute
     extend DescendantsTracker, Options, TypeLookup
