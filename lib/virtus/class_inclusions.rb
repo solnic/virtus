@@ -13,7 +13,6 @@ module Virtus
     def self.included(descendant)
       super
       descendant.extend(ClassMethods)
-      descendant.extend(Extensions::AllowedWriterMethods)
       descendant.class_eval { include Methods }
       descendant.class_eval { include InstanceMethods }
       descendant.class_eval { include InstanceMethods::Constructor }

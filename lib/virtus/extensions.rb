@@ -18,7 +18,6 @@ module Virtus
       object.instance_eval do
         extend Methods
         extend InstanceMethods
-        extend AllowedWriterMethods
         extend InstanceMethods::MassAssignment
       end
     end
@@ -75,23 +74,6 @@ module Virtus
         include(::Equalizer.new(*attribute_set.map(&:name)))
       end
 
-      private
-
-      # Return an attribute set for that instance
-      #
-      # @return [AttributeSet]
-      #
-      # @api private
-      def attribute_set
-        @attribute_set
-      end
-
-    end # Methods
-
-    module AllowedWriterMethods
-      WRITER_METHOD_REGEXP   = /=\z/.freeze
-      INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
-
       # The list of writer methods that can be mass-assigned to in #attributes=
       #
       # @return [Set]
@@ -106,8 +88,18 @@ module Virtus
           end
       end
 
-    end # AllowedWriterMethods
+      private
+
+      # Return an attribute set for that instance
+      #
+      # @return [AttributeSet]
+      #
+      # @api private
+      def attribute_set
+        @attribute_set
+      end
+
+    end # Methods
 
   end # module Extensions
-
 end # module Virtus
