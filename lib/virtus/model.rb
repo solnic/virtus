@@ -51,7 +51,6 @@ module Virtus
       # @api private
       def self.included(descendant)
         super
-        descendant.extend(Extensions::AllowedWriterMethods)
         descendant.send(:include, InstanceMethods::MassAssignment)
       end
       private_class_method :included
@@ -59,7 +58,6 @@ module Virtus
       # @api private
       def self.extended(descendant)
         super
-        descendant.extend(Extensions::AllowedWriterMethods)
         descendant.extend(InstanceMethods::MassAssignment)
       end
       private_class_method :extended
