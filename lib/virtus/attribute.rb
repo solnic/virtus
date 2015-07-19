@@ -18,7 +18,7 @@ module Virtus
   class Attribute
     extend DescendantsTracker, Options, TypeLookup
 
-    include ::Equalizer.new(:type, :options)
+    include Equalizer.new(inspect) << :type << :options
 
     accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize, :nullify_blank
 
