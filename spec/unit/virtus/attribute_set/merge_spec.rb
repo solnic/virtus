@@ -21,12 +21,14 @@ describe Virtus::AttributeSet, '#merge' do
 
   context 'with a duplicate attribute' do
     let(:attributes) { [Virtus::Attribute.build(String, :name => name)] }
-    let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
+    let(:attribute)  {  Virtus::Attribute.build(String, :name => name) }
 
     it { is_expected.to equal(object) }
 
-    it 'replaces the original attribute' do
-      expect { subject }.to change { object.to_a }.from(attributes).to([attribute])
+    it "replaces the original attribute object" do
+      expect { subject }.to change { object.to_a.map(&:__id__) }.
+      from(attributes.map(&:__id__)).
+      to([attribute.__id__])
     end
   end
 end
