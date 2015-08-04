@@ -38,6 +38,12 @@ describe "mass assignment with accessors" do
     expect(subject.subcategory).to eq('Furniture')
   end
 
+  specify 'can be updated with #update_attributes' do
+    subject.update_attributes({:categories => ['Home', 'Furniture']})
+    expect(subject.category).to eq('Home')
+    expect(subject.subcategory).to eq('Furniture')
+  end
+
   specify 'respects accessor visibility' do
     expect(subject.id).not_to eq(100)
   end
