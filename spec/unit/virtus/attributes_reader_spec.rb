@@ -38,4 +38,28 @@ describe Virtus, '#attributes' do
 
     it_behaves_like 'attribute hash'
   end
+
+  context "#to_h / #to_hash" do
+    let(:model) {
+      child = Class.new {
+        include Virtus
+
+        attribute :d, String
+      }
+
+      Class.new {
+        include Virtus
+
+        attribute :a, String
+        attribute :c, child
+      }
+    }
+
+    subject { model.new a: "b", c: {d: "e"} }
+
+    it "deeply converts to a hash" do
+      expect(subject.to_h).to eql(a: "b", c: {d: "e"})
+      expect(subject.to_hash).to eql(a: "b", c: {d: "e"})
+    end
+  end
 end
