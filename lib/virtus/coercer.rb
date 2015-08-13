@@ -3,6 +3,7 @@ module Virtus
   # Abstract coercer class
   #
   class Coercer
+    include Equalizer.new(inspect) << :primitive << :type
 
     # @api private
     attr_reader :primitive, :type

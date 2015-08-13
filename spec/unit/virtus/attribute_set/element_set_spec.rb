@@ -37,20 +37,28 @@ describe Virtus::AttributeSet, '#[]=' do
 
     it { is_expected.to equal(attribute) }
 
-    it 'replaces the original attribute' do
-      expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])
-    end
-
-    it 'allows #[] to access the attribute with a symbol' do
-      expect { subject }.to change { object['name'] }.from(original).to(attribute)
+    it "replaces the original attribute object" do
+      expect { subject }.to change { object.to_a.map(&:__id__) }.
+      from(attributes.map(&:__id__)).
+      to([attribute.__id__])
     end
 
     it 'allows #[] to access the attribute with a string' do
-      expect { subject }.to change { object[:name] }.from(original).to(attribute)
+      expect { subject }.to change { object['name'].__id__ }.
+      from(original.__id__).
+      to(attribute.__id__)
+    end
+
+    it 'allows #[] to access the attribute with a symbol' do
+      expect { subject }.to change { object[:name].__id__ }.
+      from(original.__id__).
+      to(attribute.__id__)
     end
 
     it 'allows #reset to track overridden attributes' do
-      expect { subject }.to change { object.reset.to_a }.from(attributes).to([ attribute ])
+      expect { subject }.to change { object.reset.to_a.map(&:__id__) }.
+      from(attributes.map(&:__id__)).
+      to([attribute.__id__])
     end
   end
 end

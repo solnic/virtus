@@ -7,6 +7,8 @@ module Virtus
     class DefaultValue
       extend DescendantsTracker
 
+      include Equalizer.new(inspect) << :value
+
       # Builds a default value instance
       #
       # @return [Virtus::Attribute::DefaultValue]
