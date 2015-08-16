@@ -285,3 +285,5 @@ require 'virtus/attribute/boolean'
 require 'virtus/attribute/collection'
 require 'virtus/attribute/hash'
 require 'virtus/attribute/embedded_value'
+
+require 'virtus/lite'

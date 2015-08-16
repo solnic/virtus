@@ -577,6 +577,33 @@ Blog.attribute_set[:posts].member_type.primitive # => Post
 Post.attribute_set[:blog].type.primitive # => Blog
 ```
 
+Virtus::Lite
+------------
+
+Virtus::Lite is a drop-in replacement for Virtus.model that supports the core
+feature set of Virtus (type coercion, custom coercion, and default values),
+while delivering 10x the speed. Many apps will be able to simply replace
+`include Virtus.model` with `include Virtus::Lite` to enjoy this performance
+boost.
+
+```
+Comparison:
+FastAttributes: without values                       :  2326399.8 i/s
+Virtus::Lite: without values                         :   319304.0 i/s - 7.29x slower
+FastAttributes: integer values for integer attributes:    82969.3 i/s - 28.04x slower
+FastAttributes: string values for integer attributes :    64758.7 i/s - 35.92x slower
+Virtus::Lite: string values for integer attributes   :    37270.1 i/s - 62.42x slower
+Virtus::Lite: integer values for integer attributes  :    36577.8 i/s - 63.60x slower
+Virtus: integer values for integer attributes        :    21857.4 i/s - 106.44x slower
+Attrio: integer values for integer attributes        :    11362.2 i/s - 204.75x slower
+Virtus: without values                               :     9551.8 i/s - 243.56x slower
+Attrio: string values for integer attributes         :     9048.5 i/s - 257.10x slower
+Attrio: without values                               :     6876.1 i/s - 338.33x slower
+Virtus: string values for integer attributes         :     3197.6 i/s - 727.55x slower
+```
+
+Adapted from the [fast_attributes benchmark code.](https://github.com/applift/fast_attributes/blob/master/benchmarks/comparison.rb)
+
 Ruby version support
 --------------------
 
