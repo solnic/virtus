@@ -577,6 +577,12 @@ Blog.attribute_set[:posts].member_type.primitive # => Post
 Post.attribute_set[:blog].type.primitive # => Blog
 ```
 
+## Plugins / Extensions
+
+List of plugins/extensions that add features to Virtus:
+
+* [virtus-localized](https://github.com/XescuGC/virtus-localized): Localize the attributes
+
 Ruby version support
 --------------------
 
