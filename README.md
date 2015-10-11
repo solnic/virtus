@@ -582,6 +582,7 @@ Post.attribute_set[:blog].type.primitive # => Blog
 List of plugins/extensions that add features to Virtus:
 
 * [virtus-localized](https://github.com/XescuGC/virtus-localized): Localize the attributes
+* [virtus-relations](https://github.com/smanolloff/virtus-relations): Add relations to Virtus objects
 
 Ruby version support
 --------------------
