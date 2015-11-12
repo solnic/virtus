@@ -31,7 +31,7 @@ module Virtus
         descendant.extend(Extensions::Methods)
         descendant.extend(InstanceMethods)
       end
-      private_class_method :included
+      private_class_method :extended
 
     end # Core
 
