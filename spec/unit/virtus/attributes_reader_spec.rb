@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Virtus, '#attributes' do
-
   shared_examples_for 'attribute hash' do
     it 'includes all attributes' do
       subject.attributes = { :test => 'Hello World', :test_priv => 'Yo' }
@@ -11,14 +10,14 @@ describe Virtus, '#attributes' do
   end
 
   context 'with a class' do
-    let(:model) {
-      Class.new {
+    let(:model) do
+      Class.new do
         include Virtus
 
         attribute :test,      String
         attribute :test_priv, String, :reader => :private
-      }
-    }
+      end
+    end
 
     it_behaves_like 'attribute hash' do
       subject { model.new }

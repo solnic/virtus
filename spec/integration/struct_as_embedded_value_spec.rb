@@ -15,7 +15,7 @@ describe 'Using Struct as an embedded value attribute' do
   end
 
   subject do
-    Examples::Rectangle.new(:top_left => [ 3, 5 ], :bottom_right => [ 8, 7 ])
+    Examples::Rectangle.new(:top_left => [3, 5], :bottom_right => [8, 7])
   end
 
   specify 'initialize a struct object with correct attributes' do

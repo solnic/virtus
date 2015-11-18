@@ -1,10 +1,7 @@
 module Virtus
-
   # Instance methods that are added when you include Virtus
   module InstanceMethods
-
     module Constructor
-
       # Set attributes during initialization of an object
       #
       # @param [#to_hash] attributes
@@ -17,11 +14,9 @@ module Virtus
         attribute_set.set(self, attributes) if attributes
         set_default_attributes
       end
-
     end # Constructor
 
     module MassAssignment
-
       # Returns a hash of all publicly accessible attributes
       #
       # @example
@@ -70,7 +65,6 @@ module Virtus
       def attributes=(attributes)
         attribute_set.set(self, attributes)
       end
-
     end # MassAssignment
 
     # Returns a value of the attribute with the given name
@@ -213,6 +207,5 @@ module Virtus
         raise ArgumentError, "#{name.inspect} is not allowed as an attribute name"
       end
     end
-
   end # module InstanceMethods
 end # module Virtus

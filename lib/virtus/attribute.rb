@@ -1,5 +1,4 @@
 module Virtus
-
   # Attribute objects handle coercion and provide interface to hook into an
   # attribute set instance that's included into a class or object
   #
@@ -140,7 +139,7 @@ module Virtus
     #
     # @api public
     def coercible?
-      kind_of?(Coercible)
+      is_a?(Coercible)
     end
 
     # Return if the attribute has lazy default value evaluation
@@ -157,7 +156,7 @@ module Virtus
     #
     # @api public
     def lazy?
-      kind_of?(LazyDefault)
+      is_a?(LazyDefault)
     end
 
     # Return if the attribute is in the strict coercion mode
@@ -174,7 +173,7 @@ module Virtus
     #
     # @api public
     def strict?
-      kind_of?(Strict)
+      is_a?(Strict)
     end
 
     # Return if the attribute is in the nullify blank coercion mode
@@ -191,7 +190,7 @@ module Virtus
     #
     # @api public
     def nullify_blank?
-      kind_of?(NullifyBlank)
+      is_a?(NullifyBlank)
     end
 
     # Return if the attribute is accepts nil values as valid coercion output
@@ -239,7 +238,5 @@ module Virtus
       freeze
       self
     end
-
   end # class Attribute
-
 end # module Virtus

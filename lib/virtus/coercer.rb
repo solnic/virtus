@@ -1,5 +1,4 @@
 module Virtus
-
   # Abstract coercer class
   #
   class Coercer
@@ -21,7 +20,7 @@ module Virtus
     # @return [Object] coerced input
     #
     # @api public
-    def call(input)
+    def call(_input)
       NotImplementedError.new("#{self.class}#call must be implemented")
     end
 
@@ -33,9 +32,7 @@ module Virtus
     #
     # @api public
     def success?(primitive, input)
-      input.kind_of?(primitive)
+      input.is_a?(primitive)
     end
-
   end # Coercer
-
 end # Virtus

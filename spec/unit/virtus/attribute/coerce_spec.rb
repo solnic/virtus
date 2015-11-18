@@ -5,10 +5,10 @@ describe Virtus::Attribute, '#coerce' do
 
   fake(:coercer) { Virtus::Attribute::Coercer }
 
-  let(:object)   {
+  let(:object)   do
     described_class.build(String,
-      :coercer => coercer, :strict => strict, :required => required, :nullify_blank => nullify_blank)
-  }
+                          :coercer => coercer, :strict => strict, :required => required, :nullify_blank => nullify_blank)
+  end
 
   let(:required) { true }
   let(:nullify_blank) { false }

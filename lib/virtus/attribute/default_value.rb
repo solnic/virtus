@@ -1,6 +1,5 @@
 module Virtus
   class Attribute
-
     # Class representing the default value option
     #
     # @api private
@@ -45,7 +44,6 @@ module Virtus
       def call(*)
         value
       end
-
     end # class DefaultValue
   end # class Attribute
 end # module Virtus

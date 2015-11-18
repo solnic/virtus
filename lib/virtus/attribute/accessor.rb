@@ -1,6 +1,5 @@
 module Virtus
   class Attribute
-
     # Accessor extension provides methods to read and write attributes
     #
     # @example
@@ -13,7 +12,6 @@ module Virtus
     #   attribute.get(object) # => 'jane@doe.com'
     #
     module Accessor
-
       # Return name of this accessor attribute
       #
       # @return [Symbol]
@@ -96,8 +94,6 @@ module Virtus
       def public_writer?
         options[:writer] == :public
       end
-
     end # Accessor
-
   end # Attribute
 end # Virtus

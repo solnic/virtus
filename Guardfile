@@ -1,5 +1,5 @@
-guard :rspec, spec_paths: 'spec/unit' do
-  #run all specs if configuration is modified
+guard :rspec, :spec_paths => 'spec/unit' do
+  # run all specs if configuration is modified
   watch('Guardfile')           { 'spec' }
   watch('Gemfile.lock')        { 'spec' }
   watch('spec/spec_helper.rb') { 'spec' }

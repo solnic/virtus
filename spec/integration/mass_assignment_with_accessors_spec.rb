@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe "mass assignment with accessors" do
-
+describe 'mass assignment with accessors' do
   before do
     module Examples
       class Product
@@ -16,7 +15,7 @@ describe "mass assignment with accessors" do
           self.subcategory = categories.last
         end
 
-      private
+        private
 
         def _id=(value)
           self.id = value
@@ -25,7 +24,7 @@ describe "mass assignment with accessors" do
     end
   end
 
-  subject { Examples::Product.new(:categories => ['Office', 'Printers'], :_id => 100) }
+  subject { Examples::Product.new(:categories => %w(Office Printers), :_id => 100) }
 
   specify 'works uppon instantiation' do
     expect(subject.category).to eq('Office')
@@ -33,7 +32,7 @@ describe "mass assignment with accessors" do
   end
 
   specify 'can be set with #attributes=' do
-    subject.attributes = {:categories => ['Home', 'Furniture']}
+    subject.attributes = { :categories => %w(Home Furniture) }
     expect(subject.category).to eq('Home')
     expect(subject.subcategory).to eq('Furniture')
   end

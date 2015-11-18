@@ -1,5 +1,4 @@
 module Virtus
-
   # A set of Attribute objects
   class AttributeSet < Module
     include Enumerable
@@ -43,7 +42,7 @@ module Virtus
     # @api public
     def each
       return to_enum unless block_given?
-      @index.each { |name, attribute| yield attribute if name.kind_of?(Symbol) }
+      @index.each { |name, attribute| yield attribute if name.is_a?(Symbol) }
       self
     end
 
@@ -235,6 +234,5 @@ module Virtus
     def update_index(name, attribute)
       @index[name] = @index[name.to_s.freeze] = attribute
     end
-
   end # class AttributeSet
 end # module Virtus

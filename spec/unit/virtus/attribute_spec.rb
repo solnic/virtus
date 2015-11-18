@@ -163,13 +163,13 @@ describe Virtus, '#attribute' do
   end
 
   context 'with a module' do
-    let(:mod) {
-      Module.new {
+    let(:mod) do
+      Module.new do
         include Virtus
 
         attribute :test, String
-      }
-    }
+      end
+    end
 
     let(:model) { Class.new }
 
@@ -210,13 +210,13 @@ describe Virtus, '#attribute' do
   context 'using custom module' do
     subject { model.new }
 
-    let(:model) {
-      Class.new {
+    let(:model) do
+      Class.new do
         include Virtus.model { |config| config.coerce = false }
 
         attribute :test, String
-      }
-    }
+      end
+    end
 
     it { is_expected.to respond_to(:test) }
     it { is_expected.to respond_to(:test=) }

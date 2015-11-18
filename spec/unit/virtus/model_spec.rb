@@ -68,9 +68,9 @@ describe Virtus, '.model' do
         it_behaves_like 'a model with mass-assignment' do
           let(:instance) { subject.new }
 
-          let(:attributes) {
+          let(:attributes) do
             { :name => 'Jane', :something => nil, :age => 23 }
-          }
+          end
         end
 
         it 'has its own attributes' do

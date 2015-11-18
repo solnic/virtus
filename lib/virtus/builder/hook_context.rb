@@ -1,6 +1,5 @@
 module Virtus
   class Builder
-
     # Context used for building "included" and "extended" hooks
     #
     # @private
@@ -9,7 +8,8 @@ module Virtus
 
       # @api private
       def initialize(builder, config)
-        @builder, @config = builder, config
+        @builder = builder
+        @config = config
         initialize_attribute_method
       end
 
@@ -44,8 +44,6 @@ module Virtus
           super(name, type, method_options.merge(options))
         end
       end
-
     end # HookContext
-
   end # Builder
 end # Virtus

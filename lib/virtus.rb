@@ -2,10 +2,9 @@ require 'ostruct'
 
 # Base module which adds Attribute API to your classes
 module Virtus
-
   # Provides args for const_get and const_defined? to make them behave
   # consistently across different versions of ruby
-  EXTRA_CONST_ARGS = (RUBY_VERSION < '1.9' ? [] : [ false ]).freeze
+  EXTRA_CONST_ARGS = (RUBY_VERSION < '1.9' ? [] : [false]).freeze
 
   # Represents an undefined parameter used by auto-generated option methods
   Undefined = Object.new.freeze
@@ -14,7 +13,8 @@ module Virtus
     attr_reader :output, :attribute
 
     def initialize(output, attribute)
-      @output, @attribute = output, attribute
+      @output = output
+      @attribute = attribute
       super(build_message)
     end
 
@@ -120,7 +120,7 @@ module Virtus
   # @return [Configuration]
   #
   # @api public
-  def self.config(&block)
+  def self.config
     yield configuration if block_given?
     configuration
   end
@@ -237,7 +237,6 @@ module Virtus
   def self.warn(msg)
     Kernel.warn(msg)
   end
-
 end # module Virtus
 
 require 'descendants_tracker'

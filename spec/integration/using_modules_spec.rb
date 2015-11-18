@@ -17,7 +17,7 @@ describe 'I can define attributes within a module' do
       module Age
         include Common
 
-        attribute :age,  Integer
+        attribute :age, Integer
       end
 
       class User

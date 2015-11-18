@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'overriding virtus behavior' do
-
   before do
     module Examples
       class Article
@@ -14,7 +13,7 @@ describe 'overriding virtus behavior' do
         end
 
         def title=(name)
-          super unless self.title == "can't be changed"
+          super unless title == "can't be changed"
         end
       end
     end

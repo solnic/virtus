@@ -26,7 +26,7 @@ describe Virtus::ValueObject do
 
   describe 'initialization' do
     it 'sets the attribute values provided to Class.new' do
-      expect(class_under_test.new(:latitude => 10000.001).latitude).to eq(10000.001)
+      expect(class_under_test.new(:latitude => 10_000.001).latitude).to eq(10_000.001)
       expect(subject.latitude).to eql(attribute_values[:latitude])
     end
   end
@@ -39,7 +39,7 @@ describe Virtus::ValueObject do
 
     it 'writer methods are set to private' do
       private_methods = class_under_test.private_instance_methods
-      private_methods.map! { |m| m.to_s }
+      private_methods.map!(&:to_s)
       expect(private_methods).to include('latitude=', 'longitude=', 'attributes=')
     end
 

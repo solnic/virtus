@@ -116,7 +116,7 @@ describe Virtus, '.module' do
 
   context 'as a peer to another module within a class' do
     subject { Virtus.module }
-    let(:other)  { Module.new }
+    let(:other) { Module.new }
 
     before do
       other.send(:include, Virtus.module)
@@ -142,8 +142,8 @@ describe Virtus, '.module' do
 
   context 'with multiple other modules mixed into it' do
     subject { Virtus.module }
-    let(:other)  { Module.new }
-    let(:yet_another)  { Module.new }
+    let(:other) { Module.new }
+    let(:yet_another) { Module.new }
 
     before do
       other.send(:include, Virtus.module)
@@ -170,5 +170,4 @@ describe Virtus, '.module' do
       )
     end
   end
-
 end

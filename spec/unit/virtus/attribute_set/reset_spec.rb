@@ -5,7 +5,7 @@ describe Virtus::AttributeSet, '#reset' do
 
   let(:name)       { :name }
   let(:attribute)  { Virtus::Attribute.build(String, :name => :name) }
-  let(:attributes) { [ attribute ]                           }
+  let(:attributes) { [attribute]                           }
   let(:object)     { described_class.new(parent, attributes) }
 
   context 'when the parent has no attributes' do
@@ -15,37 +15,37 @@ describe Virtus::AttributeSet, '#reset' do
 
     describe '#to_set' do
       subject { super().to_set }
-      it { is_expected.to eq(Set[ attribute ]) }
+      it { is_expected.to eq(Set[attribute]) }
     end
   end
 
   context 'when the parent has attributes that are not duplicates' do
     let(:parent_attribute) { Virtus::Attribute.build(String, :name => :parent_name) }
-    let(:parent)           { described_class.new([ parent_attribute ])       }
+    let(:parent)           { described_class.new([parent_attribute]) }
 
     it { is_expected.to equal(object) }
 
     describe '#to_set' do
       subject { super().to_set }
-      it { is_expected.to eq(Set[ attribute, parent_attribute ]) }
+      it { is_expected.to eq(Set[attribute, parent_attribute]) }
     end
   end
 
   context 'when the parent has attributes that are duplicates' do
     let(:parent_attribute) { Virtus::Attribute.build(String, :name => name) }
-    let(:parent)           { described_class.new([ parent_attribute ]) }
+    let(:parent)           { described_class.new([parent_attribute]) }
 
     it { is_expected.to equal(object) }
 
     describe '#to_set' do
       subject { super().to_set }
-      it { is_expected.to eq(Set[ attribute ]) }
+      it { is_expected.to eq(Set[attribute]) }
     end
   end
 
   context 'when the parent has changed' do
     let(:parent_attribute) { Virtus::Attribute.build(String, :name => :parent_name) }
-    let(:parent)           { described_class.new([ parent_attribute ])       }
+    let(:parent)           { described_class.new([parent_attribute]) }
     let(:new_attribute)    { Virtus::Attribute.build(String, :name => :parent_name) }
 
     it { is_expected.to equal(object) }

@@ -1,7 +1,6 @@
 require 'spec_helper'
 
-describe "virtus attribute definitions" do
-
+describe 'virtus attribute definitions' do
   before do
     module Examples
       class Person
@@ -14,7 +13,6 @@ describe "virtus attribute definitions" do
       end
 
       class Manager < Person
-
       end
     end
   end
@@ -41,7 +39,7 @@ describe "virtus attribute definitions" do
   end
 
   context 'with attributes' do
-    let(:attributes) { {:name => 'Jane', :age => 45, :doctor => true, :salary => 4500} }
+    let(:attributes) { { :name => 'Jane', :age => 45, :doctor => true, :salary => 4500 } }
 
     specify "#attributes returns the object's attributes as a hash" do
       expect(person.attributes).to eq(attributes)

@@ -1,6 +1,5 @@
 module Virtus
   class Attribute
-
     # Boolean attribute allows true or false values to be set
     # Additionally it adds boolean reader method, like "admin?"
     #
@@ -49,7 +48,6 @@ module Virtus
         super
         attribute_set.define_reader_method(self, "#{name}?", options[:reader])
       end
-
     end # class Boolean
   end # class Attribute
 end # module Virtus

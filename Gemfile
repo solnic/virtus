@@ -6,13 +6,17 @@ gem 'bogus', '~> 0.1'
 gem 'inflecto', '~> 0.0.2'
 gem 'rspec', '~> 3.1'
 
-gem "codeclimate-test-reporter", group: :test, require: false
+group :development, :test do
+  gem 'rubocop', '0.35.1'
+end
+
+group :test do
+  gem 'codeclimate-test-reporter', :require => false
+end
 
 group :tools do
   gem 'guard'
   gem 'guard-rspec'
-
-  gem 'rubocop'
 
   platform :mri do
     gem 'mutant'

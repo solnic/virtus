@@ -1,6 +1,5 @@
 module Virtus
   class Attribute
-
     # EmbeddedValue handles virtus-like objects, OpenStruct and Struct
     #
     class EmbeddedValue < Attribute
@@ -11,16 +10,14 @@ module Virtus
       #
       # @private
       class FromStruct < Virtus::Coercer
-
         # @api public
         def call(input)
-          if input.kind_of?(primitive)
+          if input.is_a?(primitive)
             input
-          elsif not input.nil?
+          elsif !input.nil?
             primitive.new(*input)
           end
         end
-
       end # FromStruct
 
       # Builds OpenStruct-like instance with attributes passed to the constructor
@@ -28,16 +25,14 @@ module Virtus
       #
       # @private
       class FromOpenStruct < Virtus::Coercer
-
         # @api public
         def call(input)
-          if input.kind_of?(primitive)
+          if input.is_a?(primitive)
             input
-          elsif not input.nil?
+          elsif !input.nil?
             primitive.new(input)
           end
         end
-
       end # FromOpenStruct
 
       # @api private
@@ -60,8 +55,6 @@ module Virtus
           FromStruct.new(type)
         end
       end
-
     end # class EmbeddedValue
-
   end # class Attribute
 end # module Virtus

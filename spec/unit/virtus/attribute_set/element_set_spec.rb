@@ -14,7 +14,7 @@ describe Virtus::AttributeSet, '#[]=' do
     it { is_expected.to equal(attribute) }
 
     it 'adds an attribute' do
-      expect { subject }.to change { object.to_a }.from(attributes).to([ attribute ])
+      expect { subject }.to change { object.to_a }.from(attributes).to([attribute])
     end
 
     it 'allows #[] to access the attribute with a symbol' do
@@ -26,39 +26,39 @@ describe Virtus::AttributeSet, '#[]=' do
     end
 
     it 'allows #reset to track overridden attributes' do
-      expect { subject }.to change { object.reset.to_a }.from(attributes).to([ attribute ])
+      expect { subject }.to change { object.reset.to_a }.from(attributes).to([attribute])
     end
   end
 
   context 'with a duplicate attribute' do
     let(:original)   { Virtus::Attribute.build(String, :name => name) }
-    let(:attributes) { [ original ] }
+    let(:attributes) { [original] }
     let(:attribute)  { Virtus::Attribute.build(String, :name => name) }
 
     it { is_expected.to equal(attribute) }
 
-    it "replaces the original attribute object" do
-      expect { subject }.to change { object.to_a.map(&:__id__) }.
-      from(attributes.map(&:__id__)).
-      to([attribute.__id__])
+    it 'replaces the original attribute object' do
+      expect { subject }.to change { object.to_a.map(&:__id__) }
+        .from(attributes.map(&:__id__))
+        .to([attribute.__id__])
     end
 
     it 'allows #[] to access the attribute with a string' do
-      expect { subject }.to change { object['name'].__id__ }.
-      from(original.__id__).
-      to(attribute.__id__)
+      expect { subject }.to change { object['name'].__id__ }
+        .from(original.__id__)
+        .to(attribute.__id__)
     end
 
     it 'allows #[] to access the attribute with a symbol' do
-      expect { subject }.to change { object[:name].__id__ }.
-      from(original.__id__).
-      to(attribute.__id__)
+      expect { subject }.to change { object[:name].__id__ }
+        .from(original.__id__)
+        .to(attribute.__id__)
     end
 
     it 'allows #reset to track overridden attributes' do
-      expect { subject }.to change { object.reset.to_a.map(&:__id__) }.
-      from(attributes.map(&:__id__)).
-      to([attribute.__id__])
+      expect { subject }.to change { object.reset.to_a.map(&:__id__) }
+        .from(attributes.map(&:__id__))
+        .to([attribute.__id__])
     end
   end
 end

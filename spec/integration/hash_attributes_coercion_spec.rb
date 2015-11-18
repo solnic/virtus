@@ -1,19 +1,24 @@
 require 'spec_helper'
 
-
 class Package
   include Virtus
 
   attribute :dimensions, Hash[Symbol => Float]
-  attribute :meta_info , Hash[String => String]
+  attribute :meta_info, Hash[String => String]
 end
-
 
 describe Package do
   let(:instance) do
     described_class.new(
-      :dimensions => { 'width' => "2.2", :height => 2, "length" => 4.5 },
-      :meta_info  => { 'from'  => :Me  , :to => 'You' }
+      :dimensions => {
+        'width'  => '2.2',
+        :height  => 2,
+        'length' => 4.5
+      },
+      :meta_info  => {
+        'from' => :Me,
+        :to    => 'You'
+      }
     )
   end
 
@@ -31,7 +36,7 @@ describe Package do
     it { is_expected.to have_key :length }
 
     it 'should be coerced to [Symbol => Float] format' do
-      expect(dimensions[:width]).to  be_eql(2.2)
+      expect(dimensions[:width]).to be_eql(2.2)
       expect(dimensions[:height]).to be_eql(2.0)
       expect(dimensions[:length]).to be_eql(4.5)
     end

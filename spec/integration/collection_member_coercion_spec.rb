@@ -31,18 +31,24 @@ describe User do
   it { is_expected.to respond_to(:addresses=) }
 
   let(:instance) do
-    described_class.new(:phone_numbers => phone_numbers_attributes,
-                        :addresses     => addresses_attributes)
+    described_class.new(
+      :phone_numbers => phone_numbers_attributes,
+      :addresses     => addresses_attributes
+    )
   end
 
-  let(:phone_numbers_attributes) { [
-    { :number => '212-555-1212' },
-    { :number => '919-444-3265' },
-  ] }
+  let(:phone_numbers_attributes) do
+    [
+      { :number => '212-555-1212' },
+      { :number => '919-444-3265' }
+    ]
+  end
 
-  let(:addresses_attributes) { [
-    { :address => '1234 Any St.', :locality => 'Anytown', :region => "DC", :postal_code => "21234" },
-  ] }
+  let(:addresses_attributes) do
+    [
+      { :address => '1234 Any St.', :locality => 'Anytown', :region => 'DC', :postal_code => '21234' }
+    ]
+  end
 
   describe '#phone_numbers' do
     describe 'first entry' do
@@ -80,17 +86,17 @@ describe User do
 
     describe '#locality' do
       subject { super().locality }
-      it { is_expected.to eql('Anytown')      }
+      it { is_expected.to eql('Anytown') }
     end
 
     describe '#region' do
       subject { super().region }
-      it { is_expected.to eql('DC')           }
+      it { is_expected.to eql('DC') }
     end
 
     describe '#postal_code' do
       subject { super().postal_code }
-      it { is_expected.to eql('21234')        }
+      it { is_expected.to eql('21234') }
     end
   end
 end

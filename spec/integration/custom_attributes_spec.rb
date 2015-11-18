@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe 'custom attributes' do
-
   before do
     module Examples
       class NoisyString < Virtus::Attribute
@@ -38,5 +37,4 @@ describe 'custom attributes' do
     subject.scream = 'welcome'
     expect(subject.scream).to eq('WELCOME')
   end
-
 end

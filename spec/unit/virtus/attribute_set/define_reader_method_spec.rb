@@ -10,26 +10,26 @@ describe Virtus::AttributeSet, '#define_reader_method' do
     attribute_set.define_reader_method(attribute, method_name, visibility)
   end
 
-  context "with public visibility" do
+  context 'with public visibility' do
     let(:visibility) { :public }
 
-    it "defines public writer" do
+    it 'defines public writer' do
       expect(attribute_set.public_instance_methods).to include(method_name)
     end
   end
 
-  context "with private visibility" do
+  context 'with private visibility' do
     let(:visibility) { :private }
 
-    it "defines public writer" do
+    it 'defines public writer' do
       expect(attribute_set.private_instance_methods).to include(method_name)
     end
   end
 
-  context "with protected visibility" do
+  context 'with protected visibility' do
     let(:visibility) { :protected }
 
-    it "defines protected writer" do
+    it 'defines protected writer' do
       expect(attribute_set.protected_instance_methods).to include(method_name)
     end
   end

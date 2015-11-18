@@ -1,5 +1,4 @@
 module Virtus
-
   # Virtus module that can define attributes for later inclusion
   #
   # @private
@@ -83,6 +82,5 @@ module Virtus
         object.attribute(*attribute_args)
       end
     end
-
   end # module ModuleExtensions
 end # module Virtus

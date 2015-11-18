@@ -3,14 +3,14 @@ require 'spec_helper'
 describe Virtus, '#set_default_attributes!' do
   subject { object.set_default_attributes! }
 
-  let(:model) {
-    Class.new {
+  let(:model) do
+    Class.new do
       include Virtus
 
       attribute :name, String,  :default => 'foo', :lazy => true
       attribute :age,  Integer, :default => 30
-    }
-  }
+    end
+  end
 
   let(:object) { model.new }
 

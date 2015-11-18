@@ -9,11 +9,11 @@ describe Virtus::Attribute::Collection, '#coerce' do
       fake(:member_type) { Virtus::Attribute }
 
       let(:member_primitive) { Integer }
-      let(:input)            { ['1', '2'] }
+      let(:input)            { %w(1 2) }
 
-      let(:object) {
+      let(:object) do
         described_class.build(Array[member_primitive], :coercer => coercer, :member_type => member_type)
-      }
+      end
 
       it 'uses coercer to coerce members' do
         mock(coercer).call(input) { input }
@@ -41,7 +41,7 @@ describe Virtus::Attribute::Collection, '#coerce' do
     context 'when member type is a hash with key/value coercion' do
       let(:member_primitive) { Hash[String => Integer] }
       let(:member_attribute) { Virtus::Attribute.build(member_primitive) }
-      let(:input)            { [{:one => '1'}, {:two => '2'}] }
+      let(:input)            { [{ :one => '1' }, { :two => '2' }] }
       let(:output)           { [member_attribute.coerce(input.first), member_attribute.coerce(input.last)] }
       let(:object)           { described_class.build(Array[member_primitive]) }
 
@@ -59,11 +59,11 @@ describe Virtus::Attribute::Collection, '#coerce' do
 
     let(:member_primitive) { Integer }
 
-    let(:object) {
+    let(:object) do
       described_class.build(
-        Array[member_primitive], coercer: coercer, member_type: member_type
+        Array[member_primitive], :coercer => coercer, :member_type => member_type
       )
-    }
+    end
 
     it 'returns nil' do
       mock(coercer).call(input) { input }

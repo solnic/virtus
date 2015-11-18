@@ -3,25 +3,25 @@ require 'spec_helper'
 describe 'I can create a Virtus module' do
   before do
     module Examples
-      NoncoercingModule = Virtus.model { |config|
+      NoncoercingModule = Virtus.model do |config|
         config.coerce = false
-      }
+      end
 
-      CoercingModule = Virtus.model { |config|
+      CoercingModule = Virtus.model do |config|
         config.coerce = true
 
         config.coercer do |coercer|
           coercer.string.boolean_map = { 'yup' => true, 'nope' => false }
         end
-      }
+      end
 
-      StrictModule = Virtus.model { |config|
+      StrictModule = Virtus.model do |config|
         config.strict = true
-      }
+      end
 
-      BlankModule = Virtus.model { |config|
+      BlankModule = Virtus.model do |config|
         config.nullify_blank = true
-      }
+      end
 
       class NoncoercedUser
         include NoncoercingModule

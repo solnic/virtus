@@ -7,14 +7,20 @@ describe Virtus::Attribute::Hash, '#coerce' do
   fake(:key_type)   { Virtus::Attribute }
   fake(:value_type) { Virtus::Attribute }
 
-  let(:object) {
+  let(:object) do
     described_class.build(Hash[key_primitive => value_primitive], options)
-  }
+  end
 
   let(:options) { {} }
 
   context 'when input is coercible to hash' do
-    let(:input)  { Class.new { def to_hash; { :hello => 'World' }; end }.new }
+    let(:input) do
+      Class.new do
+        def to_hash
+          { :hello => 'World' }
+        end
+      end.new
+    end
     let(:object) { described_class.build(Hash) }
 
     it { is_expected.to eq(:hello => 'World') }
@@ -29,9 +35,9 @@ describe Virtus::Attribute::Hash, '#coerce' do
 
   context 'when input is a hash' do
     context 'when key/value types are primitives' do
-      let(:options) {
+      let(:options) do
         { :coercer => coercer, :key_type => key_type, :value_type => value_type }
-      }
+      end
 
       let(:key_primitive)   { String }
       let(:value_primitive) { Integer }
@@ -63,7 +69,7 @@ describe Virtus::Attribute::Hash, '#coerce' do
       let(:key_primitive)   { OpenStruct }
       let(:value_primitive) { Struct.new(:id) }
 
-      let(:input)  { Hash[{:name => 'Test'} => [1]] }
+      let(:input)  { Hash[{ :name => 'Test' } => [1]] }
       let(:output) { Hash[key_primitive.new(:name => 'Test') => value_primitive.new(1)] }
 
       it 'coerces keys and values' do
@@ -81,7 +87,7 @@ describe Virtus::Attribute::Hash, '#coerce' do
       let(:key_attribute)   { Virtus::Attribute.build(key_primitive) }
       let(:value_attribute) { Virtus::Attribute.build(value_primitive) }
 
-      let(:input)  { Hash[[1, 2], {:one => '1', :two => '2'}] }
+      let(:input)  { Hash[[1, 2], { :one => '1', :two => '2' }] }
       let(:output) { Hash[key_attribute.coerce(input.keys.first) => value_attribute.coerce(input.values.first)] }
 
       it 'coerces keys and values' do

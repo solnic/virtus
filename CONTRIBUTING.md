@@ -7,6 +7,7 @@ Virtus recently hit it's 1.0 release (2013-10-16). The focus now is on bug-fixes
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a future version unintentionally.
+* Run `rubocop -a` to fix any Ruby style issues and re-run `rubocop --auto-gen-config` for any acceptable exceptions.
 * Commit, do not mess with Rakefile or version
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
