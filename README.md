@@ -58,12 +58,12 @@ class User
   attribute :birthday, DateTime
 end
 
-user = User.new(:name => 'Piotr', :age => 31)
-user.attributes # => { :name => "Piotr", :age => 31 }
+user = User.new(:name => 'Piotr', :age => 32)
+user.attributes # => { :name => "Piotr", :age => 32 }
 
 user.name # => "Piotr"
 
-user.age = '31' # => 31
+user.age = '32' # => 32
 user.age.class # => Fixnum
 
 user.birthday = 'November 18th, 1983' # => #<DateTime: 1983-11-18T00:00:00+00:00 (4891313/2,0/1,2299161)>
