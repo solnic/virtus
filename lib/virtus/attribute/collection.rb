@@ -80,6 +80,11 @@ module Virtus
         end
       end
 
+      # @api public
+      def value_coerced?(value)
+        super && value.all? { |item| member_type.value_coerced? item }
+      end
+
       # @api private
       def finalize
         return self if finalized?
