@@ -71,7 +71,7 @@ module Virtus
 
       # @api public
       def coerce(value)
-        coerced = super
+        coerced = value.nil? && !required? ? nil : super
 
         return coerced unless coerced.respond_to?(:each_with_object)
 
