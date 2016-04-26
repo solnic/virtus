@@ -15,7 +15,7 @@ describe "default values" do
         include Virtus
 
         attribute :title,        String
-        attribute :slug,         String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }, :lazy => true
+        attribute :slug,         String,  :default => lambda { |post, attribute| post.title && post.title.downcase.gsub(' ', '-') }, :lazy => true
         attribute :view_count,   Integer, :default => 0
         attribute :published,    Boolean, :default => false, :accessor => :private
         attribute :editor_title, String,  :default => :default_editor_title, :lazy => true
@@ -57,6 +57,16 @@ describe "default values" do
     expect do
       subject.reset_attribute(:view_count)
     end.to change { subject.view_count }.to(0)
+  end
+
+  specify 'you can reset all attributes to their defaults' do
+    subject.view_count = 10
+    subject.editor_title = "UNPUBLISHED: Top Secret"
+
+    subject.reset_attributes
+
+    expect(subject.view_count).to eq(0)
+    expect(subject.editor_title).to eq("UNPUBLISHED: ")
   end
 
   context 'a ValueObject' do
