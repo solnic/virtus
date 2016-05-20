@@ -29,7 +29,6 @@ module Virtus
       #
       # @api private
       def call(value)
-        return value if value.nil?
         coercers[value.class].public_send(method, value)
       rescue ::Coercible::UnsupportedCoercion
         value

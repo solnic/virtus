@@ -9,7 +9,7 @@ module Virtus
       #
       # @api public
       def coerce(input)
-        output = super
+        output = input.nil? ? nil : super
 
         if !value_coerced?(output) && input.to_s.empty?
           nil
