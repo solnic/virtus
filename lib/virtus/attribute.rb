@@ -20,13 +20,14 @@ module Virtus
 
     include Equalizer.new(inspect) << :type << :options
 
-    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize, :nullify_blank
+    accept_options :primitive, :accessor, :default, :lazy, :strict, :required, :finalize, :nullify_blank, :use_default_on_nil
 
     strict false
     required true
     accessor :public
     finalize true
     nullify_blank false
+    use_default_on_nil false
 
     # @see Virtus.coerce
     #
@@ -192,6 +193,23 @@ module Virtus
     # @api public
     def nullify_blank?
       kind_of?(NullifyBlank)
+    end
+
+    # Return if the attribute is to use the default value when set to nil
+    #
+    # @example
+    #
+    #   attr = Virtus::Attribute.build(String, :use_default_on_nil => true)
+    #   attr.use_default_on_nil? # => true
+    #
+    #   attr = Virtus::Attribute.build(String, :use_default_on_nil => false)
+    #   attr.use_default_on_nil? # => false
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def use_default_on_nil?
+      kind_of?(UseDefaultOnNil)
     end
 
     # Return if the attribute is accepts nil values as valid coercion output

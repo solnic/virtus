@@ -160,11 +160,12 @@ module Virtus
       def initialize_attribute
         @attribute = klass.new(type, options)
 
-        @attribute.extend(Accessor)     if options[:name]
-        @attribute.extend(Coercible)    if options[:coerce]
-        @attribute.extend(NullifyBlank) if options[:nullify_blank]
-        @attribute.extend(Strict)       if options[:strict]
-        @attribute.extend(LazyDefault)  if options[:lazy]
+        @attribute.extend(Accessor)        if options[:name]
+        @attribute.extend(Coercible)       if options[:coerce]
+        @attribute.extend(NullifyBlank)    if options[:nullify_blank]
+        @attribute.extend(UseDefaultOnNil) if options[:use_default_on_nil]
+        @attribute.extend(Strict)          if options[:strict]
+        @attribute.extend(LazyDefault)     if options[:lazy]
 
         @attribute.finalize if options[:finalize]
       end
