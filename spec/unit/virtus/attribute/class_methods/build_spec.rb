@@ -86,6 +86,14 @@ describe Virtus::Attribute, '.build' do
     it { is_expected.to be_nullify_blank }
   end
 
+  context 'when options specify use default on nil mode' do
+    let(:options) { { :use_default_on_nil => true } }
+
+    it_behaves_like 'a valid attribute instance'
+
+    it { is_expected.to be_use_default_on_nil }
+  end
+
   context 'when type is a string' do
     let(:type) { 'Integer' }
 
