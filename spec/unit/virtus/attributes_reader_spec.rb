@@ -38,4 +38,30 @@ describe Virtus, '#attributes' do
 
     it_behaves_like 'attribute hash'
   end
+
+  context "#to_h / #to_hash" do
+    let(:model) {
+      child = Class.new {
+        include Virtus
+
+        attribute :foo, String
+      }
+
+      Class.new {
+        include Virtus
+
+        attribute :bar, String
+        attribute :nested_model, child
+        attribute :array_of_nested_model, Array[child]
+
+      }
+    }
+
+    subject { model.new bar: "1", nested_model: { foo: "2" }, array_of_nested_model: [{ foo: "3" }, { foo: "4" }]  }
+
+    it "deeply converts to a hash" do
+      expect(subject.to_h).to eql(bar: "1", nested_model: { foo: "2" }, array_of_nested_model: [{ foo: "3" }, { foo: "4" }] )
+      expect(subject.to_hash).to eql(bar: "1", nested_model: { foo: "2" }, array_of_nested_model: [{ foo: "3" }, { foo: "4" }] )
+    end
+  end
 end

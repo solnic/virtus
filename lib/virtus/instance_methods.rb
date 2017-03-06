@@ -41,8 +41,39 @@ module Virtus
       def attributes
         attribute_set.get(self)
       end
-      alias_method :to_hash, :attributes
-      alias_method :to_h, :attributes
+
+      # Returns a hash of all publicly accessible attributes (including nested attributes)
+      #
+      # @example
+      #   class Child
+      #     include Virtus
+      #
+      #     attribute :name, String
+      #   end
+      #
+      #   class Parent
+      #     include Virtus
+      #
+      #     attribute :name,  String
+      #     attribute :child, Child
+      #   end
+      #
+      #   parent = Parent.new(name: 'John', child: {name: 'Jim'})
+      #   parent.to_h  # => { name: 'John', child: {name: 'Jim'} }
+      #
+      # @return [Hash]
+      #
+      # @api public
+      def to_h
+        attributes.each_with_object({}) do |(k, v), h|
+          if v.is_a? Array
+            h[k] = v.map { |v| hash_if_responds_or_value v }
+          else
+            h[k] = hash_if_responds_or_value v
+          end
+        end
+      end
+      alias_method :to_hash, :to_h
 
       # Mass-assign attribute values
       #
@@ -197,6 +228,10 @@ module Virtus
     end
 
     private
+
+    def hash_if_responds_or_value(value)
+      value.respond_to?(:to_h) ? value.to_h : value
+    end
 
     # The list of allowed public methods
     #
