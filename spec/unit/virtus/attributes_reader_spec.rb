@@ -44,22 +44,24 @@ describe Virtus, '#attributes' do
       child = Class.new {
         include Virtus
 
-        attribute :d, String
+        attribute :foo, String
       }
 
       Class.new {
         include Virtus
 
-        attribute :a, String
-        attribute :c, child
+        attribute :bar, String
+        attribute :nested_model, child
+        attribute :array_of_nested_model, Array[child]
+
       }
     }
 
-    subject { model.new a: "b", c: {d: "e"} }
+    subject { model.new bar: "1", nested_model: { foo: "2" }, array_of_nested_model: [{ foo: "3" }, { foo: "4" }]  }
 
     it "deeply converts to a hash" do
-      expect(subject.to_h).to eql(a: "b", c: {d: "e"})
-      expect(subject.to_hash).to eql(a: "b", c: {d: "e"})
+      expect(subject.to_h).to eql(bar: "1", nested_model: { foo: "2" }, array_of_nested_model: [{ foo: "3" }, { foo: "4" }] )
+      expect(subject.to_hash).to eql(bar: "1", nested_model: { foo: "2" }, array_of_nested_model: [{ foo: "3" }, { foo: "4" }] )
     end
   end
 end

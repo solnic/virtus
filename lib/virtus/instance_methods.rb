@@ -66,7 +66,11 @@ module Virtus
       # @api public
       def to_h
         attributes.each_with_object({}) do |(k, v), h|
-          h[k] = v.respond_to?(:to_h) ? v.to_h : v
+          if v.is_a? Array
+            h[k] = v.map { |v| hash_if_responds_or_value v }
+          else
+            h[k] = hash_if_responds_or_value v
+          end
         end
       end
       alias_method :to_hash, :to_h
@@ -224,6 +228,10 @@ module Virtus
     end
 
     private
+
+    def hash_if_responds_or_value(value)
+      value.respond_to?(:to_h) ? value.to_h : value
+    end
 
     # The list of allowed public methods
     #
