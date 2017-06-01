@@ -226,4 +226,38 @@ describe Virtus, '#attribute' do
       expect(subject.test).to be(:foo)
     end
   end
+
+
+  context 'strict mode' do
+    let(:model_with_integer_field) { model_class_with_integer_field.new }
+    let(:model_class_with_integer_field) {
+      Class.new {
+        include Virtus.model(:strict => true)
+
+        attribute :test, Integer, required: false
+      }
+    }
+
+    let(:model_with_array_field) { model_class_with_array_field.new }
+    let(:model_class_with_array_field) {
+      Class.new {
+        include Virtus.model(:strict => true)
+
+        attribute :test, Array, required: false
+      }
+    }
+
+    it 'raises coercion error on given invalid Integer' do
+      expect {
+        model_with_integer_field.test = 'this is not integer'
+      }.to raise_error Virtus::CoercionError
+    end
+
+    it 'raises coercion error on given invalid Array' do
+      expect {
+        model_with_array_field.test = 'this is not array'
+      }.to raise_error Virtus::CoercionError
+    end
+
+  end
 end
