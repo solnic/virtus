@@ -1,6 +1,21 @@
 module Virtus
   class Attribute
 
+    # An "ancestor" for both TrueClass and FalseClass
+    # Used to correctly build Attribute::Boolean from
+    # true or false
+    #
+    # Needs to be a descendant of TrueClass in order
+    # to allow Axiom::Type.infer to infer
+    # Axiom::Types::Boolean from BooleanPrimitive
+    #
+    # @private
+    class BooleanPrimitive < TrueClass
+      def self.>=(klass)
+        TrueClass >= klass || FalseClass >= klass
+      end
+    end
+
     # Boolean attribute allows true or false values to be set
     # Additionally it adds boolean reader method, like "admin?"
     #
@@ -15,7 +30,7 @@ module Virtus
     #   post.published?  # => false
     #
     class Boolean < Attribute
-      primitive TrueClass
+      primitive BooleanPrimitive
 
       # @api private
       def self.build_type(*)

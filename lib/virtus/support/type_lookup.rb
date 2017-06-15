@@ -83,7 +83,7 @@ module Virtus
       type = nil
       descendants.select(&:primitive).reverse_each do |descendant|
         descendant_primitive = descendant.primitive
-        next unless primitive <= descendant_primitive
+        next unless descendant_primitive >= primitive
         type = descendant if type.nil? or type.primitive > descendant_primitive
       end
       type
