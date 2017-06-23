@@ -41,7 +41,7 @@ module Virtus
     #
     # @api public
     def names
-      @attributes.map{&:name}
+      @attributes.map(&:name)
     end
 
     # Iterate over each attribute in the set
