@@ -42,7 +42,7 @@ describe Virtus, '.finalize' do
 
   describe 'attribute_names' do
    it 'returns array of attribute names' do
-     expect(Examples::Person.attribute_names).to eq([:name, :articles, :address])
+     expect(Examples::Person.attribute_set.names).to eq([:name, :articles, :address])
    end
   end
 

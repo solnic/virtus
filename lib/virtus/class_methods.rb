@@ -49,24 +49,6 @@ module Virtus
       attribute_set
     end
 
-
-    # Returns all the attributes name defined on a Class
-    #
-    # @example
-    #   class User
-    #     include Virtus
-    #
-    #     attribute :name, String
-    #     attribute :age,  Integer
-    #   end
-    #
-    # @return [:name, :age]
-    #
-    # @api public
-    def attribute_names
-      attribute_set.to_a.map{|attr| attr.name}
-    end
-
     private
 
     # Setup descendants' own Attribute-accessor-method-hosting modules
