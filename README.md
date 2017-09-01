@@ -357,7 +357,7 @@ end
 class BookCollection < Array
   def <<(book)
    if book.kind_of?(Hash)
-    super(Book.new(book))
+     super(Book.new(book))
    else
      super
    end
