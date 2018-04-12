@@ -14,6 +14,32 @@ describe Virtus, '#attributes=' do
 
       expect(subject.test).to eql('Hello World')
     end
+
+    context "with Rails 5 parameters" do
+      class FakeParams
+
+        def initialize(hash)
+          @hash = hash
+        end
+
+        def to_hash
+          raise "Cannot be called on unsafe params"
+        end
+
+        def to_unsafe_hash
+          @hash
+        end
+      end
+
+      it "safely assigns the hash" do
+        subject.attributes = FakeParams.new({ :test => 'Hello World' })
+        expect(subject.test).to eql('Hello World')
+      end
+
+      it "handles properly if the attributes are not hash like" do
+        expect { subject.attributes = 1 }.to raise_error(NoMethodError)
+      end
+    end
   end
 
   context 'with a class' do
