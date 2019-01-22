@@ -425,7 +425,7 @@ end
 class User
   include Virtus.model
 
-  attribute :info, Json, default: {}
+  attribute :info, Json, default: ->(_, _) { {} }
 end
 
 user = User.new
