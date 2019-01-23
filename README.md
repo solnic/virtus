@@ -309,7 +309,7 @@ boolean type you can workaround it like that:
 class User
   include Virtus.model
 
-  attribute :admin, Axiom::Types::Boolean
+  attribute :admin, Virtus::Attribute::Boolean
 end
 ```
 
