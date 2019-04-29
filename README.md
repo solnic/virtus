@@ -5,6 +5,13 @@
 [coveralls]: https://coveralls.io/r/solnic/virtus
 [inchpages]: http://inch-ci.org/github/solnic/virtus/
 
+DISCONTINUED
+------------
+
+> Working on virtus taught me a lot about handling data in Ruby, which involves coercions, type safety and validation (amongst other things). Even though the project has been successful, and serving well for many people, I decided to build something better. As a result, [dry-types](https://github.com/dry-rb/dry-types), [dry-struct](https://github.com/dry-rb/dry-struct) and [dry-schema](https://github.com/dry-rb/dry-schema) were born. These projects should be considered as virtus' successors, with better separation of concerns and better features. If you're interested in a modern take on same problems that virtus tried to solve, please check out these projects!
+>
+> @solnic
+
 Virtus
 ======
 
@@ -28,13 +35,6 @@ You can use it in many different contexts like:
 * Domain model prototyping
 
 And probably more.
-
-Evolution...
-------------
-
-> Working on virtus taught me a lot about handling data in Ruby, which involves coercions, type safety and validation (amongst other things). Even though the project has been successful, and serving well for many people, I decided to build something better. As a result, [dry-types](https://github.com/dry-rb/dry-types), [dry-struct](https://github.com/dry-rb/dry-struct) and [dry-validation](https://github.com/dry-rb/dry-validation) were born. These projects should be considered as virtus' successors, with better separation of concerns and better features. If you're interested in a modern take on same problems that virtus tried to solve, please check out these projects!
->
-> @solnic
 
 Installation
 ------------
