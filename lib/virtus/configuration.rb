@@ -1,8 +1,6 @@
 module Virtus
-
   # A Configuration instance
   class Configuration
-
     # Access the finalize setting for this instance
     attr_accessor :finalize
 
@@ -29,7 +27,7 @@ module Virtus
     # @return [undefined]
     #
     # @api private
-    def initialize(options={})
+    def initialize(options = {})
       @finalize        = options.fetch(:finalize, true)
       @coerce          = options.fetch(:coerce, true)
       @strict          = options.fetch(:strict, false)
@@ -67,6 +65,5 @@ module Virtus
         :required           => required,
         :configured_coercer => coercer }.freeze
     end
-
   end # class Configuration
 end # module Virtus

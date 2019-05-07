@@ -96,7 +96,7 @@ describe Virtus::Attribute, '.build' do
 
   context 'when strict mode is used' do
     let(:type) { Array[String] }
-    let(:options) { { strict: true } }
+    let(:options) { { :strict => true } }
 
     it 'sets strict mode for member type' do
       expect(subject.member_type).to be_strict

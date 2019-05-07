@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "Defining a ValueObject with a custom constructor" do
+describe 'Defining a ValueObject with a custom constructor' do
   before do
     module Examples
       class Point
@@ -10,7 +10,7 @@ describe "Defining a ValueObject with a custom constructor" do
         attribute :y, Integer
 
         def initialize(attributes)
-          if attributes.kind_of?(Array)
+          if attributes.is_a?(Array)
             self.x = attributes.first
             self.y = attributes.last
           else
@@ -29,10 +29,10 @@ describe "Defining a ValueObject with a custom constructor" do
   end
 
   subject do
-    Examples::Rectangle.new(:top_left => [ 3, 4 ], :bottom_right => [ 5, 8 ])
+    Examples::Rectangle.new(:top_left => [3, 4], :bottom_right => [5, 8])
   end
 
-  specify "initialize a value object attribute with correct attributes" do
+  specify 'initialize a value object attribute with correct attributes' do
     expect(subject.top_left.x).to be(3)
     expect(subject.top_left.y).to be(4)
 

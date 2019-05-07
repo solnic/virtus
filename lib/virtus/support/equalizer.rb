@@ -1,8 +1,6 @@
 module Virtus
-
   # Define equality, equivalence and inspection methods
   class Equalizer < Module
-
     # Initialize an Equalizer with the given keys
     #
     # Will use the keys with which it is initialized to define #cmp?,
@@ -32,7 +30,7 @@ module Virtus
       self
     end
 
-  private
+    private
 
     # Define the equalizer methods based on #keys
     #
@@ -75,7 +73,8 @@ module Virtus
     #
     # @api private
     def define_inspect_method
-      name, keys = @name, @keys
+      name = @name
+      keys = @keys
       define_method(:inspect) do
         "#<#{name}#{keys.map { |key| " #{key}=#{send(key).inspect}" }.join}>"
       end
@@ -92,7 +91,6 @@ module Virtus
 
     # The comparison methods
     module Methods
-
       # Compare the object with other object for equality
       #
       # @example
@@ -120,9 +118,8 @@ module Virtus
       #
       # @api public
       def ==(other)
-        other.kind_of?(self.class) && cmp?(__method__, other)
+        other.is_a?(self.class) && cmp?(__method__, other)
       end
-
     end # module Methods
   end # class Equalizer
 end # module Virtus

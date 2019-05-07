@@ -1,7 +1,5 @@
 module Virtus
-
   module Model
-
     # @api private
     def self.included(descendant)
       super
@@ -15,7 +13,6 @@ module Virtus
     end
 
     module Core
-
       # @api private
       def self.included(descendant)
         super
@@ -32,22 +29,18 @@ module Virtus
         descendant.extend(InstanceMethods)
       end
       private_class_method :extended
-
     end # Core
 
     module Constructor
-
       # @api private
       def self.included(descendant)
         super
         descendant.send(:include, InstanceMethods::Constructor)
       end
       private_class_method :included
-
     end # Constructor
 
     module MassAssignment
-
       # @api private
       def self.included(descendant)
         super
@@ -61,8 +54,6 @@ module Virtus
         descendant.extend(InstanceMethods::MassAssignment)
       end
       private_class_method :extended
-
     end # MassAssignment
-
   end # Model
 end # Virtus

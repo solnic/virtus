@@ -1,11 +1,10 @@
 module Virtus
   class Attribute
-
     # Handles attributes with Hash type
     #
     class Hash < Attribute
       primitive ::Hash
-      default   primitive.new
+      default primitive.new
 
       # @api private
       attr_reader :key_type, :value_type
@@ -49,12 +48,13 @@ module Virtus
 
         # @api private
         def self.infer_key_and_value_types(type)
-          return {} unless type.kind_of?(::Hash)
+          return {} unless type.is_a?(::Hash)
 
           if type.size > 1
             raise ArgumentError, "more than one [key => value] pair in `#{type}`"
           else
-            key_type, value_type = type.keys.first, type.values.first
+            key_type = type.keys.first
+            value_type = type.values.first
 
             key_primitive =
               if key_type.is_a?(Class) && key_type < Attribute && key_type.primitive
@@ -70,7 +70,7 @@ module Virtus
                 value_type
               end
 
-            { :key_type => key_primitive, :value_type => value_primitive}
+            { :key_type => key_primitive, :value_type => value_primitive }
           end
         end
 
@@ -92,7 +92,7 @@ module Virtus
 
       # @api private
       def self.merge_options!(type, options)
-        options[:key_type]   ||= Attribute.build(type.key_type, :strict => options[:strict])
+        options[:key_type] ||= Attribute.build(type.key_type, :strict => options[:strict])
         options[:value_type] ||= Attribute.build(type.value_type, :strict => options[:strict])
       end
 
@@ -123,8 +123,6 @@ module Virtus
       def finalized?
         super && key_type.finalized? && value_type.finalized?
       end
-
     end # class Hash
-
   end # class Attribute
 end # module Virtus

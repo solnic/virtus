@@ -1,5 +1,5 @@
-if RUBY_ENGINE == "rbx"
-  require "codeclimate-test-reporter"
+if RUBY_ENGINE == 'rbx'
+  require 'codeclimate-test-reporter'
   CodeClimate::TestReporter.start
 end
 
@@ -22,7 +22,7 @@ Dir[File.expand_path('../shared/**/*.rb', __FILE__)].each { |file| require file 
 RSpec.configure do |config|
   # Remove anonymous- and example- Attribute classes from Attribute descendants
   config.after :all do
-    stack = [ Virtus::Attribute ]
+    stack = [Virtus::Attribute]
     while klass = stack.pop
       klass.descendants.delete_if do |descendant|
         descendant.name.nil? || descendant.name.empty? || descendant.name.start_with?('Examples::')

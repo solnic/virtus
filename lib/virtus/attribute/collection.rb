@@ -1,12 +1,11 @@
 module Virtus
   class Attribute
-
     # Collection attribute handles enumerable-like types
     #
     # Handles coercing members to the designated member type.
     #
     class Collection < Attribute
-      default Proc.new { |_, attribute| attribute.primitive.new }
+      default proc { |_, attribute| attribute.primitive.new }
 
       # @api private
       attr_reader :member_type
@@ -22,10 +21,10 @@ module Virtus
           if EmbeddedValue.handles?(member) || pending?(member)
             Type.new(primitive, member)
           else
-            klass.new {
+            klass.new do
               primitive primitive
               member_type Axiom::Types.infer(member)
-            }
+            end
           end
         end
 
@@ -66,7 +65,7 @@ module Virtus
 
       # @api private
       def self.merge_options!(type, options)
-        options[:member_type] ||= Attribute.build(type.member_type, strict: options[:strict])
+        options[:member_type] ||= Attribute.build(type.member_type, :strict => options[:strict])
       end
 
       # @api public
@@ -96,8 +95,6 @@ module Virtus
       def finalized?
         super && member_type.finalized?
       end
-
     end # class Collection
-
   end # class Attribute
 end # module Virtus

@@ -7,10 +7,10 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
   let(:options) { {} }
 
   context 'when primitive is OpenStruct' do
-    let(:model)  { OpenStruct }
+    let(:model) { OpenStruct }
 
     context 'when input is an attribute hash' do
-      let(:input) { Hash[name: 'Piotr', age: 30] }
+      let(:input) { Hash[:name => 'Piotr', :age => 30] }
 
       it { is_expected.to be_instance_of(model) }
 
@@ -39,7 +39,7 @@ describe Virtus::Attribute::EmbeddedValue, '#coerce' do
   end
 
   context 'when primitive is Struct' do
-    let(:model)  { Struct.new(:name, :age) }
+    let(:model) { Struct.new(:name, :age) }
 
     context 'when input is an attribute hash' do
       let(:input) { ['Piotr', 30] }

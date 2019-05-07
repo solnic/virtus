@@ -5,7 +5,7 @@ describe Virtus::AttributeSet, '#each' do
 
   let(:name)       { :name }
   let(:attribute)  { Virtus::Attribute.build(String, :name => :name) }
-  let(:attributes) { [ attribute ] }
+  let(:attributes) { [attribute] }
   let(:parent)     { described_class.new }
   let(:yields)     { Set[] }
 
@@ -28,15 +28,15 @@ describe Virtus::AttributeSet, '#each' do
       it { is_expected.to equal(attribute_set) }
 
       it 'yields the expected attributes' do
-        expect { subject }.to change { yields.dup }.
-          from(Set[]).
-          to(attributes.to_set)
+        expect { subject }.to change { yields.dup }
+          .from(Set[])
+          .to(attributes.to_set)
       end
     end
 
     context 'when the parent has attributes that are not duplicates' do
       let(:parent_attribute) { Virtus::Attribute.build(String, :name => :parent_name) }
-      let(:parent)           { described_class.new([ parent_attribute ])       }
+      let(:parent)           { described_class.new([parent_attribute]) }
 
       it { is_expected.to equal(attribute_set) }
 
@@ -51,14 +51,14 @@ describe Virtus::AttributeSet, '#each' do
 
     context 'when the parent has attributes that are duplicates' do
       let(:parent_attribute) { Virtus::Attribute.build(String, :name => name) }
-      let(:parent)           { described_class.new([ parent_attribute ]) }
+      let(:parent)           { described_class.new([parent_attribute]) }
 
       it { is_expected.to equal(attribute_set) }
 
       it 'yields the expected attributes' do
-        expect { subject }.to change { yields.dup }.
-          from(Set[]).
-          to(Set[ attribute ])
+        expect { subject }.to change { yields.dup }
+          .from(Set[])
+          .to(Set[attribute])
       end
     end
   end

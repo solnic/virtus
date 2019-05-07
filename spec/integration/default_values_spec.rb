@@ -1,10 +1,8 @@
 require 'spec_helper'
 
-describe "default values" do
-
+describe 'default values' do
   before do
     module Examples
-
       class Reference
         include Virtus::ValueObject
 
@@ -15,7 +13,7 @@ describe "default values" do
         include Virtus
 
         attribute :title,        String
-        attribute :slug,         String,  :default => lambda { |post, attribute| post.title.downcase.gsub(' ', '-') }, :lazy => true
+        attribute :slug,         String,  :default => ->(post, _attribute) { post.title.downcase.tr(' ', '-') }, :lazy => true
         attribute :view_count,   Integer, :default => 0
         attribute :published,    Boolean, :default => false, :accessor => :private
         attribute :editor_title, String,  :default => :default_editor_title, :lazy => true
@@ -28,7 +26,6 @@ describe "default values" do
           published? ? title : "UNPUBLISHED: #{title}"
         end
       end
-
     end
   end
 

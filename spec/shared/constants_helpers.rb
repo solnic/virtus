@@ -1,5 +1,4 @@
 module ConstantsHelpers
-
   extend self
 
   # helper to remove constants after test-runs.

@@ -1,5 +1,4 @@
 module Virtus
-
   # Class to build a Virtus module with it's own config
   #
   # This allows for individual Virtus modules to be included in
@@ -8,7 +7,6 @@ module Virtus
   #
   # @private
   class Builder
-
     # Return module
     #
     # @return [Module]
@@ -42,7 +40,8 @@ module Virtus
     #
     # @api private
     def initialize(conf, mod = Module.new)
-      @config, @mod = conf, mod
+      @config = conf
+      @mod = mod
       add_included_hook
       add_extended_hook
     end
@@ -89,7 +88,6 @@ module Virtus
     def with_hook_context
       yield(HookContext.new(self, config))
     end
-
   end # class Builder
 
   # @private
@@ -98,7 +96,6 @@ module Virtus
 
   # @private
   class ModuleBuilder < Builder
-
     private
 
     # @api private
@@ -112,12 +109,10 @@ module Virtus
         end
       end
     end
-
   end # ModuleBuilder
 
   # @private
   class ValueObjectBuilder < Builder
-
     # @api private
     def extensions
       super << ValueObject::AllowedWriterMethods << ValueObject::InstanceMethods
@@ -127,7 +122,5 @@ module Virtus
     def options
       super.merge(:writer => :private)
     end
-
   end # ValueObjectBuilder
-
 end # module Virtus

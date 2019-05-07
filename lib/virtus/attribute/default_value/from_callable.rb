@@ -1,12 +1,10 @@
 module Virtus
   class Attribute
     class DefaultValue
-
       # Represents default value evaluated via a callable object
       #
       # @api private
       class FromCallable < DefaultValue
-
         # Return if the class can handle the value
         #
         # @param [Object] value
@@ -28,7 +26,6 @@ module Virtus
         def call(*args)
           @value.call(*args)
         end
-
       end # class FromCallable
     end # class DefaultValue
   end # class Attribute

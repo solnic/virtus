@@ -1,8 +1,6 @@
 module Virtus
-
   # A module that adds class and instance level options
   module Options
-
     # Returns default options hash for a given attribute class
     #
     # @example
@@ -51,7 +49,7 @@ module Virtus
       self
     end
 
-  protected
+    protected
 
     # Adds a reader/writer method for the give option name
     #
@@ -95,7 +93,7 @@ module Virtus
       self
     end
 
-  private
+    private
 
     # Adds descendant to descendants array and inherits default options
     #
@@ -108,6 +106,5 @@ module Virtus
       super
       descendant.add_accepted_options(accepted_options).set_options(options)
     end
-
   end # module Options
 end # module Virtus

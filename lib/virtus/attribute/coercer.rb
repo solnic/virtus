@@ -1,11 +1,9 @@
 module Virtus
   class Attribute
-
     # Coercer accessor wrapper
     #
     # @api private
     class Coercer < Virtus::Coercer
-
       # @api private
       attr_reader :method, :coercers
 
@@ -38,8 +36,6 @@ module Virtus
       def success?(primitive, value)
         coercers[primitive].coerced?(value)
       end
-
     end # class Coercer
-
   end # class Attribute
 end # module Virtus

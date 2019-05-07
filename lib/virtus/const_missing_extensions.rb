@@ -1,6 +1,5 @@
 module Virtus
   module ConstMissingExtensions
-
     # Hooks into const missing process to determine types of attributes
     #
     # @param [String] name
@@ -9,10 +8,9 @@ module Virtus
     #
     # @api private
     def const_missing(name)
-      Attribute::Builder.determine_type(name) or
-        Axiom::Types.const_defined?(name) && Axiom::Types.const_get(name) or
+      Attribute::Builder.determine_type(name) ||
+        Axiom::Types.const_defined?(name) && Axiom::Types.const_get(name) ||
         super
     end
-
   end
 end

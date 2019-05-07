@@ -1,13 +1,12 @@
 module Virtus
   class Attribute
     class DefaultValue
-
       # Represents default value evaluated via a clonable object
       #
       # @api private
       class FromClonable < DefaultValue
         SINGLETON_CLASSES = [
-          ::NilClass, ::TrueClass, ::FalseClass, ::Numeric,  ::Symbol ].freeze
+          ::NilClass, ::TrueClass, ::FalseClass, ::Numeric, ::Symbol].freeze
 
         # Return if the class can handle the value
         #
@@ -17,7 +16,7 @@ module Virtus
         #
         # @api private
         def self.handle?(value)
-          SINGLETON_CLASSES.none? { |klass| value.kind_of?(klass) }
+          SINGLETON_CLASSES.none? { |klass| value.is_a?(klass) }
         end
 
         # Evaluates the value via value#clone
@@ -28,7 +27,6 @@ module Virtus
         def call(*)
           @value.clone
         end
-
       end # class FromClonable
     end # class DefaultValue
   end # class Attribute

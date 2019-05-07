@@ -14,21 +14,21 @@ describe Virtus::AttributeSet, '#<<' do
     it { is_expected.to equal(object) }
 
     it 'adds an attribute' do
-      expect { subject }.to change { object.to_a }.
-        from(attributes).
-        to([ attribute ])
+      expect { subject }.to change { object.to_a }
+        .from(attributes)
+        .to([attribute])
     end
 
     it 'indexes the new attribute under its #name property' do
-      expect { subject }.to change { object[name] }.
-        from(nil).
-        to(attribute)
+      expect { subject }.to change { object[name] }
+        .from(nil)
+        .to(attribute)
     end
 
     it 'indexes the new attribute under the string version of its #name property' do
-      expect { subject }.to change { object[name.to_s] }.
-        from(nil).
-        to(attribute)
+      expect { subject }.to change { object[name.to_s] }
+        .from(nil)
+        .to(attribute)
     end
   end
 
@@ -38,10 +38,10 @@ describe Virtus::AttributeSet, '#<<' do
 
     it { is_expected.to equal(object) }
 
-    it "replaces the original attribute object" do
-      expect { subject }.to change { object.to_a.map(&:__id__) }.
-      from(attributes.map(&:__id__)).
-      to([attribute.__id__])
+    it 'replaces the original attribute object' do
+      expect { subject }.to change { object.to_a.map(&:__id__) }
+        .from(attributes.map(&:__id__))
+        .to([attribute.__id__])
     end
   end
 end

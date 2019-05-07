@@ -26,17 +26,23 @@ describe 'embedded values' do
     end
   end
 
-  subject { Examples::User.new(:name => 'the guy',
-                               :address => address_attributes) }
+  subject do
+    Examples::User.new(:name    => 'the guy',
+                       :address => address_attributes)
+  end
   let(:address_attributes) do
-      { :street => 'Street 1/2', :zipcode => '12345', :city => { :name => 'NYC' } }
+    {
+      :street  => 'Street 1/2',
+      :zipcode => '12345',
+      :city    => { :name => 'NYC' }
+    }
   end
 
   specify '#attributes returns instances of the embedded values' do
-    expect(subject.attributes).to eq({
-      :name => 'the guy',
+    expect(subject.attributes).to eq(
+      :name    => 'the guy',
       :address => subject.address
-    })
+    )
   end
 
   specify 'allows you to pass a hash for the embedded value' do
@@ -46,5 +52,4 @@ describe 'embedded values' do
     expect(user.address.zipcode).to eq('12345')
     expect(user.address.city.name).to eq('NYC')
   end
-
 end

@@ -1,12 +1,10 @@
 module Virtus
   class Attribute
     class DefaultValue
-
       # Represents default value evaluated via a symbol
       #
       # @api private
       class FromSymbol < DefaultValue
-
         # Return if the class can handle the value
         #
         # @param [Object] value
@@ -28,7 +26,6 @@ module Virtus
         def call(instance, _)
           instance.respond_to?(@value, true) ? instance.send(@value) : @value
         end
-
       end # class FromSymbol
     end # class DefaultValue
   end # class Attribute

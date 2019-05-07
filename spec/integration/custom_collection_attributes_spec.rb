@@ -79,7 +79,7 @@ describe 'custom collection attributes' do
   context 'with an enumerable' do
     require 'forwardable'
 
-    let(:book_collection_class) {
+    let(:book_collection_class) do
       Class.new do
         extend Forwardable
         include Enumerable
@@ -94,7 +94,7 @@ describe 'custom collection attributes' do
           new(*args)
         end
       end
-    }
+    end
 
     it_behaves_like 'a collection'
   end

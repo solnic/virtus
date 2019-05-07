@@ -1,9 +1,8 @@
 module Virtus
-
   # Extensions common for both classes and instances
   module Extensions
     WRITER_METHOD_REGEXP   = /=\z/.freeze
-    INVALID_WRITER_METHODS = %w[ == != === []= attributes= ].to_set.freeze
+    INVALID_WRITER_METHODS = %w( == != === []= attributes= ).to_set.freeze
     RESERVED_NAMES         = [:attributes].to_set.freeze
 
     # A hook called when an object is extended with Virtus
@@ -24,7 +23,6 @@ module Virtus
     private_class_method :extended
 
     module Methods
-
       # @api private
       def self.extended(descendant)
         super
@@ -68,9 +66,9 @@ module Virtus
       # @see Virtus.default_value
       #
       # @api public
-      def values(&block)
+      def values
         private :attributes= if instance_methods.include?(:attributes=)
-        yield
+        yield if block_given?
         include(::Equalizer.new(*attribute_set.map(&:name)))
       end
 
@@ -98,8 +96,6 @@ module Virtus
       def attribute_set
         @attribute_set
       end
-
     end # Methods
-
   end # module Extensions
 end # module Virtus

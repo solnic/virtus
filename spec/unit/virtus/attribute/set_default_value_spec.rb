@@ -3,7 +3,16 @@ require 'spec_helper'
 describe Virtus::Attribute, '#set_default_value' do
   let(:object) { described_class.build(String, options.merge(:name => name, :default => default)) }
 
-  let(:model)    { Class.new { def name; 'model'; end; attr_reader :test } }
+  let(:model) do
+    Class.new do
+      def name
+        'model'
+      end
+
+      attr_reader :test
+    end
+  end
+
   let(:name)     { :test }
   let(:instance) { model.new }
   let(:options)  { {} }
@@ -62,7 +71,7 @@ describe Virtus::Attribute, '#set_default_value' do
   context 'with a callable' do
     subject { instance }
 
-    let(:default) { lambda { |model, attribute| "#{model.name}-#{attribute.name}" } }
+    let(:default) { ->(model, attribute) { "#{model.name}-#{attribute.name}" } }
 
     describe '#test' do
       subject { super().test }
@@ -77,7 +86,15 @@ describe Virtus::Attribute, '#set_default_value' do
       let(:default) { :set_test }
 
       context 'when method is public' do
-        let(:model) { Class.new { attr_reader :test; def set_test; @test = 'hello world'; end } }
+        let(:model) do
+          Class.new do
+            attr_reader :test
+
+            def set_test
+              @test = 'hello world'
+            end
+          end
+        end
 
         describe '#test' do
           subject { super().test }
@@ -86,7 +103,17 @@ describe Virtus::Attribute, '#set_default_value' do
       end
 
       context 'when method is private' do
-        let(:model) { Class.new { attr_reader :test; private; def set_test; @test = 'hello world'; end } }
+        let(:model) do
+          Class.new do
+            attr_reader :test
+
+            private
+
+            def set_test
+              @test = 'hello world'
+            end
+          end
+        end
 
         describe '#test' do
           subject { super().test }

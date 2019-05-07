@@ -1,5 +1,4 @@
 module Virtus
-
   # Include this Module for Value Object semantics
   #
   # The idea is that instances should be immutable and compared based on state
@@ -18,7 +17,6 @@ module Virtus
   #   hash = { location => :foo }
   #   hash[same_location]             #=> :foo
   module ValueObject
-
     # Callback to configure including Class as a Value Object
     #
     # Including Class will include Virtus and have additional
@@ -45,7 +43,6 @@ module Virtus
     private_class_method :included
 
     module InstanceMethods
-
       # ValueObjects are immutable and can't be cloned
       #
       # They always represent the same value
@@ -60,7 +57,7 @@ module Virtus
       def clone
         self
       end
-      alias dup clone
+      alias_method :dup, :clone
 
       # Create a new ValueObject by combining the passed attribute hash with
       # the instances attributes.
@@ -77,7 +74,6 @@ module Virtus
       def with(attribute_updates)
         self.class.new(attribute_set.get(self).merge(attribute_updates))
       end
-
     end
 
     module AllowedWriterMethods
@@ -90,14 +86,13 @@ module Virtus
         @allowed_writer_methods ||=
           begin
             allowed_writer_methods = super
-            allowed_writer_methods += attribute_set.map{|attr| "#{attr.name}="}
+            allowed_writer_methods += attribute_set.map { |attr| "#{attr.name}=" }
             allowed_writer_methods.to_set.freeze
           end
       end
     end
 
     module ClassMethods
-
       # Define an attribute on the receiver
       #
       # The Attribute will have private writer methods (eg., immutable instances)
@@ -142,9 +137,6 @@ module Virtus
             equalizer
           end
       end
-
     end # module ClassMethods
-
   end # module ValueObject
-
 end # module Virtus

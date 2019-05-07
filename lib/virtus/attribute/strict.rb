@@ -1,10 +1,8 @@
 module Virtus
   class Attribute
-
     # Attribute extension which raises CoercionError when coercion failed
     #
     module Strict
-
       # @see [Attribute#coerce]
       #
       # @raises [CoercionError] when coercer failed
@@ -19,8 +17,6 @@ module Virtus
           raise CoercionError.new(output, self)
         end
       end
-
     end # Strict
-
   end # Attribute
 end # Virtus

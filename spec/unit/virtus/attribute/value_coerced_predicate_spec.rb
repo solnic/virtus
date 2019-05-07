@@ -6,13 +6,13 @@ describe Virtus::Attribute, '#value_coerced?' do
   let(:object) { described_class.build(String) }
 
   context 'when input is coerced' do
-    let(:input)  { '1' }
+    let(:input) { '1' }
 
     it { is_expected.to be(true) }
   end
 
   context 'when input is not coerced' do
-    let(:input)  { 1 }
+    let(:input) { 1 }
 
     it { is_expected.to be(false) }
   end

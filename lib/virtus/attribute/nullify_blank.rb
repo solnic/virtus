@@ -1,10 +1,8 @@
 module Virtus
   class Attribute
-
     # Attribute extension which nullifies blank attributes when coercion failed
     #
     module NullifyBlank
-
       # @see [Attribute#coerce]
       #
       # @api public
@@ -17,8 +15,6 @@ module Virtus
           output
         end
       end
-
     end # NullifyBlank
-
   end # Attribute
 end # Virtus

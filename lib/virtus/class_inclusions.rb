@@ -1,8 +1,6 @@
 module Virtus
-
   # Class-level extensions
   module ClassInclusions
-
     # Extends a descendant with class and instance methods
     #
     # @param [Class] descendant
@@ -21,7 +19,6 @@ module Virtus
     private_class_method :included
 
     module Methods
-
       # Return a list of allowed writer method names
       #
       # @return [Set]
@@ -41,8 +38,6 @@ module Virtus
       def attribute_set
         self.class.attribute_set
       end
-
     end # Methods
-
   end # module ClassInclusions
 end # module Virtus

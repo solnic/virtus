@@ -1,5 +1,4 @@
 module Virtus
-
   # Class methods that are added when you include Virtus
   module ClassMethods
     include Extensions::Methods
@@ -85,6 +84,5 @@ module Virtus
         raise ArgumentError, "#{name.inspect} is not allowed as an attribute name"
       end
     end
-
   end # module ClassMethods
 end # module Virtus

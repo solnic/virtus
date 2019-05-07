@@ -25,10 +25,10 @@ describe Virtus::AttributeSet, '#merge' do
 
     it { is_expected.to equal(object) }
 
-    it "replaces the original attribute object" do
-      expect { subject }.to change { object.to_a.map(&:__id__) }.
-      from(attributes.map(&:__id__)).
-      to([attribute.__id__])
+    it 'replaces the original attribute object' do
+      expect { subject }.to change { object.to_a.map(&:__id__) }
+        .from(attributes.map(&:__id__))
+        .to([attribute.__id__])
     end
   end
 end

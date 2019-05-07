@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Virtus::Attribute::Collection, 'custom subclass' do
   subject { attribute_class.build(primitive) }
 
-  let(:primitive) { Class.new  { include Enumerable } }
+  let(:primitive) { Class.new { include Enumerable } }
 
   after do
     described_class.descendants.delete(attribute_class)

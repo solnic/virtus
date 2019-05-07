@@ -25,7 +25,7 @@ shared_examples_for 'a #freeze method' do
 
   it 'prevents future modifications' do
     subject
-    expectation = raise_error(expected_exception_class,expected_exception_message)
+    expectation = raise_error(expected_exception_class, expected_exception_message)
     expect { object.instance_variable_set(:@foo, :bar) }.to(expectation)
   end
 
