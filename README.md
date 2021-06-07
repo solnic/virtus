@@ -1,6 +1,5 @@
 [gem]: https://rubygems.org/gems/virtus
 [travis]: https://travis-ci.org/solnic/virtus
-[gemnasium]: https://gemnasium.com/solnic/virtus
 [codeclimate]: https://codeclimate.com/github/solnic/virtus
 [coveralls]: https://coveralls.io/r/solnic/virtus
 [inchpages]: http://inch-ci.org/github/solnic/virtus/
@@ -17,7 +16,6 @@ Virtus
 
 [![Gem Version](https://badge.fury.io/rb/virtus.svg)][gem]
 [![Build Status](https://travis-ci.org/solnic/virtus.svg?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/solnic/virtus.png)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/solnic/virtus/badges/gpa.svg)][codeclimate]
 [![Test Coverage](https://codeclimate.com/github/solnic/virtus/badges/coverage.svg)][codeclimate]
 [![Inline docs](http://inch-ci.org/github/solnic/virtus.svg?branch=master)][inchpages]
