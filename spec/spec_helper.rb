@@ -6,7 +6,6 @@ end
 require 'rspec'
 require 'bogus/rspec'
 require 'virtus'
-require 'inflecto' # for resolving namespaced constant names
 
 module Virtus
   def self.warn(*)

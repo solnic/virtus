@@ -25,13 +25,7 @@ module Virtus
     # @api private
     def determine_type
       if type.include?('::')
-        # TODO: wrap it up in Virtus.constantize and use feature-detection to
-        #       pick up either Inflecto or ActiveSupport, whateve is available
-        if defined?(Inflecto)
-          Inflecto.constantize(type)
-        else
-          raise NotImplementedError, 'Virtus needs inflecto gem to constantize namespaced constant names'
-        end
+        Virtus.constantize(type)
       else
         Object.const_get(type)
       end

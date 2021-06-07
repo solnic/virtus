@@ -207,6 +207,25 @@ module Virtus
     @configuration ||= Configuration.new
   end
 
+  # @api private
+  def self.constantize(type)
+    inflector.constantize(type)
+  end
+
+  # @api private
+  def self.inflector
+    @inflector ||=
+      begin
+        require 'dry/inflector'
+        Dry::Inflector.new
+      rescue LoadError
+        raise(
+          NotImplementedError,
+          'Virtus needs dry-inflector gem to constantize namespaced constant names'
+        )
+      end
+  end
+
   # Finalize pending attributes
   #
   # @example
