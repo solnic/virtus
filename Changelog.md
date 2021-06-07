@@ -1,6 +1,9 @@
 # v2.0.0 2021-06-07
 
+* [added] New method `Virtus::Atrribute::Collection#value_coerced?`  (dslh)
 * [changed] inflecto was replaced with dry-inflector (solnic)
+* [changed] `Virtus::Attribute#==` was revised (see ef57af319334a1d4f3e0860acbde7c6d6f0eb8ef) (novikserg)
+* [fixed] Mass assignment bug fix (see #325) (novikserg)
 
 [Compare v1.0.5..v2.0.0](https://github.com/solnic/virtus/compare/v1.0.5...v2.0.0)
 
