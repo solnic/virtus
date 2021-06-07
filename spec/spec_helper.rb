@@ -1,6 +1,6 @@
-if RUBY_ENGINE == "ruby" && RUBY_VERSION >= "3.0"
-  require "codeclimate-test-reporter"
-  CodeClimate::TestReporter.start
+if RUBY_ENGINE == 'ruby' && RUBY_VERSION >= '3.0'
+  require 'simplecov'
+  SimpleCov.start
 end
 
 require 'rspec'
