@@ -1,3 +1,9 @@
+# v2.0.0 2021-06-07
+
+* [changed] inflecto was replaced with dry-inflector (solnic)
+
+[Compare v1.0.5..v2.0.0](https://github.com/solnic/virtus/compare/v1.0.5...v2.0.0)
+
 # v1.0.5 2015-03-18
 
 * [feature] Support for :nullify_blank option when configuring a virtus module (lucasmazza)
