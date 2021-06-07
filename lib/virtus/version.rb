@@ -1,3 +1,3 @@
 module Virtus
-  VERSION = '1.0.5'.freeze
+  VERSION = '2.0.0'.freeze
 end
