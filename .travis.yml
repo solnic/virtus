@@ -7,17 +7,8 @@ rvm:
   - 2.2
   - 2.3
   - 2.4
+  - 2.5
+  - 2.6
+  - 2.7
+  - 3.0
   - jruby
-  - rbx
-  - ruby-head
-matrix:
-  allow_failures:
-    - rvm: ruby-head
-    - rvm: rbx
-notifications:
-  email:
-    - piotr.solnica@gmail.com
-    - dan.kubb@gmail.com
-addons:
-  code_climate:
-    repo_token: 2b66fbb7c7c72503eb7841a479c0ad923f691729f4109b4aa8c9b4def1ebb42d
