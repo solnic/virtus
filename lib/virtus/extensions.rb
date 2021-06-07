@@ -71,7 +71,7 @@ module Virtus
       def values(&block)
         private :attributes= if instance_methods.include?(:attributes=)
         yield
-        include(::Equalizer.new(*attribute_set.map(&:name)))
+        include(Equalizer.new(name, attribute_set.map(&:name)))
       end
 
       # The list of writer methods that can be mass-assigned to in #attributes=

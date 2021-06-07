@@ -18,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.extra_rdoc_files = %w[LICENSE README.md TODO.md]
 
   gem.add_dependency('descendants_tracker', '~> 0.0', '>= 0.0.3')
-  gem.add_dependency('equalizer', '~> 0.0', '>= 0.0.9')
   gem.add_dependency('coercible', '~> 1.0')
   gem.add_dependency('axiom-types', '~> 0.1')
 

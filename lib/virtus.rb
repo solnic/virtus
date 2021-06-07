@@ -260,7 +260,6 @@ module Virtus
 end # module Virtus
 
 require 'descendants_tracker'
-require 'equalizer'
 require 'axiom-types'
 require 'coercible'
 
