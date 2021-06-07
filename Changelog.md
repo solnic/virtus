@@ -2,6 +2,7 @@
 
 * [added] New method `Virtus::Atrribute::Collection#value_coerced?`  (dslh)
 * [changed] inflecto was replaced with dry-inflector (solnic)
+* [changed] equalizer was replaced with the internal virtus/equalizer (solnic)
 * [changed] `Virtus::Attribute#==` was revised (see ef57af319334a1d4f3e0860acbde7c6d6f0eb8ef) (novikserg)
 * [fixed] Mass assignment bug fix (see #325) (novikserg)
 
