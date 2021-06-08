@@ -193,9 +193,13 @@ module Virtus
     #
     # @api private
     def coerce(attributes)
-      ::Hash.try_convert(attributes) or raise(
-        NoMethodError, "Expected #{attributes.inspect} to respond to #to_hash"
-      )
+      if attributes.respond_to?(:to_unsafe_hash)
+        attributes.to_unsafe_hash
+      elsif hash_attributes = ::Hash.try_convert(attributes)
+        hash_attributes
+      else
+        raise( NoMethodError, "Expected #{attributes.inspect} to respond to #to_hash" )
+      end
     end
 
     # @api private
