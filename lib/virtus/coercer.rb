@@ -25,7 +25,7 @@ module Virtus
       NotImplementedError.new("#{self.class}#call must be implemented")
     end
 
-    # Return if the input value was successfuly coerced
+    # Return if the input value was successfully coerced
     #
     # @param [Object] input
     #
