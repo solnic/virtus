@@ -64,4 +64,13 @@ describe Virtus, '.finalize' do
   it 'automatically resolves constant when it is already available' do
     expect(Examples::Article.attribute_set[:person].type.primitive).to be(Examples::Person)
   end
+
+  describe 'attribute_names' do
+    
+    it 'returns array of attribute names' do
+      expect(Examples::Person.attribute_names).to eq([:name, :articles, :address])
+    end
+    
+  end
+
 end
