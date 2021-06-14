@@ -32,7 +32,7 @@ module Virtus
     #
     # @api public
     def determine_type(class_or_name)
-      @type_lookup_cache[class_or_name] ||= determine_type_and_cache(class_or_name)
+      @type_lookup_cache[class_or_name.to_s] ||= determine_type_and_cache(class_or_name)
     end
 
     # Return the default primitive supported
