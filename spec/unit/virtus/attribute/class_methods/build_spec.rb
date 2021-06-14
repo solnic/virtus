@@ -177,4 +177,18 @@ describe Virtus::Attribute, '.build' do
       it { is_expected.to be < Axiom::Types::Collection }
     end
   end
+
+  context 'when building from Boolean values' do
+    context 'when building from true' do
+      let(:type) { true }
+
+      it { is_expected.to be_instance_of(Virtus::Attribute::Boolean) }
+    end
+
+    context 'when building from false' do
+      let(:type) { false }
+
+      it { is_expected.to be_instance_of(Virtus::Attribute::Boolean) }
+    end
+  end
 end
