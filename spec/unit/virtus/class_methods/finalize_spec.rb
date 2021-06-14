@@ -40,6 +40,12 @@ describe Virtus, '.finalize' do
     Virtus.finalize
   end
 
+  describe 'attribute_names' do
+   it 'returns array of attribute names' do
+     expect(Examples::Person.attribute_set.names).to eq([:name, :articles, :address])
+   end
+  end
+
   it "sets attributes that don't require finalization" do
     expect(Examples::Person.attribute_set[:name]).to be_instance_of(Virtus::Attribute)
     expect(Examples::Person.attribute_set[:name].primitive).to be(String)

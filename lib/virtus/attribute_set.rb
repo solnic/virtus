@@ -27,6 +27,23 @@ module Virtus
       reset
     end
 
+    # Returns all the attributes name defined on a Class
+    #
+    # @example
+    #   class User
+    #     include Virtus
+    #
+    #     attribute :name, String
+    #     attribute :age,  Integer
+    #   end
+    #
+    # @return [:name, :age]
+    #
+    # @api public
+    def names
+      @attributes.map(&:name)
+    end
+
     # Iterate over each attribute in the set
     #
     # @example
