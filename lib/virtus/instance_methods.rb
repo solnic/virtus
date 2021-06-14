@@ -70,6 +70,7 @@ module Virtus
       def attributes=(attributes)
         attribute_set.set(self, attributes)
       end
+      alias_method :update_attributes, :attributes=
 
     end # MassAssignment
 
