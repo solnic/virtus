@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.files            = `git ls-files`.split("\n")
   gem.test_files       = `git ls-files -- {spec}/*`.split("\n")
   gem.extra_rdoc_files = %w[LICENSE README.md TODO.md]
+  gem.required_ruby_version = '>= 1.9.3'
 
   gem.add_dependency('descendants_tracker', '~> 0.0', '>= 0.0.3')
   gem.add_dependency('coercible', '~> 1.0')
