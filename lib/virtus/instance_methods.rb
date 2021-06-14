@@ -41,8 +41,35 @@ module Virtus
       def attributes
         attribute_set.get(self)
       end
-      alias_method :to_hash, :attributes
-      alias_method :to_h, :attributes
+
+      # Returns a hash of all publicly accessible attributes (including nested attributes)
+      #
+      # @example
+      #   class Child
+      #     include Virtus
+      #
+      #     attribute :name, String
+      #   end
+      #
+      #   class Parent
+      #     include Virtus
+      #
+      #     attribute :name,  String
+      #     attribute :child, Child
+      #   end
+      #
+      #   parent = Parent.new(name: 'John', child: {name: 'Jim'})
+      #   parent.to_h  # => { name: 'John', child: {name: 'Jim'} }
+      #
+      # @return [Hash]
+      #
+      # @api public
+      def to_h
+        attributes.each_with_object({}) do |(k, v), h|
+          h[k] = v.respond_to?(:to_h) ? v.to_h : v
+        end
+      end
+      alias_method :to_hash, :to_h
 
       # Mass-assign attribute values
       #
