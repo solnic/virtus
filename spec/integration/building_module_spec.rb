@@ -23,6 +23,10 @@ describe 'I can create a Virtus module' do
         config.nullify_blank = true
       }
 
+      DefaultOnNilModule = Virtus.model { |config|
+        config.use_default_on_nil = true
+      }
+
       class NoncoercedUser
         include NoncoercingModule
 
@@ -49,6 +53,13 @@ describe 'I can create a Virtus module' do
 
         attribute :stuff, Hash
         attribute :happy, Boolean, :nullify_blank => false
+      end
+
+      class DefaultOnNilModel
+        include DefaultOnNilModule
+
+        attribute :name, String, :default => 'foo'
+        attribute :happy, Boolean, :default => true, :use_default_on_nil => false
       end
     end
   end
@@ -86,5 +97,15 @@ describe 'I can create a Virtus module' do
     model.happy = 'foo'
 
     expect(model.happy).to eql('foo')
+  end
+
+  specify 'including a custom module with use default on nil enabled' do
+    model = Examples::DefaultOnNilModel.new
+
+    model.name = nil
+    expect(model.name).to eql('foo')
+
+    model.happy = nil
+    expect(model.happy).to be_nil
   end
 end

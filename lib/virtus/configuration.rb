@@ -15,6 +15,9 @@ module Virtus
     # Access the nullify_blank setting for this instance
     attr_accessor :nullify_blank
 
+    # Access the use_default_on_nil setting for this instance
+    attr_accessor :use_default_on_nil
+
     # Access the required setting for this instance
     attr_accessor :required
 
@@ -30,14 +33,15 @@ module Virtus
     #
     # @api private
     def initialize(options={})
-      @finalize        = options.fetch(:finalize, true)
-      @coerce          = options.fetch(:coerce, true)
-      @strict          = options.fetch(:strict, false)
-      @nullify_blank   = options.fetch(:nullify_blank, false)
-      @required        = options.fetch(:required, true)
-      @constructor     = options.fetch(:constructor, true)
-      @mass_assignment = options.fetch(:mass_assignment, true)
-      @coercer         = Coercible::Coercer.new
+      @finalize           = options.fetch(:finalize, true)
+      @coerce             = options.fetch(:coerce, true)
+      @strict             = options.fetch(:strict, false)
+      @nullify_blank      = options.fetch(:nullify_blank, false)
+      @use_default_on_nil = options.fetch(:use_default_on_nil, false)
+      @required           = options.fetch(:required, true)
+      @constructor        = options.fetch(:constructor, true)
+      @mass_assignment    = options.fetch(:mass_assignment, true)
+      @coercer            = Coercible::Coercer.new
 
       yield self if block_given?
     end
@@ -64,6 +68,7 @@ module Virtus
         :finalize           => finalize,
         :strict             => strict,
         :nullify_blank      => nullify_blank,
+        :use_default_on_nil => use_default_on_nil,
         :required           => required,
         :configured_coercer => coercer }.freeze
     end

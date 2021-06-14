@@ -298,6 +298,7 @@ require 'virtus/attribute/coercible'
 require 'virtus/attribute/strict'
 require 'virtus/attribute/lazy_default'
 require 'virtus/attribute/nullify_blank'
+require 'virtus/attribute/use_default_on_nil'
 
 require 'virtus/attribute/boolean'
 require 'virtus/attribute/collection'

@@ -526,6 +526,19 @@ end
 User.new(:birthday => "").birthday # => nil
 ```
 
+## Use Default On Nil Mode
+
+If you have attributes with `:default` set, you can use the `:use_default_on_nil` option to fall back to the default value whenever the attribute is set to `nil`.
+
+```ruby
+class Page
+  include Virtus.model(:use_default_on_nil => true)
+
+  attribute :views, Integer, :default => 0
+end
+
+Page(:views => nil).views # => 0
+```
 
 ## Building modules with custom configuration
 
