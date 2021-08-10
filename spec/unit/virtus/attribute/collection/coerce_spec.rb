@@ -61,14 +61,27 @@ describe Virtus::Attribute::Collection, '#coerce' do
 
     let(:object) {
       described_class.build(
-        Array[member_primitive], coercer: coercer, member_type: member_type
+        Array[member_primitive], coercer: coercer, member_type: member_type, required: required
       )
     }
 
-    it 'returns nil' do
-      mock(coercer).call(input) { input }
+    context 'when required' do
+      let(:required) { true }
+      let(:output)   { Array(input) }
 
-      expect(subject).to be(input)
+      it 'returns an empty array' do
+        mock(coercer).call(input) { output }
+
+        expect(subject).to eq(output)
+      end
+    end
+
+    context 'when not required' do
+      let(:required) { false }
+
+      it 'returns nil' do
+        expect(subject).to be(input)
+      end
     end
   end
 end
